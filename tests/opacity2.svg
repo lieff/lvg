@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+         "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style type="text/css">
+    polygon:hover {stroke:red; stroke-width:10; fill-opacity:0.4;}
+  </style>
+  <polygon fill="red" stroke-width="10" fill-opacity="0.4"
+           points="350, 75 379,161 469,161 397,215
+                   423,301 350,250 277,301 303,215
+                   231,161 321,161"
+          transform="translate(-350,-200) scale(2) rotate(15)" />
+  <polygon fill="lime" stroke-width="10"
+           points="850,75  958,137.5 958,262.5
+                   850,325 742,262.6 742,137.5"
+           transform="translate(-700,-100)" />
+</svg>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<svg xmlns="http://www.w3.org/2000/svg">
+
+  <rect x="20" y="20" width="300" height="250"    style="fill:none;stroke:blue;stroke-width:2"/>
+
+  <ellipse cx="160" cy="70"  rx="40" ry="30"     style="fill:yellow;stroke:navy;stroke-width:3"/>
+
+
+  <g transform="translate(0, 120) rotate(30, 160, 60)">
+      <ellipse cx="160" cy="70" rx="70" ry="30"  style="fill:none;stroke:purple;stroke-width:3"/>
+  </g>
+
+
+</svg>
