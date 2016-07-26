@@ -13,7 +13,7 @@
 #define NANOSVG_IMPLEMENTATION
 #include "nanosvg.h"
 
-#ifndef EMSCRIPTEN
+#if !defined(EMSCRIPTEN) && defined(DEBUG)
 #define NANOSVGRAST_IMPLEMENTATION
 #include "nanosvgrast.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -75,7 +75,7 @@ NSVGimage *lvgLoadSVG(const char *file)
 {
     char *buf;
     double time = glfwGetTime();
-    if (*(buf = lvgGetFileContents(file, 0)))
+    if (!(buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open SVG image.\n");
         return 0;
@@ -86,6 +86,24 @@ NSVGimage *lvgLoadSVG(const char *file)
     free(buf);
     time = glfwGetTime();
     printf("svg load time: %fs\n", time - time2);
+#if !defined(EMSCRIPTEN) && defined(DEBUG)
+    if (0)
+    {
+        int w = (int)image->width;
+        int h = (int)image->height;
+        NSVGrasterizer *rast = nsvgCreateRasterizer();
+        if (rast == NULL) {
+            printf("Could not init rasterizer.\n");
+        }
+        unsigned char *img = malloc(w*h*4);
+        if (img == NULL) {
+            printf("Could not alloc image buffer.\n");
+        }
+        nsvgRasterize(rast, image, 0, 0, 1, img, w, h, w*4);
+        stbi_write_png("svg.png", w, h, 4, img, w*4);
+        nsvgDeleteRasterizer(rast);
+    }
+#endif
     return image;
 }
 
@@ -141,23 +159,23 @@ void lvgDrawSVG(NSVGimage *image)
         {
             nvgBeginPath(vg);
             nvgMoveTo(vg, path->pts[0], path->pts[1]);
-            for (i = 0; i < path->npts - 1; i += 3)
+            int l = path->npts - 1;
+            //l = (int)(l*g_time*0.4) % l;
+            for (i = 0; i < l; i += 3)
             {
                 float *p = &path->pts[i*2];
                 nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
             }
             if (path->closed)
-            {
                 nvgLineTo(vg, path->pts[0], path->pts[1]);
-                if (NSVG_PAINT_COLOR == shape->fill.type)
-                    nvgFillColor(vg, nvgColorU32(shape->fill.color));
-                else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-                    nvgSVGLinearGrad(vg, shape, 1);
-                else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-                    nvgSVGRadialGrad(vg, shape, 1);
-                if (NSVG_PAINT_NONE != shape->fill.type)
-                    nvgFill(vg);
-            }
+            if (NSVG_PAINT_COLOR == shape->fill.type)
+                nvgFillColor(vg, nvgColorU32(shape->fill.color));
+            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+                nvgSVGLinearGrad(vg, shape, 1);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+                nvgSVGRadialGrad(vg, shape, 1);
+            if (NSVG_PAINT_NONE != shape->fill.type)
+                nvgFill(vg);
             if (NSVG_PAINT_NONE != shape->stroke.type)
             {
                 if (NSVG_PAINT_COLOR == shape->stroke.type)
@@ -404,25 +422,6 @@ int main(int argc, char **argv)
 #endif
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
-
-#ifndef EMSCRIPTEN
-    if (0)
-    {
-        /*int w = (int)g_image->width;
-        int h = (int)g_image->height;
-        NSVGrasterizer *rast = nsvgCreateRasterizer();
-        if (rast == NULL) {
-            printf("Could not init rasterizer.\n");
-        }
-        unsigned char *img = malloc(w*h*4);
-        if (img == NULL) {
-            printf("Could not alloc image buffer.\n");
-        }
-        nsvgRasterize(rast, g_image, 0, 0, 1, img, w, h, w*4);
-        stbi_write_png("svg.png", w, h, 4, img, w*4);
-        nsvgDeleteRasterizer(rast);*/
-    }
-#endif
 
 #ifdef EMSCRIPTEN
     vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
