@@ -796,6 +796,14 @@ NVGpaint nvgLinearGradient(NVGcontext* ctx,
 	return p;
 }
 
+NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
+    float sx, float sy, float ex, float ey,
+    float ir, float ig, float ib, float ia, float or, float og, float ob, float oa)
+{
+    float m = 1.0/255.0;
+    return nvgLinearGradient(ctx, sx, sy, ex, ey, nvgRGBAf(ir*m, ig*m, ib*m, ia*m), nvgRGBAf(or*m, og*m, ob*m, oa*m));
+}
+
 NVGpaint nvgRadialGradient(NVGcontext* ctx,
 								  float cx, float cy, float inr, float outr,
 								  NVGcolor icol, NVGcolor ocol)

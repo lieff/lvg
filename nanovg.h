@@ -344,6 +344,10 @@ void nvgDeleteImage(NVGcontext* ctx, int image);
 NVGpaint nvgLinearGradient(NVGcontext* ctx, float sx, float sy, float ex, float ey,
 						   NVGcolor icol, NVGcolor ocol);
 
+NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
+    float sx, float sy, float ex, float ey,
+    float ir, float ig, float ib, float ia, float or, float og, float ob, float oa);
+
 // Creates and returns a box gradient. Box gradient is a feathered rounded rectangle, it is useful for rendering
 // drop shadows or highlights for boxes. Parameters (x,y) define the top-left corner of the rectangle,
 // (w,h) define the size of the rectangle, r defines the corner radius, and f feather. Feather defines how blurry

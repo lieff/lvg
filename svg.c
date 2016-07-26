@@ -47,28 +47,35 @@ extern void onInit();
 extern void onFrame();
 #endif
 
-int get_zip_contents(const char *fname, char **buf)
+char *lvgGetFileContents(const char *fname, int *size)
 {
     struct zip_stat st;
     struct zip_file *zf;
     zip_int64_t idx;
     if ((idx = zip_name_locate(g_zip, fname, 0)) < 0)
-	return -1;
+    return 0;
     if (!(zf = zip_fopen_index(g_zip, idx, 0)))
-        return -1;
+        return 0;
     zip_stat_index(g_zip, idx, 0, &st);
-    *buf = malloc(st.size + 1);
-    (*buf)[st.size] = 0;
-    zip_fread(zf, *buf, st.size);
+    char *buf = malloc(st.size + 1);
+    buf[st.size] = 0;
+    zip_fread(zf, buf, st.size);
     zip_fclose(zf);
-    return st.size;
+    if (size)
+        *size = st.size;
+    return buf;
+}
+
+void lvgFree(void *buf)
+{
+    free(buf);
 }
 
 NSVGimage *lvgLoadSVG(const char *file)
 {
     char *buf;
     double time = glfwGetTime();
-    if (get_zip_contents(file, &buf) < 0)
+    if (*(buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open SVG image.\n");
         return 0;
@@ -168,6 +175,7 @@ void lvgDrawSVG(NSVGimage *image)
 
 void drawframe()
 {
+    glfwPollEvents();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     glfwGetWindowSize(window, &winWidth, &winHeight);
     glfwGetFramebufferSize(window, &width, &height);
@@ -195,24 +203,17 @@ void drawframe()
     //nvgRestore(vg);
     nvgEndFrame(vg);
     glfwSwapBuffers(window);
-    glfwPollEvents();
 }
 
 #ifndef EMSCRIPTEN
-void resizecb(GLFWwindow* window, int width, int height)
-{
-    // Update and render
-    NSVG_NOTUSED(width);
-    NSVG_NOTUSED(height);
-    drawframe();
-}
-
 const char g_header[] =
     "#include <math.h>\n"
     "#include \"nanovg.h\"\n"
     "#define NANOSVG_ALL_COLOR_KEYWORDS\n"
     "#include \"nanosvg.h\"\n"
     "\n"
+    "char *lvgGetFileContents(const char *fname, int *size);\n"
+    "void lvgFree(void *buf);\n"
     "void lvgDrawSVG(NSVGimage *image);\n"
     "NSVGimage *lvgLoadSVG(const char *file);\n"
     "\n"
@@ -236,6 +237,8 @@ struct SYM
 const struct SYM g_syms[] = {
     { "lvgDrawSVG", lvgDrawSVG },
     { "lvgLoadSVG", lvgLoadSVG },
+    { "lvgGetFileContents", lvgGetFileContents },
+    { "lvgFree", lvgFree },
     { "sin", sin },
     { "floor", floor },
 
@@ -251,6 +254,7 @@ const struct SYM g_syms[] = {
     { "nvgPathWinding", nvgPathWinding },
     { "nvgFillPaint", nvgFillPaint },
     { "nvgLinearGradient", nvgLinearGradient },
+    { "nvgLinearGradientTCC", nvgLinearGradientTCC },
     { "nvgMoveTo", nvgMoveTo },
     { "nvgLineTo", nvgLineTo },
     { "nvgStrokeColor", nvgStrokeColor },
@@ -278,7 +282,9 @@ const struct SYM g_syms[] = {
     { "nvgLineCap", nvgLineCap },
     { "nvgLineJoin", nvgLineJoin },
     { "nvgCreateImage", nvgCreateImage },
+    { "nvgCreateImageMem", nvgCreateImageMem },
     { "nvgCreateFont", nvgCreateFont },
+    { "nvgCreateFontMem", nvgCreateFontMem },
     { "nvgDeleteImage", nvgDeleteImage },
     { "nvgTextMetrics", nvgTextMetrics },
     { "nvgTextBreakLines", nvgTextBreakLines },
@@ -314,7 +320,7 @@ int loadScript()
     char *buf, *source;
     int size, i;
 
-    if (get_zip_contents("main.c", &buf) < 0)
+    if (!(buf = lvgGetFileContents("main.c", 0)))
     {
         printf("error: could not open C script.\n");
         return -1;
@@ -327,6 +333,7 @@ int loadScript()
 
     s = tcc_new();
     tcc_set_error_func(s, 0, tcc_error_func);
+    //tcc_set_options(s, "-g");
     tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
     tcc_add_include_path(s, ".");
     tcc_add_include_path(s, "./include");
@@ -360,7 +367,7 @@ int open_lvg(const char *file)
     g_main_script = 0;
     char *buf;
 #ifdef EMSCRIPTEN
-    if (get_zip_contents("main.js", &buf) < 0)
+    if (!(buf = lvgGetFileContents("main.js", 0)))
         printf("error: could not open JS script.\n");
     else
         g_main_script = buf;
@@ -372,7 +379,7 @@ int open_lvg(const char *file)
 
 int main(int argc, char **argv)
 {
-    if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "test.lvg"))
+    if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "test3.lvg"))
     {
         printf("error");
         return -1;
@@ -393,7 +400,6 @@ int main(int argc, char **argv)
     }
 
 #ifndef EMSCRIPTEN
-    glfwSetFramebufferSizeCallback(window, resizecb);
     glfwSwapInterval(1);
 #endif
     glfwMakeContextCurrent(window);

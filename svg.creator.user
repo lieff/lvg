@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2016-07-25T03:16:34. -->
+<!-- Written by QtCreator 3.5.1, 2016-07-26T01:19:13. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -69,7 +69,7 @@
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">-O0 -g -fpcc-struct-return nanovg.c svg.c -o svg_d -lm -lglfw -lGL -ltcc -lzip -ldl</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">-O0 -fno-stack-protector -g nanovg.c svg.c -o svg_d -lm -lglfw -lGL -ltcc -lzip -ldl</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Command">gcc</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">%{buildDir}</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Custom Process Step</value>
