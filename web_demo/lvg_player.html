@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Player</title>
+    <title>LVG Player</title>
     <style>
       body {
         font-family: arial;
@@ -128,9 +128,12 @@
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
       var spinnerElement = document.getElementById('spinner');
+      var filename = location.search.split('file=')[1];
 
       var Module = {
-        preRun: [],
+        preRun: function() {
+            FS.createPreloadedFile('/', 'main.lvg', filename, true, false);
+        },
         postRun: [],
         print: (function() {
           var element = document.getElementById('output');
@@ -206,7 +209,7 @@
     <script>
 
           (function() {
-            var memoryInitializer = 'index.html.mem';
+            var memoryInitializer = 'lvg_player.html.mem';
             if (typeof Module['locateFile'] === 'function') {
               memoryInitializer = Module['locateFile'](memoryInitializer);
             } else if (Module['memoryInitializerPrefixURL']) {
@@ -219,7 +222,7 @@
           })();
 
           var script = document.createElement('script');
-          script.src = "index.js";
+          script.src = "lvg_player.js";
           document.body.appendChild(script);
 
 </script>

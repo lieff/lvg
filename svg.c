@@ -397,7 +397,7 @@ int open_lvg(const char *file)
 
 int main(int argc, char **argv)
 {
-    if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "test3.lvg"))
+    if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "main.lvg"))
     {
         printf("error");
         return -1;
