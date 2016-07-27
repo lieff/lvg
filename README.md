@@ -8,7 +8,8 @@ It's uses C scripts natively and javascript for web.
 
 Why C scripts? Because C compiler is small, and runtime written in C, so no other lagnuage needed and script can be compiled in to save space.
 
-Demo:
+[Demo:](https://lieff.github.io/lvg_player.html?file=test.lvg)
+
 ![Screenshot](svg_tiger.png?raw=true "demo")
 
 LVG System is developed and maintained by https://github.com/lieff
