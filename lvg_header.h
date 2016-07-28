@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdint.h>
 #include "nanovg.h"
 #define NANOSVG_ALL_COLOR_KEYWORDS
 #include "nanosvg.h"

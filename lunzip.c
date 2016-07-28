@@ -46,16 +46,15 @@ void lvgZipClose(zip_t *zip)
 
 uint32_t lvgZipNameLocate(zip_t *zip, const char *fname)
 {
-    int i;
-    if (zip->endRecord->centralDirectoryOffset > zip->size)
+    if (!zip || zip->endRecord->centralDirectoryOffset > zip->size)
         return -1;
+    size_t flen = strlen(fname);
     zipGlobalFileHeader_t *fh = (zipGlobalFileHeader_t *)(zip->buf + zip->endRecord->centralDirectoryOffset);
-    for (i = 0; i < zip->endRecord->numEntries; i++)
+    for (int i = 0; i < zip->endRecord->numEntries; i++)
     {
         if (fh->signature != 0x02014B50)
             return -1;
-        int found = !strncmp((char *)(fh + 1), fname, fh->fileNameLength);
-        if (found)
+        if (fh->fileNameLength == flen && !strncmp((char *)(fh + 1), fname, fh->fileNameLength))
             return fh->relativeOffsetOflocalHeader;
         fh = (zipGlobalFileHeader_t *)((char *)(fh + 1) + fh->fileNameLength + fh->extraFieldLength + fh->fileCommentLength);
     }
@@ -68,17 +67,15 @@ char *lvgZipDecompress(zip_t *zip, uint32_t file_ofs, uint32_t *size)
     if (fh->signature != 0x04034B50)
         return 0;
     char *c_data = (char *)(fh + 1) + fh->fileNameLength + fh->extraFieldLength;
+    char *u_data = (char *)malloc(fh->uncompressedSize + 1);
+    u_data[fh->uncompressedSize] = 0;
     if (0 == fh->compressionMethod)
     {
         if ((fh->compressedSize != fh->uncompressedSize))
             return 0;
-        if (size)
-            *size = fh->uncompressedSize;
-        return c_data;
-    }
-    char *u_data = (char *)malloc(fh->uncompressedSize + 1);
-    u_data[fh->uncompressedSize] = 0;
-    stbi_zlib_decode_noheader_buffer(u_data, fh->uncompressedSize, c_data, fh->compressedSize);
+        memcpy(u_data, c_data, fh->uncompressedSize);
+    } else
+        stbi_zlib_decode_noheader_buffer(u_data, fh->uncompressedSize, c_data, fh->compressedSize);
     if (size)
         *size = fh->uncompressedSize;
     return u_data;

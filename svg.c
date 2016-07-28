@@ -217,6 +217,7 @@ void drawframe()
 #ifndef EMSCRIPTEN
 const char g_header[] =
     "#include <math.h>\n"
+    "#include <stdint.h>\n"
     "#include \"nanovg.h\"\n"
     "#define NANOSVG_ALL_COLOR_KEYWORDS\n"
     "#include \"nanosvg.h\"\n"
