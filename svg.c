@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
-#include <zip.h>
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -29,7 +28,9 @@
 #endif
 #include "nanovg_gl.h"
 
-struct zip *g_zip;
+#include "lunzip.h"
+
+zip_t g_zip;
 NVGcontext *vg = NULL;
 NVGcolor g_bgColor;
 GLFWwindow *window;
@@ -48,23 +49,12 @@ extern void onInit();
 extern void onFrame();
 #endif
 
-char *lvgGetFileContents(const char *fname, int *size)
+char *lvgGetFileContents(const char *fname, uint32_t *size)
 {
-    struct zip_stat st;
-    struct zip_file *zf;
-    zip_int64_t idx;
-    if ((idx = zip_name_locate(g_zip, fname, 0)) < 0)
-    return 0;
-    if (!(zf = zip_fopen_index(g_zip, idx, 0)))
+    uint32_t idx;
+    if ((idx = lvgZipNameLocate(&g_zip, fname)) == (int32_t)-1)
         return 0;
-    zip_stat_index(g_zip, idx, 0, &st);
-    char *buf = malloc(st.size + 1);
-    buf[st.size] = 0;
-    zip_fread(zf, buf, st.size);
-    zip_fclose(zf);
-    if (size)
-        *size = st.size;
-    return buf;
+    return lvgZipDecompress(&g_zip, idx, size);
 }
 
 void lvgFree(void *buf)
@@ -231,7 +221,7 @@ const char g_header[] =
     "#define NANOSVG_ALL_COLOR_KEYWORDS\n"
     "#include \"nanosvg.h\"\n"
     "\n"
-    "char *lvgGetFileContents(const char *fname, int *size);\n"
+    "char *lvgGetFileContents(const char *fname, uint32_t *size);\n"
     "void lvgFree(void *buf);\n"
     "void lvgDrawSVG(NSVGimage *image);\n"
     "NSVGimage *lvgLoadSVG(const char *file);\n"
@@ -382,8 +372,7 @@ error:
 
 int open_lvg(const char *file)
 {
-    int err;
-    if ((g_zip = zip_open(file, 0, &err)) == NULL)
+    if (lvgZipOpen(file, &g_zip))
         return -1;
     g_main_script = 0;
     char *buf;
@@ -474,7 +463,7 @@ int main(int argc, char **argv)
 #else
     nvgDeleteGL2(vg);
 #endif
-    zip_close(g_zip);
+    lvgZipClose(&g_zip);
 
     glfwTerminate();
     return 0;

@@ -1,4 +1,7 @@
 fontstash.h
+lunzip.c
+lunzip.h
+lvg_header.h
 nanosvg.h
 nanosvgrast.h
 nanovg.c

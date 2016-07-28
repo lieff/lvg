@@ -12,4 +12,8 @@ Why C scripts? Because C compiler is small, and runtime written in C, so no othe
 
 ![Screenshot](svg_tiger.png?raw=true "demo")
 
+https://skia.org/
+https://cairographics.org/
+http://www.antigrain.com/
+
 LVG System is developed and maintained by https://github.com/lieff
