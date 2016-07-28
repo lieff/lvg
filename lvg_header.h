@@ -9,6 +9,7 @@ void lvgDrawSVG(NSVGimage *image);
 NSVGimage *lvgLoadSVG(const char *file);
 
 extern NVGcontext *vg;
+extern NVGcolor g_bgColor;
 extern int winWidth;
 extern int winHeight;
 extern int width;

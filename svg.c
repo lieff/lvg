@@ -31,6 +31,7 @@
 
 struct zip *g_zip;
 NVGcontext *vg = NULL;
+NVGcolor g_bgColor;
 GLFWwindow *window;
 int winWidth, winHeight;
 int width = 0, height = 0;
@@ -154,7 +155,7 @@ void lvgDrawSVG(NSVGimage *image)
     {
         if (!(shape->flags & NSVG_FLAGS_VISIBLE))
             continue;
-    
+
         for (path = shape->paths; path != NULL; path = path->next)
         {
             nvgBeginPath(vg);
@@ -204,7 +205,7 @@ void drawframe()
     mkeys |= glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS ? 4 : 0;
 
     glViewport(0, 0, width, height);
-    glClearColor(22.0f/255.0f, 22.0f/255.0f, 22.0f/255.0f, 1.0f);
+    glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
     nvgBeginFrame(vg, winWidth, winHeight, (float)width / (float)winWidth);
@@ -236,6 +237,7 @@ const char g_header[] =
     "NSVGimage *lvgLoadSVG(const char *file);\n"
     "\n"
     "extern NVGcontext *vg;\n"
+    "extern NVGcolor g_bgColor;\n"
     "extern int winWidth;\n"
     "extern int winHeight;\n"
     "extern int width;\n"
@@ -316,6 +318,7 @@ const struct SYM g_syms[] = {
     { "nvgIntersectScissor", nvgIntersectScissor },
 
     { "vg", &vg },
+    { "g_bgColor", &g_bgColor },
     { "winWidth", &winWidth },
     { "winHeight", &winHeight },
     { "width", &width },
@@ -403,16 +406,21 @@ int main(int argc, char **argv)
         return -1;
     }
 
+    glfwWindowHint(GLFW_RESIZABLE, 1);
 #ifdef EMSCRIPTEN
-    glfwWindowHint(GLFW_RESIZABLE , 1);
-    window = glfwCreateWindow(1024, 1024, "LVG Player", NULL, NULL);
+    width = 1024, height = 800;
 #else
     const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-    window = glfwCreateWindow(mode->width - 40, mode->height - 80, "LVG Player", NULL, NULL);
+    width = mode->width - 40, height = mode->height - 80;
+    if (width > 1024)
+        width = 1024;
+    if (height > 800)
+        height = 800;
 #endif
+    window = glfwCreateWindow(width, height, "LVG Player", NULL, NULL);
     if (!window)
     {
-        printf("Could not open window\n");
+        printf("eror: could not open window\n");
         glfwTerminate();
         return -1;
     }
@@ -429,6 +437,17 @@ int main(int argc, char **argv)
     vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
 
+    /*GLuint texId[1];
+    glActiveTexture(GL_TEXTURE0);
+    glGenTextures(1, texId);
+    glBindTexture(GL_TEXTURE_2D, texId[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glActiveTexture(GL_TEXTURE0);*/
+
 #ifdef EMSCRIPTEN
     if (g_main_script)
     {
@@ -440,7 +459,7 @@ int main(int argc, char **argv)
     if (g_main_script)
         onInit();
     glfwSetTime(0);
-    emscripten_set_main_loop(drawframe, 60, 1);
+    emscripten_set_main_loop(drawframe, 0, 1);
 #else
     if (onInit)
         onInit();
