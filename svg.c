@@ -422,7 +422,7 @@ int main(int argc, char **argv)
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
 #ifdef EMSCRIPTEN
-    vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+    vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
 #else
     vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
