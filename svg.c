@@ -347,7 +347,7 @@ int loadScript()
     tcc_set_error_func(s, 0, tcc_error_func);
     //tcc_set_options(s, "-g");
     tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
-    tcc_add_include_path(s, ".");
+    tcc_add_include_path(s, "nanovg");
     tcc_add_include_path(s, "./include");
     tcc_set_lib_path(s, "./lib");
 
