@@ -29,6 +29,7 @@
 #include "nanovg_gl.h"
 
 #include "lunzip.h"
+#include "all.h"
 
 zip_t g_zip;
 NVGcontext *vg = NULL;
@@ -215,29 +216,6 @@ void drawframe()
 }
 
 #ifndef EMSCRIPTEN
-const char g_header[] =
-    "#include <math.h>\n"
-    "#include <stdint.h>\n"
-    "#include \"nanovg.h\"\n"
-    "#define NANOSVG_ALL_COLOR_KEYWORDS\n"
-    "#include \"nanosvg.h\"\n"
-    "\n"
-    "char *lvgGetFileContents(const char *fname, uint32_t *size);\n"
-    "void lvgFree(void *buf);\n"
-    "void lvgDrawSVG(NSVGimage *image);\n"
-    "NSVGimage *lvgLoadSVG(const char *file);\n"
-    "\n"
-    "extern NVGcontext *vg;\n"
-    "extern NVGcolor g_bgColor;\n"
-    "extern int winWidth;\n"
-    "extern int winHeight;\n"
-    "extern int width;\n"
-    "extern int height;\n"
-    "extern int mkeys;\n"
-    "extern double mx;\n"
-    "extern double my;\n"
-    "extern double g_time;\n"
-    "\n";
 
 struct SYM
 {
@@ -337,9 +315,9 @@ int loadScript()
         printf("error: could not open C script.\n");
         return -1;
     }
-    source = malloc(strlen(g_header) + strlen(buf) + 1);
+    source = malloc(strlen(allh_h) + strlen(buf) + 1);
     source[0] = 0;
-    strcat(source, g_header);
+    strcat(source, allh_h);
     strcat(source, buf);
     free(buf);
 
@@ -347,8 +325,6 @@ int loadScript()
     tcc_set_error_func(s, 0, tcc_error_func);
     //tcc_set_options(s, "-g");
     tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
-    tcc_add_include_path(s, "nanovg");
-    tcc_add_include_path(s, "./include");
     tcc_set_lib_path(s, "./lib");
 
     if (tcc_compile_string(s, source) == -1)

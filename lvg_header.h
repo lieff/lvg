@@ -1,8 +1,4 @@
 #include <math.h>
-#include <stdint.h>
-#include "nanovg.h"
-#define NANOSVG_ALL_COLOR_KEYWORDS
-#include "nanosvg.h"
 
 void *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
