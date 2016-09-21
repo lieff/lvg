@@ -14,9 +14,10 @@ Why C scripts? Because C compiler is small, and runtime written in C, so no othe
 
 Interesting graphics libraries:
 
-https://github.com/01org/fastuidraw
-https://skia.org/
-https://cairographics.org/
-http://www.antigrain.com/
+ * https://github.com/01org/fastuidraw
+ * https://skia.org/
+ * https://cairographics.org/
+ * http://www.antigrain.com/
+ * http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_home
 
 LVG System is developed and maintained by https://github.com/lieff
