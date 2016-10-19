@@ -50,6 +50,14 @@ extern void onInit();
 extern void onFrame();
 #endif
 
+NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
+    float sx, float sy, float ex, float ey,
+    float ir, float ig, float ib, float ia, float or, float og, float ob, float oa)
+{
+    float m = 1.0/255.0;
+    return nvgLinearGradient(ctx, sx, sy, ex, ey, nvgRGBAf(ir*m, ig*m, ib*m, ia*m), nvgRGBAf(or*m, og*m, ob*m, oa*m));
+}
+
 char *lvgGetFileContents(const char *fname, uint32_t *size)
 {
     uint32_t idx;
