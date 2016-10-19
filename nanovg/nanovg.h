@@ -152,6 +152,9 @@ enum NVGimageFlags {
 // frame buffer size. In that case you would set windowWidth/Height to the window size
 // devicePixelRatio to: frameBufferWidth / windowWidth.
 void nvgBeginFrame(NVGcontext* ctx, int windowWidth, int windowHeight, float devicePixelRatio);
+  
+// Returns devicePixelRatio passed to nvgBeginFrame.
+float nvgDevicePixelRatio(NVGcontext* ctx);
 
 // Cancels drawing the current frame.
 void nvgCancelFrame(NVGcontext* ctx);

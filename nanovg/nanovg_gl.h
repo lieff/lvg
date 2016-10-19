@@ -592,6 +592,7 @@ static int glnvg__renderCreate(void* uptr)
 		"// Stroke - from [0..1] to clipped pyramid, where the slope is 1px.\n"
 		"float strokeMask() {\n"
 		"	return min(1.0, (1.0-abs(ftcoord.x*2.0-1.0))*strokeMult) * min(1.0, ftcoord.y);\n"
+    //"	return smoothstep(0.0, 1.0, (1.0-abs(ftcoord.x*2.0-1.0))*strokeMult) * smoothstep(0.0, 1.0, ftcoord.y);\n"
 		"}\n"
 		"#endif\n"
 		"\n"
@@ -639,9 +640,12 @@ static int glnvg__renderCreate(void* uptr)
 		"		color *= scissor;\n"
 		"		result = color * innerCol;\n"
 		"	}\n"
+// Discard is really bad on iOS.
+#ifndef TARGET_OS_IPHONE
 		"#ifdef EDGE_AA\n"
 		"	if (strokeAlpha < strokeThr) discard;\n"
 		"#endif\n"
+#endif
 		"#ifdef NANOVG_GL3\n"
 		"	outColor = result;\n"
 		"#else\n"
@@ -1138,6 +1142,10 @@ static void glnvg__renderFlush(void* uptr, NVGcompositeOperationState compositeO
 		glStencilFunc(GL_ALWAYS, 0, 0xffffffff);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
+#ifdef TARGET_OS_IPHONE
+    // Avoid performance analysis warning on iOS.
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+#endif
 		#if NANOVG_GL_USE_STATE_FILTER
 		gl->boundTexture = 0;
 		gl->stencilMask = 0xffffffff;
