@@ -1,4 +1,6 @@
 #ifdef EMSCRIPTEN
+#include <stdio.h>
+#include <string.h>
 #include <stdint.h>
 #endif
 #include <math.h>
