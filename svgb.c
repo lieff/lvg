@@ -47,6 +47,8 @@ int main(int argc, char **argv)
         i++;
     }
     fwrite(&i, 1, 4, file);
+    fwrite(&image->width, 1, 4, file);
+    fwrite(&image->height, 1, 4, file);
 
     for (shape = image->shapes; shape != NULL; shape = shape->next)
     {
@@ -58,12 +60,14 @@ int main(int argc, char **argv)
         fwrite(&i, 1, 4, file);
         fwrite(&shape->fill, 1, sizeof(shape->fill), file);
         fwrite(&shape->stroke, 1, sizeof(shape->stroke), file);
+        fwrite(&shape->strokeWidth, 1, sizeof(shape->strokeWidth), file);
+        fwrite(shape->bounds, 1, sizeof(shape->bounds), file);
 
         for (path = shape->paths; path != NULL; path = path->next)
         {
             fwrite(&path->npts, 1, 4, file);
             fwrite(&path->closed, 1, 1, file);
-            fwrite(path->pts, 1, sizeof(path->pts[0])*path->npts, file);
+            fwrite(path->pts, 1, sizeof(path->pts[0])*path->npts*2, file);
         }
     }
 

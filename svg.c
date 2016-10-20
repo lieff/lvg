@@ -122,6 +122,8 @@ NSVGimage *lvgLoadSVGB(const char *file)
 
     int nshapes = 0;
     READ(&nshapes, 4);
+    READ(&image->width, 4);
+    READ(&image->height, 4);
     image->shapes = (NSVGshape*)malloc(nshapes*sizeof(NSVGshape));
     memset(image->shapes, 0, nshapes*sizeof(NSVGshape));
     NSVGshape *shape = 0;
@@ -134,6 +136,8 @@ NSVGimage *lvgLoadSVGB(const char *file)
         READ(&npaths, 4);
         READ(&shape->fill, sizeof(shape->fill));
         READ(&shape->stroke, sizeof(shape->stroke));
+        READ(&shape->strokeWidth, sizeof(shape->strokeWidth));
+        READ(shape->bounds, sizeof(shape->bounds));
         shape->flags |= NSVG_FLAGS_VISIBLE;
 
         shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
@@ -146,8 +150,8 @@ NSVGimage *lvgLoadSVGB(const char *file)
             path = &shape->paths[j];
             READ(&path->npts, 4);
             READ(&path->closed, 1);
-            path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts);
-            READ(path->pts, sizeof(path->pts[0])*path->npts);
+            path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
+            READ(path->pts, sizeof(path->pts[0])*path->npts*2);
         }
     }
 
