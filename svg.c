@@ -107,15 +107,39 @@ NSVGimage *lvgLoadSVG(const char *file)
     return image;
 }
 
+#define READ(p, n) { memcpy(p, buf, n); buf += n; }
+
+char *load_paint(char *buf, NSVGpaint *p)
+{
+    READ(&p->type, 1);
+    if (NSVG_PAINT_COLOR == p->type)
+    {
+        READ(&p->color, 4);
+    } else if (NSVG_PAINT_LINEAR_GRADIENT == p->type || NSVG_PAINT_RADIAL_GRADIENT == p->type)
+    {
+        int nstops = 0;
+        READ(&nstops, 4);
+        NSVGgradient *g = p->gradient = (NSVGgradient*)malloc(sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*nstops);
+        g->nstops = nstops;
+        READ(&g->xform, 4*6);
+        READ(&g->fx, 4*2);
+        READ(&g->spread, 1);
+        READ(g->stops, g->nstops*8);
+    }
+    return buf;
+}
+
 NSVGimage *lvgLoadSVGB(const char *file)
 {
     char *buf, *save_buf;
+    double time = glfwGetTime();
     if (!(buf = save_buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open SVG image.\n");
         return 0;
     }
-#define READ(p, n) { memcpy(p, buf, n); buf += n; }
+    double time2 = glfwGetTime();
+    printf("zip time: %fs\n", time2 - time);
 
     NSVGimage *image = (NSVGimage*)malloc(sizeof(NSVGimage));
     memset(image, 0, sizeof(NSVGimage));
@@ -134,10 +158,10 @@ NSVGimage *lvgLoadSVGB(const char *file)
         shape = &image->shapes[i];
         int npaths = 0;
         READ(&npaths, 4);
-        READ(&shape->fill, sizeof(shape->fill));
-        READ(&shape->stroke, sizeof(shape->stroke));
-        READ(&shape->strokeWidth, sizeof(shape->strokeWidth));
-        READ(shape->bounds, sizeof(shape->bounds));
+        buf = load_paint(buf, &shape->fill);
+        buf = load_paint(buf, &shape->stroke);
+        READ(&shape->strokeWidth, 4);
+        READ(shape->bounds, 4*4);
         shape->flags |= NSVG_FLAGS_VISIBLE;
 
         shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
@@ -156,6 +180,8 @@ NSVGimage *lvgLoadSVGB(const char *file)
     }
 
     free(save_buf);
+    time = glfwGetTime();
+    printf("svg load time: %fs\n", time - time2);
     return image;
 }
 

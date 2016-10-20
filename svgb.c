@@ -10,6 +10,23 @@
 #include "stb_image_write.h"
 #endif
 
+void save_gradient(FILE *file, NSVGgradient *g)
+{
+    fwrite(&g->nstops, 1, 4, file);
+    fwrite(&g->xform, 1, 4*6, file);
+    fwrite(&g->fx, 1, 4*2, file);
+    fwrite(&g->spread, 1, 1, file);
+    fwrite(g->stops, 1, g->nstops*8, file);
+}
+
+void save_paint(FILE *file, NSVGpaint *p)
+{
+    fwrite(&p->type, 1, 1, file);
+    if (NSVG_PAINT_COLOR == p->type)
+        fwrite(&p->color, 1, 4, file);
+    else if (NSVG_PAINT_LINEAR_GRADIENT == p->type || NSVG_PAINT_RADIAL_GRADIENT == p->type)
+        save_gradient(file, p->gradient);
+}
 
 int main(int argc, char **argv)
 {
@@ -58,10 +75,10 @@ int main(int argc, char **argv)
         for (path = shape->paths; path != NULL; path = path->next)
             i++;
         fwrite(&i, 1, 4, file);
-        fwrite(&shape->fill, 1, sizeof(shape->fill), file);
-        fwrite(&shape->stroke, 1, sizeof(shape->stroke), file);
-        fwrite(&shape->strokeWidth, 1, sizeof(shape->strokeWidth), file);
-        fwrite(shape->bounds, 1, sizeof(shape->bounds), file);
+        save_paint(file, &shape->fill);
+        save_paint(file, &shape->stroke);
+        fwrite(&shape->strokeWidth, 1, 4, file);
+        fwrite(shape->bounds, 1, 4*4, file);
 
         for (path = shape->paths; path != NULL; path = path->next)
         {
