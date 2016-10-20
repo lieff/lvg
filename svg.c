@@ -107,6 +107,54 @@ NSVGimage *lvgLoadSVG(const char *file)
     return image;
 }
 
+NSVGimage *lvgLoadSVGB(const char *file)
+{
+    char *buf, *save_buf;
+    if (!(buf = save_buf = lvgGetFileContents(file, 0)))
+    {
+        printf("error: could not open SVG image.\n");
+        return 0;
+    }
+#define READ(p, n) { memcpy(p, buf, n); buf += n; }
+
+    NSVGimage *image = (NSVGimage*)malloc(sizeof(NSVGimage));
+    memset(image, 0, sizeof(NSVGimage));
+
+    int nshapes = 0;
+    READ(&nshapes, 4);
+    image->shapes = (NSVGshape*)malloc(nshapes*sizeof(NSVGshape));
+    memset(image->shapes, 0, nshapes*sizeof(NSVGshape));
+    NSVGshape *shape = 0;
+    for (int i = 0; i < nshapes; i++)
+    {
+        if (shape)
+            shape->next = &image->shapes[i];
+        shape = &image->shapes[i];
+        int npaths = 0;
+        READ(&npaths, 4);
+        READ(&shape->fill, sizeof(shape->fill));
+        READ(&shape->stroke, sizeof(shape->stroke));
+        shape->flags |= NSVG_FLAGS_VISIBLE;
+
+        shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
+        memset(shape->paths, 0, npaths*sizeof(NSVGpath));
+        NSVGpath *path = 0;
+        for (int j = 0; j < npaths; j++)
+        {
+            if (path)
+                path->next = &shape->paths[j];
+            path = &shape->paths[j];
+            READ(&path->npts, 4);
+            READ(&path->closed, 1);
+            path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts);
+            READ(path->pts, sizeof(path->pts[0])*path->npts);
+        }
+    }
+
+    free(save_buf);
+    return image;
+}
+
 static inline NVGcolor nvgColorU32(uint32_t c)
 {
     return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, 255);
@@ -234,6 +282,7 @@ struct SYM
 const struct SYM g_syms[] = {
     { "lvgDrawSVG", lvgDrawSVG },
     { "lvgLoadSVG", lvgLoadSVG },
+    { "lvgLoadSVGB", lvgLoadSVGB },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
     { "sin", sin },
@@ -376,7 +425,7 @@ int main(int argc, char **argv)
 {
     if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "main.lvg"))
     {
-        printf("error");
+        printf("error: could not open lvg file\n");
         return -1;
     }
 
@@ -394,7 +443,7 @@ int main(int argc, char **argv)
     window = glfwCreateWindow(width, height, "LVG Player", NULL, NULL);
     if (!window)
     {
-        printf("eror: could not open window\n");
+        printf("error: could not open window\n");
         glfwTerminate();
         return -1;
     }
