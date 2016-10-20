@@ -1,3 +1,6 @@
+#ifdef EMSCRIPTEN
+#include <stdint.h>
+#endif
 #include <math.h>
 
 void *lvgGetFileContents(const char *fname, uint32_t *size);

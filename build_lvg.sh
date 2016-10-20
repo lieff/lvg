@@ -15,7 +15,7 @@ else
 fi
 unzip $1 main.c
 mv main.c main.pc
-cat lvg_header.h main.pc >> main.c
+cat nanovg/nanosvg.h nanovg/nanovg.h lvg_header.h main.pc >> main.c
 emcc -Os main.c -o main.js -s EXPORTED_FUNCTIONS="['onFrame', 'onInit']" -s SIDE_MODULE=1
 rm main.c
 rm main.pc
