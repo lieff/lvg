@@ -145,6 +145,7 @@ typedef struct NSVGshape
 	char strokeDashCount;				// Number of dash values in dash array.
 	char strokeLineJoin;		// Stroke join type.
 	char strokeLineCap;			// Stroke cap type.
+    float miterLimit;			// Miter limit
 	char fillRule;				// Fill rule, see NSVGfillRule.
 	unsigned char flags;		// Logical or of NSVG_FLAGS_* flags
 	float bounds[4];			// Tight bounding box of the shape [minx,miny,maxx,maxy].
@@ -415,6 +416,7 @@ typedef struct NSVGattrib
 	int strokeDashCount;
 	char strokeLineJoin;
 	char strokeLineCap;
+    float miterLimit;
 	char fillRule;
 	float fontSize;
 	unsigned int stopColor;
@@ -622,6 +624,7 @@ static NSVGparser* nsvg__createParser()
 	p->attr[0].strokeWidth = 1;
 	p->attr[0].strokeLineJoin = NSVG_JOIN_MITER;
 	p->attr[0].strokeLineCap = NSVG_CAP_BUTT;
+	p->attr[0].miterLimit = 4;
 	p->attr[0].fillRule = NSVG_FILLRULE_NONZERO;
 	p->attr[0].hasFill = 1;
 	p->attr[0].visible = 1;
@@ -940,6 +943,7 @@ static void nsvg__addShape(NSVGparser* p)
 		shape->strokeDashArray[i] = attr->strokeDashArray[i] * scale;
 	shape->strokeLineJoin = attr->strokeLineJoin;
 	shape->strokeLineCap = attr->strokeLineCap;
+	shape->miterLimit = attr->miterLimit;
 	shape->fillRule = attr->fillRule;
 	shape->opacity = attr->opacity;
 
@@ -994,17 +998,9 @@ static void nsvg__addShape(NSVGparser* p)
 	// Set flags
 	shape->flags = (attr->visible ? NSVG_FLAGS_VISIBLE : 0x00);
 
-	// Add to tail
-	prev = NULL;
-	cur = p->image->shapes;
-	while (cur != NULL) {
-		prev = cur;
-		cur = cur->next;
-	}
-	if (prev == NULL)
-		p->image->shapes = shape;
-	else
-		prev->next = shape;
+	// Add to head due to performance, reverse list later
+	shape->next = p->image->shapes;
+	p->image->shapes = shape;
 
 	return;
 
@@ -1355,6 +1351,14 @@ static float nsvg__parseOpacity(const char* str)
 	return val;
 }
 
+static float nsvg__parseMiterLimit(const char* str)
+{
+	float val = 0;
+	sscanf(str, "%f", &val);
+	if (val < 0.0f) val = 0.0f;
+	return val;
+}
+
 static int nsvg__parseUnits(const char* units)
 {
 	if (units[0] == 'p' && units[1] == 'x')
@@ -1681,6 +1685,8 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
 		attr->strokeLineCap = nsvg__parseLineCap(value);
 	} else if (strcmp(name, "stroke-linejoin") == 0) {
 		attr->strokeLineJoin = nsvg__parseLineJoin(value);
+	} else if (strcmp(name, "stroke-miterlimit") == 0) {
+		attr->miterLimit = nsvg__parseMiterLimit(value);
 	} else if (strcmp(name, "fill-rule") == 0) {
 		attr->fillRule = nsvg__parseFillRule(value);
 	} else if (strcmp(name, "font-size") == 0) {
@@ -2783,6 +2789,7 @@ NSVGimage* nsvgParse(char* input, const char* units, float dpi)
 {
 	NSVGparser* p;
 	NSVGimage* ret = 0;
+	NSVGshape* cur, *tmp;
 
 	p = nsvg__createParser();
 	if (p == NULL) {
@@ -2791,6 +2798,16 @@ NSVGimage* nsvgParse(char* input, const char* units, float dpi)
 	p->dpi = dpi;
 
 	nsvg__parseXML(input, nsvg__startElement, nsvg__endElement, nsvg__content, p);
+	
+	//reverse the list of shapes to match svg order
+	cur = p->image->shapes;
+	while (cur && cur->next != NULL) {
+		tmp = cur->next;
+		cur->next = cur->next->next;
+		tmp->next = p->image->shapes;
+		p->image->shapes = tmp;
+		cur = cur->next;
+	}
 
 	// Scale to viewBox
 	nsvg__scaleToViewbox(p, units);
