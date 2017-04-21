@@ -1,0 +1,8 @@
+1222a1223
+>       var filename = location.search.split('file=')[1];
+1225c1226,1228
+<         preRun: [],
+---
+>         preRun: function() {
+>             FS.createPreloadedFile('/', 'main.lvg', filename, true, false);
+>         },

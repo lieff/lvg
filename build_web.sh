@@ -6,3 +6,5 @@ emcc -O3 nanovg/nanovg.c svg.c lunzip.c -I. -Inanovg -o lvg_player.html -s USE_G
 
 #http://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
 #https://github.com/kripken/emscripten/wiki/Linking
+
+patch lvg_player.html lvg_player.patch
