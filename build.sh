@@ -1,1 +1,1 @@
-gcc -s -Os -flto -fno-stack-protector nanovg/nanovg.c svg.c lunzip.c -L. -I. -Inanovg -o svg -lm -lglfw -lGL -ltcc2 -ldl
+gcc -s -Os -flto -fno-stack-protector nanovg/nanovg.c svg.c swf.c lunzip.c swftools/lib/*.c swftools/lib/modules/*.c swftools/lib/action/*.c -L. -I. -Inanovg -Iswftools/lib -o svg -lm -lglfw -lGL -ltcc2 -ldl -ljpeg -lz

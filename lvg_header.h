@@ -10,6 +10,7 @@ void lvgFree(void *buf);
 void lvgDrawSVG(NSVGimage *image);
 NSVGimage *lvgLoadSVG(const char *file);
 NSVGimage *lvgLoadSVGB(const char *file);
+int lvgLoadSWF(const char *file);
 
 extern NVGcontext *vg;
 extern NVGcolor g_bgColor;

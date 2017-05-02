@@ -1,0 +1,1 @@
+This is swf parser from swftools project https://github.com/matthiaskramm/swftools

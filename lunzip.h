@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 typedef struct __attribute__((__packed__)) zipLocalFileHeader_t
 {
@@ -60,3 +61,4 @@ int lvgZipOpen(const char *fname, zip_t *zip);
 void lvgZipClose(zip_t *zip);
 uint32_t lvgZipNameLocate(zip_t *zip, const char *fname);
 char *lvgZipDecompress(zip_t *zip, uint32_t file_ofs, uint32_t *size);
+char *lvgGetFileContents(const char *fname, uint32_t *size);

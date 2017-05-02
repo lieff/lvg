@@ -42,6 +42,8 @@ double g_time;
 int mkeys = 0;
 const char *g_main_script;
 
+int lvgLoadSWF(const char *file);
+
 #ifndef EMSCRIPTEN
 void (*onInit)();
 void (*onFrame)();
@@ -313,6 +315,7 @@ const struct SYM g_syms[] = {
     { "lvgDrawSVG", lvgDrawSVG },
     { "lvgLoadSVG", lvgLoadSVG },
     { "lvgLoadSVGB", lvgLoadSVGB },
+    { "lvgLoadSWF", lvgLoadSWF },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
     { "sin", sin },
