@@ -5,7 +5,7 @@
 #endif
 #include <math.h>
 
-void *lvgGetFileContents(const char *fname, uint32_t *size);
+char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
 void lvgDrawSVG(NSVGimage *image);
 NSVGimage *lvgLoadSVG(const char *file);

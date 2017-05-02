@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-05-02T01:07:49. -->
+<!-- Written by QtCreator 4.1.0, 2017-05-03T01:50:03. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -164,7 +164,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">test5.lvg</value>
+    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">../lvg_samples/test5.lvg</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">./svg</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory">%{buildDir}</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Run ./svg</value>
