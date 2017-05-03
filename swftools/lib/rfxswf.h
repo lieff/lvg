@@ -235,6 +235,7 @@ void  swf_GetRGB(TAG * t, RGBA * col);
 void  swf_GetRGBA(TAG * t, RGBA * col);
 void  swf_GetGradient(TAG * t, GRADIENT * gradient, char alpha);
 void  swf_SetGradient(TAG * tag, GRADIENT * gradient, char alpha);
+void  swf_GetMorphGradient(TAG * tag, GRADIENT * gradient1, GRADIENT * gradient2);
 void  swf_FreeGradient(GRADIENT* gradient);
 char* swf_GetString(TAG*t);
 int   swf_SetU8(TAG * t,U8 v);              // resets Bitcount

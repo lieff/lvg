@@ -169,6 +169,7 @@ SRECT swf_GetDefineBBox(TAG * t)
       swf_GetRect(t, &b1);
       break;
     case ST_DEFINEMORPHSHAPE:
+    case ST_DEFINEMORPHSHAPE2:
       id = swf_GetU16(t);
       swf_GetRect(t, &b1);
       swf_GetRect(t, &b2);
@@ -1152,7 +1153,9 @@ U8 swf_isShapeTag(TAG*tag)
     if(tag->id == ST_DEFINESHAPE ||
        tag->id == ST_DEFINESHAPE2 ||
        tag->id == ST_DEFINESHAPE3 ||
-       tag->id == ST_DEFINESHAPE4)
+       tag->id == ST_DEFINESHAPE4 ||
+       tag->id == ST_DEFINEMORPHSHAPE ||
+       tag->id == ST_DEFINEMORPHSHAPE2)
         return 1;
     return 0;
 }

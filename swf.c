@@ -128,6 +128,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
         if (swf_isDefiningTag(tag))
         {
             int id = swf_GetDefineID(tag);
+            assert(none_type == idtable[id].type); // handle object replace later
             idtable[id].tag = tag;
             idtable[id].bbox = swf_GetDefineBBox(tag);
 
