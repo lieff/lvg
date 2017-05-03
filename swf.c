@@ -16,16 +16,11 @@ typedef struct
 {
     TAG *tag;
     SRECT bbox;
-    union {
-        NSVGshape *shape;
-        //font_t *font;
-        int image;
-    } obj;
+    int lvg_id;
     enum CHARACTER_TYPE type;
 } character_t;
 
 character_t *idtable;
-int numplacements;
 SWFPLACEOBJECT* placements;
 
 int compare_placements(const void *v1, const void *v2);
@@ -69,20 +64,50 @@ static void path_cubicBezTo(NSVGpath* p, float cpx1, float cpy1, float cpx2, flo
     path_addPoint(p, x, y);
 }
 
-
-int swf_ReadObjects(SWF *swf)
+static inline uint32_t RGBA2U32(RGBA *c)
 {
-    int img;
-    numplacements = 0;
+    return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
+}
+
+
+LVGMovieClip *swf_ReadObjects(SWF *swf)
+{
     swf_OptimizeTagOrder(swf);
     swf_FoldAll(swf);
 
     idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
+    LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
+    clip->bounds[0] = swf->movieSize.xmin;
+    clip->bounds[1] = swf->movieSize.ymin;
+    clip->bounds[2] = swf->movieSize.xmax;
+    clip->bounds[3] = swf->movieSize.ymax;
 
     RGBA bg = swf_GetSWFBackgroundColor(swf);
-    g_bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
+    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
 
     TAG *tag = swf->firstTag;
+    while (tag)
+    {
+        if (swf_isDefiningTag(tag))
+        {
+            if (swf_isShapeTag(tag))
+                clip->num_shapes++;
+            else if(swf_isImageTag(tag))
+                clip->num_images++;
+        } else if (swf_isPlaceTag(tag))
+            clip->num_objects++;
+        else if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
+            break;
+        tag = tag->next;
+    }
+    clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
+    clip->images = calloc(1, sizeof(int)*clip->num_images);
+    clip->objects = calloc(1, sizeof(LVGObject)*clip->num_objects);
+    placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*clip->num_objects);
+
+    clip->num_shapes = 0;
+    clip->num_images = 0;
+    tag = swf->firstTag;
     while (tag)
     {
         if (swf_isDefiningTag(tag))
@@ -95,9 +120,19 @@ int swf_ReadObjects(SWF *swf)
             {
                 SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
-                NSVGshape *shape = (NSVGshape*)calloc(1, sizeof(NSVGshape));
+                NSVGshape *shape = clip->shapes + clip->num_shapes;
                 shape->flags |= NSVG_FLAGS_VISIBLE;
                 shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+                shape->bounds[0] = idtable[id].bbox.xmin;
+                shape->bounds[1] = idtable[id].bbox.ymin;
+                shape->bounds[2] = idtable[id].bbox.xmax;
+                shape->bounds[3] = idtable[id].bbox.ymax;
+                if (swf_shape->numfillstyles)
+                {
+                    FILLSTYLE *f = swf_shape->fillstyles;
+                    shape->fill.type = NSVG_PAINT_COLOR;
+                    shape->fill.color = RGBA2U32(&f->color);
+                }
                 NSVGpath *path = shape->paths;
                 struct _SHAPELINE * lines = swf_shape->lines;
                 while (lines)
@@ -115,63 +150,29 @@ int swf_ReadObjects(SWF *swf)
                 while (lines)
                 {
                     if (!path->npts)
-                        path_moveTo(path, lines->x, lines->y);
+                        path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
                     else
-                        path_lineTo(path, lines->x, lines->y);
+                        path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
                     lines = lines->next;
                 }
 
                 idtable[id].type = shape_type;
-                idtable[id].obj.shape = shape;
+                idtable[id].lvg_id = clip->num_shapes++;
             } else if(swf_isImageTag(tag))
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
+                *(clip->images + clip->num_images) = nvgCreateImageRGBA(vg, width, height, 0, (const unsigned char *)data);
                 idtable[id].type = image_type;
-                idtable[id].obj.image = nvgCreateImageRGBA(vg, width, height, 0, (const unsigned char *)data);
-                img = idtable[id].obj.image;
+                idtable[id].lvg_id = clip->num_images++;
                 free(data);
-            }/* else if(tag->id == ST_DEFINEFONT || tag->id == ST_DEFINEFONT2)
-            {
-                int t;
-                SWFFONT*swffont;
-                font_t*font = (font_t*)rfx_calloc(sizeof(font_t));
-                idtable[id].obj.font = font;
-                swf_FontExtract(swf,id,&swffont);
-                font->numchars = swffont->numchars;
-                font->glyphs = (SHAPE2**)rfx_calloc(sizeof(SHAPE2*)*font->numchars);
-                for(t=0;t<font->numchars;t++) {
-                    if(!swffont->glyph[t].shape->fillstyle.n) {
-                        // the actual fill color will be overwritten while rendering
-                        swf_ShapeAddSolidFillStyle(swffont->glyph[t].shape, &color_white);
-                    }
-                    font->glyphs[t] = swf_ShapeToShape2(swffont->glyph[t].shape);
-                }
-                swf_FontFree(swffont);
-                idtable[id].type = font_type;
-            } else if(tag->id == ST_DEFINEFONTINFO || tag->id == ST_DEFINEFONTINFO2)
-            {
-                idtable[id].type = font_type;
-            } else if(tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
-            {
-                idtable[id].type = text_type;
-            } else if(tag->id == ST_DEFINESPRITE)
-            {
-                idtable[id].type = sprite_type;
-            } else if(tag->id == ST_DEFINEEDITTEXT)
-            {
-                idtable[id].type = edittext_type;
-            }*/
-        } else if (tag->id == ST_PLACEOBJECT || tag->id == ST_PLACEOBJECT2)
-            numplacements++;
-        else if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
+            }
+        } else if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
             break;
         tag = tag->next;
     }
 
-    placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*numplacements);
-    numplacements = 0;
-
+    int i, numplacements = 0;
     tag = swf->firstTag;
     while (tag)
     {
@@ -188,11 +189,19 @@ int swf_ReadObjects(SWF *swf)
     }
     qsort(placements, numplacements, sizeof(SWFPLACEOBJECT), compare_placements);
 
-    return img;
+    for (int i = 0; i < numplacements; i++)
+    {
+        LVGObject *o = &clip->objects[i];
+        character_t *c = &idtable[placements[i].id];
+        o->id = c->lvg_id;
+        o->depth = placements[i].depth;
+        o->type = c->type;
+    }
+    return clip;
 }
 
 
-int lvgLoadSWF(const char *file)
+LVGMovieClip *lvgLoadSWF(const char *file)
 {
     SWF swf;
     char *b;
@@ -204,7 +213,7 @@ int lvgLoadSWF(const char *file)
     }
 
     if ((b[0] != 'F' && b[0] != 'C') || b[1] != 'W' || b[2] != 'S')
-        return -1;
+        return 0;
     uint32_t uncompressedSize = GET32(&b[4]);
 
     reader_t reader;
@@ -228,7 +237,7 @@ int lvgLoadSWF(const char *file)
     free(b);
     return swf_ReadObjects(&swf);
 
-    RENDERBUF buf;
+    /*RENDERBUF buf;
     swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin) / 20,
                    (swf.movieSize.ymax - swf.movieSize.ymin) / 20, 2, 1);
     swf_RenderSWF(&buf, &swf);
@@ -236,5 +245,5 @@ int lvgLoadSWF(const char *file)
     //stbi_write_png("svg.png", buf.width, buf.height, 4, img, buf.width*4);
     //png_write("output.png", (unsigned char*)img, buf.width, buf.height);
     swf_Render_Delete(&buf);
-    return nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
+    return nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);*/
 }

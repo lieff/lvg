@@ -30,6 +30,7 @@
 
 #include "lunzip.h"
 #include "all.h"
+#include "lvg_header.h"
 
 zip_t g_zip;
 NVGcontext *vg = NULL;
@@ -41,8 +42,6 @@ double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
 const char *g_main_script;
-
-int lvgLoadSWF(const char *file);
 
 #ifndef EMSCRIPTEN
 void (*onInit)();
@@ -224,49 +223,74 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, int
         nvgStrokePaint(vg, p);
 }
 
+void lvgDrawShape(NSVGshape *shape)
+{
+    int i;
+    NSVGpath *path;
+    for (path = shape->paths; path != NULL; path = path->next)
+    {
+        nvgBeginPath(vg);
+        nvgMoveTo(vg, path->pts[0], path->pts[1]);
+        int l = path->npts - 1;
+        //l = (int)(l*g_time*0.4) % l;
+        for (i = 0; i < l; i += 3)
+        {
+            float *p = &path->pts[i*2];
+            nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
+        }
+        if (path->closed)
+            nvgLineTo(vg, path->pts[0], path->pts[1]);
+        if (NSVG_PAINT_COLOR == shape->fill.type)
+            nvgFillColor(vg, nvgColorU32(shape->fill.color));
+        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+            nvgSVGLinearGrad(vg, shape, 1);
+        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+            nvgSVGRadialGrad(vg, shape, 1);
+        if (NSVG_PAINT_NONE != shape->fill.type)
+            nvgFill(vg);
+        if (NSVG_PAINT_NONE != shape->stroke.type)
+        {
+            if (NSVG_PAINT_COLOR == shape->stroke.type)
+                nvgStrokeColor(vg, nvgColorU32(shape->stroke.color));
+            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+                nvgSVGLinearGrad(vg, shape, 0);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+                nvgSVGRadialGrad(vg, shape, 0);
+            nvgStrokeWidth(vg, shape->strokeWidth);
+            nvgStroke(vg);
+        }
+    }
+}
+
 void lvgDrawSVG(NSVGimage *image)
 {
     NSVGshape *shape;
-    NSVGpath *path;
-
-    int i;
     for (shape = image->shapes; shape != NULL; shape = shape->next)
     {
         if (!(shape->flags & NSVG_FLAGS_VISIBLE))
             continue;
+        lvgDrawShape(shape);
+    }
+}
 
-        for (path = shape->paths; path != NULL; path = path->next)
+void lvgDrawClip(LVGMovieClip *clip)
+{
+    for (int i = 0; i < clip->num_objects; i++)
+    {
+        LVGObject *o = &clip->objects[i];
+        if (LVG_OBJ_SHAPE == o->type)
         {
+            lvgDrawShape(&clip->shapes[o->id]);
+        } else
+        if (LVG_OBJ_IMAGE == o->type)
+        {
+            int w, h;
+            nvgImageSize(vg, clip->images[o->id], &w, &h);
+            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, w, h, 0, clip->images[o->id], 1.0f);
             nvgBeginPath(vg);
-            nvgMoveTo(vg, path->pts[0], path->pts[1]);
-            int l = path->npts - 1;
-            //l = (int)(l*g_time*0.4) % l;
-            for (i = 0; i < l; i += 3)
-            {
-                float *p = &path->pts[i*2];
-                nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
-            }
-            if (path->closed)
-                nvgLineTo(vg, path->pts[0], path->pts[1]);
-            if (NSVG_PAINT_COLOR == shape->fill.type)
-                nvgFillColor(vg, nvgColorU32(shape->fill.color));
-            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-                nvgSVGLinearGrad(vg, shape, 1);
-            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-                nvgSVGRadialGrad(vg, shape, 1);
-            if (NSVG_PAINT_NONE != shape->fill.type)
-                nvgFill(vg);
-            if (NSVG_PAINT_NONE != shape->stroke.type)
-            {
-                if (NSVG_PAINT_COLOR == shape->stroke.type)
-                    nvgStrokeColor(vg, nvgColorU32(shape->stroke.color));
-                else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-                    nvgSVGLinearGrad(vg, shape, 0);
-                else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-                    nvgSVGRadialGrad(vg, shape, 0);
-                nvgStrokeWidth(vg, shape->strokeWidth);
-                nvgStroke(vg);
-            }
+            nvgRect(vg, 0, 0, w, h);
+            nvgFillPaint(vg, imgPaint);
+            nvgFill(vg);
         }
     }
 }
@@ -313,6 +337,7 @@ struct SYM
 
 const struct SYM g_syms[] = {
     { "lvgDrawSVG", lvgDrawSVG },
+    { "lvgDrawClip", lvgDrawClip },
     { "lvgLoadSVG", lvgLoadSVG },
     { "lvgLoadSVGB", lvgLoadSVGB },
     { "lvgLoadSWF", lvgLoadSWF },
