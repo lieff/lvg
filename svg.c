@@ -288,6 +288,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int f
     for (int i = 0; i < group->frames[frame].num_objects; i++)
     {
         LVGObject *o = &group->frames[frame].objects[i];
+        nvgSave(vg);
+        nvgTransform(vg, o->t[0], o->t[1], o->t[2], o->t[3], o->t[4], o->t[5]);
         if (LVG_OBJ_SHAPE == o->type)
         {
             lvgDrawShape(&clip->shapes[o->id]);
@@ -306,6 +308,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int f
         {
             lvgDrawClipGroup(clip, clip->groups + o->id, frame);
         }
+        nvgRestore(vg);
     }
 }
 

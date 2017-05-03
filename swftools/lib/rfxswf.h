@@ -62,10 +62,11 @@ typedef struct _SPOINT
 } SPOINT;
 
 typedef struct _RGBA
-{ U8    a;
+{
   U8    r;
   U8    g;
   U8    b;
+  U8    a;
 } RGBA;
 
 typedef struct _YUV

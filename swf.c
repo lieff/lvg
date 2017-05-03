@@ -250,11 +250,11 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->depth = p->depth;
                 o->type = c->type;
                 o->t[0] = m->sx/65536.0f;
-                o->t[1] = m->r1/65536.0f;
-                o->t[2] = m->tx/65536.0f;
-                o->t[3] = m->r0/65536.0f;
-                o->t[4] = m->sy/65536.0f;
-                o->t[5] = m->ty/65536.0f;
+                o->t[1] = m->r1/20.0f;
+                o->t[2] = m->r0/20.0f;
+                o->t[3] = m->sy/65536.0f;
+                o->t[4] = m->tx/20.0f;
+                o->t[5] = m->ty/20.0f;
             }
             group->num_frames++;
         } else if (tag->id == ST_END)
