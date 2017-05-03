@@ -246,6 +246,13 @@ void lvgDrawShape(NSVGshape *shape)
             nvgSVGLinearGrad(vg, shape, 1);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
             nvgSVGRadialGrad(vg, shape, 1);
+        else if (NSVG_PAINT_IMAGE == shape->fill.type)
+        {
+            int w, h;
+            nvgImageSize(vg, shape->fill.color, &w, &h);
+            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, w, h, 0, shape->fill.color, 1.0f);
+            nvgFillPaint(vg, imgPaint);
+        }
         if (NSVG_PAINT_NONE != shape->fill.type)
             nvgFill(vg);
         if (NSVG_PAINT_NONE != shape->stroke.type)

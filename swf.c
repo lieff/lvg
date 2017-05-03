@@ -125,8 +125,23 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 if (swf_shape->numfillstyles)
                 {
                     FILLSTYLE *f = swf_shape->fillstyles;
-                    shape->fill.type = NSVG_PAINT_COLOR;
-                    shape->fill.color = RGBA2U32(&f->color);
+                    if (FILL_SOLID == f->type)
+                    {
+                        shape->fill.type = NSVG_PAINT_COLOR;
+                        shape->fill.color = RGBA2U32(&f->color);
+                    } else if(f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
+                    {
+                        shape->fill.type = NSVG_PAINT_IMAGE;
+                        int bm = f->id_bitmap != 65535 ? f->id_bitmap : swf_shape->fillstyles[1].id_bitmap;
+                        if (bm != 65535)
+                        {
+                            shape->fill.color = clip->images[idtable[id].lvg_id];
+                        }
+                    } else if(f->type == FILL_LINEAR || f->type == FILL_RADIAL)
+                    {
+                        shape->fill.type = NSVG_PAINT_COLOR;
+                        shape->fill.color = RGBA2U32(&f->color);
+                    }
                 }
                 if (swf_shape->linestyles)
                 {
@@ -227,11 +242,19 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             group->frames[group->num_frames].objects = calloc(1, sizeof(LVGObject)*numplacements);
             for (int i = 0; i < numplacements; i++)
             {
+                SWFPLACEOBJECT *p = &placements[i];
+                MATRIX *m = &p->matrix;
                 LVGObject *o = &group->frames[group->num_frames].objects[i];
                 character_t *c = &idtable[placements[i].id];
                 o->id = c->lvg_id;
-                o->depth = placements[i].depth;
+                o->depth = p->depth;
                 o->type = c->type;
+                o->t[0] = m->sx/65536.0f;
+                o->t[1] = m->r1/65536.0f;
+                o->t[2] = m->tx/65536.0f;
+                o->t[3] = m->r0/65536.0f;
+                o->t[4] = m->sy/65536.0f;
+                o->t[5] = m->ty/65536.0f;
             }
             group->num_frames++;
         } else if (tag->id == ST_END)
