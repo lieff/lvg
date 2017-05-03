@@ -11,7 +11,7 @@
 
 extern NVGcontext *vg;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, text_type, edittext_type, font_type, sprite_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, sprite_type, text_type, edittext_type, font_type};
 typedef struct
 {
     TAG *tag;
@@ -20,8 +20,6 @@ typedef struct
     enum CHARACTER_TYPE type;
 } character_t;
 
-character_t *idtable;
-SWFPLACEOBJECT* placements;
 
 int compare_placements(const void *v1, const void *v2);
 
@@ -84,45 +82,26 @@ static inline uint32_t RGBA2U32(RGBA *c)
     return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
 }
 
-
-LVGMovieClip *swf_ReadObjects(SWF *swf)
+static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
-    swf_OptimizeTagOrder(swf);
-    swf_FoldAll(swf);
-
-    idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
-    LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
-    clip->bounds[0] = swf->movieSize.xmin/20.0f;
-    clip->bounds[1] = swf->movieSize.ymin/20.0f;
-    clip->bounds[2] = swf->movieSize.xmax/20.0f;
-    clip->bounds[3] = swf->movieSize.ymax/20.0f;
-
-    RGBA bg = swf_GetSWFBackgroundColor(swf);
-    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
-
-    TAG *tag = swf->firstTag;
+    group->num_frames = 0;
+    TAG *tag = firstTag;
     while (tag)
     {
         if (swf_isDefiningTag(tag))
         {
-            if (swf_isShapeTag(tag))
-                clip->num_shapes++;
-            else if(swf_isImageTag(tag))
-                clip->num_images++;
-        } else if (swf_isPlaceTag(tag))
-            clip->num_objects++;
-        else if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
-            break;
+            if (tag->id == ST_DEFINESPRITE)
+            {
+                swf_FoldSprite(tag);
+            }
+        } else if (tag->id == ST_SHOWFRAME)
+            group->num_frames++;
         tag = tag->next;
     }
-    clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
-    clip->images = calloc(1, sizeof(int)*clip->num_images);
-    clip->objects = calloc(1, sizeof(LVGObject)*clip->num_objects);
-    placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*clip->num_objects);
 
-    clip->num_shapes = 0;
-    clip->num_images = 0;
-    tag = swf->firstTag;
+    group->frames = calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
+    group->num_frames = 0;
+    tag = firstTag;
     while (tag)
     {
         if (swf_isDefiningTag(tag))
@@ -174,10 +153,15 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 {
                     if (!path->npts)
                     {
-                        assert(moveTo == lines->type);
+                        if (moveTo != lines->type)
+                        {
+                            path_moveTo(path, 0.0f, 0.0f);
+                            goto do_lines;
+                        }
                         path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
                     } else
                     {
+do_lines:
                         if (moveTo == lines->type)
                             path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
                         else if (lineTo == lines->type)
@@ -190,7 +174,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
 
                 idtable[id].type = shape_type;
                 idtable[id].lvg_id = clip->num_shapes++;
-            } else if(swf_isImageTag(tag))
+            } else if (swf_isImageTag(tag))
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
@@ -198,14 +182,30 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
+            } else if (tag->id == ST_DEFINESPRITE)
+            {
+                swf_UnFoldSprite(tag);
+                parseGroup(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
+                swf_FoldSprite(tag);
+                idtable[id].type = sprite_type;
+                idtable[id].lvg_id = clip->num_groups++;
             }
-        } else if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
+        } else if (swf_isPlaceTag(tag))
+            group->frames[group->num_frames].num_objects++;
+        else if (tag->id == ST_SHOWFRAME)
+            group->num_frames++;
+        else if (tag->id == ST_END)
             break;
         tag = tag->next;
     }
+}
 
+static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
+{
+    group->num_frames = 0;
+    SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*65536);
     int i, numplacements = 0;
-    tag = swf->firstTag;
+    TAG *tag = firstTag;
     while (tag)
     {
         if (swf_isPlaceTag(tag))
@@ -214,21 +214,79 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             swf_GetPlaceObject(tag, &p);
             placements[numplacements++] = p;
             swf_PlaceObjectFree(&p);
-        }
-        if (tag->id == ST_SHOWFRAME || tag->id == ST_END)
+        } else if (tag->id == ST_DEFINESPRITE)
+        {
+            swf_UnFoldSprite(tag);
+            parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
+            swf_FoldSprite(tag);
+            clip->num_groups++;
+        } else if (tag->id == ST_SHOWFRAME)
+        {
+            qsort(placements, numplacements, sizeof(SWFPLACEOBJECT), compare_placements);
+            assert(numplacements == group->frames[group->num_frames].num_objects);
+            group->frames[group->num_frames].objects = calloc(1, sizeof(LVGObject)*numplacements);
+            for (int i = 0; i < numplacements; i++)
+            {
+                LVGObject *o = &group->frames[group->num_frames].objects[i];
+                character_t *c = &idtable[placements[i].id];
+                o->id = c->lvg_id;
+                o->depth = placements[i].depth;
+                o->type = c->type;
+            }
+            group->num_frames++;
+        } else if (tag->id == ST_END)
             break;
         tag = tag->next;
     }
-    qsort(placements, numplacements, sizeof(SWFPLACEOBJECT), compare_placements);
+    free(placements);
+}
 
-    for (int i = 0; i < numplacements; i++)
+LVGMovieClip *swf_ReadObjects(SWF *swf)
+{
+    swf_OptimizeTagOrder(swf);
+    swf_FoldAll(swf);
+
+    character_t *idtable;
+    SWFPLACEOBJECT* placements;
+    idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
+    LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
+    clip->bounds[0] = swf->movieSize.xmin/20.0f;
+    clip->bounds[1] = swf->movieSize.ymin/20.0f;
+    clip->bounds[2] = swf->movieSize.xmax/20.0f;
+    clip->bounds[3] = swf->movieSize.ymax/20.0f;
+    clip->num_groups = 1;
+
+    RGBA bg = swf_GetSWFBackgroundColor(swf);
+    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
+
+    TAG *tag = swf->firstTag;
+    while (tag)
     {
-        LVGObject *o = &clip->objects[i];
-        character_t *c = &idtable[placements[i].id];
-        o->id = c->lvg_id;
-        o->depth = placements[i].depth;
-        o->type = c->type;
+        if (swf_isDefiningTag(tag))
+        {
+            if (swf_isShapeTag(tag))
+                clip->num_shapes++;
+            else if(swf_isImageTag(tag))
+                clip->num_images++;
+            else if(tag->id == ST_DEFINESPRITE)
+            {
+                swf_UnFoldSprite(tag);
+                clip->num_groups++;
+            }
+        }
+        tag = tag->next;
     }
+    clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
+    clip->images = calloc(1, sizeof(int)*clip->num_images);
+    clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
+
+    clip->num_shapes = 0;
+    clip->num_images = 0;
+    clip->num_groups = 1;
+    parseGroup(swf->firstTag, idtable, clip, clip->groups);
+    clip->num_groups = 1;
+    parsePlacements(swf->firstTag, idtable, clip, clip->groups);
+    free(idtable);
     return clip;
 }
 
@@ -269,7 +327,7 @@ LVGMovieClip *lvgLoadSWF(const char *file)
     free(b);
     return swf_ReadObjects(&swf);
 
-    /*RENDERBUF buf;
+    RENDERBUF buf;
     swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin) / 20,
                    (swf.movieSize.ymax - swf.movieSize.ymin) / 20, 2, 1);
     swf_RenderSWF(&buf, &swf);
@@ -277,5 +335,6 @@ LVGMovieClip *lvgLoadSWF(const char *file)
     //stbi_write_png("svg.png", buf.width, buf.height, 4, img, buf.width*4);
     //png_write("output.png", (unsigned char*)img, buf.width, buf.height);
     swf_Render_Delete(&buf);
-    return nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);*/
+    //return nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
+    return 0;
 }

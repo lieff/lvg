@@ -273,11 +273,14 @@ void lvgDrawSVG(NSVGimage *image)
     }
 }
 
-void lvgDrawClip(LVGMovieClip *clip)
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int frame)
 {
-    for (int i = 0; i < clip->num_objects; i++)
+    int w, h;
+    if (frame >= group->num_frames)
+        return;
+    for (int i = 0; i < group->frames[frame].num_objects; i++)
     {
-        LVGObject *o = &clip->objects[i];
+        LVGObject *o = &group->frames[frame].objects[i];
         if (LVG_OBJ_SHAPE == o->type)
         {
             lvgDrawShape(&clip->shapes[o->id]);
@@ -291,8 +294,17 @@ void lvgDrawClip(LVGMovieClip *clip)
             nvgRect(vg, 0, 0, w, h);
             nvgFillPaint(vg, imgPaint);
             nvgFill(vg);
+        } else
+        if (LVG_OBJ_GROUP == o->type)
+        {
+            lvgDrawClipGroup(clip, clip->groups + o->id, frame);
         }
     }
+}
+
+void lvgDrawClip(LVGMovieClip *clip)
+{
+    lvgDrawClipGroup(clip, clip->groups, 0);
 }
 
 void drawframe()

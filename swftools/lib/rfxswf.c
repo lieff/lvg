@@ -1366,12 +1366,12 @@ void swf_UnFoldSprite(TAG * t)
     len = tmp&0x3f;
     id  = tmp>>6;
     if(id == ST_END)
-	level--;
+      level--;
     if(id == ST_DEFINESPRITE && len<=4)
-	level++;
+      level++;
 
     if (len==0x3f)
-	len = swf_GetU32(t);
+      len = swf_GetU32(t);
     it = swf_InsertTag(next, id);
     next = it;
     it->len = len;
@@ -1383,7 +1383,7 @@ void swf_UnFoldSprite(TAG * t)
     }
 
     if(!level)
-	break;
+      break;
   }
   
   free(t->data); t->data = 0;

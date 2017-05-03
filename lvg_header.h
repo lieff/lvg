@@ -5,22 +5,34 @@
 #endif
 #include <math.h>
 
-enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE };
+enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };
 
 typedef struct LVGObject
 {
-    int id, depth, flags, type;
+    int id, type, depth, flags;
     float t[6];
 } LVGObject;
+
+typedef struct LVGMovieClipFrame
+{
+    LVGObject *objects;
+    int num_objects;
+} LVGMovieClipFrame;
+
+typedef struct LVGMovieClipGroup
+{
+    LVGMovieClipFrame *frames;
+    int num_frames;
+} LVGMovieClipGroup;
 
 typedef struct LVGMovieClip
 {
     NSVGshape *shapes;
     int *images;
-    LVGObject *objects;
+    LVGMovieClipGroup *groups;
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_objects;
+    int num_shapes, num_images, num_groups;
 } LVGMovieClip;
 
 char *lvgGetFileContents(const char *fname, uint32_t *size);
