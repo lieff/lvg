@@ -133,6 +133,13 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                     shape->fill.type = NSVG_PAINT_COLOR;
                     shape->fill.color = RGBA2U32(&f->color);
                 }
+                if (swf_shape->linestyles)
+                {
+                    LINESTYLE *f = swf_shape->linestyles;
+                    shape->stroke.type = NSVG_PAINT_COLOR;
+                    shape->stroke.color = RGBA2U32(&f->color);
+                    shape->strokeWidth = f->width/20.0f;
+                }
                 NSVGpath *path = shape->paths;
                 struct _SHAPELINE * lines = swf_shape->lines;
                 while (lines)
