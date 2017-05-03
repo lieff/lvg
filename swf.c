@@ -64,6 +64,21 @@ static void path_cubicBezTo(NSVGpath* p, float cpx1, float cpy1, float cpx2, flo
     path_addPoint(p, x, y);
 }
 
+static void path_quadBezTo(NSVGpath* p, float cx, float cy, float x, float y)
+{
+    if (p->npts > 0)
+    {
+        float px = p->pts[(p->npts - 1)*2 + 0];
+        float py = p->pts[(p->npts - 1)*2 + 1];
+        float cpx1 = px + 2.0f/3.0f*(cx - px);
+        float cpy1 = py + 2.0f/3.0f*(cy - py);
+        float cpx2 = x + 2.0f/3.0f*(cx - x);
+        float cpy2 = y + 2.0f/3.0f*(cy - y);
+        path_cubicBezTo(p, cpx1, cpy1, cpx2, cpy2, x, y);
+    }
+}
+
+
 static inline uint32_t RGBA2U32(RGBA *c)
 {
     return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
@@ -77,10 +92,10 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
 
     idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
     LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
-    clip->bounds[0] = swf->movieSize.xmin;
-    clip->bounds[1] = swf->movieSize.ymin;
-    clip->bounds[2] = swf->movieSize.xmax;
-    clip->bounds[3] = swf->movieSize.ymax;
+    clip->bounds[0] = swf->movieSize.xmin/20.0f;
+    clip->bounds[1] = swf->movieSize.ymin/20.0f;
+    clip->bounds[2] = swf->movieSize.xmax/20.0f;
+    clip->bounds[3] = swf->movieSize.ymax/20.0f;
 
     RGBA bg = swf_GetSWFBackgroundColor(swf);
     clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
@@ -123,10 +138,10 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 NSVGshape *shape = clip->shapes + clip->num_shapes;
                 shape->flags |= NSVG_FLAGS_VISIBLE;
                 shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
-                shape->bounds[0] = idtable[id].bbox.xmin;
-                shape->bounds[1] = idtable[id].bbox.ymin;
-                shape->bounds[2] = idtable[id].bbox.xmax;
-                shape->bounds[3] = idtable[id].bbox.ymax;
+                shape->bounds[0] = idtable[id].bbox.xmin/20.0f;
+                shape->bounds[1] = idtable[id].bbox.ymin/20.0f;
+                shape->bounds[2] = idtable[id].bbox.xmax/20.0f;
+                shape->bounds[3] = idtable[id].bbox.ymax/20.0f;
                 if (swf_shape->numfillstyles)
                 {
                     FILLSTYLE *f = swf_shape->fillstyles;
@@ -157,9 +172,18 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 while (lines)
                 {
                     if (!path->npts)
+                    {
+                        assert(moveTo == lines->type);
                         path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
-                    else
-                        path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
+                    } else
+                    {
+                        if (moveTo == lines->type)
+                            path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
+                        else if (lineTo == lines->type)
+                            path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
+                        else if (splineTo == lines->type)
+                            path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
+                    }
                     lines = lines->next;
                 }
 
