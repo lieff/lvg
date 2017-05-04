@@ -235,6 +235,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
             swf_FoldSprite(tag);
             clip->num_groups++;
+        } else if (tag->id == ST_REMOVEOBJECT || tag->id == ST_REMOVEOBJECT2)
+        {
         } else if (tag->id == ST_SHOWFRAME)
         {
             qsort(placements, numplacements, sizeof(SWFPLACEOBJECT), compare_placements);
@@ -250,8 +252,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->depth = p->depth;
                 o->type = c->type;
                 o->t[0] = m->sx/65536.0f;
-                o->t[1] = m->r1/20.0f;
-                o->t[2] = m->r0/20.0f;
+                o->t[1] = m->r1/65536.0f;
+                o->t[2] = m->r0/65536.0f;
                 o->t[3] = m->sy/65536.0f;
                 o->t[4] = m->tx/20.0f;
                 o->t[5] = m->ty/20.0f;
