@@ -257,6 +257,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->t[5] = m->ty/20.0f;
             }
             group->num_frames++;
+            numplacements = 0;
         } else if (tag->id == ST_END)
             break;
         tag = tag->next;
@@ -278,6 +279,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->bounds[2] = swf->movieSize.xmax/20.0f;
     clip->bounds[3] = swf->movieSize.ymax/20.0f;
     clip->num_groups = 1;
+    clip->fps = swf->frameRate/256.0;
 
     RGBA bg = swf_GetSWFBackgroundColor(swf);
     clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
@@ -310,6 +312,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->num_groups = 1;
     parsePlacements(swf->firstTag, idtable, clip, clip->groups);
     free(idtable);
+    assert(clip->groups->num_frames == swf->frameCount);
+    clip->last_time = g_time;
     return clip;
 }
 

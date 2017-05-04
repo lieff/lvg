@@ -22,7 +22,7 @@ typedef struct LVGMovieClipFrame
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
-    int num_frames;
+    int num_frames, cur_frame;
 } LVGMovieClipGroup;
 
 typedef struct LVGMovieClip
@@ -33,6 +33,8 @@ typedef struct LVGMovieClip
     float bounds[4];
     NVGcolor bgColor;
     int num_shapes, num_images, num_groups;
+    float fps;
+    double last_time;
 } LVGMovieClip;
 
 char *lvgGetFileContents(const char *fname, uint32_t *size);

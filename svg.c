@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+#include <assert.h>
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -280,11 +281,13 @@ void lvgDrawSVG(NSVGimage *image)
     }
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int frame)
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
 {
     int w, h;
-    if (frame >= group->num_frames)
-        return;
+    int frame = group->cur_frame;
+    assert(frame < group->num_frames);
+    if (next_frame)
+        group->cur_frame = (group->cur_frame + 1) % group->num_frames;
     for (int i = 0; i < group->frames[frame].num_objects; i++)
     {
         LVGObject *o = &group->frames[frame].objects[i];
@@ -306,7 +309,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int f
         } else
         if (LVG_OBJ_GROUP == o->type)
         {
-            lvgDrawClipGroup(clip, clip->groups + o->id, frame);
+            lvgDrawClipGroup(clip, clip->groups + o->id, next_frame);
         }
         nvgRestore(vg);
     }
@@ -314,7 +317,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int f
 
 void lvgDrawClip(LVGMovieClip *clip)
 {
-    lvgDrawClipGroup(clip, clip->groups, 0);
+    int next_frame = 0;
+    if ((g_time - clip->last_time) > (1.0/clip->fps))
+    {
+        next_frame = 1;
+        clip->last_time += (1.0/clip->fps);
+    }
+    lvgDrawClipGroup(clip, clip->groups, next_frame);
 }
 
 void drawframe()
