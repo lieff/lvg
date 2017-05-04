@@ -115,6 +115,16 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
+
+                int nshapes = 0, fillStyle = 0, lineStyle = 0;
+                struct _SHAPELINE * lines = swf_shape->lines;
+                while (lines)
+                {
+                    if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+                        nshapes++;
+                    lines = lines->next;
+                }
+
                 NSVGshape *shape = clip->shapes + clip->num_shapes;
                 shape->flags |= NSVG_FLAGS_VISIBLE;
                 shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
@@ -151,7 +161,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     shape->strokeWidth = f->width/20.0f;
                 }
                 NSVGpath *path = shape->paths;
-                struct _SHAPELINE * lines = swf_shape->lines;
+                lines = swf_shape->lines;
                 while (lines)
                 {
                     if (!path->npts)
