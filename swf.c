@@ -207,6 +207,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 lines = swf_shape->lines;
                 while (lines)
                 {
+                    memcpy(shape->shapes[nshapes].bounds, shape->bounds, sizeof(shape->bounds));
                     lines = parseShape(idtable, clip, shape->shapes + nshapes++, lines, swf_shape->fillstyles, swf_shape->linestyles, &x, &y);
                 }
                 assert(nshapes == shape->num_shapes);

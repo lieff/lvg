@@ -249,9 +249,8 @@ void lvgDrawShape(NSVGshape *shape)
             nvgSVGRadialGrad(vg, shape, 1);
         else if (NSVG_PAINT_IMAGE == shape->fill.type)
         {
-            int w, h;
-            nvgImageSize(vg, shape->fill.color, &w, &h);
-            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, w, h, 0, shape->fill.color, 1.0f);
+            int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
+            NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
             nvgFillPaint(vg, imgPaint);
         }
         if (NSVG_PAINT_NONE != shape->fill.type)
