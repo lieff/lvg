@@ -239,6 +239,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
 {
     group->num_frames = 0;
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*65536);
+    int *display = (int*)calloc(1, sizeof(int)*65536);
     int i, numplacements = 0;
     TAG *tag = firstTag;
     while (tag)
@@ -247,6 +248,10 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             SWFPLACEOBJECT p;
             swf_GetPlaceObject(tag, &p);
+            if (p.id)
+                display[p.depth] = p.id;
+            else
+                p.id = display[p.depth];
             placements[numplacements++] = p;
             swf_PlaceObjectFree(&p);
         } else if (tag->id == ST_DEFINESPRITE)
@@ -292,9 +297,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     swf_OptimizeTagOrder(swf);
     swf_FoldAll(swf);
 
-    character_t *idtable;
-    SWFPLACEOBJECT* placements;
-    idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
+    character_t *idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
     LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
     clip->bounds[0] = swf->movieSize.xmin/20.0f;
     clip->bounds[1] = swf->movieSize.ymin/20.0f;
