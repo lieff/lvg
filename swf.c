@@ -84,7 +84,8 @@ static inline uint32_t RGBA2U32(RGBA *c)
 
 static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape,SHAPELINE *fromLine, FILLSTYLE *fills, LINESTYLE *lineStyles, int *x, int *y)
 {
-    int fillStyle = fromLine->fillstyle0, lineStyle = fromLine->linestyle;
+    int fillStyle = fromLine->fillstyle0 ? fromLine->fillstyle0 : fromLine->fillstyle1;
+    int lineStyle = fromLine->linestyle;
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
     if (fillStyle)
@@ -119,7 +120,8 @@ static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape
         lines = lines->next;
     while (lines)
     {
-        if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+        int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
+        if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
             break;
         path->npts += 6;
         lines = lines->next;
@@ -137,7 +139,8 @@ static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape
         path_moveTo(path, *x/20.0f, *y/20.0f);
     while (lines)
     {
-        if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+        int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
+        if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
             break;
         if (lineTo == lines->type)
             path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
@@ -170,7 +173,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         {
             int id = swf_GetDefineID(tag);
             assert(none_type == idtable[id].type);
-            assert(1 == clip->num_groups);
+            assert(group == clip->groups);
             idtable[id].tag = tag;
             idtable[id].bbox = swf_GetDefineBBox(tag);
 
@@ -179,14 +182,15 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
 
-                int fillStyle = 0, lineStyle = 0;
+                int fillStyle = -1, lineStyle = -1;
                 SHAPELINE *lines = swf_shape->lines;
                 LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
                 while (lines)
                 {
-                    if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+                    int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
+                    if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
                     {
-                        fillStyle = lines->fillstyle0;
+                        fillStyle = lineFill;
                         lineStyle = lines->linestyle;
                         shape->num_shapes++;
                     }

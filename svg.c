@@ -556,7 +556,11 @@ int main(int argc, char **argv)
 #ifdef EMSCRIPTEN
     vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
 #else
-    vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+    vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
+#ifdef DEBUG
+        | NVG_DEBUG
+#endif
+        );
 #endif
 
     /*GLuint texId[1];
