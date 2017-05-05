@@ -1,9 +1,10 @@
+#include <assert.h>
 #include "stb_image.h"
 #include "png.h"
 #include <rfxswf.h>
 #include "stb_image.h"
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
+//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//#include "stb_image_write.h"
 #include "lunzip.h"
 #include "nanovg.h"
 #include "nanosvg.h"
@@ -76,10 +77,77 @@ static void path_quadBezTo(NSVGpath* p, float cx, float cy, float x, float y)
     }
 }
 
-
 static inline uint32_t RGBA2U32(RGBA *c)
 {
     return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
+}
+
+static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape,SHAPELINE *fromLine, FILLSTYLE *fills, LINESTYLE *lineStyles, int *x, int *y)
+{
+    int fillStyle = fromLine->fillstyle0, lineStyle = fromLine->linestyle;
+    shape->flags |= NSVG_FLAGS_VISIBLE;
+    shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+    if (fillStyle)
+    {
+        FILLSTYLE *f = fills + fillStyle - 1;
+        if (FILL_SOLID == f->type)
+        {
+            shape->fill.type = NSVG_PAINT_COLOR;
+            shape->fill.color = RGBA2U32(&f->color);
+        } else if(f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
+        {
+            shape->fill.type = NSVG_PAINT_IMAGE;
+            if (f->id_bitmap != 65535)
+                shape->fill.color = clip->images[idtable[f->id_bitmap].lvg_id];
+        } else if(f->type == FILL_LINEAR || f->type == FILL_RADIAL)
+        {
+            shape->fill.type = NSVG_PAINT_COLOR;
+            shape->fill.color = RGBA2U32(&f->color);
+        }
+    }
+    if (lineStyle)
+    {
+        lineStyles += lineStyle - 1;
+        shape->stroke.type = NSVG_PAINT_COLOR;
+        shape->stroke.color = RGBA2U32(&lineStyles->color);
+        shape->strokeWidth = lineStyles->width/20.0f;
+    }
+    NSVGpath *path = shape->paths;
+    SHAPELINE *lines = fromLine;
+    path->npts = 2;
+    if (moveTo == lines->type)
+        lines = lines->next;
+    while (lines)
+    {
+        if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+            break;
+        path->npts += 6;
+        lines = lines->next;
+    }
+    path->closed = shape->fill.type != NSVG_PAINT_NONE;
+    path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
+    path->npts = 0;
+
+    lines = fromLine;
+    if (moveTo == lines->type)
+    {
+        lines = lines->next;
+        path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
+    } else
+        path_moveTo(path, *x/20.0f, *y/20.0f);
+    while (lines)
+    {
+        if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
+            break;
+        if (lineTo == lines->type)
+            path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
+        else if (splineTo == lines->type)
+            path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
+        *x = lines->x;
+        *y = lines->y;
+        lines = lines->next;
+    }
+    return lines;
 }
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
@@ -88,13 +156,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     TAG *tag = firstTag;
     while (tag)
     {
-        if (swf_isDefiningTag(tag))
-        {
-            if (tag->id == ST_DEFINESPRITE)
-            {
-                swf_FoldSprite(tag);
-            }
-        } else if (tag->id == ST_SHOWFRAME)
+        if (tag->id == ST_SHOWFRAME)
             group->num_frames++;
         tag = tag->next;
     }
@@ -107,7 +169,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         if (swf_isDefiningTag(tag))
         {
             int id = swf_GetDefineID(tag);
-            assert(none_type == idtable[id].type); // handle object replace later
+            assert(none_type == idtable[id].type);
+            assert(1 == clip->num_groups);
             idtable[id].tag = tag;
             idtable[id].bbox = swf_GetDefineBBox(tag);
 
@@ -116,86 +179,33 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
 
-                int nshapes = 0, fillStyle = 0, lineStyle = 0;
-                struct _SHAPELINE * lines = swf_shape->lines;
+                int fillStyle = 0, lineStyle = 0;
+                SHAPELINE *lines = swf_shape->lines;
+                LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
                 while (lines)
                 {
                     if (fillStyle != lines->fillstyle0 || lineStyle != lines->linestyle || moveTo == lines->type)
-                        nshapes++;
+                    {
+                        fillStyle = lines->fillstyle0;
+                        lineStyle = lines->linestyle;
+                        shape->num_shapes++;
+                    }
                     lines = lines->next;
                 }
 
-                NSVGshape *shape = clip->shapes + clip->num_shapes;
-                shape->flags |= NSVG_FLAGS_VISIBLE;
-                shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+                shape->shapes = (NSVGshape*)calloc(1, shape->num_shapes*sizeof(NSVGshape));
                 shape->bounds[0] = idtable[id].bbox.xmin/20.0f;
                 shape->bounds[1] = idtable[id].bbox.ymin/20.0f;
                 shape->bounds[2] = idtable[id].bbox.xmax/20.0f;
                 shape->bounds[3] = idtable[id].bbox.ymax/20.0f;
-                if (swf_shape->numfillstyles)
-                {
-                    FILLSTYLE *f = swf_shape->fillstyles;
-                    if (FILL_SOLID == f->type)
-                    {
-                        shape->fill.type = NSVG_PAINT_COLOR;
-                        shape->fill.color = RGBA2U32(&f->color);
-                    } else if(f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
-                    {
-                        shape->fill.type = NSVG_PAINT_IMAGE;
-                        int bm = f->id_bitmap != 65535 ? f->id_bitmap : swf_shape->fillstyles[1].id_bitmap;
-                        if (bm != 65535)
-                        {
-                            shape->fill.color = clip->images[idtable[id].lvg_id];
-                        }
-                    } else if(f->type == FILL_LINEAR || f->type == FILL_RADIAL)
-                    {
-                        shape->fill.type = NSVG_PAINT_COLOR;
-                        shape->fill.color = RGBA2U32(&f->color);
-                    }
-                }
-                if (swf_shape->linestyles)
-                {
-                    LINESTYLE *f = swf_shape->linestyles;
-                    shape->stroke.type = NSVG_PAINT_COLOR;
-                    shape->stroke.color = RGBA2U32(&f->color);
-                    shape->strokeWidth = f->width/20.0f;
-                }
-                NSVGpath *path = shape->paths;
+
+                int x = 0, y = 0, nshapes = 0;
                 lines = swf_shape->lines;
                 while (lines)
                 {
-                    if (!path->npts)
-                        path->npts += 2;
-                    else
-                        path->npts += 6;
-                    lines = lines->next;
+                    lines = parseShape(idtable, clip, shape->shapes + nshapes++, lines, swf_shape->fillstyles, swf_shape->linestyles, &x, &y);
                 }
-                path->closed = 1;
-                path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
-                path->npts = 0;
-                lines = swf_shape->lines;
-                while (lines)
-                {
-                    if (!path->npts)
-                    {
-                        if (moveTo != lines->type)
-                        {
-                            path_moveTo(path, 0.0f, 0.0f);
-                            goto do_lines;
-                        }
-                        path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
-                    } else
-                    {
-do_lines:
-                        if (moveTo == lines->type)
-                            path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
-                        else if (lineTo == lines->type)
-                            path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
-                        else if (splineTo == lines->type)
-                            path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
-                    }
-                    lines = lines->next;
-                }
+                assert(nshapes == shape->num_shapes);
 
                 idtable[id].type = shape_type;
                 idtable[id].lvg_id = clip->num_shapes++;
@@ -306,10 +316,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             else if(swf_isImageTag(tag))
                 clip->num_images++;
             else if(tag->id == ST_DEFINESPRITE)
-            {
-                swf_UnFoldSprite(tag);
                 clip->num_groups++;
-            }
         }
         tag = tag->next;
     }
@@ -364,16 +371,17 @@ LVGMovieClip *lvgLoadSWF(const char *file)
         return 0;
     }
     free(b);
-    return swf_ReadObjects(&swf);
-
+    LVGMovieClip *clip = swf_ReadObjects(&swf);
+#ifdef DEBUG
     RENDERBUF buf;
-    swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin) / 20,
-                   (swf.movieSize.ymax - swf.movieSize.ymin) / 20, 2, 1);
+    swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin)/20, (swf.movieSize.ymax - swf.movieSize.ymin)/20, 2, 1);
     swf_RenderSWF(&buf, &swf);
-    RGBA* img = swf_Render(&buf);
+    RGBA *img = swf_Render(&buf);
     //stbi_write_png("svg.png", buf.width, buf.height, 4, img, buf.width*4);
-    //png_write("output.png", (unsigned char*)img, buf.width, buf.height);
     swf_Render_Delete(&buf);
-    //return nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
-    return 0;
+    clip->num_images++;
+    clip->images = realloc(clip->images, clip->num_images*sizeof(int));
+    clip->images[clip->num_images - 1] = nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
+#endif
+    return clip;
 }

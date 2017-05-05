@@ -295,7 +295,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         nvgTransform(vg, o->t[0], o->t[1], o->t[2], o->t[3], o->t[4], o->t[5]);
         if (LVG_OBJ_SHAPE == o->type)
         {
-            lvgDrawShape(&clip->shapes[o->id]);
+            for (int j = 0; j < clip->shapes[o->id].num_shapes; j++)
+                lvgDrawShape(&clip->shapes[o->id].shapes[j]);
         } else
         if (LVG_OBJ_IMAGE == o->type)
         {
@@ -324,6 +325,15 @@ void lvgDrawClip(LVGMovieClip *clip)
         clip->last_time += (1.0/clip->fps);
     }
     lvgDrawClipGroup(clip, clip->groups, next_frame);
+#ifdef DEBUG
+    int w, h;
+    nvgImageSize(vg, clip->images[clip->num_images - 1], &w, &h);
+    NVGpaint imgPaint = nvgImagePattern(vg, 600, 0, w, h, 0, clip->images[clip->num_images - 1], 1.0f);
+    nvgBeginPath(vg);
+    nvgRect(vg, 600, 0, w, h);
+    nvgFillPaint(vg, imgPaint);
+    nvgFill(vg);
+#endif
 }
 
 void drawframe()

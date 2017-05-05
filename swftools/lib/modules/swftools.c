@@ -1386,14 +1386,14 @@ RGBA swf_GetSWFBackgroundColor(SWF*swf)
     color.r = color.b = color.g = 255;
     color.a = 255;
     while(t) {
-    if(t->id == ST_SETBACKGROUNDCOLOR) {
-        swf_SetTagPos(t, 0);
-        color.r = swf_GetU8(t);
-        color.g = swf_GetU8(t);
-        color.b = swf_GetU8(t);
-        break;
-    }
-    t=t->next;
+        if(t->id == ST_SETBACKGROUNDCOLOR) {
+            swf_SetTagPos(t, 0);
+            color.r = swf_GetU8(t);
+            color.g = swf_GetU8(t);
+            color.b = swf_GetU8(t);
+            break;
+        }
+        t=t->next;
     }
     return color;
 }

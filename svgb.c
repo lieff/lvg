@@ -10,7 +10,7 @@
 #include "stb_image_write.h"
 #endif
 
-void save_gradient(FILE *file, NSVGgradient *g)
+static void save_gradient(FILE *file, NSVGgradient *g)
 {
     fwrite(&g->nstops, 1, 4, file);
     fwrite(&g->xform, 1, 4*6, file);
@@ -19,7 +19,7 @@ void save_gradient(FILE *file, NSVGgradient *g)
     fwrite(g->stops, 1, g->nstops*8, file);
 }
 
-void save_paint(FILE *file, NSVGpaint *p)
+static void save_paint(FILE *file, NSVGpaint *p)
 {
     fwrite(&p->type, 1, 1, file);
     if (NSVG_PAINT_COLOR == p->type)

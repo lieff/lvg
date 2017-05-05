@@ -25,9 +25,16 @@ typedef struct LVGMovieClipGroup
     int num_frames, cur_frame;
 } LVGMovieClipGroup;
 
-typedef struct LVGMovieClip
+typedef struct LVGShapeCollection
 {
     NSVGshape *shapes;
+    float bounds[4];
+    int num_shapes;
+} LVGShapeCollection;
+
+typedef struct LVGMovieClip
+{
+    LVGShapeCollection *shapes;
     int *images;
     LVGMovieClipGroup *groups;
     float bounds[4];
