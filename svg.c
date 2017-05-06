@@ -228,9 +228,9 @@ void lvgDrawShape(NSVGshape *shape)
 {
     int i;
     NSVGpath *path;
+    nvgBeginPath(vg);
     for (path = shape->paths; path != NULL; path = path->next)
     {
-        nvgBeginPath(vg);
         nvgMoveTo(vg, path->pts[0], path->pts[1]);
         int l = path->npts - 1;
         //l = (int)(l*g_time*0.4) % l;
@@ -241,31 +241,35 @@ void lvgDrawShape(NSVGshape *shape)
         }
         if (path->closed)
             nvgLineTo(vg, path->pts[0], path->pts[1]);
-        if (NSVG_PAINT_COLOR == shape->fill.type)
-            nvgFillColor(vg, nvgColorU32(shape->fill.color));
+    }
+    if (NSVG_PAINT_COLOR == shape->fill.type)
+        nvgFillColor(vg, nvgColorU32(shape->fill.color));
+    else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+        nvgSVGLinearGrad(vg, shape, 1);
+    else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+        nvgSVGRadialGrad(vg, shape, 1);
+    else if (NSVG_PAINT_IMAGE == shape->fill.type)
+    {
+        int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
+        NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
+        nvgFillPaint(vg, imgPaint);
+    }
+    if (NSVG_PAINT_NONE != shape->fill.type)
+    {
+        //if (NSVG_FILLRULE_EVENODD == shape->fillRule)
+        //    nvgPathWinding(vg, NVG_HOLE);
+        nvgFill(vg);
+    }
+    if (NSVG_PAINT_NONE != shape->stroke.type)
+    {
+        if (NSVG_PAINT_COLOR == shape->stroke.type)
+            nvgStrokeColor(vg, nvgColorU32(shape->stroke.color));
         else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, 1);
+            nvgSVGLinearGrad(vg, shape, 0);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-            nvgSVGRadialGrad(vg, shape, 1);
-        else if (NSVG_PAINT_IMAGE == shape->fill.type)
-        {
-            int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
-            NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
-            nvgFillPaint(vg, imgPaint);
-        }
-        if (NSVG_PAINT_NONE != shape->fill.type)
-            nvgFill(vg);
-        if (NSVG_PAINT_NONE != shape->stroke.type)
-        {
-            if (NSVG_PAINT_COLOR == shape->stroke.type)
-                nvgStrokeColor(vg, nvgColorU32(shape->stroke.color));
-            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-                nvgSVGLinearGrad(vg, shape, 0);
-            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-                nvgSVGRadialGrad(vg, shape, 0);
-            nvgStrokeWidth(vg, shape->strokeWidth);
-            nvgStroke(vg);
-        }
+            nvgSVGRadialGrad(vg, shape, 0);
+        nvgStrokeWidth(vg, shape->strokeWidth);
+        nvgStroke(vg);
     }
 }
 
