@@ -202,7 +202,7 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, int
     NVGcolor cs = nvgColorU32(grad->stops[0].color);
     NVGcolor ce = nvgColorU32(grad->stops[1].color);
 
-    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, nvgColorU32(grad->stops[0].color), ce);
+    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
     if (is_fill)
         nvgFillPaint(vg, p);
     else

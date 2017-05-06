@@ -82,10 +82,33 @@ static inline uint32_t RGBA2U32(RGBA *c)
     return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
 }
 
-static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape,SHAPELINE *fromLine, FILLSTYLE *fills, LINESTYLE *lineStyles, int *x, int *y)
+typedef struct SHAPE_PARTS
 {
-    int fillStyle = fromLine->fillstyle0 ? fromLine->fillstyle0 : fromLine->fillstyle1;
-    int lineStyle = fromLine->linestyle;
+    SHAPELINE *start;
+    SHAPELINE *prev;
+    int num_lines, fill_style[2], fill_style_used[2];
+} SHAPE_PARTS;
+
+static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int fill_style, int idx)
+{
+    for (int i = 0; i < num_parts; i++)
+    {
+        if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style)
+            continue;
+        SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
+        SHAPELINE *end = parts[i].start + parts[i].num_lines - 1;
+        if ((start->x == x && start->y == y) || (end->x == x && end->y == y))
+        {
+            parts[i].fill_style_used[idx] = 1;
+            return i;
+        }
+    }
+}
+
+static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, SHAPE_PARTS *part, FILLSTYLE *fills, LINESTYLE *lineStyles)
+{
+    int fillStyle = part->fill_style[0] ? part->fill_style[0] : part->fill_style[1];
+    int lineStyle = part->start->linestyle;
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
     if (fillStyle)
@@ -95,15 +118,22 @@ static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape
         {
             shape->fill.type = NSVG_PAINT_COLOR;
             shape->fill.color = RGBA2U32(&f->color);
-        } else if(f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
+        } else if (f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
         {
             shape->fill.type = NSVG_PAINT_IMAGE;
             if (f->id_bitmap != 65535)
                 shape->fill.color = clip->images[idtable[f->id_bitmap].lvg_id];
-        } else if(f->type == FILL_LINEAR || f->type == FILL_RADIAL)
+        } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
         {
-            shape->fill.type = NSVG_PAINT_COLOR;
-            shape->fill.color = RGBA2U32(&f->color);
+            assert(f->gradient.num >= 2);
+            shape->fill.type = (FILL_LINEAR == f->type) ? NSVG_PAINT_LINEAR_GRADIENT : NSVG_PAINT_RADIAL_GRADIENT;
+            shape->fill.gradient = (NSVGgradient*)calloc(1, sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*(f->gradient.num - 1));
+            shape->fill.gradient->nstops = f->gradient.num;
+            for (int i = 0; i < f->gradient.num; i++)
+            {
+                shape->fill.gradient->stops[i].color = RGBA2U32(&f->gradient.rgba[i]);
+                shape->fill.gradient->stops[i].offset = f->gradient.ratios[i]/255.0f;
+            }
         }
     }
     if (lineStyle)
@@ -114,40 +144,26 @@ static SHAPELINE *parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape
         shape->strokeWidth = lineStyles->width/20.0f;
     }
     NSVGpath *path = shape->paths;
-    SHAPELINE *lines = fromLine;
-    path->npts = 2;
-    if (moveTo == lines->type)
-        lines = lines->next;
-    while (lines)
-    {
-        int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
-        if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
-            break;
-        path->npts += 6;
-        lines = lines->next;
-    }
+    path->npts = 2 + ((moveTo == part->start->type) ? 6*(part->num_lines - 1) : 6*part->num_lines);
     path->closed = shape->fill.type != NSVG_PAINT_NONE;
     path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
     path->npts = 0;
 
-    lines = fromLine;
-    if (moveTo == lines->type)
+    SHAPELINE *lines = part->start;
+    int num_lines = part->num_lines;
+    if (moveTo == part->start->type)
     {
+        path_moveTo(path, part->start->x/20.0f, part->start->y/20.0f);
         lines = lines->next;
-        path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
+        num_lines--;
     } else
-        path_moveTo(path, *x/20.0f, *y/20.0f);
-    while (lines)
+        path_moveTo(path, part->prev->x/20.0f, part->prev->y/20.0f);
+    for (int i = 0; i < num_lines; i++)
     {
-        int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
-        if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
-            break;
         if (lineTo == lines->type)
             path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
         else if (splineTo == lines->type)
             path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
-        *x = lines->x;
-        *y = lines->y;
         lines = lines->next;
     }
     return lines;
@@ -182,36 +198,73 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
 
-                int fillStyle = -1, lineStyle = -1;
+                SHAPELINE tmp_line = { 0 };
                 SHAPELINE *lines = swf_shape->lines;
+                SHAPELINE *startLine = lines;
+                SHAPELINE *startPrevLine = 0;
+                SHAPELINE *prevLine = lines;
+                SHAPE_PARTS *parts = (SHAPE_PARTS*)calloc(1, sizeof(SHAPE_PARTS)*65536);
                 LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
-                while (lines)
+                int fillStyle0 = lines->fillstyle0, fillStyle1 = lines->fillstyle1, numParts = 0, numLines = 0;
+                if (lines)
                 {
-                    int lineFill = lines->fillstyle0 ? lines->fillstyle0 : lines->fillstyle1;
-                    if (fillStyle != lineFill || lineStyle != lines->linestyle || moveTo == lines->type)
+                    if (moveTo != lines->type)
                     {
-                        fillStyle = lineFill;
-                        lineStyle = lines->linestyle;
-                        shape->num_shapes++;
-                    }
+                        tmp_line.fillstyle0 = fillStyle0;
+                        tmp_line.fillstyle1 = fillStyle1;
+                        tmp_line.linestyle  = lines->linestyle;
+                        tmp_line.next = lines;
+                        lines = &tmp_line;
+                        prevLine = startPrevLine = lines;
+                    } else
+                        numLines++;
                     lines = lines->next;
                 }
+                while (lines)
+                {
+                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type)
+                    {
+                        parts[numParts].start = startLine;
+                        parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
+                        parts[numParts].num_lines = numLines;
+                        parts[numParts].fill_style[0] = fillStyle0;
+                        parts[numParts].fill_style[1] = fillStyle1;
+                        fillStyle0 = lines->fillstyle0;
+                        fillStyle1 = lines->fillstyle1;
+                        startPrevLine = prevLine;
+                        startLine = lines;
+                        numLines = 0;
+                        numParts++;
+                    }
+                    numLines++;
+                    prevLine = lines;
+                    lines = lines->next;
+                }
+                if (numLines)
+                {
+                    parts[numParts].start = startLine;
+                    parts[numParts].prev = startPrevLine;
+                    parts[numParts].num_lines = numLines;
+                    parts[numParts].fill_style[0] = fillStyle0;
+                    parts[numParts].fill_style[1] = fillStyle1;
+                    numParts++;
+                }
 
+                shape->num_shapes = numParts;
                 shape->shapes = (NSVGshape*)calloc(1, shape->num_shapes*sizeof(NSVGshape));
                 shape->bounds[0] = idtable[id].bbox.xmin/20.0f;
                 shape->bounds[1] = idtable[id].bbox.ymin/20.0f;
                 shape->bounds[2] = idtable[id].bbox.xmax/20.0f;
                 shape->bounds[3] = idtable[id].bbox.ymax/20.0f;
 
-                int x = 0, y = 0, nshapes = 0;
                 lines = swf_shape->lines;
-                while (lines)
+                for (int i = 0; i < numParts; i++)
                 {
-                    memcpy(shape->shapes[nshapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    lines = parseShape(idtable, clip, shape->shapes + nshapes++, lines, swf_shape->fillstyles, swf_shape->linestyles, &x, &y);
+                    memcpy(shape->shapes[i].bounds, shape->bounds, sizeof(shape->bounds));
+                    lines = parseShape(idtable, clip, shape->shapes + i, parts + i, swf_shape->fillstyles, swf_shape->linestyles);
                 }
-                assert(nshapes == shape->num_shapes);
-
+                assert(numParts == shape->num_shapes);
+                free(parts);
                 idtable[id].type = shape_type;
                 idtable[id].lvg_id = clip->num_shapes++;
             } else if (swf_isImageTag(tag))
@@ -282,8 +335,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->depth = p->depth;
                 o->type = c->type;
                 o->t[0] = m->sx/65536.0f;
-                o->t[1] = m->r1/65536.0f;
-                o->t[2] = m->r0/65536.0f;
+                o->t[1] = m->r0/65536.0f;
+                o->t[2] = m->r1/65536.0f;
                 o->t[3] = m->sy/65536.0f;
                 o->t[4] = m->tx/20.0f;
                 o->t[5] = m->ty/20.0f;
