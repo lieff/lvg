@@ -89,26 +89,27 @@ typedef struct SHAPE_PARTS
     int num_lines, fill_style[2], fill_style_used[2];
 } SHAPE_PARTS;
 
-static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int from_move, int fill_style, int *at_start)
+static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int from_move, int from_start, int fill_style, int idx, int *at_start)
 {
-    for (int idx = 0; idx < 2; idx++)
-        for (int i = 0; i < num_parts; i++)
+    for (int i = 0; i < num_parts; i++)
+    {
+        if ((from_move && moveTo != parts[i].start->type) || (!from_move && moveTo == parts[i].start->type))
+            continue;
+        SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
+        SHAPELINE *end = parts[i].start;
+        for (int j = 0; j < (parts[i].num_lines - 1); j++)
+            end = end->next;
+        assert(start != end);
+        if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style)
+            continue;
+        if ((INT_MAX == x) || (from_start && start->x == x && start->y == y) || (!from_start && end->x == x && end->y == y))
         {
-            if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style ||
-               (from_move && moveTo != parts[i].start->type) || (!from_move && moveTo == parts[i].start->type))
-                continue;
-            SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
-            SHAPELINE *end = parts[i].start;
-            for (int j = 0; j < (parts[i].num_lines - 1); j++)
-                end = end->next;
-            if ((from_move && INT_MAX == x) || (start->x == x && start->y == y) || (end->x == x && end->y == y))
-            {
-                if (at_start)
-                    *at_start = (start->x == x && start->y == y);
-                parts[i].fill_style_used[idx] = 1;
-                return i;
-            }
+            if (at_start)
+                *at_start = (start->x == x && start->y == y);
+            parts[i].fill_style_used[idx] = 1;
+            return i;
         }
+    }
     return -1;
 }
 
@@ -200,9 +201,13 @@ add_shape:
     while (x != end_x || y != end_y)
     {   // not full path, try connect parts
         int at_start = 0;
-        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, fillStyle, &at_start);
+        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 1, fillStyle, idx, &at_start);
         if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, fillStyle, &at_start);
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 1, fillStyle, idx, &at_start);
+        if (p < 0)
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 0, fillStyle, 1 - idx, &at_start);
+        if (p < 0)
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 0, fillStyle, 1 - idx, &at_start);
         //assert(p >= 0);
         if (p < 0)
             break;
@@ -259,7 +264,12 @@ add_shape:
         if (new_lines)
             free(new_lines);
     }
-    int p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, fillStyle, 0);
+    int p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, 0, fillStyle, idx, 0);
+    if (p < 0)
+    {
+        idx = 1 - idx;
+        p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, 0, fillStyle, idx, 0);
+    }
     if (p >= 0)
     {
         part = parts + p;
@@ -322,8 +332,14 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 }
                 while (lines)
                 {
+                    while (lines && lines->next && moveTo == lines->type && moveTo == lines->next->type)
+                    {
+                        prevLine->next = lines->next;
+                        lines = prevLine->next;
+                    }
                     if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type || (moveTo != prevLine->type && haveIntersect(swf_shape->lines, prevLine)))
                     {
+                        assert(numLines > 1 || (moveTo != startLine->type));
                         parts[numParts].start = startLine;
                         parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
                         parts[numParts].num_lines = numLines;
