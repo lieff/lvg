@@ -114,6 +114,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
 {
     assert(part->num_lines > 0);
     assert(!part->prev || part->prev->next == part->start);
+    assert(part->prev || moveTo == part->start->type);
     int fillStyle = part->fill_style[idx];
     int lineStyle = part->start->linestyle;
     part->fill_style_used[idx] = 1;
@@ -185,42 +186,51 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
     {   // not full path, try connect parts
         int at_start = 0;
         int p = findConnectingPart(parts, num_parts, end_x, end_y, fillStyle, &at_start);
-        assert(p >= 0);
+        //assert(p >= 0);
         if (p < 0)
             break;
         SHAPE_PARTS *cpart = parts + p;
-        SHAPELINE *lines = cpart->start;
-        alloc_pts += 3*cpart->num_lines;
+        lines = cpart->start;
+        num_lines = cpart->num_lines;
+        if (moveTo == cpart->start->type)
+        {
+            lines = lines->next;
+            num_lines--;
+        }
+        alloc_pts += 3*num_lines;
         path->pts = (float*)realloc(path->pts, sizeof(path->pts[0])*alloc_pts*2);
         SHAPELINE *new_lines = 0;
         if (!at_start)
         {   // connect from end of part - reverse part path
-            new_lines = (SHAPELINE *)malloc(sizeof(SHAPELINE)*cpart->num_lines);
-            new_lines[cpart->num_lines - 1] = *cpart->prev;
-            for (int i = 0; i < cpart->num_lines; i++)
+            new_lines = (SHAPELINE *)malloc(sizeof(SHAPELINE)*num_lines);
+            lines = cpart->prev ? cpart->prev : cpart->start;
+            for (int i = 0; i < num_lines; i++)
             {
-                SHAPELINE *new_line = &new_lines[cpart->num_lines - 1 - i];
+                SHAPELINE *new_line = &new_lines[num_lines - 1 - i];
+                *new_line = *lines;
+                lines = lines->next;
+                assert(moveTo != lines->type);
                 new_line->type = lines->type;
                 new_line->sx = lines->sx;
                 new_line->sy = lines->sy;
-                if (i != (cpart->num_lines - 1))
-                {
-                    new_lines[cpart->num_lines - 2 - i] = *lines;
+            }
+            for (int i = 0; i < num_lines; i++)
+            {
+                if (i != (num_lines - 1))
                     new_lines[i].next = &new_lines[i + 1];
-                } else
+                else
                     new_lines[i].next = 0;
-                lines = lines->next;
             }
             lines = new_lines;
         }
-        for (int i = 0; i < cpart->num_lines; i++)
+        for (int i = 0; i < num_lines; i++)
         {
             assert(moveTo != lines->type);
             if (lineTo == lines->type)
                 path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
             else if (splineTo == lines->type)
                 path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
-            if (i != (cpart->num_lines - 1))
+            if (i != (num_lines - 1))
                 lines = lines->next;
         }
         end_x = lines->x, end_y = lines->y;
@@ -303,7 +313,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 if (numLines)
                 {
                     parts[numParts].start = startLine;
-                    parts[numParts].prev = startPrevLine;
+                    parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
                     parts[numParts].num_lines = numLines;
                     parts[numParts].fill_style[0] = fillStyle0;
                     parts[numParts].fill_style[1] = fillStyle1;
