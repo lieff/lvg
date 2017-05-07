@@ -89,25 +89,38 @@ typedef struct SHAPE_PARTS
     int num_lines, fill_style[2], fill_style_used[2];
 } SHAPE_PARTS;
 
-static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int fill_style, int *at_start)
+static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int from_move, int fill_style, int *at_start)
 {
     for (int idx = 0; idx < 2; idx++)
         for (int i = 0; i < num_parts; i++)
         {
-            if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style)
+            if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style ||
+               (from_move && moveTo != parts[i].start->type) || (!from_move && moveTo == parts[i].start->type))
                 continue;
             SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
             SHAPELINE *end = parts[i].start;
             for (int j = 0; j < (parts[i].num_lines - 1); j++)
                 end = end->next;
-            if ((start->x == x && start->y == y) || (end->x == x && end->y == y))
+            if ((from_move && INT_MAX == x) || (start->x == x && start->y == y) || (end->x == x && end->y == y))
             {
-                *at_start = (start->x == x && start->y == y);
+                if (at_start)
+                    *at_start = (start->x == x && start->y == y);
                 parts[i].fill_style_used[idx] = 1;
                 return i;
             }
         }
     return -1;
+}
+
+static int haveIntersect(SHAPELINE *lines, SHAPELINE *point)
+{
+    while (lines)
+    {
+        if (lines != point && lines->x == point->x && lines->y == point->y)
+            return 1;
+        lines = lines->next;
+    }
+    return 0;
 }
 
 static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, SHAPE_PARTS *parts, int num_parts, SHAPE_PARTS *part, FILLSTYLE *fills, LINESTYLE *lineStyles, int idx)
@@ -119,7 +132,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
     int lineStyle = part->start->linestyle;
     part->fill_style_used[idx] = 1;
     shape->flags |= NSVG_FLAGS_VISIBLE;
-    shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+    shape->fillRule = NSVG_FILLRULE_EVENODD;
     if (fillStyle)
     {
         FILLSTYLE *f = fills + fillStyle - 1;
@@ -152,9 +165,11 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
         shape->stroke.color = RGBA2U32(&lineStyles->color);
         shape->strokeWidth = lineStyles->width/20.0f;
     }
+    shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
     NSVGpath *path = shape->paths;
-    int alloc_pts = 1 + ((moveTo == part->start->type) ? 3*(part->num_lines - 1) : 3*part->num_lines);
+add_shape:
     path->closed = shape->fill.type != NSVG_PAINT_NONE;
+    int alloc_pts = 1 + ((moveTo == part->start->type) ? 3*(part->num_lines - 1) : 3*part->num_lines);
     path->pts = (float*)malloc(sizeof(path->pts[0])*alloc_pts*2);
     path->npts = 0;
 
@@ -185,11 +200,14 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
     while (x != end_x || y != end_y)
     {   // not full path, try connect parts
         int at_start = 0;
-        int p = findConnectingPart(parts, num_parts, end_x, end_y, fillStyle, &at_start);
+        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, fillStyle, &at_start);
+        if (p < 0)
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, fillStyle, &at_start);
         //assert(p >= 0);
         if (p < 0)
             break;
         SHAPE_PARTS *cpart = parts + p;
+        //assert(moveTo != cpart->start->type);
         lines = cpart->start;
         num_lines = cpart->num_lines;
         if (moveTo == cpart->start->type)
@@ -231,11 +249,23 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
             else if (splineTo == lines->type)
                 path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
             if (i != (num_lines - 1))
+            {
+                assert(x != lines->x || y != lines->y);
                 lines = lines->next;
+            }
         }
+        assert(path->npts == alloc_pts);
         end_x = lines->x, end_y = lines->y;
         if (new_lines)
             free(new_lines);
+    }
+    int p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, fillStyle, 0);
+    if (p >= 0)
+    {
+        part = parts + p;
+        path->next = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+        path = path->next;
+        goto add_shape;
     }
 }
 
@@ -292,7 +322,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 }
                 while (lines)
                 {
-                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type)
+                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type || (moveTo != prevLine->type && haveIntersect(swf_shape->lines, prevLine)))
                     {
                         parts[numParts].start = startLine;
                         parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
@@ -332,9 +362,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     int i = 0, idx = 0;
                     for (; i < numParts; i++)
                     {
-                        if (parts[i].fill_style[0] && !parts[i].fill_style_used[0])
+                        if (moveTo == parts[i].start->type && parts[i].fill_style[0] && !parts[i].fill_style_used[0])
                             break;
-                        if (parts[i].fill_style[1] && !parts[i].fill_style_used[1])
+                        if (moveTo == parts[i].start->type && parts[i].fill_style[1] && !parts[i].fill_style_used[1])
                         {
                             idx = 1;
                             break;
@@ -365,9 +395,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 idtable[id].type = sprite_type;
                 idtable[id].lvg_id = clip->num_groups++;
             }
-        } else if (swf_isPlaceTag(tag))
-            group->frames[group->num_frames].num_objects++;
-        else if (tag->id == ST_SHOWFRAME)
+        } else if (tag->id == ST_SHOWFRAME)
             group->num_frames++;
         else if (tag->id == ST_END)
             break;
@@ -379,8 +407,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
 {
     group->num_frames = 0;
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*65536);
-    int *display = (int*)calloc(1, sizeof(int)*65536);
-    int i, numplacements = 0;
+    int i, j;
     TAG *tag = firstTag;
     while (tag)
     {
@@ -388,11 +415,10 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             SWFPLACEOBJECT p;
             swf_GetPlaceObject(tag, &p);
-            if (p.id)
-                display[p.depth] = p.id;
-            else
-                p.id = display[p.depth];
-            placements[numplacements++] = p;
+            if (!p.id)
+                p.id = placements[p.depth].id;
+            assert(p.id > 0);
+            placements[p.depth] = p;
             swf_PlaceObjectFree(&p);
         } else if (tag->id == ST_DEFINESPRITE)
         {
@@ -402,17 +428,38 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             clip->num_groups++;
         } else if (tag->id == ST_REMOVEOBJECT || tag->id == ST_REMOVEOBJECT2)
         {
+            U32 oldTagPos = swf_GetTagPos(tag);
+            swf_SetTagPos(tag, 0);
+            int id;
+            if (ST_REMOVEOBJECT == tag->id)
+                id = swf_GetU16(tag);
+            int depth = swf_GetU16(tag);
+            if (ST_REMOVEOBJECT == tag->id)
+            {
+                assert(placements[depth].id == id);
+            }
+            memset(&placements[depth], 0, sizeof(placements[depth]));
+            swf_SetTagPos(tag, oldTagPos);
         } else if (tag->id == ST_SHOWFRAME)
         {
-            qsort(placements, numplacements, sizeof(SWFPLACEOBJECT), compare_placements);
-            assert(numplacements == group->frames[group->num_frames].num_objects);
-            group->frames[group->num_frames].objects = calloc(1, sizeof(LVGObject)*numplacements);
-            for (int i = 0; i < numplacements; i++)
+            int numplacements = 0;
+            for (i = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
+                if (!p->id)
+                    continue;
+                numplacements++;
+            }
+            group->frames[group->num_frames].num_objects = numplacements;
+            group->frames[group->num_frames].objects = calloc(1, sizeof(LVGObject)*numplacements);
+            for (i = 0, j = 0; i < 65536; i++)
+            {
+                SWFPLACEOBJECT *p = &placements[i];
+                if (!p->id)
+                    continue;
                 MATRIX *m = &p->matrix;
-                LVGObject *o = &group->frames[group->num_frames].objects[i];
-                character_t *c = &idtable[placements[i].id];
+                LVGObject *o = &group->frames[group->num_frames].objects[j++];
+                character_t *c = &idtable[p->id];
                 o->id = c->lvg_id;
                 o->depth = p->depth;
                 o->type = c->type;
@@ -424,7 +471,6 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->t[5] = m->ty/20.0f;
             }
             group->num_frames++;
-            numplacements = 0;
         } else if (tag->id == ST_END)
             break;
         tag = tag->next;

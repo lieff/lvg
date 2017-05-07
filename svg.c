@@ -197,10 +197,10 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, int
     struct NSVGgradient *grad = shape->fill.gradient;
     float sx = shape->bounds[0];
     float sy = shape->bounds[1];
-    float ex = shape->bounds[2];
+    float ex = shape->bounds[0];
     float ey = shape->bounds[3];
     NVGcolor cs = nvgColorU32(grad->stops[0].color);
-    NVGcolor ce = nvgColorU32(grad->stops[1].color);
+    NVGcolor ce = nvgColorU32(grad->stops[grad->nstops - 1].color);
 
     NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
     if (is_fill)
@@ -215,7 +215,7 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, int
     float cx = (shape->bounds[0] + shape->bounds[2])/2.0;
     float cy = (shape->bounds[1] + shape->bounds[3])/2.0;
     NVGcolor cs = nvgColorU32(grad->stops[0].color);
-    NVGcolor ce = nvgColorU32(grad->stops[1].color);
+    NVGcolor ce = nvgColorU32(grad->stops[grad->nstops - 1].color);
 
     NVGpaint p = nvgRadialGradient(vg, cx, cy, 0, cx, cs, ce);
     if (is_fill)
@@ -256,8 +256,8 @@ void lvgDrawShape(NSVGshape *shape)
     }
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
-        //if (NSVG_FILLRULE_EVENODD == shape->fillRule)
-        //    nvgPathWinding(vg, NVG_HOLE);
+        if (NSVG_FILLRULE_EVENODD == shape->fillRule)
+            nvgPathWinding(vg, NVG_HOLE);
         nvgFill(vg);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
