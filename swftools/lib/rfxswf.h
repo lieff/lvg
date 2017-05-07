@@ -993,7 +993,7 @@ typedef struct _SWFPLACEOBJECT {
 } SWFPLACEOBJECT;
 
 void swf_SetPlaceObject(TAG * t,SWFPLACEOBJECT* obj);
-void swf_GetPlaceObject(TAG * t,SWFPLACEOBJECT* obj);
+int swf_GetPlaceObject(TAG * t,SWFPLACEOBJECT* obj);
 void swf_PlaceObjectFree(SWFPLACEOBJECT* obj);
 
 // swfvideo.c

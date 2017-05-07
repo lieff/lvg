@@ -151,48 +151,51 @@ void swf_SetPlaceObject(TAG * t,SWFPLACEOBJECT* obj)
     }
 }
 
-void swf_GetPlaceObject(TAG * tag,SWFPLACEOBJECT* obj)
+int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj)
 {
-    if(obj)
-	memset(obj, 0, sizeof(SWFPLACEOBJECT));
+    if (obj)
+        memset(obj, 0, sizeof(SWFPLACEOBJECT));
 
-    if(!tag) {
-	swf_GetMatrix(0, &obj->matrix);
-	swf_GetCXForm(0, &obj->cxform, 1);
-	//obj->internal = PF_CHAR|PF_MATRIX|PF_CXFORM;
-	return;
+    if (!tag)
+    {
+        swf_GetMatrix(0, &obj->matrix);
+        swf_GetCXForm(0, &obj->cxform, 1);
+        //obj->internal = PF_CHAR|PF_MATRIX|PF_CXFORM;
+        return 0;
     }
     swf_SetTagPos(tag, 0);
     
-    if(tag->id == ST_PLACEOBJECT) {
-	obj->id = swf_GetU16(tag);
-	obj->depth = swf_GetU16(tag);
-	swf_GetMatrix(tag, &obj->matrix);
-	swf_GetCXForm(tag, &obj->cxform, 0);
-	//obj->internal = PF_CHAR|PF_MATRIX|PF_CXFORM;
-    } else if(tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3) {
-	U8 flags,flags2=0;
-        flags = swf_GetU8(tag);
-	if(tag->id == ST_PLACEOBJECT3)
-	    flags2 = swf_GetU8(tag);
-        memset(obj,0,sizeof(SWFPLACEOBJECT));
-            
-        swf_GetMatrix(0,&obj->matrix);
-        swf_GetCXForm(0,&obj->cxform,1);
-
-	obj->flags = flags;
+    if (tag->id == ST_PLACEOBJECT)
+    {
+        obj->id = swf_GetU16(tag);
         obj->depth = swf_GetU16(tag);
-	//obj->internal = flags;
-        if(flags&PF_MOVE) obj->move = 1;
-        if(flags&PF_CHAR) obj->id = swf_GetU16(tag);
-        if(flags&PF_MATRIX) swf_GetMatrix(tag, &obj->matrix);
-        if(flags&PF_CXFORM) swf_GetCXForm(tag, &obj->cxform,1);
-        if(flags&PF_RATIO) obj->ratio = swf_GetU16(tag);
+        swf_GetMatrix(tag, &obj->matrix);
+        swf_GetCXForm(tag, &obj->cxform, 0);
+        return PF_CHAR | PF_MATRIX | PF_CXFORM;
+    } else if (tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3)
+    {
+        U8 flags, flags2 = 0;
+        flags = swf_GetU8(tag);
+        if (tag->id == ST_PLACEOBJECT3)
+            flags2 = swf_GetU8(tag);
+        memset(obj, 0, sizeof(SWFPLACEOBJECT));
+        swf_GetMatrix(0, &obj->matrix);
+        swf_GetCXForm(0, &obj->cxform,1);
+
+        obj->flags = flags;
+        obj->depth = swf_GetU16(tag);
+        //obj->internal = flags;
+        if (flags & PF_MOVE) obj->move = 1;
+        if (flags & PF_CHAR) obj->id = swf_GetU16(tag);
+        if (flags & PF_MATRIX) swf_GetMatrix(tag, &obj->matrix);
+        if (flags & PF_CXFORM) swf_GetCXForm(tag, &obj->cxform,1);
+        if (flags & PF_RATIO) obj->ratio = swf_GetU16(tag);
         /* if you modify the order of these operations, also
            modify it in ../src/swfcombine.c */
-        if(flags&PF_CLIPDEPTH) 
+        if (flags & PF_CLIPDEPTH)
             obj->clipdepth = swf_GetU16(tag); //clip
-        if(flags&PF_NAME) {
+        if (flags & PF_NAME)
+        {
             int l,t;
             U8*data;
             swf_ResetReadBits(tag);
@@ -202,20 +205,20 @@ void swf_GetPlaceObject(TAG * tag,SWFPLACEOBJECT* obj)
             obj->name = (char*)data;
             while((data[t++] = swf_GetU8(tag))); 
         }
-	if(flags2&PF2_BLENDMODE) {
-	    obj->blendmode = swf_GetU8(tag);
-	}
+        if (flags2 & PF2_BLENDMODE)
+            obj->blendmode = swf_GetU8(tag);
 
         /* Actionscript ignored (for now) */
         obj->actions = 0;
-    } else {
+        return flags;
+    } else
         fprintf(stderr, "rfxswf: Bad Tag: %d not a placeobject\n", tag->id);
-    }
 }
 
 void swf_PlaceObjectFree(SWFPLACEOBJECT* obj)
 {
-    if(obj->name)
-	free(obj->name);
+    if (obj->name)
+        free(obj->name);
+    obj->name = 0;
 }
 

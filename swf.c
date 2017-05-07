@@ -435,7 +435,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     group->num_frames = 0;
-    SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)rfx_calloc(sizeof(SWFPLACEOBJECT)*65536);
+    SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)calloc(1, sizeof(SWFPLACEOBJECT)*65536);
     int i, j;
     TAG *tag = firstTag;
     while (tag)
@@ -443,12 +443,18 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         if (swf_isPlaceTag(tag))
         {
             SWFPLACEOBJECT p;
-            swf_GetPlaceObject(tag, &p);
-            if (!p.id)
-                p.id = placements[p.depth].id;
-            assert(p.id > 0);
-            placements[p.depth] = p;
+            int flags = swf_GetPlaceObject(tag, &p);
             swf_PlaceObjectFree(&p);
+            SWFPLACEOBJECT *target = &placements[p.depth];
+            if (!p.id)
+                p.id = target->id;
+            assert(p.id > 0);
+            target->id = p.id;
+            target->depth = p.depth;
+            if (flags & PF_MATRIX) target->matrix = p.matrix;
+            if (flags & PF_CXFORM) target->cxform = p.cxform;
+            if (flags & PF_RATIO) target->ratio = p.ratio;
+            if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
         } else if (tag->id == ST_DEFINESPRITE)
         {
             swf_UnFoldSprite(tag);
