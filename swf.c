@@ -371,7 +371,20 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         }
                     }
                     if (i == numParts)
-                        break;
+                    {
+                        for (i = 0; i < numParts; i++)
+                        {
+                            if (parts[i].fill_style[0] && !parts[i].fill_style_used[0])
+                                break;
+                            if (parts[i].fill_style[1] && !parts[i].fill_style_used[1])
+                            {
+                                idx = 1;
+                                break;
+                            }
+                        }
+                        if (i == numParts)
+                            break;
+                    }
                     memcpy(shape->shapes[i].bounds, shape->bounds, sizeof(shape->bounds));
                     parseShape(idtable, clip, shape->shapes + shape->num_shapes++, parts, numParts, parts + i, swf_shape->fillstyles, swf_shape->linestyles, idx);
                 }
