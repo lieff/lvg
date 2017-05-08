@@ -1920,7 +1920,7 @@ void swf_WriteFont(SWFFONT * font, char *filename)
 	array = action_PushString(array, "xpos");
 	for(t=0;t<font->numchars;t++) {
 	    swf_SetU8(tag, 1);
-	    int width = abs((xmax[t] - xmin[t+1])*fontsize/1024) + 60;
+	    int width = abs((int)(xmax[t] - xmin[t+1])*fontsize/1024) + 60;
 	    array = action_PushInt(array, x/20 +(xmin[t]*scale/1024)/20);
 	    x += width * overlarge_factor;
 	    swf_SetBits(tag, t, gbits);

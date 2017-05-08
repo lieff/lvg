@@ -25,21 +25,16 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include <math.h>
 #include <memory.h>
 #include "graphcut.h"
 #include "mem.h"
 
-//#define DEBUG
-
-//#define CHECKS
-
 #ifdef DEBUG
 #define DBG
-#include <assert.h>
 #else
-#define DBG if(0)
-#define assert(x) (x)
+#define DBG if (0) 
 #endif
 
 #define ACTIVE 0x10

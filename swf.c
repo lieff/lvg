@@ -1,6 +1,5 @@
 #include <assert.h>
-#include "stb_image.h"
-#include "png.h"
+#include <limits.h>
 #include <rfxswf.h>
 #include "stb_image.h"
 //#define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -571,7 +570,6 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->last_time = g_time;
     return clip;
 }
-
 
 LVGMovieClip *lvgLoadSWF(const char *file)
 {

@@ -651,7 +651,7 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
             return 0;
         }
 #else
-        stbi_zlib_decode_buffer(alphadata, datalen, &tag->data[tag->pos], tag->len - tag->pos);
+        stbi_zlib_decode_buffer((char *)alphadata, datalen, (char *)&tag->data[tag->pos], tag->len - tag->pos);
 #endif
         for (y = 0; y < (*height); y++)
         {
@@ -999,7 +999,7 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG * tag, int *dwidth, int *dheight)
     }
 #else
     data = (U8*)malloc(datalen);
-    stbi_zlib_decode_buffer(data, datalen, &tag->data[tag->pos], tag->len - tag->pos);
+    stbi_zlib_decode_buffer((char *)data, datalen, (char *)&tag->data[tag->pos], tag->len - tag->pos);
 #endif
     pos = 0;
 
