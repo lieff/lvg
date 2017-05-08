@@ -53,6 +53,7 @@ void lvgDrawClip(LVGMovieClip *clip);
 NSVGimage *lvgLoadSVG(const char *file);
 NSVGimage *lvgLoadSVGB(const char *file);
 LVGMovieClip *lvgLoadSWF(const char *file);
+LVGMovieClip *lvgLoadClip(const char *file);
 
 extern NVGcontext *vg;
 extern NVGcolor g_bgColor;

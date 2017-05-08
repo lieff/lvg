@@ -131,6 +131,32 @@ char *load_paint(char *buf, NSVGpaint *p)
     return buf;
 }
 
+char *load_shape(char *buf, NSVGshape *shape)
+{
+    int npaths = 0;
+    READ(&npaths, 4);
+    buf = load_paint(buf, &shape->fill);
+    buf = load_paint(buf, &shape->stroke);
+    READ(&shape->strokeWidth, 4);
+    READ(shape->bounds, 4*4);
+    shape->flags |= NSVG_FLAGS_VISIBLE;
+
+    shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
+    memset(shape->paths, 0, npaths*sizeof(NSVGpath));
+    NSVGpath *path = 0;
+    for (int j = 0; j < npaths; j++)
+    {
+        if (path)
+            path->next = &shape->paths[j];
+        path = &shape->paths[j];
+        READ(&path->npts, 4);
+        READ(&path->closed, 1);
+        path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
+        READ(path->pts, sizeof(path->pts[0])*path->npts*2);
+    }
+    return buf;
+}
+
 NSVGimage *lvgLoadSVGB(const char *file)
 {
     char *buf, *save_buf;
@@ -143,48 +169,120 @@ NSVGimage *lvgLoadSVGB(const char *file)
     double time2 = glfwGetTime();
     printf("zip time: %fs\n", time2 - time);
 
-    NSVGimage *image = (NSVGimage*)malloc(sizeof(NSVGimage));
-    memset(image, 0, sizeof(NSVGimage));
+    NSVGimage *image = (NSVGimage*)calloc(1, sizeof(NSVGimage));
 
     int nshapes = 0;
     READ(&nshapes, 4);
     READ(&image->width, 4);
     READ(&image->height, 4);
-    image->shapes = (NSVGshape*)malloc(nshapes*sizeof(NSVGshape));
-    memset(image->shapes, 0, nshapes*sizeof(NSVGshape));
+    image->shapes = (NSVGshape*)calloc(1, nshapes*sizeof(NSVGshape));
     NSVGshape *shape = 0;
     for (int i = 0; i < nshapes; i++)
     {
         if (shape)
             shape->next = &image->shapes[i];
         shape = &image->shapes[i];
-        int npaths = 0;
-        READ(&npaths, 4);
-        buf = load_paint(buf, &shape->fill);
-        buf = load_paint(buf, &shape->stroke);
-        READ(&shape->strokeWidth, 4);
-        READ(shape->bounds, 4*4);
-        shape->flags |= NSVG_FLAGS_VISIBLE;
-
-        shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
-        memset(shape->paths, 0, npaths*sizeof(NSVGpath));
-        NSVGpath *path = 0;
-        for (int j = 0; j < npaths; j++)
-        {
-            if (path)
-                path->next = &shape->paths[j];
-            path = &shape->paths[j];
-            READ(&path->npts, 4);
-            READ(&path->closed, 1);
-            path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
-            READ(path->pts, sizeof(path->pts[0])*path->npts*2);
-        }
+        buf = load_shape(buf, shape);
     }
 
     free(save_buf);
     time = glfwGetTime();
     printf("svg load time: %fs\n", time - time2);
     return image;
+}
+
+static char *loadShapeCollection(char *buf, LVGShapeCollection *c)
+{
+    READ(&c->num_shapes, 4);
+    READ(c->bounds, 4*4);
+    c->shapes = (NSVGshape *)calloc(1, sizeof(NSVGshape)*c->num_shapes);
+    for (int i = 0; i < c->num_shapes; i++)
+    {
+        buf = load_shape(buf, c->shapes + i);
+        c->shapes[i].fillRule = NSVG_FILLRULE_EVENODD;
+    }
+    return buf;
+}
+
+static char *loadImage(char *buf, int *image)
+{
+    int type = 0, len = 0;
+    READ(&type, 4);
+    READ(&len, 4);
+    *image = 0;
+    return buf;
+}
+
+static char *loadObject(char *buf, LVGObject *o)
+{
+    READ(&o->id, 4);
+    READ(&o->type, 4);
+    READ(&o->depth, 4);
+    READ(&o->flags, 4);
+    READ(&o->t, 4*6);
+    READ(&o->color_mul, 4*4);
+    READ(&o->color_add, 4*4);
+    return buf;
+}
+
+static char *loadFrame(char *buf, LVGMovieClipFrame *frame)
+{
+    READ(&frame->num_objects, 4);
+    frame->objects = (LVGObject *)calloc(1, sizeof(LVGObject)*frame->num_objects);
+    for (int i = 0; i < frame->num_objects; i++)
+        buf = loadObject(buf, frame->objects + i);
+    return buf;
+}
+
+static char *loadGroup(char *buf, LVGMovieClipGroup *group)
+{
+    READ(&group->num_frames, 4);
+    group->frames = (LVGMovieClipFrame *)calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
+    for (int i = 0; i < group->num_frames; i++)
+        buf = loadFrame(buf, group->frames + i);
+    return buf;
+}
+
+LVGMovieClip *lvgLoadClip(const char *file)
+{
+    char *buf, *save_buf;
+    double time = glfwGetTime();
+    if (!(buf = save_buf = lvgGetFileContents(file, 0)))
+    {
+        printf("error: could not open movie clip.\n");
+        return 0;
+    }
+    double time2 = glfwGetTime();
+    printf("zip time: %fs\n", time2 - time);
+
+    LVGMovieClip *clip = 0;
+    uint32_t tag;
+    READ(&tag, 4);
+    if (tag != *(uint32_t*)"LVGC")
+        goto fail;
+    clip = (LVGMovieClip*)calloc(1, sizeof(LVGMovieClip));
+    READ(clip->bounds, 4*4);
+    READ(clip->bgColor.rgba, 4*4);
+    READ(&clip->num_shapes, 4);
+    READ(&clip->num_images, 4);
+    READ(&clip->num_groups, 4);
+    READ(&clip->fps, 4);
+    clip->shapes = (LVGShapeCollection*)calloc(1, sizeof(LVGShapeCollection)*clip->num_shapes);
+    clip->images = (int*)calloc(1, sizeof(int)*clip->num_images);
+    clip->groups = (LVGMovieClipGroup*)calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
+    int i;
+    for (i = 0; i < clip->num_shapes; i++)
+        buf = loadShapeCollection(buf, clip->shapes + i);
+    for (i = 0; i < clip->num_images; i++)
+        buf = loadImage(buf, clip->images + i);
+    for (i = 0; i < clip->num_groups; i++)
+        buf = loadGroup(buf, clip->groups + i);
+fail:
+    free(save_buf);
+    time = glfwGetTime();
+    printf("movie clip load time: %fs\n", time - time2);
+    clip->last_time = g_time;
+    return clip;
 }
 
 static inline NVGcolor nvgColorU32(uint32_t c)
@@ -228,10 +326,6 @@ static NVGcolor transformColor(NVGcolor color, LVGObject *o)
 {
     if (!o)
         return color;
-    /*if (o->color_mul[3] < 0.1f)
-    {
-        o->color_mul[3] = 0.9f;
-    }*/
     color = nvgRGBAf(color.r*o->color_mul[0], color.g*o->color_mul[1], color.b*o->color_mul[2], color.a*o->color_mul[3]);
     color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
     color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
@@ -400,6 +494,7 @@ const struct SYM g_syms[] = {
     { "lvgLoadSVG", lvgLoadSVG },
     { "lvgLoadSVGB", lvgLoadSVGB },
     { "lvgLoadSWF", lvgLoadSWF },
+    { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
     { "sin", sin },
