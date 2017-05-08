@@ -2,6 +2,9 @@
 #include <string.h>
 #include <float.h>
 #include <assert.h>
+#include <limits.h>
+#include <unistd.h>
+#include <fcntl.h>
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -31,6 +34,7 @@
 
 #include "lunzip.h"
 #include "all.h"
+#include "all_lib.h"
 #include "lvg_header.h"
 
 zip_t g_zip;
@@ -51,6 +55,46 @@ void (*onFrame)();
 extern void onInit();
 extern void onFrame();
 #endif
+
+int open_wrapper(const char *pathname, int flags)
+{
+    if (!strcmp(pathname, "./lib/libtcc1.a"))
+        return INT_MAX;
+    return open(pathname, flags);
+}
+
+void close_wrapper(int fd)
+{
+    if (INT_MAX == fd)
+        return;
+    close(fd);
+}
+
+static int buf_ptr = 0;
+
+ssize_t read_wrapper(int fd, void *buf, size_t count)
+{
+    if (INT_MAX != fd)
+        return read(fd, buf, count);
+    size_t rest = sizeof(lib_libtcc1_a) - buf_ptr;
+    size_t to_read = count < rest ? count : rest;
+    memcpy(buf, lib_libtcc1_a + buf_ptr, to_read);
+    buf_ptr += to_read;
+    return to_read;
+}
+
+off_t lseek_wrapper(int fd, off_t offset, int whence)
+{
+    if (INT_MAX != fd)
+        return lseek(fd, offset, whence);
+    switch (whence)
+    {
+    case SEEK_SET: buf_ptr = offset; break;
+    case SEEK_CUR: buf_ptr += offset; break;
+    case SEEK_END: buf_ptr = sizeof(lib_libtcc1_a) + offset; break;
+    }
+    return buf_ptr;
+}
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
     float sx, float sy, float ex, float ey,

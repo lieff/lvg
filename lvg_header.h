@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdint.h>
 #endif
-#include <math.h>
 
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };
 
