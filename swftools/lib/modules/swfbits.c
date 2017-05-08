@@ -572,11 +572,10 @@ static void tag_term_source(struct jpeg_decompress_struct *cinfo)
 {
     TAG *tag = (TAG *) cinfo->client_data;
 }
+#endif // HAVE_JPEGLIB
+
 RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
 {
-    struct jpeg_decompress_struct cinfo;
-    struct jpeg_error_mgr jerr;
-    struct jpeg_source_mgr mgr;
     RGBA *dest;
     int y;
     int offset = 0;
@@ -594,6 +593,11 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
         tag->len = offset+6;
     }
 
+#if defined(HAVE_JPEGLIB)
+    struct jpeg_decompress_struct cinfo;
+    struct jpeg_error_mgr jerr;
+    struct jpeg_source_mgr mgr;
+
     cinfo.err = jpeg_std_error(&jerr);
     jpeg_create_decompress(&cinfo);
 
@@ -609,8 +613,7 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
     jpeg_read_header(&cinfo, TRUE);
     *width = cinfo.image_width;
     *height = cinfo.image_height;
-    dest = (RGBA*)
-        malloc(sizeof(RGBA) * cinfo.image_width * cinfo.image_height);
+    dest = (RGBA*)malloc(sizeof(RGBA) * cinfo.image_width * cinfo.image_height);
 
     jpeg_start_decompress(&cinfo);
     for (y = 0; y < cinfo.output_height; y++) {
@@ -630,11 +633,14 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
     }
 
     jpeg_finish_decompress(&cinfo);
-
     jpeg_destroy_decompress(&cinfo);
+#else
+    dest = (RGBA *)stbi_load_from_memory(&tag->data[tag->pos], tag->len - tag->pos, width, height, &y, 4);
+#endif
 
-    if(offset) {
-        size_t datalen = cinfo.output_width*cinfo.output_height;
+    if (offset)
+    {
+        size_t datalen = (*width)*(*height);
         U8* alphadata = (U8*)malloc(datalen);
         tag->len = oldtaglen;
         swf_SetTagPos(tag, 6+offset);
@@ -647,11 +653,13 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
 #else
         stbi_zlib_decode_buffer(alphadata, datalen, &tag->data[tag->pos], tag->len - tag->pos);
 #endif
-        for(y=0;y<cinfo.output_height;y++) {
-            RGBA*line = &dest[y*cinfo.output_width];
-            U8*aline = &alphadata[y*cinfo.output_width];
+        for (y = 0; y < (*height); y++)
+        {
+            RGBA *line = &dest[y*(*width)];
+            U8 *aline = &alphadata[y*(*width)];
             int x;
-            for(x=0;x<cinfo.output_width;x++) {
+            for (x = 0; x < (*width); x++)
+            {
                 line[x].r = line[x].r < aline[x] ? line[x].r : aline[x];
                 line[x].g = line[x].g < aline[x] ? line[x].g : aline[x];
                 line[x].b = line[x].b < aline[x] ? line[x].b : aline[x];
@@ -662,8 +670,6 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
     }
     return dest;
 }
-
-#endif                                // HAVE_JPEGLIB
 
 // Lossless compression texture based on zlib
 
@@ -1206,18 +1212,11 @@ TAG* swf_AddImage(TAG*tag, int bitid, RGBA*mem, int width, int height, int quali
 
 RGBA *swf_ExtractImage(TAG * tag, int *dwidth, int *dheight)
 {
-//    RGBA *img;
-    
     swf_SetTagPos(tag, 2); // id is 2 bytes
 
     if (tag->id == ST_DEFINEBITSJPEG ||
         tag->id == ST_DEFINEBITSJPEG2 || tag->id == ST_DEFINEBITSJPEG3) {
-#ifdef HAVE_JPEGLIB
         return swf_JPEG2TagToImage(tag, dwidth, dheight);
-#else
-        fprintf(stderr, "rfxswf: Error: No JPEG library compiled in");
-        return 0;
-#endif
     }
     if (tag->id == ST_DEFINEBITSLOSSLESS ||
         tag->id == ST_DEFINEBITSLOSSLESS2) {

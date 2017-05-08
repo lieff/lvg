@@ -216,7 +216,7 @@
 
 //#define HAVE_ZLIB
 
-#define HAVE_JPEGLIB
+//#define HAVE_JPEGLIB
 
 #ifdef HAVE_FT2BUILD_H
 #define HAVE_FREETYPE_H 1
