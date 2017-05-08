@@ -20,12 +20,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#ifdef HAVE_IO_H
-#include <io.h>
-#endif
+#include <stdint.h>
 #include <string.h>
 #include <memory.h>
 #define __USE_LARGEFILE64
@@ -34,6 +29,12 @@
 
 #include "../config.h"
 
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#ifdef HAVE_IO_H
+#include <io.h>
+#endif
 #ifdef HAVE_ZLIB
 #include <zlib.h>
 #define ZLIB_BUFFER_SIZE 16384

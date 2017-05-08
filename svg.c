@@ -493,7 +493,9 @@ const struct SYM g_syms[] = {
     { "lvgDrawClip", lvgDrawClip },
     { "lvgLoadSVG", lvgLoadSVG },
     { "lvgLoadSVGB", lvgLoadSVGB },
+#ifndef EMSCRIPTEN
     { "lvgLoadSWF", lvgLoadSWF },
+#endif
     { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },

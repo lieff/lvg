@@ -24,16 +24,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <memory.h>
+#include <fcntl.h>
+#include <ctype.h>
 #include "../../config.h"
 #ifdef HAVE_ZLIB
 #include <zconf.h>
 #include <zlib.h>
+#else
+#include "stb_image.h"
 #endif
-#include <fcntl.h>
-#include <ctype.h>
 
 #ifdef HAVE_JPEGLIB
-#include "stb_image.h"
+//#include "stb_image.h"
 //#define HAVE_BOOLEAN
 #ifdef __cplusplus
 extern "C" {
@@ -587,14 +589,9 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
         return 0;
     }
     if (tag->id == ST_DEFINEBITSJPEG3) {
-#ifdef HAVE_ZLIB
         offset = swf_GetU32(tag);
         oldtaglen = tag->len;
         tag->len = offset+6;
-#else
-        fprintf(stderr, "rfxswf: extracting from definebitsjpeg3 not possible: no zlib\n");
-        return 0;
-#endif
     }
 
     cinfo.err = jpeg_std_error(&jerr);
@@ -636,18 +633,20 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
 
     jpeg_destroy_decompress(&cinfo);
 
-#ifdef HAVE_ZLIB
     if(offset) {
-        uLongf datalen = cinfo.output_width*cinfo.output_height;
+        size_t datalen = cinfo.output_width*cinfo.output_height;
         U8* alphadata = (U8*)malloc(datalen);
-        int error;
         tag->len = oldtaglen;
         swf_SetTagPos(tag, 6+offset);
-        error = uncompress(alphadata, &datalen, &tag->data[tag->pos], tag->len - tag->pos);
+#ifdef HAVE_ZLIB
+        int error = uncompress(alphadata, &datalen, &tag->data[tag->pos], tag->len - tag->pos);
         if (error != Z_OK) {
             fprintf(stderr, "rfxswf: Zlib error %d while extracting definejpeg3\n", error);
             return 0;
         }
+#else
+        stbi_zlib_decode_buffer(alphadata, datalen, &tag->data[tag->pos], tag->len - tag->pos);
+#endif
         for(y=0;y<cinfo.output_height;y++) {
             RGBA*line = &dest[y*cinfo.output_width];
             U8*aline = &alphadata[y*cinfo.output_width];
@@ -661,7 +660,6 @@ RGBA *swf_JPEG2TagToImage(TAG * tag, int *width, int *height)
         }
         free(alphadata);
     }
-#endif
     return dest;
 }
 
@@ -929,10 +927,12 @@ void swf_SetLosslessImage(TAG*tag, RGBA*data, int width, int height)
     }
 }
 
+#endif // HAVE_ZLIB
+
 RGBA *swf_DefineLosslessBitsTagToImage(TAG * tag, int *dwidth, int *dheight)
 {
     int id, format, height, width, pos;
-    uLongf datalen;//, datalen2;
+    size_t datalen;//, datalen2;
     int error;
     int bpp = 1;
     int cols = 0;
@@ -979,19 +979,22 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG * tag, int *dwidth, int *dheight)
 
     data = 0;
     datalen = (width * height * bpp / 8 + cols * 8);
+#ifdef HAVE_ZLIB
     do {
         if (data)
             free(data);
         datalen += 4096;
         data = (U8*)malloc(datalen);
-        error =
-            uncompress(data, &datalen, &tag->data[tag->pos],
-                       tag->len - tag->pos);
+        error = uncompress(data, &datalen, &tag->data[tag->pos], tag->len - tag->pos);
     } while (error == Z_BUF_ERROR);
     if (error != Z_OK) {
         fprintf(stderr, "rfxswf: Zlib error %d (image %d)\n", error, id);
         return 0;
     }
+#else
+    data = (U8*)malloc(datalen);
+    stbi_zlib_decode_buffer(data, datalen, &tag->data[tag->pos], tag->len - tag->pos);
+#endif
     pos = 0;
 
     if (cols) {
@@ -1048,8 +1051,6 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG * tag, int *dwidth, int *dheight)
     free(data);
     return dest;
 }
-
-#endif                                // HAVE_ZLIB
 
 #if defined(HAVE_ZLIB) && defined(HAVE_JPEGLIB)
 
@@ -1164,7 +1165,7 @@ TAG* swf_AddImage(TAG*tag, int bitid, RGBA*mem, int width, int height, int quali
 
     /* try lossless image */
 
-#ifdef NO_LOSSLESS
+#if defined(NO_LOSSLESS) || !defined(HAVE_ZLIB)
     tag1 = swf_InsertTag(0, /*ST_DEFINEBITSLOSSLESS1/2*/0);
     tag1->len = 0x7fffffff;
 #else
@@ -1220,12 +1221,7 @@ RGBA *swf_ExtractImage(TAG * tag, int *dwidth, int *dheight)
     }
     if (tag->id == ST_DEFINEBITSLOSSLESS ||
         tag->id == ST_DEFINEBITSLOSSLESS2) {
-#ifdef HAVE_ZLIB
         return swf_DefineLosslessBitsTagToImage(tag, dwidth, dheight);
-#else
-        fprintf(stderr, "rfxswf: Error: No JPEG library compiled in");
-        return 0;
-#endif
     }
     fprintf(stderr, "rfxswf: Error: Invalid tag (%d, %s)", tag->id,
             swf_TagGetName(tag));

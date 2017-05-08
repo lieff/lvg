@@ -123,9 +123,6 @@
 /* Define if you have the <t1lib.h> header file.  */
 /* #undef HAVE_T1LIB_H */
 
-/* Define if you have the <zlib.h> header file.  */
-#define HAVE_ZLIB_H 1
-
 /* Define if you have the <zzip/lib.h> header file.  */
 /* #undef HAVE_ZZIP_LIB_H */
 
@@ -174,9 +171,6 @@
 /* Define if you have the t1 library (-lt1).  */
 /* #undef HAVE_LIBT1 */
 
-/* Define if you have the z library (-lz).  */
-#define HAVE_LIBZ 1
-
 /* Name of package */
 #define PACKAGE "swftools"
 
@@ -185,9 +179,6 @@
 
 /* Typedefs */
 //#define boolean int
-
-/* use gzip/uncompress */
-#define USE_GZIP 1
 
 /* let ttf2pt1 use libfreetype */
 /* #undef USE_FREETYPE */
@@ -223,11 +214,7 @@
 /* Define to 0 on non-windows systems */
 #define O_BINARY 0
 
-#ifdef HAVE_ZLIB_H
-#ifdef HAVE_LIBZ
-#define HAVE_ZLIB
-#endif
-#endif
+//#define HAVE_ZLIB
 
 #define HAVE_JPEGLIB
 

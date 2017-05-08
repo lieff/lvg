@@ -26,9 +26,6 @@
 
 #include "mem.h"
 #include "rfxswf.h"
-#ifdef HAVE_ZLIB
-#include <zlib.h>
-#endif // HAVE_ZLIB
 
 #ifndef RFXSWF_DISABLESOUND
 #ifdef HAVE_LAME
