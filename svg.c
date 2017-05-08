@@ -224,7 +224,21 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, int
         nvgStrokePaint(vg, p);
 }
 
-void lvgDrawShape(NSVGshape *shape)
+static NVGcolor transformColor(NVGcolor color, LVGObject *o)
+{
+    if (!o)
+        return color;
+    /*if (o->color_mul[3] < 0.1f)
+    {
+        o->color_mul[3] = 0.9f;
+    }*/
+    color = nvgRGBAf(color.r*o->color_mul[0], color.g*o->color_mul[1], color.b*o->color_mul[2], color.a*o->color_mul[3]);
+    color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
+    color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
+    return color;
+}
+
+void lvgDrawShape(NSVGshape *shape, LVGObject *o)
 {
     int i;
     NSVGpath *path;
@@ -243,8 +257,9 @@ void lvgDrawShape(NSVGshape *shape)
             nvgLineTo(vg, path->pts[0], path->pts[1]);
     }
     if (NSVG_PAINT_COLOR == shape->fill.type)
-        nvgFillColor(vg, nvgColorU32(shape->fill.color));
-    else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+    {
+        nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
+    } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         nvgSVGLinearGrad(vg, shape, 1);
     else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         nvgSVGRadialGrad(vg, shape, 1);
@@ -263,7 +278,7 @@ void lvgDrawShape(NSVGshape *shape)
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
         if (NSVG_PAINT_COLOR == shape->stroke.type)
-            nvgStrokeColor(vg, nvgColorU32(shape->stroke.color));
+            nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), o));
         else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
             nvgSVGLinearGrad(vg, shape, 0);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
@@ -280,7 +295,7 @@ void lvgDrawSVG(NSVGimage *image)
     {
         if (!(shape->flags & NSVG_FLAGS_VISIBLE))
             continue;
-        lvgDrawShape(shape);
+        lvgDrawShape(shape, 0);
     }
 }
 
@@ -299,7 +314,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         if (LVG_OBJ_SHAPE == o->type)
         {
             for (int j = 0; j < clip->shapes[o->id].num_shapes; j++)
-                lvgDrawShape(&clip->shapes[o->id].shapes[j]);
+                lvgDrawShape(&clip->shapes[o->id].shapes[j], o);
         } else
         if (LVG_OBJ_IMAGE == o->type)
         {
@@ -328,7 +343,7 @@ void lvgDrawClip(LVGMovieClip *clip)
         clip->last_time += (1.0/clip->fps);
     }
     lvgDrawClipGroup(clip, clip->groups, next_frame);
-#ifdef DEBUG
+/*#ifdef DEBUG
     int w, h;
     nvgImageSize(vg, clip->images[clip->num_images - 1], &w, &h);
     NVGpaint imgPaint = nvgImagePattern(vg, 600, 0, w, h, 0, clip->images[clip->num_images - 1], 1.0f);
@@ -336,7 +351,7 @@ void lvgDrawClip(LVGMovieClip *clip)
     nvgRect(vg, 600, 0, w, h);
     nvgFillPaint(vg, imgPaint);
     nvgFill(vg);
-#endif
+#endif*/
 }
 
 void drawframe()

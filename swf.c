@@ -437,6 +437,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
     group->num_frames = 0;
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)calloc(1, sizeof(SWFPLACEOBJECT)*65536);
     int i, j;
+    for (i = 0; i < 65536; i++)
+        swf_GetPlaceObject(0, placements + i);
     TAG *tag = firstTag;
     while (tag)
     {
@@ -473,7 +475,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             {
                 assert(placements[depth].id == id);
             }
-            memset(&placements[depth], 0, sizeof(placements[depth]));
+            swf_GetPlaceObject(0, placements + depth);
             swf_SetTagPos(tag, oldTagPos);
         } else if (tag->id == ST_SHOWFRAME)
         {
@@ -493,6 +495,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 if (!p->id)
                     continue;
                 MATRIX *m = &p->matrix;
+                CXFORM *cx = &p->cxform;
                 LVGObject *o = &group->frames[group->num_frames].objects[j++];
                 character_t *c = &idtable[p->id];
                 o->id = c->lvg_id;
@@ -504,6 +507,14 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->t[3] = m->sy/65536.0f;
                 o->t[4] = m->tx/20.0f;
                 o->t[5] = m->ty/20.0f;
+                o->color_mul[0] = cx->r0/256.0f;
+                o->color_mul[1] = cx->g0/256.0f;
+                o->color_mul[2] = cx->b0/256.0f;
+                o->color_mul[3] = cx->a0/256.0f;
+                o->color_add[0] = cx->r1/256.0f;
+                o->color_add[1] = cx->g1/256.0f;
+                o->color_add[2] = cx->b1/256.0f;
+                o->color_add[3] = cx->a1/256.0f;
             }
             group->num_frames++;
         } else if (tag->id == ST_END)
@@ -517,6 +528,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
 {
     swf_OptimizeTagOrder(swf);
     swf_FoldAll(swf);
+    swf_RemoveJPEGTables(swf);
 
     character_t *idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
     LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
@@ -596,7 +608,7 @@ LVGMovieClip *lvgLoadSWF(const char *file)
     }
     free(b);
     LVGMovieClip *clip = swf_ReadObjects(&swf);
-#ifdef DEBUG
+/*#ifdef DEBUG
     RENDERBUF buf;
     swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin)/20, (swf.movieSize.ymax - swf.movieSize.ymin)/20, 2, 1);
     swf_RenderSWF(&buf, &swf);
@@ -606,6 +618,6 @@ LVGMovieClip *lvgLoadSWF(const char *file)
     clip->num_images++;
     clip->images = realloc(clip->images, clip->num_images*sizeof(int));
     clip->images[clip->num_images - 1] = nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
-#endif
+#endif*/
     return clip;
 }

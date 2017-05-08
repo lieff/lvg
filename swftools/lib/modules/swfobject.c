@@ -160,8 +160,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj)
     {
         swf_GetMatrix(0, &obj->matrix);
         swf_GetCXForm(0, &obj->cxform, 1);
-        //obj->internal = PF_CHAR|PF_MATRIX|PF_CXFORM;
-        return 0;
+        return PF_MATRIX | PF_CXFORM;
     }
     swf_SetTagPos(tag, 0);
     
@@ -180,11 +179,10 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj)
             flags2 = swf_GetU8(tag);
         memset(obj, 0, sizeof(SWFPLACEOBJECT));
         swf_GetMatrix(0, &obj->matrix);
-        swf_GetCXForm(0, &obj->cxform,1);
+        swf_GetCXForm(0, &obj->cxform, 1);
 
         obj->flags = flags;
         obj->depth = swf_GetU16(tag);
-        //obj->internal = flags;
         if (flags & PF_MOVE) obj->move = 1;
         if (flags & PF_CHAR) obj->id = swf_GetU16(tag);
         if (flags & PF_MATRIX) swf_GetMatrix(tag, &obj->matrix);
@@ -213,6 +211,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj)
         return flags;
     } else
         fprintf(stderr, "rfxswf: Bad Tag: %d not a placeobject\n", tag->id);
+    return 0;
 }
 
 void swf_PlaceObjectFree(SWFPLACEOBJECT* obj)

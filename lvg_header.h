@@ -11,6 +11,8 @@ typedef struct LVGObject
 {
     int id, type, depth, flags;
     float t[6];
+    float color_mul[4];
+    float color_add[4];
 } LVGObject;
 
 typedef struct LVGMovieClipFrame
