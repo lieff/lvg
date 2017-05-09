@@ -733,6 +733,7 @@ int open_swf(const char *file_name)
     munmap(buf, st.st_size);
     close(fd);
     onFrame = swfOnFrame;
+    g_bgColor = g_clip->bgColor;
     return 0;
 }
 #endif

@@ -84,6 +84,7 @@ static inline uint32_t RGBA2U32(RGBA *c)
 typedef struct SHAPE_PARTS
 {
     SHAPELINE *start;
+    SHAPELINE *end;
     SHAPELINE *prev;
     int num_lines, fill_style[2], fill_style_used[2];
 } SHAPE_PARTS;
@@ -95,9 +96,13 @@ static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, i
         if ((from_move && moveTo != parts[i].start->type) || (!from_move && moveTo == parts[i].start->type))
             continue;
         SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
-        SHAPELINE *end = parts[i].start;
+        SHAPELINE *end = parts[i].end;
+#ifdef DEBUG
+        end = parts[i].start;
         for (int j = 0; j < (parts[i].num_lines - 1); j++)
             end = end->next;
+        assert(end == parts[i].end);
+#endif
         assert(start != end);
         if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style)
             continue;
@@ -174,7 +179,7 @@ add_shape:
     path->npts = 0;
 
     SHAPELINE *lines = part->start;
-    int x, y, num_lines = part->num_lines;
+    int x, y, prev_x = INT_MAX, prev_y = INT_MAX, num_lines = part->num_lines;
     if (moveTo == part->start->type)
     {
         x = part->start->x, y = part->start->y;
@@ -193,24 +198,57 @@ add_shape:
         else if (splineTo == lines->type)
             path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
         if (i != (num_lines - 1))
+        {
+            assert(x != lines->x || y != lines->y);
+            prev_x = lines->x, prev_y = lines->y;
             lines = lines->next;
+        }
     }
     int end_x = lines->x, end_y = lines->y;
     assert(path->npts == alloc_pts);
     while (x != end_x || y != end_y)
     {   // not full path, try connect parts
-        int at_start = 0;
-        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 1, fillStyle, idx, &at_start);
+        int at_start = 0, search_idx = idx;
+        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 1, fillStyle, search_idx, &at_start);
         if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 1, fillStyle, idx, &at_start);
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 1, fillStyle, search_idx, &at_start);
         if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 0, fillStyle, 1 - idx, &at_start);
+        {
+            search_idx = 1 - idx;
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 0, fillStyle, search_idx, &at_start);
+        }
         if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 0, fillStyle, 1 - idx, &at_start);
+            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 0, fillStyle, search_idx, &at_start);
         //assert(p >= 0);
         if (p < 0)
             break;
         SHAPE_PARTS *cpart = parts + p;
+        SHAPELINE *start = cpart->prev ? cpart->prev : cpart->start;
+        if (at_start)
+        {
+            assert(start->x == end_x && start->y == end_y);
+            start = start->next;
+            if (start->x == prev_x && start->y == prev_y)
+            {
+                //assert(0);
+                cpart->fill_style_used[search_idx] = 0;
+                break;
+            }
+        } else
+        {
+            assert(cpart->end->x == end_x && cpart->end->y == end_y);
+            //SHAPELINE *end = cpart->end;
+            SHAPELINE *end = start;
+            int to = cpart->prev ? (cpart->num_lines - 1) : (cpart->num_lines - 2);
+            for (int j = 0; j < to; j++)
+                end = end->next;
+            if (end->x == prev_x && end->y == prev_y)
+            {
+                //assert(0);
+                cpart->fill_style_used[search_idx] = 0;
+                break;
+            }
+        }
         //assert(moveTo != cpart->start->type);
         lines = cpart->start;
         num_lines = cpart->num_lines;
@@ -255,6 +293,7 @@ add_shape:
             if (i != (num_lines - 1))
             {
                 assert(x != lines->x || y != lines->y);
+                prev_x = lines->x, prev_y = lines->y;
                 lines = lines->next;
             }
         }
@@ -340,6 +379,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     {
                         assert(numLines > 1 || (moveTo != startLine->type));
                         parts[numParts].start = startLine;
+                        parts[numParts].end = prevLine;
                         parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
                         parts[numParts].num_lines = numLines;
                         parts[numParts].fill_style[0] = fillStyle0;
@@ -358,6 +398,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 if (numLines)
                 {
                     parts[numParts].start = startLine;
+                    parts[numParts].end = prevLine;
                     parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
                     parts[numParts].num_lines = numLines;
                     parts[numParts].fill_style[0] = fillStyle0;
