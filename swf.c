@@ -8,10 +8,11 @@
 #include "nanovg.h"
 #include "nanosvg.h"
 #include "lvg_header.h"
+#include "minimp3.h"
 
 extern NVGcontext *vg;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, sprite_type, text_type, edittext_type, font_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, sprite_type, sound_type, text_type, edittext_type, font_type};
 typedef struct
 {
     TAG *tag;
@@ -223,7 +224,7 @@ add_shape:
         if (p < 0)
             break;
         SHAPE_PARTS *cpart = parts + p;
-        SHAPELINE *start = cpart->prev ? cpart->prev : cpart->start;
+        /*SHAPELINE *start = cpart->prev ? cpart->prev : cpart->start;
         if (at_start)
         {
             assert(start->x == end_x && start->y == end_y);
@@ -248,7 +249,7 @@ add_shape:
                 cpart->fill_style_used[search_idx] = 0;
                 break;
             }
-        }
+        }*/
         //assert(moveTo != cpart->start->type);
         lines = cpart->start;
         num_lines = cpart->num_lines;
@@ -319,6 +320,8 @@ add_shape:
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
+    int stream_sound = 0, stream_buf_size = 0, stream_samples = 0;
+    char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
     while (tag)
@@ -463,12 +466,87 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_FoldSprite(tag);
                 idtable[id].type = sprite_type;
                 idtable[id].lvg_id = clip->num_groups++;
+            } else if (ST_DEFINESOUND == tag->id)
+            {
+                U32 oldTagPos = swf_GetTagPos(tag);
+                swf_SetTagPos(tag, 0);
+                int id = swf_GetU16(tag);
+                int format = swf_GetBits(tag, 4);
+                static const short rates[4] = { 5500, 11025, 22050, 44100 };
+                int rate = swf_GetBits(tag, 2);
+                int bits = swf_GetBits(tag, 1);
+                int stereo = swf_GetBits(tag, 1);
+                int num_samples = swf_GetU32(tag);
+                assert(2 == format); // mp3
+                LVGSound *sound = clip->sounds + clip->num_sounds;
+                sound->samples = (short*)malloc(num_samples*2*2);
+                sound->num_samples = num_samples;
+                mp3_info_t info;
+                mp3_decoder_t dec = mp3_create();
+                mp3_decode(dec, &tag->data[tag->pos], tag->len - tag->pos, sound->samples, &info);
+                mp3_done(dec);
+                assert(info.channels == (stereo + 1));
+                assert(info.sample_rate == rates[rate]);
+                swf_SetTagPos(tag, oldTagPos);
+                idtable[id].type = sprite_type;
+                idtable[id].lvg_id = clip->num_sounds++;
             }
+        } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
+        {
+            U32 oldTagPos = swf_GetTagPos(tag);
+            swf_SetTagPos(tag, 0);
+            int reserve = swf_GetBits(tag, 4);
+            int rate = swf_GetBits(tag, 2);
+            int bits = swf_GetBits(tag, 1);
+            int stereo = swf_GetBits(tag, 1);
+            int format = swf_GetBits(tag, 4);
+            int stream_rate = swf_GetBits(tag, 2);
+            int stream_bits = swf_GetBits(tag, 1);
+            int stream_stereo = swf_GetBits(tag, 1);
+            int avg_samples = swf_GetU16(tag);
+            short latency_seek = 0;
+            if (2 == format)
+                latency_seek = swf_GetU16(tag);
+            stream_sound = clip->num_sounds++;
+            swf_SetTagPos(tag, oldTagPos);
+        } else if (ST_SOUNDSTREAMBLOCK == tag->id)
+        {
+            U32 oldTagPos = swf_GetTagPos(tag);
+            swf_SetTagPos(tag, 0);
+            int samples = swf_GetU16(tag);
+            int seek_samples = swf_GetU16(tag);
+            stream_samples += samples;
+            int old_size = stream_buf_size;
+            stream_buf_size += tag->len - tag->pos;
+            stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
+            memcpy(stream_buffer + old_size, &tag->data[tag->pos], tag->len - tag->pos);
+            swf_SetTagPos(tag, oldTagPos);
         } else if (tag->id == ST_SHOWFRAME)
             group->num_frames++;
         else if (tag->id == ST_END)
             break;
         tag = tag->next;
+    }
+    if (stream_buffer)
+    {
+        LVGSound *sound = clip->sounds + stream_sound;
+        mp3_info_t info;
+        mp3_decoder_t dec = mp3_create();
+        sound->samples = (short*)malloc(stream_samples*2*2*2);
+        sound->num_samples = 0;
+        char *buf = stream_buffer;
+        while (stream_buf_size)
+        {
+            int frame_size = mp3_decode(dec, buf, stream_buf_size, sound->samples + sound->num_samples, &info);
+            if (!frame_size)
+                break;
+            buf += frame_size;
+            stream_buf_size -= frame_size;
+            sound->num_samples += info.audio_bytes/2;
+        }
+        mp3_done(dec);
+        sound->samples = (short*)realloc(sound->samples, sound->num_samples*2);
+        free(stream_buffer);
     }
 }
 
@@ -589,20 +667,26 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
         {
             if (swf_isShapeTag(tag))
                 clip->num_shapes++;
-            else if(swf_isImageTag(tag))
+            else if (swf_isImageTag(tag))
                 clip->num_images++;
-            else if(tag->id == ST_DEFINESPRITE)
+            else if (ST_DEFINESPRITE == tag->id)
                 clip->num_groups++;
+            else if (ST_DEFINESOUND == tag->id)
+                clip->num_sounds++;
+            else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
+                clip->num_sounds++;
         }
         tag = tag->next;
     }
     clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
     clip->images = calloc(1, sizeof(int)*clip->num_images);
     clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
+    clip->sounds = calloc(1, sizeof(LVGSound)*clip->num_sounds);
 
     clip->num_shapes = 0;
     clip->num_images = 0;
     clip->num_groups = 1;
+    clip->num_sounds = 0;
     parseGroup(swf->firstTag, idtable, clip, clip->groups);
     clip->num_groups = 1;
     parsePlacements(swf->firstTag, idtable, clip, clip->groups);

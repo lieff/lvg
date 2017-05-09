@@ -33,14 +33,21 @@ typedef struct LVGShapeCollection
     int num_shapes;
 } LVGShapeCollection;
 
+typedef struct LVGSound
+{
+    short *samples;
+    int num_samples;
+} LVGSound;
+
 typedef struct LVGMovieClip
 {
     LVGShapeCollection *shapes;
     int *images;
     LVGMovieClipGroup *groups;
+    LVGSound *sounds;
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups;
+    int num_shapes, num_images, num_groups, num_sounds;
     float fps;
     double last_time;
 } LVGMovieClip;
