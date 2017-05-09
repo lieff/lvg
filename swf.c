@@ -571,17 +571,9 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     return clip;
 }
 
-LVGMovieClip *lvgLoadSWF(const char *file)
+LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
 {
     SWF swf;
-    char *b;
-    uint32_t file_size;
-    if (!(b = lvgGetFileContents(file, &file_size)))
-    {
-        printf("error: could not open swf.\n");
-        return 0;
-    }
-
     if ((b[0] != 'F' && b[0] != 'C') || b[1] != 'W' || b[2] != 'S')
         return 0;
     uint32_t uncompressedSize = GET32(&b[4]);
@@ -593,18 +585,21 @@ LVGMovieClip *lvgLoadSWF(const char *file)
         memcpy(u_data, b, 8);
         u_data[0] = 'F';
         stbi_zlib_decode_buffer(u_data + 8, uncompressedSize - 8, b + 8, file_size - 8);
-        free(b);
+        if (free_buf)
+            free(b);
+        free_buf = 1;
         b = u_data;
         file_size = uncompressedSize;
     }
     reader_init_memreader(&reader, (void*)b, file_size);
-    if (swf_ReadSWF2(&reader, &swf) < 0)
+    int ret = swf_ReadSWF2(&reader, &swf);
+    if (free_buf)
+        free(b);
+    if (ret < 0)
     {
         printf("error: could not open swf.\n");
-        free(b);
         return 0;
     }
-    free(b);
     LVGMovieClip *clip = swf_ReadObjects(&swf);
 /*#ifdef DEBUG
     RENDERBUF buf;
@@ -618,4 +613,16 @@ LVGMovieClip *lvgLoadSWF(const char *file)
     clip->images[clip->num_images - 1] = nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
 #endif*/
     return clip;
+}
+
+LVGMovieClip *lvgLoadSWF(const char *file)
+{
+    char *b;
+    uint32_t file_size;
+    if (!(b = lvgGetFileContents(file, &file_size)))
+    {
+        printf("error: could not open swf.\n");
+        return 0;
+    }
+    return lvgLoadSWFBuf(b, file_size, 1);
 }

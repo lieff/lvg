@@ -51,10 +51,10 @@ typedef struct __attribute__((__packed__)) zipEndRecord_t
 
 typedef struct zip_t
 {
-    FILE *file;
     char *buf;
     zipEndRecord_t *endRecord;
     size_t size;
+    int file;
 } zip_t;
 
 int lvgZipOpen(const char *fname, zip_t *zip);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-05-03T01:50:03. -->
+<!-- Written by QtCreator 4.1.0, 2017-05-09T13:37:52. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -164,10 +164,10 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">../lvg_samples/test5.lvg</value>
-    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">./svg</value>
+    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">../lvg_samples/test.swf</value>
+    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">./lvg</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory">%{buildDir}</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Run ./svg</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Run ./lvg</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>

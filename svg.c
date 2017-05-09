@@ -5,6 +5,8 @@
 #include <limits.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -36,7 +38,9 @@
 #include "all.h"
 #include "all_lib.h"
 #include "lvg_header.h"
+#include "lvg.h"
 
+LVGMovieClip *g_clip;
 zip_t g_zip;
 NVGcontext *vg = NULL;
 NVGcolor g_bgColor;
@@ -566,6 +570,29 @@ const struct SYM g_syms[] = {
     { "modf", modf },
     { "fmod", fmod },
 
+    { "sinf", sinf },
+    { "cosf", cosf },
+    { "tanf", tanf },
+    { "sinhf", sinhf },
+    { "coshf", coshf },
+    { "tanhf", tanhf },
+    { "asinf", asinf },
+    { "acosf", acosf },
+    { "atanf", atanf },
+    { "atan2f", atan2f },
+    { "expf", expf },
+    { "logf", logf },
+    { "log10f", log10f },
+    { "powf", powf },
+    { "sqrtf", sqrtf },
+    { "ceilf", ceilf },
+    { "floorf", floorf },
+    { "fabsf", fabsf },
+    { "ldexpf", ldexpf },
+    { "frexpf", frexpf },
+    { "modff", modff },
+    { "fmodf", fmodf },
+
     { "nvgScale", nvgScale },
     { "nvgSave", nvgSave },
     { "nvgBeginPath", nvgBeginPath },
@@ -682,9 +709,35 @@ error:
 }
 #endif
 
-int open_lvg(const char *file)
+void swfOnFrame()
 {
-    if (lvgZipOpen(file, &g_zip))
+    float clip_w = g_clip->bounds[2] - g_clip->bounds[0], clip_h = g_clip->bounds[3] - g_clip->bounds[1];
+    float scalex = width/clip_w;
+    float scaley = height/clip_h;
+    float scale = scalex < scaley ? scalex : scaley;
+
+    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
+    nvgScale(vg, scale, scale);
+    lvgDrawClip(g_clip);
+}
+
+int open_swf(const char *file_name)
+{
+    struct stat64 st;
+    int fd = open(file_name, O_RDONLY);
+    if (fd < 0 || fstat64(fd, &st) < 0)
+        return -1;
+    char *buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    g_clip = lvgLoadSWFBuf(buf, st.st_size, 0);
+    munmap(buf, st.st_size);
+    close(fd);
+    onFrame = swfOnFrame;
+    return 0;
+}
+
+int open_lvg(const char *file_name)
+{
+    if (lvgZipOpen(file_name, &g_zip))
         return -1;
     g_main_script = 0;
     char *buf;
@@ -701,7 +754,15 @@ int open_lvg(const char *file)
 
 int main(int argc, char **argv)
 {
-    if (!glfwInit() || open_lvg(argc > 1 ? argv[1] : "main.lvg"))
+    if (!glfwInit())
+    {
+        printf("error: glfw init failed\n");
+        return -1;
+    }
+    char *file_name = argc > 1 ? argv[1] : "main.lvg";
+    char *e = strrchr(file_name, '.');
+    int is_swf = e && !strcmp(e, ".swf");
+    if (!is_swf && open_lvg(file_name))
     {
         printf("error: could not open lvg file\n");
         return -1;
@@ -742,16 +803,11 @@ int main(int argc, char **argv)
         );
 #endif
 
-    /*GLuint texId[1];
-    glActiveTexture(GL_TEXTURE0);
-    glGenTextures(1, texId);
-    glBindTexture(GL_TEXTURE_2D, texId[0]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glActiveTexture(GL_TEXTURE0);*/
+    if (is_swf && open_swf(file_name))
+    {
+        printf("error: could not open swf file\n");
+        return -1;
+    }
 
 #ifdef EMSCRIPTEN
     if (g_main_script)

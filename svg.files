@@ -46,6 +46,7 @@ swftools/README.md
 libtcc.h
 lunzip.c
 lunzip.h
+lvg.h
 lvg_header.h
 stb_image.h
 stb_image_write.h

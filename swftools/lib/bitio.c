@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <memory.h>
-#define __USE_LARGEFILE64
+//#define __USE_LARGEFILE64
 #include <fcntl.h>
 #include <errno.h>
 

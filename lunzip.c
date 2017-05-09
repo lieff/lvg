@@ -3,19 +3,20 @@
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include <sys/mman.h>
 #include <lunzip.h>
 #include "stb_image.h"
 
 int lvgZipOpen(const char *fname, zip_t *zip)
 {
-    FILE *f = fopen(fname, "r");
-    if (!f)
+    struct stat64 st;
+    int fd = open(fname, O_RDONLY);
+    if (fd < 0 || fstat64(fd, &st) < 0)
         return -1;
-    fseek(f, 0, SEEK_END);
-    size_t size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    char *m = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, fileno(f), 0);
+    size_t size = st.st_size;
+    char *m = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
     if (*(int32_t*)m != 0x04034B50)
         goto error;
     int i;
@@ -28,20 +29,28 @@ int lvgZipOpen(const char *fname, zip_t *zip)
     }
     if (i == 0 || er->diskNumber || er->centralDirectoryDiskNumber || er->numEntries != er->numEntriesThisDisk)
         goto error;
-    zip->file = f;
+    zip->file = fd;
     zip->buf = m;
     zip->endRecord = er;
     zip->size = size;
     return 0;
 error:
-    fclose(f);
+    close(fd);
     return -1;
 }
 
 void lvgZipClose(zip_t *zip)
 {
-    munmap(zip->buf, zip->size);
-    fclose(zip->file);
+    if (zip->buf)
+    {
+        munmap(zip->buf, zip->size);
+        zip->buf = 0;
+    }
+    if (zip->file > 0)
+    {
+        close(zip->file);
+        zip->file = 0;
+    }
 }
 
 uint32_t lvgZipNameLocate(zip_t *zip, const char *fname)
