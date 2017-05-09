@@ -39,6 +39,7 @@
 #include "all_lib.h"
 #include "lvg_header.h"
 #include "lvg.h"
+#include <SDL2/SDL_audio.h>
 
 LVGMovieClip *g_clip;
 zip_t g_zip;
@@ -476,11 +477,40 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
     }
 }
 
+void fill_audio(void *udata, Uint8 *stream, int len)
+{
+    LVGSound *sound = (LVGSound *)udata;
+    memset(stream, 0, len);
+    int rest = sound->num_samples*2 - sound->cur_play_byte;
+    if (!rest)
+        return;
+    len = (len > rest) ? rest : len;
+    SDL_MixAudio(stream, (char *)sound->samples + sound->cur_play_byte, len, SDL_MIX_MAXVOLUME);
+    sound->cur_play_byte += len;
+}
+
+void lvgPlaySound(LVGSound *sound)
+{
+    SDL_AudioSpec wanted;
+    memset(&wanted, 0, sizeof(wanted));
+    wanted.freq = 22050;
+    wanted.format = AUDIO_S16;
+    wanted.channels = 1;
+    wanted.samples = 4096;
+    wanted.callback = fill_audio;
+    wanted.userdata = sound;
+    if (SDL_OpenAudio(&wanted, NULL) < 0)
+        printf("error: couldn't open audio: %s\n", SDL_GetError());
+    SDL_PauseAudio(0);
+}
+
 void lvgDrawClip(LVGMovieClip *clip)
 {
     int next_frame = 0;
     if ((g_time - clip->last_time) > (1.0/clip->fps))
     {
+        if (0 == clip->groups->cur_frame && clip->num_sounds)
+            lvgPlaySound(clip->sounds);
         next_frame = 1;
         clip->last_time += (1.0/clip->fps);
     }

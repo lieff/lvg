@@ -530,22 +530,31 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     if (stream_buffer)
     {
         LVGSound *sound = clip->sounds + stream_sound;
+        sound->samples = (short*)calloc(1, stream_samples*4);
+        assert(sound->samples);
+        /*FILE *f = fopen("out.mp3", "wb");
+        fwrite(stream_buffer, 1, stream_buf_size, f);
+        fclose(f);*/
         mp3_info_t info;
         mp3_decoder_t dec = mp3_create();
-        sound->samples = (short*)malloc(stream_samples*2*2*2);
-        sound->num_samples = 0;
         char *buf = stream_buffer;
         while (stream_buf_size)
         {
             int frame_size = mp3_decode(dec, buf, stream_buf_size, sound->samples + sound->num_samples, &info);
             if (!frame_size)
                 break;
+            for (int i = 1; i < info.audio_bytes/4; i++)
+                sound->samples[sound->num_samples + i] = sound->samples[sound->num_samples + i*2];
             buf += frame_size;
             stream_buf_size -= frame_size;
-            sound->num_samples += info.audio_bytes/2;
+            sound->num_samples += info.audio_bytes/4;
         }
         mp3_done(dec);
-        sound->samples = (short*)realloc(sound->samples, sound->num_samples*2);
+        assert(stream_samples == sound->num_samples);
+        /*FILE *f = fopen("out.pcm", "wb");
+        fwrite(sound->samples, 1, sound->num_samples*2, f);
+        fclose(f);*/
+        //sound->samples = (short*)realloc(sound->samples, sound->num_samples*4);
         free(stream_buffer);
     }
 }
