@@ -338,38 +338,6 @@ static inline NVGcolor nvgColorU32(uint32_t c)
     return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, 255);
 }
 
-static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, int is_fill)
-{
-    struct NSVGgradient *grad = shape->fill.gradient;
-    float sx = shape->bounds[0];
-    float sy = shape->bounds[1];
-    float ex = shape->bounds[0];
-    float ey = shape->bounds[3];
-    NVGcolor cs = nvgColorU32(grad->stops[0].color);
-    NVGcolor ce = nvgColorU32(grad->stops[grad->nstops - 1].color);
-
-    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
-    if (is_fill)
-        nvgFillPaint(vg, p);
-    else
-        nvgStrokePaint(vg, p);
-}
-
-static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, int is_fill)
-{
-    struct NSVGgradient *grad = shape->fill.gradient;
-    float cx = (shape->bounds[0] + shape->bounds[2])/2.0;
-    float cy = (shape->bounds[1] + shape->bounds[3])/2.0;
-    NVGcolor cs = nvgColorU32(grad->stops[0].color);
-    NVGcolor ce = nvgColorU32(grad->stops[grad->nstops - 1].color);
-
-    NVGpaint p = nvgRadialGradient(vg, cx, cy, 0, cx, cs, ce);
-    if (is_fill)
-        nvgFillPaint(vg, p);
-    else
-        nvgStrokePaint(vg, p);
-}
-
 static NVGcolor transformColor(NVGcolor color, LVGObject *o)
 {
     if (!o)
@@ -378,6 +346,38 @@ static NVGcolor transformColor(NVGcolor color, LVGObject *o)
     color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
     color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
     return color;
+}
+
+static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+{
+    struct NSVGgradient *grad = shape->fill.gradient;
+    float sx = shape->bounds[0];
+    float sy = shape->bounds[1];
+    float ex = shape->bounds[0];
+    float ey = shape->bounds[3];
+    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
+    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
+
+    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
+    if (is_fill)
+        nvgFillPaint(vg, p);
+    else
+        nvgStrokePaint(vg, p);
+}
+
+static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+{
+    struct NSVGgradient *grad = shape->fill.gradient;
+    float cx = (shape->bounds[0] + shape->bounds[2])/2.0;
+    float cy = (shape->bounds[1] + shape->bounds[3])/2.0;
+    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
+    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
+
+    NVGpaint p = nvgRadialGradient(vg, cx, cy, 0, cx, cs, ce);
+    if (is_fill)
+        nvgFillPaint(vg, p);
+    else
+        nvgStrokePaint(vg, p);
 }
 
 void lvgDrawShape(NSVGshape *shape, LVGObject *o)
@@ -402,9 +402,9 @@ void lvgDrawShape(NSVGshape *shape, LVGObject *o)
     {
         nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
     } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-        nvgSVGLinearGrad(vg, shape, 1);
+        nvgSVGLinearGrad(vg, shape, o, 1);
     else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-        nvgSVGRadialGrad(vg, shape, 1);
+        nvgSVGRadialGrad(vg, shape, o, 1);
     else if (NSVG_PAINT_IMAGE == shape->fill.type)
     {
         int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
@@ -422,9 +422,9 @@ void lvgDrawShape(NSVGshape *shape, LVGObject *o)
         if (NSVG_PAINT_COLOR == shape->stroke.type)
             nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), o));
         else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, 0);
+            nvgSVGLinearGrad(vg, shape, o, 0);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-            nvgSVGRadialGrad(vg, shape, 0);
+            nvgSVGRadialGrad(vg, shape, o, 0);
         nvgStrokeWidth(vg, shape->strokeWidth);
         nvgStroke(vg);
     }
