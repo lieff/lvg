@@ -1,5 +1,9 @@
 #pragma once
 #include <stdint.h>
+#ifdef EMSCRIPTEN
+#define stat64 stat
+#define fstat64 fstat
+#endif
 
 typedef struct __attribute__((__packed__)) zipLocalFileHeader_t
 {

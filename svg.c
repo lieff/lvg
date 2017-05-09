@@ -709,6 +709,7 @@ error:
 }
 #endif
 
+#ifndef EMSCRIPTEN
 void swfOnFrame()
 {
     float clip_w = g_clip->bounds[2] - g_clip->bounds[0], clip_h = g_clip->bounds[3] - g_clip->bounds[1];
@@ -734,6 +735,7 @@ int open_swf(const char *file_name)
     onFrame = swfOnFrame;
     return 0;
 }
+#endif
 
 int open_lvg(const char *file_name)
 {
@@ -803,12 +805,6 @@ int main(int argc, char **argv)
         );
 #endif
 
-    if (is_swf && open_swf(file_name))
-    {
-        printf("error: could not open swf file\n");
-        return -1;
-    }
-
 #ifdef EMSCRIPTEN
     if (g_main_script)
     {
@@ -822,6 +818,11 @@ int main(int argc, char **argv)
     glfwSetTime(0);
     emscripten_set_main_loop(drawframe, 0, 1);
 #else
+    if (is_swf && open_swf(file_name))
+    {
+        printf("error: could not open swf file\n");
+        return -1;
+    }
     if (onInit)
         onInit();
     glfwSetTime(0);
