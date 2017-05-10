@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+#include <sys/param.h>
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -485,23 +486,48 @@ void fill_audio(void *udata, Uint8 *stream, int len)
 {
     LVGSound *sound = (LVGSound *)udata;
     int rest = sound->num_samples*2 - sound->cur_play_byte;
+    //printf("len=%d, rest=%d\n", len, rest);
     if (!rest)
     {
+silence:
         memset(stream, 0, len);
         return;
     }
-    len = (len > rest) ? rest : len;
     short *buf = (short *)((unsigned char *)sound->samples + sound->cur_play_byte);
     if (cvt_needed)
     {
         cvt.len = len/cvt.len_ratio;
-        cvt.buf = alloca(cvt.len*cvt.len_mult);
-        memcpy(cvt.buf, buf, cvt.len);
-        SDL_ConvertAudio(&cvt);
-        memcpy(stream, cvt.buf, len);
-        sound->cur_play_byte += cvt.len;
+        if (!cvt.buf)
+            cvt.buf = malloc(cvt.len*cvt.len_mult);
+        while (len)
+        {
+            cvt.len = MIN(cvt.len, rest);
+            if (!cvt.len)
+                goto silence;
+            if (cvt.len_cvt)
+            {
+                int to_copy = MIN(cvt.len_cvt, len);
+                memcpy(stream, cvt.buf, to_copy);
+                stream += to_copy;
+                cvt.len_cvt -= to_copy;
+                len -= to_copy;
+                memmove(cvt.buf, cvt.buf + to_copy, cvt.len_cvt);
+                if (!len)
+                    return;
+            }
+            memcpy(cvt.buf, buf, cvt.len);
+            sound->cur_play_byte += cvt.len;
+            rest -= cvt.len;
+            SDL_ConvertAudio(&cvt);
+            int to_copy = MIN(cvt.len_cvt, len);
+            memcpy(stream, cvt.buf, to_copy);
+            stream += to_copy;
+            cvt.len_cvt -= to_copy;
+            len -= to_copy;
+        }
     } else
     {
+        len = MIN(len, rest);
         memcpy(stream, buf, len);
         //SDL_MixAudio(stream, cvt.buf, len, SDL_MIX_MAXVOLUME);
         sound->cur_play_byte += len;
@@ -542,6 +568,7 @@ void lvgPlaySound(LVGSound *sound)
         printf("error: couldn't open converter: %s\n", SDL_GetError());
         return;
     }
+    cvt.len_cvt = 0;
 #ifdef SDL2
     SDL_PauseAudioDevice(dev, 0);
 #else
@@ -881,7 +908,7 @@ int main(int argc, char **argv)
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
 #ifdef EMSCRIPTEN
-    vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    vg = nvgCreateGLES2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0);
 #else
     vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
 #ifdef DEBUG
