@@ -43,6 +43,8 @@ swftools/lib/types.h
 swftools/config.h
 swftools/LICENSE
 swftools/README.md
+adpcm.c
+adpcm.h
 libtcc.h
 lunzip.c
 lunzip.h
