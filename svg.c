@@ -39,7 +39,7 @@
 #include "all_lib.h"
 #include "lvg_header.h"
 #include "lvg.h"
-#include <SDL2/SDL_audio.h>
+#include <SDL2/SDL.h>
 
 LVGMovieClip *g_clip;
 zip_t g_zip;
@@ -52,6 +52,7 @@ double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
 const char *g_main_script;
+int is_swf;
 
 #ifndef EMSCRIPTEN
 void (*onInit)();
@@ -477,16 +478,34 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
     }
 }
 
+SDL_AudioSpec have;
+int cvt_needed;
+SDL_AudioCVT cvt;
 void fill_audio(void *udata, Uint8 *stream, int len)
 {
     LVGSound *sound = (LVGSound *)udata;
-    memset(stream, 0, len);
     int rest = sound->num_samples*2 - sound->cur_play_byte;
     if (!rest)
+    {
+        memset(stream, 0, len);
         return;
+    }
     len = (len > rest) ? rest : len;
-    SDL_MixAudio(stream, (char *)sound->samples + sound->cur_play_byte, len, SDL_MIX_MAXVOLUME);
-    sound->cur_play_byte += len;
+    short *buf = (short *)((unsigned char *)sound->samples + sound->cur_play_byte);
+    if (cvt_needed)
+    {
+        cvt.len = len/cvt.len_ratio;
+        cvt.buf = alloca(cvt.len*cvt.len_mult);
+        memcpy(cvt.buf, buf, cvt.len);
+        SDL_ConvertAudio(&cvt);
+        memcpy(stream, cvt.buf, len);
+        sound->cur_play_byte += cvt.len;
+    } else
+    {
+        memcpy(stream, buf, len);
+        //SDL_MixAudio(stream, cvt.buf, len, SDL_MIX_MAXVOLUME);
+        sound->cur_play_byte += len;
+    }
 }
 
 void lvgPlaySound(LVGSound *sound)
@@ -499,9 +518,35 @@ void lvgPlaySound(LVGSound *sound)
     wanted.samples = 4096;
     wanted.callback = fill_audio;
     wanted.userdata = sound;
-    if (SDL_OpenAudio(&wanted, NULL) < 0)
+    sound->cur_play_byte = 0;
+#ifdef SDL2
+    int dev = SDL_OpenAudioDevice(NULL, 0, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
+    if (dev < 0)
+    {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
+        return;
+    }
+#else
+    if (SDL_OpenAudio(&wanted, &have) < 0)
+    {
+        printf("error: couldn't open audio: %s\n", SDL_GetError());
+        return;
+    }
+#endif
+    cvt_needed = (have.freq != wanted.freq) || (have.channels != wanted.channels) || (have.format != wanted.format);
+    //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, cvt_needed); fflush(stdout);
+
+    int ret = SDL_BuildAudioCVT(&cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq);
+    if (ret < 0)
+    {
+        printf("error: couldn't open converter: %s\n", SDL_GetError());
+        return;
+    }
+#ifdef SDL2
+    SDL_PauseAudioDevice(dev, 0);
+#else
     SDL_PauseAudio(0);
+#endif
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
@@ -526,8 +571,22 @@ void lvgDrawClip(LVGMovieClip *clip)
 #endif*/
 }
 
+void swfOnFrame()
+{
+    float clip_w = g_clip->bounds[2] - g_clip->bounds[0], clip_h = g_clip->bounds[3] - g_clip->bounds[1];
+    float scalex = width/clip_w;
+    float scaley = height/clip_h;
+    float scale = scalex < scaley ? scalex : scaley;
+
+    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
+    nvgScale(vg, scale, scale);
+    lvgDrawClip(g_clip);
+}
+
 void drawframe()
 {
+    //SDL_Event event;
+    //SDL_PollEvent(&event);
     glfwPollEvents();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     glfwGetWindowSize(window, &winWidth, &winHeight);
@@ -547,6 +606,8 @@ void drawframe()
 
     g_time = glfwGetTime();
 #ifdef EMSCRIPTEN
+    if (is_swf)
+        swfOnFrame();
     if (g_main_script)
 #else
     if (onFrame)
@@ -739,19 +800,6 @@ error:
 }
 #endif
 
-#ifndef EMSCRIPTEN
-void swfOnFrame()
-{
-    float clip_w = g_clip->bounds[2] - g_clip->bounds[0], clip_h = g_clip->bounds[3] - g_clip->bounds[1];
-    float scalex = width/clip_w;
-    float scaley = height/clip_h;
-    float scale = scalex < scaley ? scalex : scaley;
-
-    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
-    nvgScale(vg, scale, scale);
-    lvgDrawClip(g_clip);
-}
-
 int open_swf(const char *file_name)
 {
     struct stat64 st;
@@ -762,11 +810,12 @@ int open_swf(const char *file_name)
     g_clip = lvgLoadSWFBuf(buf, st.st_size, 0);
     munmap(buf, st.st_size);
     close(fd);
+#ifndef EMSCRIPTEN
     onFrame = swfOnFrame;
+#endif
     g_bgColor = g_clip->bgColor;
     return 0;
 }
-#endif
 
 int open_lvg(const char *file_name)
 {
@@ -792,13 +841,19 @@ int main(int argc, char **argv)
         printf("error: glfw init failed\n");
         return -1;
     }
+    if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
+    {
+        fprintf(stderr, "error: sdl2 init failed: %s\n", SDL_GetError());
+        return -1;
+    }
     char *file_name = argc > 1 ? argv[1] : "main.lvg";
     char *e = strrchr(file_name, '.');
-    int is_swf = e && !strcmp(e, ".swf");
+    is_swf = e && !strcmp(e, ".swf");
     if (!is_swf && open_lvg(file_name))
     {
         printf("error: could not open lvg file\n");
-        return -1;
+        is_swf = 1;
+        //return -1;
     }
 
     glfwWindowHint(GLFW_RESIZABLE, 1);
@@ -816,7 +871,6 @@ int main(int argc, char **argv)
     if (!window)
     {
         printf("error: could not open window\n");
-        glfwTerminate();
         return -1;
     }
 
@@ -836,6 +890,11 @@ int main(int argc, char **argv)
         );
 #endif
 
+    if (is_swf && open_swf(file_name))
+    {
+        printf("error: could not open swf file\n");
+        return -1;
+    }
 #ifdef EMSCRIPTEN
     if (g_main_script)
     {
@@ -849,11 +908,6 @@ int main(int argc, char **argv)
     glfwSetTime(0);
     emscripten_set_main_loop(drawframe, 0, 1);
 #else
-    if (is_swf && open_swf(file_name))
-    {
-        printf("error: could not open swf file\n");
-        return -1;
-    }
     if (onInit)
         onInit();
     glfwSetTime(0);
@@ -868,7 +922,7 @@ int main(int argc, char **argv)
     nvgDeleteGL2(vg);
 #endif
     lvgZipClose(&g_zip);
-
     glfwTerminate();
+    SDL_Quit();
     return 0;
 }

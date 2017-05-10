@@ -1,0 +1,33 @@
+diff --git a/src/runtime.js b/src/runtime.js
+index 7d2c669b2..380988c40 100644
+--- a/src/runtime.js
++++ b/src/runtime.js
+@@ -327,6 +327,28 @@ var Runtime = {
+     }
+     Runtime.loadedDynamicLibraries.push(libModule);
+   },
++  loadDynamicLibrarySrc: function(src) {
++    var libModule = eval(src)(
++      Runtime.alignFunctionTables(),
++      Module
++    );
++    // add symbols into global namespace TODO: weak linking etc.
++    for (var sym in libModule) {
++      if (!Module.hasOwnProperty(sym)) {
++        Module[sym] = libModule[sym];
++      }
++#if ASSERTIONS == 2
++      else if (sym[0] === '_') {
++        var curr = Module[sym], next = libModule[sym];
++        // don't warn on functions - might be odr, linkonce_odr, etc.
++        if (!(typeof curr === 'function' && typeof next === 'function')) {
++          Module.printErr("warning: trying to dynamically load symbol '" + sym + "' (from '" + lib + "') that already exists (duplicate symbol? or weak linking, which isn't supported yet?)"); // + [curr, ' vs ', next]);
++        }
++      }
++#endif
++    }
++    Runtime.loadedDynamicLibraries.push(libModule);
++  },
+ #endif
+ 
+   warnOnce: function(text) {

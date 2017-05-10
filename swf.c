@@ -472,7 +472,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, 0);
                 int id = swf_GetU16(tag);
                 int format = swf_GetBits(tag, 4);
-                static const short rates[4] = { 5500, 11025, 22050, 44100 };
+                static const int rates[4] = { 5500, 11025, 22050, 44100 };
                 int rate = swf_GetBits(tag, 2);
                 int bits = swf_GetBits(tag, 1);
                 int stereo = swf_GetBits(tag, 1);
@@ -540,11 +540,12 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         char *buf = stream_buffer;
         while (stream_buf_size)
         {
-            int frame_size = mp3_decode(dec, buf, stream_buf_size, sound->samples + sound->num_samples, &info);
+            short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
+            int frame_size = mp3_decode(dec, buf, stream_buf_size, frame_buf, &info);
             if (!frame_size)
                 break;
-            for (int i = 1; i < info.audio_bytes/4; i++)
-                sound->samples[sound->num_samples + i] = sound->samples[sound->num_samples + i*2];
+            for (int i = 0; i < info.audio_bytes/4; i++)
+                sound->samples[sound->num_samples + i] = frame_buf[i*2];
             buf += frame_size;
             stream_buf_size -= frame_size;
             sound->num_samples += info.audio_bytes/4;
@@ -682,9 +683,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 clip->num_groups++;
             else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
-            else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
-                clip->num_sounds++;
-        }
+        } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
+            clip->num_sounds++;
         tag = tag->next;
     }
     clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
