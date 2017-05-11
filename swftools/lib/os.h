@@ -31,21 +31,12 @@ extern "C" {
 
 extern char path_seperator;
 
-#ifdef WIN32
-char* getRegistryEntry(char*path);
-int setRegistryEntry(char*key,char*value);
-#endif
-
 typedef struct _memfile {
     void*data;
     int len;
 } memfile_t;
 memfile_t* memfile_open(const char*path);
 void memfile_close(memfile_t*file);
-
-char* getInstallationPath();
-char* concatPaths(const char*base, const char*add);
-char* stripFilename(const char*filename, const char*newext);
 
 void move_file(const char*from, const char*to);
 char file_exists(const char*filename);

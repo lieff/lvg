@@ -42,18 +42,20 @@
 #include "lvg.h"
 #include <SDL2/SDL.h>
 
-LVGMovieClip *g_clip;
-zip_t g_zip;
+static LVGMovieClip *g_clip;
+static zip_t g_zip;
+static GLFWwindow *window;
 NVGcontext *vg = NULL;
 NVGcolor g_bgColor;
-GLFWwindow *window;
 int winWidth, winHeight;
 int width = 0, height = 0;
 double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
-const char *g_main_script;
-int is_swf;
+static const char *g_main_script;
+static int is_swf;
+static int tcc_buf_pos, tcc_buf_size;
+static char *tcc_buf;
 
 #ifndef EMSCRIPTEN
 void (*onInit)();
@@ -66,7 +68,21 @@ extern void onFrame();
 int open_wrapper(const char *pathname, int flags)
 {
     if (!strcmp(pathname, "./lib/libtcc1.a"))
+    {
+        tcc_buf_pos =0;
+        tcc_buf_size = sizeof(lib_libtcc1_a);
+        tcc_buf = lib_libtcc1_a;
         return INT_MAX;
+    }
+    char *e = strrchr(pathname, '.');
+    if (e && !strcmp(e, ".h"))
+    {
+        uint32_t size;
+        char *file = lvgGetFileContents(pathname, &size);
+        if (!file)
+            return -1;
+        return INT_MAX - 1;
+    }
     return open(pathname, flags);
 }
 
@@ -74,19 +90,23 @@ void close_wrapper(int fd)
 {
     if (INT_MAX == fd)
         return;
+    if ((INT_MAX - 1) == fd)
+    {
+        free(tcc_buf);
+        tcc_buf = 0;
+        return;
+    }
     close(fd);
 }
-
-static int buf_ptr = 0;
 
 ssize_t read_wrapper(int fd, void *buf, size_t count)
 {
     if (INT_MAX != fd)
         return read(fd, buf, count);
-    size_t rest = sizeof(lib_libtcc1_a) - buf_ptr;
+    size_t rest = tcc_buf_size - tcc_buf_pos;
     size_t to_read = count < rest ? count : rest;
-    memcpy(buf, lib_libtcc1_a + buf_ptr, to_read);
-    buf_ptr += to_read;
+    memcpy(buf, tcc_buf + tcc_buf_pos, to_read);
+    tcc_buf_pos += to_read;
     return to_read;
 }
 
@@ -96,11 +116,11 @@ off_t lseek_wrapper(int fd, off_t offset, int whence)
         return lseek(fd, offset, whence);
     switch (whence)
     {
-    case SEEK_SET: buf_ptr = offset; break;
-    case SEEK_CUR: buf_ptr += offset; break;
-    case SEEK_END: buf_ptr = sizeof(lib_libtcc1_a) + offset; break;
+    case SEEK_SET: tcc_buf_pos = offset; break;
+    case SEEK_CUR: tcc_buf_pos += offset; break;
+    case SEEK_END: tcc_buf_pos = tcc_buf_size + offset; break;
     }
-    return buf_ptr;
+    return tcc_buf_pos;
 }
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
@@ -832,6 +852,8 @@ int open_swf(const char *file_name)
     g_clip = lvgLoadSWFBuf(buf, st.st_size, 0);
     munmap(buf, st.st_size);
     close(fd);
+    if (!g_clip)
+        return -1;
 #ifndef EMSCRIPTEN
     onFrame = swfOnFrame;
 #endif
@@ -850,10 +872,10 @@ int open_lvg(const char *file_name)
         printf("error: could not open JS script.\n");
     else
         g_main_script = buf;
-#else
-    loadScript();
-#endif
     return 0;
+#else
+    return loadScript();
+#endif
 }
 
 int main(int argc, char **argv)
