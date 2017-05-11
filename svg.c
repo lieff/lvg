@@ -54,7 +54,8 @@ double g_time;
 int mkeys = 0;
 static const char *g_main_script;
 static int is_swf;
-static int tcc_buf_pos, tcc_buf_size;
+static int tcc_buf_pos;
+static size_t tcc_buf_size;
 static char *tcc_buf;
 
 #ifndef EMSCRIPTEN
@@ -81,6 +82,9 @@ int open_wrapper(const char *pathname, int flags)
         char *file = lvgGetFileContents(pathname, &size);
         if (!file)
             return -1;
+        tcc_buf_pos =0;
+        tcc_buf_size = size;
+        tcc_buf = file;
         return INT_MAX - 1;
     }
     return open(pathname, flags);
@@ -101,7 +105,7 @@ void close_wrapper(int fd)
 
 ssize_t read_wrapper(int fd, void *buf, size_t count)
 {
-    if (INT_MAX != fd)
+    if (INT_MAX != fd && (INT_MAX - 1) != fd)
         return read(fd, buf, count);
     size_t rest = tcc_buf_size - tcc_buf_pos;
     size_t to_read = count < rest ? count : rest;
@@ -112,7 +116,7 @@ ssize_t read_wrapper(int fd, void *buf, size_t count)
 
 off_t lseek_wrapper(int fd, off_t offset, int whence)
 {
-    if (INT_MAX != fd)
+    if (INT_MAX != fd && (INT_MAX - 1) != fd)
         return lseek(fd, offset, whence);
     switch (whence)
     {
@@ -780,6 +784,46 @@ const struct SYM g_syms[] = {
     { "nvgDegToRad", nvgDegToRad },
     { "nvgResetScissor", nvgResetScissor },
     { "nvgIntersectScissor", nvgIntersectScissor },
+
+    { "glCreateProgram", glCreateProgram },
+    { "glCreateShader", glCreateShader },
+    { "glShaderSource", glShaderSource },
+    { "glCompileShader", glCompileShader },
+    { "glGetShaderiv", glGetShaderiv },
+    { "glAttachShader", glAttachShader },
+    { "glLinkProgram", glLinkProgram },
+    { "glGetProgramiv", glGetProgramiv },
+    { "glGetUniformLocation", glGetUniformLocation },
+    { "glGetAttribLocation", glGetAttribLocation },
+    { "glGenBuffers", glGenBuffers },
+    { "glGenVertexArrays", glGenVertexArrays },
+    { "glBindVertexArray", glBindVertexArray },
+    { "glBindBuffer", glBindBuffer },
+    { "glEnableVertexAttribArray", glEnableVertexAttribArray },
+    { "glVertexAttribPointer", glVertexAttribPointer },
+    { "glBindTexture", glBindTexture },
+    { "glGenTextures", glGenTextures },
+    { "glTexParameteri", glTexParameteri },
+    { "glTexImage2D", glTexImage2D },
+    { "glDetachShader", glDetachShader },
+    { "glDeleteShader", glDeleteShader },
+    { "glDeleteProgram", glDeleteProgram },
+    { "glDeleteTextures", glDeleteTextures },
+    { "glDeleteBuffers", glDeleteBuffers },
+    { "glEnable", glEnable },
+    { "glBlendEquation", glBlendEquation },
+    { "glBlendFunc", glBlendFunc },
+    { "glDisable", glDisable },
+    { "glActiveTexture", glActiveTexture },
+    { "glUseProgram", glUseProgram },
+    { "glUniform1i", glUniform1i },
+    { "glUniformMatrix4fv", glUniformMatrix4fv },
+    { "glViewport", glViewport },
+    { "glBufferData", glBufferData },
+    { "glMapBuffer", glMapBuffer },
+    { "glUnmapBuffer", glUnmapBuffer },
+    { "glScissor", glScissor },
+    { "glDrawElements", glDrawElements },
 
     { "vg", &vg },
     { "g_bgColor", &g_bgColor },
