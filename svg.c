@@ -734,6 +734,7 @@ const struct SYM g_syms[] = {
     { "nvgSave", nvgSave },
     { "nvgBeginPath", nvgBeginPath },
     { "nvgRoundedRect", nvgRoundedRect },
+    { "nvgRGB", nvgRGB },
     { "nvgRGBA", nvgRGBA },
     { "nvgFillColor", nvgFillColor },
     { "nvgFill", nvgFill },
