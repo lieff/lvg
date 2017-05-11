@@ -1,7 +1,10 @@
 #ifdef EMSCRIPTEN
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdint.h>
+#include <stdarg.h>
+#include <stddef.h>
 #endif
 
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };

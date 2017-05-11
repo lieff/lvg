@@ -537,7 +537,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             if (2 == format)
                 latency_seek = swf_GetU16(tag);
             swf_SetTagPos(tag, oldTagPos);
-        } else if (ST_SOUNDSTREAMBLOCK == tag->id && 1 == clip->num_groups)
+        } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);

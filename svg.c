@@ -11,6 +11,7 @@
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
+#include <emscripten/html5.h>
 #define GLFW_INCLUDE_ES2
 #endif
 #include <GLFW/glfw3.h>
@@ -66,6 +67,7 @@ extern void onInit();
 extern void onFrame();
 #endif
 
+#ifndef EMSCRIPTEN
 int open_wrapper(const char *pathname, int flags)
 {
     if (!strcmp(pathname, "./lib/libtcc1.a"))
@@ -126,6 +128,7 @@ off_t lseek_wrapper(int fd, off_t offset, int whence)
     }
     return tcc_buf_pos;
 }
+#endif
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
     float sx, float sy, float ex, float ey,
@@ -678,12 +681,12 @@ const struct SYM g_syms[] = {
     { "lvgDrawClip", lvgDrawClip },
     { "lvgLoadSVG", lvgLoadSVG },
     { "lvgLoadSVGB", lvgLoadSVGB },
-#ifndef EMSCRIPTEN
     { "lvgLoadSWF", lvgLoadSWF },
-#endif
     { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
+    { "printf", printf }
+
     { "sin", sin },
     { "cos", cos },
     { "tan", tan },
@@ -822,9 +825,17 @@ const struct SYM g_syms[] = {
     { "glViewport", glViewport },
     { "glBufferData", glBufferData },
     { "glMapBuffer", glMapBuffer },
+    { "glMapBufferRange", glMapBufferRange },
     { "glUnmapBuffer", glUnmapBuffer },
     { "glScissor", glScissor },
     { "glDrawElements", glDrawElements },
+    { "glPushAttrib", glPushAttrib },
+    { "glViewport", glViewport },
+    { "glMatrixMode", glMatrixMode },
+    { "glPushMatrix", glPushMatrix },
+    { "glLoadIdentity", glLoadIdentity },
+    { "glOrtho", glOrtho },
+    { "glEnableClientState", glEnableClientState },
 
     { "vg", &vg },
     { "g_bgColor", &g_bgColor },
@@ -925,6 +936,21 @@ int open_lvg(const char *file_name)
 
 int main(int argc, char **argv)
 {
+#if defined(EMSCRIPTEN)
+    EmscriptenWebGLContextAttributes attrs;
+    emscripten_webgl_init_context_attributes(&attrs);
+    attrs.enableExtensionsByDefault = 1;
+    attrs.majorVersion = 2;
+    attrs.minorVersion = 0;
+    EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context = emscripten_webgl_create_context(0, &attrs);
+    if (!context)
+    {
+        printf("error: WebGL 2 is not supported\n");
+        return -1;
+    }
+    emscripten_webgl_make_context_current(context);
+#endif
+
     if (!glfwInit())
     {
         printf("error: glfw init failed\n");

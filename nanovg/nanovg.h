@@ -33,12 +33,16 @@ extern "C" {
 typedef struct NVGcontext NVGcontext;
 
 struct NVGcolor {
+#ifndef __TINYC__
 	union {
 		float rgba[4];
 		struct {
 			float r,g,b,a;
 		};
 	};
+#else
+    float r,g,b,a;
+#endif
 };
 typedef struct NVGcolor NVGcolor;
 
