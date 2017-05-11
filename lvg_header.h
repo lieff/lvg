@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <time.h>
+#include <limits.h>
 #endif
 
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };
@@ -78,6 +80,10 @@ extern double mx;
 extern double my;
 extern double g_time;
 
+double atof(const char*);
+int atoi(const char*);
+long int atol(const char*);
+
 double sin(double);
 double cos(double);
 double tan(double);
@@ -123,3 +129,65 @@ float ldexpf(float, int);
 float frexpf(float, int*);
 float modff(float, float*);
 float fmodf(float, float);
+
+#ifdef __TINYC__
+#define CHAR_BIT 8
+#define SCHAR_MIN (-128)
+#define SCHAR_MAX 127
+#define UCHAR_MAX 255
+
+#ifdef __CHAR_UNSIGNED__
+#define CHAR_MIN 0
+#define CHAR_MAX UCHAR_MAX
+#else
+#define CHAR_MIN SCHAR_MIN
+#define CHAR_MAX SCHAR_MAX
+#endif
+
+#define SHRT_MIN (-32768)
+#define SHRT_MAX 32767
+#define USHRT_MAX 65535
+#define INT_MIN (-INT_MAX - 1)
+#define INT_MAX 2147483647
+#define UINT_MAX 4294967295U
+
+#if __WORDSIZE == 64
+#define LONG_MAX 9223372036854775807L
+#else
+#define LONG_MAX 2147483647L
+#endif
+#define LONG_MIN (-LONG_MAX - 1L)
+
+#if __WORDSIZE == 64
+#define ULONG_MAX 18446744073709551615UL
+#else
+#define ULONG_MAX 4294967295UL
+#endif
+
+# define LLONG_MAX 9223372036854775807LL
+# define LLONG_MIN (-LLONG_MAX - 1LL)
+# define ULLONG_MAX 18446744073709551615ULL
+
+typedef long int time_t;
+
+struct timespec
+{
+  long int tv_sec;
+  long int tv_nsec;
+};
+
+struct tm
+{
+  int tm_sec;
+  int tm_min;
+  int tm_hour;
+  int tm_mday;
+  int tm_mon;
+  int tm_year;
+  int tm_wday;
+  int tm_yday;
+  int tm_isdst;
+  long int tm_gmtoff;
+  const char *tm_zone;
+};
+#endif

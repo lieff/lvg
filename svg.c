@@ -5,6 +5,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <time.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
 #include <sys/param.h>
@@ -685,7 +686,12 @@ const struct SYM g_syms[] = {
     { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
-    { "printf", printf }
+    { "printf", printf },
+
+    { "atof", atof },
+
+    { "time", time },
+    { "localtime", localtime },
 
     { "sin", sin },
     { "cos", cos },
