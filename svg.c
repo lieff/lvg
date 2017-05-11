@@ -493,37 +493,32 @@ silence:
         memset(stream, 0, len);
         return;
     }
-    short *buf = (short *)((unsigned char *)sound->samples + sound->cur_play_byte);
-    if (cvt_needed)
+    char *buf = (char *)sound->samples + sound->cur_play_byte;
+    if (cvt.needed)
     {
-        cvt.len = len/cvt.len_ratio;
+        cvt.len = ((int)(len/cvt.len_ratio) + 1) & (~1);
         if (!cvt.buf)
             cvt.buf = malloc(cvt.len*cvt.len_mult);
         while (len)
         {
             cvt.len = MIN(cvt.len, rest);
-            if (!cvt.len)
-                goto silence;
-            if (cvt.len_cvt)
+            if (!cvt.len_cvt && cvt.len)
             {
-                int to_copy = MIN(cvt.len_cvt, len);
-                memcpy(stream, cvt.buf, to_copy);
-                stream += to_copy;
-                cvt.len_cvt -= to_copy;
-                len -= to_copy;
-                memmove(cvt.buf, cvt.buf + to_copy, cvt.len_cvt);
-                if (!len)
-                    return;
+                memcpy(cvt.buf, buf, cvt.len);
+                buf += cvt.len;
+                sound->cur_play_byte += cvt.len;
+                rest -= cvt.len;
+                SDL_ConvertAudio(&cvt);
             }
-            memcpy(cvt.buf, buf, cvt.len);
-            sound->cur_play_byte += cvt.len;
-            rest -= cvt.len;
-            SDL_ConvertAudio(&cvt);
+            if (!cvt.len_cvt)
+                goto silence;
+            //printf("len=%d, rest=%d, cvt.len=%d, cvt.len_cvt=%d\n", len, rest, cvt.len, cvt.len_cvt);
             int to_copy = MIN(cvt.len_cvt, len);
             memcpy(stream, cvt.buf, to_copy);
             stream += to_copy;
             cvt.len_cvt -= to_copy;
             len -= to_copy;
+            memmove(cvt.buf, cvt.buf + to_copy, cvt.len_cvt);
         }
     } else
     {
@@ -536,15 +531,17 @@ silence:
 
 void lvgPlaySound(LVGSound *sound)
 {
+    sound->cur_play_byte = 0;
+    if (SDL_AUDIO_STOPPED != SDL_GetAudioStatus())
+        return;
     SDL_AudioSpec wanted;
     memset(&wanted, 0, sizeof(wanted));
-    wanted.freq = 22050;
+    wanted.freq = sound->rate;
     wanted.format = AUDIO_S16;
     wanted.channels = 1;
     wanted.samples = 4096;
     wanted.callback = fill_audio;
     wanted.userdata = sound;
-    sound->cur_play_byte = 0;
 #ifdef SDL2
     int dev = SDL_OpenAudioDevice(NULL, 0, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
     if (dev < 0)
@@ -559,15 +556,13 @@ void lvgPlaySound(LVGSound *sound)
         return;
     }
 #endif
-    cvt_needed = (have.freq != wanted.freq) || (have.channels != wanted.channels) || (have.format != wanted.format);
-    //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, cvt_needed); fflush(stdout);
-
     int ret = SDL_BuildAudioCVT(&cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq);
     if (ret < 0)
     {
         printf("error: couldn't open converter: %s\n", SDL_GetError());
         return;
     }
+    //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, cvt.needed); fflush(stdout);
     cvt.len_cvt = 0;
 #ifdef SDL2
     SDL_PauseAudioDevice(dev, 0);

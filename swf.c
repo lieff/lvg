@@ -469,19 +469,19 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 idtable[id].lvg_id = clip->num_groups++;
             } else if (ST_DEFINESOUND == tag->id)
             {
+                LVGSound *sound = clip->sounds + clip->num_sounds;
                 U32 oldTagPos = swf_GetTagPos(tag);
                 swf_SetTagPos(tag, 0);
                 int id = swf_GetU16(tag);
                 int format = swf_GetBits(tag, 4);
                 static const int rates[4] = { 5500, 11025, 22050, 44100 };
-                int rate = swf_GetBits(tag, 2);
+                sound->rate = rates[swf_GetBits(tag, 2)];
                 int bits = swf_GetBits(tag, 1);
                 int stereo = swf_GetBits(tag, 1);
                 int num_samples = swf_GetU32(tag);
-                LVGSound *sound = clip->sounds + clip->num_sounds;
                 sound->samples = (short*)malloc(num_samples*2*2);
                 assert(1 == format || 2 == format); // adpcm, mp3
-                char *buf = &tag->data[tag->pos];
+                char *buf = (char *)&tag->data[tag->pos];
                 int buf_size = tag->len - tag->pos;
                 if (1 == format)
                 {
@@ -508,7 +508,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     }
                     mp3_done(dec);
                     assert(info.channels == (stereo + 1));
-                    assert(info.sample_rate == rates[rate]);
+                    assert(info.sample_rate == sound->rate);
                     assert(num_samples == sound->num_samples);
                 }
                 swf_SetTagPos(tag, oldTagPos);
@@ -576,6 +576,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             sound->num_samples += info.audio_bytes/4;
         }
         mp3_done(dec);
+        sound->rate = info.sample_rate;
         assert(stream_samples == sound->num_samples);
         /*FILE *f = fopen("out.pcm", "wb");
         fwrite(sound->samples, 1, sound->num_samples*2, f);

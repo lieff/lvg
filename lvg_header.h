@@ -36,7 +36,7 @@ typedef struct LVGShapeCollection
 typedef struct LVGSound
 {
     short *samples;
-    int num_samples, cur_play_byte;
+    int num_samples, rate, cur_play_byte;
 } LVGSound;
 
 typedef struct LVGMovieClip
