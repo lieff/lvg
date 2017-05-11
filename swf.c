@@ -500,6 +500,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         if (!frame_size)
                             break;
                         int samples = info.audio_bytes/(info.channels*2);
+                        if (num_samples < (sound->num_samples + samples))
+                        {
+                            num_samples = sound->num_samples + samples;
+                            sound->samples = (short*)realloc(sound->samples, num_samples*2);
+                        }
                         for (int i = 0; i < samples; i++)
                             sound->samples[sound->num_samples + i] = frame_buf[i*2];
                         buf += frame_size;
@@ -532,7 +537,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             if (2 == format)
                 latency_seek = swf_GetU16(tag);
             swf_SetTagPos(tag, oldTagPos);
-        } else if (ST_SOUNDSTREAMBLOCK == tag->id)
+        } else if (ST_SOUNDSTREAMBLOCK == tag->id && 1 == clip->num_groups)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
@@ -569,11 +574,17 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             int frame_size = mp3_decode(dec, buf, stream_buf_size, frame_buf, &info);
             if (!frame_size)
                 break;
-            for (int i = 0; i < info.audio_bytes/4; i++)
+            int samples = info.audio_bytes/(info.channels*2);
+            if (stream_samples < (sound->num_samples + samples))
+            {
+                stream_samples = sound->num_samples + samples;
+                sound->samples = (short*)realloc(sound->samples, stream_samples*2);
+            }
+            for (int i = 0; i < samples; i++)
                 sound->samples[sound->num_samples + i] = frame_buf[i*2];
             buf += frame_size;
             stream_buf_size -= frame_size;
-            sound->num_samples += info.audio_bytes/4;
+            sound->num_samples += samples;
         }
         mp3_done(dec);
         sound->rate = info.sample_rate;
