@@ -42,7 +42,7 @@ typedef struct LVGShapeCollection
 typedef struct LVGSound
 {
     short *samples;
-    int num_samples, rate, cur_play_byte;
+    int num_samples, rate, channels, cur_play_byte;
 } LVGSound;
 
 typedef struct LVGMovieClip
@@ -70,6 +70,8 @@ NSVGimage *lvgLoadSVGB(const char *file);
 LVGMovieClip *lvgLoadSWF(const char *file);
 LVGMovieClip *lvgLoadClip(const char *file);
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*callback)(void *userdata, char *stream, int len), void *userdata);
+short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
+short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
 
 extern NVGcontext *vg;
 extern NVGcolor g_bgColor;
@@ -193,7 +195,7 @@ struct tm
   const char *tm_zone;
 };
 
-time_t time(time_t *t); 
+time_t time(time_t *t);
 char *asctime(const struct tm *tm);
 char *ctime(const time_t *timep);
 struct tm *gmtime(const time_t *timep);

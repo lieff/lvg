@@ -1,3 +1,6 @@
+mp3/libc.h
+mp3/minimp3.c
+mp3/minimp3.h
 nanovg/fontstash.h
 nanovg/LICENSE.txt
 nanovg/nanosvg.h
@@ -49,6 +52,7 @@ libtcc.h
 lunzip.c
 lunzip.h
 lvg.h
+lvg_audio.c
 lvg_header.h
 stb_image.h
 stb_image_write.h

@@ -560,39 +560,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     if (stream_buffer)
     {
         LVGSound *sound = clip->sounds + stream_sound;
-        sound->samples = (short*)calloc(1, stream_samples*4);
-        assert(sound->samples);
-        /*FILE *f = fopen("out.mp3", "wb");
-        fwrite(stream_buffer, 1, stream_buf_size, f);
-        fclose(f);*/
-        mp3_info_t info;
-        mp3_decoder_t dec = mp3_create();
-        char *buf = stream_buffer;
-        while (stream_buf_size)
-        {
-            short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
-            int frame_size = mp3_decode(dec, buf, stream_buf_size, frame_buf, &info);
-            if (!frame_size)
-                break;
-            int samples = info.audio_bytes/(info.channels*2);
-            if (stream_samples < (sound->num_samples + samples))
-            {
-                stream_samples = sound->num_samples + samples;
-                sound->samples = (short*)realloc(sound->samples, stream_samples*2);
-            }
-            for (int i = 0; i < samples; i++)
-                sound->samples[sound->num_samples + i] = frame_buf[i*2];
-            buf += frame_size;
-            stream_buf_size -= frame_size;
-            sound->num_samples += samples;
-        }
-        mp3_done(dec);
-        sound->rate = info.sample_rate;
+        sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
         assert(stream_samples == sound->num_samples);
-        /*FILE *f = fopen("out.pcm", "wb");
-        fwrite(sound->samples, 1, sound->num_samples*2, f);
-        fclose(f);*/
-        //sound->samples = (short*)realloc(sound->samples, sound->num_samples*4);
         free(stream_buffer);
     }
 }

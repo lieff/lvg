@@ -691,6 +691,8 @@ const struct SYM g_syms[] = {
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
     { "lvgStartAudio", lvgStartAudio },
+    { "lvgLoadMP3", lvgLoadMP3 },
+    { "lvgLoadMP3Buf", lvgLoadMP3Buf },
     { "printf", printf },
 
     { "atof", atof },

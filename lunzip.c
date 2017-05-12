@@ -85,6 +85,7 @@ char *lvgZipDecompress(zip_t *zip, uint32_t file_ofs, uint32_t *size)
         memcpy(u_data, c_data, fh->uncompressedSize);
     } else
         stbi_zlib_decode_noheader_buffer(u_data, fh->uncompressedSize, c_data, fh->compressedSize);
+    u_data[fh->uncompressedSize] = 0; // automatic zero-terminate
     if (size)
         *size = fh->uncompressedSize;
     return u_data;
