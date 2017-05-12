@@ -55,7 +55,7 @@ double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
 static const char *g_main_script;
-static int is_swf;
+static int is_swf, is_gles3;
 static int tcc_buf_pos;
 static size_t tcc_buf_size;
 static char *tcc_buf;
@@ -931,9 +931,16 @@ int open_lvg(const char *file_name)
     char *buf;
 #ifdef EMSCRIPTEN
     if (!(buf = lvgGetFileContents("main.js", 0)))
+    {
         printf("error: could not open JS script.\n");
-    else
-        g_main_script = buf;
+        return -1;
+    }
+    g_main_script = buf;
+    if (buf = lvgGetFileContents("features", 0))
+    {
+        is_gles3 = NULL != strstr("gles3");
+        free(buf);
+    }
     return 0;
 #else
     return loadScript();
@@ -942,19 +949,31 @@ int open_lvg(const char *file_name)
 
 int main(int argc, char **argv)
 {
-#if defined(EMSCRIPTEN)
-    EmscriptenWebGLContextAttributes attrs;
-    emscripten_webgl_init_context_attributes(&attrs);
-    attrs.enableExtensionsByDefault = 1;
-    attrs.majorVersion = 2;
-    attrs.minorVersion = 0;
-    EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context = emscripten_webgl_create_context(0, &attrs);
-    if (!context)
+    char *file_name = argc > 1 ? argv[1] : "main.lvg";
+    char *e = strrchr(file_name, '.');
+    is_swf = e && !strcmp(e, ".swf");
+    if (!is_swf && open_lvg(file_name))
     {
-        printf("error: WebGL 2 is not supported\n");
-        return -1;
+        printf("error: could not open lvg file\n");
+        is_swf = 1;
+        //return -1;
     }
-    emscripten_webgl_make_context_current(context);
+#if defined(EMSCRIPTEN)
+    if (is_gles3)
+    {
+        EmscriptenWebGLContextAttributes attrs;
+        emscripten_webgl_init_context_attributes(&attrs);
+        attrs.enableExtensionsByDefault = 1;
+        attrs.majorVersion = 2;
+        attrs.minorVersion = 0;
+        EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context = emscripten_webgl_create_context(0, &attrs);
+        if (!context)
+        {
+            printf("error: this clip requires GLES3, but WebGL 2 is not supported\n");
+            return -1;
+        }
+        emscripten_webgl_make_context_current(context);
+    }
 #endif
 
     if (!glfwInit())
@@ -966,15 +985,6 @@ int main(int argc, char **argv)
     {
         fprintf(stderr, "error: sdl2 init failed: %s\n", SDL_GetError());
         return -1;
-    }
-    char *file_name = argc > 1 ? argv[1] : "main.lvg";
-    char *e = strrchr(file_name, '.');
-    is_swf = e && !strcmp(e, ".swf");
-    if (!is_swf && open_lvg(file_name))
-    {
-        printf("error: could not open lvg file\n");
-        is_swf = 1;
-        //return -1;
     }
 
     glfwWindowHint(GLFW_RESIZABLE, 1);
