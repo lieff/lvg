@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/vnd.lvg">
+    <comment>LVG Movie</comment>
+    <glob pattern="*.lvg"/>
+    <icon name="lvg"/>
+  </mime-type>
+</mime-info>
+
