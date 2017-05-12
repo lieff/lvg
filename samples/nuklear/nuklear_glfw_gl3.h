@@ -13,6 +13,8 @@
 #ifndef NK_GLFW_GL3_H_
 #define NK_GLFW_GL3_H_
 
+//#define USE_GLES3
+
 typedef void GLvoid;
 typedef unsigned int GLuint;
 typedef unsigned int GLenum;
@@ -33,6 +35,7 @@ typedef long int GLsizeiptr;
 #define GL_VERTEX_SHADER                  0x8B31
 #define GL_COMPILE_STATUS                 0x8B81
 #define GL_LINK_STATUS                    0x8B82
+#define GL_INFO_LOG_LENGTH                0x8B84
 
 #define GL_ARRAY_BUFFER                   0x8892
 #define GL_ELEMENT_ARRAY_BUFFER           0x8893
@@ -91,6 +94,7 @@ GLuint glCreateShader (GLenum type);
 void glShaderSource (GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length);
 void glCompileShader (GLuint shader);
 void glGetShaderiv (GLuint shader, GLenum pname, GLint *params);
+void glGetShaderInfoLog (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 void glAttachShader (GLuint program, GLuint shader);
 void glLinkProgram (GLuint program);
 void glUseProgram (GLuint program);
@@ -232,7 +236,43 @@ static struct nk_glfw {
     double last_button_click;
 } glfw;
 
+#if defined(USE_GLES3)
 #define NK_SHADER_VERSION "#version 300 es\n"
+#define ATTR "in "
+#define VARYNG "out "
+#define INVARYNG "in "
+#else
+#define NK_SHADER_VERSION ""
+#define ATTR "attribute "
+#define VARYING "varying "
+#define INVARYNG "varying "
+#endif
+
+static GLuint LoadShader(GLenum type, const char *shaderSrc)
+{
+    GLint compiled;
+    GLuint shader = glCreateShader(type);
+    if (shader == 0)
+        return 0;
+    glShaderSource(shader, 1, &shaderSrc, NULL);
+    glCompileShader(shader);
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+    if (!compiled)
+    {
+       GLint infoLen = 0;
+       glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+       if (infoLen > 1)
+       {
+           char *infoLog = malloc(sizeof(char)*infoLen);
+           glGetShaderInfoLog (shader, infoLen, NULL, infoLog);
+           printf("error: compiling shader failed:\n%s\n", infoLog);
+           free(infoLog);
+       }
+       glDeleteShader(shader);
+       return 0;
+    }
+    return shader;
+}
 
 NK_API void
 nk_glfw3_device_create(void)
@@ -241,11 +281,11 @@ nk_glfw3_device_create(void)
     static const GLchar *vertex_shader =
         NK_SHADER_VERSION
         "uniform mat4 ProjMtx;\n"
-        "in vec2 Position;\n"
-        "in vec2 TexCoord;\n"
-        "in vec4 Color;\n"
-        "out vec2 Frag_UV;\n"
-        "out vec4 Frag_Color;\n"
+        ATTR "vec2 Position;\n"
+        ATTR "vec2 TexCoord;\n"
+        ATTR "vec4 Color;\n"
+        VARYING "vec2 Frag_UV;\n"
+        VARYING "vec4 Frag_Color;\n"
         "void main() {\n"
         "   Frag_UV = TexCoord;\n"
         "   Frag_Color = Color;\n"
@@ -255,26 +295,24 @@ nk_glfw3_device_create(void)
         NK_SHADER_VERSION
         "precision mediump float;\n"
         "uniform sampler2D Texture;\n"
-        "in vec2 Frag_UV;\n"
-        "in vec4 Frag_Color;\n"
+        INVARYNG "vec2 Frag_UV;\n"
+        INVARYNG "vec4 Frag_Color;\n"
+#if defined(USE_GLES3)
         "out vec4 Out_Color;\n"
+#endif
         "void main(){\n"
+#if defined(USE_GLES3)
         "   Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n"
+#else
+        "   gl_FragColor = Frag_Color * texture2D(Texture, Frag_UV.st);\n"
+#endif
         "}\n";
 
     struct nk_glfw_device *dev = &glfw.ogl;
     nk_buffer_init_default(&dev->cmds);
     dev->prog = glCreateProgram();
-    dev->vert_shdr = glCreateShader(GL_VERTEX_SHADER);
-    dev->frag_shdr = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dev->vert_shdr, 1, &vertex_shader, 0);
-    glShaderSource(dev->frag_shdr, 1, &fragment_shader, 0);
-    glCompileShader(dev->vert_shdr);
-    glCompileShader(dev->frag_shdr);
-    glGetShaderiv(dev->vert_shdr, GL_COMPILE_STATUS, &status);
-    assert(status == GL_TRUE);
-    glGetShaderiv(dev->frag_shdr, GL_COMPILE_STATUS, &status);
-    assert(status == GL_TRUE);
+    dev->vert_shdr = LoadShader(GL_VERTEX_SHADER, vertex_shader);
+    dev->frag_shdr = LoadShader(GL_FRAGMENT_SHADER, fragment_shader);
     glAttachShader(dev->prog, dev->vert_shdr);
     glAttachShader(dev->prog, dev->frag_shdr);
     glLinkProgram(dev->prog);

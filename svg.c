@@ -800,6 +800,7 @@ const struct SYM g_syms[] = {
     { "glShaderSource", glShaderSource },
     { "glCompileShader", glCompileShader },
     { "glGetShaderiv", glGetShaderiv },
+    { "glGetShaderInfoLog", glGetShaderInfoLog },
     { "glAttachShader", glAttachShader },
     { "glLinkProgram", glLinkProgram },
     { "glGetProgramiv", glGetProgramiv },
@@ -936,9 +937,9 @@ int open_lvg(const char *file_name)
         return -1;
     }
     g_main_script = buf;
-    if (buf = lvgGetFileContents("features", 0))
+    if ((buf = lvgGetFileContents("features", 0)))
     {
-        is_gles3 = NULL != strstr("gles3");
+        is_gles3 = NULL != strstr(buf, "gles3");
         free(buf);
     }
     return 0;
