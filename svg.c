@@ -510,7 +510,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 SDL_AudioSpec have;
 int cvt_needed;
 SDL_AudioCVT cvt;
-void fill_audio(void *udata, Uint8 *stream, int len)
+void fill_audio(void *udata, char *stream, int len)
 {
     LVGSound *sound = (LVGSound *)udata;
     int rest = sound->num_samples*2 - sound->cur_play_byte;
@@ -557,19 +557,18 @@ silence:
     }
 }
 
-void lvgPlaySound(LVGSound *sound)
+int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*callback)(void *userdata, char *stream, int len), void *userdata)
 {
-    sound->cur_play_byte = 0;
     if (SDL_AUDIO_STOPPED != SDL_GetAudioStatus())
-        return;
+        return -1;
     SDL_AudioSpec wanted;
     memset(&wanted, 0, sizeof(wanted));
-    wanted.freq = sound->rate;
-    wanted.format = AUDIO_S16;
-    wanted.channels = 1;
-    wanted.samples = 4096;
-    wanted.callback = fill_audio;
-    wanted.userdata = sound;
+    wanted.freq = samplerate;
+    wanted.format = format ? AUDIO_F32 : AUDIO_S16;
+    wanted.channels = channels;
+    wanted.samples = buffer ? buffer : 4096;
+    wanted.callback = (SDL_AudioCallback)callback;
+    wanted.userdata = userdata;
 #ifdef SDL2
     int dev = SDL_OpenAudioDevice(NULL, 0, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
     if (dev < 0)
@@ -581,14 +580,13 @@ void lvgPlaySound(LVGSound *sound)
     if (SDL_OpenAudio(&wanted, &have) < 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
-        return;
+        return -1;
     }
 #endif
-    int ret = SDL_BuildAudioCVT(&cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq);
-    if (ret < 0)
+    if (SDL_BuildAudioCVT(&cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq) < 0)
     {
         printf("error: couldn't open converter: %s\n", SDL_GetError());
-        return;
+        return -1;
     }
     //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, cvt.needed); fflush(stdout);
     cvt.len_cvt = 0;
@@ -597,6 +595,12 @@ void lvgPlaySound(LVGSound *sound)
 #else
     SDL_PauseAudio(0);
 #endif
+}
+
+void lvgPlaySound(LVGSound *sound)
+{
+    sound->cur_play_byte = 0;
+    lvgStartAudio(sound->rate, 1, 0, 0, fill_audio, sound);
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
@@ -686,6 +690,7 @@ const struct SYM g_syms[] = {
     { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
+    { "lvgStartAudio", lvgStartAudio },
     { "printf", printf },
 
     { "atof", atof },

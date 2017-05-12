@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <time.h>
 #include <limits.h>
+#include <assert.h>
 #endif
 
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };
@@ -68,6 +69,7 @@ NSVGimage *lvgLoadSVG(const char *file);
 NSVGimage *lvgLoadSVGB(const char *file);
 LVGMovieClip *lvgLoadSWF(const char *file);
 LVGMovieClip *lvgLoadClip(const char *file);
+int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*callback)(void *userdata, char *stream, int len), void *userdata);
 
 extern NVGcontext *vg;
 extern NVGcolor g_bgColor;
@@ -190,4 +192,11 @@ struct tm
   long int tm_gmtoff;
   const char *tm_zone;
 };
+
+time_t time(time_t *t); 
+char *asctime(const struct tm *tm);
+char *ctime(const time_t *timep);
+struct tm *gmtime(const time_t *timep);
+struct tm *localtime(const time_t *timep);
+time_t mktime(struct tm *tm);
 #endif
