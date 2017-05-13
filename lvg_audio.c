@@ -8,12 +8,18 @@
 #include "minimp3.h"
 #include <SDL2/SDL.h>
 
-SDL_AudioCVT g_cvt;
+SDL_AudioCVT g_cvt, g_cvt_record;
 SDL_AudioCallback g_audio_cb;
 void *g_audio_cb_user_data;
+SDL_AudioCallback g_record_cb;
+void *g_record_cb_user_data;
+int g_dev = -1, g_dev_record = -1;
 
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples)
 {
+    /*FILE *f = fopen("out.mp3", "wb");
+    fwrite(buf, 1, buf_size, f);
+    fclose(f);*/
     mp3_info_t info;
     mp3_decoder_t dec = mp3_create();
     int alloc_samples = 1024*1024, num_samples = 0;
@@ -99,6 +105,18 @@ static void audio_cb(void *udata, Uint8 *stream, int len)
         g_audio_cb(g_audio_cb_user_data, stream, len);
 }
 
+static void record_cb(void *udata, Uint8 *stream, int len)
+{
+    if (g_cvt.needed)
+    {
+        g_cvt.len = len;
+        g_cvt.buf = stream;
+        SDL_ConvertAudio(&g_cvt);
+        g_record_cb(g_record_cb_user_data, g_cvt.buf, g_cvt.len_cvt);
+    } else
+        g_record_cb(g_record_cb_user_data, stream, len);
+}
+
 static void sound_play_cb(void *udata, char *stream, int len)
 {
     SDL_AudioCallback cb = (SDL_AudioCallback)udata;
@@ -114,27 +132,44 @@ static void sound_play_cb(void *udata, char *stream, int len)
         memset(stream, 0, len);
 }
 
-int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*callback)(void *userdata, char *stream, int len), void *userdata)
+#define SDL2
+int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata)
 {
-    if (SDL_AUDIO_STOPPED != SDL_GetAudioStatus())
+#ifdef SDL2
+    if (!is_capture && g_dev >= 0)
         return -1;
+#else
+    if (is_capture || g_dev >= 0)
+        return -1;
+#endif
     SDL_AudioSpec wanted, have;
     memset(&wanted, 0, sizeof(wanted));
     wanted.freq = samplerate;
     wanted.format = format ? AUDIO_F32 : AUDIO_S16;
     wanted.channels = channels;
     wanted.samples = buffer ? buffer : 4096;
-    wanted.callback = audio_cb;
+    wanted.callback = is_capture ? record_cb : audio_cb;
     wanted.userdata = callback;
-    g_audio_cb = (SDL_AudioCallback)callback;
-    g_audio_cb_user_data = userdata;
+    if (is_capture)
+    {
+        g_record_cb = (SDL_AudioCallback)callback;
+        g_record_cb_user_data = userdata;
+    } else
+    {
+        g_audio_cb = (SDL_AudioCallback)callback;
+        g_audio_cb_user_data = userdata;
+    }
 #ifdef SDL2
-    int dev = SDL_OpenAudioDevice(NULL, 0, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
+    int dev = SDL_OpenAudioDevice(NULL, is_capture, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
     if (dev < 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
-        return;
+        return -1;
     }
+    if (is_capture)
+        g_dev_record = dev;
+    else
+        g_dev = dev;
 #else
     if (SDL_OpenAudio(&wanted, &have) < 0)
     {
@@ -142,13 +177,14 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*c
         return -1;
     }
 #endif
-    if (SDL_BuildAudioCVT(&g_cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq) < 0)
+    SDL_AudioCVT *cvt = is_capture ? &g_cvt_record : &g_cvt;
+    if (SDL_BuildAudioCVT(cvt, wanted.format, wanted.channels, wanted.freq, have.format, have.channels, have.freq) < 0)
     {
         printf("error: couldn't open converter: %s\n", SDL_GetError());
         return -1;
     }
     //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, g_cvt.needed); fflush(stdout);
-    g_cvt.len_cvt = 0;
+    cvt->len_cvt = 0;
 #ifdef SDL2
     SDL_PauseAudioDevice(dev, 0);
 #else
@@ -160,5 +196,5 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, void (*c
 void lvgPlaySound(LVGSound *sound)
 {
     sound->cur_play_byte = 0;
-    lvgStartAudio(sound->rate, 1, 0, 0, sound_play_cb, sound);
+    lvgStartAudio(sound->rate, 1, 0, 0, 0, sound_play_cb, sound);
 }
