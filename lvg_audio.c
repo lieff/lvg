@@ -110,7 +110,9 @@ static void record_cb(void *udata, Uint8 *stream, int len)
     if (g_cvt_record.needed)
     {
         g_cvt_record.len = len;
-        g_cvt_record.buf = stream;
+        if (!g_cvt_record.buf)
+            g_cvt_record.buf = malloc(g_cvt_record.len*g_cvt_record.len_mult);
+        memcpy(g_cvt_record.buf, stream, len);
         SDL_ConvertAudio(&g_cvt_record);
         g_record_cb(g_record_cb_user_data, g_cvt_record.buf, g_cvt_record.len_cvt);
     } else
