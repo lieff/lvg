@@ -599,6 +599,11 @@ const struct SYM g_syms[] = {
     { "lvgLoadMP3Buf", lvgLoadMP3Buf },
     { "printf", printf },
 
+    { "malloc", malloc },
+    { "calloc", calloc },
+    { "realloc", realloc },
+    { "free", free },
+
     { "atof", atof },
 
     { "time", time },

@@ -130,6 +130,18 @@ static int haveIntersect(SHAPELINE *lines, SHAPELINE *point)
     return 0;
 }
 
+static void expandBBox(float *bounds, float x, float y)
+{
+    if (bounds[0] > x)
+        bounds[0] = x;
+    if (bounds[1] > y)
+        bounds[1] = y;
+    if (bounds[2] < x)
+        bounds[2] = x;
+    if (bounds[3] < y)
+        bounds[3] = y;
+}
+
 static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, SHAPE_PARTS *parts, int num_parts, SHAPE_PARTS *part, FILLSTYLE *fills, LINESTYLE *lineStyles, int idx)
 {
     assert(part->num_lines > 0);
@@ -191,10 +203,12 @@ add_shape:
     {
         x = part->prev->x, y = part->prev->y;
     }
+    expandBBox(shape->bounds, x/20.0f, y/20.0f);
     path_moveTo(path, x/20.0f, y/20.0f);
     for (int i = 0; i < num_lines; i++)
     {
         assert(moveTo != lines->type);
+        expandBBox(shape->bounds, lines->x/20.0f, lines->y/20.0f);
         if (lineTo == lines->type)
             path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
         else if (splineTo == lines->type)
@@ -288,6 +302,7 @@ add_shape:
         for (int i = 0; i < num_lines; i++)
         {
             assert(moveTo != lines->type);
+            expandBBox(shape->bounds, lines->x/20.0f, lines->y/20.0f);
             if (lineTo == lines->type)
                 path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
             else if (splineTo == lines->type)
@@ -411,10 +426,10 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 }
 
                 shape->shapes = (NSVGshape*)calloc(1, numParts*2*sizeof(NSVGshape));
-                shape->bounds[0] = idtable[id].bbox.xmin/20.0f;
-                shape->bounds[1] = idtable[id].bbox.ymin/20.0f;
-                shape->bounds[2] = idtable[id].bbox.xmax/20.0f;
-                shape->bounds[3] = idtable[id].bbox.ymax/20.0f;
+                shape->bounds[2] = idtable[id].bbox.xmin/20.0f;
+                shape->bounds[3] = idtable[id].bbox.ymin/20.0f;
+                shape->bounds[0] = idtable[id].bbox.xmax/20.0f;
+                shape->bounds[1] = idtable[id].bbox.ymax/20.0f;
 
                 lines = swf_shape->lines;
                 for (;;)

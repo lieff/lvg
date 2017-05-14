@@ -85,6 +85,11 @@ extern double mx;
 extern double my;
 extern double g_time;
 
+void *malloc(size_t);
+void *calloc(size_t, size_t);
+void *realloc(void *, size_t);
+void free(void *);
+
 double atof(const char*);
 int atoi(const char*);
 long int atol(const char*);
