@@ -141,9 +141,26 @@ NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
 char *lvgGetFileContents(const char *fname, uint32_t *size)
 {
     uint32_t idx;
-    if ((idx = lvgZipNameLocate(&g_zip, fname)) == (int32_t)-1)
+    if ((idx = lvgZipNameLocate(&g_zip, fname)) != (int32_t)-1)
+        return lvgZipDecompress(&g_zip, idx, size);
+#ifdef EMSCRIPTEN
+    struct stat st;
+    int fd = open(fname, O_RDONLY);
+    if (fd < 0)
         return 0;
-    return lvgZipDecompress(&g_zip, idx, size);
+    if (fstat(fd, &st) < 0)
+        goto doexit;
+    char *file_buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    char *buf = malloc(st.st_size + 1);
+    memcpy(buf, file_buf, st.st_size);
+    buf[st.st_size] = 0;
+    munmap(file_buf, st.st_size);
+    if (size)
+        *size = st.st_size;
+doexit:
+    close(fd);
+#endif
+    return buf;
 }
 
 void lvgFree(void *buf)
