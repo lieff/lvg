@@ -159,8 +159,10 @@ char *lvgGetFileContents(const char *fname, uint32_t *size)
         *size = st.st_size;
 doexit:
     close(fd);
-#endif
     return buf;
+#else
+    return 0;
+#endif
 }
 
 void lvgFree(void *buf)

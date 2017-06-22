@@ -28,39 +28,6 @@
 
 #include "actioncompiler.h"
 
-static void print_error(const char*format,...)
-{
-    char buf[1024];
-    int len;
-    va_list arglist;
-    va_start(arglist, format);
-    vsnprintf(buf, sizeof(buf)-1, format, arglist);
-    va_end(arglist);
-
-    len = strlen(buf);
-    while(len>0 && buf[len-1]=='\n') len--;
-    buf[len] = '\n';
-    buf[len+1] = 0;
-    fprintf(stderr, "error: %s", buf);
-}
-
-static void print_warn(const char*format,...)
-{
-    char buf[1024];
-    int len;
-    va_list arglist;
-    va_start(arglist, format);
-    vsnprintf(buf, sizeof(buf)-1, format, arglist);
-    va_end(arglist);
-
-    len = strlen(buf);
-    while(len>0 && buf[len-1]=='\n') len--;
-    buf[len] = '\n';
-    buf[len+1] = 0;
-    printf("%s", buf);
-    fprintf(stderr, "warning: %s", buf);
-}
-
 int compileSWFActionCode(const char *script, int version, void**data, int*len)
 {
     return 0;
