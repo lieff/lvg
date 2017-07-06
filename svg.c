@@ -742,8 +742,10 @@ const struct SYM g_syms[] = {
     { "glGetUniformLocation", glGetUniformLocation },
     { "glGetAttribLocation", glGetAttribLocation },
     { "glGenBuffers", glGenBuffers },
+#ifndef __APPLE__
     { "glGenVertexArrays", glGenVertexArrays },
     { "glBindVertexArray", glBindVertexArray },
+#endif
     { "glBindBuffer", glBindBuffer },
     { "glEnableVertexAttribArray", glEnableVertexAttribArray },
     { "glVertexAttribPointer", glVertexAttribPointer },
@@ -767,7 +769,9 @@ const struct SYM g_syms[] = {
     { "glViewport", glViewport },
     { "glBufferData", glBufferData },
     { "glMapBuffer", glMapBuffer },
+#ifndef __APPLE__
     { "glMapBufferRange", glMapBufferRange },
+#endif
     { "glUnmapBuffer", glUnmapBuffer },
     { "glScissor", glScissor },
     { "glDrawElements", glDrawElements },

@@ -25,6 +25,15 @@ sources = ['adpcm.c', 'lunzip.c', 'lvg_audio.c', 'svg.c', 'svgb.c', 'swf.c',
     'swftools/lib/modules/swftools.c',
     'swftools/lib/action/actioncompiler.c'
 ]
-incdirs = include_directories('.', 'nanovg', 'swftools/lib', 'mp3')
+incdirs = ['.', 'nanovg', 'swftools/lib', 'mp3']
 add_global_arguments('-D_GNU_SOURCE', language : 'c')
-executable('lvg', sources, link_args : ['-L..', '-lm', '-lglfw', '-lGL', '-ltcc2', '-ldl', '-lSDL2'], include_directories : incdirs)
+ext_link_args = ['-L..', '-lm', '-ldl', '-lSDL2']
+host_os_family = host_machine.system()
+if host_os_family == 'linux'
+ext_link_args += ['-lGL', '-lglfw', '-ltcc2']
+endif
+if host_os_family == 'darwin'
+incdirs += ['/usr/local/include']
+ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-ltcc', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
+endif
+executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
