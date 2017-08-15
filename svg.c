@@ -921,7 +921,7 @@ int main(int argc, char **argv)
         printf("error: glfw init failed\n");
         return -1;
     }
-    if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
+    if (SDL_Init(/*SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)*/SDL_INIT_AUDIO) < 0)
     {
         fprintf(stderr, "error: sdl2 init failed: %s\n", SDL_GetError());
         return -1;
