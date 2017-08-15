@@ -193,7 +193,7 @@ add_shape:
     path->npts = 0;
 
     SHAPELINE *lines = part->start;
-    int x, y, prev_x = INT_MAX, prev_y = INT_MAX, num_lines = part->num_lines;
+    int x, y, /*prev_x = INT_MAX, prev_y = INT_MAX, */num_lines = part->num_lines;
     if (moveTo == part->start->type)
     {
         x = part->start->x, y = part->start->y;
@@ -216,7 +216,7 @@ add_shape:
         if (i != (num_lines - 1))
         {
             assert(x != lines->x || y != lines->y);
-            prev_x = lines->x, prev_y = lines->y;
+            //prev_x = lines->x, prev_y = lines->y;
             lines = lines->next;
         }
     }
@@ -310,7 +310,7 @@ add_shape:
             if (i != (num_lines - 1))
             {
                 assert(x != lines->x || y != lines->y);
-                prev_x = lines->x, prev_y = lines->y;
+                //prev_x = lines->x, prev_y = lines->y;
                 lines = lines->next;
             }
         }
@@ -491,7 +491,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int format = swf_GetBits(tag, 4);
                 static const int rates[4] = { 5500, 11025, 22050, 44100 };
                 sound->rate = rates[swf_GetBits(tag, 2)];
-                int bits = swf_GetBits(tag, 1);
+                /*int bits = */swf_GetBits(tag, 1);
                 int stereo = swf_GetBits(tag, 1);
                 int num_samples = swf_GetU32(tag);
                 sound->samples = (short*)malloc(num_samples*2*2);
@@ -534,30 +534,36 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, oldTagPos);
                 idtable[id].type = sound_type;
                 idtable[id].lvg_id = clip->num_sounds++;
+            } else if (ST_DOACTION == tag->id)
+            {
+
+            } else if (ST_DOABC == tag->id)
+            {
+
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
-            int reserve = swf_GetBits(tag, 4);
-            int rate = swf_GetBits(tag, 2);
-            int bits = swf_GetBits(tag, 1);
-            int stereo = swf_GetBits(tag, 1);
+            /*int reserve = */swf_GetBits(tag, 4);
+            /*int rate = */swf_GetBits(tag, 2);
+            /*int bits = */swf_GetBits(tag, 1);
+            /*int stereo = */swf_GetBits(tag, 1);
             int format = swf_GetBits(tag, 4);
-            int stream_rate = swf_GetBits(tag, 2);
-            int stream_bits = swf_GetBits(tag, 1);
-            int stream_stereo = swf_GetBits(tag, 1);
-            int avg_samples = swf_GetU16(tag);
-            short latency_seek = 0;
+            /*int stream_rate = */swf_GetBits(tag, 2);
+            /*int stream_bits = */swf_GetBits(tag, 1);
+            /*int stream_stereo = */swf_GetBits(tag, 1);
+            /*int avg_samples = */swf_GetU16(tag);
+            //short latency_seek = 0;
             if (2 == format)
-                latency_seek = swf_GetU16(tag);
+                /*latency_seek = */swf_GetU16(tag);
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             int samples = swf_GetU16(tag);
-            int seek_samples = swf_GetU16(tag);
+            /*int seek_samples = */swf_GetU16(tag);
             stream_samples += samples;
             int old_size = stream_buf_size;
             stream_buf_size += tag->len - tag->pos;

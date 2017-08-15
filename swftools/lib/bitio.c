@@ -425,11 +425,9 @@ static void zlib_error(int ret, char* msg, z_stream*zs)
     if(errno) perror("errno:");
     exit(1);
 }
-#endif
 
 static int reader_zlibinflate(reader_t*reader, void* data, int len) 
 {
-#ifdef HAVE_ZLIB
     zlibinflate_t*z = (zlibinflate_t*)reader->internal;
     int ret;
     if(!z) {
@@ -469,19 +467,16 @@ static int reader_zlibinflate(reader_t*reader, void* data, int len)
     }
     reader->pos += len;
     return len;
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
+
 static int reader_zlibseek(reader_t*reader, int pos)
 {
     fprintf(stderr, "Erro: seeking not supported for zlib streams");
     return -1;
 }
+
 static void reader_zlibinflate_dealloc(reader_t*reader)
 {
-#ifdef HAVE_ZLIB
     zlibinflate_t*z = (zlibinflate_t*)reader->internal;
     /* test whether read() already did basic deallocation */
     if(reader->internal) {
@@ -489,11 +484,10 @@ static void reader_zlibinflate_dealloc(reader_t*reader)
 	free(reader->internal);
     }
     memset(reader, 0, sizeof(reader_t));
-#endif
 }
+
 void reader_init_zlibinflate(reader_t*r, reader_t*input)
 {
-#ifdef HAVE_ZLIB
     zlibinflate_t*z = (zlibinflate_t*)malloc(sizeof(zlibinflate_t));
     memset(z, 0, sizeof(zlibinflate_t));
     int ret;
@@ -512,11 +506,8 @@ void reader_init_zlibinflate(reader_t*r, reader_t*input)
     ret = inflateInit(&z->zs);
     if (ret != Z_OK) zlib_error(ret, "bitio:inflate_init", &z->zs);
     reader_resetbits(r);
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
+#endif
 
 /* ---------------------------- zlibdeflate writer -------------------------- */
 
@@ -529,9 +520,9 @@ typedef struct _zlibdeflate
 #endif
 } zlibdeflate_t;
 
+#ifdef HAVE_ZLIB
 static int writer_zlibdeflate_write(writer_t*writer, void* data, int len) 
 {
-#ifdef HAVE_ZLIB
     zlibdeflate_t*z = (zlibdeflate_t*)writer->internal;
     int ret;
     if(writer->type != WRITER_TYPE_ZLIB) {
@@ -565,15 +556,10 @@ static int writer_zlibdeflate_write(writer_t*writer, void* data, int len)
 	}
     }
     return len;
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
 
 void writer_zlibdeflate_flush(writer_t*writer)
 {
-#ifdef HAVE_ZLIB
     zlibdeflate_t*z = (zlibdeflate_t*)writer->internal;
     int ret;
     if(writer->type != WRITER_TYPE_ZLIB) {
@@ -600,15 +586,10 @@ void writer_zlibdeflate_flush(writer_t*writer)
 	break;
     }
     return;
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
 
 static void writer_zlibdeflate_finish(writer_t*writer)
 {
-#ifdef HAVE_ZLIB
     zlibdeflate_t*z = (zlibdeflate_t*)writer->internal;
     writer_t*output;
     int ret;
@@ -641,14 +622,10 @@ static void writer_zlibdeflate_finish(writer_t*writer)
     free(writer->internal);
     memset(writer, 0, sizeof(writer_t));
     //output->finish(output); 
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
+
 void writer_init_zlibdeflate(writer_t*w, writer_t*output)
 {
-#ifdef HAVE_ZLIB
     zlibdeflate_t*z;
     int ret;
     memset(w, 0, sizeof(writer_t));
@@ -671,11 +648,8 @@ void writer_init_zlibdeflate(writer_t*w, writer_t*output)
     w->mybyte = 0;
     z->zs.next_out = z->writebuffer;
     z->zs.avail_out = ZLIB_BUFFER_SIZE;
-#else
-    fprintf(stderr, "Error: swftools was compiled without zlib support");
-    exit(1);
-#endif
 }
+#endif
 
 /* ----------------------- bit handling routines -------------------------- */
 

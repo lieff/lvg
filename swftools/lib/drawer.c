@@ -28,34 +28,6 @@
 #include <ctype.h>
 #include "drawer.h"
 
-static char* getToken(const char**p)
-{
-    const char*start;
-    char*result;
-    while(**p && strchr(" ,()\t\n\r", **p)) {
-	(*p)++;
-    } 
-    start = *p;
-
-     /*
-        SVF pathdata can exclude whitespace after L and M commands.
-        Ref:  http://www.w3.org/TR/SVG11/paths.html#PathDataGeneralInformation
-        This allows us to use svg files output from gnuplot.
-        Also checks for relative MoveTo and LineTo (m and l).
-        051106 Magnus Lundin, lundin@mlu.mine.nu
-     */
-    if (strchr("LMlm", **p) && (isdigit(*(*p+1))||strchr("+-", *(*p+1)))) {
-	(*p)++;
-    }
-    else while(**p && !strchr(" ,()\t\n\r", **p)) {
-	(*p)++;
-    }
-    result = (char*)malloc((*p)-start+1);
-    memcpy(result,start,(*p)-start+1);
-    result[(*p)-start] = 0;
-    return result;
-}
-
 void draw_conicTo(drawer_t*draw, FPOINT*  c, FPOINT*  to)
 {
     FPOINT* pos = &draw->pos;
@@ -67,39 +39,6 @@ void draw_conicTo(drawer_t*draw, FPOINT*  c, FPOINT*  to)
     draw_cubicTo(draw, &c1,&c2,to);
 
     draw->pos = *to;
-}
-
-/* convenience routine */
-static void draw_conicTo2(drawer_t*draw, double x1, double y1, double  x2, double y2)
-{
-    FPOINT c1,c2;
-    c1.x = x1;
-    c1.y = y1;
-    c2.x = x2;
-    c2.y = y2;
-    draw_conicTo(draw, &c1, &c2);
-}
-/* convenience routine */
-static void draw_moveTo2(drawer_t*draw, double x, double y)
-{
-    FPOINT c;
-    c.x = x; c.y = y;
-    draw->moveTo(draw, &c);
-}
-/* convenience routine */
-static void draw_lineTo2(drawer_t*draw, double x, double y)
-{
-    FPOINT c;
-    c.x = x; c.y = y;
-    draw->lineTo(draw, &c);
-}
-
-static float getFloat(const char** p)
-{
-    char* token = getToken(p);
-    float result = atof(token);
-    free(token);
-    return result;
 }
 
 struct SPLINEPOINT

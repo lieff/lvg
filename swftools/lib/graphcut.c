@@ -171,9 +171,12 @@ static void graphcut_workspace_delete(graphcut_workspace_t*w)
     posqueue_delete(w->queue1);w->queue1=0;
     posqueue_delete(w->queue2);w->queue2=0;
     posqueue_delete(w->tmpqueue);w->tmpqueue=0;
-    if(w->flags1) free(w->flags1);w->flags1=0;
-    if(w->flags2) free(w->flags2);w->flags2=0;
-    if(w->back) free(w->back);w->back=0;
+    if(w->flags1) free(w->flags1);
+    w->flags1=0;
+    if(w->flags2) free(w->flags2);
+    w->flags2=0;
+    if(w->back) free(w->back);
+    w->back=0;
     free(w);
 }
 
@@ -296,17 +299,6 @@ static void workspace_print(graphcut_workspace_t*w)
     printf("queue1: ");posqueue_print(w, w->queue1);
     printf("queue2: ");posqueue_print(w, w->queue2);
 }
-
-static void myassert(graphcut_workspace_t*w, char assertion, const char*file, int line, const char*func)
-{
-    if(!assertion) {
-	printf("Assertion %s:%d (%s) failed:\n", file, line, func);
-	workspace_print(w);
-	exit(0);
-    }
-}
-
-#define ASSERT(w,c) {myassert(w,c,__FILE__,__LINE__,__func__);}
 
 static path_t* expand_pos(graphcut_workspace_t*w, posqueue_t*queue, node_t*pos, char reverse, unsigned char*mytree, unsigned char*othertree)
 {
