@@ -27,13 +27,14 @@ sources = ['adpcm.c', 'lunzip.c', 'lvg_audio.c', 'svg.c', 'svgb.c', 'swf.c',
 ]
 incdirs = ['.', 'nanovg', 'swftools/lib', 'mp3']
 add_global_arguments('-D_GNU_SOURCE', language : 'c')
-ext_link_args = ['-L..', '-lm', '-ldl', '-lSDL2']
+add_global_arguments('-DNDEBUG', language : 'c')
+ext_link_args = ['-L..', '-lm', '-lSDL2']
 host_os_family = host_machine.system()
 if host_os_family == 'linux'
-ext_link_args += ['-lGL', '-lglfw', '-ltcc2']
+ext_link_args += ['-lGL', '-lglfw', '-ltcc2', '-ldl']
 endif
 if host_os_family == 'darwin'
 incdirs += ['/usr/local/include']
-ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-ltcc', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
+ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-ltcc', '-ldl', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
 endif
 executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
