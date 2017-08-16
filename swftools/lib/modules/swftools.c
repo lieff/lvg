@@ -378,7 +378,8 @@ int swf_GetDepth(TAG * t)
 void swf_SetDepth(TAG * t, U16 depth)
 {
     switch (swf_GetTagID(t))
-    { case ST_PLACEOBJECT:
+    {
+    case ST_PLACEOBJECT:
     case ST_REMOVEOBJECT:
         PUT16(t->data, depth);
         break;

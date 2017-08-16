@@ -45,7 +45,7 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
     }
     mp3_done(dec);
     if (alloc_samples > num_samples)
-        music_buf = (short *)realloc(music_buf, num_samples*2);
+        music_buf = (short *)realloc(music_buf, num_samples*2*info.channels);
     if (rate)
         *rate = info.sample_rate;
     if (channels)
