@@ -509,11 +509,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 {
                     mp3_info_t info;
                     mp3_decoder_t dec = mp3_create();
-                    while (buf_size)
+                    while (buf_size && sound->num_samples < num_samples)
                     {
                         short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
                         int frame_size = mp3_decode(dec, buf, buf_size, frame_buf, &info);
-                        if (!frame_size)
+                        if (!frame_size || info.audio_bytes < 0)
                             break;
                         assert(info.channels == sound->channels);
                         assert(info.sample_rate == sound->rate);
@@ -627,7 +627,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
 #endif
             if (ST_REMOVEOBJECT == tag->id)
 #ifndef NDEBUG
-                id = 
+                id =
 #endif
                 swf_GetU16(tag);
             int depth = swf_GetU16(tag);
