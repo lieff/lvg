@@ -54,7 +54,10 @@ double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
 static const char *g_main_script;
-static int is_swf, is_gles3;
+static int is_swf;
+#ifdef EMSCRIPTEN
+static int is_gles3;
+#endif
 static int tcc_buf_pos;
 static size_t tcc_buf_size;
 static char *tcc_buf;
@@ -72,9 +75,9 @@ int open_wrapper(const char *pathname, int flags)
 {
     if (!strcmp(pathname, "./lib/libtcc1.a"))
     {
-        tcc_buf_pos =0;
+        tcc_buf_pos = 0;
         tcc_buf_size = sizeof(lib_libtcc1_a);
-        tcc_buf = lib_libtcc1_a;
+        tcc_buf = (char *)lib_libtcc1_a;
         return INT_MAX;
     }
     char *e = strrchr(pathname, '.');
@@ -84,7 +87,7 @@ int open_wrapper(const char *pathname, int flags)
         char *file = lvgGetFileContents(pathname, &size);
         if (!file)
             return -1;
-        tcc_buf_pos =0;
+        tcc_buf_pos = 0;
         tcc_buf_size = size;
         tcc_buf = file;
         return INT_MAX - 1;
@@ -492,7 +495,6 @@ void lvgDrawSVG(NSVGimage *image)
 
 static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
 {
-    int w, h;
     int frame = group->cur_frame;
     assert(frame < group->num_frames);
     if (next_frame)
@@ -812,9 +814,9 @@ int loadScript()
         printf("error: could not open C script.\n");
         return -1;
     }
-    source = malloc(strlen(allh_h) + strlen(buf) + 1);
+    source = malloc(strlen((char *)allh_h) + strlen(buf) + 1);
     source[0] = 0;
-    strcat(source, allh_h);
+    strcat(source, (char *)allh_h);
     strcat(source, buf);
     free(buf);
 
@@ -868,8 +870,8 @@ int open_lvg(const char *file_name)
     if (lvgZipOpen(file_name, &g_zip))
         return -1;
     g_main_script = 0;
-    char *buf;
 #ifdef EMSCRIPTEN
+    char *buf;
     if (!(buf = lvgGetFileContents("main.js", 0)))
     {
         printf("error: could not open JS script.\n");

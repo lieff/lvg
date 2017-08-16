@@ -1563,8 +1563,9 @@ int swf_ReadSWF2(reader_t*reader, SWF * swf)   // Reads SWF to memory (malloc'ed
     int len;
     TAG * t;
     TAG t1;
+#ifdef HAVE_ZLIB
     reader_t zreader;
-
+#endif
     if ((len = reader->read(reader ,b,8))<8) return -1;
 
     if (b[0]!='F' && b[0]!='C') return -1;

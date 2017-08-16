@@ -7,7 +7,9 @@
 #include "lvg_header.h"
 #include "minimp3.h"
 #include <SDL2/SDL.h>
+//#include "resample.h"
 
+//static struct rs_data *g_resample;
 SDL_AudioCVT g_cvt, g_cvt_record;
 SDL_AudioCallback g_audio_cb;
 void *g_audio_cb_user_data;
@@ -87,6 +89,7 @@ static void audio_cb(void *udata, Uint8 *stream, int len)
             {
                 g_audio_cb(g_audio_cb_user_data, g_cvt.buf, g_cvt.len);
                 SDL_ConvertAudio(&g_cvt);
+                //g_cvt.len_cvt = resample(g_resample, (short*)g_cvt.buf, g_cvt.len/2, (short*)g_cvt.buf, g_cvt.len*2, 0)*2;
             }
             if (!g_cvt.len_cvt)
             {
@@ -121,7 +124,7 @@ static void record_cb(void *udata, Uint8 *stream, int len)
 
 static void sound_play_cb(void *udata, char *stream, int len)
 {
-    SDL_AudioCallback cb = (SDL_AudioCallback)udata;
+    //SDL_AudioCallback cb = (SDL_AudioCallback)udata;
     LVGSound *sound = (LVGSound *)udata;
     int rest = sound->num_samples*sound->channels*2 - sound->cur_play_byte;
     char *buf = (char *)sound->samples + sound->cur_play_byte;
@@ -185,6 +188,7 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_c
         printf("error: couldn't open converter: %s\n", SDL_GetError());
         return -1;
     }
+    //g_resample = resample_init(have.freq, wanted.freq, 65536);
     //printf("info: rate=%d, channels=%d, format=%x, change=%d\n", have.freq, have.channels, have.format, g_cvt.needed); fflush(stdout);
     cvt->len_cvt = 0;
 #ifdef SDL2

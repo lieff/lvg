@@ -1,12 +1,12 @@
 /* swfaction.c
 
    Actionscript generation and parsing routines
-   
+
    Extension module for the rfxswf library.
    Part of the swftools package.
 
    Copyright (c) 2001 Matthias Kramm <kramm@quiss.org>
- 
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -33,7 +33,7 @@ struct Action
     char*flags;
 } static actions[] =
 {
-/*
+    /*
 f: frame (word)
 u: url (string)
 t: target (string)
@@ -96,7 +96,7 @@ r: register (byte)
 {4,"SetProperty", 0x23, ""}, // -3
 {4,"RemoveSprite", 0x25, ""}, //-1
 {4,"StartDrag", 0x27, ""}, // -2, -1, (-4)
-{4,"EndDrag", 0x28, ""}, 
+{4,"EndDrag", 0x28, ""},
 {4,"CloneSprite", 0x24, ""}, // -3
 {4,"Trace", 0x26, ""}, //-1
 {4,"GetTime", 0x34, ""}, //+1
@@ -145,7 +145,7 @@ r: register (byte)
 };
 static int definedactions = sizeof(actions)/sizeof(struct Action);
 
-ActionTAG* swf_ActionGet(TAG*tag) 
+ActionTAG* swf_ActionGet(TAG*tag)
 {
     U8 op = 1;
     int length;
@@ -154,27 +154,27 @@ ActionTAG* swf_ActionGet(TAG*tag)
     U8*data;
     while(op)
     {
-	action->next = (ActionTAG*)rfx_calloc(sizeof(ActionTAG));
-	action->next->prev = action;
-	action->next->next = 0;
-	action->next->parent = tmp.next;
-	action = action->next;
+        action->next = (ActionTAG*)rfx_calloc(sizeof(ActionTAG));
+        action->next->prev = action;
+        action->next->next = 0;
+        action->next->parent = tmp.next;
+        action = action->next;
 
-	op = swf_GetU8(tag);
-	if(op<0x80)
-	    length = 0;
-	else
-	    length = swf_GetU16(tag);
+        op = swf_GetU8(tag);
+        if(op<0x80)
+            length = 0;
+        else
+            length = swf_GetU16(tag);
 
-	if(length) {
-	    data = (U8*)malloc(length);
-	    swf_GetBlock(tag, data, length);
-	} else {
-	  data = 0;
-	}
-	action->op = op;
-	action->len = length;
-	action->data = data;
+        if(length) {
+            data = (U8*)malloc(length);
+            swf_GetBlock(tag, data, length);
+        } else {
+            data = 0;
+        }
+        action->op = op;
+        action->len = length;
+        action->data = data;
     }
     return tmp.next;
 }
@@ -182,44 +182,44 @@ ActionTAG* swf_ActionGet(TAG*tag)
 void swf_ActionFree(ActionTAG*action)
 {
     if(!action) {
-	return;
+        return;
     }
     action = action->parent;
     if(!action) {
-	fprintf(stderr, "Warning: freeing zero action (no parent)");
-	return;
+        fprintf(stderr, "Warning: freeing zero action (no parent)");
+        return;
     }
 
     while(action)
     {
-	ActionTAG*tmp;
-	if(action->data && action->data != action->tmp) {
-	    free(action->data);
-	    action->data = 0;
-	}
-	action->len = 0;
-	
-	tmp = action;
-	action=action->next;
-	free(tmp);
+        ActionTAG*tmp;
+        if(action->data && action->data != action->tmp) {
+            free(action->data);
+            action->data = 0;
+        }
+        action->len = 0;
+
+        tmp = action;
+        action=action->next;
+        free(tmp);
     }
 }
 
 void swf_ActionSet(TAG*tag, ActionTAG*action)
 {
     if(!action) {
-	return;
+        return;
     }
     action=action->parent;
     while(action)
     {
-	swf_SetU8(tag, action->op);
-	if(action->op & 128)
-	  swf_SetU16(tag, action->len);
+        swf_SetU8(tag, action->op);
+        if(action->op & 128)
+            swf_SetU16(tag, action->len);
 
-	swf_SetBlock(tag, action->data, action->len);
+        swf_SetBlock(tag, action->data, action->len);
 
-	action = action->next;
+        action = action->next;
     }
 }
 
@@ -227,75 +227,75 @@ int OpAdvance(char c, U8*data)
 {
     switch (c)
     {
-	case 'f':
-	    return 2;
-	case 'u':
-	    return strlen((const char*)data)+1;
-	case 't':
-	    return strlen((const char*)data)+1;
-	case 'l': 
-	    return strlen((const char*)data)+1;
-	case 'c': 
-	    return strlen((const char*)data)+1;
-	case 'C': 
-	    return 2;
-	case 's':
-	    return 1;
-	case 'm':
-	    return 1;
-	case 'b':
-	    return 2;
-	case 'r':
-	    return 1;
-	case 'p': {
-	    U8 type = *data++;
-	    if(type == 0) {
-		return 1+strlen((const char*)data)+1; //string
-	    } else if (type == 1) {
-		return 1+4; //float
-	    } else if (type == 2) {
-		return 1+0; //NULL
-	    } else if (type == 3) {
-		return 1+0; //Undefined
-	    } else if (type == 4) {
-		return 1+1; //register
-	    } else if (type == 5) {
-		return 1+1; //bool
-	    } else if (type == 6) {
-		return 1+8; //double
-	    } else if (type == 7) {
-		return 1+4; //int
-	    } else if (type == 8) {
-		return 1+1; //lookup
-	    } else if (type == 9) {
-		return 1+2; //lookup 16
-	    } else return 1;
-	    break;
-	}
-	case 'o': {
-	    return 2;
-	}
-	case '{': {
-	    U16 num;
-	    U16 codesize;
-	    U8* odata = data;
-	    int t;
-	    while(*data++); //name
-	    num = (*data++); //num
-	    num += (*data++)*256;
-	    for(t=0;t<num;t++)
-		while(*data++); //param
-	    codesize = (*data++); //num
-	    codesize += (*data++)*256;
-	    return data-odata;
-	}
+    case 'f':
+        return 2;
+    case 'u':
+        return strlen((const char*)data)+1;
+    case 't':
+        return strlen((const char*)data)+1;
+    case 'l':
+        return strlen((const char*)data)+1;
+    case 'c':
+        return strlen((const char*)data)+1;
+    case 'C':
+        return 2;
+    case 's':
+        return 1;
+    case 'm':
+        return 1;
+    case 'b':
+        return 2;
+    case 'r':
+        return 1;
+    case 'p': {
+        U8 type = *data++;
+        if(type == 0) {
+            return 1+strlen((const char*)data)+1; //string
+        } else if (type == 1) {
+            return 1+4; //float
+        } else if (type == 2) {
+            return 1+0; //NULL
+        } else if (type == 3) {
+            return 1+0; //Undefined
+        } else if (type == 4) {
+            return 1+1; //register
+        } else if (type == 5) {
+            return 1+1; //bool
+        } else if (type == 6) {
+            return 1+8; //double
+        } else if (type == 7) {
+            return 1+4; //int
+        } else if (type == 8) {
+            return 1+1; //lookup
+        } else if (type == 9) {
+            return 1+2; //lookup 16
+        } else return 1;
+        break;
+    }
+    case 'o': {
+        return 2;
+    }
+    case '{': {
+        U16 num;
+        U16 codesize;
+        U8* odata = data;
+        int t;
+        while(*data++); //name
+        num = (*data++); //num
+        num += (*data++)*256;
+        for(t=0;t<num;t++)
+            while(*data++); //param
+        codesize = (*data++); //num
+        codesize += (*data++)*256;
+        return data-odata;
+    }
     }
     return 0;
 }
 #define ATAG_FULLLENGTH(atag) ((atag)->len + 1 + ((atag)->op&0x80?2:0))
 #define MAX_LEVELS 16
 /* TODO: * this should be in swfdump.c */
-void swf_DumpActions(ActionTAG*atag, char*prefix) 
+void swf_DumpActions(ActionTAG*atag, char*prefix)
 {
     int t;
     U8*data;
@@ -303,8 +303,8 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
     int entry = 0;
     char spaces[MAX_LEVELS*4+1];
     struct {
-	char*text;
-	int count;
+        char*text;
+        int count;
     } counter[MAX_LEVELS];
     int countpos = 0;
 #ifdef MAX_LOOKUP
@@ -314,212 +314,212 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
     memset(spaces, 32, sizeof(spaces));
     spaces[sizeof(spaces)-1] = 0;
 
-   if (!prefix)
+    if (!prefix)
         prefix="";
 
     while(atag)
     {
-	char*indent = &spaces[sizeof(spaces)-1-countpos*4];
-	U16 poollen = 0;
-	for(t=0;t<definedactions;t++)
-	    if(actions[t].op == atag->op)
-		break;
+        char*indent = &spaces[sizeof(spaces)-1-countpos*4];
+        U16 poollen = 0;
+        for(t=0;t<definedactions;t++)
+            if(actions[t].op == atag->op)
+                break;
 
-	if(t==definedactions) {
-	    printf("%s (%5d bytes) action:%s unknown[%02x]", prefix, atag->len, indent, atag->op);
-	} else {
-	    printf("%s (%5d bytes) action:%s %s", prefix, atag->len, indent, actions[t].name);
-	}
-	data = atag->data;
-	if(atag->len && t!=definedactions) //TODO: check for consistency: should we have a length?
-	{
-	  cp = actions[t].flags;
-	  while(*cp)
-	  {
-	      switch(*cp)
-	      {
-		  case 'f': { //frame
-		      printf(" %d", data[0]+256*data[1]);
-		  } break;
-		  case 'u': {
-		      printf(" URL:\"%s\"", data);
-		  } break;
-		  case 't': {
-		      printf(" Target:\"%s\"", data);
-		  } break;
-		  case 'l': {
-		      printf(" Label:\"%s\"", data);
-		  } break;
-		  case 'c': {
-		      printf(" String:\"%s\"", data);
+        if(t==definedactions) {
+            printf("%s (%5d bytes) action:%s unknown[%02x]", prefix, atag->len, indent, atag->op);
+        } else {
+            printf("%s (%5d bytes) action:%s %s", prefix, atag->len, indent, actions[t].name);
+        }
+        data = atag->data;
+        if(atag->len && t!=definedactions) //TODO: check for consistency: should we have a length?
+        {
+            cp = actions[t].flags;
+            while(*cp)
+            {
+                switch(*cp)
+                {
+                case 'f': { //frame
+                    printf(" %d", data[0]+256*data[1]);
+                } break;
+                case 'u': {
+                    printf(" URL:\"%s\"", data);
+                } break;
+                case 't': {
+                    printf(" Target:\"%s\"", data);
+                } break;
+                case 'l': {
+                    printf(" Label:\"%s\"", data);
+                } break;
+                case 'c': {
+                    printf(" String:\"%s\"", data);
 #ifdef MAX_LOOKUP
-		      if (entry<MAX_LOOKUP)
-			lookup[entry++] = strdup((const char*)data);
+                    if (entry<MAX_LOOKUP)
+                        lookup[entry++] = strdup((const char*)data);
 #endif
-		  } break;
-		  case 'C': {
-		      poollen = data[0]+256*data[1];
-		      entry = 0;
-		      printf("(%d entries)", poollen);
-		  } break;
-		  case 's': {
-		      printf(" +%d", *data);
-		  } break;
-		  case 'm': {
-		      //m: method (byte) url:(0=none, 1=get, 2=datat)/gf2:(1=play)
-		      printf(" %d", *data);
-		  } break;
-		  case '{': {
-		      U16 num;
-		      U16 codesize;
-		      int s = 0;
-		      int t;
-		      printf(" %s(", data);
-		      while(data[s++]); //name
-		      num = (data[s++]); //num
-		      num += (data[s++])*256;
-		      for(t=0;t<num;t++) {
-			  printf("%s",data+s);  // 10/22/04 MD: added +s to
-			  if(t<num-1)
-			      printf(", ");
-			  while(data[s++]); //param
-		      }
-		      printf(")");
-		      codesize = (data[s++]); //num
-		      codesize += (data[s++])*256;
-		      printf(" codesize:%d ",codesize);
-		      printf("\n%s                       %s{", prefix, indent);
-		      if(countpos>=15) {
-			  printf("Error: nested too deep\n");
-			  continue;
-		      }
-		      counter[countpos].text = "}";
-		      counter[countpos].count = codesize + ATAG_FULLLENGTH(atag);
-		      countpos++;
-		  } break;
-		  case 'o': {
-		      int t;
-		      U16 codesize = data[0]+256*data[1];
-		      printf(" codesize:%d ", codesize);
+                } break;
+                case 'C': {
+                    poollen = data[0]+256*data[1];
+                    entry = 0;
+                    printf("(%d entries)", poollen);
+                } break;
+                case 's': {
+                    printf(" +%d", *data);
+                } break;
+                case 'm': {
+                    //m: method (byte) url:(0=none, 1=get, 2=datat)/gf2:(1=play)
+                    printf(" %d", *data);
+                } break;
+                case '{': {
+                    U16 num;
+                    U16 codesize;
+                    int s = 0;
+                    int t;
+                    printf(" %s(", data);
+                    while(data[s++]); //name
+                    num = (data[s++]); //num
+                    num += (data[s++])*256;
+                    for(t=0;t<num;t++) {
+                        printf("%s",data+s);  // 10/22/04 MD: added +s to
+                        if(t<num-1)
+                            printf(", ");
+                        while(data[s++]); //param
+                    }
+                    printf(")");
+                    codesize = (data[s++]); //num
+                    codesize += (data[s++])*256;
+                    printf(" codesize:%d ",codesize);
+                    printf("\n%s                       %s{", prefix, indent);
+                    if(countpos>=15) {
+                        printf("Error: nested too deep\n");
+                        continue;
+                    }
+                    counter[countpos].text = "}";
+                    counter[countpos].count = codesize + ATAG_FULLLENGTH(atag);
+                    countpos++;
+                } break;
+                case 'o': {
+                    int t;
+                    U16 codesize = data[0]+256*data[1];
+                    printf(" codesize:%d ", codesize);
 
-		      /* the following tries to find the "string"
-			 the flash documentation speaks of- I've
-			 never actually seen one yet. -mk */
-		      for(t=2;t<atag->len;t++)
-			  printf("[%02x]", atag->data[t]);
+                    /* the following tries to find the "string"
+             the flash documentation speaks of- I've
+             never actually seen one yet. -mk */
+                    for(t=2;t<atag->len;t++)
+                        printf("[%02x]", atag->data[t]);
 
-		      printf("\n%s                       %s{", prefix, indent);
-		      if(countpos>=15) {
-			  printf("Error: nested too deep\n");
-			  continue;
-		      }
-		      counter[countpos].text = "}";
-		      counter[countpos].count = codesize + ATAG_FULLLENGTH(atag);
-		      countpos++;
-		  } break;
-		  case 'b': {
-		      printf(" %d", data[0]+256*(signed char)data[1]);
-		  } break;
-		  case 'r': {
-		      printf(" %d", data[0]);
-		  } break;
-		  case 'p': {
-		      U8 type = *data;
-		      unsigned char*value = data+1;
-		      if(type == 0) {
-			  printf(" String:\"%s\"", value);
-		      } else if (type == 1) {
-			  U32 f = value[0]+(value[1]<<8)+
-				  (value[2]<<16)+(value[3]<<24);
-			  printf(" Float:%f", *(float*)&f);
-		      } else if (type == 2) {
-			  printf(" NULL");
-		      } else if (type == 3) {
-			  printf(" Undefined");
-		      } else if (type == 4) {
-			  printf(" register:%d", *value);
-		      } else if (type == 5) {
-			  printf(" bool:%s", *value?"true":"false");
-		      } else if (type == 6) {
-			  U8 a[8];
-			  memcpy(&a[4],value,4);
-			  memcpy(a,&value[4],4);
+                    printf("\n%s                       %s{", prefix, indent);
+                    if(countpos>=15) {
+                        printf("Error: nested too deep\n");
+                        continue;
+                    }
+                    counter[countpos].text = "}";
+                    counter[countpos].count = codesize + ATAG_FULLLENGTH(atag);
+                    countpos++;
+                } break;
+                case 'b': {
+                    printf(" %d", data[0]+256*(signed char)data[1]);
+                } break;
+                case 'r': {
+                    printf(" %d", data[0]);
+                } break;
+                case 'p': {
+                    U8 type = *data;
+                    unsigned char*value = data+1;
+                    if(type == 0) {
+                        printf(" String:\"%s\"", value);
+                    } else if (type == 1) {
+                        U32 f = value[0]+(value[1]<<8)+
+                                (value[2]<<16)+(value[3]<<24);
+                        printf(" Float:%f", *(float*)&f);
+                    } else if (type == 2) {
+                        printf(" NULL");
+                    } else if (type == 3) {
+                        printf(" Undefined");
+                    } else if (type == 4) {
+                        printf(" register:%d", *value);
+                    } else if (type == 5) {
+                        printf(" bool:%s", *value?"true":"false");
+                    } else if (type == 6) {
+                        U8 a[8];
+                        memcpy(&a[4],value,4);
+                        memcpy(a,&value[4],4);
 #ifdef WORDS_BIGENDIAN
-			  int t;
-			  for(t=0;t<4;t++) {
-			      U8 tmp = a[t];
-			      a[t]=a[7-t];
-			      a[7-t] = tmp;
-			  }
+                        int t;
+                        for(t=0;t<4;t++) {
+                            U8 tmp = a[t];
+                            a[t]=a[7-t];
+                            a[7-t] = tmp;
+                        }
 #endif
-			  printf(" double:%f", *(double*)a);
-		      } else if (type == 7) {
-			  printf(" int:%d", value[0]+(value[1]<<8)+
-					    (value[2]<<16)+(value[3]<<24));
-		      } else if (type == 8) {
-			  printf(" Lookup:%d", *value);
+                        printf(" double:%f", *(double*)a);
+                    } else if (type == 7) {
+                        printf(" int:%d", value[0]+(value[1]<<8)+
+                                (value[2]<<16)+(value[3]<<24));
+                    } else if (type == 8) {
+                        printf(" Lookup:%d", *value);
 #ifdef MAX_LOOKUP
-			  if (lookup[*value])
-			    printf(" (\"%s\")",lookup[*value]);
+                        if (lookup[*value])
+                            printf(" (\"%s\")",lookup[*value]);
 #endif
-		      } else if (type == 9) {
-			  U32 offset = value[0]+(value[1]<<8);
-			  printf(" Lookup16:%d", offset);
+                    } else if (type == 9) {
+                        U32 offset = value[0]+(value[1]<<8);
+                        printf(" Lookup16:%d", offset);
 #ifdef MAX_LOOKUP
-			  if (lookup[offset])
-			    printf(" (\"%s\")",lookup[offset]);
+                        if (lookup[offset])
+                            printf(" (\"%s\")",lookup[offset]);
 #endif
-		      } else {
-			  printf(" UNKNOWN[%02x]",type);
-		      }
-		  } break;
-	      }
-	      data += OpAdvance(*cp, data);
-	      if((*cp!='c' || !poollen) &&
-		 (*cp!='p' || !(data<&atag->data[atag->len])))
-		  cp++;
-	      if(poollen)
-		  poollen--;
-	  }
-	}
+                    } else {
+                        printf(" UNKNOWN[%02x]",type);
+                    }
+                } break;
+                }
+                data += OpAdvance(*cp, data);
+                if((*cp!='c' || !poollen) &&
+                        (*cp!='p' || !(data<&atag->data[atag->len])))
+                    cp++;
+                if(poollen)
+                    poollen--;
+            }
+        }
 
-	if(data < atag->data + atag->len)
-	{
-	    int nl = ((atag->data+atag->len)-data);
-	    int t;
-	    printf(" (remainder of %d bytes:\"", nl);
-	    for(t=0;t<nl;t++) {
-		if(data[t]<32)
-		    printf("\\%d",data[t]);
-		else
-		    printf("%c", data[t]);
-	    }
-	    printf("\")");
-	}
-	printf("\n");
+        if(data < atag->data + atag->len)
+        {
+            int nl = ((atag->data+atag->len)-data);
+            int t;
+            printf(" (remainder of %d bytes:\"", nl);
+            for(t=0;t<nl;t++) {
+                if(data[t]<32)
+                    printf("\\%d",data[t]);
+                else
+                    printf("%c", data[t]);
+            }
+            printf("\")");
+        }
+        printf("\n");
 
-	for(t=0;t<countpos;t++) {
-	    counter[t].count -= ATAG_FULLLENGTH(atag);
-	    if(counter[t].count < 0) {
-		printf("===== Error: Oplength errors =====\n");
-		countpos = 0;
-		break;
-	    }
-	}
+        for(t=0;t<countpos;t++) {
+            counter[t].count -= ATAG_FULLLENGTH(atag);
+            if(counter[t].count < 0) {
+                printf("===== Error: Oplength errors =====\n");
+                countpos = 0;
+                break;
+            }
+        }
 
-	while(countpos && !counter[countpos-1].count)
-	{
-	    printf("%s                   %s%s\n", 
-		prefix, indent, counter[countpos-1].text);
-	    indent += 4;
-	    countpos--;
-	}
+        while(countpos && !counter[countpos-1].count)
+        {
+            printf("%s                   %s%s\n",
+                   prefix, indent, counter[countpos-1].text);
+            indent += 4;
+            countpos--;
+        }
 
-	atag = atag->next;
+        atag = atag->next;
     }
 
 #ifdef MAX_LOOKUP
-  for (t=0;t<MAX_LOOKUP;t++) if (lookup[t]) free(lookup[t]);
+    for (t=0;t<MAX_LOOKUP;t++) if (lookup[t]) free(lookup[t]);
 #endif
 }
 
@@ -535,92 +535,92 @@ int swf_ActionEnumerate(ActionTAG*atag, char*(*callback)(char*), int type)
     int count = 0;
     while(atag)
     {
-	U16 poollen = 0;
-	for(t=0;t<definedactions;t++)
-	    if(actions[t].op == atag->op)
-		break;
+        U16 poollen = 0;
+        for(t=0;t<definedactions;t++)
+            if(actions[t].op == atag->op)
+                break;
 
-	if(t==definedactions) {
-	    // unknown actiontag
-	    atag = atag->next;
-	    count++;
-	    continue;
-	}
-	cp = actions[t].flags;
-	data = atag->data;
-	if(atag->len) {
-	    while(*cp) {
-		U8 * replacepos = 0;
-		int replacelen = 0;
-		U8 * replacement = 0;
-		switch(*cp)
-		{
-		    case 'u': {
-			if(type&TYPE_URL)
-			{
-			    replacelen = strlen((const char*)data);
-			    replacepos = data;
-			    replacement = (U8*)callback((char*)data); // may be null
-			}
-		    } break;
-	    	    case 't': {
-			if(type&TYPE_TARGET)
-			{
-			    replacelen = strlen((const char*)data);
-			    replacepos = data;
-			    replacement = (U8*)callback((char*)data); // may be null
-			}
-		    } break;
-		    case 'c': {
-		    	if(type&TYPE_STRING)
-			{
-			    replacelen = strlen((const char*)data);
-			    replacepos = data;
-			    replacement = (U8*)callback((char*)data); // may be null
-			}
-		    } break;
-		    case 'C': {
-			poollen = (data[0]+256*data[1]);
-		    } break;
-		    case 'o': {
-		    } break;
-		    case 'p': {
-			U8 datatype = *data;
-			char*value = (char*)&data[1];
-			if(datatype == 0) { //string
-			    if(type&TYPE_STRING)
-			    {
-				replacelen = strlen(value);
-				replacepos = (U8*)value;
-				replacement = (U8*)callback(value); // may be null
-			    }
-			} else if (datatype == 8) { //lookup
-			}
-		    } break;
-		}
-		data += OpAdvance(*cp, data);
-		if(*cp!='c' || !poollen)
-		    cp++;
-		if(poollen)
-		    poollen--;
+        if(t==definedactions) {
+            // unknown actiontag
+            atag = atag->next;
+            count++;
+            continue;
+        }
+        cp = actions[t].flags;
+        data = atag->data;
+        if(atag->len) {
+            while(*cp) {
+                U8 * replacepos = 0;
+                int replacelen = 0;
+                U8 * replacement = 0;
+                switch(*cp)
+                {
+                case 'u': {
+                    if(type&TYPE_URL)
+                    {
+                        replacelen = strlen((const char*)data);
+                        replacepos = data;
+                        replacement = (U8*)callback((char*)data); // may be null
+                    }
+                } break;
+                case 't': {
+                    if(type&TYPE_TARGET)
+                    {
+                        replacelen = strlen((const char*)data);
+                        replacepos = data;
+                        replacement = (U8*)callback((char*)data); // may be null
+                    }
+                } break;
+                case 'c': {
+                    if(type&TYPE_STRING)
+                    {
+                        replacelen = strlen((const char*)data);
+                        replacepos = data;
+                        replacement = (U8*)callback((char*)data); // may be null
+                    }
+                } break;
+                case 'C': {
+                    poollen = (data[0]+256*data[1]);
+                } break;
+                case 'o': {
+                } break;
+                case 'p': {
+                    U8 datatype = *data;
+                    char*value = (char*)&data[1];
+                    if(datatype == 0) { //string
+                        if(type&TYPE_STRING)
+                        {
+                            replacelen = strlen(value);
+                            replacepos = (U8*)value;
+                            replacement = (U8*)callback(value); // may be null
+                        }
+                    } else if (datatype == 8) { //lookup
+                    }
+                } break;
+                }
+                data += OpAdvance(*cp, data);
+                if(*cp!='c' || !poollen)
+                    cp++;
+                if(poollen)
+                    poollen--;
 
-		if(replacement)
-		{
-		    int newlen = strlen((const char *)replacement);
-		    char * newdata = (char*)malloc(atag->len - replacelen + newlen);
-		    int rpos = replacepos - atag->data;
-		    memcpy(newdata, atag->data, rpos);
-		    memcpy(&newdata[rpos], replacement, newlen);
-		    memcpy(&newdata[rpos+newlen], &replacepos[replacelen],
-			    &data[atag->len] - &replacepos[replacelen]);
-		    free(atag->data);
-		    atag->data = (U8*)newdata;
-		    data = &atag->data[rpos+newlen+1];
-		}
-	    }
-	}
-	atag = atag->next;
-	count ++;
+                if(replacement)
+                {
+                    int newlen = strlen((const char *)replacement);
+                    char * newdata = (char*)malloc(atag->len - replacelen + newlen);
+                    int rpos = replacepos - atag->data;
+                    memcpy(newdata, atag->data, rpos);
+                    memcpy(&newdata[rpos], replacement, newlen);
+                    memcpy(&newdata[rpos+newlen], &replacepos[replacelen],
+                            &data[atag->len] - &replacepos[replacelen]);
+                    free(atag->data);
+                    atag->data = (U8*)newdata;
+                    data = &atag->data[rpos+newlen+1];
+                }
+            }
+        }
+        atag = atag->next;
+        count ++;
     }
     return count;
 }
@@ -654,23 +654,23 @@ void swf_ActionEnd(ActionTAG* atag)
 {
     ActionTAG*last;
     while(atag) {
-	last = atag;
-	atag=atag->next;
-    } 
+    last = atag;
+    atag=atag->next;
+    }
 
     last->prev->next = 0;
     free(last);
-}*/
+}
 
 static ActionTAG*lastATAG(ActionTAG*atag)
 {
     ActionTAG*last = 0;
     while(atag) {
-	last = atag;
-	atag=atag->next;
-    } 
+    last = atag;
+    atag=atag->next;
+    }
     return last;
-}
+}*/
 
 ActionTAG* swf_AddActionTAG(ActionTAG*atag, U8 op, U8*data, U16 len)
 {
@@ -678,17 +678,17 @@ ActionTAG* swf_AddActionTAG(ActionTAG*atag, U8 op, U8*data, U16 len)
     tmp = (ActionTAG*)malloc(sizeof(ActionTAG));
     tmp->next = 0;
     if(atag) {
-	tmp->prev = atag;
-	atag->next = tmp;
-	tmp->parent = atag->parent;
+        tmp->prev = atag;
+        atag->next = tmp;
+        tmp->parent = atag->parent;
     } else {
-	tmp->prev = 0;
-	tmp->parent = tmp;
+        tmp->prev = 0;
+        tmp->parent = tmp;
     }
     if(data || !len) {
-	tmp->data = data;
+        tmp->data = data;
     } else {
-	tmp->data = tmp->tmp;
+        tmp->data = tmp->tmp;
     }
 
     tmp->len = len;
@@ -809,44 +809,44 @@ void action_fixjump(ActionMarker m1, ActionMarker m2)
     int len = 0;
     int oplen = 0;
     a = a1;
-    
+
     a = a->next; //first one is free
     while(a && a!=a2)
     {
-	len += ActionTagSize(a);
-	oplen ++;
-	a = a->next;
+        len += ActionTagSize(a);
+        oplen ++;
+        a = a->next;
     }
     if(!a)
     { len = 0;
-      oplen = 0;
-      a = a2;
-      while(a && a!=a1) {
-	  len -= ActionTagSize(a);
-	  oplen --;
-	  a = a->next;
-      }
-      if(!a) {
-	  fprintf(stderr, "action_fixjump: couldn't find second tag\n");
-	  return;
-      }
-      len -= ActionTagSize(a);
-      oplen --;
+        oplen = 0;
+        a = a2;
+        while(a && a!=a1) {
+            len -= ActionTagSize(a);
+            oplen --;
+            a = a->next;
+        }
+        if(!a) {
+            fprintf(stderr, "action_fixjump: couldn't find second tag\n");
+            return;
+        }
+        len -= ActionTagSize(a);
+        oplen --;
     }
 
-    if (a1->op == ACTION_IF || a1->op == ACTION_JUMP) 
+    if (a1->op == ACTION_IF || a1->op == ACTION_JUMP)
     {
-	*(U16*)(a1->data) = LE_16_TO_NATIVE(len);
+        *(U16*)(a1->data) = LE_16_TO_NATIVE(len);
     }
     else if(a1->op == ACTION_WAITFORFRAME)
     {
-	((U8*)(a1->data))[2] = oplen;
+        ((U8*)(a1->data))[2] = oplen;
     }
     else if(a1->op == ACTION_WAITFORFRAME2)
     {
-	((U8*)(a1->data))[0] = oplen;
+        ((U8*)(a1->data))[0] = oplen;
     }
-    
+
 }
 
 ActionTAG* action_NextFrame(ActionTAG*atag) {return swf_AddActionTAG(atag, ACTION_NEXTFRAME, 0, 0);}
@@ -923,50 +923,50 @@ ActionTAG* action_BitRShift(ActionTAG*atag) {return swf_AddActionTAG(atag, ACTIO
 ActionTAG* action_BitURShift(ActionTAG*atag) {return swf_AddActionTAG(atag, ACTION_BITURSHIFT, 0, 0);}
 ActionTAG* action_Call(ActionTAG*atag) {return swf_AddActionTAG(atag, ACTION_CALL, 0, 0);}
 ActionTAG* action_End(ActionTAG*atag) {return swf_AddActionTAG(atag, ACTION_END, 0, 0);}
-ActionTAG* action_GotoFrame(ActionTAG*atag, U16 frame) 
+ActionTAG* action_GotoFrame(ActionTAG*atag, U16 frame)
 {
     atag = swf_AddActionTAG(atag, ACTION_GOTOFRAME, 0, 2);
     *(U16*)atag->tmp = LE_16_TO_NATIVE(frame);
     return atag;
 }
 
-ActionTAG* action_Jump(ActionTAG*atag, U16 branch) 
+ActionTAG* action_Jump(ActionTAG*atag, U16 branch)
 {
     atag = swf_AddActionTAG(atag, ACTION_JUMP, 0, 2);
     *(U16*)atag->tmp = LE_16_TO_NATIVE(branch);
     return atag;
 }
-ActionTAG* action_If(ActionTAG*atag, U16 branch) 
+ActionTAG* action_If(ActionTAG*atag, U16 branch)
 {
     atag = swf_AddActionTAG(atag, ACTION_IF, 0, 2);
     *(U16*)atag->tmp = LE_16_TO_NATIVE(branch);
     return atag;
 }
-ActionTAG* action_StoreRegister(ActionTAG*atag, U8 reg) 
+ActionTAG* action_StoreRegister(ActionTAG*atag, U8 reg)
 {
     atag = swf_AddActionTAG(atag, ACTION_STOREREGISTER, 0, 1);
     *(U8*)atag->tmp = reg;
     return atag;
 }
-ActionTAG* action_GotoFrame2(ActionTAG*atag, U8 method) 
+ActionTAG* action_GotoFrame2(ActionTAG*atag, U8 method)
 {
     atag = swf_AddActionTAG(atag, ACTION_GOTOFRAME2, 0, 1);
     *(U8*)atag->tmp = method;
     return atag;
 }
-ActionTAG* action_GetUrl2(ActionTAG*atag, U8 method) 
+ActionTAG* action_GetUrl2(ActionTAG*atag, U8 method)
 {
     atag = swf_AddActionTAG(atag, ACTION_GETURL2, 0, 1);
     *(U8*)atag->tmp = method;
     return atag;
 }
-ActionTAG* action_WaitForFrame2(ActionTAG*atag, U8 skip) 
+ActionTAG* action_WaitForFrame2(ActionTAG*atag, U8 skip)
 {
     atag = swf_AddActionTAG(atag, ACTION_WAITFORFRAME2, 0, 1);
     *(U8*)atag->tmp = skip;
     return atag;
 }
-ActionTAG* action_WaitForFrame(ActionTAG*atag, U16 frame, U8 skip) 
+ActionTAG* action_WaitForFrame(ActionTAG*atag, U16 frame, U8 skip)
 {
     atag = swf_AddActionTAG(atag, ACTION_WAITFORFRAME, 0, 3);
     *(U16*)atag->tmp = LE_16_TO_NATIVE(frame);
@@ -978,40 +978,40 @@ ActionTAG* action_SetTarget(ActionTAG*atag, const char* target)
     char*ptr = strdup(target);
     return swf_AddActionTAG(atag, ACTION_SETTARGET, (U8*)ptr, strlen(ptr)+1);
 }
-ActionTAG* action_PushNULL(ActionTAG*atag) 
+ActionTAG* action_PushNULL(ActionTAG*atag)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 1);
     *(U8*)atag->tmp = 2; //NULL
     return atag;
 }
-ActionTAG* action_PushUndefined(ActionTAG*atag) 
+ActionTAG* action_PushUndefined(ActionTAG*atag)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 1);
     *(U8*)atag->tmp = 3; //Undefined
     return atag;
 }
-ActionTAG* action_PushBoolean(ActionTAG*atag, char c) 
+ActionTAG* action_PushBoolean(ActionTAG*atag, char c)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 2);
     *(U8*)atag->tmp = 5; //bool
     *(U8*)&atag->tmp[1] = c;
     return atag;
 }
-ActionTAG* action_PushRegister(ActionTAG*atag, U8 reg) 
+ActionTAG* action_PushRegister(ActionTAG*atag, U8 reg)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 2);
     *(U8*)atag->tmp = 4; //register
     *(U8*)&atag->tmp[1] = reg;
     return atag;
 }
-ActionTAG* action_PushLookup(ActionTAG*atag, U8 index) 
+ActionTAG* action_PushLookup(ActionTAG*atag, U8 index)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 2);
     *(U8*)atag->tmp = 8; //lookup
     *(U8*)&atag->tmp[1] = index;
     return atag;
 }
-ActionTAG* action_PushLookup16(ActionTAG*atag, U16 index) 
+ActionTAG* action_PushLookup16(ActionTAG*atag, U16 index)
 {
     atag = swf_AddActionTAG(atag, ACTION_PUSH, 0, 3);
     *(U8*)atag->tmp = 9; //lookup
@@ -1019,7 +1019,7 @@ ActionTAG* action_PushLookup16(ActionTAG*atag, U16 index)
     *(U8*)&atag->tmp[2] = index>>8;
     return atag;
 }
-ActionTAG* action_PushString(ActionTAG*atag, const char*str) 
+ActionTAG* action_PushString(ActionTAG*atag, const char*str)
 {
     int l = strlen(str);
     char*ptr = (char*)malloc(l+2);
@@ -1038,7 +1038,7 @@ ActionTAG* action_PushFloat(ActionTAG*atag, float f)
     ptr[4]  = fd>>24;
     return swf_AddActionTAG(atag, ACTION_PUSH, (U8*)ptr, 5);
 }
-ActionTAG* action_PushDouble(ActionTAG*atag, double d) 
+ActionTAG* action_PushDouble(ActionTAG*atag, double d)
 {
     char*ptr = (char*)malloc(9);
     U8*dd = (U8*)&d;
@@ -1071,7 +1071,7 @@ ActionTAG* action_GotoLabel(ActionTAG*atag, char* label)
     char*ptr = strdup(label);
     return swf_AddActionTAG(atag, ACTION_GOTOLABEL, (U8*)ptr, strlen(ptr));
 }
-ActionTAG* action_GetUrl(ActionTAG*atag, const char* url, char* label) 
+ActionTAG* action_GetUrl(ActionTAG*atag, const char* url, char* label)
 {
     int l1= strlen(url);
     int l2= strlen(label);
@@ -1094,11 +1094,11 @@ ActionTAG* swf_ActionCompile(const char* source, int version)
     void*buffer = 0;
     int len = 0;
     int ret;
-    
+
     tag = swf_InsertTag(NULL, ST_DOACTION);
     ret = compileSWFActionCode(source, version, &buffer, &len);
     if(!ret || buffer==0 || len == 0)
-	return 0;
+        return 0;
 
     swf_SetBlock(tag, (U8*)buffer, len);
     swf_SetU8(tag, 0);

@@ -2102,7 +2102,7 @@ static int decode_header(mp3_context_t *s, uint32_t header) {
 }
 
 static int mp_decode_layer3(mp3_context_t *s) {
-    int nb_granules, main_data_begin, private_bits;
+    int nb_granules, main_data_begin/*, private_bits*/;
     int gr, ch, blocksplit_flag, i, j, k, n, bits_pos;
     granule_t *g;
     static granule_t granules[2][2];
@@ -2111,14 +2111,14 @@ static int mp_decode_layer3(mp3_context_t *s) {
 
     if (s->lsf) {
         main_data_begin = get_bits(&s->gb, 8);
-        private_bits = get_bits(&s->gb, s->nb_channels);
+        /*private_bits = */get_bits(&s->gb, s->nb_channels);
         nb_granules = 1;
     } else {
         main_data_begin = get_bits(&s->gb, 9);
         if (s->nb_channels == 2)
-            private_bits = get_bits(&s->gb, 3);
+            /*private_bits = */get_bits(&s->gb, 3);
         else
-            private_bits = get_bits(&s->gb, 5);
+            /*private_bits = */get_bits(&s->gb, 5);
         nb_granules = 2;
         for(ch=0;ch<s->nb_channels;ch++) {
             granules[ch][0].scfsi = 0; /* all scale factors are transmitted */
@@ -2340,7 +2340,7 @@ static int mp_decode_layer3(mp3_context_t *s) {
                             g->scale_factors[j++] = get_bits(&s->gb, sl);
                     }else{
                         libc_memset((void*) &g->scale_factors[j], 0, n);
-                        j += n;                        
+                        j += n;
 //                        for(i=0;i<n;i++)
 //                            g->scale_factors[j++] = 0;
                     }
@@ -2384,28 +2384,28 @@ static int mp3_decode_main(
     if (s->error_protection)
         get_bits(&s->gb, 16);
 
-        nb_frames = mp_decode_layer3(s);
+    nb_frames = mp_decode_layer3(s);
 
-        s->last_buf_size=0;
-        if(s->in_gb.buffer){
-            align_get_bits(&s->gb);
-            i= (s->gb.size_in_bits - get_bits_count(&s->gb))>>3;
-            if(i >= 0 && i <= BACKSTEP_SIZE){
-                libc_memmove(s->last_buf, s->gb.buffer + (get_bits_count(&s->gb)>>3), i);
-                s->last_buf_size=i;
-            }
-            s->gb= s->in_gb;
-        }
-
+    s->last_buf_size=0;
+    if(s->in_gb.buffer){
         align_get_bits(&s->gb);
         i= (s->gb.size_in_bits - get_bits_count(&s->gb))>>3;
-
-        if(i<0 || i > BACKSTEP_SIZE || nb_frames<0){
-            i = buf_size - HEADER_SIZE;
-            if (BACKSTEP_SIZE < i) i = BACKSTEP_SIZE;
+        if(i >= 0 && i <= BACKSTEP_SIZE){
+            libc_memmove(s->last_buf, s->gb.buffer + (get_bits_count(&s->gb)>>3), i);
+            s->last_buf_size=i;
         }
-        libc_memcpy(s->last_buf + s->last_buf_size, s->gb.buffer + buf_size - HEADER_SIZE - i, i);
-        s->last_buf_size += i;
+        s->gb= s->in_gb;
+    }
+
+    align_get_bits(&s->gb);
+    i= (s->gb.size_in_bits - get_bits_count(&s->gb))>>3;
+
+    if(i<0 || i > BACKSTEP_SIZE || nb_frames<0){
+        i = buf_size - HEADER_SIZE;
+        if (BACKSTEP_SIZE < i) i = BACKSTEP_SIZE;
+    }
+    libc_memcpy(s->last_buf + s->last_buf_size, s->gb.buffer + buf_size - HEADER_SIZE - i, i);
+    s->last_buf_size += i;
 
     /* apply the synthesis filter */
     for(ch=0;ch<s->nb_channels;ch++) {
@@ -2448,7 +2448,7 @@ static int mp3_decode_init(mp3_context_t *s) {
         for(i=1;i<16;i++) {
             const huff_table_t *h = &mp3_huff_tables[i];
             int xsize, x, y;
-            unsigned int n;
+            //unsigned int n;
             uint8_t  tmp_bits [512];
             uint16_t tmp_codes[512];
 
@@ -2456,7 +2456,7 @@ static int mp3_decode_init(mp3_context_t *s) {
             libc_memset(tmp_codes, 0, sizeof(tmp_codes));
 
             xsize = h->xsize;
-            n = xsize * xsize;
+            //n = xsize * xsize;
 
             j = 0;
             for(x=0;x<xsize;x++) {

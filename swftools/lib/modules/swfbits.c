@@ -1,12 +1,12 @@
 /* swfbits.c
 
-   Bitmap functions (needs libjpeg) 
+   Bitmap functions (needs libjpeg)
 
    Extension module for the rfxswf library.
    Part of the swftools package.
 
    Copyright (c) 2000, 2001 Rainer Bˆhme <rfxswf@reflex-studio.de>
- 
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -421,8 +421,8 @@ typedef struct _JPEGFILEMGR {
     FILE*fi;
 } JPEGFILEMGR;
 
-static void file_init_destination(j_compress_ptr cinfo) 
-{ 
+static void file_init_destination(j_compress_ptr cinfo)
+{
     JPEGFILEMGR*fmgr = (JPEGFILEMGR*)(cinfo->dest);
     struct jpeg_destination_mgr*dmgr = &fmgr->mgr;
 
@@ -438,7 +438,7 @@ static void file_init_destination(j_compress_ptr cinfo)
 }
 
 static boolean file_empty_output_buffer(j_compress_ptr cinfo)
-{ 
+{
     JPEGFILEMGR*fmgr = (JPEGFILEMGR*)(cinfo->dest);
     struct jpeg_destination_mgr*dmgr = &fmgr->mgr;
 
@@ -450,8 +450,8 @@ static boolean file_empty_output_buffer(j_compress_ptr cinfo)
     return 1;
 }
 
-static void file_term_destination(j_compress_ptr cinfo) 
-{ 
+static void file_term_destination(j_compress_ptr cinfo)
+{
     JPEGFILEMGR*fmgr = (JPEGFILEMGR*)(cinfo->dest);
     struct jpeg_destination_mgr*dmgr = &fmgr->mgr;
 
@@ -833,7 +833,7 @@ int swf_SetLosslessBitsIndexed(TAG * t, U16 width, U16 height, U8 * bitmap, RGBA
                     }
                     zs.avail_in = 4 * ncolors;
                 } else {
-                    for (i = 0; i < ncolors; i++)        // pack RGBA structures to RGB 
+                    for (i = 0; i < ncolors; i++)        // pack RGBA structures to RGB
                     {
                         pp[0] = pal[i].r;
                         pp[1] = pal[i].g;
@@ -939,7 +939,9 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG * tag, int *dwidth, int *dheight)
 {
     int id, format, height, width, pos;
     size_t datalen;//, datalen2;
+#ifdef HAVE_ZLIB
     int error;
+#endif
     int bpp = 1;
     int cols = 0;
     int pos2 = 0;
@@ -1161,54 +1163,6 @@ int swf_SetJPEGBits3(TAG * tag, U16 width, U16 height, RGBA * bitmap, int qualit
     return -1;
 }
 #endif
-
-
-/* expects mem to be non-premultiplied */
-TAG* swf_AddImage(TAG*tag, int bitid, RGBA*mem, int width, int height, int quality)
-{
-    TAG *tag1 = 0, *tag2 = 0;
-    int has_alpha = swf_ImageHasAlpha(mem,width,height);
-
-    /* try lossless image */
-
-#if defined(NO_LOSSLESS) || !defined(HAVE_ZLIB)
-    tag1 = swf_InsertTag(0, /*ST_DEFINEBITSLOSSLESS1/2*/0);
-    tag1->len = 0x7fffffff;
-#else
-    tag1 = swf_InsertTag(0, /*ST_DEFINEBITSLOSSLESS1/2*/0);
-    swf_SetU16(tag1, bitid);
-    swf_SetLosslessImage(tag1, mem, width, height);
-#endif
-
-#if defined(HAVE_JPEGLIB)
-    /* try jpeg image. Notice that if (and only if) we tried the lossless compression
-       above, the data will now be premultiplied with alpha. */
-    if(has_alpha) {
-        tag2 = swf_InsertTag(0, ST_DEFINEBITSJPEG3);
-        swf_SetU16(tag2, bitid);
-        swf_SetJPEGBits3(tag2, width, height, mem, quality);
-    } else {
-        tag2 = swf_InsertTag(0, ST_DEFINEBITSJPEG2);
-        swf_SetU16(tag2, bitid);
-        swf_SetJPEGBits2(tag2, width, height, mem, quality);
-    }
-#endif
-
-    if(quality>100 || !tag2 || (tag1 && tag1->len < tag2->len)) {
-        /* use the zlib version- it's smaller */
-        tag1->prev = tag;
-        if(tag) tag->next = tag1;
-        tag = tag1;
-        swf_DeleteTag(0, tag2);
-    } else {
-        /* use the jpeg version- it's smaller */
-        tag2->prev = tag;
-        if(tag) tag->next = tag2;
-        tag = tag2;
-        swf_DeleteTag(0, tag1);
-    }
-    return tag;
-}
 
 RGBA *swf_ExtractImage(TAG * tag, int *dwidth, int *dheight)
 {

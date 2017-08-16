@@ -1064,9 +1064,9 @@ void swf_SetShape2(TAG*tag, SHAPE2*shape2)
 
 void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
 {
-    int num = 0, morph = 0, numshapes = 1, id;
+    int num = 0, morph = 0/*, numshapes = 1, id*/;
     U16 fill,line;
-    SHAPELINE*l;
+    //SHAPELINE*l;
     if(tag->id == ST_DEFINESHAPE)
         num = 1;
     else if(tag->id == ST_DEFINESHAPE2)
@@ -1082,13 +1082,13 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
     else
         fprintf(stderr, "parseDefineShape must be called with a shape tag");
     if (tag->id == ST_DEFINEMORPHSHAPE || tag->id==ST_DEFINEMORPHSHAPE2) {
-        numshapes = 2;
+        //numshapes = 2;
         morph = 1;
     }
 
     swf_SetTagPos(tag, 0);
 
-    id = swf_GetU16(tag); //id
+    /*id = */swf_GetU16(tag);
     memset(shape, 0, sizeof(SHAPE2));
     shape->bbox = (SRECT*)malloc(sizeof(SRECT));
     swf_GetRect(tag, shape->bbox);
@@ -1126,7 +1126,7 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
 
     shape->lines = swf_ParseShapeData(&tag->data[tag->pos], (tag->len - tag->pos)*8, fill, line, num, shape);
 
-    l = shape->lines;
+    //l = shape->lines;
 }
 
 static void free_lines(SHAPELINE* lines)

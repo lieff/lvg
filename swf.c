@@ -622,9 +622,9 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
-            int id;
+            //int id;
             if (ST_REMOVEOBJECT == tag->id)
-                id = swf_GetU16(tag);
+                /*id = */swf_GetU16(tag);
             int depth = swf_GetU16(tag);
             if (ST_REMOVEOBJECT == tag->id)
             {

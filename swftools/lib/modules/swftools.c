@@ -28,76 +28,77 @@
 #define S64 long long
 SFIXED RFXSWF_SP(SFIXED a1,SFIXED a2,SFIXED b1,SFIXED b2)
 { S64 a = ((S64)a1*(S64)b1+(S64)a2*(S64)b2)>>16;
-  SFIXED result = (SFIXED)(a);
-  if(a!=result)
-      fprintf(stderr, "Warning: overflow in matrix multiplication\n");
-  return result;
+    SFIXED result = (SFIXED)(a);
+    if(a!=result)
+        fprintf(stderr, "Warning: overflow in matrix multiplication\n");
+    return result;
 }
 SFIXED RFXSWF_QFIX(int zaehler,int nenner) // bildet Quotient von zwei INTs in SFIXED
 { S64 z = zaehler<<16;
-  S64 a = z/(S64)nenner;
-  return (SFIXED)a;
+    S64 a = z/(S64)nenner;
+    return (SFIXED)a;
 }
 #undef S64
 
 MATRIX * swf_MatrixJoin(MATRIX * d,MATRIX * s1,MATRIX * s2)
 {
-  if (!d) return NULL;
-  if (!s1) return (s2)?(MATRIX *)memcpy(d,s2,sizeof(MATRIX)):NULL;
-  if (!s2) return (MATRIX *)memcpy(d,s1,sizeof(MATRIX));
+    if (!d) return NULL;
+    if (!s1) return (s2)?(MATRIX *)memcpy(d,s2,sizeof(MATRIX)):NULL;
+    if (!s2) return (MATRIX *)memcpy(d,s1,sizeof(MATRIX));
 
-  d->tx = s1->tx + RFXSWF_SP(s1->sx,s1->r1,s2->tx,s2->ty);
-  d->ty = s1->ty + RFXSWF_SP(s1->r0,s1->sy,s2->tx,s2->ty);
+    d->tx = s1->tx + RFXSWF_SP(s1->sx,s1->r1,s2->tx,s2->ty);
+    d->ty = s1->ty + RFXSWF_SP(s1->r0,s1->sy,s2->tx,s2->ty);
 
-  d->sx = RFXSWF_SP(s1->sx,s1->r1,s2->sx,s2->r0);
-  d->r0 = RFXSWF_SP(s1->r0,s1->sy,s2->sx,s2->r0);
+    d->sx = RFXSWF_SP(s1->sx,s1->r1,s2->sx,s2->r0);
+    d->r0 = RFXSWF_SP(s1->r0,s1->sy,s2->sx,s2->r0);
 
-  d->r1 = RFXSWF_SP(s1->sx,s1->r1,s2->r1,s2->sy);
-  d->sy = RFXSWF_SP(s1->r0,s1->sy,s2->r1,s2->sy);
+    d->r1 = RFXSWF_SP(s1->sx,s1->r1,s2->r1,s2->sy);
+    d->sy = RFXSWF_SP(s1->r0,s1->sy,s2->r1,s2->sy);
 
-  //DumpMatrix(NULL,d);
+    //DumpMatrix(NULL,d);
 
-  return d;
+    return d;
 }
 
 MATRIX * swf_MatrixMapTriangle(MATRIX * m,int dx,int dy,int x0,int y0,
                                int x1,int y1,int x2,int y2)
 { int dx1 = x1 - x0;
-  int dy1 = y1 - y0;
-  int dx2 = x2 - x0;
-  int dy2 = y2 - y0;
+    int dy1 = y1 - y0;
+    int dx2 = x2 - x0;
+    int dy2 = y2 - y0;
 
-  if (!m) return NULL;
-  if ((!dx)||(!dy)) return NULL; // check DIV by zero
+    if (!m) return NULL;
+    if ((!dx)||(!dy)) return NULL; // check DIV by zero
 
-  m->tx = x0;
-  m->ty = y0;
-  m->sx = RFXSWF_QFIX(dx1,dx);
-  m->sy = RFXSWF_QFIX(dy2,dy);
-  m->r0 = RFXSWF_QFIX(dy1,dx);
-  m->r1 = RFXSWF_QFIX(dx2,dy);
+    m->tx = x0;
+    m->ty = y0;
+    m->sx = RFXSWF_QFIX(dx1,dx);
+    m->sy = RFXSWF_QFIX(dy2,dy);
+    m->r0 = RFXSWF_QFIX(dy1,dx);
+    m->r1 = RFXSWF_QFIX(dx2,dy);
 
-  return m;
+    return m;
 }
 
 void swf_SetDefineID(TAG * tag, U16 newid)
 {
-  int oldlen = tag->len;
-  tag->len = 0;
-  swf_SetU16(tag, newid); /* set defining ID */
-  tag->len = oldlen;
+    int oldlen = tag->len;
+    tag->len = 0;
+    swf_SetU16(tag, newid); /* set defining ID */
+    tag->len = oldlen;
 }
 
 U16 swf_GetDefineID(TAG * t)
 // up to SWF 4.0
 { U32 oldTagPos;
-  U16 id = 0;
+    U16 id = 0;
 
-  oldTagPos = swf_GetTagPos(t);
-  swf_SetTagPos(t,0);
+    oldTagPos = swf_GetTagPos(t);
+    swf_SetTagPos(t,0);
 
-  switch (swf_GetTagID(t))
-  { case ST_DEFINESHAPE:
+    switch (swf_GetTagID(t))
+    {
+    case ST_DEFINESHAPE:
     case ST_DEFINESHAPE2:
     case ST_DEFINESHAPE3:
     case ST_DEFINESHAPE4:
@@ -133,31 +134,32 @@ U16 swf_GetDefineID(TAG * t)
     case ST_VIDEOFRAME: //pseudodefine
     case ST_NAMECHARACTER: //pseudodefine
     case ST_DOINITACTION: //pseudodefine
-      id = swf_GetU16(t);
-      break;
+        id = swf_GetU16(t);
+        break;
     default:
-      fprintf(stderr, "rfxswf: Error: tag %d (%s) has no id\n", t->id, swf_TagGetName(t));
-  }
+        fprintf(stderr, "rfxswf: Error: tag %d (%s) has no id\n", t->id, swf_TagGetName(t));
+    }
 
-  swf_SetTagPos(t,oldTagPos);
+    swf_SetTagPos(t,oldTagPos);
 
-  return id;
+    return id;
 }
 
 SRECT swf_GetDefineBBox(TAG * t)
 {
-  U32 oldTagPos;
-  U16 id = 0;
-  SRECT b1,b2;
-  memset(&b1, 0, sizeof(b1));
+    U32 oldTagPos;
+    //U16 id = 0;
+    SRECT b1,b2;
+    memset(&b1, 0, sizeof(b1));
 
-  oldTagPos = swf_GetTagPos(t);
-  swf_SetTagPos(t,0);
+    oldTagPos = swf_GetTagPos(t);
+    swf_SetTagPos(t,0);
 
-  swf_GetRect(0, &b1);
+    swf_GetRect(0, &b1);
 
-  switch (swf_GetTagID(t))
-  { case ST_DEFINESHAPE:
+    switch (swf_GetTagID(t))
+    {
+    case ST_DEFINESHAPE:
     case ST_DEFINESHAPE2:
     case ST_DEFINESHAPE3:
     case ST_DEFINESHAPE4:
@@ -165,131 +167,134 @@ SRECT swf_GetDefineBBox(TAG * t)
     case ST_DEFINETEXT:
     case ST_DEFINETEXT2:
     case ST_DEFINEVIDEOSTREAM:
-      id = swf_GetU16(t);
-      swf_GetRect(t, &b1);
-      break;
+        /*id = */swf_GetU16(t);
+        swf_GetRect(t, &b1);
+        break;
     case ST_DEFINEMORPHSHAPE:
     case ST_DEFINEMORPHSHAPE2:
-      id = swf_GetU16(t);
-      swf_GetRect(t, &b1);
-      swf_GetRect(t, &b2);
-      swf_ExpandRect2(&b1, &b2);
-      break;
+        /*id = */swf_GetU16(t);
+        swf_GetRect(t, &b1);
+        swf_GetRect(t, &b2);
+        swf_ExpandRect2(&b1, &b2);
+        break;
     case ST_DEFINEBITSLOSSLESS:
     case ST_DEFINEBITSLOSSLESS2:
     case ST_DEFINEBITS:
     case ST_DEFINEBITSJPEG2:
     case ST_DEFINEBITSJPEG3:
-      // FIXME
-      break;
-  }
+        // FIXME
+        break;
+    }
 
-  swf_SetTagPos(t,oldTagPos);
+    swf_SetTagPos(t,oldTagPos);
 
-  return b1;
+    return b1;
 }
 
 U16 swf_GetPlaceID(TAG * t)
 // up to SWF 4.0
 { U32 oldTagPos;
-  U16 id = 0;
+    U16 id = 0;
 
-  oldTagPos = swf_GetTagPos(t);
-  swf_SetTagPos(t,0);
+    oldTagPos = swf_GetTagPos(t);
+    swf_SetTagPos(t,0);
 
-  switch (swf_GetTagID(t))
-  { case ST_PLACEOBJECT:
+    switch (swf_GetTagID(t))
+    {
+    case ST_PLACEOBJECT:
     case ST_REMOVEOBJECT:
     case ST_FREECHARACTER:
     case ST_STARTSOUND:
-      id = swf_GetU16(t);
-      break;
+        id = swf_GetU16(t);
+        break;
 
     case ST_PLACEOBJECT2:
     { U8 flags = swf_GetU8(t);
-//      U16 d =
+        //      U16 d =
         swf_GetU16(t);
-      id = (flags&PF_CHAR)?swf_GetU16(t):id;
+        id = (flags&PF_CHAR)?swf_GetU16(t):id;
     } break;
     case ST_PLACEOBJECT3:
     { U8 flags = swf_GetU8(t);
-//      U8 flags2 =
+        //      U8 flags2 =
         swf_GetU8(t);
-//      U16 d =
+        //      U16 d =
         swf_GetU16(t);
-      id = (flags&PF_CHAR)?swf_GetU16(t):id;
+        id = (flags&PF_CHAR)?swf_GetU16(t):id;
     } break;
 
-  }
+    }
 
-  swf_SetTagPos(t,oldTagPos);
+    swf_SetTagPos(t,oldTagPos);
 
-  return id;
+    return id;
 }
 
 static int swf_definingtagids[] =
-{ST_DEFINESHAPE,
- ST_DEFINESHAPE2,
- ST_DEFINESHAPE3,
- ST_DEFINESHAPE4,
- ST_DEFINEMORPHSHAPE,
- ST_DEFINEMORPHSHAPE2,
- ST_DEFINEFONT,
- ST_DEFINEFONT2,
- ST_DEFINEFONT3,
- ST_DEFINETEXT,
- ST_DEFINETEXT2,
- ST_DEFINEEDITTEXT,
- ST_DEFINEBITS,
- ST_DEFINEBITSJPEG2,
- ST_DEFINEBITSJPEG3,
- ST_DEFINEBITSLOSSLESS,
- ST_DEFINEBITSLOSSLESS2,
- ST_DEFINEMOVIE,
- ST_DEFINESPRITE,
- ST_DEFINEBUTTON,
- ST_DEFINEBUTTON2,
- ST_DEFINESOUND,
- ST_DEFINEVIDEOSTREAM,
- ST_DEFINEBINARY,
- -1
+{
+    ST_DEFINESHAPE,
+    ST_DEFINESHAPE2,
+    ST_DEFINESHAPE3,
+    ST_DEFINESHAPE4,
+    ST_DEFINEMORPHSHAPE,
+    ST_DEFINEMORPHSHAPE2,
+    ST_DEFINEFONT,
+    ST_DEFINEFONT2,
+    ST_DEFINEFONT3,
+    ST_DEFINETEXT,
+    ST_DEFINETEXT2,
+    ST_DEFINEEDITTEXT,
+    ST_DEFINEBITS,
+    ST_DEFINEBITSJPEG2,
+    ST_DEFINEBITSJPEG3,
+    ST_DEFINEBITSLOSSLESS,
+    ST_DEFINEBITSLOSSLESS2,
+    ST_DEFINEMOVIE,
+    ST_DEFINESPRITE,
+    ST_DEFINEBUTTON,
+    ST_DEFINEBUTTON2,
+    ST_DEFINESOUND,
+    ST_DEFINEVIDEOSTREAM,
+    ST_DEFINEBINARY,
+    -1
 };
 
 // tags which may be used inside a sprite definition
 static int swf_spritetagids[] =
-{ST_SHOWFRAME,
- ST_PLACEOBJECT,
- ST_PLACEOBJECT2,
- ST_PLACEOBJECT3,
- ST_REMOVEOBJECT,
- ST_REMOVEOBJECT2,
- ST_DOACTION,
- ST_DOABC,
- ST_STARTSOUND,
- ST_FRAMELABEL,
- ST_SOUNDSTREAMHEAD,
- ST_SOUNDSTREAMHEAD2,
- ST_SOUNDSTREAMBLOCK,
- ST_END,
- -1
+{
+    ST_SHOWFRAME,
+    ST_PLACEOBJECT,
+    ST_PLACEOBJECT2,
+    ST_PLACEOBJECT3,
+    ST_REMOVEOBJECT,
+    ST_REMOVEOBJECT2,
+    ST_DOACTION,
+    ST_DOABC,
+    ST_STARTSOUND,
+    ST_FRAMELABEL,
+    ST_SOUNDSTREAMHEAD,
+    ST_SOUNDSTREAMHEAD2,
+    ST_SOUNDSTREAMBLOCK,
+    ST_END,
+    -1
 };
 
 /* tags which add content or information to a character with a given ID */
 static int swf_pseudodefiningtagids[] =
 {
- ST_DEFINEFONTINFO,
- ST_DEFINEFONTINFO2,
- ST_DEFINEFONTALIGNZONES,
- ST_DEFINEFONTNAME,
- ST_DEFINEBUTTONCXFORM,
- ST_DEFINEBUTTONSOUND,
- ST_DEFINESCALINGGRID,
- ST_CSMTEXTSETTINGS,
- ST_NAMECHARACTER,
- ST_DOINITACTION,
- ST_VIDEOFRAME,
- ST_GLYPHNAMES,
- -1
+    ST_DEFINEFONTINFO,
+    ST_DEFINEFONTINFO2,
+    ST_DEFINEFONTALIGNZONES,
+    ST_DEFINEFONTNAME,
+    ST_DEFINEBUTTONCXFORM,
+    ST_DEFINEBUTTONSOUND,
+    ST_DEFINESCALINGGRID,
+    ST_CSMTEXTSETTINGS,
+    ST_NAMECHARACTER,
+    ST_DOINITACTION,
+    ST_VIDEOFRAME,
+    ST_GLYPHNAMES,
+    -1
 };
 
 U8 swf_isAllowedSpriteTag(TAG * tag)
@@ -333,62 +338,62 @@ U8 swf_isPseudoDefiningTag(TAG * tag)
 
 int swf_GetDepth(TAG * t)
 {
-  int depth = -1;
-  U32 oldTagPos;
-  oldTagPos = swf_GetTagPos(t);
-  swf_SetTagPos(t,0);
+    int depth = -1;
+    U32 oldTagPos;
+    oldTagPos = swf_GetTagPos(t);
+    swf_SetTagPos(t,0);
 
-  switch (swf_GetTagID(t))
-  { case ST_PLACEOBJECT:
+    switch (swf_GetTagID(t))
+    { case ST_PLACEOBJECT:
     case ST_REMOVEOBJECT:
-      swf_GetU16(t); //id
-      depth = swf_GetU16(t);
-      break;
+        swf_GetU16(t); //id
+        depth = swf_GetU16(t);
+        break;
     case ST_REMOVEOBJECT2:
-      depth = swf_GetU16(t);
-      break;
+        depth = swf_GetU16(t);
+        break;
     case ST_PLACEOBJECT2:
     {
-//        U8 flags =
+        //        U8 flags =
         swf_GetU8(t);
         depth = swf_GetU16(t);
     } break;
     case ST_PLACEOBJECT3:
     {
-//        U8 flags =
+        //        U8 flags =
         swf_GetU8(t);
-//        U8 flags2 =
+        //        U8 flags2 =
         swf_GetU8(t);
         depth = swf_GetU16(t);
     } break;
     case ST_SETTABINDEX:
     {
-      depth = swf_GetU16(t);
+        depth = swf_GetU16(t);
     }
-  }
-  swf_SetTagPos(t,oldTagPos);
-  return depth;
+    }
+    swf_SetTagPos(t,oldTagPos);
+    return depth;
 }
 
 void swf_SetDepth(TAG * t, U16 depth)
 {
-  switch (swf_GetTagID(t))
-  { case ST_PLACEOBJECT:
+    switch (swf_GetTagID(t))
+    { case ST_PLACEOBJECT:
     case ST_REMOVEOBJECT:
-      PUT16(t->data, depth);
-      break;
+        PUT16(t->data, depth);
+        break;
     case ST_REMOVEOBJECT2:
-      PUT16(t->data, depth);
-      break;
+        PUT16(t->data, depth);
+        break;
     case ST_PLACEOBJECT2:
-      PUT16(&t->data[1], depth);
-      break;
+        PUT16(&t->data[1], depth);
+        break;
     case ST_SETTABINDEX:
-      PUT16(t->data, depth);
-      break;
+        PUT16(t->data, depth);
+        break;
     default:
-      fprintf(stderr, "rfxswf: Error: tag %d has no depth\n", t->id);
-  }
+        fprintf(stderr, "rfxswf: Error: tag %d has no depth\n", t->id);
+    }
 }
 
 char* swf_GetName(TAG * t)
@@ -401,30 +406,30 @@ char* swf_GetName(TAG * t)
     swf_SetTagPos(t,0);
     switch(swf_GetTagID(t))
     {
-        case ST_FRAMELABEL:
-            name = (char*)&t->data[swf_GetTagPos(t)];
+    case ST_FRAMELABEL:
+        name = (char*)&t->data[swf_GetTagPos(t)];
         break;
-        case ST_PLACEOBJECT3:
-        case ST_PLACEOBJECT2: {
-            U8 flags = swf_GetU8(t);
+    case ST_PLACEOBJECT3:
+    case ST_PLACEOBJECT2: {
+        U8 flags = swf_GetU8(t);
         if(t->id == ST_PLACEOBJECT3)
-        swf_GetU8(t);
-            swf_GetU16(t); //depth;
-            if(flags&PF_CHAR)
-              swf_GetU16(t); //id
-            if(flags&PF_MATRIX)
-              swf_GetMatrix(t, &m);
-            if(flags&PF_CXFORM)
-              swf_GetCXForm(t, &c, 1);
-            if(flags&PF_RATIO)
-              swf_GetU16(t);
-            if(flags&PF_CLIPDEPTH)
-              swf_GetU16(t);
-            if(flags&PF_NAME) {
-              swf_ResetReadBits(t);
-              name = (char*)&t->data[swf_GetTagPos(t)];
-            }
+            swf_GetU8(t);
+        swf_GetU16(t); //depth;
+        if(flags&PF_CHAR)
+            swf_GetU16(t); //id
+        if(flags&PF_MATRIX)
+            swf_GetMatrix(t, &m);
+        if(flags&PF_CXFORM)
+            swf_GetCXForm(t, &c, 1);
+        if(flags&PF_RATIO)
+            swf_GetU16(t);
+        if(flags&PF_CLIPDEPTH)
+            swf_GetU16(t);
+        if(flags&PF_NAME) {
+            swf_ResetReadBits(t);
+            name = (char*)&t->data[swf_GetTagPos(t)];
         }
+    }
         break;
     }
     swf_SetTagPos(t,oldTagPos);
@@ -440,33 +445,33 @@ void swf_GetMorphGradient(TAG * tag, GRADIENT * gradient1, GRADIENT * gradient2)
     if(gradient2) gradient2->num = num;
 
     if(gradient1) {
-    gradient1->num = num;
-    gradient1->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient1->num);
-    gradient1->ratios = (U8*)rfx_calloc(sizeof(gradient1->ratios[0])*gradient1->num);
+        gradient1->num = num;
+        gradient1->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient1->num);
+        gradient1->ratios = (U8*)rfx_calloc(sizeof(gradient1->ratios[0])*gradient1->num);
     }
     if(gradient2) {
-    gradient2->num = num;
-    gradient2->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient2->num);
-    gradient2->ratios = (U8*)rfx_calloc(sizeof(gradient2->ratios[0])*gradient2->num);
+        gradient2->num = num;
+        gradient2->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient2->num);
+        gradient2->ratios = (U8*)rfx_calloc(sizeof(gradient2->ratios[0])*gradient2->num);
     }
     for(t=0;t<num;t++)
     {
-    U8 ratio;
-    RGBA color;
+        U8 ratio;
+        RGBA color;
 
-    ratio = swf_GetU8(tag);
-    swf_GetRGBA(tag, &color);
-    if(gradient1) {
-        gradient1->ratios[t] = ratio;
-        gradient1->rgba[t] = color;
-    }
+        ratio = swf_GetU8(tag);
+        swf_GetRGBA(tag, &color);
+        if(gradient1) {
+            gradient1->ratios[t] = ratio;
+            gradient1->rgba[t] = color;
+        }
 
-    ratio = swf_GetU8(tag);
-    swf_GetRGBA(tag, &color);
-    if(gradient2) {
-        gradient2->ratios[t] = ratio;
-        gradient2->rgba[t] = color;
-    }
+        ratio = swf_GetU8(tag);
+        swf_GetRGBA(tag, &color);
+        if(gradient2) {
+            gradient2->ratios[t] = ratio;
+            gradient2->rgba[t] = color;
+        }
     }
 }
 
@@ -479,53 +484,53 @@ void enumerateUsedIDs_fillstyle(TAG * tag, int t, void (*callback)(TAG*, int, vo
     type = swf_GetU8(tag); //type
     DEBUG_ENUMERATE printf("fill style %d) type=%02x (tagpos=%d)\n", t, type, tag->pos);
     if(type == 0) {
-    RGBA color;
-    if(num >= 3)
+        RGBA color;
+        if(num >= 3)
         {swf_GetRGBA(tag, &color);if(morph) swf_GetRGBA(tag, NULL);}
-    else
+        else
         {swf_GetRGB(tag, &color);if(morph) swf_GetRGB(tag, NULL);}
-    DEBUG_ENUMERATE printf("               %02x%02x%02x%02x\n", color.r,color.g,color.b,color.a);
+        DEBUG_ENUMERATE printf("               %02x%02x%02x%02x\n", color.r,color.g,color.b,color.a);
     }
     else if(type == 0x10 || type == 0x12 || type == 0x13)
     {
-    swf_ResetReadBits(tag);
-    MATRIX m;
-    swf_GetMatrix(tag, &m);
-    DEBUG_ENUMERATE swf_DumpMatrix(stdout, &m);
-    if(morph) {
+        swf_ResetReadBits(tag);
+        MATRIX m;
         swf_GetMatrix(tag, &m);
         DEBUG_ENUMERATE swf_DumpMatrix(stdout, &m);
-    }
-    swf_ResetReadBits(tag);
-    if(morph) {
-        swf_GetMorphGradient(tag, NULL, NULL);
-        if(type == 0x13) {
-        swf_GetU16(tag);
-        swf_GetU16(tag);
+        if(morph) {
+            swf_GetMatrix(tag, &m);
+            DEBUG_ENUMERATE swf_DumpMatrix(stdout, &m);
         }
-    } else {
-        GRADIENT g;
-        swf_GetGradient(tag, &g, /*alpha*/ num>=3?1:0);
-        DEBUG_ENUMERATE swf_DumpGradient(stdout, &g);
-        if(type == 0x13)
-        swf_GetU16(tag);
-    }
+        swf_ResetReadBits(tag);
+        if(morph) {
+            swf_GetMorphGradient(tag, NULL, NULL);
+            if(type == 0x13) {
+                swf_GetU16(tag);
+                swf_GetU16(tag);
+            }
+        } else {
+            GRADIENT g;
+            swf_GetGradient(tag, &g, /*alpha*/ num>=3?1:0);
+            DEBUG_ENUMERATE swf_DumpGradient(stdout, &g);
+            if(type == 0x13)
+                swf_GetU16(tag);
+        }
     }
     else if(type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43)
     {
-    swf_ResetReadBits(tag);
-    if(tag->data[tag->pos] != 0xff ||
-       tag->data[tag->pos+1] != 0xff)
-    (callback)(tag, tag->pos, callback_data);
+        swf_ResetReadBits(tag);
+        if(tag->data[tag->pos] != 0xff ||
+                tag->data[tag->pos+1] != 0xff)
+            (callback)(tag, tag->pos, callback_data);
 
-    swf_GetU16(tag);
-    swf_ResetReadBits(tag);
-    swf_GetMatrix(tag, NULL);
-    if(morph)
+        swf_GetU16(tag);
+        swf_ResetReadBits(tag);
         swf_GetMatrix(tag, NULL);
+        if(morph)
+            swf_GetMatrix(tag, NULL);
     }
     else {
-    fprintf(stderr, "rfxswf:swftools.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
+        fprintf(stderr, "rfxswf:swftools.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
     }
 }
 
@@ -536,25 +541,25 @@ void enumerateUsedIDs_linestyle(TAG * tag, int t, void (*callback)(TAG*, int, vo
     width = swf_GetU16(tag);
     char fill=0;
     if(morph)
-    swf_GetU16(tag);
+        swf_GetU16(tag);
     if(num >= 4) {
-    U16 flags = swf_GetU16(tag);
-    DEBUG_ENUMERATE printf("line style %d) flags: %08x\n", t, flags);
-    if((flags & 0x30) == 0x20) {
-        U16 miter = swf_GetU16(tag); // miter limit
-        DEBUG_ENUMERATE printf("line style %d) miter join: %08x\n", t, miter);
-    }
-    if(flags & 0x08) {
-        fill = 1;
-    }
+        U16 flags = swf_GetU16(tag);
+        DEBUG_ENUMERATE printf("line style %d) flags: %08x\n", t, flags);
+        if((flags & 0x30) == 0x20) {
+            U16 miter = swf_GetU16(tag); // miter limit
+            DEBUG_ENUMERATE printf("line style %d) miter join: %08x\n", t, miter);
+        }
+        if(flags & 0x08) {
+            fill = 1;
+        }
     }
     if(!fill) {
-    if(num >= 3)
+        if(num >= 3)
         {swf_GetRGBA(tag, &color);if(morph) swf_GetRGBA(tag, NULL);}
-    else
+        else
         {swf_GetRGB(tag, &color);if(morph) swf_GetRGB(tag, NULL);}
     } else {
-    enumerateUsedIDs_fillstyle(tag, t, callback, callback_data, num, morph);
+        enumerateUsedIDs_fillstyle(tag, t, callback, callback_data, num, morph);
     }
     DEBUG_ENUMERATE printf("line style %d) width=%.2f color=%02x%02x%02x%02x \n", t, width/20.0, color.r,color.g,color.b,color.a);
 }
@@ -565,21 +570,21 @@ void enumerateUsedIDs_styles(TAG * tag, void (*callback)(TAG*, int, void*), void
     int t;
     count = swf_GetU8(tag);
     if(count == 0xff && num>1) // defineshape2,3,4 only
-    count = swf_GetU16(tag);
+        count = swf_GetU16(tag);
 
     DEBUG_ENUMERATE printf("%d fill styles\n", count);
     for(t=0;t<count;t++)
     {
-    enumerateUsedIDs_fillstyle(tag, t, callback, callback_data, num, morph);
+        enumerateUsedIDs_fillstyle(tag, t, callback, callback_data, num, morph);
     }
     swf_ResetReadBits(tag);
     count = swf_GetU8(tag); // line style array
     if(count == 0xff)
-    count = swf_GetU16(tag);
+        count = swf_GetU16(tag);
     DEBUG_ENUMERATE printf("%d line styles\n", count);
     for(t=0;t<count;t++)
     {
-    enumerateUsedIDs_linestyle(tag, t, callback, callback_data, num, morph);
+        enumerateUsedIDs_linestyle(tag, t, callback, callback_data, num, morph);
     }
 }
 
@@ -595,43 +600,43 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
         callback(tag, tag->pos + base, callback_data);
         swf_GetU16(tag); //button id
         for(t=0;t<4;t++) {
-        int flags;
-        callback(tag, tag->pos + base, callback_data);
-        U16 sound_id = swf_GetU16(tag); //sound id
-        if(!sound_id)
-            continue;
-        flags = swf_GetU8(tag);
-        if(flags&1)
-            swf_GetU32(tag); // in point
-        if(flags&2)
-            swf_GetU32(tag); // out points
-        if(flags&4)
-            swf_GetU16(tag); // loop count
-        if(flags&8)
-        {
-            int npoints = swf_GetU8(tag);
-            int s;
-            for(s=0;s<npoints;s++)
+            int flags;
+            callback(tag, tag->pos + base, callback_data);
+            U16 sound_id = swf_GetU16(tag); //sound id
+            if(!sound_id)
+                continue;
+            flags = swf_GetU8(tag);
+            if(flags&1)
+                swf_GetU32(tag); // in point
+            if(flags&2)
+                swf_GetU32(tag); // out points
+            if(flags&4)
+                swf_GetU16(tag); // loop count
+            if(flags&8)
             {
-            swf_GetU32(tag);
-            swf_GetU16(tag);
-            swf_GetU16(tag);
+                int npoints = swf_GetU8(tag);
+                int s;
+                for(s=0;s<npoints;s++)
+                {
+                    swf_GetU32(tag);
+                    swf_GetU16(tag);
+                    swf_GetU16(tag);
+                }
             }
         }
-        }
-        } break;
+    } break;
     case ST_DEFINEBUTTONCXFORM:
         callback(tag, tag->pos + base, callback_data); //button id
-    break;
+        break;
 
     case ST_SYMBOLCLASS:
     case ST_EXPORTASSETS: {
         int num =  swf_GetU16(tag);
         int t;
         for(t=0;t<num;t++) {
-        callback(tag, tag->pos + base, callback_data); //button id
-        swf_GetU16(tag); //id
-        while(swf_GetU8(tag)); //name
+            callback(tag, tag->pos + base, callback_data); //button id
+            swf_GetU16(tag); //id
+            while(swf_GetU8(tag)); //name
         }
     } break;
 
@@ -643,14 +648,14 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
         int num =  swf_GetU16(tag); //url
         int t;
         for(t=0;t<num;t++) {
-        callback(tag, tag->pos + base, callback_data); //button id
-        swf_GetU16(tag); //id
-        while(swf_GetU8(tag)); //name
+            callback(tag, tag->pos + base, callback_data); //button id
+            swf_GetU16(tag); //id
+            while(swf_GetU8(tag)); //name
         }
     } break;
 
-        case ST_DOABC:
-        case ST_RAWABC:
+    case ST_DOABC:
+    case ST_RAWABC:
         break;
 
     case ST_FREECHARACTER: /* unusual tags, which all start with an ID */
@@ -665,106 +670,104 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
     case ST_PLACEOBJECT2:
         // only if placeflaghascharacter
         if(!(tag->data[0]&2))
-        break;
+            break;
         callback(tag, 3 + base, callback_data);
         break;
     case ST_PLACEOBJECT3:
         // only if placeflaghascharacter
         if(!(tag->data[0]&2))
-        break;
+            break;
         callback(tag, 4 + base, callback_data);
         break;
     case ST_REMOVEOBJECT:
         callback(tag, tag->pos + base, callback_data);
-    break;
+        break;
     case ST_STARTSOUND:
         callback(tag, tag->pos + base, callback_data);
-    break;
+        break;
     case ST_DEFINESPRITE: {
         if(tag->len <= 4)
-        break; // sprite is expanded
+            break; // sprite is expanded
 
         swf_GetU16(tag); // id
         swf_GetU16(tag); // framenum
 
         while(1) {
-        U16 flags = swf_GetU16(tag);
-        U32 len;
-        U16 id = flags>>6;
-        TAG *tag2 = swf_InsertTag(NULL, id);
-        len = flags&0x3f;
-        if(len == 63)
-            len = swf_GetU32(tag);
-        if(id == ST_END)
-            break;
-        tag2->len = tag2->memsize = len;
-        tag2->data = (U8*)malloc(len);
-        memcpy(tag2->data, &tag->data[tag->pos], len);
-        /* I never saw recursive sprites, but they are (theoretically)
+            U16 flags = swf_GetU16(tag);
+            U32 len;
+            U16 id = flags>>6;
+            TAG *tag2 = swf_InsertTag(NULL, id);
+            len = flags&0x3f;
+            if(len == 63)
+                len = swf_GetU32(tag);
+            if(id == ST_END)
+                break;
+            tag2->len = tag2->memsize = len;
+            tag2->data = (U8*)malloc(len);
+            memcpy(tag2->data, &tag->data[tag->pos], len);
+            /* I never saw recursive sprites, but they are (theoretically)
            possible, so better add base here again */
-        enumerateUsedIDs(tag2, tag->pos + base, callback, callback_data);
-        swf_DeleteTag(0, tag2);
-        swf_GetBlock(tag, NULL, len);
+            enumerateUsedIDs(tag2, tag->pos + base, callback, callback_data);
+            swf_DeleteTag(0, tag2);
+            swf_GetBlock(tag, NULL, len);
         }
     }
-    break;
+        break;
     case ST_DEFINEBUTTON2: // has some font ids in the button records
         num++;
-    //fallthrough
+        //fallthrough
     case ST_DEFINEBUTTON: {
         swf_GetU16(tag); //button id
         if(num>1)
         {
-        int offset;
-        swf_GetU8(tag); //flag
-        offset = swf_GetU16(tag); //offset
+            swf_GetU8(tag); //flag
+            /*int offset = */swf_GetU16(tag); //offset
         }
         while(1)
         {
-        U8 flags = swf_GetU8(tag);
-        if(!flags) //flags
-            break;
-        callback(tag, tag->pos + base, callback_data);
-        swf_GetU16(tag); //char
-        swf_GetU16(tag); //layer
-        swf_ResetReadBits(tag);
-        swf_GetMatrix(tag, NULL);
-        if(num>1) {
-          swf_ResetReadBits(tag);
-          swf_GetCXForm(tag, NULL, 1);
-        }
-        if(flags&0x10) {
-            U8 num = swf_GetU8(tag);
-            int t;
-            for(t=0;t<num;t++) {
-            swf_DeleteFilter(swf_GetFilter(tag));
+            U8 flags = swf_GetU8(tag);
+            if(!flags) //flags
+                break;
+            callback(tag, tag->pos + base, callback_data);
+            swf_GetU16(tag); //char
+            swf_GetU16(tag); //layer
+            swf_ResetReadBits(tag);
+            swf_GetMatrix(tag, NULL);
+            if(num>1) {
+                swf_ResetReadBits(tag);
+                swf_GetCXForm(tag, NULL, 1);
             }
-        }
-        if(flags&0x20) {
-//		    U8 blendmode =
-            swf_GetU8(tag);
-        }
+            if(flags&0x10) {
+                U8 num = swf_GetU8(tag);
+                int t;
+                for(t=0;t<num;t++) {
+                    swf_DeleteFilter(swf_GetFilter(tag));
+                }
+            }
+            if(flags&0x20) {
+                //		    U8 blendmode =
+                swf_GetU8(tag);
+            }
         }
         // ...
     }
-    break;
+        break;
     case ST_DEFINEEDITTEXT:  {
-        U8 flags1,flags2;
+        U8 flags1/*,flags2*/;
         swf_GetU16(tag); //id
         swf_GetRect(tag, NULL); //bounding box
         swf_ResetReadBits(tag);
         flags1 = swf_GetU8(tag);
-        flags2 = swf_GetU8(tag);
-        if(flags1 & 1)
-        callback(tag, tag->pos + base, callback_data);
+        /*flags2 = */swf_GetU8(tag);
+        if (flags1 & 1)
+            callback(tag, tag->pos + base, callback_data);
     }
-    break;
+        break;
     case ST_DEFINETEXT2:
         num ++;
     case ST_DEFINETEXT: {
         int glyphbits, advancebits;
-        int id;
-        id = swf_GetU16(tag); //id
+        /*int id = */swf_GetU16(tag); //id
         swf_GetRect(tag, NULL); //bounding box
         swf_ResetReadBits(tag);
         swf_GetMatrix(tag, NULL); //matrix
@@ -772,41 +775,41 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
         glyphbits = swf_GetU8(tag); //glyphbits
         advancebits = swf_GetU8(tag); //advancebits
         while(1) {
-        U16 flags;
-        int t;
-        swf_ResetReadBits(tag);
-        flags = swf_GetBits(tag, 8);
-        if(!flags) break;
+            U16 flags;
+            int t;
+            swf_ResetReadBits(tag);
+            flags = swf_GetBits(tag, 8);
+            if(!flags) break;
 
-        swf_ResetReadBits(tag);
-        if(flags & 8) { // hasfont
-            callback(tag, tag->pos + base, callback_data);
-            id = swf_GetU16(tag);
-        }
-        if(flags & 4) { // hascolor
-            if(num==1) swf_GetRGB(tag, NULL);
-            else       swf_GetRGBA(tag, NULL);
-        }
-        if(flags & 2) { //has x offset
             swf_ResetReadBits(tag);
-            swf_GetU16(tag);
-        }
-        if(flags & 1) { //has y offset
-            swf_ResetReadBits(tag);
-            swf_GetU16(tag);
-        }
-        if(flags & 8) { //has height
-            swf_ResetReadBits(tag);
-            swf_GetU16(tag);
-        }
+            if(flags & 8) { // hasfont
+                callback(tag, tag->pos + base, callback_data);
+                /*id = */swf_GetU16(tag);
+            }
+            if(flags & 4) { // hascolor
+                if(num==1) swf_GetRGB(tag, NULL);
+                else       swf_GetRGBA(tag, NULL);
+            }
+            if(flags & 2) { //has x offset
+                swf_ResetReadBits(tag);
+                swf_GetU16(tag);
+            }
+            if(flags & 1) { //has y offset
+                swf_ResetReadBits(tag);
+                swf_GetU16(tag);
+            }
+            if(flags & 8) { //has height
+                swf_ResetReadBits(tag);
+                swf_GetU16(tag);
+            }
 
-        flags = swf_GetBits(tag, 8);
-        if(!flags) break;
-        swf_ResetReadBits(tag);
-        for(t=0;t<flags;t++) {
-            swf_GetBits(tag, glyphbits);
-            swf_GetBits(tag, advancebits);
-        }
+            flags = swf_GetBits(tag, 8);
+            if(!flags) break;
+            swf_ResetReadBits(tag);
+            for(t=0;t<flags;t++) {
+                swf_GetBits(tag, glyphbits);
+                swf_GetBits(tag, advancebits);
+            }
         }
         break;
     }
@@ -818,22 +821,22 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
     case ST_DEFINEFONTINFO2:
     case ST_VIDEOFRAME:
         callback(tag, tag->pos + base, callback_data);
-    break;
+        break;
     case ST_DEFINEVIDEOSTREAM:
-    break;
+        break;
 
     case ST_DOINITACTION:
         callback(tag, tag->pos + base, callback_data);
-    break;
+        break;
 
     case ST_DEFINEMORPHSHAPE2:
     case ST_DEFINESHAPE4:
-    num++;
+        num++;
     case ST_DEFINEMORPHSHAPE:
     case ST_DEFINESHAPE3:
-    num++; //fallthrough
+        num++; //fallthrough
     case ST_DEFINESHAPE2:
-    num++; //fallthrough
+        num++; //fallthrough
     case ST_DEFINESHAPE: {
         int fillbits;
         int linebits;
@@ -841,29 +844,29 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
         int numshapes = 1;
         int morph = 0;
         if(tag->id == ST_DEFINEMORPHSHAPE || tag->id==ST_DEFINEMORPHSHAPE2) {
-        numshapes = 2;
-        morph = 1;
+            numshapes = 2;
+            morph = 1;
         }
 
         id = swf_GetU16(tag); // id;
         SRECT r={0,0,0,0},r2={0,0,0,0};
         swf_GetRect(tag, &r); // shape bounds
         if(morph) {
-        swf_ResetReadBits(tag);
-        swf_GetRect(tag, NULL); // shape bounds2
+            swf_ResetReadBits(tag);
+            swf_GetRect(tag, NULL); // shape bounds2
+            if(num>=4) {
+                swf_ResetReadBits(tag);
+                swf_GetRect(tag, NULL); // edge bounds1
+            }
+        }
         if(num>=4) {
             swf_ResetReadBits(tag);
-            swf_GetRect(tag, NULL); // edge bounds1
-        }
-        }
-        if(num>=4) {
-        swf_ResetReadBits(tag);
-        swf_GetRect(tag, &r2); // edge bounds
-        U8 flags = swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
-        DEBUG_ENUMERATE printf("flags: %02x (1=scaling strokes, 2=non-scaling strokes)\n", flags);
+            swf_GetRect(tag, &r2); // edge bounds
+            U8 flags = swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
+            DEBUG_ENUMERATE printf("flags: %02x (1=scaling strokes, 2=non-scaling strokes)\n", flags);
         }
         if(morph) {
-        swf_GetU32(tag); //offset to endedges
+            swf_GetU32(tag); //offset to endedges
         }
 
         DEBUG_ENUMERATE printf("Tag:%d Name:%s ID:%d\n", tag->id, swf_TagGetName(tag), id);
@@ -876,80 +879,80 @@ void enumerateUsedIDs(TAG * tag, int base, void (*callback)(TAG*, int, void*), v
         swf_ResetReadBits(tag);
         while(--numshapes>=0) /* morph shapes define two shapes */
         {
-        DEBUG_ENUMERATE printf("shape:%d\n", numshapes);
-        fillbits = swf_GetBits(tag, 4);
-        linebits = swf_GetBits(tag, 4);
-        DEBUG_ENUMERATE printf("fillbits=%d linebits=%d\n", fillbits, linebits);
-        swf_ResetReadBits(tag);
-        int x=0,y=0;
-        while(1) {
-            int flags;
-            flags = swf_GetBits(tag, 1);
-            if(!flags) { //style change
-            flags = swf_GetBits(tag, 5);
-            if(!flags)
-                break;
-            if(flags&1) { //move
-                int n = swf_GetBits(tag, 5);
-                x = swf_GetBits(tag, n); //x
-                y = swf_GetBits(tag, n); //y
-                DEBUG_ENUMERATE printf("moveTo %.2f %.2f\n",x/20.0,y/20.0);
-            }
-            if(flags&2) { //fill0
-                int fill0;
-                fill0 = swf_GetBits(tag, fillbits);
-                DEBUG_ENUMERATE printf("fill0 %d\n", fill0);
-            }
-            if(flags&4) { //fill1
-                int fill1;
-                fill1 = swf_GetBits(tag, fillbits);
-                DEBUG_ENUMERATE printf("fill1 %d\n", fill1);
-            }
-            if(flags&8) { //linestyle
-                int line;
-                line = swf_GetBits(tag, linebits);
-                DEBUG_ENUMERATE printf("linestyle %d\n",line);
-            }
-            if(flags&16) {
-                DEBUG_ENUMERATE printf("more fillstyles\n");
-                enumerateUsedIDs_styles(tag, callback, callback_data, num, 0);
-                fillbits = swf_GetBits(tag, 4);
-                linebits = swf_GetBits(tag, 4);
-            }
-            } else {
-            flags = swf_GetBits(tag, 1);
-            if(flags) { //straight edge
-                int n = swf_GetBits(tag, 4) + 2;
-                if(swf_GetBits(tag, 1)) { //line flag
-                x += swf_GetSBits(tag, n); //delta x
-                y += swf_GetSBits(tag, n); //delta y
-                DEBUG_ENUMERATE printf("lineTo %.2f %.2f\n",x/20.0,y/20.0);
+            DEBUG_ENUMERATE printf("shape:%d\n", numshapes);
+            fillbits = swf_GetBits(tag, 4);
+            linebits = swf_GetBits(tag, 4);
+            DEBUG_ENUMERATE printf("fillbits=%d linebits=%d\n", fillbits, linebits);
+            swf_ResetReadBits(tag);
+            int x=0,y=0;
+            while(1) {
+                int flags;
+                flags = swf_GetBits(tag, 1);
+                if(!flags) { //style change
+                    flags = swf_GetBits(tag, 5);
+                    if(!flags)
+                        break;
+                    if(flags&1) { //move
+                        int n = swf_GetBits(tag, 5);
+                        x = swf_GetBits(tag, n); //x
+                        y = swf_GetBits(tag, n); //y
+                        DEBUG_ENUMERATE printf("moveTo %.2f %.2f\n",x/20.0,y/20.0);
+                    }
+                    if(flags&2) { //fill0
+                        int fill0;
+                        fill0 = swf_GetBits(tag, fillbits);
+                        DEBUG_ENUMERATE printf("fill0 %d\n", fill0);
+                    }
+                    if(flags&4) { //fill1
+                        int fill1;
+                        fill1 = swf_GetBits(tag, fillbits);
+                        DEBUG_ENUMERATE printf("fill1 %d\n", fill1);
+                    }
+                    if(flags&8) { //linestyle
+                        int line;
+                        line = swf_GetBits(tag, linebits);
+                        DEBUG_ENUMERATE printf("linestyle %d\n",line);
+                    }
+                    if(flags&16) {
+                        DEBUG_ENUMERATE printf("more fillstyles\n");
+                        enumerateUsedIDs_styles(tag, callback, callback_data, num, 0);
+                        fillbits = swf_GetBits(tag, 4);
+                        linebits = swf_GetBits(tag, 4);
+                    }
                 } else {
-                int v=swf_GetBits(tag, 1);
-                int d;
-                d = swf_GetSBits(tag, n); //vert/horz
-                if(!v)
-                    x += d;
-                else
-                    y += d;
-                DEBUG_ENUMERATE printf("lineTo %.2f %.2f (%s)\n",x/20.0,y/20.0, v?"vertical":"horizontal");
+                    flags = swf_GetBits(tag, 1);
+                    if(flags) { //straight edge
+                        int n = swf_GetBits(tag, 4) + 2;
+                        if(swf_GetBits(tag, 1)) { //line flag
+                            x += swf_GetSBits(tag, n); //delta x
+                            y += swf_GetSBits(tag, n); //delta y
+                            DEBUG_ENUMERATE printf("lineTo %.2f %.2f\n",x/20.0,y/20.0);
+                        } else {
+                            int v=swf_GetBits(tag, 1);
+                            int d;
+                            d = swf_GetSBits(tag, n); //vert/horz
+                            if(!v)
+                                x += d;
+                            else
+                                y += d;
+                            DEBUG_ENUMERATE printf("lineTo %.2f %.2f (%s)\n",x/20.0,y/20.0, v?"vertical":"horizontal");
+                        }
+                    } else { //curved edge
+                        int n = swf_GetBits(tag, 4) + 2;
+                        int x1,y1,x2,y2;
+                        x1 = swf_GetSBits(tag, n);
+                        y1 = swf_GetSBits(tag, n);
+                        x2 = swf_GetSBits(tag, n);
+                        y2 = swf_GetSBits(tag, n);
+                        DEBUG_ENUMERATE printf("splineTo %.2f %.2f %.2f %.2f\n", x1/20.0, y1/20.0, x2/20.0, y2/20.0);
+                    }
                 }
-            } else { //curved edge
-                int n = swf_GetBits(tag, 4) + 2;
-                int x1,y1,x2,y2;
-                x1 = swf_GetSBits(tag, n);
-                y1 = swf_GetSBits(tag, n);
-                x2 = swf_GetSBits(tag, n);
-                y2 = swf_GetSBits(tag, n);
-                DEBUG_ENUMERATE printf("splineTo %.2f %.2f %.2f %.2f\n", x1/20.0, y1/20.0, x2/20.0, y2/20.0);
             }
-            }
-        }
         }
     }
-    break;
+        break;
     default:
-    break;
+        break;
     }
 }
 
@@ -989,82 +992,82 @@ char swf_Relocate (SWF*swf, char*bitmap)
 
     int current_id=0;
 #define NEW_ID(n) \
-        for(current_id++;current_id<65536;current_id++) { \
-            if(!bitmap[current_id]) { \
-            n = current_id; \
-            break; \
-            } \
-        } \
-                if(current_id==65536) { \
-                    fprintf(stderr, "swf_Relocate: Couldn't relocate: Out of IDs\n"); \
-                    return 0; \
-                }
+    for(current_id++;current_id<65536;current_id++) { \
+    if(!bitmap[current_id]) { \
+    n = current_id; \
+    break; \
+} \
+} \
+    if(current_id==65536) { \
+    fprintf(stderr, "swf_Relocate: Couldn't relocate: Out of IDs\n"); \
+    return 0; \
+}
 
     while(tag)
     {
-    int num;
-    int *ptr;
+        int num;
+        int *ptr;
 
-    if(swf_isDefiningTag(tag))
-    {
-        int newid;
-        int id;
+        if(swf_isDefiningTag(tag))
+        {
+            int newid;
+            int id;
 
-        id = swf_GetDefineID(tag); //own id
+            id = swf_GetDefineID(tag); //own id
 
-        if(!bitmap[id]) { //free
-        newid = id;
-        } else if(slaveids[id]>0) {
-        newid = slaveids[id];
-        } else {
-        NEW_ID(newid);
+            if(!bitmap[id]) { //free
+                newid = id;
+            } else if(slaveids[id]>0) {
+                newid = slaveids[id];
+            } else {
+                NEW_ID(newid);
+            }
+
+            bitmap[newid] = 1;
+            slaveids[id] = newid;
+
+            swf_SetDefineID(tag, newid);
         }
 
-        bitmap[newid] = 1;
-        slaveids[id] = newid;
-
-        swf_SetDefineID(tag, newid);
-    }
-
-    num = swf_GetNumUsedIDs(tag);
-    if(num) {
-        ptr = (int*)malloc(sizeof(int)*num);
-        swf_GetUsedIDs(tag, ptr);
-        int t;
-        for(t=0;t<num;t++) {
-        int id = GET16(&tag->data[ptr[t]]);
-        if(slaveids[id]<0) {
-            if(!id && bitmap[id]) {
-            /* id 0 is only used in SWF versions >=9. It's the ID of
+        num = swf_GetNumUsedIDs(tag);
+        if(num) {
+            ptr = (int*)malloc(sizeof(int)*num);
+            swf_GetUsedIDs(tag, ptr);
+            int t;
+            for(t=0;t<num;t++) {
+                int id = GET16(&tag->data[ptr[t]]);
+                if(slaveids[id]<0) {
+                    if(!id && bitmap[id]) {
+                        /* id 0 is only used in SWF versions >=9. It's the ID of
                the main timeline. It's used in e.g. SYMBOLTAG tags, but
                never defined, so if we're asked to reallocate it, we have
                to allocate an ID for it on the fly. */
-            int newid;
-            NEW_ID(newid);
-            bitmap[newid] = 1;
-            slaveids[id] = newid;
-            id = newid;
-            } else if(!bitmap[id]) {
-            /* well- we don't know this id, but it's not reserved anyway, so just
+                        int newid;
+                        NEW_ID(newid);
+                        bitmap[newid] = 1;
+                        slaveids[id] = newid;
+                        id = newid;
+                    } else if(!bitmap[id]) {
+                        /* well- we don't know this id, but it's not reserved anyway, so just
                leave it alone */
-            } else {
-            /* this actually happens with files created with Flash CS4 and never.
+                    } else {
+                        /* this actually happens with files created with Flash CS4 and never.
                Apparently e.g. DefineButton tags are able to use forward declarations of objects. */
-            fprintf(stderr, "warning: Mapping id (%d) never encountered before in %s\n", id,
-                swf_TagGetName(tag));
-            int newid;
-            NEW_ID(newid);
-            id = slaveids[id] = newid;
-            ok = 0;
+                        fprintf(stderr, "warning: Mapping id (%d) never encountered before in %s\n", id,
+                                swf_TagGetName(tag));
+                        int newid;
+                        NEW_ID(newid);
+                        id = slaveids[id] = newid;
+                        ok = 0;
+                    }
+                } else {
+                    id = slaveids[id];
+                }
+                PUT16(&tag->data[ptr[t]], id);
             }
-        } else {
-            id = slaveids[id];
-        }
-        PUT16(&tag->data[ptr[t]], id);
-        }
             free(ptr);
-    }
-    tag=tag->next;
+        }
+        tag=tag->next;
     }
     return ok;
 }
@@ -1075,28 +1078,28 @@ void swf_Relocate2(SWF*swf, int*id2id)
     TAG*tag;
     tag = swf->firstTag;
     while(tag) {
-    if(swf_isDefiningTag(tag)) {
-        int id = swf_GetDefineID(tag);
-        id = id2id[id];
-        if(id>=0) {
-        swf_SetDefineID(tag, id);
+        if(swf_isDefiningTag(tag)) {
+            int id = swf_GetDefineID(tag);
+            id = id2id[id];
+            if(id>=0) {
+                swf_SetDefineID(tag, id);
+            }
         }
-    }
-    int num = swf_GetNumUsedIDs(tag);
-    if(num) {
-        int *ptr;
-        int t;
-        ptr = (int*)malloc(sizeof(int)*num);
-        swf_GetUsedIDs(tag, ptr);
-        for(t=0;t<num;t++) {
-        int id = GET16(&tag->data[ptr[t]]);
-        id = id2id[id];
-        if(id>=0) {
-            PUT16(&tag->data[ptr[t]], id);
-        }
-        }
+        int num = swf_GetNumUsedIDs(tag);
+        if(num) {
+            int *ptr;
+            int t;
+            ptr = (int*)malloc(sizeof(int)*num);
+            swf_GetUsedIDs(tag, ptr);
+            for(t=0;t<num;t++) {
+                int id = GET16(&tag->data[ptr[t]]);
+                id = id2id[id];
+                if(id>=0) {
+                    PUT16(&tag->data[ptr[t]], id);
+                }
+            }
             free(ptr);
-    }
+        }
     }
 }
 
@@ -1106,8 +1109,8 @@ void swf_RelocateDepth(SWF*swf, char*bitmap)
     int nr;
     tag = swf->firstTag;
     for(nr=65535;nr>=0;nr--) {
-    if(bitmap[nr] != 0)
-        break;
+        if(bitmap[nr] != 0)
+            break;
     }
     // now nr is the highest used depth. So we start
     // assigning depths at nr+1
@@ -1115,47 +1118,47 @@ void swf_RelocateDepth(SWF*swf, char*bitmap)
 
     while(tag)
     {
-    int depth;
-    /* TODO * clip depths
+        int depth;
+        /* TODO * clip depths
             * sprites
      */
-    if(tag->id == ST_PLACEOBJECT2) {
-        SWFPLACEOBJECT obj;
-        swf_GetPlaceObject(tag, &obj);
-        if(obj.clipdepth) {
-        int newdepth = obj.clipdepth+nr;
-        if(newdepth>65535) {
-            fprintf(stderr, "Couldn't relocate depths: too large values\n");
-            newdepth = 65535;
+        if(tag->id == ST_PLACEOBJECT2) {
+            SWFPLACEOBJECT obj;
+            swf_GetPlaceObject(tag, &obj);
+            if(obj.clipdepth) {
+                int newdepth = obj.clipdepth+nr;
+                if(newdepth>65535) {
+                    fprintf(stderr, "Couldn't relocate depths: too large values\n");
+                    newdepth = 65535;
+                }
+                obj.clipdepth = newdepth;
+                swf_ResetTag(tag, ST_PLACEOBJECT2);
+                swf_SetPlaceObject(tag, &obj);
+            }
+            swf_PlaceObjectFree(&obj);
         }
-        obj.clipdepth = newdepth;
-        swf_ResetTag(tag, ST_PLACEOBJECT2);
-        swf_SetPlaceObject(tag, &obj);
-        }
-        swf_PlaceObjectFree(&obj);
-    }
 
-    depth = swf_GetDepth(tag);
-    if(depth>=0) {
-        int newdepth = depth+nr;
-        if(newdepth>65535) {
-        fprintf(stderr, "Couldn't relocate depths: too large values\n");
-        newdepth = 65535;
+        depth = swf_GetDepth(tag);
+        if(depth>=0) {
+            int newdepth = depth+nr;
+            if(newdepth>65535) {
+                fprintf(stderr, "Couldn't relocate depths: too large values\n");
+                newdepth = 65535;
+            }
+            swf_SetDepth(tag, newdepth);
         }
-        swf_SetDepth(tag, newdepth);
-    }
-    tag=tag->next;
+        tag=tag->next;
     }
 }
 
 U8 swf_isShapeTag(TAG*tag)
 {
     if(tag->id == ST_DEFINESHAPE ||
-       tag->id == ST_DEFINESHAPE2 ||
-       tag->id == ST_DEFINESHAPE3 ||
-       tag->id == ST_DEFINESHAPE4 ||
-       tag->id == ST_DEFINEMORPHSHAPE ||
-       tag->id == ST_DEFINEMORPHSHAPE2)
+            tag->id == ST_DEFINESHAPE2 ||
+            tag->id == ST_DEFINESHAPE3 ||
+            tag->id == ST_DEFINESHAPE4 ||
+            tag->id == ST_DEFINEMORPHSHAPE ||
+            tag->id == ST_DEFINEMORPHSHAPE2)
         return 1;
     return 0;
 }
@@ -1163,15 +1166,15 @@ U8 swf_isShapeTag(TAG*tag)
 U8 swf_isPlaceTag(TAG*tag)
 {
     if(tag->id == ST_PLACEOBJECT ||
-       tag->id == ST_PLACEOBJECT2 ||
-       tag->id == ST_PLACEOBJECT3)
+            tag->id == ST_PLACEOBJECT2 ||
+            tag->id == ST_PLACEOBJECT3)
         return 1;
     return 0;
 }
 U8 swf_isTextTag(TAG*tag)
 {
     if(tag->id == ST_DEFINETEXT ||
-       tag->id == ST_DEFINETEXT2)
+            tag->id == ST_DEFINETEXT2)
         return 1;
     return 0;
 }
@@ -1179,9 +1182,9 @@ U8 swf_isTextTag(TAG*tag)
 U8 swf_isFontTag(TAG*tag)
 {
     if(tag->id == ST_DEFINEFONT ||
-       tag->id == ST_DEFINEFONT2 ||
-       tag->id == ST_DEFINEFONT3 ||
-       tag->id == ST_DEFINEFONTINFO)
+            tag->id == ST_DEFINEFONT2 ||
+            tag->id == ST_DEFINEFONT3 ||
+            tag->id == ST_DEFINEFONTINFO)
         return 1;
     return 0;
 }
@@ -1189,10 +1192,10 @@ U8 swf_isFontTag(TAG*tag)
 U8  swf_isImageTag(TAG*tag)
 {
     if(tag->id == ST_DEFINEBITSJPEG ||
-       tag->id == ST_DEFINEBITSJPEG2 ||
-       tag->id == ST_DEFINEBITSJPEG3 ||
-       tag->id == ST_DEFINEBITSLOSSLESS ||
-       tag->id == ST_DEFINEBITSLOSSLESS2)
+            tag->id == ST_DEFINEBITSJPEG2 ||
+            tag->id == ST_DEFINEBITSJPEG3 ||
+            tag->id == ST_DEFINEBITSLOSSLESS ||
+            tag->id == ST_DEFINEBITSLOSSLESS2)
         return 1;
     return 0;
 }
@@ -1215,22 +1218,22 @@ TAG* swf_Concatenate (TAG*list1,TAG*list2)
 
     tag = list1;
     while(tag) {
-    if(!swf_isDefiningTag(tag)) {
-        int id = swf_GetDefineID(tag);
-        bitmap[id] = 1;
-    }
-    if(tag->id == ST_PLACEOBJECT ||
-       tag->id == ST_PLACEOBJECT2) {
-        int depth = swf_GetDepth(tag);
-        depthmap[depth] = 1;
-    }
-    if(tag->id == ST_REMOVEOBJECT ||
-       tag->id == ST_REMOVEOBJECT2) {
-        int depth = swf_GetDepth(tag);
-        depthmap[depth] = 0;
-    }
-    tag = tag->next;
-    lasttag = tag;
+        if(!swf_isDefiningTag(tag)) {
+            int id = swf_GetDefineID(tag);
+            bitmap[id] = 1;
+        }
+        if(tag->id == ST_PLACEOBJECT ||
+                tag->id == ST_PLACEOBJECT2) {
+            int depth = swf_GetDepth(tag);
+            depthmap[depth] = 1;
+        }
+        if(tag->id == ST_REMOVEOBJECT ||
+                tag->id == ST_REMOVEOBJECT2) {
+            int depth = swf_GetDepth(tag);
+            depthmap[depth] = 0;
+        }
+        tag = tag->next;
+        lasttag = tag;
     }
     swf_Relocate(&swf2, bitmap);
     swf_RelocateDepth(&swf2, depthmap);
@@ -1276,7 +1279,7 @@ void swf_Optimize(SWF*swf)
                   the helper tags, too.
          */
         if(swf_isPseudoDefiningTag(tag) &&
-           tag->id != ST_NAMECHARACTER) {
+                tag->id != ST_NAMECHARACTER) {
             dontremap[swf_GetDefineID(tag)] = 1;
         }
         tag=tag->next;
@@ -1305,20 +1308,20 @@ void swf_Optimize(SWF*swf)
             int hash = tagHash(tag);
             int match=0;
             if(!dontremap[id])
-            while((tag2 = hashmap[hash%hash_size])) {
-                if(tag2 != (TAG*)0 && tag->len == tag2->len) {
-            if(memcmp(&tag->data[2],&tag2->data[2],tag->len-2) == 0) {
-            match = 1;
-            break;
-            }
+                while((tag2 = hashmap[hash%hash_size])) {
+                    if(tag2 != (TAG*)0 && tag->len == tag2->len) {
+                        if(memcmp(&tag->data[2],&tag2->data[2],tag->len-2) == 0) {
+                            match = 1;
+                            break;
+                        }
+                    }
+                    hash++;
                 }
-                hash++;
-            }
             if(!match) {
                 while(hashmap[hash%hash_size]) hash++;
                 hashmap[hash%hash_size] = tag;
             } else {
-        /* we found two identical tags- remap one
+                /* we found two identical tags- remap one
            of them */
                 remap[id] = swf_GetDefineID(tag2);
                 swf_DeleteTag(swf, tag);
@@ -1344,7 +1347,6 @@ void swf_Optimize(SWF*swf)
 
 void swf_SetDefineBBox(TAG * tag, SRECT newbbox)
 {
-    U16 id = 0;
     SRECT b1;
     swf_SetTagPos(tag,0);
 
@@ -1357,21 +1359,21 @@ void swf_SetDefineBBox(TAG * tag, SRECT newbbox)
     case ST_DEFINETEXT:
     case ST_DEFINETEXT2:
     case ST_DEFINEVIDEOSTREAM: {
-          U32 after_bbox_offset = 0, len;
-          U8*data;
-          id = swf_GetU16(tag);
-          swf_GetRect(tag, &b1);
-          swf_ResetReadBits(tag);
-          after_bbox_offset = tag->pos;
-          len = tag->len - after_bbox_offset;
-          data = (U8*)malloc(len);
-          memcpy(data, &tag->data[after_bbox_offset], len);
-          tag->writeBit = 0;
-          tag->len = 2;
-          swf_SetRect(tag, &newbbox);
-          swf_SetBlock(tag, data, len);
-          free(data);
-          tag->pos = tag->readBit = 0;
+        U32 after_bbox_offset = 0, len;
+        U8*data;
+        /*U16 id = */swf_GetU16(tag);
+        swf_GetRect(tag, &b1);
+        swf_ResetReadBits(tag);
+        after_bbox_offset = tag->pos;
+        len = tag->len - after_bbox_offset;
+        data = (U8*)malloc(len);
+        memcpy(data, &tag->data[after_bbox_offset], len);
+        tag->writeBit = 0;
+        tag->len = 2;
+        swf_SetRect(tag, &newbbox);
+        swf_SetBlock(tag, data, len);
+        free(data);
+        tag->pos = tag->readBit = 0;
 
     } break;
     default:

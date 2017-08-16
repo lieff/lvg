@@ -1014,8 +1014,8 @@ RGBA* swf_Render(RENDERBUF*dest)
     if(antialize <= 1) /* no antializing */ {
         for(y=0;y<i->height2;y++) {
             RGBA*line = &i->img[y*i->width2];
-            RGBA*out = &img[y*dest->width];
-            /*for(x=0;x<dest->width;x++)
+            /*RGBA*out = &img[y*dest->width];
+            for(x=0;x<dest->width;x++)
             {
                 out[x].a = line[x].r;
                 out[x].r = line[x].g;
