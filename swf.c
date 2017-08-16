@@ -494,7 +494,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 /*int bits = */swf_GetBits(tag, 1);
                 int stereo = swf_GetBits(tag, 1);
                 int num_samples = swf_GetU32(tag);
-                sound->samples = (short*)malloc(num_samples*2*2);
+                sound->channels = stereo ? 2 : 1;
+                sound->samples = (short*)malloc(num_samples*2*sound->channels);
                 assert(1 == format || 2 == format); // adpcm, mp3
                 char *buf = (char *)&tag->data[tag->pos];
                 int buf_size = tag->len - tag->pos;
@@ -514,21 +515,20 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         int frame_size = mp3_decode(dec, buf, buf_size, frame_buf, &info);
                         if (!frame_size)
                             break;
+                        assert(info.channels == sound->channels);
+                        assert(info.sample_rate == sound->rate);
                         int samples = info.audio_bytes/(info.channels*2);
                         if (num_samples < (sound->num_samples + samples))
                         {
                             num_samples = sound->num_samples + samples;
-                            sound->samples = (short*)realloc(sound->samples, num_samples*2);
+                            sound->samples = (short*)realloc(sound->samples, num_samples*2*info.channels);
                         }
-                        for (int i = 0; i < samples; i++)
-                            sound->samples[sound->num_samples + i] = frame_buf[i*2];
+                        memcpy(sound->samples + sound->num_samples*info.channels, frame_buf, info.audio_bytes);
                         buf += frame_size;
                         stream_buf_size -= frame_size;
                         sound->num_samples += samples;
                     }
                     mp3_done(dec);
-                    assert(info.channels == (stereo + 1));
-                    assert(info.sample_rate == sound->rate);
                     assert(num_samples == sound->num_samples);
                 }
                 swf_SetTagPos(tag, oldTagPos);
@@ -622,9 +622,14 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
-            //int id;
+#ifndef NDEBUG
+            int id;
+#endif
             if (ST_REMOVEOBJECT == tag->id)
-                /*id = */swf_GetU16(tag);
+#ifndef NDEBUG
+                id = 
+#endif
+                swf_GetU16(tag);
             int depth = swf_GetU16(tag);
             if (ST_REMOVEOBJECT == tag->id)
             {

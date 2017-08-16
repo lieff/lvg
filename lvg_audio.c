@@ -25,7 +25,7 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
     mp3_info_t info;
     mp3_decoder_t dec = mp3_create();
     int alloc_samples = 1024*1024, num_samples = 0;
-    short *music_buf = (short *)malloc(alloc_samples*2);
+    short *music_buf = (short *)malloc(alloc_samples*2*2);
     while (buf_size)
     {
         short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
@@ -36,17 +36,9 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
         if (alloc_samples < (num_samples + samples))
         {
             alloc_samples *= 2;
-            music_buf = (short *)realloc(music_buf, alloc_samples*2);
+            music_buf = (short *)realloc(music_buf, alloc_samples*2*info.channels);
         }
-        if (2 == info.channels)
-        {   // TODO: joint stereo not supported?
-            for (int i = 0; i < samples; i++)
-                music_buf[num_samples + i] = frame_buf[i*2];
-        } else
-        {
-            for (int i = 0; i < samples; i++)
-                music_buf[num_samples + i] = frame_buf[i];
-        }
+        memcpy(music_buf + num_samples*info.channels, frame_buf, info.audio_bytes);
         buf += frame_size;
         buf_size -= frame_size;
         num_samples += samples;
@@ -57,7 +49,7 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
     if (rate)
         *rate = info.sample_rate;
     if (channels)
-        *channels = 1;//info.channels;
+        *channels = info.channels;
     if (num_samples)
         *nsamples = num_samples;
     return music_buf;
@@ -202,5 +194,5 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_c
 void lvgPlaySound(LVGSound *sound)
 {
     sound->cur_play_byte = 0;
-    lvgStartAudio(sound->rate, 1, 0, 0, 0, sound_play_cb, sound);
+    lvgStartAudio(sound->rate, sound->channels, 0, 0, 0, sound_play_cb, sound);
 }

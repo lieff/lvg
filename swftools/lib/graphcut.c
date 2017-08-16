@@ -215,7 +215,9 @@ static path_t*extract_path(graphcut_workspace_t*work, unsigned char*mytree, unsi
     while(p != work->pos1) {
         halfedge_t*back = work->back[NR(p)];
         DBG printf("walk backward (1): %d %d\n", NR(p), back?NR(back->fwd->node):-1);
-        //node_t*old = p;
+#ifndef NDEBUG
+        node_t*old = p;
+#endif
         p = work->back[NR(p)]->fwd->node;
         assert(p!=old);
         len1++;
