@@ -167,6 +167,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
         } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
         {
             assert(f->gradient.num >= 2);
+            assert(f->gradient.num < 1024);
             shape->fill.type = (FILL_LINEAR == f->type) ? NSVG_PAINT_LINEAR_GRADIENT : NSVG_PAINT_RADIAL_GRADIENT;
             shape->fill.gradient = (NSVGgradient*)calloc(1, sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*(f->gradient.num - 1));
             shape->fill.gradient->nstops = f->gradient.num;
@@ -362,7 +363,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 
             if (swf_isShapeTag(tag))
             {
-                SHAPE2 *swf_shape = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
+                SHAPE2 *swf_shape = (SHAPE2*)calloc(1, sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
 
                 SHAPELINE tmp_line = { 0 };
@@ -502,7 +503,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 if (1 == format)
                 {
                     int dec_samples = adpcm_decode(tag, buf_size, stereo + 1, sound->samples);
-                    assert(dec_samples == num_samples);
+                    assert(dec_samples == num_samples*sound->channels);
                     sound->num_samples = dec_samples;
                 } else
                 if (2 == format)

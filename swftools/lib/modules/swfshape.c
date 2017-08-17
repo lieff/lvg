@@ -536,7 +536,8 @@ static void parseFillStyle(FILLSTYLE*dest, TAG*tag, int num)
         swf_ResetReadBits(tag);
         if (morph)
         {
-            swf_GetMorphGradient(tag, NULL, NULL);
+            GRADIENT gradient2;
+            swf_GetMorphGradient(tag, &dest->gradient, &gradient2);
             if (type == 0x13)
             {
                 swf_GetU16(tag);
@@ -544,7 +545,7 @@ static void parseFillStyle(FILLSTYLE*dest, TAG*tag, int num)
             }
         } else
         {
-            swf_GetGradient(tag, &dest->gradient, num>=3?1:0);
+            swf_GetGradient(tag, &dest->gradient, num >= 3 ? 1 : 0);
             if(type == 0x13)
                 swf_GetU16(tag);
         }
