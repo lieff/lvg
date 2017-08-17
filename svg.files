@@ -9,8 +9,8 @@ nanovg/nanovg.c
 nanovg/nanovg.h
 nanovg/nanovg_gl.h
 nanovg/nanovg_gl_utils.h
-swftools/lib/action/actioncompiler.c
-swftools/lib/action/actioncompiler.h
+swftools/lib/as3/abc.c
+swftools/lib/as3/abc.h
 swftools/lib/as3/compiler.h
 swftools/lib/as3/import.h
 swftools/lib/lame/lame.h

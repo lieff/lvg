@@ -533,12 +533,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, oldTagPos);
                 idtable[id].type = sound_type;
                 idtable[id].lvg_id = clip->num_sounds++;
-            } else if (ST_DOACTION == tag->id)
-            {
-
-            } else if (ST_DOABC == tag->id)
-            {
-
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
         {
@@ -572,6 +566,16 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, oldTagPos);
             if (stream_sound < 0)
                 stream_sound = clip->num_sounds++;
+        } else if (ST_DOACTION == tag->id)
+        {
+            ActionTAG*actions;
+            actions = swf_ActionGet(tag);
+            swf_DumpActions(actions, 0);
+        } else if (ST_DOABC == tag->id)
+        {
+            void*abccode = swf_ReadABC(tag);
+            swf_DumpABC(stdout, abccode, "");
+            swf_FreeABC(abccode);
         } else if (tag->id == ST_SHOWFRAME)
             group->num_frames++;
         else if (tag->id == ST_END)
@@ -652,7 +656,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             for (i = 0, j = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
-                if (!p->id)
+                if (!p->id || p->clipdepth)
                     continue;
                 MATRIX *m = &p->matrix;
                 CXFORM *cx = &p->cxform;

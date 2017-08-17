@@ -1085,32 +1085,6 @@ ActionTAG* action_DefineFunction(ActionTAG*atag, U8*data, int len) {return atag;
 ActionTAG* action_Constantpool(ActionTAG*atag, char* constantpool) {return atag;}
 ActionTAG*  action_With(ActionTAG*atag, char*object) {return atag;}
 
-#include "../action/actioncompiler.h"
-
-ActionTAG* swf_ActionCompile(const char* source, int version)
-{
-    TAG* tag;
-    ActionTAG* a = 0;
-    void*buffer = 0;
-    int len = 0;
-    int ret;
-
-    tag = swf_InsertTag(NULL, ST_DOACTION);
-    ret = compileSWFActionCode(source, version, &buffer, &len);
-    if(!ret || buffer==0 || len == 0)
-        return 0;
-
-    swf_SetBlock(tag, (U8*)buffer, len);
-    swf_SetU8(tag, 0);
-
-    free(buffer);
-
-    a = swf_ActionGet(tag);
-    swf_DeleteTag(0, tag);
-    return a;
-}
-
-
 /*
   Properties:
 
