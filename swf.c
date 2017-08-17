@@ -525,7 +525,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         }
                         memcpy(sound->samples + sound->num_samples*info.channels, frame_buf, info.audio_bytes);
                         buf += frame_size;
-                        stream_buf_size -= frame_size;
                         sound->num_samples += samples;
                     }
                     mp3_done(dec);
@@ -565,10 +564,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             int samples = swf_GetU16(tag);
             /*int seek_samples = */swf_GetU16(tag);
             stream_samples += samples;
-            int old_size = stream_buf_size;
-            stream_buf_size += tag->len - tag->pos;
+            int old_size = stream_buf_size, size = tag->len - tag->pos;
+            assert(size > 0);
+            stream_buf_size += size;
             stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
-            memcpy(stream_buffer + old_size, &tag->data[tag->pos], tag->len - tag->pos);
+            memcpy(stream_buffer + old_size, &tag->data[tag->pos], size);
             swf_SetTagPos(tag, oldTagPos);
             if (stream_sound < 0)
                 stream_sound = clip->num_sounds++;
