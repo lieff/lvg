@@ -11,8 +11,17 @@ nanovg/nanovg_gl.h
 nanovg/nanovg_gl_utils.h
 swftools/lib/as3/abc.c
 swftools/lib/as3/abc.h
+swftools/lib/as3/assets.c
+swftools/lib/as3/assets.h
+swftools/lib/as3/code.c
+swftools/lib/as3/code.h
 swftools/lib/as3/compiler.h
 swftools/lib/as3/import.h
+swftools/lib/as3/opcodes.c
+swftools/lib/as3/opcodes.h
+swftools/lib/as3/pool.c
+swftools/lib/as3/pool.h
+swftools/lib/as3/registry.h
 swftools/lib/lame/lame.h
 swftools/lib/modules/swfaction.c
 swftools/lib/modules/swfalignzones.c
@@ -40,6 +49,8 @@ swftools/lib/mem.c
 swftools/lib/mem.h
 swftools/lib/os.c
 swftools/lib/os.h
+swftools/lib/q.c
+swftools/lib/q.h
 swftools/lib/rfxswf.c
 swftools/lib/rfxswf.h
 swftools/lib/types.h
