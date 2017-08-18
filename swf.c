@@ -343,13 +343,16 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     TAG *tag = firstTag;
     while (tag)
     {
+        if (tag->id == ST_END)
+            break;
         if (tag->id == ST_SHOWFRAME)
             group->num_frames++;
         tag = tag->next;
     }
-
+    if (!group->num_frames) // no SHOWFRAME tag at end of the sprite
+        group->num_frames++;
     group->frames = calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
-    group->num_frames = 0;
+
     tag = firstTag;
     while (tag)
     {
@@ -577,9 +580,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             void*abccode = swf_ReadABC(tag);
             swf_DumpABC(stdout, abccode, "");
             swf_FreeABC(abccode);
-        } else if (tag->id == ST_SHOWFRAME)
-            group->num_frames++;
-        else if (tag->id == ST_END)
+        } else if (tag->id == ST_END)
             break;
         tag = tag->next;
     }
@@ -644,7 +645,9 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             swf_SetTagPos(tag, oldTagPos);
         } else if (tag->id == ST_SHOWFRAME)
         {
-            int numplacements = 0;
+            int numplacements;
+do_show_frame:
+            numplacements = 0;
             for (i = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
@@ -682,8 +685,14 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 o->color_add[3] = cx->a1/256.0f;
             }
             group->num_frames++;
+            if (tag->id == ST_END)
+                break;
         } else if (tag->id == ST_END)
+        {
+            if (!group->num_frames) // no SHOWFRAME tag at end of the sprite
+                goto do_show_frame;
             break;
+        }
         tag = tag->next;
     }
     free(placements);
