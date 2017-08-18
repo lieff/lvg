@@ -369,6 +369,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 SHAPE2 *swf_shape = (SHAPE2*)calloc(1, sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
+                if (!swf_shape->lines)
+                {   // empty shape
+                    tag = tag->next;
+                    continue;
+                }
 
                 SHAPELINE tmp_line = { 0 };
                 SHAPELINE *lines = swf_shape->lines;
