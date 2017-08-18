@@ -338,7 +338,7 @@ add_shape:
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
-    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0;
+    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0;
     char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
@@ -549,7 +549,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, 0);
             /*int reserve = */swf_GetBits(tag, 4);
             int rate = rates[swf_GetBits(tag, 2)];
-            /*int bits = */swf_GetBits(tag, 1);
+            stream_bits = swf_GetBits(tag, 1);
             int stereo = swf_GetBits(tag, 1);
             stream_format = swf_GetBits(tag, 4);
             /*int stream_rate = */swf_GetBits(tag, 2);
@@ -559,7 +559,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             //short latency_seek = 0;
             if (2 == stream_format)
                 /*latency_seek = */swf_GetU16(tag);
-            assert(1 == stream_format || 2 == stream_format); // adpcm, mp3
+            assert(0 == stream_format || 1 == stream_format || 2 == stream_format); // pcm, adpcm, mp3
             if (stream_sound < 0)
                 stream_sound = clip->num_sounds++;
             LVGSound *sound = clip->sounds + stream_sound;
@@ -598,6 +598,18 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     if (stream_buffer)
     {
         LVGSound *sound = clip->sounds + stream_sound;
+        if (0 == stream_format)
+        {
+            if (stream_bits)
+            {
+                sound->samples = (short*)stream_buffer;
+            } else
+            {
+                sound->samples = (short*)malloc(stream_buf_size*2);
+                for (int i = 0; i < stream_buf_size; i++)
+                    sound->samples[i] = stream_buffer[i];
+            }
+        } else
         if (1 == stream_format)
         {
             TAG t;
@@ -611,7 +623,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
             assert(stream_samples == sound->num_samples);
         }
-        free(stream_buffer);
+        if (!(0 == stream_format && stream_bits))
+            free(stream_buffer);
     }
 }
 
@@ -739,9 +752,9 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
 
     TAG *tag = swf->firstTag;
+    int sound_stream_found = 0;
     while (tag)
     {
-        int sound_stream_found = 0;
         if (swf_isDefiningTag(tag))
         {
             if (swf_isShapeTag(tag))
@@ -749,10 +762,12 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             else if (swf_isImageTag(tag))
                 clip->num_images++;
             else if (ST_DEFINESPRITE == tag->id)
+            {
                 clip->num_groups++;
-            else if (ST_DEFINESOUND == tag->id)
+                clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
+            } else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
-        } else if (ST_SOUNDSTREAMBLOCK == tag->id && !sound_stream_found)
+        } else if ((ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id || ST_SOUNDSTREAMBLOCK == tag->id) && !sound_stream_found)
         {
             sound_stream_found = 1;
             clip->num_sounds++;
