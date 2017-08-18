@@ -7,6 +7,7 @@
 #include "lvg_header.h"
 #include "minimp3.h"
 #include <SDL2/SDL.h>
+#include <assert.h>
 //#include "resample.h"
 
 //static struct rs_data *g_resample;
@@ -30,7 +31,8 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
     {
         short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
         int frame_size = mp3_decode(dec, (short *)buf, buf_size, frame_buf, &info);
-        if (!frame_size)
+        assert(frame_size && info.audio_bytes > 0);
+        if (!frame_size || info.audio_bytes <= 0)
             break;
         int samples = info.audio_bytes/(info.channels*2);
         if (alloc_samples < (num_samples + samples))

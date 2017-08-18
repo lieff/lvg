@@ -522,7 +522,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     {
                         short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
                         int frame_size = mp3_decode(dec, buf, buf_size, frame_buf, &info);
-                        if (!frame_size || info.audio_bytes < 0)
+                        assert(frame_size && info.audio_bytes > 0);
+                        if (!frame_size || info.audio_bytes <= 0)
                             break;
                         assert(info.channels == sound->channels);
                         assert(info.sample_rate == sound->rate);
@@ -534,6 +535,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         }
                         memcpy(sound->samples + sound->num_samples*info.channels, frame_buf, info.audio_bytes);
                         buf += frame_size;
+                        buf_size -= frame_size;
                         sound->num_samples += samples;
                     }
                     mp3_done(dec);
