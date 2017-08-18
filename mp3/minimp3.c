@@ -1512,7 +1512,8 @@ static int huffman_decode(
     /* skip extension bits */
     bits_left = end_pos2 - get_bits_count(&s->gb);
     if (bits_left < 0) {
-        return -1;
+        //return -1;
+        return 0; // TODO: find error
     }
     skip_bits_long(&s->gb, bits_left);
 
