@@ -337,7 +337,8 @@ add_shape:
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
-    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0;
+    static const int rates[4] = { 5500, 11025, 22050, 44100 };
+    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0;
     char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
@@ -493,7 +494,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, 0);
                 int id = swf_GetU16(tag);
                 int format = swf_GetBits(tag, 4);
-                static const int rates[4] = { 5500, 11025, 22050, 44100 };
                 sound->rate = rates[swf_GetBits(tag, 2)];
                 /*int bits = */swf_GetBits(tag, 1);
                 int stereo = swf_GetBits(tag, 1);
@@ -543,17 +543,23 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             /*int reserve = */swf_GetBits(tag, 4);
-            /*int rate = */swf_GetBits(tag, 2);
+            int rate = rates[swf_GetBits(tag, 2)];
             /*int bits = */swf_GetBits(tag, 1);
-            /*int stereo = */swf_GetBits(tag, 1);
-            int format = swf_GetBits(tag, 4);
+            int stereo = swf_GetBits(tag, 1);
+            stream_format = swf_GetBits(tag, 4);
             /*int stream_rate = */swf_GetBits(tag, 2);
             /*int stream_bits = */swf_GetBits(tag, 1);
             /*int stream_stereo = */swf_GetBits(tag, 1);
             /*int avg_samples = */swf_GetU16(tag);
             //short latency_seek = 0;
-            if (2 == format)
+            if (2 == stream_format)
                 /*latency_seek = */swf_GetU16(tag);
+            assert(1 == stream_format || 2 == stream_format); // adpcm, mp3
+            if (stream_sound < 0)
+                stream_sound = clip->num_sounds++;
+            LVGSound *sound = clip->sounds + stream_sound;
+            sound->channels = stereo ? 2 : 1;
+            sound->rate = rate;
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
@@ -587,8 +593,19 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     if (stream_buffer)
     {
         LVGSound *sound = clip->sounds + stream_sound;
-        sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
-        assert(stream_samples == sound->num_samples);
+        if (1 == stream_format)
+        {
+            TAG t;
+            memset(&t, 0, sizeof(t));
+            t.data = (U8*)stream_buffer;
+            //sound->samples = (short*)malloc(stream_buf_size*4*2*sound->channels);
+            //sound->num_samples = adpcm_decode(&t, stream_buf_size, sound->channels, sound->samples);
+        } else
+        if (2 == stream_format)
+        {
+            sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
+            assert(stream_samples == sound->num_samples);
+        }
         free(stream_buffer);
     }
 }
