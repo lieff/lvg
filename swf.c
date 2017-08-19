@@ -611,6 +611,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             LVGVideo *video = clip->videos + idtable[vid].lvg_id;
             int frame_num = swf_GetU16(tag);
             assert(frame_num < video->num_frames);
+            if (frame_num >= video->num_frames)
+            {
+                video->num_frames = frame_num + 1;
+                video->frames = realloc(video->frames, video->num_frames*sizeof(LVGVideoFrame));
+            }
             LVGVideoFrame *frame = video->frames + frame_num;
             frame->len = tag->len - tag->pos;
             frame->data = malloc(frame->len);
