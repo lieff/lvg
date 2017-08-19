@@ -41,6 +41,7 @@
 #include "all_lib.h"
 #include "lvg_header.h"
 #include "lvg.h"
+#include "stb_image.h"
 #include <SDL2/SDL.h>
 #include <video/video.h>
 
@@ -64,6 +65,13 @@ static size_t tcc_buf_size;
 static char *tcc_buf;
 
 extern const const video_dec ff_decoder;
+
+stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
+void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
+#if defined(__x86_64__) || defined(_M_X64)
+stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
+void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step);
+#endif
 
 #ifndef EMSCRIPTEN
 void (*onInit)();
@@ -535,14 +543,35 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                 video_frame out;
                 ff_decoder.decode(vdec, frame->data, frame->len, &out);
                 assert(video->width == out.width && video->height == out.height);
-                int *img = malloc(out.width*out.height*4);
-                for(int i = 0, y = 0; y < out.height; y++)
-                    for(int x = 0; x < out.width; x++)
-                    {
-                        uint32_t px = out.planes[0][y*out.stride[0] + x];
-                        img[i++] = px | (px << 8) | (px << 16) | 255 << 24;
-                    }
-                nvgUpdateImage(vg, video->image, (unsigned char *)img);
+                uint8_t *img = malloc(out.width*out.height*4);
+                uint8_t *pimg = img;
+                uint8_t *rowu = alloca(out.width);
+                uint8_t *rowv = alloca(out.width);
+                uint8_t *py = out.planes[0];
+                uint8_t *pu = out.planes[1];
+                uint8_t *pv = out.planes[2];
+                for(int y = 0; y < out.height/2; y++)
+                {
+#if defined(__x86_64__) || defined(_M_X64)
+#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2_simd
+#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_simd
+#else
+#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2
+#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_row
+#endif
+                    stbi__resample_row_hv_2_x(rowu, pu, pu, out.width/2, 0);
+                    stbi__resample_row_hv_2_x(rowv, pv, pv, out.width/2, 0);
+                    stbi__YCbCr_to_RGB_row_x(pimg, py, rowu, rowv, out.width, 4);
+                    pimg += out.width*4;
+                    stbi__resample_row_hv_2_x(rowu, pu, pu + out.stride[1], out.width/2, 0);
+                    stbi__resample_row_hv_2_x(rowv, pv, pv + out.stride[2], out.width/2, 0);
+                    stbi__YCbCr_to_RGB_row_x(pimg, py + out.stride[0], rowu, rowv, out.width, 4);
+                    pimg += out.width*4;
+                    py += out.stride[0]*2;
+                    pu += out.stride[1];
+                    pv += out.stride[2];
+                }
+                nvgUpdateImage(vg, video->image, img);
                 free(img);
             }
             NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, video->width, video->height, 0, video->image, 1.0f);
