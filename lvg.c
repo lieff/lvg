@@ -526,10 +526,30 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         {
             static void *vdec;
             LVGVideo *video = &clip->videos[o->id];
-            if (!vdec)
-                ff_decoder.init(&vdec, video->codec);
-            LVGVideoFrame *frame = video->frames;
-            ff_decoder.decode(vdec, frame->data, frame->len);
+            if (!o->ratio || o->ratio != video->cur_frame)
+            {
+                video->cur_frame = o->ratio;
+                if (!vdec)
+                    ff_decoder.init(&vdec, video->codec);
+                LVGVideoFrame *frame = video->frames + o->ratio;
+                video_frame out;
+                ff_decoder.decode(vdec, frame->data, frame->len, &out);
+                assert(video->width == out.width && video->height == out.height);
+                int *img = malloc(out.width*out.height*4);
+                for(int i = 0, y = 0; y < out.height; y++)
+                    for(int x = 0; x < out.width; x++)
+                    {
+                        uint32_t px = out.planes[0][y*out.stride[0] + x];
+                        img[i++] = px | (px << 8) | (px << 16) | 255 << 24;
+                    }
+                nvgUpdateImage(vg, video->image, (unsigned char *)img);
+                free(img);
+            }
+            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, video->width, video->height, 0, video->image, 1.0f);
+            nvgBeginPath(vg);
+            nvgRect(vg, 0, 0, video->width, video->height);
+            nvgFillPaint(vg, imgPaint);
+            nvgFill(vg);
         }
         if (LVG_OBJ_GROUP == o->type)
         {

@@ -55,6 +55,7 @@ typedef struct LVGVideo
 {
     LVGVideoFrame *frames;
     int codec, width, height, num_frames;
+    int cur_frame, image;
 } LVGVideo;
 
 typedef struct LVGMovieClip

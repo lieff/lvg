@@ -562,6 +562,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
+                video->image = nvgCreateImageRGBA(vg, video->width, video->height, 0, 0);
                 swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
@@ -595,7 +596,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             /*int seek_samples = */swf_GetU16(tag);
             stream_samples += samples;
             int old_size = stream_buf_size, size = tag->len - tag->pos;
-            assert(size > 0);
+            //assert(size > 0);
             stream_buf_size += size;
             stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
             memcpy(stream_buffer + old_size, &tag->data[tag->pos], size);
@@ -681,6 +682,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             SWFPLACEOBJECT p;
             int flags = swf_GetPlaceObject(tag, &p);
             swf_PlaceObjectFree(&p);
+            if (!(flags & PF_CHAR))
+                p.id = INVALID_ID;
             SWFPLACEOBJECT *target = &placements[p.depth];
             if (INVALID_ID == p.id)
                 p.id = target->id;

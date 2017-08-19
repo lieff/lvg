@@ -71,7 +71,7 @@ static void ff_release(void *_dec)
     free(dec);
 }
 
-static int ff_decode(void *_dec, void *buf, int len)
+static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
 {
     ffmpeg_decoder *dec = _dec;
     int ret;
@@ -92,6 +92,13 @@ static int ff_decode(void *_dec, void *buf, int len)
             printf("Error during decoding\n");
             return 0;
         }
+        for(int i = 0; i < 3; i++)
+        {
+            out->planes[i] = dec->frame->data[i];
+            out->stride[i] = dec->frame->linesize[i];
+        }
+        out->width  = dec->frame->width;
+        out->height = dec->frame->height;
     }
     return 1;
 }
