@@ -53,7 +53,7 @@ static inline int getBitPos(TAG *tag, int start_pos)
     return pos + bits;
 }
 
-int adpcm_decode(TAG *tag, int buf_size, int channels, int16_t *samples)
+int adpcm_decode(TAG *tag, int buf_size, int channels, int16_t *samples, int max_samples)
 {
     int i, count, size = buf_size*8, samples_num = 0, start_pos = tag->pos;
     int nbits = swf_GetBits(tag, 2) + 2;
@@ -96,7 +96,8 @@ int adpcm_decode(TAG *tag, int buf_size, int channels, int16_t *samples)
                 status[i].step_index = clip(status[i].step_index, 0, 88);
                 status[i].predictor = clip16(status[i].predictor);
 
-                *samples++ = status[i].predictor;
+                if (samples_num < max_samples)
+                    *samples++ = status[i].predictor;
                 samples_num++;
             }
         }

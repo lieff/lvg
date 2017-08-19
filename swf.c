@@ -510,9 +510,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int buf_size = tag->len - tag->pos;
                 if (1 == format)
                 {
-                    int dec_samples = adpcm_decode(tag, buf_size, stereo + 1, sound->samples);
+                    int dec_samples = adpcm_decode(tag, buf_size, stereo + 1, sound->samples, num_samples);
                     assert(dec_samples == num_samples*sound->channels);
-                    sound->num_samples = dec_samples;
+                    sound->num_samples = num_samples;
                 } else
                 if (2 == format)
                 {
