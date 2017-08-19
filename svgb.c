@@ -75,7 +75,7 @@ static void saveObject(FILE *file, LVGObject *o)
     fwrite(&o->id, 1, 4, file);
     fwrite(&o->type, 1, 4, file);
     fwrite(&o->depth, 1, 4, file);
-    fwrite(&o->flags, 1, 4, file);
+    fwrite(&o->ratio, 1, 4, file);
     fwrite(&o->t, 1, 4*6, file);
     fwrite(&o->color_mul, 1, 4*4, file);
     fwrite(&o->color_add, 1, 4*4, file);

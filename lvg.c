@@ -42,6 +42,7 @@
 #include "lvg_header.h"
 #include "lvg.h"
 #include <SDL2/SDL.h>
+#include <video/video.h>
 
 static LVGMovieClip *g_clip;
 static zip_t g_zip;
@@ -61,6 +62,8 @@ static int is_gles3;
 static int tcc_buf_pos;
 static size_t tcc_buf_size;
 static char *tcc_buf;
+
+extern const const video_dec ff_decoder;
 
 #ifndef EMSCRIPTEN
 void (*onInit)();
@@ -318,7 +321,7 @@ static char *loadObject(char *buf, LVGObject *o)
     READ(&o->id, 4);
     READ(&o->type, 4);
     READ(&o->depth, 4);
-    READ(&o->flags, 4);
+    READ(&o->ratio, 4);
     READ(&o->t, 4*6);
     READ(&o->color_mul, 4*4);
     READ(&o->color_add, 4*4);
@@ -519,6 +522,15 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
             nvgFillPaint(vg, imgPaint);
             nvgFill(vg);
         } else
+        if (LVG_OBJ_VIDEO == o->type)
+        {
+            static void *vdec;
+            LVGVideo *video = &clip->videos[o->id];
+            if (!vdec)
+                ff_decoder.init(&vdec, video->codec);
+            LVGVideoFrame *frame = video->frames;
+            ff_decoder.decode(vdec, frame->data, frame->len);
+        }
         if (LVG_OBJ_GROUP == o->type)
         {
             lvgDrawClipGroup(clip, clip->groups + o->id, next_frame);

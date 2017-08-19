@@ -13,7 +13,7 @@
 
 extern NVGcontext *vg;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, sprite_type, sound_type, text_type, edittext_type, font_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, sound_type, text_type, edittext_type, font_type};
 typedef struct
 {
     TAG *tag;
@@ -497,7 +497,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 LVGSound *sound = clip->sounds + clip->num_sounds;
                 U32 oldTagPos = swf_GetTagPos(tag);
                 swf_SetTagPos(tag, 0);
-                int id = swf_GetU16(tag);
+                id = swf_GetU16(tag);
                 int format = swf_GetBits(tag, 4);
                 sound->rate = rates[swf_GetBits(tag, 2)];
                 /*int bits = */swf_GetBits(tag, 1);
@@ -544,6 +544,25 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, oldTagPos);
                 idtable[id].type = sound_type;
                 idtable[id].lvg_id = clip->num_sounds++;
+            } else if (ST_DEFINEVIDEOSTREAM == tag->id)
+            {
+                U32 oldTagPos = swf_GetTagPos(tag);
+                swf_SetTagPos(tag, 0);
+                id = swf_GetU16(tag);
+                idtable[id].type = video_type;
+                idtable[id].lvg_id = clip->num_videos++;
+                clip->videos = realloc(clip->videos, clip->num_videos*sizeof(LVGVideo));
+                LVGVideo *video = clip->videos + idtable[id].lvg_id;
+                video->num_frames = swf_GetU16(tag);
+                video->width  = swf_GetU16(tag);
+                video->height = swf_GetU16(tag);
+                int reserved  = swf_GetBits(tag, 4);
+                int deblock   = swf_GetBits(tag, 3);
+                int smooth    = swf_GetBits(tag, 1);
+                video->codec  = swf_GetU8(tag) - 2;
+                assert(video->codec >= 0 && video->codec <= 5);
+                video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
+                swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
         {
@@ -583,6 +602,19 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, oldTagPos);
             if (stream_sound < 0)
                 stream_sound = clip->num_sounds++;
+        } else if (ST_VIDEOFRAME == tag->id)
+        {
+            U32 oldTagPos = swf_GetTagPos(tag);
+            swf_SetTagPos(tag, 0);
+            int vid = swf_GetU16(tag);
+            LVGVideo *video = clip->videos + idtable[vid].lvg_id;
+            int frame_num = swf_GetU16(tag);
+            assert(frame_num < video->num_frames);
+            LVGVideoFrame *frame = video->frames + frame_num;
+            frame->len = tag->len - tag->pos;
+            frame->data = malloc(frame->len);
+            memcpy(frame->data, tag->data + tag->pos, frame->len);
+            swf_SetTagPos(tag, oldTagPos);
         } else if (ST_DOACTION == tag->id)
         {
             ActionTAG*actions;
@@ -636,7 +668,11 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)calloc(1, sizeof(SWFPLACEOBJECT)*65536);
     int i, j;
     for (i = 0; i < 65536; i++)
+    {
         swf_GetPlaceObject(0, placements + i);
+#define INVALID_ID 65535
+        placements[i].id = INVALID_ID;
+    }
     TAG *tag = firstTag;
     while (tag)
     {
@@ -646,9 +682,9 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             int flags = swf_GetPlaceObject(tag, &p);
             swf_PlaceObjectFree(&p);
             SWFPLACEOBJECT *target = &placements[p.depth];
-            if (!p.id)
+            if (INVALID_ID == p.id)
                 p.id = target->id;
-            assert(p.id > 0);
+            assert(INVALID_ID != p.id);
             target->id = p.id;
             target->depth = p.depth;
             if (flags & PF_MATRIX) target->matrix = p.matrix;
@@ -688,7 +724,7 @@ do_show_frame:
             for (i = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
-                if (!p->id)
+                if (INVALID_ID == p->id)
                     continue;
                 numplacements++;
             }
@@ -697,15 +733,16 @@ do_show_frame:
             for (i = 0, j = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
-                if (!p->id || p->clipdepth)
+                if (INVALID_ID == p->id || p->clipdepth)
                     continue;
                 MATRIX *m = &p->matrix;
                 CXFORM *cx = &p->cxform;
                 LVGObject *o = &group->frames[group->num_frames].objects[j++];
                 character_t *c = &idtable[p->id];
                 o->id = c->lvg_id;
-                o->depth = p->depth;
                 o->type = c->type;
+                o->depth = p->depth;
+                o->ratio = p->ratio;
                 o->t[0] = m->sx/65536.0f;
                 o->t[1] = m->r0/65536.0f;
                 o->t[2] = m->r1/65536.0f;

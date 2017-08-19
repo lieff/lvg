@@ -10,11 +10,11 @@
 #include <assert.h>
 #endif
 
-enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_GROUP };
+enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP };
 
 typedef struct LVGObject
 {
-    int id, type, depth, flags;
+    int id, type, depth, ratio;
     float t[6];
     float color_mul[4];
     float color_add[4];
@@ -45,15 +45,28 @@ typedef struct LVGSound
     int num_samples, rate, channels, cur_play_byte;
 } LVGSound;
 
+typedef struct LVGVideoFrame
+{
+    void *data;
+    int len;
+} LVGVideoFrame;
+
+typedef struct LVGVideo
+{
+    LVGVideoFrame *frames;
+    int codec, width, height, num_frames;
+} LVGVideo;
+
 typedef struct LVGMovieClip
 {
     LVGShapeCollection *shapes;
     int *images;
     LVGMovieClipGroup *groups;
     LVGSound *sounds;
+    LVGVideo *videos;
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups, num_sounds;
+    int num_shapes, num_images, num_groups, num_sounds, num_videos;
     float fps;
     double last_time;
 } LVGMovieClip;
