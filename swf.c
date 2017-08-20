@@ -404,6 +404,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         prevLine->next = lines->next;
                         lines = prevLine->next;
                     }
+                    if (!lines->next && moveTo == lines->type)
+                        break;
                     if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type || (moveTo != prevLine->type && haveIntersect(swf_shape->lines, prevLine)))
                     {
                         assert(numLines > 1 || (moveTo != startLine->type));
