@@ -338,7 +338,7 @@ add_shape:
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
-    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0;
+    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0;
     char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
@@ -570,9 +570,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             /*int reserve = */swf_GetBits(tag, 4);
-            int rate = rates[swf_GetBits(tag, 2)];
+            stream_rate = rates[swf_GetBits(tag, 2)];
             stream_bits = swf_GetBits(tag, 1);
-            int stereo = swf_GetBits(tag, 1);
+            stream_channels = swf_GetBits(tag, 1) ? 2 : 1;
             stream_format = swf_GetBits(tag, 4);
             /*int stream_rate = */swf_GetBits(tag, 2);
             /*int stream_bits = */swf_GetBits(tag, 1);
@@ -582,11 +582,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             if (2 == stream_format)
                 /*latency_seek = */swf_GetU16(tag);
             assert(0 == stream_format || 1 == stream_format || 2 == stream_format); // pcm, adpcm, mp3
-            if (stream_sound < 0)
-                stream_sound = clip->num_sounds++;
-            LVGSound *sound = clip->sounds + stream_sound;
-            sound->channels = stereo ? 2 : 1;
-            sound->rate = rate;
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
@@ -603,6 +598,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, oldTagPos);
             if (stream_sound < 0)
                 stream_sound = clip->num_sounds++;
+            LVGSound *sound = clip->sounds + stream_sound;
+            sound->channels = stream_channels;
+            sound->rate = stream_rate;
         } else if (ST_VIDEOFRAME == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
@@ -811,7 +809,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             else if (ST_DEFINESPRITE == tag->id)
             {
                 clip->num_groups++;
-                clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
+                //clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
             } else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
         } else if ((ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id || ST_SOUNDSTREAMBLOCK == tag->id) && !sound_stream_found)
