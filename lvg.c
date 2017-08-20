@@ -543,15 +543,15 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                 video_frame out;
                 if (ff_decoder.decode(vdec, frame->data, frame->len, &out))
                 {
-                    assert(video->width == out.width && video->height <= out.height);
-                    uint8_t *img = malloc(out.width*out.height*4);
+                    assert(video->width <= out.width && video->height <= out.height);
+                    uint8_t *img = malloc(video->width*video->height*4);
                     uint8_t *pimg = img;
-                    uint8_t *rowu = alloca(out.width);
-                    uint8_t *rowv = alloca(out.width);
+                    uint8_t *rowu = alloca(video->width);
+                    uint8_t *rowv = alloca(video->width);
                     uint8_t *py = out.planes[0];
                     uint8_t *pu = out.planes[1];
                     uint8_t *pv = out.planes[2];
-                    for(int y = 0; y < out.height/2; y++)
+                    for(int y = 0; y < video->height/2; y++)
                     {
 #if defined(__x86_64__) || defined(_M_X64)
 #define stbi__resample_row_hv_2_x stbi__resample_row_hv_2_simd
@@ -560,14 +560,14 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 #define stbi__resample_row_hv_2_x stbi__resample_row_hv_2
 #define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_row
 #endif
-                        stbi__resample_row_hv_2_x(rowu, pu, pu, out.width/2, 0);
-                        stbi__resample_row_hv_2_x(rowv, pv, pv, out.width/2, 0);
-                        stbi__YCbCr_to_RGB_row_x(pimg, py, rowu, rowv, out.width, 4);
-                        pimg += out.width*4;
-                        stbi__resample_row_hv_2_x(rowu, pu, pu + out.stride[1], out.width/2, 0);
-                        stbi__resample_row_hv_2_x(rowv, pv, pv + out.stride[2], out.width/2, 0);
-                        stbi__YCbCr_to_RGB_row_x(pimg, py + out.stride[0], rowu, rowv, out.width, 4);
-                        pimg += out.width*4;
+                        stbi__resample_row_hv_2_x(rowu, pu, pu, video->width/2, 0);
+                        stbi__resample_row_hv_2_x(rowv, pv, pv, video->width/2, 0);
+                        stbi__YCbCr_to_RGB_row_x(pimg, py, rowu, rowv, video->width, 4);
+                        pimg += video->width*4;
+                        stbi__resample_row_hv_2_x(rowu, pu, pu + out.stride[1], video->width/2, 0);
+                        stbi__resample_row_hv_2_x(rowv, pv, pv + out.stride[2], video->width/2, 0);
+                        stbi__YCbCr_to_RGB_row_x(pimg, py + out.stride[0], rowu, rowv, video->width, 4);
+                        pimg += video->width*4;
                         py += out.stride[0]*2;
                         pu += out.stride[1];
                         pv += out.stride[2];
