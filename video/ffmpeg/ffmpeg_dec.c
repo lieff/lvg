@@ -75,6 +75,8 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
 {
     ffmpeg_decoder *dec = _dec;
     int ret;
+    if (!dec || !buf || !len)
+        return 0;
     dec->pkt->data = buf;
     dec->pkt->size = len;
     ret = avcodec_send_packet(dec->dec_ctx, dec->pkt);
