@@ -77,6 +77,9 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
     int ret;
     if (!dec || !buf || !len)
         return 0;
+    ret = avcodec_receive_frame(dec->dec_ctx, dec->frame);
+    if (!ret)
+        goto decoded;
     dec->pkt->data = buf;
     dec->pkt->size = len;
     ret = avcodec_send_packet(dec->dec_ctx, dec->pkt);
@@ -84,24 +87,22 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
         printf("Error sending a packet for decoding\n");
         return 0;
     }
-    while (ret >= 0)
+    ret = avcodec_receive_frame(dec->dec_ctx, dec->frame);
+    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+        return 0;
+    else if (ret < 0)
     {
-        ret = avcodec_receive_frame(dec->dec_ctx, dec->frame);
-        if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
-            return 0;
-        else if (ret < 0)
-        {
-            printf("Error during decoding\n");
-            return 0;
-        }
-        for(int i = 0; i < 3; i++)
-        {
-            out->planes[i] = dec->frame->data[i];
-            out->stride[i] = dec->frame->linesize[i];
-        }
-        out->width  = dec->frame->width;
-        out->height = dec->frame->height;
+        printf("Error during decoding\n");
+        return 0;
     }
+decoded:
+    for(int i = 0; i < 3; i++)
+    {
+        out->planes[i] = dec->frame->data[i];
+        out->stride[i] = dec->frame->linesize[i];
+    }
+    out->width  = dec->frame->width;
+    out->height = dec->frame->height;
     return 1;
 }
 
