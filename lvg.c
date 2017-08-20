@@ -542,7 +542,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                 LVGVideoFrame *frame = video->frames + o->ratio;
                 video_frame out;
                 ff_decoder.decode(vdec, frame->data, frame->len, &out);
-                assert(video->width == out.width && video->height == out.height);
+                assert(video->width == out.width && video->height < out.height);
                 uint8_t *img = malloc(out.width*out.height*4);
                 uint8_t *pimg = img;
                 uint8_t *rowu = alloca(out.width);
