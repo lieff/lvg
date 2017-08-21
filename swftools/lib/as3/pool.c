@@ -508,7 +508,7 @@ char multiname_late_name(multiname_t*m)
     if(!m)
         return 0;
     return m->type==RTQNAMEL || m->type==RTQNAMELA ||
-           m->type==MULTINAMEL || m->type==MULTINAMELA;
+            m->type==MULTINAMEL || m->type==MULTINAMELA;
 }
 
 char* multiname_tostring(multiname_t*m)
@@ -528,12 +528,12 @@ char* multiname_tostring(multiname_t*m)
         strcpy(mname, "<q");
         if(m->type == QNAMEA)
             strcat(mname, ",attr");
-    strcat(mname, ">");
-    if(m->ns) {
-        strcat(mname,"[");
-        strcat(mname,access2str(m->ns->access));
-        strcat(mname, "]");
-    }
+        strcat(mname, ">");
+        if(m->ns) {
+            strcat(mname,"[");
+            strcat(mname,access2str(m->ns->access));
+            strcat(mname, "]");
+        }
         strcat(mname, nsname);
         free(nsname);
         strcat(mname, "::");
@@ -587,12 +587,12 @@ multiname_t* multiname_fromstring(const char*name2)
         if(strchr(n, ':')) {
             fprintf(stderr, "Error: single ':' in name\n");
         }
-    namespace = "";
-    name = n;
+        namespace = "";
+        name = n;
     } else {
-    *p = 0;
-    namespace = n;
-    name = p+2;
+        *p = 0;
+        namespace = n;
+        name = p+2;
         if(strchr(namespace, ':')) {
             fprintf(stderr, "Error: single ':' in namespace\n");
         }
@@ -1028,7 +1028,7 @@ double pool_lookup_float(pool_t*pool, int i)
     if(!i) return __builtin_nan("");
     double*ptr = (double*)array_getkey(pool->x_floats, i);
     if(!ptr)
-    return  __builtin_nan("");
+        return  __builtin_nan("");
     return *ptr;
 }
 const char*pool_lookup_string(pool_t*pool, int i)
@@ -1124,23 +1124,23 @@ void pool_read(pool_t*pool, TAG*tag)
     int num_strings = swf_GetU30(tag);
     DEBUG printf("%d strings\n", num_strings);
     for(t=1;t<num_strings;t++) {
-    int len = swf_GetU30(tag);
+        int len = swf_GetU30(tag);
         string_t s = string_new((char*)&tag->data[tag->pos], len);
-    swf_GetBlock(tag, 0, len);
-    array_append(pool->x_strings, &s, 0);
-    DEBUG printf("%d) \"%s\"\n", t, ((string_t*)array_getkey(pool->x_strings, t))->str);
+        swf_GetBlock(tag, 0, len);
+        array_append(pool->x_strings, &s, 0);
+        DEBUG printf("%d) \"%s\"\n", t, ((string_t*)array_getkey(pool->x_strings, t))->str);
     }
     int num_namespaces = swf_GetU30(tag);
     DEBUG printf("%d namespaces\n", num_namespaces);
     for(t=1;t<num_namespaces;t++) {
-    U8 type = swf_GetU8(tag);
-    int namenr = swf_GetU30(tag);
-    const char*name = 0;
+        U8 type = swf_GetU8(tag);
+        int namenr = swf_GetU30(tag);
+        const char*name = 0;
         if(namenr)
             name = pool_lookup_string(pool, namenr);
         namespace_t*ns = namespace_new(type, name);
-    array_append(pool->x_namespaces, ns, 0);
-    DEBUG printf("%d) %02x \"%s\"\n", t, type, namespace_tostring(ns));
+        array_append(pool->x_namespaces, ns, 0);
+        DEBUG printf("%d) %02x \"%s\"\n", t, type, namespace_tostring(ns));
         namespace_destroy(ns);
     }
     int num_sets = swf_GetU30(tag);
@@ -1173,41 +1173,41 @@ void pool_read(pool_t*pool, TAG*tag)
             printf("0x%02x ", tag->data[tag->pos+s]);
         printf("\n");*/
 
-    m.type = swf_GetU8(tag);
-    if(m.type==0x07 || m.type==0x0d) {
-        int namespace_index = swf_GetU30(tag);
+        m.type = swf_GetU8(tag);
+        if(m.type==0x07 || m.type==0x0d) {
+            int namespace_index = swf_GetU30(tag);
             m.ns = (namespace_t*)array_getkey(pool->x_namespaces, namespace_index);
-        if(!m.ns) {
-        fprintf(stderr, "Error: Illegal reference to namespace #%d in constant pool.\n", namespace_index);
-        }
+            if(!m.ns) {
+                fprintf(stderr, "Error: Illegal reference to namespace #%d in constant pool.\n", namespace_index);
+            }
             int name_index = swf_GetU30(tag);
             if(name_index) // 0 = '*' (any)
-            m.name = pool_lookup_string(pool, name_index);
-    } else if(m.type==0x0f || m.type==0x10) {
+                m.name = pool_lookup_string(pool, name_index);
+        } else if(m.type==0x0f || m.type==0x10) {
             int name_index = swf_GetU30(tag);
             if(name_index) // 0 = '*' (any name)
-            m.name = pool_lookup_string(pool, name_index);
-    } else if(m.type==0x11 || m.type==0x12) {
-    } else if(m.type==0x09 || m.type==0x0e) {
+                m.name = pool_lookup_string(pool, name_index);
+        } else if(m.type==0x11 || m.type==0x12) {
+        } else if(m.type==0x09 || m.type==0x0e) {
             int name_index = swf_GetU30(tag);
             int namespace_set_index = swf_GetU30(tag);
             if(name_index)
-            m.name = pool_lookup_string(pool, name_index);
-        m.namespace_set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, namespace_set_index);
+                m.name = pool_lookup_string(pool, name_index);
+            m.namespace_set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, namespace_set_index);
         } else if(m.type==0x1b || m.type==0x1c) {
             int namespace_set_index = swf_GetU30(tag);
-        m.namespace_set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, namespace_set_index);
+            m.namespace_set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, namespace_set_index);
         } else if(m.type==0x1d) {
             int v1 = swf_GetU30(tag); //multiname
             /*int v2 = */swf_GetU30(tag); //counter?
             /*int v3 = */swf_GetU30(tag); //multiname
             // e.g. Vector<int> ... we only store the parent object
             m = *(multiname_t*)array_getkey(pool->x_multinames, v1);
-    } else {
-        printf("can't parse type %d multinames yet\n", m.type);
-    }
+        } else {
+            printf("can't parse type %d multinames yet\n", m.type);
+        }
         DEBUG printf("multiname %d) %s\n", t, multiname_tostring(&m));
-    array_append(pool->x_multinames, &m, 0);
+        array_append(pool->x_multinames, &m, 0);
     }
 }
 
@@ -1242,7 +1242,7 @@ void pool_dump(pool_t*pool, FILE*fo, char flags)
     }
     fprintf(fo, "%d namespaces\n", pool->x_namespaces->num);
     for(t=1;t<pool->x_namespaces->num;t++) {
-    namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
+        namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
         char*s = namespace_tostring(ns);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_namespaces, t);
         if(flags&1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
@@ -1259,7 +1259,7 @@ void pool_dump(pool_t*pool, FILE*fo, char flags)
 
     fprintf(fo, "%d multinames\n", pool->x_multinames->num);
     for(t=1;t<pool->x_multinames->num;t++) {
-    multiname_t*m = (multiname_t*)array_getkey(pool->x_multinames, t);
+        multiname_t*m = (multiname_t*)array_getkey(pool->x_multinames, t);
         char*s = multiname_tostring(m);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_multinames, t);
         if(flags&1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
@@ -1295,7 +1295,7 @@ void pool_write(pool_t*pool, TAG*tag)
         }
     }
     for(t=1;t<pool->x_namespaces->num;t++) {
-    namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
+        namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
         /*  The spec says (page 22): "a value of zero denotes an empty string".
             However when actually using zero strings as empty namespaces, the
             flash player breaks.*/
@@ -1325,19 +1325,19 @@ void pool_write(pool_t*pool, TAG*tag)
     swf_SetU30(tag, pool->x_strings->num>1?pool->x_strings->num:0);
     for(t=1;t<pool->x_strings->num;t++) {
         string_t str = pool_lookup_string2(pool, t);
-    swf_SetU30String(tag, str.str, str.len);
+        swf_SetU30String(tag, str.str, str.len);
     }
     swf_SetU30(tag, pool->x_namespaces->num>1?pool->x_namespaces->num:0);
     for(t=1;t<pool->x_namespaces->num;t++) {
-    namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
-    swf_SetU8(tag, ns->access);
-    const char*name = ns->name;
-    int i = 0;
+        namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
+        swf_SetU8(tag, ns->access);
+        const char*name = ns->name;
+        int i = 0;
 
         //if(name && name[0])
         i = pool_find_string(pool, name);
 
-    swf_SetU30(tag, i);
+        swf_SetU30(tag, i);
     }
     swf_SetU30(tag, pool->x_namespace_sets->num>1?pool->x_namespace_sets->num:0);
     for(t=1;t<pool->x_namespace_sets->num;t++) {
@@ -1354,34 +1354,34 @@ void pool_write(pool_t*pool, TAG*tag)
 
     swf_SetU30(tag, pool->x_multinames->num>1?pool->x_multinames->num:0);
     for(t=1;t<pool->x_multinames->num;t++) {
-    multiname_t*m = (multiname_t*)array_getkey(pool->x_multinames, t);
-    swf_SetU8(tag, m->type);
+        multiname_t*m = (multiname_t*)array_getkey(pool->x_multinames, t);
+        swf_SetU8(tag, m->type);
 
         if(m->ns) {
             assert(m->type==0x07 || m->type==0x0d);
-        int i = pool_find_namespace(pool, m->ns);
+            int i = pool_find_namespace(pool, m->ns);
             if(i<0) fprintf(stderr, "internal error: unregistered namespace %02x %s %s\n", m->ns->access, access2str(m->ns->access), m->ns->name);
-        swf_SetU30(tag, i);
+            swf_SetU30(tag, i);
         } else {
             assert(m->type!=0x07 && m->type!=0x0d);
         }
 
         if(m->name) {
             assert(m->type==0x09 || m->type==0x0e || m->type==0x07 || m->type==0x0d || m->type==0x0f || m->type==0x10);
-        int i = pool_find_string(pool, m->name);
+            int i = pool_find_string(pool, m->name);
             if(i<0) fprintf(stderr, "internal error: unregistered name\n");
-        swf_SetU30(tag, i);
+            swf_SetU30(tag, i);
         } else {
-        if(m->type == 0x09) {
-        swf_SetU30(tag, 0);
-        }
+            if(m->type == 0x09) {
+                swf_SetU30(tag, 0);
+            }
             assert(m->type!=0x0e && m->type!=0x07 && m->type!=0x0d && m->type!=0x0f && m->type!=0x10);
         }
         if(m->namespace_set) {
             assert(m->type==0x09 || m->type==0x0e || m->type==0x1c || m->type==0x1b);
-        int i = pool_find_namespace_set(pool, m->namespace_set);
+            int i = pool_find_namespace_set(pool, m->namespace_set);
             if(i<0) fprintf(stderr, "internal error: unregistered namespace set\n");
-        swf_SetU30(tag, i);
+            swf_SetU30(tag, i);
         } else {
             assert(m->type!=0x09 && m->type!=0x0e && m->type!=0x1c && m->type!=0x1b);
         }
