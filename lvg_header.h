@@ -1,10 +1,12 @@
+#ifndef __TINYC__
+#include <stddef.h>
+#include <stdint.h>
+#endif
 #ifdef EMSCRIPTEN
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include <time.h>
 #include <limits.h>
 #include <assert.h>

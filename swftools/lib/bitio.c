@@ -778,20 +778,6 @@ double reader_readDouble(reader_t*r)
     return *(double*)&w;
 #endif
 }
-char*reader_readString(reader_t*r)
-{
-    writer_t g;
-    writer_init_growingmemwriter(&g, 16);
-    while(1) {
-        U8 b = reader_readU8(r);
-        writer_writeU8(&g, b);
-        if(!b)
-            break;
-    }
-    char*string = (char*)writer_growmemwrite_getmem(&g);
-    g.finish(&g);
-    return string;
-}
 unsigned int read_compressed_uint(reader_t*r)
 {
     unsigned int u = 0;

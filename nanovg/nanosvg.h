@@ -182,6 +182,7 @@ void nsvgDelete(NSVGimage* image);
 #ifndef __TINYC__
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 #endif
 

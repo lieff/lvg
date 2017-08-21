@@ -9,6 +9,9 @@ nanovg/nanovg.c
 nanovg/nanovg.h
 nanovg/nanovg_gl.h
 nanovg/nanovg_gl_utils.h
+render/render.h
+render/render_nanovg.c
+render/render_nvpr.c
 swftools/lib/as3/abc.c
 swftools/lib/as3/abc.h
 swftools/lib/as3/assets.c

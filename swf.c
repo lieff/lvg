@@ -5,13 +5,11 @@
 //#define STB_IMAGE_WRITE_IMPLEMENTATION
 //#include "stb_image_write.h"
 #include "lunzip.h"
-#include "nanovg.h"
-#include "nanosvg.h"
-#include "lvg_header.h"
+#include "render/render.h"
 #include "minimp3.h"
 #include "adpcm.h"
 
-extern NVGcontext *vg;
+extern render *g_render;
 
 enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, sound_type, text_type, edittext_type, font_type};
 typedef struct
@@ -483,7 +481,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
-                *(clip->images + clip->num_images) = nvgCreateImageRGBA(vg, width, height, 0, (const unsigned char *)data);
+                *(clip->images + clip->num_images) = g_render->cache_image(0, width, height, (const unsigned char *)data);
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
@@ -564,7 +562,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
-                video->image = nvgCreateImageRGBA(vg, video->width, video->height, 0, 0);
+                video->image = g_render->cache_image(0, video->width, video->height, 0);
                 swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
@@ -869,17 +867,6 @@ LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
         return 0;
     }
     LVGMovieClip *clip = swf_ReadObjects(&swf);
-/*#ifdef DEBUG
-    RENDERBUF buf;
-    swf_Render_Init(&buf, 0,0, (swf.movieSize.xmax - swf.movieSize.xmin)/20, (swf.movieSize.ymax - swf.movieSize.ymin)/20, 2, 1);
-    swf_RenderSWF(&buf, &swf);
-    RGBA *img = swf_Render(&buf);
-    //stbi_write_png("svg.png", buf.width, buf.height, 4, img, buf.width*4);
-    swf_Render_Delete(&buf);
-    clip->num_images++;
-    clip->images = realloc(clip->images, clip->num_images*sizeof(int));
-    clip->images[clip->num_images - 1] = nvgCreateImageRGBA(vg, buf.width, buf.height, 0, (const unsigned char *)img);
-#endif*/
     return clip;
 }
 

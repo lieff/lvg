@@ -16,39 +16,22 @@
 #endif
 #include <GLFW/glfw3.h>
 
-#define NANOSVG_ALL_COLOR_KEYWORDS
-#define NANOSVG_IMPLEMENTATION
-#include "nanosvg.h"
-
-#if !defined(EMSCRIPTEN) && defined(DEBUG)
-#define NANOSVGRAST_IMPLEMENTATION
-#include "nanosvgrast.h"
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
-#endif
-
-#include "nanovg.h"
-#ifdef EMSCRIPTEN
-#define NANOVG_GLES2_IMPLEMENTATION
-#else
+#ifndef EMSCRIPTEN
 #include <libtcc.h>
-#define NANOVG_GL2_IMPLEMENTATION
 #endif
-#include "nanovg_gl.h"
 
 #include "lunzip.h"
 #include "all.h"
 #include "all_lib.h"
-#include "lvg_header.h"
-#include "lvg.h"
 #include "stb_image.h"
 #include <SDL2/SDL.h>
 #include <video/video.h>
+#include <render/render.h>
+#include "lvg.h"
 
 static LVGMovieClip *g_clip;
 static zip_t g_zip;
 static GLFWwindow *window;
-NVGcontext *vg = NULL;
 NVGcolor g_bgColor;
 int winWidth, winHeight;
 int width = 0, height = 0;
@@ -64,7 +47,10 @@ static int tcc_buf_pos;
 static size_t tcc_buf_size;
 static char *tcc_buf;
 
-extern const const video_dec ff_decoder;
+extern const video_dec ff_decoder;
+extern const render nvg_render;
+extern const render nvpr_render;
+const render *g_render = &nvg_render;
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
@@ -396,101 +382,9 @@ fail:
     return clip;
 }
 
-static inline NVGcolor nvgColorU32(uint32_t c)
-{
-    return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, 255);
-}
-
-static NVGcolor transformColor(NVGcolor color, LVGObject *o)
-{
-    if (!o)
-        return color;
-    color = nvgRGBAf(color.r*o->color_mul[0], color.g*o->color_mul[1], color.b*o->color_mul[2], color.a*o->color_mul[3]);
-    color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
-    color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
-    return color;
-}
-
-static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
-{
-    struct NSVGgradient *grad = shape->fill.gradient;
-    float sx = shape->bounds[0];
-    float sy = shape->bounds[1];
-    float ex = shape->bounds[0];
-    float ey = shape->bounds[3];
-    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
-    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
-
-    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
-    if (is_fill)
-        nvgFillPaint(vg, p);
-    else
-        nvgStrokePaint(vg, p);
-}
-
-static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
-{
-    struct NSVGgradient *grad = shape->fill.gradient;
-    float cx = (shape->bounds[0] + shape->bounds[2])/2.0;
-    float cy = (shape->bounds[1] + shape->bounds[3])/2.0;
-    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
-    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
-
-    NVGpaint p = nvgRadialGradient(vg, cx, cy, 0, cx, cs, ce);
-    if (is_fill)
-        nvgFillPaint(vg, p);
-    else
-        nvgStrokePaint(vg, p);
-}
-
 void lvgDrawShape(NSVGshape *shape, LVGObject *o)
 {
-    int i;
-    NSVGpath *path;
-    nvgBeginPath(vg);
-    for (path = shape->paths; path != NULL; path = path->next)
-    {
-        nvgMoveTo(vg, path->pts[0], path->pts[1]);
-        int l = path->npts - 1;
-        //l = (int)(l*g_time*0.4) % l;
-        for (i = 0; i < l; i += 3)
-        {
-            float *p = &path->pts[i*2];
-            nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
-        }
-        if (path->closed)
-            nvgLineTo(vg, path->pts[0], path->pts[1]);
-    }
-    if (NSVG_PAINT_COLOR == shape->fill.type)
-    {
-        nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
-    } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-        nvgSVGLinearGrad(vg, shape, o, 1);
-    else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-        nvgSVGRadialGrad(vg, shape, o, 1);
-    else if (NSVG_PAINT_IMAGE == shape->fill.type)
-    {
-        int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
-        NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
-        nvgFillPaint(vg, imgPaint);
-    }
-    if (NSVG_PAINT_NONE != shape->fill.type)
-    {
-        if (NSVG_FILLRULE_EVENODD == shape->fillRule)
-            nvgPathWinding(vg, NVG_HOLE);
-        nvgFill(vg);
-    }
-    if (NSVG_PAINT_NONE != shape->stroke.type)
-    {
-        if (NSVG_PAINT_COLOR == shape->stroke.type)
-            nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), o));
-        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, o, 0);
-        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-            nvgSVGRadialGrad(vg, shape, o, 0);
-        nvgStrokeWidth(vg, shape->strokeWidth);
-        nvgStroke(vg);
-    }
+    g_render->render_shape(0, shape, o);
 }
 
 void lvgDrawSVG(NSVGimage *image)
@@ -572,7 +466,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                         pu += out.stride[1];
                         pv += out.stride[2];
                     }
-                    nvgUpdateImage(vg, video->image, img);
+                    g_render->update_image(0, video->image, img);
                     free(img);
                 }
             }
@@ -601,15 +495,6 @@ void lvgDrawClip(LVGMovieClip *clip)
         clip->last_time += (1.0/clip->fps);
     }
     lvgDrawClipGroup(clip, clip->groups, next_frame);
-/*#ifdef DEBUG
-    int w, h;
-    nvgImageSize(vg, clip->images[clip->num_images - 1], &w, &h);
-    NVGpaint imgPaint = nvgImagePattern(vg, 600, 0, w, h, 0, clip->images[clip->num_images - 1], 1.0f);
-    nvgBeginPath(vg);
-    nvgRect(vg, 600, 0, w, h);
-    nvgFillPaint(vg, imgPaint);
-    nvgFill(vg);
-#endif*/
 }
 
 void swfOnFrame()
@@ -1016,15 +901,7 @@ int main(int argc, char **argv)
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
-#ifdef EMSCRIPTEN
-    vg = nvgCreateGLES2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0);
-#else
-    vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
-#ifdef DEBUG
-        | NVG_DEBUG
-#endif
-        );
-#endif
+    g_render->init(0);
 
     if (is_swf && open_swf(file_name))
     {
@@ -1052,11 +929,7 @@ int main(int argc, char **argv)
         drawframe();
     }
 #endif
-#ifdef EMSCRIPTEN
-    nvgDeleteGLES2(vg);
-#else
-    nvgDeleteGL2(vg);
-#endif
+    g_render->release(0);
     lvgZipClose(&g_zip);
     glfwTerminate();
     SDL_Quit();

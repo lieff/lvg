@@ -1768,39 +1768,3 @@ void swf_DrawText(drawer_t * draw, SWFFONT * font, int size, const char *text)
         advance += font->glyph[g].advance * size / 100.0 / 20.0;
     }
 }
-
-void swf_WriteFont_AS3(SWFFONT * font, char *filename)
-{
-    if(!font->layout)
-        swf_FontCreateLayout(font);
-
-    SWF swf;
-    memset(&swf, 0, sizeof(SWF));
-    swf.fileVersion = 9;
-    swf.frameRate = 0x4000;
-    swf.movieSize.xmax = 200;
-    swf.movieSize.ymax = 200;
-
-    if(!font->id) font->id=1;
-
-    TAG *tag = NULL; // 8===3 add = NULL ?
-    swf.firstTag = tag = swf_InsertTag(tag, ST_DEFINEFONT3);
-    swf_FontSetDefine2(tag, font);
-
-    char*name = font->name?(char*)font->name:"font";
-
-    tag = swf_InsertTag(tag, ST_NAMECHARACTER);
-    swf_SetU16(tag, font->id);
-    swf_SetString(tag, name);
-    tag = swf_InsertTag(tag, ST_EXPORTASSETS);
-    swf_SetU16(tag, 1);
-    swf_SetU16(tag, font->id);
-    swf_SetString(tag, name);
-
-    tag = 0;
-    //    tag = swf_AddAS3FontDefine(tag, font->id, (char*)font->name);
-
-    tag = swf_InsertTag(tag, ST_END);
-    swf_SaveSWF(&swf, filename);
-    swf_FreeTags(&swf);
-}
