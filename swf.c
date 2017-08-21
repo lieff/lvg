@@ -10,6 +10,7 @@
 #include "adpcm.h"
 
 extern render *g_render;
+extern void *g_render_obj;
 
 enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, sound_type, text_type, edittext_type, font_type};
 typedef struct
@@ -481,7 +482,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
-                *(clip->images + clip->num_images) = g_render->cache_image(0, width, height, (const unsigned char *)data);
+                *(clip->images + clip->num_images) = g_render->cache_image(g_render_obj, width, height, (const unsigned char *)data);
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
@@ -562,7 +563,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
-                video->image = g_render->cache_image(0, video->width, video->height, 0);
+                video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0);
                 swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)

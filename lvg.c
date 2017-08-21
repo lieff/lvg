@@ -51,6 +51,7 @@ extern const video_dec ff_decoder;
 extern const render nvg_render;
 extern const render nvpr_render;
 const render *g_render = &nvg_render;
+void *g_render_obj;
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
@@ -384,7 +385,7 @@ fail:
 
 void lvgDrawShape(NSVGshape *shape, LVGObject *o)
 {
-    g_render->render_shape(0, shape, o);
+    g_render->render_shape(g_render_obj, shape, o);
 }
 
 void lvgDrawSVG(NSVGimage *image)
@@ -401,14 +402,15 @@ void lvgDrawSVG(NSVGimage *image)
 static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
 {
     int frame = group->cur_frame;
+    float save_transform[6];
     assert(frame < group->num_frames);
     if (next_frame)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
     for (int i = 0; i < group->frames[frame].num_objects; i++)
     {
         LVGObject *o = &group->frames[frame].objects[i];
-        nvgSave(vg);
-        nvgTransform(vg, o->t[0], o->t[1], o->t[2], o->t[3], o->t[4], o->t[5]);
+        g_render->get_transform(g_render_obj, save_transform);
+        g_render->set_transform(g_render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type)
         {
             for (int j = 0; j < clip->shapes[o->id].num_shapes; j++)
@@ -416,13 +418,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         } else
         if (LVG_OBJ_IMAGE == o->type)
         {
-            int w, h;
-            nvgImageSize(vg, clip->images[o->id], &w, &h);
-            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, w, h, 0, clip->images[o->id], 1.0f);
-            nvgBeginPath(vg);
-            nvgRect(vg, 0, 0, w, h);
-            nvgFillPaint(vg, imgPaint);
-            nvgFill(vg);
+            g_render->render_image(g_render_obj, clip->images[o->id]);
         } else
         if (LVG_OBJ_VIDEO == o->type)
         {
@@ -466,21 +462,17 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                         pu += out.stride[1];
                         pv += out.stride[2];
                     }
-                    g_render->update_image(0, video->image, img);
+                    g_render->update_image(g_render_obj, video->image, img);
                     free(img);
                 }
             }
-            NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, video->width, video->height, 0, video->image, 1.0f);
-            nvgBeginPath(vg);
-            nvgRect(vg, 0, 0, video->width, video->height);
-            nvgFillPaint(vg, imgPaint);
-            nvgFill(vg);
+            g_render->render_image(g_render_obj, video->image);
         }
         if (LVG_OBJ_GROUP == o->type)
         {
             lvgDrawClipGroup(clip, clip->groups + o->id, next_frame);
         }
-        nvgRestore(vg);
+        g_render->set_transform(g_render_obj, save_transform, 1);
     }
 }
 
@@ -499,13 +491,6 @@ void lvgDrawClip(LVGMovieClip *clip)
 
 void swfOnFrame()
 {
-    float clip_w = g_clip->bounds[2] - g_clip->bounds[0], clip_h = g_clip->bounds[3] - g_clip->bounds[1];
-    float scalex = width/clip_w;
-    float scaley = height/clip_h;
-    float scale = scalex < scaley ? scalex : scaley;
-
-    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
-    nvgScale(vg, scale, scale);
     lvgDrawClip(g_clip);
 }
 
@@ -527,8 +512,7 @@ void drawframe()
     glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
-    nvgBeginFrame(vg, winWidth, winHeight, (float)width / (float)winWidth);
-    //nvgSave(vg);
+    g_render->begin_frame(g_render_obj, g_clip, winWidth, winHeight, width, height);
 
     g_time = glfwGetTime();
 #ifdef EMSCRIPTEN
@@ -540,8 +524,7 @@ void drawframe()
 #endif
         onFrame();
 
-    //nvgRestore(vg);
-    nvgEndFrame(vg);
+    g_render->end_frame(g_render_obj);
     glfwSwapBuffers(window);
 }
 
@@ -733,7 +716,7 @@ const struct SYM g_syms[] = {
     { "glOrtho", glOrtho },
     { "glEnableClientState", glEnableClientState },
 
-    { "vg", &vg },
+    //{ "vg", &vg },
     { "g_bgColor", &g_bgColor },
     { "winWidth", &winWidth },
     { "winHeight", &winHeight },
@@ -901,7 +884,7 @@ int main(int argc, char **argv)
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
-    g_render->init(0);
+    g_render->init(&g_render_obj);
 
     if (is_swf && open_swf(file_name))
     {
@@ -929,7 +912,7 @@ int main(int argc, char **argv)
         drawframe();
     }
 #endif
-    g_render->release(0);
+    g_render->release(g_render_obj);
     lvgZipClose(&g_zip);
     glfwTerminate();
     SDL_Quit();

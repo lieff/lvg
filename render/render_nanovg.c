@@ -9,8 +9,6 @@
 #include "render.h"
 #include "nanovg_gl.h"
 
-NVGcontext *vg = NULL;
-
 static inline NVGcolor nvgColorU32(uint32_t c)
 {
     return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, 255);
@@ -58,7 +56,7 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
         nvgStrokePaint(vg, p);
 }
 
-static void nvgDrawShape(NSVGshape *shape, LVGObject *o)
+static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
 {
     int i;
     NSVGpath *path;
@@ -112,9 +110,9 @@ static void nvgDrawShape(NSVGshape *shape, LVGObject *o)
 static int nvg_init(void **render)
 {
 #ifdef EMSCRIPTEN
-    vg = nvgCreateGLES2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0);
+    *render = nvgCreateGLES2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0);
 #else
-    vg = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
+    *render = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
 #ifdef DEBUG
         | NVG_DEBUG
 #endif
@@ -125,11 +123,33 @@ static int nvg_init(void **render)
 
 static void nvg_release(void *render)
 {
+    NVGcontext *vg = render;
 #ifdef EMSCRIPTEN
     nvgDeleteGLES2(vg);
 #else
     nvgDeleteGL2(vg);
 #endif
+}
+
+static void nvg_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
+{
+    NVGcontext *vg = render;
+    nvgBeginFrame(vg, winWidth, winHeight, (float)width / (float)winWidth);
+    if (!clip)
+        return;
+    float clip_w = clip->bounds[2] - clip->bounds[0], clip_h = clip->bounds[3] - clip->bounds[1];
+    float scalex = width/clip_w;
+    float scaley = height/clip_h;
+    float scale = scalex < scaley ? scalex : scaley;
+
+    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
+    nvgScale(vg, scale, scale);
+}
+
+static void nvg_end_frame(void *render)
+{
+    NVGcontext *vg = render;
+    nvgEndFrame(vg);
 }
 
 static int nvg_cache_shape(void *render, NSVGshape *shape)
@@ -139,25 +159,59 @@ static int nvg_cache_shape(void *render, NSVGshape *shape)
 
 static int nvg_cache_image(void *render, int width, int height, const void *rgba)
 {
+    NVGcontext *vg = render;
     return nvgCreateImageRGBA(vg, width, height, 0, (const unsigned char *)rgba);
 }
 
 static void nvg_update_image(void *render, int image, const void *rgba)
 {
+    NVGcontext *vg = render;
     nvgUpdateImage(vg, image, rgba);
 }
 
 static void nvg_render_shape(void *render, NSVGshape *shape, LVGObject *o)
 {
-    nvgDrawShape(shape, o);
+    NVGcontext *vg = render;
+    nvgDrawShape(vg, shape, o);
+}
+
+static void nvg_render_image(void *render, int image)
+{
+    NVGcontext *vg = render;
+    int w, h;
+    nvgImageSize(vg, image, &w, &h);
+    NVGpaint imgPaint = nvgImagePattern(vg, 0, 0, w, h, 0, image, 1.0f);
+    nvgBeginPath(vg);
+    nvgRect(vg, 0, 0, w, h);
+    nvgFillPaint(vg, imgPaint);
+    nvgFill(vg);
+}
+
+static void nvg_set_transform(void *render, float *t, int reset)
+{
+    NVGcontext *vg = render;
+    if (reset)
+        nvgResetTransform(vg);
+    nvgTransform(vg, t[0], t[1], t[2], t[3], t[4], t[5]);
+}
+
+static void nvg_get_transform(void *render, float *t)
+{
+    NVGcontext *vg = render;
+    nvgCurrentTransform(vg, t);
 }
 
 const render nvg_render =
 {
     nvg_init,
     nvg_release,
+    nvg_begin_frame,
+    nvg_end_frame,
     nvg_cache_shape,
     nvg_cache_image,
     nvg_update_image,
-    nvg_render_shape
+    nvg_render_shape,
+    nvg_render_image,
+    nvg_set_transform,
+    nvg_get_transform
 };
