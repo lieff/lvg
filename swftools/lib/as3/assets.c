@@ -81,7 +81,6 @@ asset_resolver_t* swf_ParseAssets(SWF*swf)
 
 void swf_ResolveAssets(asset_resolver_t*assets, abc_file_t*file)
 {
-    int num = assets->name2asset->num;
     int resolved = 0;
     int t;
     for(t=0;t<file->classes->num;t++) {

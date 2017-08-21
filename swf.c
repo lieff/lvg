@@ -558,9 +558,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->num_frames = swf_GetU16(tag);
                 video->width  = swf_GetU16(tag);
                 video->height = swf_GetU16(tag);
-                int reserved  = swf_GetBits(tag, 4);
-                int deblock   = swf_GetBits(tag, 3);
-                int smooth    = swf_GetBits(tag, 1);
+                /*int reserved  = */swf_GetBits(tag, 4);
+                /*int deblock   = */swf_GetBits(tag, 3);
+                /*int smooth    = */swf_GetBits(tag, 1);
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));

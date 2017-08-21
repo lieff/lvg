@@ -248,7 +248,6 @@ trait_t*trait_new_member(trait_list_t**traits, multiname_t*type, multiname_t*nam
     trait->type_name = type;
 
     trait->slot_id = list_length(*traits)+1;
-    trait_list_t*l = *traits;
     list_append_(traits, trait);
     return trait;
 }
@@ -272,14 +271,12 @@ trait_t*trait_new_method(trait_list_t**traits, multiname_t*name, abc_method_t*m)
 
 abc_method_t* abc_class_method(abc_class_t*cls, multiname_t*returntype, multiname_t*name)
 {
-    abc_file_t*file = cls->file;
     abc_method_t* m = abc_method_new(cls->file, returntype, !(cls->flags&CLASS_INTERFACE));
     m->trait = trait_new_method(&cls->traits, multiname_clone(name), m);
     return m;
 }
 abc_method_t* abc_class_staticmethod(abc_class_t*cls, multiname_t*returntype, multiname_t*name)
 {
-    abc_file_t*file = cls->file;
     abc_method_t* m = abc_method_new(cls->file, returntype, !(cls->flags&CLASS_INTERFACE));
     m->trait = trait_new_method(&cls->static_traits, multiname_clone(name), m);
     return m;
@@ -287,7 +284,6 @@ abc_method_t* abc_class_staticmethod(abc_class_t*cls, multiname_t*returntype, mu
 
 trait_t* abc_class_slot(abc_class_t*cls, multiname_t*name, multiname_t*type)
 {
-    abc_file_t*file = cls->file;
     multiname_t*m_name = multiname_clone(name);
     multiname_t*m_type = multiname_clone(type);
     trait_t*t = trait_new_member(&cls->traits, m_type, m_name, 0);
@@ -295,7 +291,6 @@ trait_t* abc_class_slot(abc_class_t*cls, multiname_t*name, multiname_t*type)
 }
 trait_t* abc_class_staticslot(abc_class_t*cls, multiname_t*name, multiname_t*type)
 {
-    abc_file_t*file = cls->file;
     multiname_t*m_name = multiname_clone(name);
     multiname_t*m_type = multiname_clone(type);
     trait_t*t = trait_new_member(&cls->static_traits, m_type, m_name, 0);
@@ -318,7 +313,6 @@ trait_t* traits_find_slotid(trait_list_t*traits, int slotid)
 
 void abc_method_body_addClassTrait(abc_method_body_t*code, char*multiname, int slotid, abc_class_t*cls)
 {
-    abc_file_t*file = code->file;
     multiname_t*m = multiname_fromstring(multiname);
     trait_t*trait = trait_new(TRAIT_CLASS, m, slotid, 0, 0);
     trait->cls = cls;
@@ -329,7 +323,6 @@ void abc_method_body_addClassTrait(abc_method_body_t*code, char*multiname, int s
    and traits of the init script are *not* the same thing */
 trait_t* abc_initscript_addClassTrait(abc_script_t*script, multiname_t*multiname, abc_class_t*cls)
 {
-    abc_file_t*file = script->file;
     multiname_t*m = multiname_clone(multiname);
     int slotid = list_length(script->traits)+1;
     trait_t*trait = trait_new(TRAIT_CLASS, m, slotid, 0, 0);
@@ -428,11 +421,11 @@ static void traits_free(trait_list_t*traits)
     list_free(traits);
 }
 
-static char trait_is_method(trait_t*trait)
+/*static char trait_is_method(trait_t*trait)
 {
     return (trait->kind == TRAIT_METHOD || trait->kind == TRAIT_GETTER ||
             trait->kind == TRAIT_SETTER || trait->kind == TRAIT_FUNCTION);
-}
+}*/
 
 static trait_list_t* traits_parse(TAG*tag, pool_t*pool, abc_file_t*file)
 {
@@ -469,7 +462,7 @@ static trait_list_t* traits_parse(TAG*tag, pool_t*pool, abc_file_t*file)
         } else if(kind == TRAIT_CLASS) { // class
             trait->slot_id = swf_GetU30(tag);
             trait->cls = (abc_class_t*)array_getvalue(file->classes, swf_GetU30(tag));
-            DEBUG printf("  class %s %d %p\n", name, trait->slot_id, (int)trait->cls);
+            DEBUG printf("  class %s %d %p\n", name, trait->slot_id, trait->cls);
         } else if(kind == TRAIT_SLOT || kind == TRAIT_CONST) { // slot, const
             trait->slot_id = swf_GetU30(tag);
             trait->type_name = multiname_clone(pool_lookup_multiname(pool, swf_GetU30(tag)));
@@ -516,57 +509,8 @@ void traits_skip(TAG*tag)
     }
 }
 
-
-static void traits_write(pool_t*pool, TAG*tag, trait_list_t*traits)
-{
-    if(!traits) {
-        swf_SetU30(tag, 0);
-        return;
-    }
-    swf_SetU30(tag, list_length(traits));
-    int s;
-
-    while(traits) {
-        trait_t*trait = traits->trait;
-
-        swf_SetU30(tag, pool_register_multiname(pool, trait->name));
-        swf_SetU8(tag, trait->kind|trait->attributes);
-
-        swf_SetU30(tag, trait->data1);
-
-        if(trait->kind == TRAIT_CLASS) {
-            swf_SetU30(tag, trait->cls->index);
-        } else if(trait->kind == TRAIT_GETTER ||
-                  trait->kind == TRAIT_SETTER ||
-                  trait->kind == TRAIT_METHOD) {
-            swf_SetU30(tag, trait->method->index);
-        } else if(trait->kind == TRAIT_SLOT ||
-                  trait->kind == TRAIT_CONST) {
-            int index = pool_register_multiname(pool, trait->type_name);
-            swf_SetU30(tag, index);
-        } else  {
-            swf_SetU30(tag, trait->data2);
-        }
-
-        if(trait->kind == TRAIT_SLOT || trait->kind == TRAIT_CONST) {
-            int vindex = constant_get_index(pool, trait->value);
-            swf_SetU30(tag, vindex);
-            if(vindex) {
-                swf_SetU8(tag, trait->value->type);
-            }
-        }
-        if(trait->attributes&0x40) {
-            // metadata
-            swf_SetU30(tag, 0);
-        }
-        traits = traits->next;
-    }
-}
-
-
 static void traits_dump(FILE*fo, const char*prefix, trait_list_t*traits, abc_file_t*file, dict_t*methods_seen)
 {
-    int t;
     while(traits) {
         trait_t*trait = traits->trait;
         char*name = multiname_tostring(trait->name);
@@ -605,7 +549,6 @@ static void traits_dump(FILE*fo, const char*prefix, trait_list_t*traits, abc_fil
                 fprintf(fo, "%sslot %d: class %s=%s\n", prefix, trait->slot_id, name, cls->classname->name);
             }
         } else if(kind == TRAIT_SLOT || kind == TRAIT_CONST) { // slot, const
-            int slot_id = trait->slot_id;
             char*type_name = multiname_tostring(trait->type_name);
             char*value = constant_tostring(trait->value);
             fprintf(fo, "%sslot %d: %s %s:%s %s %s\n", prefix, trait->slot_id,
@@ -677,7 +620,6 @@ void* swf_DumpABC(FILE*fo, void*code, char*prefix)
                 free(s);
                 ilist = ilist->next;
             }
-            ilist->next;
         }
         if(cls->flags&0xf0)
             fprintf(fo, "extra flags=%02x\n", cls->flags&0xf0);
@@ -799,6 +741,7 @@ void* swf_ReadABC(TAG*tag)
             multiname_list_t*l = m->parameters;
             while(l) {
                 const char*name = pool_lookup_string(pool, swf_GetU30(tag));
+                DEBUG printf("DEBUG: name=%s\n", name);
                 l = l->next;
             }
         }
@@ -849,7 +792,7 @@ void* swf_ReadABC(TAG*tag)
     int num_scripts = swf_GetU30(tag);
     DEBUG printf("%d scripts\n", num_scripts);
     for(t=0;t<num_scripts;t++) {
-        int init = swf_GetU30(tag);
+        /*int init = */swf_GetU30(tag);
         traits_skip(tag);
     }
 
@@ -917,7 +860,6 @@ void* swf_ReadABC(TAG*tag)
         cls->classname = multiname_clone(pool_lookup_multiname(pool, classname_index));
         cls->superclass = multiname_clone(pool_lookup_multiname(pool, superclass_index));
         cls->flags = swf_GetU8(tag);
-        const char*ns = "";
         if(cls->flags&8) {
             int ns_index = swf_GetU30(tag);
             cls->protectedNS = namespace_clone(pool_lookup_namespace(pool, ns_index));

@@ -6,7 +6,7 @@
    Part of the swftools package.
 
    Copyright (c) 2008 Matthias Kramm <kramm@quiss.org>
- 
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -53,174 +53,174 @@
 */
 
 opcode_t opcodes[]={
-{0xa0, "add", "",              -2, 1, 0, 0},
-{0xc5, "add_i", "",            -2, 1, 0, 0},
-{0x86, "astype", "2",          -1, 1, 0, 0},
-{0x87, "astypelate", "",       -2, 1, 0, 0},
-{0xA8, "bitand", "",           -2, 1, 0, 0},
-{0x97, "bitnot", "",           -1, 1, 0, 0},
-{0xa9, "bitor", "",            -2, 1, 0, 0},
-{0xaa, "bitxor", "",           -2, 1, 0, 0},
-{0x41, "call", "n",            -2, 1, 0, OP_STACK_ARGS},
-{0x43, "callmethod", "mn",     -1, 1, 0, OP_STACK_ARGS},
-{0x4c, "callproplex", "2n",    -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x46, "callproperty", "2n",   -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x4f, "callpropvoid", "2n",   -1, 0, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x44, "callstatic", "mn",     -1, 1, 0, OP_STACK_ARGS},
-{0x45, "callsuper", "2n",      -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x4e, "callsupervoid", "2n",  -1, 0, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x78, "checkfilter", "",      -1, 1, 0, 0},
-{0x80, "coerce", "2",          -1, 1, 0, 0},
-{0x82, "coerce_a", "",         -1, 1, 0, 0},
-{0x85, "coerce_s", "",         -1, 1, 0, 0},
-{0x42, "construct", "n",       -1, 1, 0, OP_STACK_ARGS},
-{0x4a, "constructprop", "2n",  -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
-{0x49, "constructsuper", "n",  -1, 0, 0, OP_STACK_ARGS},
-{0x76, "convert_b", "",        -1, 1, 0, 0},
-{0x73, "convert_i", "",        -1, 1, 0, 0},
-{0x75, "convert_d", "",        -1, 1, 0, 0},
-{0x77, "convert_o", "",        -1, 1, 0, 0},
-{0x74, "convert_u", "",        -1, 1, 0, 0},
-{0x70, "convert_s", "",        -1, 1, 0, 0},
-{0xef, "debug", "D",            0, 0, 0, 0},
-{0xf1, "debugfile", "s",        0, 0, 0, 0},
-{0xf0, "debugline", "u",        0, 0, 0, 0},
-{0x94, "declocal", "r",         0, 0, 0, OP_REGISTER},
-{0xc3, "declocal_i", "r",       0, 0, 0, OP_REGISTER},
-{0x93, "decrement", "",        -1, 1, 0, 0}, 
-{0xc1, "decrement_i", "",      -1, 1, 0, 0},
-{0x6a, "deleteproperty", "2",  -1, 1, 0, OP_STACK_NS},
-{0xa3, "divide", "",           -2, 1, 0, 0},
-{0x2a, "dup", "",              -1, 2, 0, 0},
-{0x06, "dxns", "s",             0, 0, 0, OP_SET_DXNS},
-{0x07, "dxnslate", "",         -1, 0, 0, OP_SET_DXNS},
-{0xab, "equals", "",           -2, 1, 0, 0},
-{0x72, "esc_xattr", "",        -1, 1, 0, 0},
-{0x71, "esc_xelem", "",        -1, 1, 0, 0},
-{0x5e, "findproperty", "2",     0, 1, 0, OP_STACK_NS},
-{0x5d, "findpropstrict", "2",   0, 1, 0, OP_STACK_NS},
-{0x59, "getdescendants", "2",  -1, 1, 0, OP_STACK_NS},
-{0x64, "getglobalscope", "",    0, 1, 0, 0},
-{0x6e, "getglobalslot", "u",    0, 1, 0, 0},
-{0x60, "getlex", "2",           0, 1, 0, 0}, //multiname may not be runtime
-{0x62, "getlocal", "r",         0, 1, 0, OP_REGISTER},
-{0xd0, "getlocal_0", "",        0, 1, 0, OP_REGISTER},
-{0xd1, "getlocal_1", "",        0, 1, 0, OP_REGISTER},
-{0xd2, "getlocal_2", "",        0, 1, 0, OP_REGISTER},
-{0xd3, "getlocal_3", "",        0, 1, 0, OP_REGISTER},
-{0x66, "getproperty", "2",     -1, 1, 0, OP_STACK_NS},
-{0x65, "getscopeobject", "u",   0, 1, 0, 0}, // u = index into scope stack
-{0x6c, "getslot", "u",         -1, 1, 0, 0},
-{0x04, "getsuper", "2",        -1, 1, 0, OP_STACK_NS},
-{0xaf, "greaterthan", "",      -2, 1, 0, 0},
-{0xb0, "greaterequals", "",    -2, 1, 0, 0},
-{0x1f, "hasnext", "",          -2, 1, 0, 0},
-{0x32, "hasnext2", "rr",        0, 1, 0, OP_REGISTER},
-{0x13, "ifeq", "j",            -2, 0, 0, OP_BRANCH},
-{0x12, "iffalse", "j",         -1, 0, 0, OP_BRANCH},
-{0x18, "ifge", "j",            -2, 0, 0, OP_BRANCH},
-{0x17, "ifgt", "j",            -2, 0, 0, OP_BRANCH},
-{0x16, "ifle", "j",            -2, 0, 0, OP_BRANCH},
-{0x15, "iflt", "j",            -2, 0, 0, OP_BRANCH},
-{0x0f, "ifnge", "j",           -2, 0, 0, OP_BRANCH},
-{0x0e, "ifngt", "j",           -2, 0, 0, OP_BRANCH},
-{0x0d, "ifnle", "j",           -2, 0, 0, OP_BRANCH},
-{0x0c, "ifnlt", "j",           -2, 0, 0, OP_BRANCH},
-{0x14, "ifne", "j",            -2, 0, 0, OP_BRANCH},
-{0x19, "ifstricteq", "j",      -2, 0, 0, OP_BRANCH},
-{0x1a, "ifstrictne", "j",      -2, 0, 0, OP_BRANCH},
-{0x11, "iftrue", "j",          -1, 0, 0, OP_BRANCH},
-{0xb4, "in", "",               -2, 1, 0, 0},
-{0x92, "inclocal", "r",         0, 0, 0, OP_REGISTER},
-{0xc2, "inclocal_i", "r",       0, 0, 0, OP_REGISTER},
-{0x91, "increment", "",        -1, 1, 0, 0},
-{0xc0, "increment_i", "",      -1, 1, 0, 0},
-{0x68, "initproperty", "2",    -2, 0, 0, OP_STACK_NS},
-{0xb1, "instanceof", "",       -2, 1, 0, 0},
-{0xb2, "istype", "2",          -1, 1, 0, 0}, // may not be a runtime multiname
-{0xb3, "istypelate", "",       -2, 1, 0, 0},
-{0x10, "jump", "j",             0, 0, 0, OP_JUMP},
-{0x08, "kill", "r",             0, 0, 0, OP_REGISTER},
-{0x09, "label", "",             0, 0, 0, OP_LABEL},
-{0xae, "lessequals", "",       -2, 1, 0, 0},
-{0xad, "lessthan", "",         -2, 1, 0, 0},
-{0x1b, "lookupswitch", "S",    -1, 0, 0, OP_LOOKUPSWITCH},
-{0xa5, "lshift", "",           -2, 1, 0, 0},
-{0xa4, "modulo", "",           -2, 1, 0, 0},
-{0xa2, "multiply", "",         -2, 1, 0, 0},
-{0xc7, "multiply_i", "",       -2, 1, 0, 0},
-{0x90, "negate", "",           -1, 1, 0, 0},
-{0xc4, "negate_i", "",         -1, 1, 0, 0},
-{0x57, "newactivation", "",     0, 1, 0, OP_NEED_ACTIVATION},
-{0x56, "newarray", "n",         0, 1, 0, OP_STACK_ARGS},
-{0x5a, "newcatch", "u",         0, 1, 0, 0}, //u = index into exception_info
-{0x58, "newclass", "c",        -1, 1, 0, 0}, //c = index into class_info
-{0x40, "newfunction", "m",      0, 1, 0, 0}, //i = index into method_info
-{0x55, "newobject", "n",        0, 1, 0, OP_STACK_ARGS2},
-{0x1e, "nextname", "",         -2, 1, 0, 0},
-{0x23, "nextvalue", "",        -2, 1, 0, 0},
-{0x02, "nop", "",               0, 0, 0, 0},
-{0x96, "not", "",              -1, 1, 0 ,0},
-{0x29, "pop", "",              -1, 0, 0, 0},
-{0x1d, "popscope", "",          0, 0,-1, 0},
-{0x24, "pushbyte", "b",         0, 1, 0, 0},
-{0x2f, "pushdouble", "f",       0, 1, 0, 0}, //index into floats
-{0x27, "pushfalse", "",         0, 1, 0, 0},
-{0x2d, "pushint", "I",          0, 1, 0, 0}, //index into ints
-{0x31, "pushnamespace", "N",    0, 1, 0, 0}, //index into namespace
-{0x28, "pushnan", "",           0, 1, 0, 0},
-{0x20, "pushnull", "",          0, 1, 0, 0},
-{0x30, "pushscope", "",        -1, 0, 1, 0},
-{0x25, "pushshort", "u",        0, 1, 0, 0},
-{0x2c, "pushstring", "s",       0, 1, 0, 0},
-{0x26, "pushtrue", "",          0, 1, 0, 0},
-{0x2e, "pushuint", "U",         0, 1, 0, 0}, //index into uints
-{0x21, "pushundefined", "",     0, 1, 0, 0},
-{0x1c, "pushwith", "",         -1, 0, 1, 0},
-{0x48, "returnvalue", "",      -1, 0, 0, OP_RETURN},
-{0x47, "returnvoid", "",        0, 0, 0, OP_RETURN},
-{0xa6, "rshift", "",           -2, 1, 0, 0},
-{0x63, "setlocal", "r",        -1, 0, 0, OP_REGISTER},
-{0xd4, "setlocal_0", "",       -1, 0, 0, OP_REGISTER},
-{0xd5, "setlocal_1", "",       -1, 0, 0, OP_REGISTER},
-{0xd6, "setlocal_2", "",       -1, 0, 0, OP_REGISTER},
-{0xd7, "setlocal_3", "",       -1, 0, 0, OP_REGISTER},
-{0x6f, "setglobalslot", "u",   -1, 0, 0, 0},
-{0x61, "setproperty", "2",     -2, 0, 0, OP_STACK_NS},
-{0x6d, "setslot", "u",         -2, 0, 0, 0},
-{0x05, "setsuper", "2",        -2, 0, 0, OP_STACK_NS},
-{0xac, "strictequals", "",     -2, 1, 0, 0},
-{0xa1, "subtract", "",         -2, 1, 0, 0},
-{0xc6, "subtract_i", "",       -2, 1, 0, 0},
-{0x2b, "swap", "",             -2, 2, 0, 0},
-{0x03, "throw", "",            -1, 0, 0, OP_THROW},
-{0x95, "typeof", "",           -1, 1, 0, 0},
-{0xa7, "urshift", "",          -2, 1, 0, 0},
+    {0xa0, "add", "",              -2, 1, 0, 0},
+    {0xc5, "add_i", "",            -2, 1, 0, 0},
+    {0x86, "astype", "2",          -1, 1, 0, 0},
+    {0x87, "astypelate", "",       -2, 1, 0, 0},
+    {0xA8, "bitand", "",           -2, 1, 0, 0},
+    {0x97, "bitnot", "",           -1, 1, 0, 0},
+    {0xa9, "bitor", "",            -2, 1, 0, 0},
+    {0xaa, "bitxor", "",           -2, 1, 0, 0},
+    {0x41, "call", "n",            -2, 1, 0, OP_STACK_ARGS},
+    {0x43, "callmethod", "mn",     -1, 1, 0, OP_STACK_ARGS},
+    {0x4c, "callproplex", "2n",    -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x46, "callproperty", "2n",   -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x4f, "callpropvoid", "2n",   -1, 0, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x44, "callstatic", "mn",     -1, 1, 0, OP_STACK_ARGS},
+    {0x45, "callsuper", "2n",      -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x4e, "callsupervoid", "2n",  -1, 0, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x78, "checkfilter", "",      -1, 1, 0, 0},
+    {0x80, "coerce", "2",          -1, 1, 0, 0},
+    {0x82, "coerce_a", "",         -1, 1, 0, 0},
+    {0x85, "coerce_s", "",         -1, 1, 0, 0},
+    {0x42, "construct", "n",       -1, 1, 0, OP_STACK_ARGS},
+    {0x4a, "constructprop", "2n",  -1, 1, 0, OP_STACK_ARGS|OP_STACK_NS},
+    {0x49, "constructsuper", "n",  -1, 0, 0, OP_STACK_ARGS},
+    {0x76, "convert_b", "",        -1, 1, 0, 0},
+    {0x73, "convert_i", "",        -1, 1, 0, 0},
+    {0x75, "convert_d", "",        -1, 1, 0, 0},
+    {0x77, "convert_o", "",        -1, 1, 0, 0},
+    {0x74, "convert_u", "",        -1, 1, 0, 0},
+    {0x70, "convert_s", "",        -1, 1, 0, 0},
+    {0xef, "debug", "D",            0, 0, 0, 0},
+    {0xf1, "debugfile", "s",        0, 0, 0, 0},
+    {0xf0, "debugline", "u",        0, 0, 0, 0},
+    {0x94, "declocal", "r",         0, 0, 0, OP_REGISTER},
+    {0xc3, "declocal_i", "r",       0, 0, 0, OP_REGISTER},
+    {0x93, "decrement", "",        -1, 1, 0, 0},
+    {0xc1, "decrement_i", "",      -1, 1, 0, 0},
+    {0x6a, "deleteproperty", "2",  -1, 1, 0, OP_STACK_NS},
+    {0xa3, "divide", "",           -2, 1, 0, 0},
+    {0x2a, "dup", "",              -1, 2, 0, 0},
+    {0x06, "dxns", "s",             0, 0, 0, OP_SET_DXNS},
+    {0x07, "dxnslate", "",         -1, 0, 0, OP_SET_DXNS},
+    {0xab, "equals", "",           -2, 1, 0, 0},
+    {0x72, "esc_xattr", "",        -1, 1, 0, 0},
+    {0x71, "esc_xelem", "",        -1, 1, 0, 0},
+    {0x5e, "findproperty", "2",     0, 1, 0, OP_STACK_NS},
+    {0x5d, "findpropstrict", "2",   0, 1, 0, OP_STACK_NS},
+    {0x59, "getdescendants", "2",  -1, 1, 0, OP_STACK_NS},
+    {0x64, "getglobalscope", "",    0, 1, 0, 0},
+    {0x6e, "getglobalslot", "u",    0, 1, 0, 0},
+    {0x60, "getlex", "2",           0, 1, 0, 0}, //multiname may not be runtime
+    {0x62, "getlocal", "r",         0, 1, 0, OP_REGISTER},
+    {0xd0, "getlocal_0", "",        0, 1, 0, OP_REGISTER},
+    {0xd1, "getlocal_1", "",        0, 1, 0, OP_REGISTER},
+    {0xd2, "getlocal_2", "",        0, 1, 0, OP_REGISTER},
+    {0xd3, "getlocal_3", "",        0, 1, 0, OP_REGISTER},
+    {0x66, "getproperty", "2",     -1, 1, 0, OP_STACK_NS},
+    {0x65, "getscopeobject", "u",   0, 1, 0, 0}, // u = index into scope stack
+    {0x6c, "getslot", "u",         -1, 1, 0, 0},
+    {0x04, "getsuper", "2",        -1, 1, 0, OP_STACK_NS},
+    {0xaf, "greaterthan", "",      -2, 1, 0, 0},
+    {0xb0, "greaterequals", "",    -2, 1, 0, 0},
+    {0x1f, "hasnext", "",          -2, 1, 0, 0},
+    {0x32, "hasnext2", "rr",        0, 1, 0, OP_REGISTER},
+    {0x13, "ifeq", "j",            -2, 0, 0, OP_BRANCH},
+    {0x12, "iffalse", "j",         -1, 0, 0, OP_BRANCH},
+    {0x18, "ifge", "j",            -2, 0, 0, OP_BRANCH},
+    {0x17, "ifgt", "j",            -2, 0, 0, OP_BRANCH},
+    {0x16, "ifle", "j",            -2, 0, 0, OP_BRANCH},
+    {0x15, "iflt", "j",            -2, 0, 0, OP_BRANCH},
+    {0x0f, "ifnge", "j",           -2, 0, 0, OP_BRANCH},
+    {0x0e, "ifngt", "j",           -2, 0, 0, OP_BRANCH},
+    {0x0d, "ifnle", "j",           -2, 0, 0, OP_BRANCH},
+    {0x0c, "ifnlt", "j",           -2, 0, 0, OP_BRANCH},
+    {0x14, "ifne", "j",            -2, 0, 0, OP_BRANCH},
+    {0x19, "ifstricteq", "j",      -2, 0, 0, OP_BRANCH},
+    {0x1a, "ifstrictne", "j",      -2, 0, 0, OP_BRANCH},
+    {0x11, "iftrue", "j",          -1, 0, 0, OP_BRANCH},
+    {0xb4, "in", "",               -2, 1, 0, 0},
+    {0x92, "inclocal", "r",         0, 0, 0, OP_REGISTER},
+    {0xc2, "inclocal_i", "r",       0, 0, 0, OP_REGISTER},
+    {0x91, "increment", "",        -1, 1, 0, 0},
+    {0xc0, "increment_i", "",      -1, 1, 0, 0},
+    {0x68, "initproperty", "2",    -2, 0, 0, OP_STACK_NS},
+    {0xb1, "instanceof", "",       -2, 1, 0, 0},
+    {0xb2, "istype", "2",          -1, 1, 0, 0}, // may not be a runtime multiname
+    {0xb3, "istypelate", "",       -2, 1, 0, 0},
+    {0x10, "jump", "j",             0, 0, 0, OP_JUMP},
+    {0x08, "kill", "r",             0, 0, 0, OP_REGISTER},
+    {0x09, "label", "",             0, 0, 0, OP_LABEL},
+    {0xae, "lessequals", "",       -2, 1, 0, 0},
+    {0xad, "lessthan", "",         -2, 1, 0, 0},
+    {0x1b, "lookupswitch", "S",    -1, 0, 0, OP_LOOKUPSWITCH},
+    {0xa5, "lshift", "",           -2, 1, 0, 0},
+    {0xa4, "modulo", "",           -2, 1, 0, 0},
+    {0xa2, "multiply", "",         -2, 1, 0, 0},
+    {0xc7, "multiply_i", "",       -2, 1, 0, 0},
+    {0x90, "negate", "",           -1, 1, 0, 0},
+    {0xc4, "negate_i", "",         -1, 1, 0, 0},
+    {0x57, "newactivation", "",     0, 1, 0, OP_NEED_ACTIVATION},
+    {0x56, "newarray", "n",         0, 1, 0, OP_STACK_ARGS},
+    {0x5a, "newcatch", "u",         0, 1, 0, 0}, //u = index into exception_info
+    {0x58, "newclass", "c",        -1, 1, 0, 0}, //c = index into class_info
+    {0x40, "newfunction", "m",      0, 1, 0, 0}, //i = index into method_info
+    {0x55, "newobject", "n",        0, 1, 0, OP_STACK_ARGS2},
+    {0x1e, "nextname", "",         -2, 1, 0, 0},
+    {0x23, "nextvalue", "",        -2, 1, 0, 0},
+    {0x02, "nop", "",               0, 0, 0, 0},
+    {0x96, "not", "",              -1, 1, 0 ,0},
+    {0x29, "pop", "",              -1, 0, 0, 0},
+    {0x1d, "popscope", "",          0, 0,-1, 0},
+    {0x24, "pushbyte", "b",         0, 1, 0, 0},
+    {0x2f, "pushdouble", "f",       0, 1, 0, 0}, //index into floats
+    {0x27, "pushfalse", "",         0, 1, 0, 0},
+    {0x2d, "pushint", "I",          0, 1, 0, 0}, //index into ints
+    {0x31, "pushnamespace", "N",    0, 1, 0, 0}, //index into namespace
+    {0x28, "pushnan", "",           0, 1, 0, 0},
+    {0x20, "pushnull", "",          0, 1, 0, 0},
+    {0x30, "pushscope", "",        -1, 0, 1, 0},
+    {0x25, "pushshort", "u",        0, 1, 0, 0},
+    {0x2c, "pushstring", "s",       0, 1, 0, 0},
+    {0x26, "pushtrue", "",          0, 1, 0, 0},
+    {0x2e, "pushuint", "U",         0, 1, 0, 0}, //index into uints
+    {0x21, "pushundefined", "",     0, 1, 0, 0},
+    {0x1c, "pushwith", "",         -1, 0, 1, 0},
+    {0x48, "returnvalue", "",      -1, 0, 0, OP_RETURN},
+    {0x47, "returnvoid", "",        0, 0, 0, OP_RETURN},
+    {0xa6, "rshift", "",           -2, 1, 0, 0},
+    {0x63, "setlocal", "r",        -1, 0, 0, OP_REGISTER},
+    {0xd4, "setlocal_0", "",       -1, 0, 0, OP_REGISTER},
+    {0xd5, "setlocal_1", "",       -1, 0, 0, OP_REGISTER},
+    {0xd6, "setlocal_2", "",       -1, 0, 0, OP_REGISTER},
+    {0xd7, "setlocal_3", "",       -1, 0, 0, OP_REGISTER},
+    {0x6f, "setglobalslot", "u",   -1, 0, 0, 0},
+    {0x61, "setproperty", "2",     -2, 0, 0, OP_STACK_NS},
+    {0x6d, "setslot", "u",         -2, 0, 0, 0},
+    {0x05, "setsuper", "2",        -2, 0, 0, OP_STACK_NS},
+    {0xac, "strictequals", "",     -2, 1, 0, 0},
+    {0xa1, "subtract", "",         -2, 1, 0, 0},
+    {0xc6, "subtract_i", "",       -2, 1, 0, 0},
+    {0x2b, "swap", "",             -2, 2, 0, 0},
+    {0x03, "throw", "",            -1, 0, 0, OP_THROW},
+    {0x95, "typeof", "",           -1, 1, 0, 0},
+    {0xa7, "urshift", "",          -2, 1, 0, 0},
 
-/* Alchemy opcodes */
-{0x3a, "si8", "",                -2, 0, 0, 0},
-{0x3b, "si16", "",               -2, 0, 0, 0},
-{0x3c, "si32", "",               -2, 0, 0, 0},
-{0x3d, "sf32", "",               -2, 0, 0, 0},
-{0x3e, "sf64", "",               -2, 0, 0, 0},
-{0x35, "li8", "",                -1, 1, 0, 0},
-{0x36, "li16", "",               -1, 1, 0, 0},
-{0x37, "li32", "",               -1, 1, 0, 0},
-{0x38, "lf32", "",               -1, 1, 0, 0},
-{0x39, "lf64", "",               -1, 1, 0, 0},
-{0x50, "sxi1", "",               -1, 1, 0, 0},
-{0x51, "sxi8", "",               -1, 1, 0, 0},
-{0x52, "sxi16", "",              -1, 1, 0, 0},
+    /* Alchemy opcodes */
+    {0x3a, "si8", "",                -2, 0, 0, 0},
+    {0x3b, "si16", "",               -2, 0, 0, 0},
+    {0x3c, "si32", "",               -2, 0, 0, 0},
+    {0x3d, "sf32", "",               -2, 0, 0, 0},
+    {0x3e, "sf64", "",               -2, 0, 0, 0},
+    {0x35, "li8", "",                -1, 1, 0, 0},
+    {0x36, "li16", "",               -1, 1, 0, 0},
+    {0x37, "li32", "",               -1, 1, 0, 0},
+    {0x38, "lf32", "",               -1, 1, 0, 0},
+    {0x39, "lf64", "",               -1, 1, 0, 0},
+    {0x50, "sxi1", "",               -1, 1, 0, 0},
+    {0x51, "sxi8", "",               -1, 1, 0, 0},
+    {0x52, "sxi16", "",              -1, 1, 0, 0},
 
-/* opcodes not documented, but seen in the wild */
-{0x53, "applytype", "n",       -1, 1, 0, OP_STACK_ARGS}, //seen in builtin.abc
+    /* opcodes not documented, but seen in the wild */
+    {0x53, "applytype", "n",       -1, 1, 0, OP_STACK_ARGS}, //seen in builtin.abc
 
-/* dummy instructions. Warning: these are not actually supported by flash */
-{0xfb, "__pushpackage__", "s",      0, 1, 0, OP_INTERNAL},
-{0xfc, "__rethrow__", "",           0, 0, 0, OP_THROW|OP_INTERNAL},
-{0xfd, "__fallthrough__", "s",      0, 0, 0, OP_INTERNAL},
-{0xfe, "__continue__", "s",         0, 0, 0, OP_RETURN|OP_INTERNAL},
-{0xff, "__break__", "s",            0, 0, 0, OP_RETURN|OP_INTERNAL},
+    /* dummy instructions. Warning: these are not actually supported by flash */
+    {0xfb, "__pushpackage__", "s",      0, 1, 0, OP_INTERNAL},
+    {0xfc, "__rethrow__", "",           0, 0, 0, OP_THROW|OP_INTERNAL},
+    {0xfd, "__fallthrough__", "s",      0, 0, 0, OP_INTERNAL},
+    {0xfe, "__continue__", "s",         0, 0, 0, OP_RETURN|OP_INTERNAL},
+    {0xff, "__break__", "s",            0, 0, 0, OP_RETURN|OP_INTERNAL},
 };
 
 static opcode_t* op2op[256] = {0,0,0};
@@ -243,8 +243,8 @@ static code_t*pos2code(code_t**bytepos, code_t*c, int pos, int len)
         pos+=c->pos;
     }
     if(pos < 0 ||
-       pos > len ||
-      (pos!=len && !bytepos[pos])) {
+            pos > len ||
+            (pos!=len && !bytepos[pos])) {
         /* flex likes to generate these. yuck. */
         if(c) {
             opcode_t*op = opcode_get(c->opcode);
@@ -287,14 +287,14 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
     //printf("-->\n");fflush(stdout);
 
     code_t**bytepos = rfx_calloc(sizeof(code_t*)*len);
-        
+
     while(tag->pos<end) {
         int codepos = tag->pos-start;
         U8 opcode = swf_GetU8(tag);
         opcode_t*op = opcode_get(opcode);
-	if(!op) {
-	    fprintf(stderr, "Can't parse opcode %02x\n", opcode);
-	    continue;
+        if(!op) {
+            fprintf(stderr, "Can't parse opcode %02x\n", opcode);
+            continue;
         }
         //printf("%s\n", op->name);fflush(stdout);
         NEW(code_t,c);
@@ -351,7 +351,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
             } else if(*p == 'D') { // debug
                 /*type, usually 1*/
                 U8 type = swf_GetU8(tag);
-                if(type!=1) 
+                if(type!=1)
                     fprintf(stderr, "Unknown debug type: %02x\n", type);
                 /*register name*/
                 code->data[0] = strdup((char*)pool_lookup_string(pool, swf_GetU30(tag)));
@@ -365,7 +365,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
                 l->targets = list_new();
                 int num = swf_GetU30(tag)+1;
                 int t;
-                for(t=0;t<num;t++) 
+                for(t=0;t<num;t++)
                     list_append(l->targets, (code_t*)(ptroff_t)swf_GetS24(tag));
                 data = l;
             } else {
@@ -377,7 +377,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
         }
     }
 
-//#define DEBUG_BYTES
+    //#define DEBUG_BYTES
 #ifdef DEBUG_BYTES
     int t;
     for(t=0;t<len;t++) {
@@ -413,7 +413,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
             }
         }
         c = c->next;
-    } 
+    }
 
     if(codelookup) {
         (*codelookup) = malloc(sizeof(codelookup_t));
@@ -456,7 +456,6 @@ void code_free(code_t*c)
             c->data[pos]=0;
             p++;pos++;
         }
-        memset(c, 0, sizeof(c));
         free(c);
         c = next;
     }
@@ -475,7 +474,7 @@ static int opcode_write(TAG*tag, code_t*c, pool_t*pool, abc_file_t*file, int len
 
     if(op->flags & OP_INTERNAL) {
         if(c->opcode == OPCODE___BREAK__ ||
-           c->opcode == OPCODE___CONTINUE__) {
+                c->opcode == OPCODE___CONTINUE__) {
             fprintf(stderr, "Unresolved %s\n", op->name);
         } else {
             fprintf(stderr, "Error: writing undefined internal opcode %s\n", op->name);
@@ -486,104 +485,104 @@ static int opcode_write(TAG*tag, code_t*c, pool_t*pool, abc_file_t*file, int len
         void*data = c->data[pos++];
         assert(pos<=2);
         switch(*p) {
-            case 'n': { // number
-                len += swf_SetU30(tag, (ptroff_t)data);
-                break;
-            }
-            case '2': { //multiname
-                multiname_t*m = (multiname_t*)data;
-                len += swf_SetU30(tag, pool_register_multiname(pool, m));
-                break;
-            }
-            case 'N': { //namespace
-                namespace_t*ns = (namespace_t*)data;
-                len += swf_SetU30(tag, pool_register_namespace(pool, ns));
-                break;
-            }
-            case 'm': { //method
-                abc_method_t*m = (abc_method_t*)data;
-                len += swf_SetU30(tag, m->index);
-                break;
-            }
-            case 'c': { //classinfo 
-                abc_class_t*cls = (abc_class_t*)data;
-                len += swf_SetU30(tag, cls->index);
-                break;
-            }
-            case 'i': { //methodbody
-                abc_method_body_t*m = (abc_method_body_t*)data;
-                len += swf_SetU30(tag, m->index);
-                break;
-            }
-            case 'I': { // int
-                len += swf_SetU30(tag, pool_register_int(pool, (ptroff_t)data));
-                break;
-            }
-            case 'U': { // uint
-                len += swf_SetU30(tag, pool_register_uint(pool, (ptroff_t)data));
-                break;
-            }
-            case 'f': { //  float
-                len += swf_SetU30(tag, pool_register_float(pool, *(double*)data));
-                break;
-            }
-            case 'u': { // integer
-                len += swf_SetU30(tag, (ptroff_t)data);
-                break;
-            }
-            case 'r': { // integer
-                len += swf_SetU30(tag, (ptroff_t)data);
-                break;
-            }
-            case 'b': { // byte
-                if(tag)
-                    swf_SetU8(tag, (ptroff_t)data);
-                len++;
-                break;
-            }
-            case 'j': { // jump
-                int skip = length-c->pos-4;
-                if(c->branch) 
-                    skip = (c->branch->pos) - c->pos - 4;
-                len += swf_SetS24(tag, skip);
-                break;
-            }
-            case 's': { // string
-                int index = pool_register_string2(pool, (string_t*)data);
-                len += swf_SetU30(tag, index);
-                break;
-            }
-            case 'D': { // debug statement
-                if(tag)
-                    swf_SetU8(tag, 1);
-                len++;
-                len+=swf_SetU30(tag, pool_register_string(pool,c->data[0]));
-                if(tag)
-                    swf_SetU8(tag, (ptroff_t)c->data[1]);
-                len++;
-                len+=swf_SetU30(tag, 0);
-                break;
-            }
-            case 'S': { // switch statement
-                lookupswitch_t*l = (lookupswitch_t*)data;
-                int offset = 0;
-                len+=swf_SetS24(tag, l->def->pos-c->pos+offset); //default
+        case 'n': { // number
+            len += swf_SetU30(tag, (ptroff_t)data);
+            break;
+        }
+        case '2': { //multiname
+            multiname_t*m = (multiname_t*)data;
+            len += swf_SetU30(tag, pool_register_multiname(pool, m));
+            break;
+        }
+        case 'N': { //namespace
+            namespace_t*ns = (namespace_t*)data;
+            len += swf_SetU30(tag, pool_register_namespace(pool, ns));
+            break;
+        }
+        case 'm': { //method
+            abc_method_t*m = (abc_method_t*)data;
+            len += swf_SetU30(tag, m->index);
+            break;
+        }
+        case 'c': { //classinfo
+            abc_class_t*cls = (abc_class_t*)data;
+            len += swf_SetU30(tag, cls->index);
+            break;
+        }
+        case 'i': { //methodbody
+            abc_method_body_t*m = (abc_method_body_t*)data;
+            len += swf_SetU30(tag, m->index);
+            break;
+        }
+        case 'I': { // int
+            len += swf_SetU30(tag, pool_register_int(pool, (ptroff_t)data));
+            break;
+        }
+        case 'U': { // uint
+            len += swf_SetU30(tag, pool_register_uint(pool, (ptroff_t)data));
+            break;
+        }
+        case 'f': { //  float
+            len += swf_SetU30(tag, pool_register_float(pool, *(double*)data));
+            break;
+        }
+        case 'u': { // integer
+            len += swf_SetU30(tag, (ptroff_t)data);
+            break;
+        }
+        case 'r': { // integer
+            len += swf_SetU30(tag, (ptroff_t)data);
+            break;
+        }
+        case 'b': { // byte
+            if(tag)
+                swf_SetU8(tag, (ptroff_t)data);
+            len++;
+            break;
+        }
+        case 'j': { // jump
+            int skip = length-c->pos-4;
+            if(c->branch)
+                skip = (c->branch->pos) - c->pos - 4;
+            len += swf_SetS24(tag, skip);
+            break;
+        }
+        case 's': { // string
+            int index = pool_register_string2(pool, (string_t*)data);
+            len += swf_SetU30(tag, index);
+            break;
+        }
+        case 'D': { // debug statement
+            if(tag)
+                swf_SetU8(tag, 1);
+            len++;
+            len+=swf_SetU30(tag, pool_register_string(pool,c->data[0]));
+            if(tag)
+                swf_SetU8(tag, (ptroff_t)c->data[1]);
+            len++;
+            len+=swf_SetU30(tag, 0);
+            break;
+        }
+        case 'S': { // switch statement
+            lookupswitch_t*l = (lookupswitch_t*)data;
+            int offset = 0;
+            len+=swf_SetS24(tag, l->def->pos-c->pos+offset); //default
+            code_list_t*t = l->targets;
+            if(list_length(t)) {
+                len+=swf_SetU30(tag, list_length(t)-1); //nr-1
                 code_list_t*t = l->targets;
-                if(list_length(t)) {
-                    len+=swf_SetU30(tag, list_length(t)-1); //nr-1
-                    code_list_t*t = l->targets;
-                    while(t) {
-                        len+=swf_SetS24(tag, t->code->pos - c->pos+offset);
-                        t = t->next;
-                    }
-                } else {
-                    len+=swf_SetU30(tag, 0); //nr-1
-                    len+=swf_SetS24(tag, l->def->pos-c->pos+offset);
+                while(t) {
+                    len+=swf_SetS24(tag, t->code->pos - c->pos+offset);
+                    t = t->next;
                 }
-                break;
+            } else {
+                len+=swf_SetU30(tag, 0); //nr-1
+                len+=swf_SetS24(tag, l->def->pos-c->pos+offset);
             }
-            default:
-                printf("Can't parse opcode param type \"%c\"\n", *p);
+            break;
+        }
+        default:
+            printf("Can't parse opcode param type \"%c\"\n", *p);
         }
         p++;
     }
@@ -609,7 +608,7 @@ void code_write(TAG*tag, code_t*code, pool_t*pool, abc_file_t*file)
     while(c) {
         opcode_t*op = opcode_get(code->opcode);
         if(op->flags&(OP_BRANCH|OP_JUMP)) {
-            int skip = 0;
+            //int skip = 0;
         }
         pos += opcode_write(tag, c, pool, file, length);
         c = c->next;
@@ -647,7 +646,7 @@ static int stack_minus(code_t*c)
             stack--;
         if(multiname_late_name(m))
             stack--;
-    } 
+    }
     if(op->flags&OP_STACK_ARGS || op->flags&OP_STACK_ARGS2) {
         assert(strchr(op->params, 'n'));
         int nr = (ptroff_t)(op->params[0]=='n'?c->data[0]:c->data[1]);
@@ -666,16 +665,16 @@ static void handleregister(currentstats_t*stats, int reg)
 #define FLAG_SEEN 1
 #define FLAG_ERROR 2
 
-static void dumpstack(currentstats_t*stats)
+/*static void dumpstack(currentstats_t*stats)
 {
     int t;
     for(t=0;t<stats->num;t++) {
         code_t*c = stats->stack[t].code;
         opcode_t*op = opcode_get(c->opcode);
-        printf("%05d) %c %d:%d %s", t, (stats->stack[t].flags&FLAG_SEEN)?'x':'|', 
-                               stats->stack[t].stackpos,
-                               stats->stack[t].scopepos,
-                               op->name);
+        printf("%05d) %c %d:%d %s", t, (stats->stack[t].flags&FLAG_SEEN)?'x':'|',
+               stats->stack[t].stackpos,
+               stats->stack[t].scopepos,
+               op->name);
 
         if(op->flags&(OP_BRANCH|OP_JUMP)) {
             if(c->branch)
@@ -690,33 +689,33 @@ static void dumpstack(currentstats_t*stats)
         }
         printf("\n");
     }
-}
+}*/
 
 static char callcode(currentstats_t*stats, int pos, int stack, int scope)
 {
     while(pos<stats->num) {
         if(stats->stack[pos].flags&FLAG_SEEN) {
             if(stats->stack[pos].stackpos != stack ||
-               stats->stack[pos].scopepos != scope) {
+                    stats->stack[pos].scopepos != scope) {
                 //dumpstack(stats);
                 stats->stack[pos].flags |= FLAG_ERROR;
                 fprintf(stderr, "Stack mismatch at pos %d\n", pos);
                 fprintf(stderr, "Should be: %d:%d, is: %d:%d\n", stack, scope,
-                    stats->stack[pos].stackpos, stats->stack[pos].scopepos);
-               
+                        stats->stack[pos].stackpos, stats->stack[pos].scopepos);
+
                 /* return error here if we do verification */
                 //return 0;
             }
             return 1;
         }
-    
+
         stats->stack[pos].flags |= FLAG_SEEN;
         stats->stack[pos].stackpos = stack;
         stats->stack[pos].scopepos = scope;
 
         code_t*c = stats->stack[pos].code;
         opcode_t*op = opcode_get(c->opcode);
-        
+
         //printf("Walking %s at position %d, stack=%d, scope=%d\n", op->name, pos, stack, scope);
 
         stack += stack_minus(c);
@@ -724,9 +723,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
         if(stack<0) {
             stats->stack[pos].flags |= FLAG_ERROR;
             fprintf(stderr, "error: stack underflow at %d (%s)\n", pos, op->name);
-           
-            /* if we would do true verification (if we would be a vm), this is 
-               where we would return the error 
+
+            /* if we would do true verification (if we would be a vm), this is
+               where we would return the error
                return 0;
              */
         }
@@ -754,7 +753,7 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
             if(m->body && scope > m->body->init_scope_depth)
                 m->body->init_scope_depth = scope;
         }
-        
+
         if(op->flags & OP_REGISTER) {
             char*p = op->params;
             int pos = 0;
@@ -826,7 +825,7 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
                 t = t->next;
             }
         }
-    
+
         pos++;
         if(pos<stats->num) {
             assert(c->next == stats->stack[pos].code);
@@ -835,7 +834,7 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
     return 1;
 }
 
-static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptions) 
+static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptions)
 {
     code = code_start(code);
     int num = 0;
@@ -852,7 +851,7 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
     current->num = num;
     current->flags = 0;
 
-//#define DEBUG_BYTES
+    //#define DEBUG_BYTES
 #ifdef DEBUG_BYTES
     int t;
     c = code;
@@ -922,8 +921,8 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
 
     int pos = 0;
     while(c) {
-	U8 opcode = c->opcode;
-	char found = 0;
+        U8 opcode = c->opcode;
+        //char found = 0;
         opcode_t*op = opcode_get(opcode);
 
         e = exceptions;
@@ -940,21 +939,21 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
             e = e->next;
         }
 
-	if(!op) {
-	    fprintf(stderr, "Can't parse opcode %02x.\n", opcode);
-	    return 0;
-	} else {
+        if(!op) {
+            fprintf(stderr, "Can't parse opcode %02x.\n", opcode);
+            return 0;
+        } else {
             char*p = op->params;
-            char first = 1;
+            //char first = 1;
             int i=0;
 
             if(stats) {
                 int f = stats->stack[c->pos].flags;
-                fprintf(fo, "%s%05d) %c %d:%d %s ", prefix, c->pos, 
-                                       (f&FLAG_ERROR)?'E':((f&FLAG_SEEN)?'+':'|'),
-                                       stats->stack[c->pos].stackpos,
-                                       stats->stack[c->pos].scopepos,
-                                       op->name);
+                fprintf(fo, "%s%05d) %c %d:%d %s ", prefix, c->pos,
+                        (f&FLAG_ERROR)?'E':((f&FLAG_SEEN)?'+':'|'),
+                        stats->stack[c->pos].stackpos,
+                        stats->stack[c->pos].scopepos,
+                        op->name);
             } else {
                 fprintf(fo, "%s%05d) ? ?:? %s ", prefix, c->pos, op->name);
             }
@@ -986,7 +985,7 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
                     fprintf(fo, "[classinfo %08x %s]", cls->index, classname);
                     free(classname);
                 } else if(*p == 'i') {
-                    abc_method_body_t*b = (abc_method_body_t*)data;
+                    //abc_method_body_t*b = (abc_method_body_t*)data;
                     fprintf(fo, "[methodbody]");
                 } else if(*p == 'u' || *p == 'I' || *p == 'U') {
                     int n = (ptroff_t)data;
@@ -1033,11 +1032,11 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
                 }
                 p++;
                 i++;
-                first = 0;
+                //first = 0;
             }
             fprintf(fo, "\n");
-	}
-        
+        }
+
         e = exceptions;
         while(e) {
             if(c==e->abc_exception->to) {
@@ -1056,7 +1055,7 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
     return 1;
 }
 
-codestats_t* code_get_statistics(code_t*code, abc_exception_list_t*exceptions) 
+codestats_t* code_get_statistics(code_t*code, abc_exception_list_t*exceptions)
 {
     currentstats_t*current = code_get_stats(code, exceptions);
     if(!current)
@@ -1081,18 +1080,18 @@ code_t* add_opcode(code_t*atag, U8 op)
     code_t*tmp = (code_t*)rfx_calloc(sizeof(code_t));
     tmp->opcode = op;
     if(atag) {
-	tmp->prev = atag;
+        tmp->prev = atag;
         tmp->next = atag->next;
         if(tmp->next)
             tmp->next->prev = tmp;
-	atag->next = tmp;
+        atag->next = tmp;
     } else {
-	tmp->prev = 0;
+        tmp->prev = 0;
         tmp->next = 0;
     }
     return tmp;
 }
-    
+
 void codestats_print(codestats_t*stats)
 {
     printf("max_stack: %d\n", stats->max_stack);
@@ -1158,7 +1157,7 @@ code_t*code_dup(code_t*c)
     while(c) {
         NEW(code_t, n);
         memcpy(n, c, sizeof(code_t));
-        if(!start) 
+        if(!start)
             start=n;
 
         if(c->opcode == OPCODE_LABEL || c->opcode == OPCODE_NOP) {
@@ -1169,7 +1168,7 @@ code_t*code_dup(code_t*c)
         }
 
         opcode_t*op = opcode_get(c->opcode);
-        
+
         char*p = op?op->params:"";
         int pos=0;
         while(*p) {
@@ -1198,7 +1197,7 @@ code_t*code_dup(code_t*c)
         last = n;
         c = c->next;
     }
-   
+
     if(does_branch) {
         c = start;
         while(c) {
@@ -1243,11 +1242,11 @@ char is_getlocal(code_t*c)
 {
     if(!c) return 0;
     if(c->opcode == OPCODE_GETLOCAL ||
-       c->opcode == OPCODE_GETLOCAL_0 ||
-       c->opcode == OPCODE_GETLOCAL_1 ||
-       c->opcode == OPCODE_GETLOCAL_2 ||
-       c->opcode == OPCODE_GETLOCAL_3) {
-	return 1;
+            c->opcode == OPCODE_GETLOCAL_0 ||
+            c->opcode == OPCODE_GETLOCAL_1 ||
+            c->opcode == OPCODE_GETLOCAL_2 ||
+            c->opcode == OPCODE_GETLOCAL_3) {
+        return 1;
     }
     return 0;
 }
@@ -1269,10 +1268,10 @@ code_t* cut_last_push(code_t*c)
         }
         /* cut register lookups */
         else if(c->opcode == OPCODE_GETLOCAL ||
-           c->opcode == OPCODE_GETLOCAL_0 ||
-           c->opcode == OPCODE_GETLOCAL_1 ||
-           c->opcode == OPCODE_GETLOCAL_2 ||
-           c->opcode == OPCODE_GETLOCAL_3) {
+                c->opcode == OPCODE_GETLOCAL_0 ||
+                c->opcode == OPCODE_GETLOCAL_1 ||
+                c->opcode == OPCODE_GETLOCAL_2 ||
+                c->opcode == OPCODE_GETLOCAL_3) {
             return code_cutlast(c);
         }
         /* discard function call values */
@@ -1284,13 +1283,13 @@ code_t* cut_last_push(code_t*c)
             return c;
         } else if((c->opcode == OPCODE_NEWOBJECT ||
                    c->opcode == OPCODE_NEWARRAY) &&
-                   !c->data[0]) {
+                  !c->data[0]) {
             // we can discard these if they're not eating up stack parameters
             return code_cutlast(c);
-        } else if(op->stack_minus ==0 && op->stack_plus == 0 && 
-                !(op->flags&~(OP_REGISTER|OP_SET_DXNS)) && c->prev) {
+        } else if(op->stack_minus ==0 && op->stack_plus == 0 &&
+                  !(op->flags&~(OP_REGISTER|OP_SET_DXNS)) && c->prev) {
             // trim code *before* the kill, inclocal, declocal, dxns
-            code_t*p = c->prev; 
+            code_t*p = c->prev;
             p->next = 0;
             c->prev = 0;
             return code_append(cut_last_push(p), c);
