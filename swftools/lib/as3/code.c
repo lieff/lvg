@@ -589,33 +589,6 @@ static int opcode_write(TAG*tag, code_t*c, pool_t*pool, abc_file_t*file, int len
     return len;
 }
 
-void code_write(TAG*tag, code_t*code, pool_t*pool, abc_file_t*file)
-{
-    code = code_start(code);
-    int pos = 0;
-    int length = 0;
-    code_t*c = code;
-    while(c) {
-        c->pos = pos;
-        pos += opcode_write(0, c, pool, file, 0);
-        c = c->next;
-    }
-    length = pos;
-    swf_SetU30(tag, pos);
-    int start = tag->len;
-    c = code;
-    pos = 0;
-    while(c) {
-        opcode_t*op = opcode_get(code->opcode);
-        if(op->flags&(OP_BRANCH|OP_JUMP)) {
-            //int skip = 0;
-        }
-        pos += opcode_write(tag, c, pool, file, length);
-        c = c->next;
-    }
-    assert(tag->len - start == pos);
-}
-
 typedef struct {
     int stackpos;
     int scopepos;

@@ -403,8 +403,8 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                     printf(" codesize:%d ", codesize);
 
                     /* the following tries to find the "string"
-             the flash documentation speaks of- I've
-             never actually seen one yet. -mk */
+                       the flash documentation speaks of- I've
+                       never actually seen one yet. -mk */
                     for(t=2;t<atag->len;t++)
                         printf("[%02x]", atag->data[t]);
 
@@ -429,9 +429,13 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                     if(type == 0) {
                         printf(" String:\"%s\"", value);
                     } else if (type == 1) {
-                        U32 f = value[0]+(value[1]<<8)+
-                                (value[2]<<16)+(value[3]<<24);
-                        printf(" Float:%f", *(float*)&f);
+                        union {
+                            U32 i;
+                            float f;
+                        } u;
+                        u.i = value[0] + (value[1] << 8)+
+                             (value[2] << 16) + (value[3] << 24);
+                        printf(" Float:%f", u.f);
                     } else if (type == 2) {
                         printf(" NULL");
                     } else if (type == 3) {
@@ -441,18 +445,21 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                     } else if (type == 5) {
                         printf(" bool:%s", *value?"true":"false");
                     } else if (type == 6) {
-                        U8 a[8];
-                        memcpy(&a[4],value,4);
-                        memcpy(a,&value[4],4);
+                        union {
+                            U8 a[8];
+                            double d;
+                        } u;
+                        memcpy(&u.a[4], value, 4);
+                        memcpy(u.a, &value[4], 4);
 #ifdef WORDS_BIGENDIAN
                         int t;
                         for(t=0;t<4;t++) {
-                            U8 tmp = a[t];
-                            a[t]=a[7-t];
-                            a[7-t] = tmp;
+                            U8 tmp = u.a[t];
+                            u.a[t] = u.a[7-t];
+                            u.a[7-t] = tmp;
                         }
 #endif
-                        printf(" double:%f", *(double*)a);
+                        printf(" double:%f", u.d);
                     } else if (type == 7) {
                         printf(" int:%d", value[0]+(value[1]<<8)+
                                 (value[2]<<16)+(value[3]<<24));

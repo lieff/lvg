@@ -97,8 +97,10 @@ int adpcm_decode(TAG *tag, int buf_size, int channels, int16_t *samples, int max
                 status[i].predictor = clip16(status[i].predictor);
 
                 if (samples_num < max_samples)
+                {
                     *samples++ = status[i].predictor;
-                samples_num++;
+                    samples_num++;
+                }
             }
         }
     }
