@@ -11,7 +11,7 @@
 
 static inline NVGcolor nvgColorU32(uint32_t c)
 {
-    return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, 255);
+    return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, c >> 24);
 }
 
 static NVGcolor transformColor(NVGcolor color, LVGObject *o)
@@ -74,21 +74,21 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
         if (path->closed)
             nvgLineTo(vg, path->pts[0], path->pts[1]);
     }
-    if (NSVG_PAINT_COLOR == shape->fill.type)
-    {
-        nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
-    } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-        nvgSVGLinearGrad(vg, shape, o, 1);
-    else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-        nvgSVGRadialGrad(vg, shape, o, 1);
-    else if (NSVG_PAINT_IMAGE == shape->fill.type)
-    {
-        int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
-        NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
-        nvgFillPaint(vg, imgPaint);
-    }
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
+        if (NSVG_PAINT_COLOR == shape->fill.type)
+        {
+            nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
+        } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+            nvgSVGLinearGrad(vg, shape, o, 1);
+        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+            nvgSVGRadialGrad(vg, shape, o, 1);
+        else if (NSVG_PAINT_IMAGE == shape->fill.type)
+        {
+            int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
+            NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
+            nvgFillPaint(vg, imgPaint);
+        }
         if (NSVG_FILLRULE_EVENODD == shape->fillRule)
             nvgPathWinding(vg, NVG_HOLE);
         nvgFill(vg);
