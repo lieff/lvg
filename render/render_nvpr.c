@@ -59,6 +59,13 @@ PFNGLGETPATHLENGTHNVPROC FUNC(glGetPathLengthNV) = NULL;
 PFNGLPOINTALONGPATHNVPROC FUNC(glPointAlongPathNV) = NULL;
 PFNGLPATHSTENCILFUNCNVPROC FUNC(glPathStencilFuncNV) = NULL;
 
+typedef void (APIENTRYP PFNGLMATRIXLOADIDENTITYEXTPROC) (GLenum mode);
+typedef void (APIENTRYP PFNGLMATRIXORTHOEXTPROC) (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+typedef void (APIENTRYP PFNGLMATRIXLOADFEXTPROC) (GLenum mode, const GLfloat *m);
+PFNGLMATRIXLOADIDENTITYEXTPROC glMatrixLoadIdentityEXT = NULL;
+PFNGLMATRIXORTHOEXTPROC glMatrixOrthoEXT = NULL;
+PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
+
 #if defined(_WIN32)
 # define GET_PROC_ADDRESS(name)  wglGetProcAddress(#name)
 #else
@@ -74,61 +81,181 @@ PFNGLPATHSTENCILFUNCNVPROC FUNC(glPathStencilFuncNV) = NULL;
 static int nvpr_init(void **render)
 {
     int fail = 0;
-    if (glfwExtensionSupported("GL_NV_path_rendering"))
-    {
-        LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
-        LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
-        LOAD_PROC(PFNGLISPATHNVPROC, glIsPathNV);
-        LOAD_PROC(PFNGLPATHCOMMANDSNVPROC, glPathCommandsNV);
-        LOAD_PROC(PFNGLPATHCOORDSNVPROC, glPathCoordsNV);
-        LOAD_PROC(PFNGLPATHSUBCOMMANDSNVPROC, glPathSubCommandsNV);
-        LOAD_PROC(PFNGLPATHSUBCOORDSNVPROC, glPathSubCoordsNV);
-        LOAD_PROC(PFNGLPATHSTRINGNVPROC, glPathStringNV);
-        LOAD_PROC(PFNGLPATHGLYPHSNVPROC, glPathGlyphsNV);
-        LOAD_PROC(PFNGLPATHGLYPHRANGENVPROC, glPathGlyphRangeNV);
-        LOAD_PROC(PFNGLWEIGHTPATHSNVPROC, glWeightPathsNV);
-        LOAD_PROC(PFNGLCOPYPATHNVPROC, glCopyPathNV);
-        LOAD_PROC(PFNGLINTERPOLATEPATHSNVPROC, glInterpolatePathsNV);
-        LOAD_PROC(PFNGLTRANSFORMPATHNVPROC, glTransformPathNV);
-        LOAD_PROC(PFNGLPATHPARAMETERIVNVPROC, glPathParameterivNV);
-        LOAD_PROC(PFNGLPATHPARAMETERINVPROC, glPathParameteriNV);
-        LOAD_PROC(PFNGLPATHPARAMETERFVNVPROC, glPathParameterfvNV);
-        LOAD_PROC(PFNGLPATHPARAMETERFNVPROC, glPathParameterfNV);
-        LOAD_PROC(PFNGLPATHDASHARRAYNVPROC, glPathDashArrayNV);
-        LOAD_PROC(PFNGLSTENCILFILLPATHNVPROC, glStencilFillPathNV);
-        LOAD_PROC(PFNGLSTENCILSTROKEPATHNVPROC, glStencilStrokePathNV);
-        LOAD_PROC(PFNGLSTENCILFILLPATHINSTANCEDNVPROC, glStencilFillPathInstancedNV);
-        LOAD_PROC(PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC, glStencilStrokePathInstancedNV);
-        LOAD_PROC(PFNGLPATHCOLORGENNVPROC, glPathColorGenNV);
-        LOAD_PROC(PFNGLPATHTEXGENNVPROC, glPathTexGenNV);
-        LOAD_PROC(PFNGLPATHFOGGENNVPROC, glPathFogGenNV);
-        LOAD_PROC(PFNGLCOVERFILLPATHNVPROC, glCoverFillPathNV);
-        LOAD_PROC(PFNGLCOVERSTROKEPATHNVPROC, glCoverStrokePathNV);
-        LOAD_PROC(PFNGLCOVERFILLPATHINSTANCEDNVPROC, glCoverFillPathInstancedNV);
-        LOAD_PROC(PFNGLCOVERSTROKEPATHINSTANCEDNVPROC, glCoverStrokePathInstancedNV);
-        LOAD_PROC(PFNGLGETPATHPARAMETERIVNVPROC, glGetPathParameterivNV);
-        LOAD_PROC(PFNGLGETPATHPARAMETERFVNVPROC, glGetPathParameterfvNV);
-        LOAD_PROC(PFNGLGETPATHCOMMANDSNVPROC, glGetPathCommandsNV);
-        LOAD_PROC(PFNGLGETPATHCOORDSNVPROC, glGetPathCoordsNV);
-        LOAD_PROC(PFNGLGETPATHDASHARRAYNVPROC, glGetPathDashArrayNV);
-        LOAD_PROC(PFNGLGETPATHMETRICSNVPROC, glGetPathMetricsNV);
-        LOAD_PROC(PFNGLGETPATHMETRICRANGENVPROC, glGetPathMetricRangeNV);
-        LOAD_PROC(PFNGLGETPATHSPACINGNVPROC, glGetPathSpacingNV);
-        LOAD_PROC(PFNGLGETPATHCOLORGENIVNVPROC, glGetPathColorGenivNV);
-        LOAD_PROC(PFNGLGETPATHCOLORGENFVNVPROC, glGetPathColorGenfvNV);
-        LOAD_PROC(PFNGLGETPATHTEXGENIVNVPROC, glGetPathTexGenivNV);
-        LOAD_PROC(PFNGLGETPATHTEXGENFVNVPROC, glGetPathTexGenfvNV);
-        LOAD_PROC(PFNGLISPOINTINFILLPATHNVPROC, glIsPointInFillPathNV);
-        LOAD_PROC(PFNGLISPOINTINSTROKEPATHNVPROC, glIsPointInStrokePathNV);
-        LOAD_PROC(PFNGLGETPATHLENGTHNVPROC, glGetPathLengthNV);
-        LOAD_PROC(PFNGLPOINTALONGPATHNVPROC, glPointAlongPathNV);
-        LOAD_PROC(PFNGLPATHSTENCILFUNCNVPROC, glPathStencilFuncNV);
-        LOAD_PROC(PFNGLPATHSTENCILDEPTHOFFSETNVPROC, glPathStencilDepthOffsetNV);
-        LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);
-    }
+    if (!glfwExtensionSupported("GL_NV_path_rendering"))
+        return 0;
+
+    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);
+    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
+    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
+
+    LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
+    LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
+    LOAD_PROC(PFNGLISPATHNVPROC, glIsPathNV);
+    LOAD_PROC(PFNGLPATHCOMMANDSNVPROC, glPathCommandsNV);
+    LOAD_PROC(PFNGLPATHCOORDSNVPROC, glPathCoordsNV);
+    LOAD_PROC(PFNGLPATHSUBCOMMANDSNVPROC, glPathSubCommandsNV);
+    LOAD_PROC(PFNGLPATHSUBCOORDSNVPROC, glPathSubCoordsNV);
+    LOAD_PROC(PFNGLPATHSTRINGNVPROC, glPathStringNV);
+    LOAD_PROC(PFNGLPATHGLYPHSNVPROC, glPathGlyphsNV);
+    LOAD_PROC(PFNGLPATHGLYPHRANGENVPROC, glPathGlyphRangeNV);
+    LOAD_PROC(PFNGLWEIGHTPATHSNVPROC, glWeightPathsNV);
+    LOAD_PROC(PFNGLCOPYPATHNVPROC, glCopyPathNV);
+    LOAD_PROC(PFNGLINTERPOLATEPATHSNVPROC, glInterpolatePathsNV);
+    LOAD_PROC(PFNGLTRANSFORMPATHNVPROC, glTransformPathNV);
+    LOAD_PROC(PFNGLPATHPARAMETERIVNVPROC, glPathParameterivNV);
+    LOAD_PROC(PFNGLPATHPARAMETERINVPROC, glPathParameteriNV);
+    LOAD_PROC(PFNGLPATHPARAMETERFVNVPROC, glPathParameterfvNV);
+    LOAD_PROC(PFNGLPATHPARAMETERFNVPROC, glPathParameterfNV);
+    LOAD_PROC(PFNGLPATHDASHARRAYNVPROC, glPathDashArrayNV);
+    LOAD_PROC(PFNGLSTENCILFILLPATHNVPROC, glStencilFillPathNV);
+    LOAD_PROC(PFNGLSTENCILSTROKEPATHNVPROC, glStencilStrokePathNV);
+    LOAD_PROC(PFNGLSTENCILFILLPATHINSTANCEDNVPROC, glStencilFillPathInstancedNV);
+    LOAD_PROC(PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC, glStencilStrokePathInstancedNV);
+    LOAD_PROC(PFNGLPATHCOLORGENNVPROC, glPathColorGenNV);
+    LOAD_PROC(PFNGLPATHTEXGENNVPROC, glPathTexGenNV);
+    LOAD_PROC(PFNGLPATHFOGGENNVPROC, glPathFogGenNV);
+    LOAD_PROC(PFNGLCOVERFILLPATHNVPROC, glCoverFillPathNV);
+    LOAD_PROC(PFNGLCOVERSTROKEPATHNVPROC, glCoverStrokePathNV);
+    LOAD_PROC(PFNGLCOVERFILLPATHINSTANCEDNVPROC, glCoverFillPathInstancedNV);
+    LOAD_PROC(PFNGLCOVERSTROKEPATHINSTANCEDNVPROC, glCoverStrokePathInstancedNV);
+    LOAD_PROC(PFNGLGETPATHPARAMETERIVNVPROC, glGetPathParameterivNV);
+    LOAD_PROC(PFNGLGETPATHPARAMETERFVNVPROC, glGetPathParameterfvNV);
+    LOAD_PROC(PFNGLGETPATHCOMMANDSNVPROC, glGetPathCommandsNV);
+    LOAD_PROC(PFNGLGETPATHCOORDSNVPROC, glGetPathCoordsNV);
+    LOAD_PROC(PFNGLGETPATHDASHARRAYNVPROC, glGetPathDashArrayNV);
+    LOAD_PROC(PFNGLGETPATHMETRICSNVPROC, glGetPathMetricsNV);
+    LOAD_PROC(PFNGLGETPATHMETRICRANGENVPROC, glGetPathMetricRangeNV);
+    LOAD_PROC(PFNGLGETPATHSPACINGNVPROC, glGetPathSpacingNV);
+    LOAD_PROC(PFNGLGETPATHCOLORGENIVNVPROC, glGetPathColorGenivNV);
+    LOAD_PROC(PFNGLGETPATHCOLORGENFVNVPROC, glGetPathColorGenfvNV);
+    LOAD_PROC(PFNGLGETPATHTEXGENIVNVPROC, glGetPathTexGenivNV);
+    LOAD_PROC(PFNGLGETPATHTEXGENFVNVPROC, glGetPathTexGenfvNV);
+    LOAD_PROC(PFNGLISPOINTINFILLPATHNVPROC, glIsPointInFillPathNV);
+    LOAD_PROC(PFNGLISPOINTINSTROKEPATHNVPROC, glIsPointInStrokePathNV);
+    LOAD_PROC(PFNGLGETPATHLENGTHNVPROC, glGetPathLengthNV);
+    LOAD_PROC(PFNGLPOINTALONGPATHNVPROC, glPointAlongPathNV);
+    LOAD_PROC(PFNGLPATHSTENCILFUNCNVPROC, glPathStencilFuncNV);
+    LOAD_PROC(PFNGLPATHSTENCILDEPTHOFFSETNVPROC, glPathStencilDepthOffsetNV);
+    LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);
     if (fail)
         printf("failed to load NVPR extensions\n");
     return 1;
+}
+
+typedef float Transform3x2[2][3];
+
+void identity(Transform3x2 dst)
+{
+    dst[0][0] = 1;
+    dst[0][1] = 0;
+    dst[0][2] = 0;
+    dst[1][0] = 0;
+    dst[1][1] = 1;
+    dst[1][2] = 0;
+}
+
+void mul(Transform3x2 dst, Transform3x2 a, Transform3x2 b)
+{
+    Transform3x2 result;
+    result[0][0] = a[0][0]*b[0][0] + a[0][1]*b[1][0];
+    result[0][1] = a[0][0]*b[0][1] + a[0][1]*b[1][1];
+    result[0][2] = a[0][0]*b[0][2] + a[0][1]*b[1][2] + a[0][2];
+
+    result[1][0] = a[1][0]*b[0][0] + a[1][1]*b[1][0];
+    result[1][1] = a[1][0]*b[0][1] + a[1][1]*b[1][1];
+    result[1][2] = a[1][0]*b[0][2] + a[1][1]*b[1][2] + a[1][2];
+
+    dst[0][0] = result[0][0];
+    dst[0][1] = result[0][1];
+    dst[0][2] = result[0][2];
+    dst[1][0] = result[1][0];
+    dst[1][1] = result[1][1];
+    dst[1][2] = result[1][2];
+}
+
+void translate(Transform3x2 dst, float x, float y)
+{
+    dst[0][0] = 1;
+    dst[0][1] = 0;
+    dst[0][2] = x;
+    dst[1][0] = 0;
+    dst[1][1] = 1;
+    dst[1][2] = y;
+}
+
+void scale(Transform3x2 dst, float x, float y)
+{
+    dst[0][0] = x;
+    dst[0][1] = 0;
+    dst[0][2] = 0;
+
+    dst[1][0] = 0;
+    dst[1][1] = y;
+    dst[1][2] = 0;
+}
+
+void rotate(Transform3x2 dst, float angle)
+{
+    float radians = angle*3.14159f/180.0f,
+          s = (float)sin(radians),
+          c = (float)cos(radians);
+    dst[0][0] = c;
+    dst[0][1] = -s;
+    dst[0][2] = 0;
+    dst[1][0] = s;
+    dst[1][1] = c;
+    dst[1][2] = 0;
+}
+
+void ortho(Transform3x2 dst, float l, float r, float b, float t)
+{
+    dst[0][0] = 2/(r-l);
+    dst[0][1] = 0;
+    dst[0][2] = -(r+l)/(r-l);
+    dst[1][0] = 0;
+    dst[1][1] = 2/(t-b);
+    dst[1][2] = -(t+b)/(t-b);
+}
+
+void inverse_ortho(Transform3x2 dst, float l, float r, float b, float t)
+{
+    dst[0][0] = (r-l)/2;
+    dst[0][1] = 0;
+    dst[0][2] = (r+l)/2;
+    dst[1][0] = 0;
+    dst[1][1] = (t-b)/2;
+    dst[1][2] = (t+b)/2;
+}
+
+void xform(float dst[2], Transform3x2 a, const float v[2])
+{
+    float result[2];
+    result[0] = a[0][0]*v[0] + a[0][1]*v[1] + a[0][2];
+    result[1] = a[1][0]*v[0] + a[1][1]*v[1] + a[1][2];
+    dst[0] = result[0];
+    dst[1] = result[1];
+}
+
+void MatrixLoadToGL(Transform3x2 m)
+{
+    GLfloat mm[16];
+    mm[0] = m[0][0];
+    mm[1] = m[1][0];
+    mm[2] = 0;
+    mm[3] = 0;
+    mm[4] = m[0][1];
+    mm[5] = m[1][1];
+    mm[6] = 0;
+    mm[7] = 0;
+    mm[8] = 0;
+    mm[9] = 0;
+    mm[10] = 1;
+    mm[11] = 0;
+    mm[12] = m[0][2];
+    mm[13] = m[1][2];
+    mm[14] = 0;
+    mm[15] = 1;
+    glMatrixLoadfEXT(GL_MODELVIEW, &mm[0]);
 }
 
 static void nvpr_release(void *render)
@@ -137,9 +264,21 @@ static void nvpr_release(void *render)
 
 static void nvpr_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
 {
-    //glMatrixLoadIdentityEXT(GL_PROJECTION);
-    //glMatrixOrtho(GL_PROJECTION, 0, 640, 480, 0, -1, 1);
-    //glMatrixLoadIdentity(GL_MODELVIEW);
+    glMatrixLoadIdentityEXT(GL_PROJECTION);
+    glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
+    glMatrixLoadIdentityEXT(GL_MODELVIEW);
+    if (!clip)
+        return;
+    float clip_w = clip->bounds[2] - clip->bounds[0], clip_h = clip->bounds[3] - clip->bounds[1];
+    float scalex = width/clip_w;
+    float scaley = height/clip_h;
+    float best_scale = scalex < scaley ? scalex : scaley;
+
+    Transform3x2 m;
+    identity(m);
+    translate(m, -(clip_w*best_scale - width)/2, -(clip_h*best_scale - height)/2);
+    scale(m, best_scale, best_scale);
+    MatrixLoadToGL(m);
 }
 
 static void nvpr_end_frame(void *render)
@@ -212,7 +351,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
     if (NSVG_PAINT_COLOR == shape->fill.type)
     {
         NVGcolor c = nvgColorU32(shape->fill.color);
-        glColor3f(c.r,c.g,c.b);
+        glColor3f(c.r, c.g, c.b);
     } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
     {
         GLfloat rgbGen[3][3] = { {0,  0, 0},
@@ -246,7 +385,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         if (NSVG_PAINT_COLOR == shape->stroke.type)
         {
             NVGcolor c = nvgColorU32(shape->stroke.color);
-            glColor3f(c.r,c.g,c.b);
+            glColor3f(c.r, c.g, c.b);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
@@ -272,7 +411,6 @@ static void nvpr_set_transform(void *render, float *t, int reset)
 static void nvpr_get_transform(void *render, float *t)
 {
 }
-
 
 const render nvpr_render =
 {
