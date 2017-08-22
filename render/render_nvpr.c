@@ -78,71 +78,12 @@ PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
     fail = 1; \
   }
 
-static int nvpr_init(void **render)
-{
-    int fail = 0;
-    if (!glfwExtensionSupported("GL_NV_path_rendering"))
-        return 0;
-
-    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);
-    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
-    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
-
-    LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
-    LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
-    LOAD_PROC(PFNGLISPATHNVPROC, glIsPathNV);
-    LOAD_PROC(PFNGLPATHCOMMANDSNVPROC, glPathCommandsNV);
-    LOAD_PROC(PFNGLPATHCOORDSNVPROC, glPathCoordsNV);
-    LOAD_PROC(PFNGLPATHSUBCOMMANDSNVPROC, glPathSubCommandsNV);
-    LOAD_PROC(PFNGLPATHSUBCOORDSNVPROC, glPathSubCoordsNV);
-    LOAD_PROC(PFNGLPATHSTRINGNVPROC, glPathStringNV);
-    LOAD_PROC(PFNGLPATHGLYPHSNVPROC, glPathGlyphsNV);
-    LOAD_PROC(PFNGLPATHGLYPHRANGENVPROC, glPathGlyphRangeNV);
-    LOAD_PROC(PFNGLWEIGHTPATHSNVPROC, glWeightPathsNV);
-    LOAD_PROC(PFNGLCOPYPATHNVPROC, glCopyPathNV);
-    LOAD_PROC(PFNGLINTERPOLATEPATHSNVPROC, glInterpolatePathsNV);
-    LOAD_PROC(PFNGLTRANSFORMPATHNVPROC, glTransformPathNV);
-    LOAD_PROC(PFNGLPATHPARAMETERIVNVPROC, glPathParameterivNV);
-    LOAD_PROC(PFNGLPATHPARAMETERINVPROC, glPathParameteriNV);
-    LOAD_PROC(PFNGLPATHPARAMETERFVNVPROC, glPathParameterfvNV);
-    LOAD_PROC(PFNGLPATHPARAMETERFNVPROC, glPathParameterfNV);
-    LOAD_PROC(PFNGLPATHDASHARRAYNVPROC, glPathDashArrayNV);
-    LOAD_PROC(PFNGLSTENCILFILLPATHNVPROC, glStencilFillPathNV);
-    LOAD_PROC(PFNGLSTENCILSTROKEPATHNVPROC, glStencilStrokePathNV);
-    LOAD_PROC(PFNGLSTENCILFILLPATHINSTANCEDNVPROC, glStencilFillPathInstancedNV);
-    LOAD_PROC(PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC, glStencilStrokePathInstancedNV);
-    LOAD_PROC(PFNGLPATHCOLORGENNVPROC, glPathColorGenNV);
-    LOAD_PROC(PFNGLPATHTEXGENNVPROC, glPathTexGenNV);
-    LOAD_PROC(PFNGLPATHFOGGENNVPROC, glPathFogGenNV);
-    LOAD_PROC(PFNGLCOVERFILLPATHNVPROC, glCoverFillPathNV);
-    LOAD_PROC(PFNGLCOVERSTROKEPATHNVPROC, glCoverStrokePathNV);
-    LOAD_PROC(PFNGLCOVERFILLPATHINSTANCEDNVPROC, glCoverFillPathInstancedNV);
-    LOAD_PROC(PFNGLCOVERSTROKEPATHINSTANCEDNVPROC, glCoverStrokePathInstancedNV);
-    LOAD_PROC(PFNGLGETPATHPARAMETERIVNVPROC, glGetPathParameterivNV);
-    LOAD_PROC(PFNGLGETPATHPARAMETERFVNVPROC, glGetPathParameterfvNV);
-    LOAD_PROC(PFNGLGETPATHCOMMANDSNVPROC, glGetPathCommandsNV);
-    LOAD_PROC(PFNGLGETPATHCOORDSNVPROC, glGetPathCoordsNV);
-    LOAD_PROC(PFNGLGETPATHDASHARRAYNVPROC, glGetPathDashArrayNV);
-    LOAD_PROC(PFNGLGETPATHMETRICSNVPROC, glGetPathMetricsNV);
-    LOAD_PROC(PFNGLGETPATHMETRICRANGENVPROC, glGetPathMetricRangeNV);
-    LOAD_PROC(PFNGLGETPATHSPACINGNVPROC, glGetPathSpacingNV);
-    LOAD_PROC(PFNGLGETPATHCOLORGENIVNVPROC, glGetPathColorGenivNV);
-    LOAD_PROC(PFNGLGETPATHCOLORGENFVNVPROC, glGetPathColorGenfvNV);
-    LOAD_PROC(PFNGLGETPATHTEXGENIVNVPROC, glGetPathTexGenivNV);
-    LOAD_PROC(PFNGLGETPATHTEXGENFVNVPROC, glGetPathTexGenfvNV);
-    LOAD_PROC(PFNGLISPOINTINFILLPATHNVPROC, glIsPointInFillPathNV);
-    LOAD_PROC(PFNGLISPOINTINSTROKEPATHNVPROC, glIsPointInStrokePathNV);
-    LOAD_PROC(PFNGLGETPATHLENGTHNVPROC, glGetPathLengthNV);
-    LOAD_PROC(PFNGLPOINTALONGPATHNVPROC, glPointAlongPathNV);
-    LOAD_PROC(PFNGLPATHSTENCILFUNCNVPROC, glPathStencilFuncNV);
-    LOAD_PROC(PFNGLPATHSTENCILDEPTHOFFSETNVPROC, glPathStencilDepthOffsetNV);
-    LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);
-    if (fail)
-        printf("failed to load NVPR extensions\n");
-    return 1;
-}
-
 typedef float Transform3x2[2][3];
+
+typedef struct render_ctx
+{
+    Transform3x2 transform;
+} render_ctx;
 
 void identity(Transform3x2 dst)
 {
@@ -258,12 +199,86 @@ void MatrixLoadToGL(Transform3x2 m)
     glMatrixLoadfEXT(GL_MODELVIEW, &mm[0]);
 }
 
+static int nvpr_init(void **render)
+{
+    render_ctx *ctx = calloc(1, sizeof(render_ctx));
+    *render = ctx;
+    if (!ctx)
+        return 0;
+    int fail = 0;
+    if (!glfwExtensionSupported("GL_NV_path_rendering"))
+        goto error;
+
+    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);
+    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
+    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
+
+    LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
+    LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
+    LOAD_PROC(PFNGLISPATHNVPROC, glIsPathNV);
+    LOAD_PROC(PFNGLPATHCOMMANDSNVPROC, glPathCommandsNV);
+    LOAD_PROC(PFNGLPATHCOORDSNVPROC, glPathCoordsNV);
+    LOAD_PROC(PFNGLPATHSUBCOMMANDSNVPROC, glPathSubCommandsNV);
+    LOAD_PROC(PFNGLPATHSUBCOORDSNVPROC, glPathSubCoordsNV);
+    LOAD_PROC(PFNGLPATHSTRINGNVPROC, glPathStringNV);
+    LOAD_PROC(PFNGLPATHGLYPHSNVPROC, glPathGlyphsNV);
+    LOAD_PROC(PFNGLPATHGLYPHRANGENVPROC, glPathGlyphRangeNV);
+    LOAD_PROC(PFNGLWEIGHTPATHSNVPROC, glWeightPathsNV);
+    LOAD_PROC(PFNGLCOPYPATHNVPROC, glCopyPathNV);
+    LOAD_PROC(PFNGLINTERPOLATEPATHSNVPROC, glInterpolatePathsNV);
+    LOAD_PROC(PFNGLTRANSFORMPATHNVPROC, glTransformPathNV);
+    LOAD_PROC(PFNGLPATHPARAMETERIVNVPROC, glPathParameterivNV);
+    LOAD_PROC(PFNGLPATHPARAMETERINVPROC, glPathParameteriNV);
+    LOAD_PROC(PFNGLPATHPARAMETERFVNVPROC, glPathParameterfvNV);
+    LOAD_PROC(PFNGLPATHPARAMETERFNVPROC, glPathParameterfNV);
+    LOAD_PROC(PFNGLPATHDASHARRAYNVPROC, glPathDashArrayNV);
+    LOAD_PROC(PFNGLSTENCILFILLPATHNVPROC, glStencilFillPathNV);
+    LOAD_PROC(PFNGLSTENCILSTROKEPATHNVPROC, glStencilStrokePathNV);
+    LOAD_PROC(PFNGLSTENCILFILLPATHINSTANCEDNVPROC, glStencilFillPathInstancedNV);
+    LOAD_PROC(PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC, glStencilStrokePathInstancedNV);
+    LOAD_PROC(PFNGLPATHCOLORGENNVPROC, glPathColorGenNV);
+    LOAD_PROC(PFNGLPATHTEXGENNVPROC, glPathTexGenNV);
+    LOAD_PROC(PFNGLPATHFOGGENNVPROC, glPathFogGenNV);
+    LOAD_PROC(PFNGLCOVERFILLPATHNVPROC, glCoverFillPathNV);
+    LOAD_PROC(PFNGLCOVERSTROKEPATHNVPROC, glCoverStrokePathNV);
+    LOAD_PROC(PFNGLCOVERFILLPATHINSTANCEDNVPROC, glCoverFillPathInstancedNV);
+    LOAD_PROC(PFNGLCOVERSTROKEPATHINSTANCEDNVPROC, glCoverStrokePathInstancedNV);
+    LOAD_PROC(PFNGLGETPATHPARAMETERIVNVPROC, glGetPathParameterivNV);
+    LOAD_PROC(PFNGLGETPATHPARAMETERFVNVPROC, glGetPathParameterfvNV);
+    LOAD_PROC(PFNGLGETPATHCOMMANDSNVPROC, glGetPathCommandsNV);
+    LOAD_PROC(PFNGLGETPATHCOORDSNVPROC, glGetPathCoordsNV);
+    LOAD_PROC(PFNGLGETPATHDASHARRAYNVPROC, glGetPathDashArrayNV);
+    LOAD_PROC(PFNGLGETPATHMETRICSNVPROC, glGetPathMetricsNV);
+    LOAD_PROC(PFNGLGETPATHMETRICRANGENVPROC, glGetPathMetricRangeNV);
+    LOAD_PROC(PFNGLGETPATHSPACINGNVPROC, glGetPathSpacingNV);
+    LOAD_PROC(PFNGLGETPATHCOLORGENIVNVPROC, glGetPathColorGenivNV);
+    LOAD_PROC(PFNGLGETPATHCOLORGENFVNVPROC, glGetPathColorGenfvNV);
+    LOAD_PROC(PFNGLGETPATHTEXGENIVNVPROC, glGetPathTexGenivNV);
+    LOAD_PROC(PFNGLGETPATHTEXGENFVNVPROC, glGetPathTexGenfvNV);
+    LOAD_PROC(PFNGLISPOINTINFILLPATHNVPROC, glIsPointInFillPathNV);
+    LOAD_PROC(PFNGLISPOINTINSTROKEPATHNVPROC, glIsPointInStrokePathNV);
+    LOAD_PROC(PFNGLGETPATHLENGTHNVPROC, glGetPathLengthNV);
+    LOAD_PROC(PFNGLPOINTALONGPATHNVPROC, glPointAlongPathNV);
+    LOAD_PROC(PFNGLPATHSTENCILFUNCNVPROC, glPathStencilFuncNV);
+    LOAD_PROC(PFNGLPATHSTENCILDEPTHOFFSETNVPROC, glPathStencilDepthOffsetNV);
+    LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);
+    if (fail)
+        goto error;
+    return 1;
+error:
+    free(ctx);
+    return 0;
+}
+
 static void nvpr_release(void *render)
 {
+    render_ctx *ctx = render;
+    free(ctx);
 }
 
 static void nvpr_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
 {
+    render_ctx *ctx = render;
     glMatrixLoadIdentityEXT(GL_PROJECTION);
     glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
     glMatrixLoadIdentityEXT(GL_MODELVIEW);
@@ -274,30 +289,48 @@ static void nvpr_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int
     float scaley = height/clip_h;
     float best_scale = scalex < scaley ? scalex : scaley;
 
-    Transform3x2 m;
-    identity(m);
-    translate(m, -(clip_w*best_scale - width)/2, -(clip_h*best_scale - height)/2);
-    scale(m, best_scale, best_scale);
-    MatrixLoadToGL(m);
+    identity(ctx->transform);
+    translate(ctx->transform, -(clip_w*best_scale - width)/2, -(clip_h*best_scale - height)/2);
+    Transform3x2 tr;
+    scale(tr, best_scale, best_scale);
+    mul(ctx->transform, ctx->transform, tr);
+    MatrixLoadToGL(ctx->transform);
 }
 
 static void nvpr_end_frame(void *render)
 {
-
+    //render_ctx *ctx = render;
 }
 
 static int nvpr_cache_shape(void *render, NSVGshape *shape)
 {
+    //render_ctx *ctx = render;
     return 1;
 }
 
 static int nvpr_cache_image(void *render, int width, int height, const void *rgba)
 {
-    return 1;
+    //render_ctx *ctx = render;
+    GLuint tex;
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
+    return (int)tex;
 }
 
 static void nvpr_update_image(void *render, int image, const void *rgba)
 {
+    //render_ctx *ctx = render;
+    glBindTexture(GL_TEXTURE_2D, image);
+    int w, h;
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 }
 
 static inline NVGcolor nvgColorU32(uint32_t c)
@@ -307,6 +340,7 @@ static inline NVGcolor nvgColorU32(uint32_t c)
 
 static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
 {
+    //render_ctx *ctx = render;
     int cmds = 0, coords = 0;
     GLuint pathObj = glGenPathsNV(1);
     NSVGpath *path;
@@ -351,7 +385,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
     if (NSVG_PAINT_COLOR == shape->fill.type)
     {
         NVGcolor c = nvgColorU32(shape->fill.color);
-        glColor3f(c.r, c.g, c.b);
+        glColor4f(c.r, c.g, c.b, 1);
     } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
     {
         GLfloat rgbGen[3][3] = { {0,  0, 0},
@@ -368,7 +402,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
     }
     else if (NSVG_PAINT_IMAGE == shape->fill.type)
     {
-        int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
+        //int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
         GLfloat rgbGen[3][3] = { {0,  0, 0},
                                  {0,  1, 0},
                                  {0, -1, 1} };
@@ -385,7 +419,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         if (NSVG_PAINT_COLOR == shape->stroke.type)
         {
             NVGcolor c = nvgColorU32(shape->stroke.color);
-            glColor3f(c.r, c.g, c.b);
+            glColor4f(c.r, c.g, c.b, 1);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
@@ -398,18 +432,46 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
     }
     glDeletePathsNV(pathObj, 1);
+    glDisable(GL_STENCIL_TEST);
 }
 
 static void nvpr_render_image(void *render, int image)
 {
+    //render_ctx *ctx = render;
+    glEnable(GL_TEXTURE_2D);
+    int w, h;
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glColor4f(1, 1, 1, 1);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 1); glVertex2f(0, 0);
+    glTexCoord2f(1, 1); glVertex2f(w, 0);
+    glTexCoord2f(1, 0); glVertex2f(w, h);
+    glTexCoord2f(0, 0); glVertex2f(0, h);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 
 static void nvpr_set_transform(void *render, float *t, int reset)
 {
+    render_ctx *ctx = render;
+    if (reset)
+        identity(ctx->transform);
+    Transform3x2 tr;
+    tr[0][0] = t[0]; tr[1][0] = t[1];
+    tr[0][1] = t[2]; tr[1][1] = t[3];
+    tr[0][2] = t[4]; tr[1][2] = t[5];
+    mul(ctx->transform, ctx->transform, tr);
+    MatrixLoadToGL(ctx->transform);
 }
 
 static void nvpr_get_transform(void *render, float *t)
 {
+    render_ctx *ctx = render;
+    t[0] = ctx->transform[0][0]; t[1] = ctx->transform[1][0];
+    t[2] = ctx->transform[0][1]; t[3] = ctx->transform[1][1];
+    t[4] = ctx->transform[0][2]; t[5] = ctx->transform[1][2];
 }
 
 const render nvpr_render =
