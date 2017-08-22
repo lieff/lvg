@@ -97,9 +97,9 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
     {
         if (NSVG_PAINT_COLOR == shape->stroke.type)
             nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), o));
-        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
             nvgSVGLinearGrad(vg, shape, o, 0);
-        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
             nvgSVGRadialGrad(vg, shape, o, 0);
         nvgStrokeWidth(vg, shape->strokeWidth);
         nvgStroke(vg);
