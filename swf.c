@@ -332,6 +332,7 @@ add_shape:
         path = path->next;
         goto add_shape;
     }
+    g_render->cache_shape(g_render_obj, shape);
 }
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)

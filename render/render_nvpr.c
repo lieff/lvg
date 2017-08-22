@@ -308,7 +308,38 @@ static void nvpr_end_frame(void *render)
 static int nvpr_cache_shape(void *render, NSVGshape *shape)
 {
     //render_ctx *ctx = render;
-    return 1;
+    int cmds = 0, coords = 0;
+    GLuint pathObj = glGenPathsNV(1);
+    NSVGpath *path;
+    for (path = shape->paths; path != NULL; path = path->next)
+    {
+        if (path->npts > 2)
+        {
+            int ncubic = (path->npts - 1)/3;
+            cmds += 1 + ncubic;
+            coords += 2 + ncubic*6;
+            cmds++;
+        }
+    }
+    GLubyte *cmd = (GLubyte *)alloca(cmds*sizeof(GLubyte));
+    GLfloat *coord = alloca(coords*sizeof(GLfloat));
+    cmds = 0, coords = 0;
+    for (path = shape->paths; path != NULL; path = path->next)
+    {
+        if (path->npts > 2)
+        {
+            cmd[cmds] = GL_MOVE_TO_NV;
+            int ncubic = (path->npts - 1)/3;
+            memset(cmd + cmds + 1, GL_CUBIC_CURVE_TO_NV, ncubic);
+            cmds += 1 + ncubic;
+            memcpy(coord + coords, path->pts, (2 + ncubic*6)*sizeof(float));
+            coords += 2 + ncubic*6;
+            cmd[cmds++] = GL_CLOSE_PATH_NV;
+        }
+    }
+    glPathCommandsNV(pathObj, cmds, cmd, coords, GL_FLOAT, coord);
+    shape->cache = pathObj;
+    return pathObj;
 }
 
 static int nvpr_cache_image(void *render, int width, int height, const void *rgba)
@@ -356,41 +387,12 @@ static NVGcolor transformColor(NVGcolor color, LVGObject *o)
 static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
 {
     //render_ctx *ctx = render;
-    int cmds = 0, coords = 0;
-    GLuint pathObj = glGenPathsNV(1);
-    NSVGpath *path;
-    for (path = shape->paths; path != NULL; path = path->next)
-    {
-        if (path->npts > 2)
-        {
-            int ncubic = (path->npts - 1)/3;
-            cmds += 1 + ncubic;
-            coords += 2 + ncubic*6;
-            cmds++;
-        }
-    }
-    GLubyte *cmd = (GLubyte *)alloca(cmds*sizeof(GLubyte));
-    GLfloat *coord = alloca(coords*sizeof(GLfloat));
-    cmds = 0, coords = 0;
-    for (path = shape->paths; path != NULL; path = path->next)
-    {
-        if (path->npts > 2)
-        {
-            cmd[cmds] = GL_MOVE_TO_NV;
-            int ncubic = (path->npts - 1)/3;
-            memset(cmd + cmds + 1, GL_CUBIC_CURVE_TO_NV, ncubic);
-            cmds += 1 + ncubic;
-            memcpy(coord + coords, path->pts, (2 + ncubic*6)*sizeof(float));
-            coords += 2 + ncubic*6;
-            cmd[cmds++] = GL_CLOSE_PATH_NV;
-        }
-    }
-    glPathCommandsNV(pathObj, cmds, cmd, coords, GL_FLOAT, coord);
+    GLuint pathObj = shape->cache;
 
-    GLfloat object_bbox[4], fill_bbox[4], stroke_bbox[4];
+    /*GLfloat object_bbox[4], fill_bbox[4], stroke_bbox[4];
     glGetPathParameterfvNV(pathObj, GL_PATH_OBJECT_BOUNDING_BOX_NV, object_bbox);
     glGetPathParameterfvNV(pathObj, GL_PATH_FILL_BOUNDING_BOX_NV, fill_bbox);
-    glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);
+    glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);*/
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -465,7 +467,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glCoverStrokePathNV(pathObj, GL_BOUNDING_BOX_NV);
     }
     glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
-    glDeletePathsNV(pathObj, 1);
+    //glDeletePathsNV(pathObj, 1);
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_BLEND);
 }
