@@ -9,6 +9,7 @@ nanovg/nanovg.c
 nanovg/nanovg.h
 nanovg/nanovg_gl.h
 nanovg/nanovg_gl_utils.h
+render/common.c
 render/render.h
 render/render_nanovg.c
 render/render_nvpr.c

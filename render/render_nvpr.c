@@ -342,7 +342,7 @@ static int nvpr_cache_shape(void *render, NSVGshape *shape)
     return pathObj;
 }
 
-static int nvpr_cache_image(void *render, int width, int height, const void *rgba)
+static int nvpr_cache_image(void *render, int width, int height, int flags, const void *rgba)
 {
     //render_ctx *ctx = render;
     GLuint tex;
@@ -351,10 +351,15 @@ static int nvpr_cache_image(void *render, int width, int height, const void *rgb
     glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_R);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_TEXTURE_WRAP_R);
+    if (flags & IMAGE_REPEAT)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    } else
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
     return (int)tex;
 }
@@ -369,22 +374,7 @@ static void nvpr_update_image(void *render, int image, const void *rgba)
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 }
 
-static inline NVGcolor nvgColorU32(uint32_t c)
-{
-    return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, c >> 24);
-}
-
-static NVGcolor transformColor(NVGcolor color, LVGObject *o)
-{
-    if (!o)
-        return color;
-    color = nvgRGBAf(color.r*o->color_mul[0], color.g*o->color_mul[1], color.b*o->color_mul[2], color.a*o->color_mul[3]);
-    color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
-    color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
-    return color;
-}
-
-static void LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void LinearGrad(struct NSVGshape *shape, LVGObject *o)
 {
     struct NSVGgradient *grad = shape->fill.gradient;
     NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
@@ -424,7 +414,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         {
-            LinearGrad(shape, o, 1);
+            LinearGrad(shape, o);
         }
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         {
@@ -468,7 +458,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
-            LinearGrad(shape, o, 1);
+            LinearGrad(shape, o);
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
         {
             NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);

@@ -9,21 +9,6 @@
 #include "render.h"
 #include "nanovg_gl.h"
 
-static inline NVGcolor nvgColorU32(uint32_t c)
-{
-    return nvgRGBA(c & 0xff, (c >> 8) & 0xff, (c >> 16) & 0xff, c >> 24);
-}
-
-static NVGcolor transformColor(NVGcolor color, LVGObject *o)
-{
-    if (!o)
-        return color;
-    color = nvgRGBAf(color.r*o->color_mul[0], color.g*o->color_mul[1], color.b*o->color_mul[2], color.a*o->color_mul[3]);
-    color = nvgRGBAf(color.r + o->color_add[0], color.g + o->color_add[1], color.b + o->color_add[2], color.a + o->color_add[3]);
-    color = nvgRGBAf(fmax(0.0f, fmin(color.r, 1.0f)), fmax(0.0f, fmin(color.g, 1.0f)), fmax(0.0f, fmin(color.b, 1.0f)), fmax(0.0f, fmin(color.a, 1.0f)));
-    return color;
-}
-
 static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
     struct NSVGgradient *grad = shape->fill.gradient;
@@ -157,10 +142,10 @@ static int nvg_cache_shape(void *render, NSVGshape *shape)
     return 1;
 }
 
-static int nvg_cache_image(void *render, int width, int height, const void *rgba)
+static int nvg_cache_image(void *render, int width, int height, int flags, const void *rgba)
 {
     NVGcontext *vg = render;
-    return nvgCreateImageRGBA(vg, width, height, 0, (const unsigned char *)rgba);
+    return nvgCreateImageRGBA(vg, width, height, (flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0, (const unsigned char *)rgba);
 }
 
 static void nvg_update_image(void *render, int image, const void *rgba)

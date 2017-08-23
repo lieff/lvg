@@ -50,7 +50,7 @@ static char *tcc_buf;
 extern const video_dec ff_decoder;
 extern const render nvg_render;
 extern const render nvpr_render;
-const render *g_render = &nvg_render;
+const render *g_render;
 void *g_render_obj;
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
@@ -884,7 +884,16 @@ int main(int argc, char **argv)
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
-    g_render->init(&g_render_obj);
+    g_render = &nvpr_render;
+    if (!g_render->init(&g_render_obj))
+    {
+        g_render = &nvg_render;
+        if (!g_render->init(&g_render_obj))
+        {
+            printf("error: could not open render\n");
+            return -1;
+        }
+    }
 
     if (is_swf && open_swf(file_name))
     {

@@ -163,6 +163,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
             shape->fill.type = NSVG_PAINT_IMAGE;
             if (f->id_bitmap != 65535)
                 shape->fill.color = clip->images[idtable[f->id_bitmap].lvg_id];
+            // TODO: handle bitmap matrix
         } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
         {
             assert(f->gradient.num >= 2);
@@ -491,7 +492,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
-                *(clip->images + clip->num_images) = g_render->cache_image(g_render_obj, width, height, (const unsigned char *)data);
+                *(clip->images + clip->num_images) = g_render->cache_image(g_render_obj, width, height, 0, (const unsigned char *)data);
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
@@ -572,7 +573,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
-                video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0);
+                video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0, 0);
                 swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
