@@ -384,6 +384,22 @@ static NVGcolor transformColor(NVGcolor color, LVGObject *o)
     return color;
 }
 
+static void LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
+{
+    struct NSVGgradient *grad = shape->fill.gradient;
+    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
+    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
+    GLfloat rgbGen[4][3] = { { (ce.r - cs.r), 0, cs.r },
+                             { (ce.g - cs.g), 0, cs.g },
+                             { (ce.b - cs.b), 0, cs.b },
+                             { (ce.a - cs.a), 0, cs.a } };
+    glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);
+    float *xf = grad->xform;
+    GLfloat data[2][3] = { { xf[0], xf[1], xf[2] },
+                           { xf[3], xf[4], xf[5] } };
+    //glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);
+}
+
 static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
 {
     //render_ctx *ctx = render;
@@ -408,12 +424,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         {
-            NVGcolor c = transformColor(nvgColorU32(shape->fill.gradient->stops[0].color), o);
-            glColor4f(c.r, c.g, c.b, c.a);
-            /*GLfloat rgbGen[3][3] = { {0,  0, 0},
-                                     {0,  1, 0},
-                                     {0, -1, 1} };
-            glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGB, &rgbGen[0][0]);*/
+            LinearGrad(shape, o, 1);
         }
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         {
@@ -444,6 +455,9 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         }
         glStencilFillPathNV(pathObj, (NSVG_FILLRULE_EVENODD == shape->fillRule) ? GL_INVERT : GL_COUNT_UP_NV, 0x1F);
         glCoverFillPathNV(pathObj, GL_BOUNDING_BOX_NV);
+
+        glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
+        glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
         glDisable(GL_TEXTURE_2D);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
@@ -454,8 +468,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
-            NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
-            glColor4f(c.r, c.g, c.b, c.a);
+            LinearGrad(shape, o, 1);
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
         {
             NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
@@ -465,8 +478,9 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         GLint reference = 0x1;
         glStencilStrokePathNV(pathObj, reference, 0x1F);
         glCoverStrokePathNV(pathObj, GL_BOUNDING_BOX_NV);
+
+        glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
     }
-    glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
     //glDeletePathsNV(pathObj, 1);
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_BLEND);

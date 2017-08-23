@@ -166,7 +166,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
         } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
         {
             assert(f->gradient.num >= 2);
-            assert(f->gradient.num < 1024);
+            assert(f->gradient.num < 16);
             shape->fill.type = (FILL_LINEAR == f->type) ? NSVG_PAINT_LINEAR_GRADIENT : NSVG_PAINT_RADIAL_GRADIENT;
             shape->fill.gradient = (NSVGgradient*)calloc(1, sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*(f->gradient.num - 1));
             shape->fill.gradient->nstops = f->gradient.num;
@@ -175,6 +175,14 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
                 shape->fill.gradient->stops[i].color = RGBA2U32(&f->gradient.rgba[i]);
                 shape->fill.gradient->stops[i].offset = f->gradient.ratios[i]/255.0f;
             }
+            float *xf = shape->fill.gradient->xform;
+            MATRIX *m = &f->m;
+            xf[0] = m->sx/65536.0f;
+            xf[1] = m->r0/65536.0f;
+            xf[2] = m->r1/65536.0f;
+            xf[3] = m->sy/65536.0f;
+            xf[4] = m->tx/20.0f;
+            xf[5] = m->ty/20.0f;
         }
     }
     if (lineStyle)
