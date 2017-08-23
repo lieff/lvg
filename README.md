@@ -8,7 +8,26 @@ It's uses C scripts natively and javascript for web.
 
 Why C scripts? Because C compiler is small, and runtime written in C, so no other lagnuage needed and script can be compiled in to save space.
 
-[Demo:](https://lieff.github.io/lvg_player.html?file=test.lvg)
+Current Status:
+Works:
+
+ * SVG, image, mp3 resources with tcc scripting.
+ * limited SWF support.
+ * SWF: shapes, images, video, audio (mp3, adpcm, pcm) loading (some errors in converting to SVG shape fornat).
+ * SWF: gradients with 2 stops.
+ * SWF: load action script
+
+Not works:
+
+ * SWF: morph shapes (only first shape showed).
+ * SWF: clip layers
+ * SWF: interpret action script
+ * SWF: bitmap filters
+ * SWF: network access
+
+[Tiger demo:](https://lieff.github.io/lvg_player.html?file=test.lvg)
+[Nanovg demo:](https://lieff.github.io/lvg_player.html?file=test_nanovg.lvg)
+[Nuklear demo:](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
 
 ![Screenshot](svg_tiger.png?raw=true "demo")
 
@@ -19,5 +38,8 @@ Interesting graphics libraries:
  * https://cairographics.org/
  * http://www.antigrain.com/
  * http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_home
+ * https://sourceforge.net/projects/shivavg/
+ * https://github.com/micahpearlman/MonkVG
+ * https://github.com/KhronosGroup/OpenVG-Registry
 
 LVG System is developed and maintained by https://github.com/lieff
