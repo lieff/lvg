@@ -820,7 +820,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             else if (ST_DEFINESPRITE == tag->id)
             {
                 clip->num_groups++;
-                //clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
+                clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
             } else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
         } else if ((ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id || ST_SOUNDSTREAMBLOCK == tag->id) && !sound_stream_found)
