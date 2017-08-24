@@ -861,6 +861,7 @@ int main(int argc, char **argv)
     }
 
     glfwWindowHint(GLFW_RESIZABLE, 1);
+    glfwWindowHint(GLFW_SAMPLES, 8);
 #ifdef EMSCRIPTEN
     width = 1024, height = 800;
 #else
