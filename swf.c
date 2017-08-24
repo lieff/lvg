@@ -481,7 +481,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         if (i == numParts)
                             break;
                     }
-                    memcpy(shape->shapes[i].bounds, shape->bounds, sizeof(shape->bounds));
+                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
                     parseShape(idtable, clip, shape->shapes + shape->num_shapes++, parts, numParts, parts + i, swf_shape->fillstyles, swf_shape->linestyles, idx);
                 }
                 shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
