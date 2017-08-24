@@ -87,6 +87,7 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
 {
     ffmpeg_decoder *dec = _dec;
     int ret;
+    out->planes[0] = NULL;
     if (!dec || !buf || !len)
         return 0;
 #ifndef OLD_API

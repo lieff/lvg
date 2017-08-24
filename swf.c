@@ -574,6 +574,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
                 video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0, 0);
+                video->cur_frame = -1;
                 swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
