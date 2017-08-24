@@ -25,42 +25,55 @@ NVGcolor transformColor(NVGcolor color, LVGObject *o)
 
 static void gradientSpan(uint32_t * dst, NVGcolor color0, NVGcolor color1, float offset0, float offset1)
 {
+    if (offset0 > offset1)
+    {
+        float tmp = offset0;
+        offset0 = offset1;
+        offset1 = tmp;
+        NVGcolor ctmp = color0;
+        color0 = color1;
+        color1 = ctmp;
+    }
     float s0o = clampf(offset0, 0.0f, 1.0f);
     float s1o = clampf(offset1, 0.0f, 1.0f);
     unsigned s = s0o * GRADIENT_SAMPLES;
     unsigned e = s1o * GRADIENT_SAMPLES;
-    unsigned sc = 0xffffffff;
-    unsigned sh = 24;
-    unsigned r = color0.rgba[0] * sc;
-    unsigned g = color0.rgba[1] * sc;
-    unsigned b = color0.rgba[2] * sc;
-    unsigned a = color0.rgba[3] * sc;
-    unsigned dr = (color1.rgba[0] * sc - r) / (e-s);
-    unsigned dg = (color1.rgba[1] * sc - g) / (e-s);
-    unsigned db = (color1.rgba[2] * sc - b) / (e-s);
-    unsigned da = (color1.rgba[3] * sc - a) / (e-s);
+    float r = color0.rgba[0];
+    float g = color0.rgba[1];
+    float b = color0.rgba[2];
+    float a = color0.rgba[3];
+    float dr = (color1.rgba[0] - r) / (e-s);
+    float dg = (color1.rgba[1] - g) / (e-s);
+    float db = (color1.rgba[2] - b) / (e-s);
+    float da = (color1.rgba[3] - a) / (e-s);
     for (unsigned i = s; i < e; i++)
     {
-        dst[i] = ((a>>sh)<<24) + ((b>>sh)<<16) + ((g>>sh)<<8) + ((r>>sh)<<0);
+        unsigned ur = (unsigned)(r*255); unsigned ug = (unsigned)(g*255); unsigned ub = (unsigned)(b*255); unsigned ua = (unsigned)(a*255);
+        dst[i] = (ua << 24) | (ub << 16) | (ug << 8) | ur;
         r += dr; g += dg; b += db; a += da;
     }
 }
 
-int LinearGradientStops(struct NVGcontext *vg, NSVGshape *shape, LVGObject *o)
+int LinearGradientStops(NSVGshape *shape, LVGObject *o)
 {
     int nstops = shape->fill.gradient->nstops;
     uint32_t data[GRADIENT_SAMPLES];
-    struct NVGcolor s0 = nvgRGBAf(0.f, 0.f, 0.f, 1.f);
-    struct NVGcolor s1 = nvgRGBAf(1.f, 1.f, 1.f, 1.f);
-    gradientSpan(data, s0, transformColor(nvgColorU32(shape->fill.gradient->stops[0].color), o), 0, shape->fill.gradient->stops[0].offset);
+    float max_offset = shape->fill.gradient->stops[0].offset;
+    struct NVGcolor s0 = transformColor(nvgColorU32(shape->fill.gradient->stops[0].color), o);
+    gradientSpan(data, nvgRGBAf(0.f, 0.f, 0.f, 1.f), s0, 0, max_offset);
     for (unsigned i = 0; i < (nstops - 1); i++)
     {
+        if (max_offset < shape->fill.gradient->stops[i + 1].offset)
+        {
+            max_offset = shape->fill.gradient->stops[i + 1].offset;
+            s0 = nvgColorU32(shape->fill.gradient->stops[i + 1].color);
+        }
         gradientSpan(data, transformColor(nvgColorU32(shape->fill.gradient->stops[i].color), o),
                      transformColor(nvgColorU32(shape->fill.gradient->stops[i + 1].color), o),
                      shape->fill.gradient->stops[i].offset,
                      shape->fill.gradient->stops[i + 1].offset);
     }
-    gradientSpan(data, transformColor(nvgColorU32(shape->fill.gradient->stops[nstops - 1].color), o), s1,
-            shape->fill.gradient->stops[nstops - 1].offset, 1);
+    if (max_offset < 1.0f)
+        gradientSpan(data, s0, s0, max_offset, 1.0f);
     return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES, 1, IMAGE_REPEAT, (unsigned char*)data);
 }

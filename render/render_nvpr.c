@@ -353,6 +353,8 @@ static int nvpr_cache_image(void *render, int width, int height, int flags, cons
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     if (flags & IMAGE_REPEAT)
     {
+        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     } else
@@ -374,20 +376,29 @@ static void nvpr_update_image(void *render, int image, const void *rgba)
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 }
 
-static void LinearGrad(struct NSVGshape *shape, LVGObject *o)
+static int LinearGrad(struct NSVGshape *shape, LVGObject *o)
 {
-    struct NSVGgradient *grad = shape->fill.gradient;
+    /*struct NSVGgradient *grad = shape->fill.gradient;
     NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
     NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
     GLfloat rgbGen[4][3] = { { (ce.r - cs.r), 0, cs.r },
                              { (ce.g - cs.g), 0, cs.g },
                              { (ce.b - cs.b), 0, cs.b },
                              { (ce.a - cs.a), 0, cs.a } };
-    glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);
-    float *xf = grad->xform;
-    GLfloat data[2][3] = { { xf[0], xf[1], xf[2] },
-                           { xf[3], xf[4], xf[5] } };
-    //glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);
+    glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);*/
+    int img = LinearGradientStops(shape, o);
+    float *xf = shape->fill.gradient->xform;
+    float k = 7.4;
+    //GLfloat data[2][3] = { { xf[0]*k, xf[1]*k, mx/100 },    /* s = 1*x + 0*y + 0 */
+    //                       { xf[2]*k, xf[3]*k, my/100 } };  /* t = 0*x + 1*y + 0 */
+    GLfloat data[2][3] = { { 1, 0, 0 },    /* s = 1*x + 0*y + 0 */
+                           { 0, 1, 0 } };  /* t = 0*x + 1*y + 0 */
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, img);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glColor4f(1, 1, 1, 1);
+    glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);
+    return img;
 }
 
 static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
@@ -408,13 +419,14 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
     glEnable(GL_STENCIL_TEST);
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
+        GLuint tex = 0;
         if (NSVG_PAINT_COLOR == shape->fill.type)
         {
             NVGcolor c = transformColor(nvgColorU32(shape->fill.color), o);
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         {
-            LinearGrad(shape, o);
+            tex = LinearGrad(shape, o);
         }
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         {
@@ -449,6 +461,8 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
         glDisable(GL_TEXTURE_2D);
+        glFlush();
+        glDeleteTextures(1, &tex);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
@@ -458,7 +472,9 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
-            LinearGrad(shape, o);
+            //LinearGrad(shape, o);
+            NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
+            glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
         {
             NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
