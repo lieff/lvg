@@ -846,6 +846,15 @@ void swf_Shape2Free(SHAPE2 * s)
         s->linestyles = 0;
     }
     if(s->fillstyles) {
+        for(int i = 0; i < s->numfillstyles; i++)
+        {
+            FILLSTYLE *f = &s->fillstyles[i];
+            if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
+            {
+                free(f->gradient.rgba);
+                free(f->gradient.ratios);
+            }
+        }
         free(s->fillstyles);
         s->fillstyles = 0;
     }

@@ -410,7 +410,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 {
                     while (lines && lines->next && moveTo == lines->type && moveTo == lines->next->type)
                     {
-                        prevLine->next = lines->next;
+                        SHAPELINE *l = lines->next;
+                        free(prevLine->next);
+                        prevLine->next = l;
                         lines = prevLine->next;
                     }
                     if (!lines->next && moveTo == lines->type)
@@ -486,6 +488,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 }
                 shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
                 free(parts);
+                swf_Shape2Free(swf_shape);
+                free(swf_shape);
                 idtable[id].type = shape_type;
                 idtable[id].lvg_id = clip->num_shapes++;
             } else if (swf_isImageTag(tag))
@@ -880,6 +884,8 @@ LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
         return 0;
     }
     LVGMovieClip *clip = swf_ReadObjects(&swf);
+    swf_FreeTags(&swf);
+    reader.dealloc(&reader);
     return clip;
 }
 
