@@ -572,7 +572,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 /*int smooth    = */swf_GetBits(tag, 1);
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
-                video->frames = malloc(video->num_frames*sizeof(LVGVideoFrame));
+                video->frames = calloc(1, video->num_frames*sizeof(LVGVideoFrame));
                 video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0, 0);
                 video->cur_frame = -1;
                 swf_SetTagPos(tag, oldTagPos);
@@ -623,8 +623,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             assert(frame_num < video->num_frames);
             if (frame_num >= video->num_frames)
             {
+                video->frames = realloc(video->frames, (frame_num + 1)*sizeof(LVGVideoFrame));
+                memset(video->frames + video->num_frames, 0, (frame_num + 1 - video->num_frames)*sizeof(LVGVideoFrame));
                 video->num_frames = frame_num + 1;
-                video->frames = realloc(video->frames, video->num_frames*sizeof(LVGVideoFrame));
             }
             LVGVideoFrame *frame = video->frames + frame_num;
             frame->len = tag->len - tag->pos;
