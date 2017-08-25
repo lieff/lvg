@@ -893,8 +893,10 @@ int main(int argc, char **argv)
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 
+#ifndef EMSCRIPTEN
     g_render = &nvpr_render;
     if (!g_render->init(&g_render_obj))
+#endif
     {
         g_render = &nvg_render;
         if (!g_render->init(&g_render_obj))
