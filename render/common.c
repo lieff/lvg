@@ -75,5 +75,5 @@ int LinearGradientStops(NSVGshape *shape, LVGObject *o)
     }
     if (max_offset < 1.0f)
         gradientSpan(data, s0, s0, max_offset, 1.0f);
-    return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES, 1, IMAGE_REPEAT, (unsigned char*)data);
+    return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES, 1, 0, (unsigned char*)data);
 }

@@ -179,6 +179,25 @@ void xform(float dst[2], Transform3x2 a, const float v[2])
     dst[1] = result[1];
 }
 
+void inverse(Transform3x2 dst, Transform3x2 data)
+{
+    double det = 1.0/(data[0][0]*data[1][1] - data[0][1]*data[1][0]);
+    Transform3x2 result;
+    result[0][0] = + (data[1][1]) * det;
+    result[1][0] = - (data[1][0]) * det;
+    result[0][1] = - (data[0][1]) * det;
+    result[1][1] = + (data[0][0]) * det;
+    result[0][2] = + (data[0][1] * data[1][2] - data[1][1] * data[0][2]) * det;
+    result[1][2] = - (data[0][0] * data[1][2] - data[1][0] * data[0][2]) * det;
+
+    dst[0][0] = result[0][0];
+    dst[0][1] = result[0][1];
+    dst[0][2] = result[0][2];
+    dst[1][0] = result[1][0];
+    dst[1][1] = result[1][1];
+    dst[1][2] = result[1][2];
+}
+
 void MatrixLoadToGL(Transform3x2 m)
 {
     GLfloat mm[16];
@@ -388,16 +407,22 @@ static int LinearGrad(struct NSVGshape *shape, LVGObject *o)
     glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);*/
     int img = LinearGradientStops(shape, o);
     float *xf = shape->fill.gradient->xform;
-    float k = 7.4;
-    //GLfloat data[2][3] = { { xf[0]*k, xf[1]*k, mx/100 },    /* s = 1*x + 0*y + 0 */
-    //                       { xf[2]*k, xf[3]*k, my/100 } };  /* t = 0*x + 1*y + 0 */
-    GLfloat data[2][3] = { { 1, 0, 0 },    /* s = 1*x + 0*y + 0 */
-                           { 0, 1, 0 } };  /* t = 0*x + 1*y + 0 */
+    GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
+                           { xf[1], xf[3], xf[5] } };
+    inverse(data, data);
+    /*float p1[2] = { shape->bounds[0], shape->bounds[1] };
+    float p2[2] = { shape->bounds[2], shape->bounds[3] };
+    xform(p1, data, p1);
+    xform(p2, data, p2);*/
+    Transform3x2 tr;
+    translate(tr, 16384.0/20.0, 16384.0/20.0);
+    mul(data, tr, data);
+    scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
+    mul(data, tr, data);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, img);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glColor4f(1, 1, 1, 1);
-    glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);
+    glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
     return img;
 }
 
@@ -446,7 +471,6 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             }*/
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, shape->fill.color);
-            glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
             GLfloat data[2][3] = { { 1, 0, 0 },    /* s = 1*x + 0*y + 0 */
                                    { 0, 1, 0 } };  /* t = 0*x + 1*y + 0 */
             glColor4f(1, 1, 1, 1);
