@@ -54,26 +54,172 @@ static void gradientSpan(uint32_t * dst, NVGcolor color0, NVGcolor color1, float
     }
 }
 
-int LinearGradientStops(NSVGshape *shape, LVGObject *o)
+int LinearGradientStops(NSVGgradient *gradient, LVGObject *o)
 {
-    int nstops = shape->fill.gradient->nstops;
+    int nstops = gradient->nstops;
     uint32_t data[GRADIENT_SAMPLES];
-    float max_offset = shape->fill.gradient->stops[0].offset;
-    struct NVGcolor s0 = transformColor(nvgColorU32(shape->fill.gradient->stops[0].color), o);
+    float max_offset = gradient->stops[0].offset;
+    struct NVGcolor s0 = transformColor(nvgColorU32(gradient->stops[0].color), o);
     gradientSpan(data, nvgRGBAf(0.f, 0.f, 0.f, 1.f), s0, 0, max_offset);
     for (unsigned i = 0; i < (nstops - 1); i++)
     {
-        if (max_offset < shape->fill.gradient->stops[i + 1].offset)
+        if (max_offset < gradient->stops[i + 1].offset)
         {
-            max_offset = shape->fill.gradient->stops[i + 1].offset;
-            s0 = nvgColorU32(shape->fill.gradient->stops[i + 1].color);
+            max_offset = gradient->stops[i + 1].offset;
+            s0 = nvgColorU32(gradient->stops[i + 1].color);
         }
-        gradientSpan(data, transformColor(nvgColorU32(shape->fill.gradient->stops[i].color), o),
-                     transformColor(nvgColorU32(shape->fill.gradient->stops[i + 1].color), o),
-                     shape->fill.gradient->stops[i].offset,
-                     shape->fill.gradient->stops[i + 1].offset);
+        gradientSpan(data, transformColor(nvgColorU32(gradient->stops[i].color), o),
+                     transformColor(nvgColorU32(gradient->stops[i + 1].color), o),
+                     gradient->stops[i].offset,
+                     gradient->stops[i + 1].offset);
     }
     if (max_offset < 1.0f)
         gradientSpan(data, s0, s0, max_offset, 1.0f);
     return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES, 1, 0, (unsigned char*)data);
+}
+
+static NVGcolor lerpColor(NVGcolor color0, NVGcolor color1, float offset0, float offset1, float g)
+{
+    NVGcolor dst;
+    float den = fmax(0.00001f, offset1 - offset0);
+    for (int i = 0; i < 4; i++)
+        dst.rgba[i] = color0.rgba[i] + (color1.rgba[i] - color0.rgba[i])*(g - offset0)/den;
+    dst = nvgRGBAf(fmax(0.0f, fmin(dst.r, 1.0f)), fmax(0.0f, fmin(dst.g, 1.0f)), fmax(0.0f, fmin(dst.b, 1.0f)), fmax(0.0f, fmin(dst.a, 1.0f)));
+    return dst;
+}
+
+static void calcStops(NSVGgradient *gradient, LVGObject *o, NVGcolor *color0, NVGcolor *color1, float *stop0, float *stop1, float g)
+{
+    float *s0 = 0;
+    float *s1 = 0;
+    for (size_t i = 0; i < gradient->nstops && !s1; i++)
+    {
+        float *curr = &gradient->stops[i].offset;
+        if ( g >= curr[0])
+        {
+            s0 = curr;
+            *color0 = transformColor(nvgColorU32(gradient->stops[i].color), o);
+        } else if ( s0 && g <= curr[0])
+        {
+            s1 = curr;
+            *color1 = transformColor(nvgColorU32(gradient->stops[i].color), o);
+        }
+    }
+    if (!s0)
+    {
+        s0 = &gradient->stops[0].offset;
+        *color0 = transformColor(nvgColorU32(gradient->stops[0].color), o);
+    }
+    if (!s1)
+    {
+        s1 = &gradient->stops[gradient->nstops - 1].offset;
+        *color1 = transformColor(nvgColorU32(gradient->stops[gradient->nstops - 1].color), o);
+    }
+    *stop0 = s0[0];
+    *stop1 = s1[0];
+}
+
+int RadialGradientStops(NSVGgradient *gradient, LVGObject *o)
+{
+    const int width = 64, height = 64;
+    uint32_t *image = (unsigned int*)malloc(width*height*sizeof(uint32_t));
+#define SPREAD_PAD     0
+#define SPREAD_REPEAT  1
+#define SPREAD_REFLECT 2
+
+    int nstops = gradient->nstops;
+    int spreadMode = 0;
+
+    float fxn = 32;
+    float fyn = 32;
+    float fxp = 0;
+    float fyp = 0;
+    float rn = width/2;
+    float denominator = (rn*rn) - (fxp*fxp + fyp*fyp);
+
+    for (int x = 0; x < width; x++)
+    {
+        float dx = x - fxn;
+        for (int y = 0; y < height; y++)
+        {
+            float dy = y - fyn;
+
+            float numerator = (dx*fxp + dy*fyp);
+            float df = dx*fyp - dy*fxp;
+            numerator += sqrtf((rn*rn) * (dx*dx + dy*dy) - (df*df));
+            float g = numerator/denominator;
+
+            // color = c0 + (c1 - c0)(g - x0)/(x1 - x0)
+            // where c0 = stop color 0, c1 = stop color 1
+            // where x0 = stop offset 0, x1 = stop offset 1
+            NVGcolor finalcolor;
+            float stop0;
+            float stop1;
+            NVGcolor color0, color1;
+
+            if (spreadMode == SPREAD_PAD)
+            {
+                if (g < 0.0f)
+                {
+                    stop0 = gradient->stops[0].offset;
+                    finalcolor = transformColor(nvgColorU32(gradient->stops[0].color), o);
+                } else if (g > 1.0f)
+                {
+                    stop0 = gradient->stops[nstops - 1].offset;
+                    finalcolor = transformColor(nvgColorU32(gradient->stops[nstops - 1].color), o);
+                } else
+                {
+                    calcStops(gradient, o, &color0, &color1, &stop0, &stop1, g);
+                    finalcolor = lerpColor(color0, color1, stop0, stop1, g);
+                }
+            } else
+            {
+                int w = (int)fabsf(g);
+                if (spreadMode == SPREAD_REPEAT)
+                {
+                    if (g < 0)
+                    {
+                        g = 1 - (fabs(g) - w);
+                    } else
+                    {
+                        g = g - w;
+                    }
+                } else if (spreadMode == SPREAD_REFLECT)
+                {
+                    if (g < 0)
+                    {
+                        if (w % 2 == 0)
+                        {   // even
+                            g = (fabsf(g) - w);
+                        } else
+                        {   // odd
+                            g = (1 - (fabsf(g) - w));
+                        }
+                    } else
+                    {
+                        if (w % 2 == 0)
+                        {   // even
+                            g = g - w;
+                        } else
+                        {   // odd
+                            g = 1 - (g - w);
+                        }
+                    }
+                }
+                // clamp
+                if (g > 1)
+                    g = 1;
+                if (g < 0)
+                    g = 0;
+                calcStops(gradient, o, &color0, &color1, &stop0, &stop1, g);
+                finalcolor = lerpColor(color0, color1, stop0, stop1, g);
+            }
+            uint32_t color = ((uint32_t)(finalcolor.a*255) << 24) | ((uint32_t)(finalcolor.b*255) << 16) |
+                    ((uint32_t)(finalcolor.g*255) << 8) | (uint32_t)(finalcolor.r*255);
+            image[(y*width) + x] = color;
+        }
+    }
+    int img = g_render->cache_image(g_render_obj, width, height, 0, (unsigned char*)image);
+    free(image);
+    return img;
 }

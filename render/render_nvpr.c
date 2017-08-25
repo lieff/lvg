@@ -395,7 +395,7 @@ static void nvpr_update_image(void *render, int image, const void *rgba)
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 }
 
-static int LinearGrad(struct NSVGshape *shape, LVGObject *o)
+static int LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
     /*struct NSVGgradient *grad = shape->fill.gradient;
     NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
@@ -405,8 +405,9 @@ static int LinearGrad(struct NSVGshape *shape, LVGObject *o)
                              { (ce.b - cs.b), 0, cs.b },
                              { (ce.a - cs.a), 0, cs.a } };
     glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);*/
-    int img = LinearGradientStops(shape, o);
-    float *xf = shape->fill.gradient->xform;
+    NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
+    int img = LinearGradientStops(gradient, o);
+    float *xf = gradient->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
     inverse(data, data);
@@ -414,6 +415,26 @@ static int LinearGrad(struct NSVGshape *shape, LVGObject *o)
     float p2[2] = { shape->bounds[2], shape->bounds[3] };
     xform(p1, data, p1);
     xform(p2, data, p2);*/
+    Transform3x2 tr;
+    translate(tr, 16384.0/20.0, 16384.0/20.0);
+    mul(data, tr, data);
+    scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
+    mul(data, tr, data);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, img);
+    glColor4f(1, 1, 1, 1);
+    glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
+    return img;
+}
+
+static int RadialGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
+{
+    NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
+    int img = RadialGradientStops(gradient, o);
+    float *xf = gradient->xform;
+    GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
+                           { xf[1], xf[3], xf[5] } };
+    inverse(data, data);
     Transform3x2 tr;
     translate(tr, 16384.0/20.0, 16384.0/20.0);
     mul(data, tr, data);
@@ -451,16 +472,11 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         {
-            tex = LinearGrad(shape, o);
+            tex = LinearGrad(shape, o, 1);
         }
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         {
-            NVGcolor c = transformColor(nvgColorU32(shape->fill.gradient->stops[0].color), o);
-            glColor4f(c.r, c.g, c.b, c.a);
-            /*GLfloat rgbGen[3][3] = { {0,  0, 0},
-                                     {0,  1, 0},
-                                     {0, -1, 1} };
-            glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGB, &rgbGen[0][0]);*/
+            tex = RadialGrad(shape, o, 1);
         }
         else if (NSVG_PAINT_IMAGE == shape->fill.type)
         {
@@ -486,7 +502,8 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
         glDisable(GL_TEXTURE_2D);
         glFlush();
-        glDeleteTextures(1, &tex);
+        if (tex)
+            glDeleteTextures(1, &tex);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
@@ -496,7 +513,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
         {
-            //LinearGrad(shape, o);
+            //LinearGrad(shape, o, 0);
             NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)

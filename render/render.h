@@ -23,4 +23,5 @@ typedef struct render
 
 NVGcolor nvgColorU32(uint32_t c);
 NVGcolor transformColor(NVGcolor color, LVGObject *o);
-int LinearGradientStops(NSVGshape *shape, LVGObject *o);
+int LinearGradientStops(NSVGgradient *gradient, LVGObject *o);
+int RadialGradientStops(NSVGgradient *gradient, LVGObject *o);
