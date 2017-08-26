@@ -4,7 +4,116 @@
 extern render *g_render;
 extern void *g_render_obj;
 
-#define GRADIENT_SAMPLES 1024
+void identity(Transform3x2 dst)
+{
+    dst[0][0] = 1;
+    dst[0][1] = 0;
+    dst[0][2] = 0;
+    dst[1][0] = 0;
+    dst[1][1] = 1;
+    dst[1][2] = 0;
+}
+
+void mul(Transform3x2 dst, Transform3x2 a, Transform3x2 b)
+{
+    Transform3x2 result;
+    result[0][0] = a[0][0]*b[0][0] + a[0][1]*b[1][0];
+    result[0][1] = a[0][0]*b[0][1] + a[0][1]*b[1][1];
+    result[0][2] = a[0][0]*b[0][2] + a[0][1]*b[1][2] + a[0][2];
+
+    result[1][0] = a[1][0]*b[0][0] + a[1][1]*b[1][0];
+    result[1][1] = a[1][0]*b[0][1] + a[1][1]*b[1][1];
+    result[1][2] = a[1][0]*b[0][2] + a[1][1]*b[1][2] + a[1][2];
+
+    dst[0][0] = result[0][0];
+    dst[0][1] = result[0][1];
+    dst[0][2] = result[0][2];
+    dst[1][0] = result[1][0];
+    dst[1][1] = result[1][1];
+    dst[1][2] = result[1][2];
+}
+
+void translate(Transform3x2 dst, float x, float y)
+{
+    dst[0][0] = 1;
+    dst[0][1] = 0;
+    dst[0][2] = x;
+    dst[1][0] = 0;
+    dst[1][1] = 1;
+    dst[1][2] = y;
+}
+
+void scale(Transform3x2 dst, float x, float y)
+{
+    dst[0][0] = x;
+    dst[0][1] = 0;
+    dst[0][2] = 0;
+
+    dst[1][0] = 0;
+    dst[1][1] = y;
+    dst[1][2] = 0;
+}
+
+void rotate(Transform3x2 dst, float angle)
+{
+    float radians = angle*3.14159f/180.0f,
+          s = (float)sin(radians),
+          c = (float)cos(radians);
+    dst[0][0] = c;
+    dst[0][1] = -s;
+    dst[0][2] = 0;
+    dst[1][0] = s;
+    dst[1][1] = c;
+    dst[1][2] = 0;
+}
+
+/*void ortho(Transform3x2 dst, float l, float r, float b, float t)
+{
+    dst[0][0] = 2/(r-l);
+    dst[0][1] = 0;
+    dst[0][2] = -(r+l)/(r-l);
+    dst[1][0] = 0;
+    dst[1][1] = 2/(t-b);
+    dst[1][2] = -(t+b)/(t-b);
+}
+
+void inverse_ortho(Transform3x2 dst, float l, float r, float b, float t)
+{
+    dst[0][0] = (r-l)/2;
+    dst[0][1] = 0;
+    dst[0][2] = (r+l)/2;
+    dst[1][0] = 0;
+    dst[1][1] = (t-b)/2;
+    dst[1][2] = (t+b)/2;
+}*/
+
+void xform(float dst[2], Transform3x2 a, const float v[2])
+{
+    float result[2];
+    result[0] = a[0][0]*v[0] + a[0][1]*v[1] + a[0][2];
+    result[1] = a[1][0]*v[0] + a[1][1]*v[1] + a[1][2];
+    dst[0] = result[0];
+    dst[1] = result[1];
+}
+
+void inverse(Transform3x2 dst, Transform3x2 data)
+{
+    double det = 1.0/(data[0][0]*data[1][1] - data[0][1]*data[1][0]);
+    Transform3x2 result;
+    result[0][0] = + (data[1][1]) * det;
+    result[1][0] = - (data[1][0]) * det;
+    result[0][1] = - (data[0][1]) * det;
+    result[1][1] = + (data[0][0]) * det;
+    result[0][2] = + (data[0][1] * data[1][2] - data[1][1] * data[0][2]) * det;
+    result[1][2] = - (data[0][0] * data[1][2] - data[1][0] * data[0][2]) * det;
+
+    dst[0][0] = result[0][0];
+    dst[0][1] = result[0][1];
+    dst[0][2] = result[0][2];
+    dst[1][0] = result[1][0];
+    dst[1][1] = result[1][1];
+    dst[1][2] = result[1][2];
+}
 
 static float clampf(float a, float mn, float mx) { return a < mn ? mn : (a > mx ? mx : a); }
 
@@ -36,8 +145,8 @@ static void gradientSpan(uint32_t * dst, NVGcolor color0, NVGcolor color1, float
     }
     float s0o = clampf(offset0, 0.0f, 1.0f);
     float s1o = clampf(offset1, 0.0f, 1.0f);
-    unsigned s = s0o * GRADIENT_SAMPLES;
-    unsigned e = s1o * GRADIENT_SAMPLES;
+    unsigned s = s0o * GRADIENT_SAMPLES_L;
+    unsigned e = s1o * GRADIENT_SAMPLES_L;
     float r = color0.rgba[0];
     float g = color0.rgba[1];
     float b = color0.rgba[2];
@@ -57,7 +166,7 @@ static void gradientSpan(uint32_t * dst, NVGcolor color0, NVGcolor color1, float
 int LinearGradientStops(NSVGgradient *gradient, LVGObject *o)
 {
     int nstops = gradient->nstops;
-    uint32_t data[GRADIENT_SAMPLES];
+    uint32_t data[GRADIENT_SAMPLES_L];
     float max_offset = gradient->stops[0].offset;
     struct NVGcolor s0 = transformColor(nvgColorU32(gradient->stops[0].color), o);
     gradientSpan(data, nvgRGBAf(0.f, 0.f, 0.f, 1.f), s0, 0, max_offset);
@@ -75,7 +184,7 @@ int LinearGradientStops(NSVGgradient *gradient, LVGObject *o)
     }
     if (max_offset < 1.0f)
         gradientSpan(data, s0, s0, max_offset, 1.0f);
-    return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES, 1, 0, (unsigned char*)data);
+    return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES_L, 1, 0, (unsigned char*)data);
 }
 
 static NVGcolor lerpColor(NVGcolor color0, NVGcolor color1, float offset0, float offset1, float g)

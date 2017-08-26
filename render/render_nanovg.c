@@ -9,26 +9,61 @@
 #include "render.h"
 #include "nanovg_gl.h"
 
-static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
-    struct NSVGgradient *grad = shape->fill.gradient;
-    float sx = shape->bounds[0];
+    NSVGgradient *grad = is_fill ? shape->fill.gradient : shape->stroke.gradient;
+    /*float sx = shape->bounds[0];
     float sy = shape->bounds[1];
     float ex = shape->bounds[0];
-    float ey = shape->bounds[3];
-    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
+    float ey = shape->bounds[3];*/
+    float w = shape->bounds[2] - shape->bounds[0];
+    float h = shape->bounds[3] - shape->bounds[1];
+    /*NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
     NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
 
-    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);
+    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);*/
+
+    int img = LinearGradientStops(grad, o);
+    float *xf = grad->xform;
+    Transform3x2 data = { { xf[0], xf[2], xf[4] },
+                          { xf[1], xf[3], xf[5] } };
+    //float p1[2] = { shape->bounds[0], shape->bounds[1] };
+    //float p2[2] = { shape->bounds[2], shape->bounds[3] };
+    Transform3x2 tr;
+    //printf("%.3f\n", mx);
+    inverse(data, data);
+    scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
+    mul(data, tr, data);
+    //xform(p1, data, p1);
+    //xform(p2, data, p2);
+    inverse(data, data);
+    scale(tr, 1.0/256, 1.0/256);
+    mul(data, tr, data);
+
+    NVGpaint p;
+    memset(&p, 0, sizeof(p));
+    p.xform[0] = data[0][0];
+    p.xform[1] = data[1][0];
+    p.xform[2] = data[0][1];
+    p.xform[3] = data[1][1];
+    p.xform[4] = data[0][2] + shape->bounds[0]/* + mx*/;
+    p.xform[5] = data[1][2] + shape->bounds[1];
+    p.image = img;
+    p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
+    p.extent[0] = 256;
+    p.extent[1] = 256;
+    p.feather = 0;
+
     if (is_fill)
         nvgFillPaint(vg, p);
     else
         nvgStrokePaint(vg, p);
+    return img;
 }
 
 static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
-    struct NSVGgradient *grad = shape->fill.gradient;
+    NSVGgradient *grad = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     float cx = (shape->bounds[0] + shape->bounds[2])/2.0;
     float cy = (shape->bounds[1] + shape->bounds[3])/2.0;
     NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
@@ -61,11 +96,11 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
     }
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
+        GLuint tex = 0;
         if (NSVG_PAINT_COLOR == shape->fill.type)
-        {
             nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
-        } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, o, 1);
+        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+            tex = nvgSVGLinearGrad(vg, shape, o, 1);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
             nvgSVGRadialGrad(vg, shape, o, 1);
         else if (NSVG_PAINT_IMAGE == shape->fill.type)
@@ -77,6 +112,9 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
         if (NSVG_FILLRULE_EVENODD == shape->fillRule)
             nvgPathWinding(vg, NVG_HOLE);
         nvgFill(vg);
+        glFlush();
+        if (tex)
+            glDeleteTextures(1, &tex);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
