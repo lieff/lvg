@@ -30,9 +30,12 @@ static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGO
     //float p1[2] = { shape->bounds[0], shape->bounds[1] };
     //float p2[2] = { shape->bounds[2], shape->bounds[3] };
     Transform3x2 tr;
-    //printf("%.3f\n", mx);
     inverse(data, data);
+    //rotate(tr, mx);
+    //mul(data, tr, data);
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
+    mul(data, tr, data);
+    translate(tr, 128, 128);
     mul(data, tr, data);
     //xform(p1, data, p1);
     //xform(p2, data, p2);
@@ -46,8 +49,8 @@ static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGO
     p.xform[1] = data[1][0];
     p.xform[2] = data[0][1];
     p.xform[3] = data[1][1];
-    p.xform[4] = data[0][2] + shape->bounds[0]/* + mx*/;
-    p.xform[5] = data[1][2] + shape->bounds[1];
+    p.xform[4] = data[0][2] + shape->bounds[0] + w*0.5;
+    p.xform[5] = data[1][2] + shape->bounds[1] + h*0.5;
     p.image = img;
     p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
     p.extent[0] = 256;
