@@ -141,6 +141,16 @@ static void expandBBox(float *bounds, float x, float y)
         bounds[3] = y;
 }
 
+int compareStops(const void *a, const void *b)
+{
+    NSVGgradientStop *sa = (NSVGgradientStop *)a, *sb = (NSVGgradientStop *)b;
+    if (sa->offset < sb->offset)
+        return -1;
+    if (sa->offset > sb->offset)
+        return 1;
+    return 0;
+}
+
 static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, SHAPE_PARTS *parts, int num_parts, SHAPE_PARTS *part, FILLSTYLE *fills, LINESTYLE *lineStyles, int idx)
 {
     assert(part->num_lines > 0);
@@ -176,6 +186,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
                 shape->fill.gradient->stops[i].color = RGBA2U32(&f->gradient.rgba[i]);
                 shape->fill.gradient->stops[i].offset = f->gradient.ratios[i]/255.0f;
             }
+            qsort(shape->fill.gradient->stops, shape->fill.gradient->nstops, sizeof(shape->fill.gradient->stops[0]), compareStops);
             float *xf = shape->fill.gradient->xform;
             MATRIX *m = &f->m;
             xf[0] = m->sx/65536.0f;
