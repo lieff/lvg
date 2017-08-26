@@ -1029,12 +1029,12 @@ void stringstruct_free(void*o)
         string_free(o);
 }
 
-type_t int_type = {
+/*type_t int_type = {
     equals: int_equals,
     hash: int_hash,
     dup: int_dup,
     free: int_free,
-};
+};*/
 
 type_t ptr_type = {
     equals: ptr_equals,

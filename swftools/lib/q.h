@@ -76,7 +76,7 @@ typedef struct _type_t {
 extern type_t charptr_type;
 extern type_t stringstruct_type;
 extern type_t ptr_type;
-extern type_t int_type;
+//extern type_t int_type;
 
 typedef struct _dictentry {
     void*key;

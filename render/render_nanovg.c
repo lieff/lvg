@@ -11,7 +11,7 @@
 
 static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
-    NSVGgradient *grad = is_fill ? shape->fill.gradient : shape->stroke.gradient;
+    NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     /*float sx = shape->bounds[0];
     float sy = shape->bounds[1];
     float ex = shape->bounds[0];
@@ -23,8 +23,7 @@ static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGO
 
     NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);*/
 
-    int img = LinearGradientStops(grad, o);
-    float *xf = grad->xform;
+    float *xf = gradient->xform;
     Transform3x2 data = { { xf[0], xf[2], xf[4] },
                           { xf[1], xf[3], xf[5] } };
     //float p1[2] = { shape->bounds[0], shape->bounds[1] };
@@ -51,7 +50,7 @@ static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGO
     p.xform[3] = data[1][1];
     p.xform[4] = data[0][2] + shape->bounds[0] + w*0.5;
     p.xform[5] = data[1][2] + shape->bounds[1] + h*0.5;
-    p.image = img;
+    p.image = gradient->cache;
     p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
     p.extent[0] = 256;
     p.extent[1] = 256;
@@ -61,7 +60,7 @@ static int nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGO
         nvgFillPaint(vg, p);
     else
         nvgStrokePaint(vg, p);
-    return img;
+    return gradient->cache;
 }
 
 static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
@@ -191,7 +190,11 @@ static int nvg_cache_image(void *render, int width, int height, int flags, const
 
 static int nvg_cache_gradient(NSVGpaint *fill)
 {
-    return 0;
+    if (NSVG_PAINT_RADIAL_GRADIENT == fill->type)
+        return 0;
+    int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ? LinearGradientStops(fill->gradient, 0) : RadialGradientStops(fill->gradient, 0);
+    fill->gradient->cache = img;
+    return img;
 }
 
 static void nvg_update_image(void *render, int image, const void *rgba)
