@@ -272,6 +272,13 @@ static int nvpr_cache_image(void *render, int width, int height, int flags, cons
     return (int)tex;
 }
 
+static int nvpr_cache_gradient(NSVGpaint *fill)
+{
+    int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ? LinearGradientStops(fill->gradient, 0) : RadialGradientStops(fill->gradient, 0);
+    fill->gradient->cache = img;
+    return img;
+}
+
 static void nvpr_update_image(void *render, int image, const void *rgba)
 {
     //render_ctx *ctx = render;
@@ -282,7 +289,7 @@ static void nvpr_update_image(void *render, int image, const void *rgba)
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgba);
 }
 
-static int LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
     /*struct NSVGgradient *grad = shape->fill.gradient;
     NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
@@ -293,7 +300,6 @@ static int LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
                              { (ce.a - cs.a), 0, cs.a } };
     glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);*/
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
-    int img = LinearGradientStops(gradient, o);
     float *xf = gradient->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
@@ -308,16 +314,14 @@ static int LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
     mul(data, tr, data);
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, img);
+    glBindTexture(GL_TEXTURE_2D, gradient->cache);
     glColor4f(1, 1, 1, 1);
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
-    return img;
 }
 
-static int RadialGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void RadialGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
-    int img = RadialGradientStops(gradient, o);
     float *xf = gradient->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
@@ -328,10 +332,9 @@ static int RadialGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
     mul(data, tr, data);
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, img);
+    glBindTexture(GL_TEXTURE_2D, gradient->cache);
     glColor4f(1, 1, 1, 1);
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
-    return img;
 }
 
 static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
@@ -352,34 +355,25 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
     glEnable(GL_STENCIL_TEST);
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
-        GLuint tex = 0;
         if (NSVG_PAINT_COLOR == shape->fill.type)
         {
             NVGcolor c = transformColor(nvgColorU32(shape->fill.color), o);
             glColor4f(c.r, c.g, c.b, c.a);
         } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
         {
-            tex = LinearGrad(shape, o, 1);
+            LinearGrad(shape, o, 1);
         }
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
         {
-            tex = RadialGrad(shape, o, 1);
+            RadialGrad(shape, o, 1);
         }
         else if (NSVG_PAINT_IMAGE == shape->fill.type)
         {
-            /*if (mkeys)
-            {
-                shape->paths->pts[0] = mx/2.5 - (ctx->winWidth/2)/2.5;
-                shape->paths->pts[1] = my/2.5 - (ctx->winHeight/2)/2.5;
-            }*/
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, shape->fill.color);
             GLfloat data[2][3] = { { 1, 0, 0 },    /* s = 1*x + 0*y + 0 */
                                    { 0, 1, 0 } };  /* t = 0*x + 1*y + 0 */
             glColor4f(1, 1, 1, 1);
-            /*shape->stroke.type = NSVG_PAINT_COLOR;
-            shape->stroke.color =0xff000000;
-            shape->strokeWidth = 5.f;*/
             glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);
         }
         glStencilFillPathNV(pathObj, (NSVG_FILLRULE_EVENODD == shape->fillRule) ? GL_INVERT : GL_COUNT_UP_NV, 0x1F);
@@ -388,9 +382,6 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
         glDisable(GL_TEXTURE_2D);
-        glFlush();
-        if (tex)
-            glDeleteTextures(1, &tex);
     }
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
@@ -467,6 +458,7 @@ const render nvpr_render =
     nvpr_end_frame,
     nvpr_cache_shape,
     nvpr_cache_image,
+    nvpr_cache_gradient,
     nvpr_update_image,
     nvpr_render_shape,
     nvpr_render_image,

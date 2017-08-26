@@ -113,7 +113,7 @@ typedef struct NSVGgradient {
 	float xform[6];
 	char spread;
 	float fx, fy;
-	int nstops;
+	int nstops, cache;
 	NSVGgradientStop stops[1];
 } NSVGgradient;
 

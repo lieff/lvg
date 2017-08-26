@@ -195,6 +195,7 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
             xf[3] = m->sy/65536.0f;
             xf[4] = m->tx/20.0f;
             xf[5] = m->ty/20.0f;
+            g_render->cache_gradient(&shape->fill);
         }
     }
     if (lineStyle)

@@ -189,6 +189,11 @@ static int nvg_cache_image(void *render, int width, int height, int flags, const
     return nvgCreateImageRGBA(vg, width, height, (flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0, (const unsigned char *)rgba);
 }
 
+static int nvg_cache_gradient(NSVGpaint *fill)
+{
+    return 0;
+}
+
 static void nvg_update_image(void *render, int image, const void *rgba)
 {
     NVGcontext *vg = render;
@@ -235,6 +240,7 @@ const render nvg_render =
     nvg_end_frame,
     nvg_cache_shape,
     nvg_cache_image,
+    nvg_cache_gradient,
     nvg_update_image,
     nvg_render_shape,
     nvg_render_image,

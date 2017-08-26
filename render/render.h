@@ -16,6 +16,7 @@ typedef struct render
     void (*end_frame)(void *render);
     int (*cache_shape)(void *render, NSVGshape *shape);
     int (*cache_image)(void *render, int width, int height, int flags, const void *rgba);
+    int (*cache_gradient)(NSVGpaint *fill);
     void (*update_image)(void *render, int image, const void *rgba);
     void (*render_shape)(void *render, NSVGshape *shape, LVGObject *o);
     void (*render_image)(void *render, int image);
