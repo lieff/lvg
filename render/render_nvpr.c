@@ -315,7 +315,11 @@ static void LinearGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
     mul(data, tr, data);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, gradient->cache);
-    glColor4f(1, 1, 1, 1);
+    if (o->color_mul[0] != 1.0f || o->color_mul[1] != 1.0f || o->color_mul[2] != 1.0f || o->color_mul[3] != 1.0f)
+    {
+        glColor4f(o->color_mul[0], o->color_mul[1], o->color_mul[2], o->color_mul[3]);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    }
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
 }
 
@@ -333,7 +337,11 @@ static void RadialGrad(struct NSVGshape *shape, LVGObject *o, int is_fill)
     mul(data, tr, data);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, gradient->cache);
-    glColor4f(1, 1, 1, 1);
+    if (o->color_mul[0] != 1.0f || o->color_mul[1] != 1.0f || o->color_mul[2] != 1.0f || o->color_mul[3] != 1.0f)
+    {
+        glColor4f(o->color_mul[0], o->color_mul[1], o->color_mul[2], o->color_mul[3]);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    }
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
 }
 
@@ -379,6 +387,7 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGObject *o)
         glStencilFillPathNV(pathObj, (NSVG_FILLRULE_EVENODD == shape->fillRule) ? GL_INVERT : GL_COUNT_UP_NV, 0x1F);
         glCoverFillPathNV(pathObj, GL_BOUNDING_BOX_NV);
 
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
         glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
         glDisable(GL_TEXTURE_2D);
