@@ -1,3 +1,4 @@
+#include <GL/gl.h>
 #include "render/render.h"
 #include <math.h>
 
@@ -323,5 +324,6 @@ int RadialGradientStops(NSVGgradient *gradient, LVGObject *o)
 
 void gl_free_image(int image)
 {
-    glDeleteTextures(1, &image);
+    GLuint img = image;
+    glDeleteTextures(1, &img);
 }
