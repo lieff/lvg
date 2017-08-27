@@ -17,6 +17,7 @@ typedef struct render
     int (*cache_shape)(void *render, NSVGshape *shape);
     int (*cache_image)(void *render, int width, int height, int flags, const void *rgba);
     int (*cache_gradient)(NSVGpaint *fill);
+    int (*free_image)(int image);
     void (*update_image)(void *render, int image, const void *rgba);
     void (*render_shape)(void *render, NSVGshape *shape, LVGObject *o);
     void (*render_image)(void *render, int image);
@@ -28,6 +29,7 @@ NVGcolor nvgColorU32(uint32_t c);
 NVGcolor transformColor(NVGcolor color, LVGObject *o);
 int LinearGradientStops(NSVGgradient *gradient, LVGObject *o);
 int RadialGradientStops(NSVGgradient *gradient, LVGObject *o);
+void gl_free_image(int image);
 
 typedef float Transform3x2[2][3];
 

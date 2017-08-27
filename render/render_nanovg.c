@@ -244,6 +244,7 @@ const render nvg_render =
     nvg_cache_shape,
     nvg_cache_image,
     nvg_cache_gradient,
+    gl_free_image,
     nvg_update_image,
     nvg_render_shape,
     nvg_render_image,

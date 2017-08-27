@@ -320,3 +320,8 @@ int RadialGradientStops(NSVGgradient *gradient, LVGObject *o)
     free(image);
     return img;
 }
+
+void gl_free_image(int image)
+{
+    glDeleteTextures(1, &image);
+}

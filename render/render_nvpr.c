@@ -468,6 +468,7 @@ const render nvpr_render =
     nvpr_cache_shape,
     nvpr_cache_image,
     nvpr_cache_gradient,
+    gl_free_image,
     nvpr_update_image,
     nvpr_render_shape,
     nvpr_render_image,

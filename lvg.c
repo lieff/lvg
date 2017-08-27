@@ -497,6 +497,78 @@ void lvgDrawClip(LVGMovieClip *clip)
     lvgDrawClipGroup(clip, clip->groups, next_frame);
 }
 
+static void deletePaint(NSVGpaint* paint)
+{
+    if (paint->type == NSVG_PAINT_LINEAR_GRADIENT || paint->type == NSVG_PAINT_RADIAL_GRADIENT)
+    {
+        g_render->free_image(paint->gradient->cache);
+        free(paint->gradient);
+    }
+}
+
+void lvgFreeShape(NSVGshape *shape)
+{
+    NSVGpath *path = shape->paths;
+    while (path)
+    {
+        NSVGpath *next = path->next;
+        if (path->pts)
+            free(path->pts);
+        free(path);
+        path = next;
+    }
+    deletePaint(&shape->fill);
+    deletePaint(&shape->stroke);
+}
+
+void lvgCloseClip(LVGMovieClip *clip)
+{
+    int i, j;
+    for (i = 0; i < clip->num_shapes; i++)
+    {
+        LVGShapeCollection *shape = clip->shapes + i;
+        for (j = 0; j < shape->num_shapes; j++)
+            lvgFreeShape(shape->shapes + j);
+        free(shape->shapes);
+    }
+    for (i = 0; i < clip->num_images; i++)
+    {
+        g_render->free_image(clip->images[i]);
+    }
+    for (i = 0; i < clip->num_groups; i++)
+    {
+        LVGMovieClipGroup *group = clip->groups + i;
+        for (j = 0; j < group->num_frames; j++)
+        {
+            LVGMovieClipFrame *frame = group->frames + j;
+            if (frame->objects)
+                free(frame->objects);
+        }
+        free(group->frames);
+    }
+    for (i = 0; i < clip->num_sounds; i++)
+    {
+        LVGSound *sound = clip->sounds + i;
+        if (sound->samples)
+            free(sound->samples);
+    }
+    for (i = 0; i < clip->num_videos; i++)
+    {
+        LVGVideo *video = clip->videos + i;
+        for (j = 0; j < video->num_frames; j++)
+        {
+            if (video->frames[i].data)
+                free(video->frames[i].data);
+        }
+        free(video->frames);
+    }
+    free(clip->shapes);
+    free(clip->images);
+    free(clip->groups);
+    free(clip->sounds);
+    free(clip->videos);
+}
+
 void swfOnFrame()
 {
     lvgDrawClip(g_clip);
@@ -932,6 +1004,8 @@ int main(int argc, char **argv)
         drawframe();
     }
 #endif
+    if (g_clip)
+        lvgCloseClip(g_clip);
     g_render->release(g_render_obj);
     lvgZipClose(&g_zip);
     glfwTerminate();
