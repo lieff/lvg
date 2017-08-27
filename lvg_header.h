@@ -89,6 +89,7 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_c
 short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
 void lvgPlaySound(LVGSound *sound);
+void lvgStopAudio();
 
 #ifdef __TINYC__
 extern NVGcontext *vg;

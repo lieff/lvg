@@ -193,6 +193,27 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_c
     return 0;
 }
 
+void lvgStopAudio()
+{
+#ifdef SDL2
+    if (g_dev_record)
+    {
+        //SDL_PauseAudioDevice(g_dev_record, 1);
+        SDL_CloseAudioDevice(g_dev_record);
+        g_dev_record = 0;
+    }
+    if (g_dev)
+    {
+        //SDL_PauseAudioDevice(g_dev, 1);
+        SDL_CloseAudioDevice(g_dev);
+        g_dev = 0;
+    }
+#else
+    SDL_PauseAudio(1);
+    SDL_CloseAudio();
+#endif
+}
+
 void lvgPlaySound(LVGSound *sound)
 {
     sound->cur_play_byte = 0;

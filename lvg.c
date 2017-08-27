@@ -1006,6 +1006,7 @@ int main(int argc, char **argv)
         drawframe();
     }
 #endif
+    lvgStopAudio();
     if (g_clip)
         lvgCloseClip(g_clip);
     g_render->release(g_render_obj);
