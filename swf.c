@@ -171,9 +171,18 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
         } else if (f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
         {
             shape->fill.type = NSVG_PAINT_IMAGE;
+            shape->fill.spread = ((f->type & ~2) == FILL_CLIPPED) ? NSVG_SPREAD_PAD : NSVG_SPREAD_REPEAT;
+            shape->fill.filtered = (f->type & 2) ? 0 : 1;
             if (f->id_bitmap != 65535)
                 shape->fill.color = clip->images[idtable[f->id_bitmap].lvg_id];
-            // TODO: handle bitmap matrix
+            float *xf = shape->fill.xform;
+            MATRIX *m = &f->m;
+            xf[0] = m->sx/65536.0f;
+            xf[1] = m->r0/65536.0f;
+            xf[2] = m->r1/65536.0f;
+            xf[3] = m->sy/65536.0f;
+            xf[4] = m->tx/20.0f;
+            xf[5] = m->ty/20.0f;
         } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
         {
             assert(f->gradient.num >= 2);

@@ -119,6 +119,9 @@ typedef struct NSVGgradient {
 
 typedef struct NSVGpaint {
 	char type;
+	char spread;
+	char filtered;
+	float xform[6];
 	union {
 		unsigned int color;
 		NSVGgradient* gradient;
