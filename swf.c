@@ -650,9 +650,10 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_DOACTION == tag->id)
         {
-            ActionTAG*actions;
+            ActionTAG *actions;
             actions = swf_ActionGet(tag);
             swf_DumpActions(actions, 0);
+            swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {
             void*abccode = swf_ReadABC(tag);

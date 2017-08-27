@@ -166,7 +166,6 @@ SRECT swf_GetDefineBBox(TAG * t)
     case ST_DEFINEEDITTEXT:
     case ST_DEFINETEXT:
     case ST_DEFINETEXT2:
-    case ST_DEFINEVIDEOSTREAM:
         /*id = */swf_GetU16(t);
         swf_GetRect(t, &b1);
         break;

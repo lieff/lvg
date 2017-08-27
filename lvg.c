@@ -557,8 +557,8 @@ void lvgCloseClip(LVGMovieClip *clip)
         LVGVideo *video = clip->videos + i;
         for (j = 0; j < video->num_frames; j++)
         {
-            if (video->frames[i].data)
-                free(video->frames[i].data);
+            if (video->frames[j].data)
+                free(video->frames[j].data);
         }
         free(video->frames);
         if (video->image)
