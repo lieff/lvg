@@ -561,6 +561,8 @@ void lvgCloseClip(LVGMovieClip *clip)
                 free(video->frames[i].data);
         }
         free(video->frames);
+        if (video->image)
+            g_render->free_image(video->image);
     }
     free(clip->shapes);
     free(clip->images);
