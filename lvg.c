@@ -614,7 +614,7 @@ void drawframe()
     glfwSwapBuffers(window);
 }
 
-#ifndef EMSCRIPTEN
+#if !defined(EMSCRIPTEN) && !defined(__MINGW32__)
 
 struct SYM
 {
@@ -749,7 +749,6 @@ const struct SYM g_syms[] = {
     { "nvgResetScissor", nvgResetScissor },
     { "nvgIntersectScissor", nvgIntersectScissor },
 
-#ifndef __MINGW32__
     { "glCreateProgram", glCreateProgram },
     { "glCreateShader", glCreateShader },
     { "glShaderSource", glShaderSource },
@@ -802,7 +801,7 @@ const struct SYM g_syms[] = {
     { "glLoadIdentity", glLoadIdentity },
     { "glOrtho", glOrtho },
     { "glEnableClientState", glEnableClientState },
-#endif
+
     //{ "vg", &vg },
     { "g_bgColor", &g_bgColor },
     { "winWidth", &winWidth },
@@ -902,13 +901,27 @@ int open_lvg(const char *file_name)
         free(buf);
     }
     return 0;
-#else
+#elif !defined(__MINGW32__)
     return loadScript();
+#else
+    return 0;
 #endif
 }
 
+#ifdef __MINGW32__
+#include <windows.h>
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+    int argc;
+    LPWSTR *argvw = CommandLineToArgvW(GetCommandLineW(), &argc);
+    int size_needed = WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, NULL, 0, NULL, NULL);
+    char *arg = alloca(size_needed);
+    WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, arg, size_needed, NULL, NULL);
+    char *argv[3] = { (char*)"", arg, 0 };
+#else
 int main(int argc, char **argv)
 {
+#endif
     char *file_name = argc > 1 ? argv[1] : "main.lvg";
     char *e = strrchr(file_name, '.');
     is_swf = e && !strcmp(e, ".swf");

@@ -1,5 +1,9 @@
+#ifdef __MINGW32__
+#include <glad/glad.h>
+#else
 #define GL_GLEXT_PROTOTYPES
 #define GLFW_INCLUDE_GLEXT
+#endif
 #include <GLFW/glfw3.h>
 #define NANOSVG_IMPLEMENTATION
 #ifdef EMSCRIPTEN
