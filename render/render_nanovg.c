@@ -106,25 +106,10 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, tex->tex);
     if (NSVG_SPREAD_PAD == sp->spread)
-    {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        tex->flags &= ~(NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATX);
-    } else
-    {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        tex->flags |= NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATX;
-    }
-    if (sp->filtered)
-    {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    } else
-    {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    }
+        tex->flags &= ~(NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY);
+    else
+        tex->flags |= NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY;
+    //if (sp->filtered) TODO
     int tw, th;
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);

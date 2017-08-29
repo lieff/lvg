@@ -161,6 +161,7 @@ enum GLNVGcallType {
 struct GLNVGcall {
 	int type;
 	int image;
+	int image_flags;
 	int pathOffset;
 	int pathCount;
 	int triangleOffset;
@@ -983,6 +984,26 @@ static void glnvg__fill(GLNVGcontext* gl, GLNVGcall* call)
 
 	glnvg__setUniforms(gl, call->uniformOffset + gl->fragSize, call->image);
 	glnvg__checkError(gl, "fill fill");
+	if (call->image)
+	{
+		if (call->image_flags & NVG_IMAGE_REPEATX)
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		if (call->image_flags & NVG_IMAGE_REPEATY)
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		if (1) // TODO
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		} else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		}
+	}
 
 	if (gl->flags & NVG_ANTIALIAS) {
 		glnvg__stencilFunc(gl, GL_EQUAL, 0x00, 0xff);
@@ -1312,6 +1333,8 @@ static void glnvg__renderFill(void* uptr, NVGpaint* paint, NVGscissor* scissor, 
 	if (call->pathOffset == -1) goto error;
 	call->pathCount = npaths;
 	call->image = paint->image;
+	GLNVGtexture *tex = glnvg__findTexture(gl, call->image);
+	call->image_flags = tex->flags;
 
 	if (npaths == 1 && paths[0].convex)
 		call->type = GLNVG_CONVEXFILL;
