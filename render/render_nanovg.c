@@ -98,21 +98,23 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
         nvgStrokePaint(vg, p);
 }
 
-GLuint nvglImageHandleGL2(NVGcontext* ctx, int image);
-
 static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
 {
     NSVGpaint *sp = is_fill ? &shape->fill : &shape->stroke;
-    GLuint tex = nvglImageHandleGL2(vg, sp->color);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(vg)->userPtr;
+    GLNVGtexture* tex = glnvg__findTexture(gl, sp->color);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, tex->tex);
     if (NSVG_SPREAD_PAD == sp->spread)
     {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        tex->flags &= ~(NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATX);
     } else
     {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        tex->flags |= NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATX;
     }
     if (sp->filtered)
     {
@@ -127,16 +129,12 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
     glBindTexture(GL_TEXTURE_2D, 0);
-    float sw = shape->bounds[2] - shape->bounds[0];
-    float sh = shape->bounds[3] - shape->bounds[1];
     float *xf = sp->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
     Transform3x2 tr;
     inverse(data, data);
     scale(tr, 20.0/tw, 20.0/th);
-    mul(data, tr, data);
-    translate(tr, 128, 128);
     mul(data, tr, data);
     inverse(data, data);
     scale(tr, 1.0/256, 1.0/256);
@@ -148,8 +146,8 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject
     p.xform[1] = data[1][0];
     p.xform[2] = data[0][1];
     p.xform[3] = data[1][1];
-    p.xform[4] = data[0][2] + shape->bounds[0] + sw*0.5;
-    p.xform[5] = data[1][2] + shape->bounds[1] + sh*0.5;
+    p.xform[4] = data[0][2] + shape->bounds[0] + (xf[4] - shape->bounds[0]);
+    p.xform[5] = data[1][2] + shape->bounds[1] + (xf[5] - shape->bounds[1]);
     p.image = sp->color;
     p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
     p.extent[0] = 256;
