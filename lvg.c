@@ -7,7 +7,9 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/stat.h>
+#ifndef __MINGW32__
 #include <sys/mman.h>
+#endif
 #define GL_GLEXT_PROTOTYPES
 #ifdef EMSCRIPTEN
 #include <emscripten.h>

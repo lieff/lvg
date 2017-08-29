@@ -212,7 +212,9 @@
 #define LOWERCASE_UPPERCASE 1
 
 /* Define to 0 on non-windows systems */
+#ifndef O_BINARY
 #define O_BINARY 0
+#endif
 
 //#define HAVE_ZLIB
 

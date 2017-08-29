@@ -5,7 +5,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#ifndef __MINGW32__
 #include <sys/mman.h>
+#endif
 #include <lunzip.h>
 #include "stb_image.h"
 

@@ -42,7 +42,6 @@
 #endif
 
 #include "./bitio.h"
-#include "./os.h"
 
 // internal constants
 
@@ -1526,17 +1525,6 @@ int swf_ReadSWF(int handle, SWF * swf)
   reader_t reader;
   reader_init_filereader(&reader, handle);
   return swf_ReadSWF2(&reader, swf);
-}
-
-void swf_ReadABCfile(char*filename, SWF*swf)
-{
-    memset(swf, 0, sizeof(SWF));
-    swf->fileVersion=9;
-    swf->fileAttributes=FILEATTRIBUTE_AS3; //as3
-    TAG*tag = swf->firstTag = swf_InsertTag(0, ST_RAWABC);
-    memfile_t*file = memfile_open(filename);
-    swf_SetBlock(tag, file->data, file->len);
-    memfile_close(file);
 }
 
 void swf_FreeTags(SWF * swf)                 // Frees all malloc'ed memory for tags
