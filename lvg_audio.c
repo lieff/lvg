@@ -8,6 +8,8 @@
 #include "minimp3.h"
 #include <SDL2/SDL.h>
 #include <assert.h>
+#include <stdio.h>
+#include <string.h>
 //#include "resample.h"
 
 //static struct rs_data *g_resample;

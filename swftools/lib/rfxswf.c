@@ -27,12 +27,6 @@
 #include "mem.h"
 #include "rfxswf.h"
 
-#ifndef RFXSWF_DISABLESOUND
-#ifdef HAVE_LAME
-#include "lame/lame.h"
-#endif
-#endif
-
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
