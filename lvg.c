@@ -7,7 +7,9 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/stat.h>
-#ifndef __MINGW32__
+#ifdef __MINGW32__
+#include <windows/mman.h>
+#else
 #include <sys/mman.h>
 #endif
 #define GL_GLEXT_PROTOTYPES
@@ -747,6 +749,7 @@ const struct SYM g_syms[] = {
     { "nvgResetScissor", nvgResetScissor },
     { "nvgIntersectScissor", nvgIntersectScissor },
 
+#ifndef __MINGW32__
     { "glCreateProgram", glCreateProgram },
     { "glCreateShader", glCreateShader },
     { "glShaderSource", glShaderSource },
@@ -799,7 +802,7 @@ const struct SYM g_syms[] = {
     { "glLoadIdentity", glLoadIdentity },
     { "glOrtho", glOrtho },
     { "glEnableClientState", glEnableClientState },
-
+#endif
     //{ "vg", &vg },
     { "g_bgColor", &g_bgColor },
     { "winWidth", &winWidth },

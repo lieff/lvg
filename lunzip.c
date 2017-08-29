@@ -5,7 +5,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#ifndef __MINGW32__
+#ifdef __MINGW32__
+#include <windows/mman.h>
+#else
 #include <sys/mman.h>
 #endif
 #include <lunzip.h>

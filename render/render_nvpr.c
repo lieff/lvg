@@ -1,7 +1,11 @@
 //#define GL_GLEXT_PROTOTYPES
 #define GLFW_INCLUDE_GLEXT
 #include <GLFW/glfw3.h>
+#ifdef __MINGW32__
+#include <windows.h>
+#else
 #include <GL/glx.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -67,10 +71,10 @@ PFNGLMATRIXLOADIDENTITYEXTPROC glMatrixLoadIdentityEXT = NULL;
 PFNGLMATRIXORTHOEXTPROC glMatrixOrthoEXT = NULL;
 PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
 
-#if defined(_WIN32)
-# define GET_PROC_ADDRESS(name)  wglGetProcAddress(#name)
+#ifdef __MINGW32__
+#define GET_PROC_ADDRESS(name) wglGetProcAddress(#name)
 #else
-# define GET_PROC_ADDRESS(name)  glXGetProcAddress((const GLubyte *) #name)
+#define GET_PROC_ADDRESS(name) glXGetProcAddress((const GLubyte *) #name)
 #endif
 
 #define LOAD_PROC(type, name) \

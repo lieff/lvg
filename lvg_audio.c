@@ -12,6 +12,10 @@
 #include <string.h>
 //#include "resample.h"
 
+#ifndef MIN
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+#endif
+
 //static struct rs_data *g_resample;
 SDL_AudioCVT g_cvt, g_cvt_record;
 SDL_AudioCallback g_audio_cb;
