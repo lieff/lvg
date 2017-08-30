@@ -9,5 +9,5 @@ services:
     - docker
 
 script:
-    - docker pull ubuntu:16.04
-    - docker run -i -t -v $PWD:/lvg ubuntu:16.04 /lvg/scripts/docker-build.sh
+    - docker pull ubuntu:17.04
+    - docker run -i -t -v $PWD:/lvg ubuntu:17.04 /lvg/scripts/docker-build.sh
