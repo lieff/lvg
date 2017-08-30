@@ -18,6 +18,9 @@
 #include <emscripten/html5.h>
 #define GLFW_INCLUDE_ES2
 #endif
+#ifdef __MINGW32__
+#include <glad/glad.h>
+#endif
 #include <GLFW/glfw3.h>
 
 #ifndef EMSCRIPTEN
@@ -984,6 +987,13 @@ int main(int argc, char **argv)
 #endif
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
+#ifdef __MINGW32__
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        printf("error: glad init failed\n");
+        return -1;
+    }
+#endif
 
 #ifndef EMSCRIPTEN
     g_render = &nvpr_render;
