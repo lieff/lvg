@@ -1,13 +1,10 @@
 language: c
+os: linux
+sudo: required
 
-os:
-    - linux
-
-compiler:
-    - gcc
-
-before_install:
-    - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update -qq && sudo apt-get install -y libglfw3-dev libsdl2-dev libavcodec-dev; fi
+services:
+    - docker
 
 script:
-    - build.sh
+    - docker pull ubuntu
+    - docker run -i -t -v $PWD:/lvg ubuntu sudo apt-get update -qq && sudo apt-get install -y libglfw3-dev libsdl2-dev libavcodec-dev && cd /lvg && ./build.sh
