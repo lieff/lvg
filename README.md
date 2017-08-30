@@ -13,8 +13,7 @@ Works:
 
  * SVG, image, mp3 resources with tcc scripting.
  * limited SWF support.
- * SWF: shapes, images, video, audio (mp3, adpcm, pcm) loading (some errors in converting to SVG shape fornat).
- * SWF: gradients with 2 stops.
+ * SWF: shapes, images, video, audio (mp3, adpcm, pcm) loading and rendering (some errors in converting to SVG shape fornat).
  * SWF: load action script
 
 Not works:
@@ -24,10 +23,13 @@ Not works:
  * SWF: interpret action script
  * SWF: bitmap filters
  * SWF: network access
+ * SWF: audio mixer
 
-[Tiger demo:](https://lieff.github.io/lvg_player.html?file=test.lvg)
-[Nanovg demo:](https://lieff.github.io/lvg_player.html?file=test_nanovg.lvg)
-[Nuklear demo:](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
+[Tiger demo](https://lieff.github.io/lvg_player.html?file=test.lvg)
+
+[Nanovg demo](https://lieff.github.io/lvg_player.html?file=test_nanovg.lvg)
+
+[Nuklear demo](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
 
 ![Screenshot](svg_tiger.png?raw=true "demo")
 
