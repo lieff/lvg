@@ -10,9 +10,6 @@ compiler:
 services:
     - docker
 
-before_install:
-    - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update --all; fi
-
 install:
     - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install glfw3 sdl2 ffmpeg tcc; fi
 

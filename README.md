@@ -2,6 +2,7 @@ LVG (Lion Vector Graphics)
 ==========
 
 [![Build Status](https://travis-ci.org/lieff/lvg.svg)](https://travis-ci.org/lieff/lvg)
+[![Build Status](https://ci.appveyor.com/api/projects/status/69br8ic9dwlfeu48?svg=true)](https://ci.appveyor.com/project/lieff/lvg)
 
 [nanoVG](https://github.com/memononen/nanovg) + [nanoSVG](https://github.com/memononen/nanosvg) + [glfw3](http://www.glfw.org/) + [libtcc](http://repo.or.cz/tinycc.git) + [Emscripten](https://github.com/kripken/emscripten) =
 LVG is lightweight replacement for flash.
