@@ -3,6 +3,10 @@
 #include <GLFW/glfw3.h>
 #ifdef __MINGW32__
 #include <windows.h>
+#elif __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+#include "render_nvpr_apple.h"
 #else
 #include <GL/glx.h>
 #endif
@@ -11,6 +15,8 @@
 #include <string.h>
 #include <math.h>
 #include "render.h"
+
+#ifndef __APPLE__
 
 #define FUNC(x) x
 
@@ -82,6 +88,10 @@ PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
   if (!FUNC(name)) { \
     fail = 1; \
   }
+
+#else
+#define LOAD_PROC(type, name)
+#endif
 
 typedef struct render_ctx
 {
