@@ -1,4 +1,6 @@
-#git clone https://github.com/FFmpeg/FFmpeg
+if [ ! -d "FFmpeg" ]; then
+  git clone --depth=1 https://github.com/FFmpeg/FFmpeg
+fi
 cd FFmpeg
 
 ./configure \
@@ -29,3 +31,5 @@ cd FFmpeg
 	--disable-zlib
 
 make -j8
+
+cd ..

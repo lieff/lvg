@@ -1,4 +1,4 @@
-#git clone https://github.com/FFmpeg/FFmpeg
+#git clone --depth=1 https://github.com/FFmpeg/FFmpeg
 cd FFmpeg
 
 ./configure \

@@ -1,5 +1,5 @@
 if [ ! -d "glfw" ]; then
-  git clone https://github.com/glfw/glfw
+  git clone --depth=1 https://github.com/glfw/glfw
   mkdir glfw/build
   cd glfw/build
   cmake -DCMAKE_TOOLCHAIN_FILE=../../mingw64.cmake ..
@@ -18,6 +18,12 @@ if [ ! -d "SDL" ]; then
   mv SDL/include/*.h SDL/include/SDL2
 fi
 
+if [ ! -d "video/ffmpeg/FFmpeg" ]; then
+  cd video/ffmpeg
+  ./build_win.sh
+  cd ../..
+fi
+
 #if [ ! -d "tinycc" ]; then
 #  git clone http://repo.or.cz/tinycc.git
 #  cd tinycc
@@ -34,3 +40,4 @@ glfw/deps/glad.c \
 video/ffmpeg/ffmpeg_dec.c \
 -Iglfw/include -Iglfw/deps -ISDL/include -Ivideo/ffmpeg/FFmpeg -Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -L. -I. -Inanovg -Iswftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg_win.exe -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
+upx -9 ./lvg_win.exe
