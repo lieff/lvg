@@ -1333,8 +1333,11 @@ static void glnvg__renderFill(void* uptr, NVGpaint* paint, NVGscissor* scissor, 
 	if (call->pathOffset == -1) goto error;
 	call->pathCount = npaths;
 	call->image = paint->image;
-	GLNVGtexture *tex = glnvg__findTexture(gl, call->image);
-	call->image_flags = tex->flags;
+	if (call->image)
+	{
+		GLNVGtexture *tex = glnvg__findTexture(gl, call->image);
+		call->image_flags = tex->flags;
+	}
 
 	if (npaths == 1 && paths[0].convex)
 		call->type = GLNVG_CONVEXFILL;
