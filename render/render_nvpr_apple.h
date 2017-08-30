@@ -1,80 +1,11 @@
 #pragma once
 
-#ifndef GLAPIENTRY
-# ifdef _WIN32
-#  if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED)  /* Mimic <windef.h> */
-#   define GLAPIENTRY __stdcall
-#  else
-#   define GLAPIENTRY
-#  endif
-# else
-#  define GLAPIENTRY
-# endif
-#endif
-
-#ifndef GLAPI
-# define GLAPI extern
-#endif
-
-#ifndef GLAPIENTRYP
-# define GLAPIENTRYP GLAPIENTRY *
-#endif
+#define APIENTRYP *
+#define GLAPIENTRYP *
 
 /* NV_path_rendering */
 #ifndef GL_NV_path_rendering
 #define GL_NV_path_rendering 1
-#ifdef GL_GLEXT_PROTOTYPES
-GLAPI GLuint GLAPIENTRY glGenPathsNV (GLsizei range);
-GLAPI void GLAPIENTRY glDeletePathsNV (GLuint path, GLsizei range);
-GLAPI GLboolean GLAPIENTRY glIsPathNV (GLuint path);
-GLAPI void GLAPIENTRY glPathCommandsNV (GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
-GLAPI void GLAPIENTRY glPathCoordsNV (GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
-GLAPI void GLAPIENTRY glPathSubCommandsNV (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
-GLAPI void GLAPIENTRY glPathSubCoordsNV (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
-GLAPI void GLAPIENTRY glPathStringNV (GLuint path, GLenum format, GLsizei length, const GLvoid *pathString);
-GLAPI void GLAPIENTRY glPathGlyphsNV (GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
-GLAPI void GLAPIENTRY glPathGlyphRangeNV (GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
-GLAPI void GLAPIENTRY glWeightPathsNV (GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights);
-GLAPI void GLAPIENTRY glCopyPathNV (GLuint resultPath, GLuint srcPath);
-GLAPI void GLAPIENTRY glInterpolatePathsNV (GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight);
-GLAPI void GLAPIENTRY glTransformPathNV (GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glTransformPathNV (GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glPathParameterivNV (GLuint path, GLenum pname, const GLint *value);
-GLAPI void GLAPIENTRY glPathParameteriNV (GLuint path, GLenum pname, GLint value);
-GLAPI void GLAPIENTRY glPathParameterfvNV (GLuint path, GLenum pname, const GLfloat *value);
-GLAPI void GLAPIENTRY glPathParameterfNV (GLuint path, GLenum pname, GLfloat value);
-GLAPI void GLAPIENTRY glPathDashArrayNV (GLuint path, GLsizei dashCount, const GLfloat *dashArray);
-GLAPI void GLAPIENTRY glPathStencilFuncNV (GLenum func, GLint ref, GLuint mask);
-GLAPI void GLAPIENTRY glPathStencilDepthOffsetNV (GLfloat factor, GLfloat units);
-GLAPI void GLAPIENTRY glStencilFillPathNV (GLuint path, GLenum fillMode, GLuint mask);
-GLAPI void GLAPIENTRY glStencilStrokePathNV (GLuint path, GLint reference, GLuint mask);
-GLAPI void GLAPIENTRY glStencilFillPathInstancedNV (GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glStencilStrokePathInstancedNV (GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glPathCoverDepthFuncNV (GLenum func);
-GLAPI void GLAPIENTRY glPathColorGenNV (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs);
-GLAPI void GLAPIENTRY glPathTexGenNV (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs);
-GLAPI void GLAPIENTRY glPathFogGenNV (GLenum genMode);
-GLAPI void GLAPIENTRY glCoverFillPathNV (GLuint path, GLenum coverMode);
-GLAPI void GLAPIENTRY glCoverStrokePathNV (GLuint path, GLenum coverMode);
-GLAPI void GLAPIENTRY glCoverFillPathInstancedNV (GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glCoverStrokePathInstancedNV (GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
-GLAPI void GLAPIENTRY glGetPathParameterivNV (GLuint path, GLenum pname, GLint *value);
-GLAPI void GLAPIENTRY glGetPathParameterfvNV (GLuint path, GLenum pname, GLfloat *value);
-GLAPI void GLAPIENTRY glGetPathCommandsNV (GLuint path, GLubyte *commands);
-GLAPI void GLAPIENTRY glGetPathCoordsNV (GLuint path, GLfloat *coords);
-GLAPI void GLAPIENTRY glGetPathDashArrayNV (GLuint path, GLfloat *dashArray);
-GLAPI void GLAPIENTRY glGetPathMetricsNV (GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics);
-GLAPI void GLAPIENTRY glGetPathMetricRangeNV (GLbitfield metricQueryMask, GLuint firstPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics);
-GLAPI void GLAPIENTRY glGetPathSpacingNV (GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing);
-GLAPI void GLAPIENTRY glGetPathColorGenivNV (GLenum color, GLenum pname, GLint *value);
-GLAPI void GLAPIENTRY glGetPathColorGenfvNV (GLenum color, GLenum pname, GLfloat *value);
-GLAPI void GLAPIENTRY glGetPathTexGenivNV (GLenum texCoordSet, GLenum pname, GLint *value);
-GLAPI void GLAPIENTRY glGetPathTexGenfvNV (GLenum texCoordSet, GLenum pname, GLfloat *value);
-GLAPI GLboolean GLAPIENTRY glIsPointInFillPathNV (GLuint path, GLuint mask, GLfloat x, GLfloat y);
-GLAPI GLboolean GLAPIENTRY glIsPointInStrokePathNV (GLuint path, GLfloat x, GLfloat y);
-GLAPI GLfloat GLAPIENTRY glGetPathLengthNV (GLuint path, GLsizei startSegment, GLsizei numSegments);
-GLAPI GLboolean GLAPIENTRY glPointAlongPathNV (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY);
-#endif /* GL_GLEXT_PROTOTYPES */
 typedef GLuint (GLAPIENTRYP PFNGLGENPATHSNVPROC) (GLsizei range);
 typedef void (GLAPIENTRYP PFNGLDELETEPATHSNVPROC) (GLuint path, GLsizei range);
 typedef GLboolean (GLAPIENTRYP PFNGLISPATHNVPROC) (GLuint path);

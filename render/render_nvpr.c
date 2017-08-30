@@ -16,8 +16,6 @@
 #include <math.h>
 #include "render.h"
 
-#ifndef __APPLE__
-
 #define FUNC(x) x
 
 PFNGLGENPATHSNVPROC FUNC(glGenPathsNV) = NULL;
@@ -79,6 +77,8 @@ PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
 
 #ifdef __MINGW32__
 #define GET_PROC_ADDRESS(name) wglGetProcAddress(#name)
+#elif __APPLE__
+#define GET_PROC_ADDRESS(name) glfwGetProcAddress(#name)
 #else
 #define GET_PROC_ADDRESS(name) glXGetProcAddress((const GLubyte *) #name)
 #endif
@@ -88,10 +88,6 @@ PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
   if (!FUNC(name)) { \
     fail = 1; \
   }
-
-#else
-#define LOAD_PROC(type, name)
-#endif
 
 typedef struct render_ctx
 {
