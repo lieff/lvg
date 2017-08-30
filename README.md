@@ -1,6 +1,8 @@
 LVG (Lion Vector Graphics)
 ==========
 
+[![Build Status](https://travis-ci.org/lieff/lvg.svg)](https://travis-ci.org/lieff/lvg)
+
 [nanoVG](https://github.com/memononen/nanovg) + [nanoSVG](https://github.com/memononen/nanosvg) + [glfw3](http://www.glfw.org/) + [libtcc](http://repo.or.cz/tinycc.git) + [Emscripten](https://github.com/kripken/emscripten) =
 LVG is lightweight replacement for flash.
 It's designed to use very small runtime (around 200kb) for player and can run on android, ios, web and more.
