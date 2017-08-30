@@ -10,4 +10,4 @@ services:
 
 script:
     - docker pull ubuntu:16.04
-    - docker run -i -t -v $PWD:/lvg ubuntu:16.04 apt-get update -qq && apt-get install -qq -y libglfw3-dev libsdl2-dev libavcodec-dev && cd /lvg && ./build.sh
+    - docker run -i -t -v $PWD:/lvg ubuntu:16.04 "apt-get update -qq && apt-get install -qq -y libglfw3-dev libsdl2-dev libavcodec-dev && cd /lvg && ./build.sh"
