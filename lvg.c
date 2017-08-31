@@ -913,14 +913,20 @@ int open_lvg(const char *file_name)
 
 #ifdef __MINGW32__
 #include <windows.h>
+#include <shellapi.h>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    int argc;
+    int argc = 0;
     LPWSTR *argvw = CommandLineToArgvW(GetCommandLineW(), &argc);
-    int size_needed = WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, NULL, 0, NULL, NULL);
-    char *arg = alloca(size_needed);
-    WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, arg, size_needed, NULL, NULL);
-    char *argv[3] = { (char*)"", arg, 0 };
+    char *argv[3] = { (char*)"", 0, 0 };
+    if (argvw && argc > 1)
+    {
+        int size_needed = WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, NULL, 0, NULL, NULL);
+        argv[1] = alloca(size_needed + 1);
+        WideCharToMultiByte(CP_UTF8, 0, argvw[1], -1, argv[1], size_needed, NULL, NULL);
+        argv[1][size_needed] = 0;
+        LocalFree(argvw);
+    }
 #else
 int main(int argc, char **argv)
 {
