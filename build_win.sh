@@ -41,3 +41,4 @@ video/ffmpeg/ffmpeg_dec.c \
 -Iglfw/include -Iglfw/deps -ISDL/include -Ivideo/ffmpeg/FFmpeg -Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -L. -I. -Inanovg -Iswftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg_win.exe -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 upx -9 ./lvg_win.exe
+zip -9 lvg_win.zip lvg_win.exe

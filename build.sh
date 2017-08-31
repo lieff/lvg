@@ -4,3 +4,4 @@ render/*.c \
 video/ffmpeg/ffmpeg_dec.c \
 -L. -I. -Inanovg -Iswftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg -lm -lglfw -lGL -ltcc2 -ldl -lSDL2 -lavcodec -lavutil
 upx -9 ./lvg
+zip -9 lvg_linux.zip lvg
