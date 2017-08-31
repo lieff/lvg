@@ -951,6 +951,9 @@ int main(int argc, char **argv)
         emscripten_webgl_make_context_current(context);
     }
 #endif
+#ifdef __MINGW32__
+    putenv("SDL_AUDIODRIVER=winmm");
+#endif
 
     if (!glfwInit())
     {
