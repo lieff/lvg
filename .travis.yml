@@ -19,23 +19,23 @@ script:
     - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run -i -t -v $PWD:/lvg ubuntu:17.04 /lvg/scripts/docker-build.sh; fi
 
 deploy:
-  provider: releases
-  api_key:
-    secure: B2EFfe5ExGrTaE93XCuFaqugZP/H8hw/S8uRu1wvv7LnFN/3VcWijAg9MtYL3kcXDuTLlI8ZOMogJDBffibCRnMScN7ml1E77b3M7wYmKTnS+nwOaJiySqm83tu4x0frLjdpzS02z/2HhLfICUD4hiQsBEuWTl280+tSi12WLGSNsYvXio3MPySD3m8upJ4XYLvcabMMxi0Vk3GJ3v1qsRm5NltFL+kwGSSxoIyrQCl9SVOVN0E20d2xhssUWy+98VWDFBNBRoJGI3IZKckM76X37YnHBPxiZaExyMvkr7rM9biFoGqGNuBQpJNh+APnmVsb28/qIK4wDmtkZJIX74ijSpnkzgkzIioqnW+mpVx3WLtkInykNZP8vMj8osMuS3dBg7kQg8HoHFsTKAWdvjvx2YbYPFVYo6x1BX6671Owqh+jN+vUNDc24y/UEdW1+cGCOA5qF5NRHmITshVVHXxa+eZ9AjTpyxhyHbmJLtpY7pvTU4j6wMRqJCyUcUeyksLfxjTw/ZfTaf0HUGg9sXqY2Yk0GW0elCkb9gZf6yUaMkpF8VhxpTgyvClN7qw0MD1heMI1d3P9lhFTnJ/QTDstQzK8yBLBX/pNpjenXaERjylfcOqAtEy/X8aMuM8EV79j2SkZwmo38AXRfocXAZd7FgUC/ypiN/8rDg8tPX0=
-  file:
-    - lvg_linux.zip
-    - lvg_win.zip
-  skip_cleanup: true
-  on:
-    condition: $TRAVIS_OS_NAME == linux
-    tags: true
+  - provider: releases
+    api_key:
+      secure: B2EFfe5ExGrTaE93XCuFaqugZP/H8hw/S8uRu1wvv7LnFN/3VcWijAg9MtYL3kcXDuTLlI8ZOMogJDBffibCRnMScN7ml1E77b3M7wYmKTnS+nwOaJiySqm83tu4x0frLjdpzS02z/2HhLfICUD4hiQsBEuWTl280+tSi12WLGSNsYvXio3MPySD3m8upJ4XYLvcabMMxi0Vk3GJ3v1qsRm5NltFL+kwGSSxoIyrQCl9SVOVN0E20d2xhssUWy+98VWDFBNBRoJGI3IZKckM76X37YnHBPxiZaExyMvkr7rM9biFoGqGNuBQpJNh+APnmVsb28/qIK4wDmtkZJIX74ijSpnkzgkzIioqnW+mpVx3WLtkInykNZP8vMj8osMuS3dBg7kQg8HoHFsTKAWdvjvx2YbYPFVYo6x1BX6671Owqh+jN+vUNDc24y/UEdW1+cGCOA5qF5NRHmITshVVHXxa+eZ9AjTpyxhyHbmJLtpY7pvTU4j6wMRqJCyUcUeyksLfxjTw/ZfTaf0HUGg9sXqY2Yk0GW0elCkb9gZf6yUaMkpF8VhxpTgyvClN7qw0MD1heMI1d3P9lhFTnJ/QTDstQzK8yBLBX/pNpjenXaERjylfcOqAtEy/X8aMuM8EV79j2SkZwmo38AXRfocXAZd7FgUC/ypiN/8rDg8tPX0=
+    file:
+      - lvg_linux.zip
+      - lvg_win.zip
+    skip_cleanup: true
+    on:
+      condition: $TRAVIS_OS_NAME == linux
+      tags: true
 
-  provider: releases
-  api_key:
-    secure: B2EFfe5ExGrTaE93XCuFaqugZP/H8hw/S8uRu1wvv7LnFN/3VcWijAg9MtYL3kcXDuTLlI8ZOMogJDBffibCRnMScN7ml1E77b3M7wYmKTnS+nwOaJiySqm83tu4x0frLjdpzS02z/2HhLfICUD4hiQsBEuWTl280+tSi12WLGSNsYvXio3MPySD3m8upJ4XYLvcabMMxi0Vk3GJ3v1qsRm5NltFL+kwGSSxoIyrQCl9SVOVN0E20d2xhssUWy+98VWDFBNBRoJGI3IZKckM76X37YnHBPxiZaExyMvkr7rM9biFoGqGNuBQpJNh+APnmVsb28/qIK4wDmtkZJIX74ijSpnkzgkzIioqnW+mpVx3WLtkInykNZP8vMj8osMuS3dBg7kQg8HoHFsTKAWdvjvx2YbYPFVYo6x1BX6671Owqh+jN+vUNDc24y/UEdW1+cGCOA5qF5NRHmITshVVHXxa+eZ9AjTpyxhyHbmJLtpY7pvTU4j6wMRqJCyUcUeyksLfxjTw/ZfTaf0HUGg9sXqY2Yk0GW0elCkb9gZf6yUaMkpF8VhxpTgyvClN7qw0MD1heMI1d3P9lhFTnJ/QTDstQzK8yBLBX/pNpjenXaERjylfcOqAtEy/X8aMuM8EV79j2SkZwmo38AXRfocXAZd7FgUC/ypiN/8rDg8tPX0=
-  file:
-    - lvg_macos.zip
-  skip_cleanup: true
-  on:
-    condition: $TRAVIS_OS_NAME == osx
-    tags: true
+  - provider: releases
+    api_key:
+      secure: B2EFfe5ExGrTaE93XCuFaqugZP/H8hw/S8uRu1wvv7LnFN/3VcWijAg9MtYL3kcXDuTLlI8ZOMogJDBffibCRnMScN7ml1E77b3M7wYmKTnS+nwOaJiySqm83tu4x0frLjdpzS02z/2HhLfICUD4hiQsBEuWTl280+tSi12WLGSNsYvXio3MPySD3m8upJ4XYLvcabMMxi0Vk3GJ3v1qsRm5NltFL+kwGSSxoIyrQCl9SVOVN0E20d2xhssUWy+98VWDFBNBRoJGI3IZKckM76X37YnHBPxiZaExyMvkr7rM9biFoGqGNuBQpJNh+APnmVsb28/qIK4wDmtkZJIX74ijSpnkzgkzIioqnW+mpVx3WLtkInykNZP8vMj8osMuS3dBg7kQg8HoHFsTKAWdvjvx2YbYPFVYo6x1BX6671Owqh+jN+vUNDc24y/UEdW1+cGCOA5qF5NRHmITshVVHXxa+eZ9AjTpyxhyHbmJLtpY7pvTU4j6wMRqJCyUcUeyksLfxjTw/ZfTaf0HUGg9sXqY2Yk0GW0elCkb9gZf6yUaMkpF8VhxpTgyvClN7qw0MD1heMI1d3P9lhFTnJ/QTDstQzK8yBLBX/pNpjenXaERjylfcOqAtEy/X8aMuM8EV79j2SkZwmo38AXRfocXAZd7FgUC/ypiN/8rDg8tPX0=
+    file:
+      - lvg_macos.zip
+    skip_cleanup: true
+    on:
+      condition: $TRAVIS_OS_NAME == osx
+      tags: true
