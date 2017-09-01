@@ -13,6 +13,9 @@ render/common.c
 render/render.h
 render/render_nanovg.c
 render/render_nvpr.c
+render/render_nvpr_apple.h
+swf/avm1.c
+swf/avm1.h
 swftools/lib/as3/abc.c
 swftools/lib/as3/abc.h
 swftools/lib/as3/assets.c
@@ -26,7 +29,6 @@ swftools/lib/as3/opcodes.h
 swftools/lib/as3/pool.c
 swftools/lib/as3/pool.h
 swftools/lib/as3/registry.h
-swftools/lib/lame/lame.h
 swftools/lib/modules/swfaction.c
 swftools/lib/modules/swfalignzones.c
 swftools/lib/modules/swfbits.c
@@ -51,8 +53,6 @@ swftools/lib/log.c
 swftools/lib/log.h
 swftools/lib/mem.c
 swftools/lib/mem.h
-swftools/lib/os.c
-swftools/lib/os.h
 swftools/lib/q.c
 swftools/lib/q.h
 swftools/lib/rfxswf.c
