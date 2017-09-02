@@ -13,6 +13,7 @@
 #endif
 
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP };
+enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
 typedef struct LVGObject
 {
@@ -22,16 +23,28 @@ typedef struct LVGObject
     float color_add[4];
 } LVGObject;
 
+typedef struct LVGAction
+{
+    union {
+        const void *data;
+        int idata;
+        unsigned short sdata;
+    };
+    unsigned short len;
+    unsigned char opcode;
+} LVGAction;
+
 typedef struct LVGMovieClipFrame
 {
     LVGObject *objects;
-    int num_objects;
+    LVGAction *actions;
+    int num_objects, num_actions;
 } LVGMovieClipFrame;
 
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
-    int num_frames, cur_frame;
+    int num_frames, cur_frame, play_state;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection
@@ -90,6 +103,7 @@ short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
 void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
+void lvgExecuteActions(LVGMovieClip *clip);
 
 #ifdef __TINYC__
 extern NVGcontext *vg;

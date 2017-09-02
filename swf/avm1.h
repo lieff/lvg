@@ -1,19 +1,6 @@
 #pragma once
 #include <stdint.h>
 
-typedef struct
-{
-    void      (*vm_func)(void *ctx, const uint8_t *data, int len);
-#ifdef _DEBUG
-    const char *name;
-    uint8_t   version;
-#endif
-    uint8_t   npop_params;
-    uint8_t   npush_params;
-} ActionEntry;
-
-extern const ActionEntry g_avm1_actions[256];
-
 typedef enum {
     ACTION_END = 0x00,
     ACTION_NEXT_FRAME = 0x04,

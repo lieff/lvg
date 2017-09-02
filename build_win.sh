@@ -35,6 +35,7 @@ fi
 x86_64-w64-mingw32-gcc -s -Os -flto -std=gnu99 -fno-stack-protector nanovg/nanovg.c adpcm.c lvg_audio.c lvg.c svgb.c swf.c lunzip.c \
 swftools/lib/*.c swftools/lib/modules/*.c swftools/lib/as3/*.c mp3/minimp3.c \
 render/*.c \
+swf/avm1.c \
 windows/mman.c \
 glfw/deps/glad.c \
 video/ffmpeg/ffmpeg_dec.c \

@@ -493,6 +493,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 
 void lvgDrawClip(LVGMovieClip *clip)
 {
+    lvgExecuteActions(clip);
     int next_frame = 0;
     if ((g_time - clip->last_time) > (1.0/clip->fps))
     {

@@ -1,117 +1,148 @@
 #include "avm1.h"
+#include <../render/render.h>
+#include <signal.h>
 
 #ifdef _DEBUG
 #define DBG(n, m) n, m,
-#define DBG_PRINT(n) n
+#define DBG_BREAK raise(SIGTRAP)
 #else
 #define DBG(n, m)
+#define DBG_BREAK
 #endif
 
-static void action_end(void *cx, const uint8_t *data, int len)
+typedef struct LVGActionCtx
+{
+    LVGMovieClip *clip;
+    LVGMovieClipGroup *group;
+    LVGMovieClipFrame *frame;
+} LVGActionCtx;
+
+static void action_end(LVGActionCtx *ctx, LVGAction *a)
 {
 }
 
-static void action_next_frame(void *cx, const uint8_t *data, int len)
+static void action_next_frame(LVGActionCtx *ctx, LVGAction *a)
 {
+    DBG_BREAK;
 }
 
-static void action_previous_frame(void *cx, const uint8_t *data, int len) {}
-static void action_play(void *cx, const uint8_t *data, int len) {}
-static void action_stop(void *cx, const uint8_t *data, int len) {}
-static void action_quality(void *cx, const uint8_t *data, int len) {}
-static void action_stop_sounds(void *cx, const uint8_t *data, int len) {}
-static void action_add(void *cx, const uint8_t *data, int len) {}
-static void action_sub(void *cx, const uint8_t *data, int len) {}
-static void action_mul(void *cx, const uint8_t *data, int len) {}
-static void action_div(void *cx, const uint8_t *data, int len) {}
-static void action_old_eq(void *cx, const uint8_t *data, int len) {}
-static void action_old_less(void *cx, const uint8_t *data, int len) {}
-static void action_and(void *cx, const uint8_t *data, int len) {}
-static void action_or(void *cx, const uint8_t *data, int len) {}
-static void action_not(void *cx, const uint8_t *data, int len) {}
-static void action_string_compare_eq(void *cx, const uint8_t *data, int len) {}
-static void action_string_length(void *cx, const uint8_t *data, int len) {}
-static void action_string_extract(void *cx, const uint8_t *data, int len) {}
-static void action_pop(void *cx, const uint8_t *data, int len) {}
-static void action_to_integer(void *cx, const uint8_t *data, int len) {}
-static void action_get_variable(void *cx, const uint8_t *data, int len) {}
-static void action_set_variable(void *cx, const uint8_t *data, int len) {}
-static void action_set_target2(void *cx, const uint8_t *data, int len) {}
-static void action_string_add(void *cx, const uint8_t *data, int len) {}
-static void action_get_property(void *cx, const uint8_t *data, int len) {}
-static void action_set_property(void *cx, const uint8_t *data, int len) {}
-static void action_clone_sprite(void *cx, const uint8_t *data, int len) {}
-static void action_remove_sprite(void *cx, const uint8_t *data, int len) {}
-static void action_trace(void *cx, const uint8_t *data, int len) {}
-static void action_start_drag(void *cx, const uint8_t *data, int len) {}
-static void action_end_drag(void *cx, const uint8_t *data, int len) {}
-static void action_string_compare_le(void *cx, const uint8_t *data, int len) {}
-static void action_throw(void *cx, const uint8_t *data, int len) {}
-static void action_cast(void *cx, const uint8_t *data, int len) {}
-static void action_implements(void *cx, const uint8_t *data, int len) {}
-static void action_random_number(void *cx, const uint8_t *data, int len) {}
-static void action_mb_string_length(void *cx, const uint8_t *data, int len) {}
-static void action_char_to_ascii(void *cx, const uint8_t *data, int len) {}
-static void action_ascii_to_char(void *cx, const uint8_t *data, int len) {}
-static void action_get_time(void *cx, const uint8_t *data, int len) {}
-static void action_mb_string_extract(void *cx, const uint8_t *data, int len) {}
-static void action_mb_char_to_ascii(void *cx, const uint8_t *data, int len) {}
-static void action_mb_ascii_to_char(void *cx, const uint8_t *data, int len) {}
-static void action_delete(void *cx, const uint8_t *data, int len) {}
-static void action_delete2(void *cx, const uint8_t *data, int len) {}
-static void action_define_local(void *cx, const uint8_t *data, int len) {}
-static void action_call_function(void *cx, const uint8_t *data, int len) {}
-static void action_return(void *cx, const uint8_t *data, int len) {}
-static void action_modulo(void *cx, const uint8_t *data, int len) {}
-static void action_new_object(void *cx, const uint8_t *data, int len) {}
-static void action_define_local2(void *cx, const uint8_t *data, int len) {}
-static void action_init_array(void *cx, const uint8_t *data, int len) {}
-static void action_init_object(void *cx, const uint8_t *data, int len) {}
-static void action_type_of(void *cx, const uint8_t *data, int len) {}
-static void action_target_path(void *cx, const uint8_t *data, int len) {}
-static void action_enumerate(void *cx, const uint8_t *data, int len) {}
-static void action_add2(void *cx, const uint8_t *data, int len) {}
-static void action_less2(void *cx, const uint8_t *data, int len) {}
-static void action_equals2(void *cx, const uint8_t *data, int len) {}
-static void action_to_number(void *cx, const uint8_t *data, int len) {}
-static void action_to_string(void *cx, const uint8_t *data, int len) {}
-static void action_push_duplicate(void *cx, const uint8_t *data, int len) {}
-static void action_swap(void *cx, const uint8_t *data, int len) {}
-static void action_get_member(void *cx, const uint8_t *data, int len) {}
-static void action_set_member(void *cx, const uint8_t *data, int len) {}
-static void action_increment(void *cx, const uint8_t *data, int len) {}
-static void action_decrement(void *cx, const uint8_t *data, int len) {}
-static void action_call_method(void *cx, const uint8_t *data, int len) {}
-static void action_new_method(void *cx, const uint8_t *data, int len) {}
-static void action_instance_of(void *cx, const uint8_t *data, int len) {}
-static void action_enumerate2(void *cx, const uint8_t *data, int len) {}
-static void action_bitwise_and(void *cx, const uint8_t *data, int len) {}
-static void action_bitwise_or(void *cx, const uint8_t *data, int len) {}
-static void action_bitwise_xor(void *cx, const uint8_t *data, int len) {}
-static void action_lshift(void *cx, const uint8_t *data, int len) {}
-static void action_rshift(void *cx, const uint8_t *data, int len) {}
-static void action_urshift(void *cx, const uint8_t *data, int len) {}
-static void action_strict_equals(void *cx, const uint8_t *data, int len) {}
-static void action_gt(void *cx, const uint8_t *data, int len) {}
-static void action_string_compare_gt(void *cx, const uint8_t *data, int len) {}
-static void action_extends(void *cx, const uint8_t *data, int len) {}
-static void action_goto_frame(void *cx, const uint8_t *data, int len) {}
-static void action_get_url(void *cx, const uint8_t *data, int len) {}
-static void action_store_register(void *cx, const uint8_t *data, int len) {}
-static void action_constant_pool(void *cx, const uint8_t *data, int len) {}
-static void action_wait_for_frame(void *cx, const uint8_t *data, int len) {}
-static void action_set_target(void *cx, const uint8_t *data, int len) {}
-static void action_goto_label(void *cx, const uint8_t *data, int len) {}
-static void action_wait_for_frame2(void *cx, const uint8_t *data, int len) {}
-static void action_define_function2(void *cx, const uint8_t *data, int len) {}
-static void action_try(void *cx, const uint8_t *data, int len) {}
-static void action_with(void *cx, const uint8_t *data, int len) {}
-static void action_push(void *cx, const uint8_t *data, int len) {}
-static void action_jump(void *cx, const uint8_t *data, int len) {}
-static void action_get_url2(void *cx, const uint8_t *data, int len) {}
-static void action_define_function(void *cx, const uint8_t *data, int len) {}
-static void action_if(void *cx, const uint8_t *data, int len) {}
-static void action_goto_frame2(void *cx, const uint8_t *data, int len) {}
+static void action_previous_frame(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_play(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->group->play_state = LVG_PLAYING;
+}
+static void action_stop(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->group->play_state = LVG_STOPPED;
+}
+static void action_quality(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_sub(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_mul(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_div(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_old_eq(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_old_less(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_and(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_or(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_not(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_compare_eq(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_length(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_extract(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_pop(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_to_integer(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_target2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_clone_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_remove_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_trace(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_start_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_end_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_compare_le(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_throw(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_cast(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_implements(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_random_number(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_mb_string_length(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_char_to_ascii(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_ascii_to_char(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_time(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_mb_string_extract(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_mb_char_to_ascii(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_mb_ascii_to_char(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_delete(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_delete2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_define_local(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_call_function(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_return(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_modulo(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_new_object(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_define_local2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_init_array(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_init_object(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_type_of(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_target_path(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_enumerate(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_add2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_less2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_equals2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_to_number(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_to_string(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_push_duplicate(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_swap(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_member(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_member(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_increment(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_decrement(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_call_method(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_new_method(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_instance_of(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_enumerate2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_bitwise_and(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_bitwise_or(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_bitwise_xor(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_lshift(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_rshift(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_urshift(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_strict_equals(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_gt(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_string_compare_gt(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_extends(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_goto_frame(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->group->cur_frame = a->sdata;
+}
+static void action_get_url(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_store_register(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_target(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_goto_label(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_wait_for_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_define_function2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_try(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_with(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_push(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_url2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_define_function(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_if(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+
+typedef struct
+{
+    void      (*vm_func)(LVGActionCtx *ctx, LVGAction *a);
+#ifdef _DEBUG
+    const char *name;
+    uint8_t   version;
+#endif
+    uint8_t   npop_params;
+    uint8_t   npush_params;
+} ActionEntry;
 
 const ActionEntry g_avm1_actions[256] =
 {
@@ -242,3 +273,19 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_CALL]              = { 0,                        DBG("Call", 4)           -1, -1 },
     [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 }
 };
+
+void lvgExecuteActions(LVGMovieClip *clip)
+{
+    LVGActionCtx ctx;
+    ctx.clip   = clip;
+    ctx.group  = clip->groups;
+    ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
+    if (!ctx.frame->actions)
+        return;
+    for (int i = 0; i < ctx.frame->num_actions; i++)
+    {
+        const ActionEntry *ae = &g_avm1_actions[ctx.frame->actions[i].opcode];
+        if (ae->vm_func)
+            ae->vm_func(&ctx, &ctx.frame->actions[i]);
+    }
+}

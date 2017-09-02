@@ -8,6 +8,7 @@
 #include "render/render.h"
 #include "minimp3.h"
 #include "adpcm.h"
+#include "../swf/avm1.h"
 
 extern render *g_render;
 extern void *g_render_obj;
@@ -374,9 +375,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     TAG *tag = firstTag;
     while (tag)
     {
-        if (tag->id == ST_END)
+        if (ST_END == tag->id)
             break;
-        if (tag->id == ST_SHOWFRAME)
+        if (ST_SHOWFRAME == tag->id)
             group->num_frames++;
         tag = tag->next;
     }
@@ -384,6 +385,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         group->num_frames++;
     group->frames = calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
 
+    int nframe = 0;
     tag = firstTag;
     while (tag)
     {
@@ -659,16 +661,41 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_DOACTION == tag->id)
         {
-            ActionTAG *actions;
-            actions = swf_ActionGet(tag);
-            swf_DumpActions(actions, 0);
+            LVGMovieClipFrame *frame = group->frames + nframe;
+            ActionTAG *actions = swf_ActionGet(tag);
+            ActionTAG *atag = actions;
+            int nactions = 0;
+            while (atag)
+            {
+                nactions++;
+                atag = atag->next;
+            }
+            frame->actions = realloc(frame->actions, (frame->num_actions + nactions)*sizeof(LVGAction));
+            atag = actions;
+            while (atag)
+            {
+                LVGAction *a = frame->actions + frame->num_actions++;
+                a->opcode = atag->op;
+                if (ACTION_GOTO_FRAME == atag->op)
+                    a->sdata = *(uint16_t*)atag->data;
+                else
+                {
+                    a->data = malloc(atag->len);
+                    a->len  = atag->len;
+                    memcpy((void*)a->data, atag->data, atag->len);
+                }
+                atag = atag->next;
+            }
+            //swf_DumpActions(actions, 0);
             swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {
             void*abccode = swf_ReadABC(tag);
             swf_DumpABC(stdout, abccode, "");
             swf_FreeABC(abccode);
-        } else if (tag->id == ST_END)
+        } else if (ST_SHOWFRAME == tag->id)
+            nframe++;
+        else if (ST_END == tag->id)
             break;
         tag = tag->next;
     }
