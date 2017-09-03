@@ -47,4 +47,11 @@ Interesting graphics libraries:
  * https://github.com/micahpearlman/MonkVG
  * https://github.com/KhronosGroup/OpenVG-Registry
 
+Flash related projects:
+
+ * https://www.gnu.org/software/gnash/
+ * https://swfdec.freedesktop.org/wiki/
+ * http://www.swftools.org/
+ * http://www.libming.org/
+
 LVG System is developed and maintained by https://github.com/lieff
