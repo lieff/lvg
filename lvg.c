@@ -551,6 +551,13 @@ void lvgCloseClip(LVGMovieClip *clip)
             LVGMovieClipFrame *frame = group->frames + j;
             if (frame->objects)
                 free(frame->objects);
+            if (frame->actions)
+            {
+                for (int k = 0; k < frame->num_actions; k++)
+                    if (frame->actions[k].len)
+                        free((void*)frame->actions[k].data);
+                free(frame->actions);
+            }
         }
         free(group->frames);
     }

@@ -675,10 +675,12 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             while (atag)
             {
                 LVGAction *a = frame->actions + frame->num_actions++;
+                a->data = 0;
+                a->len  = 0;
                 a->opcode = atag->op;
                 if (ACTION_GOTO_FRAME == atag->op)
                     a->sdata = *(uint16_t*)atag->data;
-                else
+                else if (atag->len)
                 {
                     a->data = malloc(atag->len);
                     a->len  = atag->len;
@@ -686,7 +688,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 }
                 atag = atag->next;
             }
-            //swf_DumpActions(actions, 0);
+            printf("frame %d actions:\n", nframe);
+            swf_DumpActions(actions, 0);
             swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {
