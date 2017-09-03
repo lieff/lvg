@@ -36,7 +36,14 @@ static void action_stop(LVGActionCtx *ctx, LVGAction *a)
     ctx->group->play_state = LVG_STOPPED;
 }
 static void action_quality(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a)
+{
+    if (a->sdata)
+    {
+        lvgPlaySound(ctx->clip->sounds + a->sdata - 1);
+    } else
+        lvgStopAudio();
+}
 static void action_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_sub(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_mul(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }

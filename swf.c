@@ -390,7 +390,7 @@ static void actions_to_lvg(ActionTAG *actions, LVGAction *a)
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
-    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0;
+    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1;
     char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
@@ -774,6 +774,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             LVGSound *sound = clip->sounds + stream_sound;
             sound->channels = stream_channels;
             sound->rate = stream_rate;
+            if (stream_frame < 0)
+                stream_frame = nframe;
         } else if (ST_VIDEOFRAME == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
@@ -851,6 +853,14 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         }
         if (!(0 == stream_format && stream_bits))
             free(stream_buffer);
+        // add action to start stream sound
+        assert(stream_frame >= 0);
+        LVGMovieClipFrame *frame = group->frames + stream_frame;
+        frame->actions = realloc(frame->actions, (frame->num_actions + 1)*sizeof(LVGAction));
+        LVGAction *a = frame->actions + frame->num_actions++;
+        memset(a, 0, sizeof(LVGAction));
+        a->opcode = ACTION_STOP_SOUNDS; // our extension: play sound if sdata != 0 with id = sdata - 1
+        a->sdata = stream_sound + 1;
     }
 }
 

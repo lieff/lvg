@@ -514,14 +514,12 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 void lvgDrawClip(LVGMovieClip *clip)
 {
     int next_frame = 0;
-    if (LVG_PLAYING == clip->groups[0].play_state)
+    if (/*LVG_PLAYING == clip->groups[0].play_state*/1)
     {
         LVGMovieClipFrame *frame = clip->groups[0].frames + clip->groups[0].cur_frame;
         lvgExecuteActions(clip, frame->actions, frame->num_actions);
         if ((g_time - clip->last_time) > (1.0/clip->fps))
         {
-            if (0 == clip->groups->cur_frame && clip->num_sounds)
-                lvgPlaySound(clip->sounds);
             next_frame = 1;
             clip->last_time += (1.0/clip->fps);
         }
