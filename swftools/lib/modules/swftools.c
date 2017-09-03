@@ -1105,49 +1105,46 @@ void swf_Relocate2(SWF*swf, int*id2id)
 
 U8 swf_isShapeTag(TAG*tag)
 {
-    if(tag->id == ST_DEFINESHAPE ||
-            tag->id == ST_DEFINESHAPE2 ||
-            tag->id == ST_DEFINESHAPE3 ||
-            tag->id == ST_DEFINESHAPE4 ||
-            tag->id == ST_DEFINEMORPHSHAPE ||
-            tag->id == ST_DEFINEMORPHSHAPE2)
+    if (tag->id == ST_DEFINESHAPE ||
+        tag->id == ST_DEFINESHAPE2 ||
+        tag->id == ST_DEFINESHAPE3 ||
+        tag->id == ST_DEFINESHAPE4 ||
+        tag->id == ST_DEFINEMORPHSHAPE ||
+        tag->id == ST_DEFINEMORPHSHAPE2)
         return 1;
     return 0;
 }
 
 U8 swf_isPlaceTag(TAG*tag)
 {
-    if(tag->id == ST_PLACEOBJECT ||
-            tag->id == ST_PLACEOBJECT2 ||
-            tag->id == ST_PLACEOBJECT3)
+    if (tag->id == ST_PLACEOBJECT || tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3)
         return 1;
     return 0;
 }
 U8 swf_isTextTag(TAG*tag)
 {
-    if(tag->id == ST_DEFINETEXT ||
-            tag->id == ST_DEFINETEXT2)
+    if(tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
         return 1;
     return 0;
 }
 
 U8 swf_isFontTag(TAG*tag)
 {
-    if(tag->id == ST_DEFINEFONT ||
-            tag->id == ST_DEFINEFONT2 ||
-            tag->id == ST_DEFINEFONT3 ||
-            tag->id == ST_DEFINEFONTINFO)
+    if (tag->id == ST_DEFINEFONT ||
+        tag->id == ST_DEFINEFONT2 ||
+        tag->id == ST_DEFINEFONT3 ||
+        tag->id == ST_DEFINEFONTINFO)
         return 1;
     return 0;
 }
 
 U8  swf_isImageTag(TAG*tag)
 {
-    if(tag->id == ST_DEFINEBITSJPEG ||
-            tag->id == ST_DEFINEBITSJPEG2 ||
-            tag->id == ST_DEFINEBITSJPEG3 ||
-            tag->id == ST_DEFINEBITSLOSSLESS ||
-            tag->id == ST_DEFINEBITSLOSSLESS2)
+    if (tag->id == ST_DEFINEBITSJPEG ||
+        tag->id == ST_DEFINEBITSJPEG2 ||
+        tag->id == ST_DEFINEBITSJPEG3 ||
+        tag->id == ST_DEFINEBITSLOSSLESS ||
+        tag->id == ST_DEFINEBITSLOSSLESS2)
         return 1;
     return 0;
 }

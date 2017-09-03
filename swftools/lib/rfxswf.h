@@ -374,6 +374,7 @@ SRECT swf_TurnRect(SRECT r, MATRIX* m);
 #define ST_SCENEDESCRIPTION	86 /* version 9 */
 #define ST_DEFINEBINARY		87 /* version 9 */
 #define ST_DEFINEFONTNAME	88 /* version 9 */
+#define ST_STARTSOUND2      89
 
 /* custom tags- only valid for swftools */
 #define ST_REFLEX              777 /* to identify generator software */

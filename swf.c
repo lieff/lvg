@@ -387,6 +387,17 @@ static void actions_to_lvg(ActionTAG *actions, LVGAction *a)
     }
 }
 
+static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
+{
+    assert(frame_num >= 0);
+    LVGMovieClipFrame *frame = group->frames + frame_num;
+    frame->actions = realloc(frame->actions, (frame->num_actions + 1)*sizeof(LVGAction));
+    LVGAction *a = frame->actions + frame->num_actions++;
+    memset(a, 0, sizeof(LVGAction));
+    a->opcode = ACTION_STOP_SOUNDS; // our extension: play sound if sdata != 0 with id = sdata - 1
+    a->sdata = sound_id + 1;
+}
+
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
@@ -854,13 +865,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         if (!(0 == stream_format && stream_bits))
             free(stream_buffer);
         // add action to start stream sound
-        assert(stream_frame >= 0);
-        LVGMovieClipFrame *frame = group->frames + stream_frame;
-        frame->actions = realloc(frame->actions, (frame->num_actions + 1)*sizeof(LVGAction));
-        LVGAction *a = frame->actions + frame->num_actions++;
-        memset(a, 0, sizeof(LVGAction));
-        a->opcode = ACTION_STOP_SOUNDS; // our extension: play sound if sdata != 0 with id = sdata - 1
-        a->sdata = stream_sound + 1;
+        add_playsound_action(group, stream_frame, stream_sound);
     }
 }
 
@@ -900,13 +905,17 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 swf_DumpActions(p.actions, 0); fflush(stdout);
                 swf_ActionFree(p.actions);
             }
-        } else if (tag->id == ST_DEFINESPRITE)
+        } else if (ST_DEFINESPRITE == tag->id)
         {
             swf_UnFoldSprite(tag);
             parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups], version);
             swf_FoldSprite(tag);
             clip->num_groups++;
-        } else if (tag->id == ST_REMOVEOBJECT || tag->id == ST_REMOVEOBJECT2)
+        } else if (ST_STARTSOUND == tag->id || ST_STARTSOUND2 == tag->id)
+        {
+            int id = swf_GetU16(tag);
+            add_playsound_action(group, group->num_frames, idtable[id].lvg_id);
+        } else if (ST_REMOVEOBJECT == tag->id || ST_REMOVEOBJECT2 == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
@@ -925,7 +934,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             }
             swf_GetPlaceObject(0, placements + depth, version);
             swf_SetTagPos(tag, oldTagPos);
-        } else if (tag->id == ST_SHOWFRAME)
+        } else if (ST_SHOWFRAME == tag->id)
         {
             int numplacements;
 do_show_frame:
@@ -968,9 +977,9 @@ do_show_frame:
                 o->color_add[3] = cx->a1/256.0f;
             }
             group->num_frames++;
-            if (tag->id == ST_END)
+            if (ST_END == tag->id)
                 break;
-        } else if (tag->id == ST_END)
+        } else if (ST_END == tag->id)
         {
             if (!group->num_frames) // no SHOWFRAME tag at end of the sprite
                 goto do_show_frame;
