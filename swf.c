@@ -13,7 +13,7 @@
 extern render *g_render;
 extern void *g_render_obj;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, sound_type, text_type, edittext_type, font_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, sound_type, text_type, edittext_type, font_type};
 typedef struct
 {
     TAG *tag;
@@ -366,6 +366,27 @@ add_shape:
     g_render->cache_shape(g_render_obj, shape);
 }
 
+static void actions_to_lvg(ActionTAG *actions, LVGAction *a)
+{
+    ActionTAG *atag = actions;
+    while (atag)
+    {
+        a->data = 0;
+        a->len  = 0;
+        a->opcode = atag->op;
+        if (ACTION_GOTO_FRAME == atag->op)
+            a->sdata = *(uint16_t*)atag->data;
+        else if (atag->len)
+        {
+            a->data = malloc(atag->len);
+            a->len  = atag->len;
+            memcpy((void*)a->data, atag->data, atag->len);
+        }
+        a++;
+        atag = atag->next;
+    }
+}
+
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
@@ -608,33 +629,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 printf("button actions:\n");
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
-                while(1)
-                {
-                    U8 flags = swf_GetU8(tag);
-                    if(!flags)
-                        break;
-                    int cid   = swf_GetU16(tag);
-                    int depth = swf_GetU16(tag);
-                    MATRIX m;
-                    swf_GetMatrix(tag, &m);
-                }
-                ActionTAG *actions = swf_ActionGet(tag);
-                swf_DumpActions(actions, 0);
-                swf_ActionFree(actions);
-                swf_SetTagPos(tag, oldTagPos);
-            } else if (ST_DEFINEBUTTON2 == tag->id)
-            {
-                printf("button2 actions:\n");
-                U32 oldTagPos = swf_GetTagPos(tag);
-
-                id = swf_GetU16(tag);
-                int flags = swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
-
-                U32 offsetpos = swf_GetTagPos(tag);  // first offset
-                swf_GetU16(tag);
-
                 int state;
-                while (state = swf_GetU8(tag))
+                while ((state = swf_GetU8(tag)))
                 {
                     int cid   = swf_GetU16(tag);
                     int depth = swf_GetU16(tag);
@@ -643,6 +639,79 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_GetMatrix(tag, &m);
                     swf_GetCXForm(tag, &cm, 1);
                 }
+                ActionTAG *actions = swf_ActionGet(tag);
+                swf_DumpActions(actions, 0);
+                swf_ActionFree(actions);
+                swf_SetTagPos(tag, oldTagPos);
+            } else if (ST_DEFINEBUTTON2 == tag->id)
+            {
+                U32 oldTagPos = swf_GetTagPos(tag);
+                id = swf_GetU16(tag);
+                printf("button2(%d) actions:\n", id);
+                idtable[id].type = button_type;
+                idtable[id].lvg_id = clip->num_buttons;
+                clip->buttons = realloc(clip->buttons, (clip->num_buttons + 1)*sizeof(LVGButton));
+                LVGButton *b = clip->buttons + clip->num_buttons++;
+                memset(b, 0, sizeof(LVGButton));
+                int flags = swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
+
+                U32 offsetpos = swf_GetTagPos(tag);  // first offset
+                swf_GetU16(tag);
+
+                int state;
+                while ((state = swf_GetU8(tag)))
+                {
+                    int cid   = swf_GetU16(tag);
+                    int depth = swf_GetU16(tag);
+                    printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
+                    LVGObject *o = 0;
+                    assert(state < 16);
+                    if (state & 15)
+                    {
+                        if (state & 1)
+                        {
+                            b->up_shapes = realloc(b->up_shapes, (b->num_up_shapes + 1)*sizeof(LVGObject));
+                            o = b->up_shapes + b->num_up_shapes++;
+                        }
+                        if (state & 2)
+                        {
+                            b->over_shapes = realloc(b->over_shapes, (b->num_over_shapes + 1)*sizeof(LVGObject));
+                            o = b->over_shapes + b->num_over_shapes++;
+                        }
+                        if (state & 4)
+                        {
+                            b->down_shapes = realloc(b->down_shapes, (b->num_down_shapes + 1)*sizeof(LVGObject));
+                            o = b->down_shapes + b->num_down_shapes++;
+                        }
+                        if (state & 8)
+                        {
+                            b->hit_shapes = realloc(b->hit_shapes, (b->num_hit_shapes + 1)*sizeof(LVGObject));
+                            o = b->hit_shapes + b->num_hit_shapes++;
+                        }
+                        memset(o, 0, sizeof(LVGObject));
+                    }
+                    MATRIX m;
+                    CXFORM cx;
+                    swf_GetMatrix(tag, &m);
+                    swf_GetCXForm(tag, &cx, 1);
+                    if (o)
+                    {
+                        o->t[0] = m.sx/65536.0f;
+                        o->t[1] = m.r0/65536.0f;
+                        o->t[2] = m.r1/65536.0f;
+                        o->t[3] = m.sy/65536.0f;
+                        o->t[4] = m.tx/20.0f;
+                        o->t[5] = m.ty/20.0f;
+                        o->color_mul[0] = cx.r0/256.0f;
+                        o->color_mul[1] = cx.g0/256.0f;
+                        o->color_mul[2] = cx.b0/256.0f;
+                        o->color_mul[3] = cx.a0/256.0f;
+                        o->color_add[0] = cx.r1/256.0f;
+                        o->color_add[1] = cx.g1/256.0f;
+                        o->color_add[2] = cx.b1/256.0f;
+                        o->color_add[3] = cx.a1/256.0f;
+                    }
+                }
                 while (offsetpos)
                 {
                     if (tag->pos >= tag->len)
@@ -650,7 +719,17 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     offsetpos = swf_GetU16(tag);
                     U32 condition = swf_GetU16(tag);                // condition
                     ActionTAG *actions = swf_ActionGet(tag);
+                    ActionTAG *atag = actions;
                     printf("  condition %04x\n", condition);
+                    int nactions = 0;
+                    while (atag)
+                    {
+                        nactions++;
+                        atag = atag->next;
+                    }
+                    b->actions = realloc(b->actions, (b->num_actions + nactions)*sizeof(LVGAction));
+                    actions_to_lvg(actions, b->actions + b->num_actions);
+                    b->num_actions += nactions;
                     swf_DumpActions(actions, "  ");
                     swf_ActionFree(actions);
                 }
@@ -723,23 +802,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 atag = atag->next;
             }
             frame->actions = realloc(frame->actions, (frame->num_actions + nactions)*sizeof(LVGAction));
-            atag = actions;
-            while (atag)
-            {
-                LVGAction *a = frame->actions + frame->num_actions++;
-                a->data = 0;
-                a->len  = 0;
-                a->opcode = atag->op;
-                if (ACTION_GOTO_FRAME == atag->op)
-                    a->sdata = *(uint16_t*)atag->data;
-                else if (atag->len)
-                {
-                    a->data = malloc(atag->len);
-                    a->len  = atag->len;
-                    memcpy((void*)a->data, atag->data, atag->len);
-                }
-                atag = atag->next;
-            }
+            actions_to_lvg(actions, frame->actions + frame->num_actions);
+            frame->num_actions += nactions;
             printf("frame %d actions:\n", nframe);
             swf_DumpActions(actions, 0);
             swf_ActionFree(actions);

@@ -12,7 +12,7 @@
 #include <assert.h>
 #endif
 
-enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP };
+enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP, LVG_OBJ_BUTTON };
 enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
 typedef struct LVGObject
@@ -73,6 +73,16 @@ typedef struct LVGVideo
     int cur_frame, image;
 } LVGVideo;
 
+typedef struct LVGButton
+{
+    LVGObject *up_shapes;
+    LVGObject *over_shapes;
+    LVGObject *down_shapes;
+    LVGObject *hit_shapes;
+    LVGAction *actions;
+    int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_actions;
+} LVGButton;
+
 typedef struct LVGMovieClip
 {
     LVGShapeCollection *shapes;
@@ -80,9 +90,10 @@ typedef struct LVGMovieClip
     LVGMovieClipGroup *groups;
     LVGSound *sounds;
     LVGVideo *videos;
+    LVGButton *buttons;
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups, num_sounds, num_videos;
+    int num_shapes, num_images, num_groups, num_sounds, num_videos, num_buttons;
     float fps;
     double last_time;
 } LVGMovieClip;
