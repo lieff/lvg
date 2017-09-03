@@ -495,13 +495,17 @@ void lvgDrawClip(LVGMovieClip *clip)
 {
     lvgExecuteActions(clip);
     int next_frame = 0;
-    if ((g_time - clip->last_time) > (1.0/clip->fps))
+    if (LVG_PLAYING == clip->groups[0].play_state)
     {
-        if (0 == clip->groups->cur_frame && clip->num_sounds)
-            lvgPlaySound(clip->sounds);
-        next_frame = 1;
-        clip->last_time += (1.0/clip->fps);
-    }
+        if ((g_time - clip->last_time) > (1.0/clip->fps))
+        {
+            if (0 == clip->groups->cur_frame && clip->num_sounds)
+                lvgPlaySound(clip->sounds);
+            next_frame = 1;
+            clip->last_time += (1.0/clip->fps);
+        }
+    } else
+        clip->last_time = g_time;
     lvgDrawClipGroup(clip, clip->groups, next_frame);
 }
 

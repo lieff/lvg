@@ -603,6 +603,58 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0, 0);
                 video->cur_frame = -1;
                 swf_SetTagPos(tag, oldTagPos);
+            } else if (ST_DEFINEBUTTON == tag->id)
+            {
+                printf("button actions:\n");
+                U32 oldTagPos = swf_GetTagPos(tag);
+                id = swf_GetU16(tag);
+                while(1)
+                {
+                    U8 flags = swf_GetU8(tag);
+                    if(!flags)
+                        break;
+                    int cid   = swf_GetU16(tag);
+                    int depth = swf_GetU16(tag);
+                    MATRIX m;
+                    swf_GetMatrix(tag, &m);
+                }
+                ActionTAG *actions = swf_ActionGet(tag);
+                swf_DumpActions(actions, 0);
+                swf_ActionFree(actions);
+                swf_SetTagPos(tag, oldTagPos);
+            } else if (ST_DEFINEBUTTON2 == tag->id)
+            {
+                printf("button2 actions:\n");
+                U32 oldTagPos = swf_GetTagPos(tag);
+
+                id = swf_GetU16(tag);
+                int flags = swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
+
+                U32 offsetpos = swf_GetTagPos(tag);  // first offset
+                swf_GetU16(tag);
+
+                int state;
+                while (state = swf_GetU8(tag))
+                {
+                    int cid   = swf_GetU16(tag);
+                    int depth = swf_GetU16(tag);
+                    MATRIX m;
+                    CXFORM cm;
+                    swf_GetMatrix(tag, &m);
+                    swf_GetCXForm(tag, &cm, 1);
+                }
+                while (offsetpos)
+                {
+                    if (tag->pos >= tag->len)
+                        break;
+                    offsetpos = swf_GetU16(tag);
+                    U32 condition = swf_GetU16(tag);                // condition
+                    ActionTAG *actions = swf_ActionGet(tag);
+                    printf("  condition %04x\n", condition);
+                    swf_DumpActions(actions, "  ");
+                    swf_ActionFree(actions);
+                }
+                swf_SetTagPos(tag, oldTagPos);
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
         {
