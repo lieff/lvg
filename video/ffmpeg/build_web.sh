@@ -31,7 +31,7 @@ emconfigure ./configure \
 	--disable-iconv \
 	--disable-libxcb \
 	--disable-lzma \
-	--disable-sdl \
+	--disable-sdl2 \
 	--disable-securetransport \
 	--disable-xlib \
 	--disable-zlib
