@@ -1103,54 +1103,6 @@ void swf_Relocate2(SWF*swf, int*id2id)
     }
 }
 
-void swf_RelocateDepth(SWF*swf, char*bitmap)
-{
-    TAG*tag;
-    int nr;
-    tag = swf->firstTag;
-    for(nr=65535;nr>=0;nr--) {
-        if(bitmap[nr] != 0)
-            break;
-    }
-    // now nr is the highest used depth. So we start
-    // assigning depths at nr+1
-    nr++;
-
-    while(tag)
-    {
-        int depth;
-        /* TODO * clip depths
-            * sprites
-     */
-        if(tag->id == ST_PLACEOBJECT2) {
-            SWFPLACEOBJECT obj;
-            swf_GetPlaceObject(tag, &obj);
-            if(obj.clipdepth) {
-                int newdepth = obj.clipdepth+nr;
-                if(newdepth>65535) {
-                    fprintf(stderr, "Couldn't relocate depths: too large values\n");
-                    newdepth = 65535;
-                }
-                obj.clipdepth = newdepth;
-                swf_ResetTag(tag, ST_PLACEOBJECT2);
-                swf_SetPlaceObject(tag, &obj);
-            }
-            swf_PlaceObjectFree(&obj);
-        }
-
-        depth = swf_GetDepth(tag);
-        if(depth>=0) {
-            int newdepth = depth+nr;
-            if(newdepth>65535) {
-                fprintf(stderr, "Couldn't relocate depths: too large values\n");
-                newdepth = 65535;
-            }
-            swf_SetDepth(tag, newdepth);
-        }
-        tag=tag->next;
-    }
-}
-
 U8 swf_isShapeTag(TAG*tag)
 {
     if(tag->id == ST_DEFINESHAPE ||
@@ -1198,49 +1150,6 @@ U8  swf_isImageTag(TAG*tag)
             tag->id == ST_DEFINEBITSLOSSLESS2)
         return 1;
     return 0;
-}
-
-TAG* swf_Concatenate (TAG*list1,TAG*list2)
-{
-    TAG*tag=0,*lasttag=0;
-    char bitmap[65536];
-    char depthmap[65536];
-    SWF swf1,swf2;
-    memset(bitmap, 0, sizeof(bitmap));
-    memset(depthmap, 0, sizeof(depthmap));
-    memset(&swf1, 0, sizeof(swf1));
-    memset(&swf2, 0, sizeof(swf2));
-
-    swf1.firstTag = list1;
-    swf_FoldAll(&swf1);
-    swf2.firstTag = list2;
-    swf_FoldAll(&swf2);
-
-    tag = list1;
-    while(tag) {
-        if(!swf_isDefiningTag(tag)) {
-            int id = swf_GetDefineID(tag);
-            bitmap[id] = 1;
-        }
-        if(tag->id == ST_PLACEOBJECT ||
-                tag->id == ST_PLACEOBJECT2) {
-            int depth = swf_GetDepth(tag);
-            depthmap[depth] = 1;
-        }
-        if(tag->id == ST_REMOVEOBJECT ||
-                tag->id == ST_REMOVEOBJECT2) {
-            int depth = swf_GetDepth(tag);
-            depthmap[depth] = 0;
-        }
-        tag = tag->next;
-        lasttag = tag;
-    }
-    swf_Relocate(&swf2, bitmap);
-    swf_RelocateDepth(&swf2, depthmap);
-    lasttag->next = swf2.firstTag;
-    swf2.firstTag->prev = lasttag;
-
-    return swf1.firstTag;
 }
 
 static int tagHash(TAG*tag)

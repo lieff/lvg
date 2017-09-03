@@ -419,7 +419,7 @@ typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
   { U16         fill;
     U16         line;
   } bits;
-  				// used by Get/SetSimpleShape and glyph handling
+                // used by Get/SetSimpleShape and glyph handling
   U8 *          data;
   U32           bitlen;         // length of data in bits
 } SHAPE;
@@ -562,7 +562,7 @@ typedef struct _FONTUSAGE
 #define FONT_ENCODING_ANSI 2
 #define FONT_ENCODING_SHIFTJIS 4
 
-#define FONTALIGN_THIN 0 
+#define FONTALIGN_THIN 0
 #define FONTALIGN_MEDIUM 1
 #define FONTALIGN_THICK 2
 
@@ -688,7 +688,7 @@ void swf_FontPrepareForEditText(SWFFONT * f);
 
 /* notice: if you set the fontid, make sure you call swf_FontPrepareForEditText() for the font first */
 void swf_SetEditText(TAG*tag, U16 flags, SRECT r, const char*text, RGBA*color,
-	int maxlength, U16 font, U16 height, EditTextLayout*layout, const char*variable);
+    int maxlength, U16 font, U16 height, EditTextLayout*layout, const char*variable);
 
 SRECT swf_SetDefineText(TAG*tag, SWFFONT*font, RGBA*rgb, const char*text, int scale);
 
@@ -958,7 +958,9 @@ int swf_ObjectMove(TAG * t,U16 depth,MATRIX * m,CXFORM * cx);
 #define PF2_FILTERS      0x01
 #define PF2_BLENDMODE    0x02
 #define PF2_ASBITMAP     0x04
-//...
+#define PF2_CLASS_NAME   0x08
+#define PF2_HAS_IMAGE    0x10
+#define PF2_HAS_VISIBLE  0x20
 
 #define BLENDMODE_NORMAL 0
 #define BLENDMODE_NORMAL2 1
@@ -985,6 +987,7 @@ typedef struct _SWFPLACEOBJECT {
     CXFORM cxform;
     U16 ratio;
     char*name;
+    char*class_name;
     U16 clipdepth;
     ActionTAG* actions;
     U8 blendmode;
@@ -992,7 +995,7 @@ typedef struct _SWFPLACEOBJECT {
 } SWFPLACEOBJECT;
 
 void swf_SetPlaceObject(TAG * t,SWFPLACEOBJECT* obj);
-int swf_GetPlaceObject(TAG * t,SWFPLACEOBJECT* obj);
+int swf_GetPlaceObject(TAG * t,SWFPLACEOBJECT* obj, int version);
 void swf_PlaceObjectFree(SWFPLACEOBJECT* obj);
 
 // swfvideo.c
@@ -1041,7 +1044,7 @@ void swf_VideoStreamClear(VIDEOSTREAM*stream);
 
 /* missing: IDLE_OUTDOWN
             OUTDOWN_OVERUP
-	    OVERUP_OUTDOWN
+        OVERUP_OUTDOWN
 */
 #define BC_OVERDOWN_IDLE        0x0100
 #define BC_IDLE_OVERDOWN        0x0080

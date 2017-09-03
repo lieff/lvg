@@ -632,8 +632,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int state;
                 while ((state = swf_GetU8(tag)))
                 {
-                    int cid   = swf_GetU16(tag);
-                    int depth = swf_GetU16(tag);
+                    /*int cid   = */swf_GetU16(tag);
+                    /*int depth = */swf_GetU16(tag);
                     MATRIX m;
                     CXFORM cm;
                     swf_GetMatrix(tag, &m);
@@ -653,7 +653,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 clip->buttons = realloc(clip->buttons, (clip->num_buttons + 1)*sizeof(LVGButton));
                 LVGButton *b = clip->buttons + clip->num_buttons++;
                 memset(b, 0, sizeof(LVGButton));
-                int flags = swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
+                /*int flags = */swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
 
                 U32 offsetpos = swf_GetTagPos(tag);  // first offset
                 swf_GetU16(tag);
@@ -854,14 +854,14 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     }
 }
 
-static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
+static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group, int version)
 {
     group->num_frames = 0;
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)calloc(1, sizeof(SWFPLACEOBJECT)*65536);
     int i, j;
     for (i = 0; i < 65536; i++)
     {
-        swf_GetPlaceObject(0, placements + i);
+        swf_GetPlaceObject(0, placements + i, version);
 #define INVALID_ID 65535
         placements[i].id = INVALID_ID;
     }
@@ -871,7 +871,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         if (swf_isPlaceTag(tag))
         {
             SWFPLACEOBJECT p;
-            int flags = swf_GetPlaceObject(tag, &p);
+            int flags = swf_GetPlaceObject(tag, &p, version);
             swf_PlaceObjectFree(&p);
             if (!(flags & PF_CHAR))
                 p.id = INVALID_ID;
@@ -885,10 +885,15 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
+            if (p.actions)
+            {
+                swf_DumpActions(p.actions, 0); fflush(stdout);
+                swf_ActionFree(p.actions);
+            }
         } else if (tag->id == ST_DEFINESPRITE)
         {
             swf_UnFoldSprite(tag);
-            parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
+            parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups], version);
             swf_FoldSprite(tag);
             clip->num_groups++;
         } else if (tag->id == ST_REMOVEOBJECT || tag->id == ST_REMOVEOBJECT2)
@@ -908,7 +913,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             {
                 assert(placements[depth].id == id);
             }
-            swf_GetPlaceObject(0, placements + depth);
+            swf_GetPlaceObject(0, placements + depth, version);
             swf_SetTagPos(tag, oldTagPos);
         } else if (tag->id == ST_SHOWFRAME)
         {
@@ -1018,7 +1023,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->num_sounds = 0;
     parseGroup(swf->firstTag, idtable, clip, clip->groups);
     clip->num_groups = 1;
-    parsePlacements(swf->firstTag, idtable, clip, clip->groups);
+    parsePlacements(swf->firstTag, idtable, clip, clip->groups, swf->fileVersion);
     free(idtable);
     assert(clip->groups->num_frames == swf->frameCount);
     clip->last_time = g_time;
