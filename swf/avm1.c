@@ -274,18 +274,18 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 }
 };
 
-void lvgExecuteActions(LVGMovieClip *clip)
+void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
 {
+    if (!actions)
+        return;
     LVGActionCtx ctx;
     ctx.clip   = clip;
     ctx.group  = clip->groups;
     ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
-    if (!ctx.frame->actions)
-        return;
-    for (int i = 0; i < ctx.frame->num_actions; i++)
+    for (int i = 0; i < num_actions; i++)
     {
-        const ActionEntry *ae = &g_avm1_actions[ctx.frame->actions[i].opcode];
+        const ActionEntry *ae = &g_avm1_actions[actions[i].opcode];
         if (ae->vm_func)
-            ae->vm_func(&ctx, &ctx.frame->actions[i]);
+            ae->vm_func(&ctx, &actions[i]);
     }
 }

@@ -482,10 +482,30 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                 }
             }
             g_render->render_image(g_render_obj, video->image);
-        }
+        } else
         if (LVG_OBJ_GROUP == o->type)
         {
             lvgDrawClipGroup(clip, clip->groups + o->id, next_frame);
+        } else
+        if (LVG_OBJ_BUTTON == o->type)
+        {
+            LVGButton *b = clip->buttons + o->id;
+            LVGObject *ob = b->up_shapes;
+            int nshapes = b->num_up_shapes;
+            if (mkeys)
+            {
+                ob = b->down_shapes;
+                nshapes = b->num_down_shapes;
+                lvgExecuteActions(clip, b->actions, b->num_actions);
+            }
+            for (int j = 0; j < nshapes; j++)
+            {
+                if (LVG_OBJ_SHAPE != ob->type)
+                    continue;
+                for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
+                    lvgDrawShape(&clip->shapes[ob->id].shapes[k], ob);
+                ob++;
+            }
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
@@ -493,10 +513,11 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 
 void lvgDrawClip(LVGMovieClip *clip)
 {
-    lvgExecuteActions(clip);
     int next_frame = 0;
     if (LVG_PLAYING == clip->groups[0].play_state)
     {
+        LVGMovieClipFrame *frame = clip->groups[0].frames + clip->groups[0].cur_frame;
+        lvgExecuteActions(clip, frame->actions, frame->num_actions);
         if ((g_time - clip->last_time) > (1.0/clip->fps))
         {
             if (0 == clip->groups->cur_frame && clip->num_sounds)

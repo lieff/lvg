@@ -696,6 +696,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_GetCXForm(tag, &cx, 1);
                     if (o)
                     {
+                        o->id    = idtable[cid].lvg_id;
+                        o->type  = idtable[cid].type;
+                        o->depth = depth;
                         o->t[0] = m.sx/65536.0f;
                         o->t[1] = m.r0/65536.0f;
                         o->t[2] = m.r1/65536.0f;
@@ -969,7 +972,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     swf_FoldAll(swf);
     swf_RemoveJPEGTables(swf);
 
-    character_t *idtable = (character_t*)rfx_calloc(sizeof(character_t)*65536);
+    character_t *idtable = (character_t*)calloc(1, sizeof(character_t)*65536);
     LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
     clip->bounds[0] = swf->movieSize.xmin/20.0f;
     clip->bounds[1] = swf->movieSize.ymin/20.0f;

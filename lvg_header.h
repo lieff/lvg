@@ -114,7 +114,7 @@ short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
 void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
-void lvgExecuteActions(LVGMovieClip *clip);
+void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions);
 
 #ifdef __TINYC__
 extern NVGcontext *vg;
