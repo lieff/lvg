@@ -24,7 +24,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA */
 
-#include "mem.h"
 #include "rfxswf.h"
 
 #ifdef HAVE_TIME_H
@@ -609,8 +608,8 @@ void swf_GetGradient(TAG * tag, GRADIENT * gradient, char alpha)
     U8 num = swf_GetU8(tag) & 15;
     if(gradient) {
         gradient->num = num;
-        gradient->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient->num);
-        gradient->ratios = (U8*)rfx_calloc(sizeof(gradient->ratios[0])*gradient->num);
+        gradient->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient->num);
+        gradient->ratios = (U8*)calloc(1, sizeof(gradient->ratios[0])*gradient->num);
     }
     for(t=0;t<num;t++)
     {
@@ -1112,7 +1111,7 @@ int swf_VerifyPassword(TAG * t, const char * password)
 TAG * swf_InsertTag(TAG * after,U16 id)
 { TAG * t;
 
-  t = (TAG *)rfx_calloc(sizeof(TAG));
+  t = (TAG *)calloc(1, sizeof(TAG));
   t->id = id;
 
   if (after)
@@ -1128,7 +1127,7 @@ TAG * swf_InsertTag(TAG * after,U16 id)
 TAG * swf_InsertTagBefore(SWF* swf, TAG * before,U16 id)
 { TAG * t;
 
-  t = (TAG *)rfx_calloc(sizeof(TAG));
+  t = (TAG *)calloc(1, sizeof(TAG));
   t->id = id;
 
   if (before)
@@ -1202,7 +1201,7 @@ TAG * swf_ReadTag(reader_t*reader, TAG * prev)
   if (id==ST_DEFINESPRITE) len = 2*sizeof(U16);
   // Sprite handling fix: Flatten sprite tree
 
-  t = (TAG *)rfx_calloc(sizeof(TAG));
+  t = (TAG *)calloc(1, sizeof(TAG));
 
   t->len = len;
   t->id  = id;

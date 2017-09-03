@@ -154,7 +154,7 @@ ActionTAG* swf_ActionGet(TAG*tag)
     U8*data;
     while(op)
     {
-        action->next = (ActionTAG*)rfx_calloc(sizeof(ActionTAG));
+        action->next = (ActionTAG*)calloc(1, sizeof(ActionTAG));
         action->next->prev = action;
         action->next->next = 0;
         action->next->parent = tmp.next;

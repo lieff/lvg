@@ -36,7 +36,6 @@
 #include "../config.h"
 #include "./bitio.h"
 #include "./drawer.h"
-#include "./mem.h"
 #include "./types.h"
 
 #ifdef __cplusplus

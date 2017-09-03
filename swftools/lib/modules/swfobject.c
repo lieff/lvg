@@ -332,7 +332,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
                     event_flags |= swf_GetU16(tag) << 16;
                 if (!event_flags)
                     break;
-                int actions_size = swf_GetU32(tag);
+                /*int actions_size = */swf_GetU32(tag);
                 if (event_flags & (2 << 16))
                 {
                     /*int key_code = */swf_GetU8(tag);

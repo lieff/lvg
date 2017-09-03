@@ -25,7 +25,6 @@
 #include <string.h>
 #include <assert.h>
 #include <memory.h>
-#include "mem.h"
 #include "types.h"
 #include "q.h"
 
@@ -155,7 +154,7 @@ typedef struct _ringbuffer_internal_t
 
 void ringbuffer_init(ringbuffer_t*r)
 {
-    ringbuffer_internal_t*i = (ringbuffer_internal_t*)rfx_calloc(sizeof(ringbuffer_internal_t));
+    ringbuffer_internal_t*i = (ringbuffer_internal_t*)calloc(1, sizeof(ringbuffer_internal_t));
     memset(r, 0, sizeof(ringbuffer_t));
     r->internal = i;
     i->buffer = (unsigned char*)malloc(1024);
@@ -367,12 +366,12 @@ void** heap_flatten(heap_t*h)
 
 trie_t*trie_new()
 {
-    return (trie_t*)rfx_calloc(sizeof(trie_t));
+    return (trie_t*)calloc(1, sizeof(trie_t));
 }
 static char _trie_put(trielayer_t**t, unsigned const char*id, void*data)
 {
     if(!*t) {
-        (*t) = rfx_calloc(sizeof(trielayer_t));
+        (*t) = calloc(1, sizeof(trielayer_t));
         (*t)->rest = (unsigned char*)strdup((char*)id);
         (*t)->data = data;
         return 0;
@@ -478,7 +477,7 @@ typedef struct _trierollback {
 static void trie_rollback_adds(trie_t*t, unsigned const char*id, void*data)
 {
     trierollback_t*rollback = (trierollback_t*)t->rollback;
-    triememory_t*m = (triememory_t*)rfx_calloc(sizeof(triememory_t));
+    triememory_t*m = (triememory_t*)calloc(1, sizeof(triememory_t));
     m->key = id;
     m->data = data;
     m->del = 0;
@@ -488,7 +487,7 @@ static void trie_rollback_adds(trie_t*t, unsigned const char*id, void*data)
 static void trie_rollback_removes(trie_t*t, unsigned const char*id, void*data)
 {
     trierollback_t*rollback = (trierollback_t*)t->rollback;
-    triememory_t*m = (triememory_t*)rfx_calloc(sizeof(triememory_t));
+    triememory_t*m = (triememory_t*)calloc(1, sizeof(triememory_t));
     m->key = id;
     m->data = data;
     m->del = 1;
@@ -521,7 +520,7 @@ void trie_dump(trie_t*t)
 void trie_remember(trie_t*t)
 {
     trierollback_t*old = (trierollback_t*)t->rollback;
-    t->rollback = (trierollback_t*)rfx_calloc(sizeof(trierollback_t));
+    t->rollback = (trierollback_t*)calloc(1, sizeof(trierollback_t));
     ((trierollback_t*)t->rollback)->prev = old;
 }
 
@@ -822,10 +821,10 @@ typedef struct _stringarray_internal_t
 void stringarray_init(stringarray_t*sa, int hashsize)
 {
     stringarray_internal_t*s;
-    sa->internal = (stringarray_internal_t*)rfx_calloc(sizeof(stringarray_internal_t));
+    sa->internal = (stringarray_internal_t*)calloc(1, sizeof(stringarray_internal_t));
     s = (stringarray_internal_t*)sa->internal;
     mem_init(&s->pos);
-    s->hash = rfx_calloc(sizeof(stringlist_t*)*hashsize);
+    s->hash = calloc(1, sizeof(stringlist_t*)*hashsize);
     s->hashsize = hashsize;
 }
 void stringarray_put(stringarray_t*sa, string_t str)
@@ -1082,7 +1081,7 @@ void dict_init(dict_t*h, int size)
 {
     memset(h, 0, sizeof(dict_t));
     h->hashsize = size;
-    h->slots = h->hashsize?(dictentry_t**)rfx_calloc(sizeof(dictentry_t*)*h->hashsize):0;
+    h->slots = h->hashsize?(dictentry_t**)calloc(1, sizeof(dictentry_t*)*h->hashsize):0;
     h->num = 0;
     h->key_type = &charptr_type;
 }
@@ -1090,7 +1089,7 @@ void dict_init2(dict_t*h, type_t*t, int size)
 {
     memset(h, 0, sizeof(dict_t));
     h->hashsize = size;
-    h->slots = h->hashsize?(dictentry_t**)rfx_calloc(sizeof(dictentry_t*)*h->hashsize):0;
+    h->slots = h->hashsize?(dictentry_t**)calloc(1, sizeof(dictentry_t*)*h->hashsize):0;
     h->num = 0;
     h->key_type = t;
 }
@@ -1099,7 +1098,7 @@ dict_t*dict_clone(dict_t*o)
 {
     dict_t*h = malloc(sizeof(dict_t));
     memcpy(h, o, sizeof(dict_t));
-    h->slots = h->hashsize?(dictentry_t**)rfx_calloc(sizeof(dictentry_t*)*h->hashsize):0;
+    h->slots = h->hashsize?(dictentry_t**)calloc(1, sizeof(dictentry_t*)*h->hashsize):0;
     int t;
     for(t=0;t<o->hashsize;t++) {
         dictentry_t*e = o->slots[t];
@@ -1119,7 +1118,7 @@ dict_t*dict_clone(dict_t*o)
 static void dict_expand(dict_t*h, int newlen)
 {
     assert(h->hashsize < newlen);
-    dictentry_t**newslots = (dictentry_t**)rfx_calloc(sizeof(dictentry_t*)*newlen);
+    dictentry_t**newslots = (dictentry_t**)calloc(1, sizeof(dictentry_t*)*newlen);
     int t;
     for(t=0;t<h->hashsize;t++) {
         dictentry_t*e = h->slots[t];
@@ -1439,7 +1438,7 @@ typedef struct _map_internal_t
 void map_init(map_t*map)
 {
     map_internal_t*m;
-    map->internal = (map_internal_t*)rfx_calloc(sizeof(map_internal_t));
+    map->internal = (map_internal_t*)calloc(1, sizeof(map_internal_t));
     m = (map_internal_t*)map->internal;
     dict_init(&m->d, INITIAL_SIZE);
 }

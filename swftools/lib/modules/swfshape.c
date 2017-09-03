@@ -48,7 +48,7 @@ int swf_ShapeNew(SHAPE * * s)
 {
     SHAPE * sh;
     if (!s) return -1;
-    sh = (SHAPE *)rfx_calloc(sizeof(SHAPE));
+    sh = (SHAPE *)calloc(1, sizeof(SHAPE));
     *s = sh;
     return 0;
 }
@@ -895,7 +895,7 @@ SHAPE2* swf_Shape2Clone(SHAPE2 * s)
 
 SHAPE2* swf_ShapeToShape2(SHAPE*shape) {
 
-    SHAPE2*shape2 = (SHAPE2*)rfx_calloc(sizeof(SHAPE2));
+    SHAPE2*shape2 = (SHAPE2*)calloc(1, sizeof(SHAPE2));
 
     shape2->numlinestyles = shape->linestyle.n;
     if(shape2->numlinestyles) {
@@ -1156,8 +1156,8 @@ void swf_RecodeShapeData(U8*data, int bitlen, int in_bits_fill, int in_bits_line
     s2.lines = swf_ParseShapeData(data, bitlen, in_bits_fill, in_bits_line, 1, 0);
     s2.numfillstyles = out_bits_fill?1<<(out_bits_fill-1):0;
     s2.numlinestyles = out_bits_line?1<<(out_bits_line-1):0;
-    s2.fillstyles = (FILLSTYLE*)rfx_calloc(sizeof(FILLSTYLE)*s2.numfillstyles);
-    s2.linestyles = (LINESTYLE*)rfx_calloc(sizeof(LINESTYLE)*s2.numlinestyles);
+    s2.fillstyles = (FILLSTYLE*)calloc(1, sizeof(FILLSTYLE)*s2.numfillstyles);
+    s2.linestyles = (LINESTYLE*)calloc(1, sizeof(LINESTYLE)*s2.numlinestyles);
 
     line = s2.lines;
     while(line) {

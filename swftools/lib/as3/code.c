@@ -286,7 +286,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
     int end=tag->pos+len;
     //printf("-->\n");fflush(stdout);
 
-    code_t**bytepos = rfx_calloc(sizeof(code_t*)*len);
+    code_t**bytepos = calloc(1, sizeof(code_t*)*len);
 
     while(tag->pos<end) {
         int codepos = tag->pos-start;
@@ -689,7 +689,7 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
         c = c->next;
     }
     currentstats_t* current = malloc(sizeof(currentstats_t));
-    current->stack = rfx_calloc(sizeof(stackpos_t)*num);
+    current->stack = calloc(1, sizeof(stackpos_t)*num);
     current->maxlocal = 0;
     current->maxstack = 0;
     current->maxscope = 0;
@@ -905,7 +905,7 @@ codestats_t* code_get_statistics(code_t*code, abc_exception_list_t*exceptions)
     currentstats_t*current = code_get_stats(code, exceptions);
     if(!current)
         return 0;
-    codestats_t*stats = rfx_calloc(sizeof(codestats_t));
+    codestats_t*stats = calloc(1, sizeof(codestats_t));
     stats->local_count = current->maxlocal;
     stats->max_stack = current->maxstack;
     stats->max_scope_depth = current->maxscope;
@@ -922,7 +922,7 @@ void codestats_free(codestats_t*s)
 
 code_t* add_opcode(code_t*atag, U8 op)
 {
-    code_t*tmp = (code_t*)rfx_calloc(sizeof(code_t));
+    code_t*tmp = (code_t*)calloc(1, sizeof(code_t));
     tmp->opcode = op;
     if(atag) {
         tmp->prev = atag;

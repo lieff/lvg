@@ -446,13 +446,13 @@ void swf_GetMorphGradient(TAG * tag, GRADIENT * gradient1, GRADIENT * gradient2)
 
     if(gradient1) {
         gradient1->num = num;
-        gradient1->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient1->num);
-        gradient1->ratios = (U8*)rfx_calloc(sizeof(gradient1->ratios[0])*gradient1->num);
+        gradient1->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient1->num);
+        gradient1->ratios = (U8*)calloc(1, sizeof(gradient1->ratios[0])*gradient1->num);
     }
     if(gradient2) {
         gradient2->num = num;
-        gradient2->rgba = (RGBA*)rfx_calloc(sizeof(RGBA)*gradient2->num);
-        gradient2->ratios = (U8*)rfx_calloc(sizeof(gradient2->ratios[0])*gradient2->num);
+        gradient2->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient2->num);
+        gradient2->ratios = (U8*)calloc(1, sizeof(gradient2->ratios[0])*gradient2->num);
     }
     for(t=0;t<num;t++)
     {
@@ -1168,10 +1168,10 @@ static int tagHash(TAG*tag)
 void swf_Optimize(SWF*swf)
 {
     const int hash_size = 131072;
-    char* dontremap = (char*)rfx_calloc(sizeof(char)*65536);
+    char* dontremap = (char*)calloc(1, sizeof(char)*65536);
     U16* remap = (U16*)malloc(sizeof(U16)*65536);
-    TAG* id2tag = (TAG*)rfx_calloc(sizeof(TAG*)*65536);
-    TAG** hashmap = (TAG**)rfx_calloc(sizeof(TAG*)*hash_size);
+    TAG* id2tag = (TAG*)calloc(1, sizeof(TAG*)*65536);
+    TAG** hashmap = (TAG**)calloc(1, sizeof(TAG*)*hash_size);
     TAG* tag;
     int t;
     for(t=0;t<65536;t++) {

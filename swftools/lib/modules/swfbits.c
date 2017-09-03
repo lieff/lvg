@@ -217,7 +217,7 @@ JPEGBITS *swf_SetJPEGBitsStart(TAG * t, int width, int height, int quality)
 
     // redirect compression lib output to local SWF Tag structure
 
-    jpeg = (JPEGDESTMGR *) rfx_calloc(sizeof(JPEGDESTMGR));
+    jpeg = (JPEGDESTMGR *) calloc(1, sizeof(JPEGDESTMGR));
 
     jpeg->cinfo.err = jpeg_std_error(&jpeg->jerr);
 
@@ -479,7 +479,7 @@ void swf_SaveJPEG(char*filename, RGBA*pixels, int width, int height, int quality
         perror(buf);
         return;
     }
-    data2 = (unsigned char *)rfx_calloc(width*3);
+    data2 = (unsigned char *)calloc(1, width*3);
 
     memset(&cinfo, 0, sizeof(cinfo));
     memset(&jerr, 0, sizeof(jerr));

@@ -29,7 +29,6 @@
 #include <math.h>
 #include <memory.h>
 #include "graphcut.h"
-#include "mem.h"
 
 #ifdef DEBUG
 #define DBG
@@ -127,9 +126,9 @@ static void posqueue_purge(posqueue_t*queue)
 
 graph_t* graph_new(int num_nodes)
 {
-    graph_t*graph = rfx_calloc(sizeof(graph_t));
+    graph_t*graph = calloc(1, sizeof(graph_t));
     graph->num_nodes = num_nodes;
-    graph->nodes = rfx_calloc(sizeof(node_t)*num_nodes);
+    graph->nodes = calloc(1, sizeof(node_t)*num_nodes);
     int t;
     for(t=0;t<num_nodes;t++) {
         graph->nodes[t].nr = t;
@@ -155,9 +154,9 @@ void graph_delete(graph_t*graph)
 static graphcut_workspace_t*graphcut_workspace_new(graph_t*graph, node_t*pos1, node_t*pos2)
 {
     graphcut_workspace_t*workspace = malloc(sizeof(graphcut_workspace_t));
-    workspace->flags1 = rfx_calloc(graph->num_nodes);
-    workspace->flags2 = rfx_calloc(graph->num_nodes);
-    workspace->back = rfx_calloc(graph->num_nodes*sizeof(halfedge_t*));
+    workspace->flags1 = calloc(1, graph->num_nodes);
+    workspace->flags2 = calloc(1, graph->num_nodes);
+    workspace->back = calloc(1, graph->num_nodes*sizeof(halfedge_t*));
     workspace->pos1 = pos1;
     workspace->pos2 = pos2;
     workspace->graph = graph;
@@ -599,8 +598,8 @@ weight_t graph_maxflow(graph_t*graph, node_t*pos1, node_t*pos2)
 
 halfedge_t*graph_add_edge(node_t*from, node_t*to, weight_t forward_weight, weight_t backward_weight)
 {
-    halfedge_t*e1 = (halfedge_t*)rfx_calloc(sizeof(halfedge_t));
-    halfedge_t*e2 = (halfedge_t*)rfx_calloc(sizeof(halfedge_t));
+    halfedge_t*e1 = (halfedge_t*)calloc(1, sizeof(halfedge_t));
+    halfedge_t*e2 = (halfedge_t*)calloc(1, sizeof(halfedge_t));
     e1->fwd = e2;
     e2->fwd = e1;
     e1->node = from;

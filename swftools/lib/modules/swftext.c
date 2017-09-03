@@ -155,7 +155,7 @@ int swf_FontExtract_DefineFont(int id, SWFFONT * f, TAG * t)
         of = swf_GetU16(t);
         n = of / 2;
         f->numchars = n;
-        f->glyph = (SWFGLYPH*)rfx_calloc(sizeof(SWFGLYPH) * n);
+        f->glyph = (SWFGLYPH*)calloc(1, sizeof(SWFGLYPH) * n);
 
         for (i = 1; i < n; i++)
             swf_GetU16(t);
@@ -281,10 +281,10 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT * font, TAG * tag)
     glyphcount = swf_GetU16(tag);
     font->numchars = glyphcount;
 
-    font->glyph = (SWFGLYPH *) rfx_calloc(sizeof(SWFGLYPH) * glyphcount);
-    font->glyph2ascii = (U16 *) rfx_calloc(sizeof(U16) * glyphcount);
+    font->glyph = (SWFGLYPH *) calloc(1, sizeof(SWFGLYPH) * glyphcount);
+    font->glyph2ascii = (U16 *) calloc(1, sizeof(U16) * glyphcount);
 
-    offset = (U32*)rfx_calloc(sizeof(U32)*(glyphcount+1));
+    offset = (U32*)calloc(1, sizeof(U32)*(glyphcount+1));
     offset_start = tag->pos;
 
     if (flags1 & 8) {		// wide offsets
@@ -387,7 +387,7 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
 
     if (fid == id) {
         font->alignzone_flags = swf_GetU8(tag);
-        font->alignzones = rfx_calloc(sizeof(ALIGNZONE)*font->numchars);
+        font->alignzones = calloc(1, sizeof(ALIGNZONE)*font->numchars);
         int i=0;
         while(tag->pos < tag->len) {
             if(i>=font->numchars)
@@ -586,7 +586,7 @@ int swf_FontExtract(SWF * swf, int id, SWFFONT * *font)
     if ((!swf) || (!font))
         return -1;
 
-    f = (SWFFONT *) rfx_calloc(sizeof(SWFFONT));
+    f = (SWFFONT *) calloc(1, sizeof(SWFFONT));
 
     t = swf->firstTag;
 
@@ -923,9 +923,9 @@ int swf_FontInitUsage(SWFFONT * f)
         fprintf(stderr, "Usage initialized twice");
         return -1;
     }
-    f->use = (FONTUSAGE*)rfx_calloc(sizeof(FONTUSAGE));
+    f->use = (FONTUSAGE*)calloc(1, sizeof(FONTUSAGE));
     f->use->smallest_size = 0xffff;
-    f->use->chars = (int*)rfx_calloc(sizeof(f->use->chars[0]) * f->numchars);
+    f->use->chars = (int*)calloc(1, sizeof(f->use->chars[0]) * f->numchars);
     return 0;
 }
 
@@ -1026,7 +1026,7 @@ void swf_FontUsePair(SWFFONT * f, int char1, int char2)
             free(u->neighbors_hash);
         }
         u->neighbors_hash_size = u->neighbors_hash_size?u->neighbors_hash_size*2:1024;
-        u->neighbors_hash = rfx_calloc(u->neighbors_hash_size*sizeof(int));
+        u->neighbors_hash = calloc(1, u->neighbors_hash_size*sizeof(int));
         int t;
         for(t=0;t<u->num_neighbors;t++) {
             hashadd(u, u->neighbors[t].char1, u->neighbors[t].char2, t);
@@ -1238,7 +1238,7 @@ void swf_FontAddLayout(SWFFONT * f, int ascent, int descent, int leading)
     f->layout->leading = leading;
     f->layout->kerningcount = 0;
     f->layout->kerning = 0;
-    f->layout->bounds = (SRECT *) rfx_calloc(sizeof(SRECT) * f->numchars);
+    f->layout->bounds = (SRECT *) calloc(1, sizeof(SRECT) * f->numchars);
 }
 
 int swf_FontSetInfo(TAG * t, SWFFONT * f)
@@ -1692,7 +1692,7 @@ void swf_FontCreateLayout(SWFFONT * f)
     if (!f->numchars)
         return;
 
-    f->layout = (SWFLAYOUT *) rfx_calloc(sizeof(SWFLAYOUT));
+    f->layout = (SWFLAYOUT *) calloc(1, sizeof(SWFLAYOUT));
     f->layout->bounds = (SRECT *) malloc(f->numchars * sizeof(SRECT));
     f->layout->ascent = 0;
     f->layout->descent = 0;
