@@ -4,5 +4,6 @@ render/*.c \
 swf/avm1.c \
 video/ffmpeg/ffmpeg_dec.c \
 -L. -I. -Inanovg -Iswftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg -Wl,-Map=lvg.map -lm -lglfw -lGL -ltcc2 -ldl -lSDL2 -lavcodec -lavutil
+objcopy --remove-section=.comment --remove-section=.note ./lvg
 upx --best --ultra-brute ./lvg
 zip -9 -u lvg_linux.zip lvg
