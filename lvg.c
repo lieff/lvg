@@ -408,14 +408,16 @@ void lvgDrawSVG(NSVGimage *image)
 
 static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
 {
-    int frame = group->cur_frame;
+    int nframe = group->cur_frame;
+    LVGMovieClipFrame *frame = group->frames + nframe;
+    lvgExecuteActions(clip, frame->actions, frame->num_actions);
     float save_transform[6];
-    assert(frame < group->num_frames);
+    assert(nframe < group->num_frames);
     if (next_frame)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
-    for (int i = 0; i < group->frames[frame].num_objects; i++)
+    for (int i = 0; i < group->frames[nframe].num_objects; i++)
     {
-        LVGObject *o = &group->frames[frame].objects[i];
+        LVGObject *o = &group->frames[nframe].objects[i];
         g_render->get_transform(g_render_obj, save_transform);
         g_render->set_transform(g_render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type)
@@ -516,8 +518,6 @@ void lvgDrawClip(LVGMovieClip *clip)
     int next_frame = 0;
     if (/*LVG_PLAYING == clip->groups[0].play_state*/1)
     {
-        LVGMovieClipFrame *frame = clip->groups[0].frames + clip->groups[0].cur_frame;
-        lvgExecuteActions(clip, frame->actions, frame->num_actions);
         if ((g_time - clip->last_time) > (1.0/clip->fps))
         {
             next_frame = 1;

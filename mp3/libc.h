@@ -42,7 +42,7 @@
 #endif
 #include <math.h>
 
-#ifndef __int8_t_defined
+#ifdef _MSC_VER
     #define __int8_t_defined
     typedef unsigned char  uint8_t;
     typedef   signed char   int8_t;
