@@ -66,9 +66,12 @@ int adpcm_decode(TAG *tag, int buf_size, int channels, int16_t *samples, int max
     {
         for (i = 0; i < channels; i++)
         {
-            *samples++ = status[i].predictor = (int16_t)(uint16_t)swf_GetBits(tag, 16);
+            if (samples_num < max_samples)
+            {
+                *samples++ = status[i].predictor = (int16_t)(uint16_t)swf_GetBits(tag, 16);
+                samples_num++;
+            }
             status[i].step_index = swf_GetBits(tag, 6);
-            samples_num++;
         }
         for (count = 0; getBitPos(tag, start_pos) <= (size - nbits*channels) && (count < 4095); count++)
         {
