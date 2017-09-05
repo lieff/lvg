@@ -39,17 +39,19 @@ sources = [
 
 incdirs = ['.', 'src', 'nanovg', 'scripting/tcc', 'swf/swftools/lib', 'mp3']
 add_global_arguments('-D_GNU_SOURCE', '-DNDEBUG', '-Os', '-flto', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-ffunction-sections', '-fdata-sections', language : 'c')
-add_global_link_arguments('-s', '-ffunction-sections', '-fdata-sections', '-Wl,--gc-sections', '-Wl,-Map=lvg.map', language : 'c')
+add_global_link_arguments('-ffunction-sections', '-fdata-sections', '-Wl,-Map=lvg.map', language : 'c')
 ext_link_args = ['-L../scripting/tcc', '-lm', '-lSDL2', '-lavcodec', '-lavutil']
 host_os_family = host_machine.system()
 
 if host_os_family == 'linux'
 ext_link_args += ['-lGL', '-lglfw', '-ltcc2', '-ldl']
+add_global_link_arguments('-s', '-Wl,--gc-sections', language : 'c')
 endif
 
 if host_os_family == 'darwin'
 incdirs += ['/usr/local/include']
 ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-ltcc', '-ldl', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
+add_global_link_arguments('-Wl,-dead_strip', language : 'c')
 endif
 
 executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
