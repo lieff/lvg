@@ -1,3 +1,5 @@
+set -e
+
 if [ ! -d "glfw" ]; then
   git clone --depth=1 https://github.com/glfw/glfw
   mkdir glfw/build

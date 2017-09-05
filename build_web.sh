@@ -1,3 +1,5 @@
+set -e
+
 . ~/Public/emsdk_portable/emsdk_set_env.sh
 emcc -O3 nanovg/nanovg.c src/lvg.c src/svgb.c src/lunzip.c \
 audio/sdl/lvg_audio.c \
