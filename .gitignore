@@ -2,3 +2,4 @@ build
 glfw
 SDL
 video/ffmpeg/FFmpeg
+upx-3.94-amd64_linux
