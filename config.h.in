@@ -3,9 +3,9 @@
 #define VERSION_STR "@version@"
 #mesondefine RENDER_NVPR
 #mesondefine RENDER_NANOVG
-#mesondefine SCRIPT_TCC
 #mesondefine AUDIO_SDL
 #mesondefine VIDEO_FFMPEG
+#mesondefine SCRIPT_TCC
 #mesondefine ENABLE_AUDIO
 #mesondefine ENABLE_VIDEO
 #mesondefine ENABLE_SCRIPT
