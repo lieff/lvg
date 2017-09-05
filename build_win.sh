@@ -2,7 +2,7 @@ if [ ! -d "glfw" ]; then
   git clone --depth=1 https://github.com/glfw/glfw
   mkdir glfw/build
   cd glfw/build
-  cmake -DCMAKE_TOOLCHAIN_FILE=../../mingw64.cmake -DGLFW_BUILD_EXAMPLES=0 -DGLFW_BUILD_TESTS=0 -DGLFW_BUILD_DOCS=0 ..
+  cmake -DCMAKE_TOOLCHAIN_FILE=../../windows/mingw64.cmake -DGLFW_BUILD_EXAMPLES=0 -DGLFW_BUILD_TESTS=0 -DGLFW_BUILD_DOCS=0 ..
   make
   cd ../../
 fi
@@ -11,7 +11,7 @@ if [ ! -d "SDL" ]; then
   hg clone http://hg.libsdl.org/SDL
   mkdir SDL/build
   cd SDL/build
-  cmake -DCMAKE_TOOLCHAIN_FILE=../../mingw64.cmake -DVIDEO_OPENGLES=0 ..
+  cmake -DCMAKE_TOOLCHAIN_FILE=../../windows/mingw64.cmake -DVIDEO_OPENGLES=0 ..
   make
   cd ../../
   mkdir SDL/include/SDL2
