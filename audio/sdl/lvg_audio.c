@@ -1,10 +1,12 @@
+#include <config.h>
+#include "nanovg.h"
+#include "nanosvg.h"
+#include "lvg_header.h"
+#if ENABLE_AUDIO && AUDIO_SDL
 #include <stddef.h>
 #include <stdlib.h>
 #include <sys/param.h>
 #include "lunzip.h"
-#include "nanovg.h"
-#include "nanosvg.h"
-#include "lvg_header.h"
 #include "minimp3.h"
 #include <SDL2/SDL.h>
 #include <assert.h>
@@ -235,3 +237,28 @@ void lvgPlaySound(LVGSound *sound)
     sound->cur_play_byte = 0;
     lvgStartAudio(sound->rate, sound->channels, 0, 0, 0, sound_play_cb, sound);
 }
+#else
+short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples)
+{
+    *nsamples = 0;
+    return 0;
+}
+
+short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samples)
+{
+    *num_samples = 0;
+    return 0;
+}
+
+int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata)
+{
+}
+
+void lvgPlaySound(LVGSound *sound)
+{
+}
+
+void lvgStopAudio()
+{
+}
+#endif

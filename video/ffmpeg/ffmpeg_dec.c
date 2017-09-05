@@ -1,3 +1,5 @@
+#include <config.h>
+#if ENABLE_VIDEO && VIDEO_FFMPEG
 #include "../video.h"
 #include <libavcodec/avcodec.h>
 #include <stdio.h>
@@ -134,3 +136,4 @@ const video_dec ff_decoder =
     ff_release,
     ff_decode
 };
+#endif

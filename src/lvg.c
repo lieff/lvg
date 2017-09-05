@@ -1,3 +1,4 @@
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
@@ -54,7 +55,9 @@ static int tcc_buf_pos;
 static size_t tcc_buf_size;
 static char *tcc_buf;
 
+#if ENABLE_VIDEO && VIDEO_FFMPEG
 extern const video_dec ff_decoder;
+#endif
 extern const render nvg_render;
 extern const render nvpr_render;
 const render *g_render;
@@ -431,10 +434,11 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         } else
         if (LVG_OBJ_VIDEO == o->type)
         {
-            static void *vdec;
             LVGVideo *video = &clip->videos[o->id];
+#if ENABLE_VIDEO && VIDEO_FFMPEG
             if ((!o->ratio || o->ratio != video->cur_frame) && o->ratio < video->num_frames)
             {
+                static void *vdec;
                 if (!vdec)
                     ff_decoder.init(&vdec, video->codec);
                 video_frame out;
@@ -483,6 +487,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                     free(img);
                 }
             }
+#endif
             g_render->render_image(g_render_obj, video->image);
         } else
         if (LVG_OBJ_GROUP == o->type)
@@ -648,7 +653,7 @@ void drawframe()
     glfwSwapBuffers(window);
 }
 
-#if !defined(EMSCRIPTEN) && !defined(__MINGW32__)
+#if ENABLE_SCRIPT && !defined(EMSCRIPTEN) && !defined(__MINGW32__)
 
 struct SYM
 {
@@ -935,7 +940,7 @@ int open_lvg(const char *file_name)
         free(buf);
     }
     return 0;
-#elif !defined(__MINGW32__)
+#elif ENABLE_SCRIPT && !defined(__MINGW32__)
     return loadScript();
 #else
     return 0;

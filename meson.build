@@ -1,4 +1,17 @@
 project('lvg', 'c', default_options : ['c_std=gnu99'])
+
+conf = configuration_data()
+conf.set('version', '0.0.5')
+conf.set('RENDER_NVPR', 1)
+conf.set('RENDER_NANOVG', 1)
+conf.set('SCRIPT_TCC', 1)
+conf.set('AUDIO_SDL', 1)
+conf.set('VIDEO_FFMPEG', 1)
+conf.set('ENABLE_AUDIO', 1)
+conf.set('ENABLE_VIDEO', 1)
+conf.set('ENABLE_SCRIPT', 1)
+configure_file(input : 'config.h.in', output : 'config.h', configuration : conf)
+
 sources = [
     'audio/sdl/lvg_audio.c',
     'src/lunzip.c',
