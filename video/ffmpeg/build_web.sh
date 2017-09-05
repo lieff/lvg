@@ -1,6 +1,8 @@
 . ~/Public/emsdk_portable/emsdk_set_env.sh
 
-#git clone --depth=1 https://github.com/FFmpeg/FFmpeg
+if [ ! -d "FFmpeg" ]; then
+git clone --depth=1 https://github.com/FFmpeg/FFmpeg
+fi
 cd FFmpeg
 
 emconfigure ./configure \

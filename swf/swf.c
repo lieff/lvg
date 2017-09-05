@@ -8,7 +8,7 @@
 #include "render/render.h"
 #include "minimp3.h"
 #include "adpcm.h"
-#include "../swf/avm1.h"
+#include "avm1.h"
 
 extern render *g_render;
 extern void *g_render_obj;
