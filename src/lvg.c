@@ -28,8 +28,8 @@
 #endif
 
 #include "lunzip.h"
-#include "scripting/tcc/all.h"
-#include "scripting/tcc/all_lib.h"
+#include "../scripting/tcc/all.h"
+#include "../scripting/tcc/all_lib.h"
 #include "stb_image.h"
 #include <SDL2/SDL.h>
 #include <video/video.h>

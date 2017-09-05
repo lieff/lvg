@@ -24,6 +24,16 @@ SDL_AudioCallback g_record_cb;
 void *g_record_cb_user_data;
 int g_dev = -1, g_dev_record = -1;
 
+/*struct
+{
+    struct
+    {
+        char *pcm;
+        int length, cur_play_byte, flags;
+    } channels[NUM_CHANNELS];
+    SDL_AudioSpec outputSpec;
+} g_mixer;*/
+
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples)
 {
     /*FILE *f = fopen("out.mp3", "wb");
