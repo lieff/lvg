@@ -41,7 +41,9 @@ render/*.c \
 windows/mman.c \
 glfw/deps/glad.c \
 video/ffmpeg/ffmpeg_dec.c \
--Iglfw/include -Iglfw/deps -ISDL/include -Ivideo/ffmpeg/FFmpeg -Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
--I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
+-Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
+-I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 \
+-Iglfw/include -Iglfw/deps -ISDL/include -Ivideo/ffmpeg/FFmpeg \
+-DNDEBUG -D_GNU_SOURCE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 scripts/compress.sh ./lvg_win.exe
 zip -9 -u lvg_win.zip lvg_win.exe
