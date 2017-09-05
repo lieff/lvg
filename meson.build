@@ -1,4 +1,4 @@
-project('lvg', 'c', default_options : ['c_std=c99'])
+project('lvg', 'c', default_options : ['c_std=gnu99'])
 sources = [
     'audio/sdl/lvg_audio.c',
     'src/lunzip.c',
@@ -38,8 +38,8 @@ sources = [
 ]
 
 incdirs = ['.', 'src', 'nanovg', 'scripting/tcc', 'swf/swftools/lib', 'mp3']
-add_global_arguments('-D_GNU_SOURCE', language : 'c')
-add_global_arguments('-DNDEBUG', language : 'c')
+add_global_arguments('-D_GNU_SOURCE', '-DNDEBUG', '-Os', '-flto', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-ffunction-sections', '-fdata-sections', language : 'c')
+add_global_link_arguments('-s', '-ffunction-sections', '-fdata-sections', '-Wl,--gc-sections', '-Wl,-Map=lvg.map', language : 'c')
 ext_link_args = ['-L../scripting/tcc', '-lm', '-lSDL2', '-lavcodec', '-lavutil']
 host_os_family = host_machine.system()
 
