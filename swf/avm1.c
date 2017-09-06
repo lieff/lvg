@@ -14,9 +14,9 @@
 
 #define STACK_SIZE 4096
 
-enum {
-    STACK_STRING, STACK_FLOAT, STACK_DOUBLE, STACK_BOOL, STACK_INT, STACK_NULL, STACK_UNDEFINED
-};
+typedef enum {
+    STACK_STRING, STACK_FLOAT, STACK_DOUBLE, STACK_BOOL, STACK_INT, STACK_NULL, STACK_UNDEFINED, STACK_CLASS, STACK_FUNCTION
+} StackValType;
 
 typedef struct StackEntry
 {
@@ -27,7 +27,7 @@ typedef struct StackEntry
         uint32_t i32;
         int boolean;
     };
-    int type;
+    StackValType type;
 } StackEntry;
 
 typedef struct LVGActionCtx
@@ -38,7 +38,7 @@ typedef struct LVGActionCtx
     StackEntry stack[STACK_SIZE];
     StackEntry regs[256];
     const char **cpool;
-    int stack_ptr, cpool_size, pc;
+    int stack_ptr, cpool_size, pc, skip_bytes;
 } LVGActionCtx;
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
@@ -96,7 +96,19 @@ static void action_pop(LVGActionCtx *ctx, LVGAction *a)
     assert(ctx->stack_ptr < sizeof(ctx->stack)/sizeof(ctx->stack[0]));
 }
 static void action_to_integer(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_get_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_variable(LVGActionCtx *ctx, LVGAction *a)
+{
+    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    assert(STACK_STRING == se->type);
+    if (0 == strcmp(se->str, "Stage") || 0 == strcmp(se->str, "this"))
+    {
+        se->type = STACK_CLASS;
+        se->str = 0;
+    } else
+    {
+        assert(0);
+    }
+}
 static void action_set_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_set_target2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -140,7 +152,15 @@ static void action_to_string(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_push_duplicate(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_swap(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_member(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_set_member(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_set_member(LVGActionCtx *ctx, LVGAction *a)
+{
+    StackEntry *se_val = &ctx->stack[ctx->stack_ptr];
+    StackEntry *se_member = se_val + 1;
+    StackEntry *se_var = se_val + 2;
+    ctx->stack_ptr += 3;
+    assert(STACK_CLASS == se_var->type && STACK_STRING == se_member->type);
+    // ignore sets for now
+}
 static void action_increment(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_decrement(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_call_method(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -196,27 +216,56 @@ static void action_try(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_with(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_push(LVGActionCtx *ctx, LVGAction *a)
 {
-    ctx->stack_ptr--;
-    StackEntry *se = &ctx->stack[ctx->stack_ptr];
-    assert(ctx->stack_ptr >= 0);
-    int type = *(uint8_t*)a->data;
-    switch(type)
-    {
-    case 0: se->type = STACK_STRING; se->str = (const char*)a->data + 1; break;
-    case 1: se->type = STACK_FLOAT; se->f_int = *(float*)((char*)a->data + 1); break;
-    case 2: se->type = STACK_NULL;
-    case 3: se->type = STACK_UNDEFINED;
-    case 4: { int reg = *((uint8_t*)a->data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; }
-    case 5: se->type = STACK_BOOL; se->boolean = *((uint8_t*)a->data + 1) ? 1 : 0; break;
-    case 6: se->type = STACK_DOUBLE; se->d_int = *(double*)((char*)a->data + 1); break;
-    case 7: se->type = STACK_INT; se->i32 = *(uint32_t*)((char*)a->data + 1); break;
-    case 8: se->type = STACK_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)a->data + 1)]; break;
-    case 9: se->type = STACK_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)a->data + 1)]; break;
-    }
+    int len = a->len;
+    const char *data = (const char *)a->data;
+    do {
+        ctx->stack_ptr--;
+        StackEntry *se = &ctx->stack[ctx->stack_ptr];
+        assert(ctx->stack_ptr >= 0);
+        int size = 0, type = *(uint8_t*)data;
+        switch(type)
+        {
+        case 0: se->type = STACK_STRING; se->str = (const char*)data + 1; size = strlen(se->str) + 1; break;
+        case 1: se->type = STACK_FLOAT; se->f_int = *(float*)((char*)data + 1); size = 4; break;
+        case 2: se->type = STACK_NULL;
+        case 3: se->type = STACK_UNDEFINED;
+        case 4: { int reg = *((uint8_t*)data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; size = 1; } break;
+        case 5: se->type = STACK_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
+        case 6: se->type = STACK_DOUBLE; se->d_int = *(double*)((char*)data + 1); size = 8; break;
+        case 7: se->type = STACK_INT; se->i32 = *(uint32_t*)((char*)data + 1); size = 4; break;
+        case 8: se->type = STACK_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)data + 1)]; size = 1; break;
+        case 9: se->type = STACK_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)data + 1)]; size = 2; break;
+        default:
+            assert(0);
+            return;
+        }
+        len -= size + 1;
+        data += size + 1;
+    } while (len > 0);
 }
 static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_url2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_define_function(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->stack_ptr--;
+    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    se->type = STACK_FUNCTION;
+    se->str = 0;
+
+    int i = 0;
+    const uint8_t *data = (const char *)a->data;
+    //const char *fname = (const char *)data;
+    while (data[i++]);
+    int params = data[i++];
+    params += data[i++]*256;
+    for(int j = 0; j < params;j++)
+    {
+        while (data[i++]);
+    }
+    int codesize = data[i++];
+    codesize += data[i++]*256;
+    ctx->skip_bytes = codesize;
+}
 static void action_if(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a)
 {
@@ -396,6 +445,12 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
     for (; ctx.pc < num_actions;)
     {
         LVGAction *a = &actions[ctx.pc++];
+        while (ctx.skip_bytes)
+        {
+#define ATAG_FULLLENGTH(a) (a->len + 1 + ((a->opcode & 0x80) ? 2 : 0))
+            ctx.skip_bytes -= ATAG_FULLLENGTH(a);
+            a = &actions[ctx.pc++];
+        }
         const ActionEntry *ae = &g_avm1_actions[a->opcode];
         if (ae->vm_func)
             ae->vm_func(&ctx, a);
