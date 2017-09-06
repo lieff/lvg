@@ -38,7 +38,7 @@ typedef struct LVGActionCtx
     StackEntry stack[STACK_SIZE];
     StackEntry regs[256];
     const char **cpool;
-    int stack_ptr, cpool_size, pc, skip_bytes;
+    int stack_ptr, cpool_size, pc;
 } LVGActionCtx;
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
@@ -191,8 +191,7 @@ static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a)
     for (int i = 0; i < ctx->cpool_size; i++)
     {
         ctx->cpool[i] = s;
-        while(*s) s++;
-        s++;
+        while(*s++);
     }
 }
 static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a)
@@ -264,7 +263,12 @@ static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
     }
     int codesize = data[i++];
     codesize += data[i++]*256;
-    ctx->skip_bytes = codesize;
+    while (codesize)
+    {
+        a++; ctx->pc++;
+#define ATAG_FULLLENGTH(a) (a->len + 1 + ((a->opcode & 0x80) ? 2 : 0))
+        codesize -= ATAG_FULLLENGTH(a);
+    }
 }
 static void action_if(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a)
@@ -445,12 +449,6 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
     for (; ctx.pc < num_actions;)
     {
         LVGAction *a = &actions[ctx.pc++];
-        while (ctx.skip_bytes)
-        {
-#define ATAG_FULLLENGTH(a) (a->len + 1 + ((a->opcode & 0x80) ? 2 : 0))
-            ctx.skip_bytes -= ATAG_FULLLENGTH(a);
-            a = &actions[ctx.pc++];
-        }
         const ActionEntry *ae = &g_avm1_actions[a->opcode];
         if (ae->vm_func)
             ae->vm_func(&ctx, a);
