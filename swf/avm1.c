@@ -36,7 +36,7 @@ typedef struct LVGActionCtx
     LVGMovieClipGroup *group;
     LVGMovieClipFrame *frame;
     StackEntry stack[STACK_SIZE];
-    StackEntry regs[4];
+    StackEntry regs[256];
     const char **cpool;
     int stack_ptr, cpool_size, pc;
 } LVGActionCtx;
@@ -66,7 +66,10 @@ static void action_stop(LVGActionCtx *ctx, LVGAction *a)
     ctx->group->play_state = LVG_STOPPED;
 }
 
-static void action_quality(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_quality(LVGActionCtx *ctx, LVGAction *a)
+{   // ignore
+}
+
 static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a)
 {
     if (a->sdata)
@@ -176,7 +179,17 @@ static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a)
 {   // all frames always loaded - never skip actions
 }
 static void action_set_target(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_goto_label(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_goto_label(LVGActionCtx *ctx, LVGAction *a)
+{
+    LVGFrameLabel *l = ctx->group->labels;
+    const char *name = (const char *)a->data;
+    for (int i = 0; i < ctx->group->num_labels; i++)
+        if (0 == strcmp(name, l[i].name))
+        {
+            ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
+            return;
+        }
+}
 static void action_wait_for_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_define_function2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_try(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -205,7 +218,29 @@ static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_url2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_define_function(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_if(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a)
+{
+    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ctx->stack_ptr++;
+    assert(STACK_INT == se->type || STACK_STRING == se->type);
+    int add = 0, flags = *(uint8_t*)a->data;
+    ctx->group->play_state = (flags & 1) ? LVG_PLAYING : LVG_STOPPED;
+    if (flags & 2)
+        add = *(uint16_t*)((char*)a->data + 1);
+    if (STACK_INT == se->type)
+    {
+        ctx->group->cur_frame = (se->i32 + add) % ctx->group->num_frames;
+    } else if (STACK_STRING == se->type)
+    {
+        LVGFrameLabel *l = ctx->group->labels;
+        for (int i = 0; i < ctx->group->num_labels; i++)
+            if (0 == strcmp(se->str, l[i].name))
+            {
+                ctx->group->cur_frame = (l[i].frame_num + add) % ctx->group->num_frames;
+                return;
+            }
+    }
+}
 
 typedef struct
 {

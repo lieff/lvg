@@ -41,10 +41,17 @@ typedef struct LVGMovieClipFrame
     int num_objects, num_actions;
 } LVGMovieClipFrame;
 
+typedef struct LVGFrameLabel
+{
+    const char *name;
+    int frame_num;
+} LVGFrameLabel;
+
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
-    int num_frames, cur_frame, play_state;
+    LVGFrameLabel *labels;
+    int num_frames, num_labels, cur_frame, play_state;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection

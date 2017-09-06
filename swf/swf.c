@@ -941,6 +941,12 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             }
             swf_GetPlaceObject(0, placements + depth, version);
             swf_SetTagPos(tag, oldTagPos);
+        } else if (ST_FRAMELABEL == tag->id)
+        {
+            group->labels = realloc(group->labels, (group->num_labels + 1)*sizeof(LVGFrameLabel));
+            LVGFrameLabel *l = group->labels + group->num_labels++;
+            l->name = strdup(tag->data);
+            l->frame_num = group->num_frames;
         } else if (ST_SHOWFRAME == tag->id)
         {
             int numplacements;
