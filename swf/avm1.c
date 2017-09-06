@@ -15,6 +15,7 @@ typedef struct LVGActionCtx
     LVGMovieClip *clip;
     LVGMovieClipGroup *group;
     LVGMovieClipFrame *frame;
+    int pc;
 } LVGActionCtx;
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
@@ -23,18 +24,25 @@ static void action_end(LVGActionCtx *ctx, LVGAction *a)
 
 static void action_next_frame(LVGActionCtx *ctx, LVGAction *a)
 {
-    DBG_BREAK;
+    ctx->group->cur_frame = (ctx->group->cur_frame + 1) % ctx->group->num_frames;
 }
 
-static void action_previous_frame(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_previous_frame(LVGActionCtx *ctx, LVGAction *a)
+{
+    if (ctx->group->cur_frame)
+        ctx->group->cur_frame--;
+}
+
 static void action_play(LVGActionCtx *ctx, LVGAction *a)
 {
     ctx->group->play_state = LVG_PLAYING;
 }
+
 static void action_stop(LVGActionCtx *ctx, LVGAction *a)
 {
     ctx->group->play_state = LVG_STOPPED;
 }
+
 static void action_quality(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a)
 {
@@ -121,12 +129,14 @@ static void action_string_compare_gt(LVGActionCtx *ctx, LVGAction *a) { DBG_BREA
 static void action_extends(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_frame(LVGActionCtx *ctx, LVGAction *a)
 {
-    ctx->group->cur_frame = a->sdata;
+    ctx->group->cur_frame = a->sdata % ctx->group->num_frames;
 }
 static void action_get_url(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_store_register(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a)
+{   // all frames always loaded - never skip actions
+}
 static void action_set_target(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_label(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_wait_for_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -289,10 +299,12 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
     ctx.clip   = clip;
     ctx.group  = clip->groups;
     ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
-    for (int i = 0; i < num_actions; i++)
+    ctx.pc     = 0;
+    for (; ctx.pc < num_actions;)
     {
-        const ActionEntry *ae = &g_avm1_actions[actions[i].opcode];
+        LVGAction *a = &actions[ctx.pc++];
+        const ActionEntry *ae = &g_avm1_actions[a->opcode];
         if (ae->vm_func)
-            ae->vm_func(&ctx, &actions[i]);
+            ae->vm_func(&ctx, a);
     }
 }
