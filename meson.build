@@ -1,4 +1,4 @@
-project('lvg', 'c', default_options : ['c_std=gnu99'])
+project('lvg', 'c', default_options : ['c_std=gnu99', 'buildtype=release'])
 
 conf = configuration_data()
 conf.set('version', '0.0.5')
