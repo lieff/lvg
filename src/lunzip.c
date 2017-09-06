@@ -31,7 +31,7 @@ int lvgZipOpen(const char *fname, zip_t *zip)
         if (er->signature == 0x06054B50)
             break;
     }
-    if (i == 0 || er->diskNumber || er->centralDirectoryDiskNumber || er->numEntries != er->numEntriesThisDisk)
+    if (i <= 0 || er->diskNumber || er->centralDirectoryDiskNumber || er->numEntries != er->numEntriesThisDisk)
         goto error;
     zip->file = fd;
     zip->buf = m;

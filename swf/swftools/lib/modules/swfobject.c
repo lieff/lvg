@@ -320,7 +320,10 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         }
         if (flags & PF_ACTIONEVENT)
         {
-            int reserved = swf_GetU16(tag); // unused
+#ifndef NDEBUG
+            int reserved =
+#endif
+                    swf_GetU16(tag); // unused
             assert(!reserved);
             U32 allevent_flags = swf_GetU16(tag);
             if (version >= 6)
