@@ -789,12 +789,13 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 
             if (1 == stream_format)
             {
-                short *buf = (short*)alloca(size*16);
+                short *buf = (short*)malloc(size*16);
                 int dec_samples = adpcm_decode(tag, size, stream_channels, buf, size*8);
                 stream_buf_size += dec_samples*2;
                 stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
                 memcpy(stream_buffer + old_size, buf, dec_samples*2);
                 sound->num_samples += dec_samples;
+                free(buf);
             } else
             {
                 stream_buf_size += size;
