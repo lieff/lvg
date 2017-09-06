@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 
 #ifdef _DEBUG
 #define DBG(n, m) n, m,
@@ -116,7 +117,16 @@ static void action_get_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_set_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_clone_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_remove_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_trace(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_trace(LVGActionCtx *ctx, LVGAction *a)
+{
+#ifdef _DEBUG
+    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ctx->stack_ptr++;
+    if (STACK_STRING == se->type)
+        printf("%s\n", se->str);
+    fflush(stdout);
+#endif
+}
 static void action_start_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_end_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_compare_le(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -194,9 +204,11 @@ static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a)
         while(*s++);
     }
 }
+
 static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a)
 {   // all frames always loaded - never skip actions
 }
+
 static void action_set_target(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_label(LVGActionCtx *ctx, LVGAction *a)
 {
@@ -252,7 +264,7 @@ static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
     se->str = 0;
 
     int i = 0;
-    const uint8_t *data = (const char *)a->data;
+    const uint8_t *data = (const uint8_t *)a->data;
     //const char *fname = (const char *)data;
     while (data[i++]);
     int params = data[i++];

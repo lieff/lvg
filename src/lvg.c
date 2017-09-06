@@ -60,6 +60,7 @@ extern const video_dec ff_decoder;
 #endif
 extern const render nvg_render;
 extern const render nvpr_render;
+extern const render null_render;
 const render *g_render;
 void *g_render_obj;
 
@@ -976,6 +977,17 @@ int main(int argc, char **argv)
         is_swf = 1;
         //return -1;
     }
+//#define TEST
+#ifdef TEST
+    g_render = &null_render;
+    if (open_swf(file_name))
+    {
+        printf("error: could not open swf file\n");
+        return -1;
+    }
+    lvgDrawClip(g_clip);
+    return 0;
+#endif
 #if defined(EMSCRIPTEN)
     if (is_gles3)
     {

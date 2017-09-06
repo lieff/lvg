@@ -22,6 +22,7 @@ sources = [
     'render/common.c',
     'render/render_nanovg.c',
     'render/render_nvpr.c',
+    'render/render_null.c',
     'swf/adpcm.c',
     'swf/avm1.c',
     'swf/swf.c',
