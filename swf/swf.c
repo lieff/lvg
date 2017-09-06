@@ -754,7 +754,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             U32 oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             /*int reserve = */swf_GetBits(tag, 4);
-            /*stream_rate = */rates[swf_GetBits(tag, 2)];
+            /*stream_rate = rates[*/swf_GetBits(tag, 2)/*]*/;
             /*stream_bits = */swf_GetBits(tag, 1);
             /*stream_channels = */swf_GetBits(tag, 1) ? 2 : 1;
             stream_format = swf_GetBits(tag, 4);

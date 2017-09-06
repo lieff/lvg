@@ -51,20 +51,30 @@ sources = [
 ]
 
 incdirs = ['.', 'src', 'nanovg', 'scripting/tcc', 'swf/swftools/lib', 'mp3']
-add_global_arguments('-D_GNU_SOURCE', '-DNDEBUG', '-Os', '-flto', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-ffunction-sections', '-fdata-sections', language : 'c')
-add_global_link_arguments('-ffunction-sections', '-fdata-sections', language : 'c')
+if get_option('buildtype') == 'debug'
+    add_global_arguments('-D_GNU_SOURCE', '-D_DEBUG', language : 'c')
+else
+    add_global_arguments('-D_GNU_SOURCE', '-DNDEBUG', '-Os', '-flto', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-ffunction-sections', '-fdata-sections', language : 'c')
+    add_global_link_arguments('-ffunction-sections', '-fdata-sections', language : 'c')
+endif
 ext_link_args = ['-L../scripting/tcc', '-lm', '-lavcodec', '-lavutil']
 host_os_family = host_machine.system()
 
+if get_option('buildtype') != 'debug'
+    if host_os_family == 'darwin'
+        add_global_link_arguments('-Wl,-dead_strip', '-Wl,-map,lvg.map', language : 'c')
+    else
+        add_global_link_arguments('-s', '-Wl,--gc-sections', '-Wl,-Map=lvg.map', language : 'c')
+    endif
+endif
+
 if host_os_family == 'linux'
     ext_link_args += ['-lGL', '-lglfw', '-lSDL2', '-ltcc2', '-ldl']
-    add_global_link_arguments('-s', '-Wl,--gc-sections', '-Wl,-Map=lvg.map', language : 'c')
 endif
 
 if host_os_family == 'darwin'
     incdirs += ['/usr/local/include']
     ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-lSDL2', '-ltcc', '-ldl', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
-    add_global_link_arguments('-Wl,-dead_strip', '-Wl,-map,lvg.map', language : 'c')
 endif
 
 if host_os_family == 'windows'
@@ -72,7 +82,6 @@ if host_os_family == 'windows'
     sources += ['windows/mman.c', 'glfw/deps/glad.c']
     ext_link_args += ['-L../glfw/build/src', '-L../SDL/build', '-L../video/ffmpeg/FFmpeg/libavcodec', '-L../video/ffmpeg/FFmpeg/libavutil']
     ext_link_args += ['-lSDL2-static', '-lglfw3', '-lopengl32', '-luser32', '-lgdi32', '-lwinmm', '-limm32', '-lole32', '-loleaut32', '-lshell32', '-lversion']
-    add_global_link_arguments('-s', '-Wl,--gc-sections', '-Wl,-Map=lvg.map', language : 'c')
 endif
 
 executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
