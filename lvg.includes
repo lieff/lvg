@@ -1,4 +1,6 @@
 .
+src
 mp3
 nanovg
-swftools/lib
+swf/swftools/lib
+scripting/tcc

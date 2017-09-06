@@ -1,6 +1,8 @@
 #include "avm1.h"
 #include <../render/render.h>
 #include <signal.h>
+#include <assert.h>
+#include <string.h>
 
 #ifdef _DEBUG
 #define DBG(n, m) n, m,
@@ -10,12 +12,33 @@
 #define DBG_BREAK
 #endif
 
+#define STACK_SIZE 4096
+
+enum {
+    STACK_STRING, STACK_FLOAT, STACK_DOUBLE, STACK_BOOL, STACK_INT, STACK_NULL, STACK_UNDEFINED
+};
+
+typedef struct StackEntry
+{
+    union {
+        const char *str;
+        float f_int;
+        double d_int;
+        uint32_t i32;
+        int boolean;
+    };
+    int type;
+} StackEntry;
+
 typedef struct LVGActionCtx
 {
     LVGMovieClip *clip;
     LVGMovieClipGroup *group;
     LVGMovieClipFrame *frame;
-    int pc;
+    StackEntry stack[STACK_SIZE];
+    StackEntry regs[4];
+    const char **cpool;
+    int stack_ptr, cpool_size, pc;
 } LVGActionCtx;
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
@@ -64,7 +87,11 @@ static void action_not(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_compare_eq(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_length(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_extract(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_pop(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_pop(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->stack_ptr++;
+    assert(ctx->stack_ptr < sizeof(ctx->stack)/sizeof(ctx->stack[0]));
+}
 static void action_to_integer(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_set_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -133,7 +160,18 @@ static void action_goto_frame(LVGActionCtx *ctx, LVGAction *a)
 }
 static void action_get_url(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_store_register(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_constant_pool(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->cpool_size = *(uint16_t*)a->data;
+    ctx->cpool = realloc(ctx->cpool, ctx->cpool_size*sizeof(char *));
+    const char *s = (const char *)a->data + 2;
+    for (int i = 0; i < ctx->cpool_size; i++)
+    {
+        ctx->cpool[i] = s;
+        while(*s) s++;
+        s++;
+    }
+}
 static void action_wait_for_frame(LVGActionCtx *ctx, LVGAction *a)
 {   // all frames always loaded - never skip actions
 }
@@ -143,7 +181,26 @@ static void action_wait_for_frame2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK;
 static void action_define_function2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_try(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_with(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_push(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_push(LVGActionCtx *ctx, LVGAction *a)
+{
+    ctx->stack_ptr--;
+    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    assert(ctx->stack_ptr >= 0);
+    int type = *(uint8_t*)a->data;
+    switch(type)
+    {
+    case 0: se->type = STACK_STRING; se->str = (const char*)a->data + 1; break;
+    case 1: se->type = STACK_FLOAT; se->f_int = *(float*)((char*)a->data + 1); break;
+    case 2: se->type = STACK_NULL;
+    case 3: se->type = STACK_UNDEFINED;
+    case 4: { int reg = *((uint8_t*)a->data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; }
+    case 5: se->type = STACK_BOOL; se->boolean = *((uint8_t*)a->data + 1) ? 1 : 0; break;
+    case 6: se->type = STACK_DOUBLE; se->d_int = *(double*)((char*)a->data + 1); break;
+    case 7: se->type = STACK_INT; se->i32 = *(uint32_t*)((char*)a->data + 1); break;
+    case 8: se->type = STACK_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)a->data + 1)]; break;
+    case 9: se->type = STACK_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)a->data + 1)]; break;
+    }
+}
 static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_url2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_define_function(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -296,10 +353,11 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
     if (!actions)
         return;
     LVGActionCtx ctx;
+    memset(&ctx, 0, sizeof(ctx));
     ctx.clip   = clip;
     ctx.group  = clip->groups;
     ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
-    ctx.pc     = 0;
+    ctx.stack_ptr = sizeof(ctx.stack)/sizeof(ctx.stack[0]) - 1;
     for (; ctx.pc < num_actions;)
     {
         LVGAction *a = &actions[ctx.pc++];
