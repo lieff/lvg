@@ -1,0 +1,5 @@
+Check simple inheritance
+constructed a Simple
+constructed a Sub
+called Sub.trace
+called Simple.trace

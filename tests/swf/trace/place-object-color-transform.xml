@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="15" frames="1">
+    <size>
+      <Rectangle left="0" right="2000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="0"/>
+      <DefineSprite objectID="1" frames="1">
+        <tags>
+          <ShowFrame/>
+          <End/>
+        </tags>
+      </DefineSprite>
+      <PlaceObject2 replace="0" depth="0" objectID="1" name="a">
+        <colorTransform>
+          <ColorTransform2 factorRed="156" factorGreen="200" factorBlue="56" factorAlpha="205"/>
+        </colorTransform>
+      </PlaceObject2>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="mc"/>
+              <String value="Color"/>
+              <String value="clr"/>
+              <String value="_alpha: "/>
+              <String value="_alpha"/>
+              <String value="Color:"/>
+              <String value="getTransform"/>
+              <String value="t"/>
+              <String value="l"/>
+              <String value="prop"/>
+              <String value="push"/>
+              <String value="sort"/>
+              <String value="i"/>
+              <String value="length"/>
+              <String value=": "/>
+              <String value="ColorTransform:"/>
+              <String value="flash"/>
+              <String value="geom"/>
+              <String value="Transform"/>
+              <String value="tr"/>
+              <String value="colorTransform"/>
+              <String value="a:"/>
+              <String value="a"/>
+              <String value="trace_transform"/>
+              <String value=""/>
+              <String value="b:"/>
+              <String value="b"/>
+              <String value="duplicateMovieClip"/>
+              <String value="ra"/>
+              <String value="rb"/>
+              <String value="ga"/>
+              <String value="gb"/>
+              <String value="ba"/>
+              <String value="bb"/>
+              <String value="aa"/>
+              <String value="ab"/>
+              <String value="setTransform"/>
+              <String value="a (changed):"/>
+              <String value="c:"/>
+              <String value="c"/>
+              <String value="MovieClipLoader"/>
+              <String value="onLoadInit"/>
+              <String value="a (loaded):"/>
+              <String value="fscommand:quit"/>
+              <String value="swfdec.jpg"/>
+              <String value="loadClip"/>
+            </strings>
+          </Dictionary>
+          <DeclareFunction2 name="trace_transform" argc="1" regc="0" preloadThis="0" suppressThis="0" preloadArguments="0" suppressArguments="0" preloadSuper="0" suppressSuper="0" preloadRoot="0" preloadParent="0" preloadGlobal="0" reserved="0">
+            <args>
+              <Parameter reg="0" name="mc"/>
+            </args>
+            <actions>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="2"/>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackInteger value="1"/>
+                  <StackDictionaryLookup index="1"/>
+                </items>
+              </PushData>
+              <New/>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="3"/>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="4"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <AddTyped/>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="5"/>
+                </items>
+              </PushData>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="7"/>
+                  <StackInteger value="0"/>
+                  <StackDictionaryLookup index="2"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="6"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="8"/>
+                  <StackInteger value="0"/>
+                </items>
+              </PushData>
+              <DeclareArray/>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="7"/>
+                </items>
+              </PushData>
+              <Enumerate/>
+              <StoreRegister reg="0"/>
+              <PushData>
+                <items>
+                  <StackNull/>
+                </items>
+              </PushData>
+              <EqualTyped/>
+              <BranchIfTrue byteOffset="37"/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="9"/>
+                  <StackRegister reg="0"/>
+                </items>
+              </PushData>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="9"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackInteger value="1"/>
+                  <StackDictionaryLookup index="8"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="10"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
+              <BranchAlways byteOffset="65485"/>
+              <PushData>
+                <items>
+                  <StackInteger value="0"/>
+                  <StackDictionaryLookup index="8"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="11"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="12"/>
+                  <StackInteger value="0"/>
+                </items>
+              </PushData>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="12"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="8"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="13"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <LessThanTyped/>
+              <LogicalNOT/>
+              <BranchIfTrue byteOffset="55"/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="8"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="12"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="14"/>
+                </items>
+              </PushData>
+              <AddTyped/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="7"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="8"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="12"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <GetMember/>
+              <GetMember/>
+              <AddTyped/>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="12"/>
+                </items>
+              </PushData>
+              <Duplicate/>
+              <GetVariable/>
+              <Increment/>
+              <SetVariable/>
+              <BranchAlways byteOffset="65456"/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="15"/>
+                </items>
+              </PushData>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="19"/>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackInteger value="1"/>
+                  <StackDictionaryLookup index="16"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="17"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="18"/>
+                </items>
+              </PushData>
+              <NewMethod/>
+              <SetLocalVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="19"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="20"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <Trace/>
+            </actions>
+          </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="21"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="22"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="23"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="24"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="25"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="26"/>
+              <StackInteger value="2"/>
+              <StackDictionaryLookup index="22"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="27"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="26"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="23"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+              <StackDictionaryLookup index="22"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <New/>
+          <SetLocalVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="7"/>
+              <StackDictionaryLookup index="28"/>
+              <StackInteger value="50"/>
+              <StackDictionaryLookup index="29"/>
+              <StackInteger value="244"/>
+              <StackDictionaryLookup index="30"/>
+              <StackInteger value="40"/>
+              <StackDictionaryLookup index="31"/>
+              <StackInteger value="112"/>
+              <StackDictionaryLookup index="32"/>
+              <StackInteger value="12"/>
+              <StackDictionaryLookup index="33"/>
+              <StackInteger value="90"/>
+              <StackDictionaryLookup index="34"/>
+              <StackInteger value="40"/>
+              <StackDictionaryLookup index="35"/>
+              <StackInteger value="70"/>
+              <StackInteger value="8"/>
+            </items>
+          </PushData>
+          <DeclareObject/>
+          <SetLocalVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="7"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="36"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="24"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="37"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="22"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="23"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="24"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="38"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackInteger value="2"/>
+              <StackDictionaryLookup index="39"/>
+              <StackInteger value="2"/>
+              <StackDictionaryLookup index="22"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="27"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="39"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="23"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="8"/>
+              <StackInteger value="0"/>
+              <StackDictionaryLookup index="40"/>
+            </items>
+          </PushData>
+          <New/>
+          <SetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="8"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="41"/>
+            </items>
+          </PushData>
+          <DeclareFunction2 name="" argc="1" regc="0" preloadThis="0" suppressThis="0" preloadArguments="0" suppressArguments="0" preloadSuper="0" suppressSuper="0" preloadRoot="0" preloadParent="0" preloadGlobal="0" reserved="0">
+            <args>
+              <Parameter reg="0" name="mc"/>
+            </args>
+            <actions>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="24"/>
+                </items>
+              </PushData>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="42"/>
+                </items>
+              </PushData>
+              <Trace/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackInteger value="1"/>
+                  <StackDictionaryLookup index="23"/>
+                </items>
+              </PushData>
+              <CallFunction/>
+              <Pop/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="43"/>
+                  <StackDictionaryLookup index="24"/>
+                </items>
+              </PushData>
+              <GetURL2 method="0"/>
+            </actions>
+          </DeclareFunction2>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="22"/>
+              <StackDictionaryLookup index="44"/>
+              <StackInteger value="2"/>
+              <StackDictionaryLookup index="8"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="45"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Pop/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

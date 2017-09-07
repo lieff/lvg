@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="0"/>
+      <DefineShape3 objectID="1">
+        <bounds>
+          <Rectangle left="0" right="1000" top="0" bottom="1000"/>
+        </bounds>
+        <styles>
+          <StyleList>
+            <fillStyles>
+              <Solid>
+                <color>
+                  <Color red="0" green="0" blue="255" alpha="255"/>
+                </color>
+              </Solid>
+            </fillStyles>
+          </StyleList>
+        </styles>
+        <shapes>
+          <Shape>
+            <edges>
+              <ShapeSetup x="0" y="0" fillStyle0="1"/>
+              <LineTo x="1000" y="0"/>
+              <LineTo x="0" y="1000"/>
+              <LineTo x="-1000" y="0"/>
+              <LineTo x="0" y="-1000"/>
+              <ShapeSetup/>
+            </edges>
+          </Shape>
+        </shapes>
+      </DefineShape3>
+      <PlaceObject2 replace="0" depth="1" objectID="1"/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_root.foo"/>
+              <String value="fscommand:quit"/>
+              <String value=""/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetURL2 method="0"/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

@@ -1,0 +1,10 @@
+Test the that setRGB(0x14283C) does the correct thing
+rgb: 1321020
+ra: 0
+rb: 20
+ga: 0
+gb: 40
+ba: 0
+bb: 60
+aa: 100
+ab: 0

@@ -1,0 +1,194 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+Testing: (no arguments)
+this: undefined
+arguments: 0: 
+1
+Testing: a
+this: a
+arguments: 0: 
+2
+Testing: a, [1, 2, 3]
+this: a
+arguments: 3: 1,2,3
+3
+Testing: a, [1, 2, 3], [4, 5]
+this: a
+arguments: 3: 1,2,3
+4
+Testing: a, 1, [2, 3]
+this: a
+arguments: 0: 
+5
+Testing: a, 1, 2, 3
+this: a
+arguments: 0: 
+6
+Testing: a, fake_array
+this: a
+arguments: 3: 1,2,3
+7
+Testing: b, [1, 2, 3]
+this: b
+arguments: 3: 1,2,3
+8
+Testing: (0) undefined (undefined), [1, 2, 3]
+this: undefined
+arguments: 3: 1,2,3
+1
+Testing: (2) true (boolean), [1, 2, 3]
+this: true
+arguments: 3: 1,2,3
+3
+Testing: (4) 0 (number), [1, 2, 3]
+this: 0
+arguments: 3: 1,2,3
+5
+Testing: (6) 0.5 (number), [1, 2, 3]
+this: 0.5
+arguments: 3: 1,2,3
+7
+Testing: (8) -0.5 (number), [1, 2, 3]
+this: -0.5
+arguments: 3: 1,2,3
+9
+Testing: (10) -Infinity (number), [1, 2, 3]
+this: -Infinity
+arguments: 3: 1,2,3
+11
+Testing: (12)  (string), [1, 2, 3]
+this: 
+arguments: 3: 1,2,3
+13
+Testing: (14) -0 (string), [1, 2, 3]
+this: -0
+arguments: 3: 1,2,3
+15
+Testing: (16) 1 (string), [1, 2, 3]
+this: 1
+arguments: 3: 1,2,3
+17
+Testing: (18) true (string), [1, 2, 3]
+this: true
+arguments: 3: 1,2,3
+19
+Testing: (20) _level0 (movieclip), [1, 2, 3]
+this: _level0
+arguments: 3: 1,2,3
+21
+Testing: (22) [type Function] (function), [1, 2, 3]
+this: [type Function]
+arguments: 3: 1,2,3
+23
+Testing: (24) [type Object] (object), [1, 2, 3]
+toString called with 
+this: [type Object]
+arguments: 3: 1,2,3
+25
+Testing: (26) undefined (object), [1, 2, 3]
+this: undefined
+arguments: 3: 1,2,3
+27
+Testing: (28) null (object), [1, 2, 3]
+1: valueOf!
+this: null
+arguments: 3: 1,2,3
+29
+Testing: (30) false (object), [1, 2, 3]
+3: valueOf!
+this: false
+arguments: 3: 1,2,3
+31
+Testing: (32) 1 (object), [1, 2, 3]
+5: valueOf!
+this: 1
+arguments: 3: 1,2,3
+33
+Testing: (34) -1 (object), [1, 2, 3]
+7: valueOf!
+this: -1
+arguments: 3: 1,2,3
+35
+Testing: (36) Infinity (object), [1, 2, 3]
+9: valueOf!
+this: Infinity
+arguments: 3: 1,2,3
+37
+Testing: (38) NaN (object), [1, 2, 3]
+11: valueOf!
+this: NaN
+arguments: 3: 1,2,3
+39
+Testing: (40) 0 (object), [1, 2, 3]
+13: valueOf!
+this: 0
+arguments: 3: 1,2,3
+41
+Testing: (42) 0.0 (object), [1, 2, 3]
+15: valueOf!
+this: 0.0
+arguments: 3: 1,2,3
+43
+Testing: (44) Hello World! (object), [1, 2, 3]
+17: valueOf!
+this: Hello World!
+arguments: 3: 1,2,3
+45
+Testing: (46) _level0 (object), [1, 2, 3]
+19: valueOf!
+this: _level0
+arguments: 3: 1,2,3
+47
+Testing: (48) [type Object] (object), [1, 2, 3]
+21: valueOf!
+21: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+49
+Testing: (50) [type Object] (object), [1, 2, 3]
+23: valueOf!
+23: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+51
+Testing: (52) [type Object] (object), [1, 2, 3]
+25: valueOf!
+25: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+53

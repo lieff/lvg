@@ -1,0 +1,33 @@
+test System.capabilites.Query
+undefined
+local.o = object
+  __proto__ (hp) = _global.Object.prototype
+  avHardwareDisable = boolean : false
+  constructor (hp) = _global.Object
+  hasAccessibility = boolean : false
+  hasAudio = boolean : true
+  hasAudioEncoder = boolean : false
+  hasEmbeddedVideo = boolean : true
+  hasIME = boolean : false
+  hasMP3 = boolean : true
+  hasPrinting = boolean : false
+  hasScreenBroadcast = boolean : false
+  hasScreenPlayback = boolean : false
+  hasStreamingAudio = boolean : true
+  hasStreamingVideo = boolean : true
+  hasTLS = boolean : false
+  hasVideoEncoder = boolean : false
+  isDebugger = boolean : false
+  language = string : "en"
+  localFileReadDisable = boolean : false
+  manufacturer = string : "Macromedia Windows"
+  os = string : "Windows XP"
+  pixelAspectRatio = number : 1
+  playerType = string : "StandAlone"
+  screenColor = string : "color"
+  screenDPI = number : 96
+  screenResolutionX = number : 1024
+  screenResolutionY = number : 768
+  serverString = string : "A=t&SA=t&SV=t&EV=t&MP3=t&AE=f&VE=f&ACC=f&PR=f&SP=f&SB=f&DEB=f&V=WIN%209%2C0%2C999%2C0&M=Adobe%20Windows&R=1024x768&DP=96&COL=color&AR=1.0&OS=Windows%20XP&L=en&IME=f&PT=StandAlone&AVD=f&LFD=f&WD=f&TLS=f"
+  version = string : "WIN 9,0,999,0"
+  windowlessDisable = boolean : false

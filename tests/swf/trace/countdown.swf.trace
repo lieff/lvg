@@ -1,0 +1,51 @@
+DoAction 1
+Transform2: fritz
+Transform2: egon
+DoAction 2
+load (egon)
+load (fritz)
+enterFrame (fritz)
+enterFrame (egon)
+enterFrame (fritz)
+enterFrame (egon)
+DoAction 4
+enterFrame (fritz)
+enterFrame (egon)
+enterFrame (fritz)
+enterFrame (egon)
+DoAction 6
+unload (fritz)
+Transform2: egon zum 2.
+DoAction 7
+unload (egon)
+load (egon2)
+load (egon)
+load (fritz)
+DoAction 6
+unload (egon2)
+unload (fritz)
+Transform2: egon zum 2.
+DoAction 7
+unload (egon)
+load (egon2)
+load (egon)
+load (fritz)
+DoAction 6
+unload (egon2)
+unload (fritz)
+Transform2: egon zum 2.
+DoAction 7
+unload (egon)
+load (egon2)
+load (egon)
+load (fritz)
+DoAction 6
+unload (egon2)
+unload (fritz)
+Transform2: egon zum 2.
+DoAction 7
+unload (egon)
+load (egon2)
+enterFrame (egon2)
+unload (egon2)
+DoAction 1

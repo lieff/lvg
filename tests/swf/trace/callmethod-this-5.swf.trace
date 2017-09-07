@@ -1,0 +1,136 @@
+Check which objects work as this property for a CallMethod action
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+Calling with (0)  (undefined)
+undefined
+undefined
+undefined
+Calling with (1) null (null)
+Calling with (2) true (boolean)
+Calling with (3) false (boolean)
+Calling with (4) 0 (number)
+Calling with (5) 1 (number)
+Calling with (6) 0.5 (number)
+Calling with (7) -1 (number)
+Calling with (8) -0.5 (number)
+Calling with (9) Infinity (number)
+Calling with (10) -Infinity (number)
+Calling with (11) NaN (number)
+Calling with (12)  (string)
+undefined
+undefined
+undefined
+Calling with (13) 0 (string)
+Calling with (14) -0 (string)
+Calling with (15) 0.0 (string)
+Calling with (16) 1 (string)
+Calling with (17) Hello World! (string)
+Calling with (18) true (string)
+Calling with (19) _level0 (string)
+Calling with (20) Ã¤Ã¶Ã¼ (string)
+Calling with (21) _level0 (movieclip)
+Calling with (22) [object Object] (object)
+Calling with (23)  (undefined)
+undefined
+undefined
+undefined
+Calling with (24) [type Object] (object)
+toString called
+Calling with (25) [type Object] (object)
+toString called with 
+Calling with (26) [object Object] (object)
+Calling with (27)  (object)
+Calling with (28)  (object)
+0: toString!
+Calling with (29) null (object)
+1: toString!
+Calling with (30) true (object)
+2: toString!
+Calling with (31) false (object)
+3: toString!
+Calling with (32) 0 (object)
+4: toString!
+Calling with (33) 1 (object)
+5: toString!
+Calling with (34) 0.5 (object)
+6: toString!
+Calling with (35) -1 (object)
+7: toString!
+Calling with (36) -0.5 (object)
+8: toString!
+Calling with (37) Infinity (object)
+9: toString!
+Calling with (38) -Infinity (object)
+10: toString!
+Calling with (39) NaN (object)
+11: toString!
+Calling with (40)  (object)
+12: toString!
+undefined
+undefined
+undefined
+Calling with (41) 0 (object)
+13: toString!
+Calling with (42) -0 (object)
+14: toString!
+Calling with (43) 0.0 (object)
+15: toString!
+Calling with (44) 1 (object)
+16: toString!
+Calling with (45) Hello World! (object)
+17: toString!
+Calling with (46) true (object)
+18: toString!
+Calling with (47) _level0 (object)
+19: toString!
+Calling with (48) Ã¤Ã¶Ã¼ (object)
+20: toString!
+Calling with (49) _level0 (object)
+21: toString!
+Calling with (50) [type Object] (object)
+22: toString!
+Calling with (51)  (object)
+23: toString!
+Calling with (52) [type Object] (object)
+24: toString!
+Calling with (53) [type Object] (object)
+25: toString!
+Calling with (54) [type Object] (object)
+26: toString!
+Calling with (55) [type Object] (object)
+27: toString!

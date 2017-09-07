@@ -1,0 +1,178 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+Check String.concat
+Hello
+Hello, world!
+Hello, world!
+Testing: (0) undefined (undefined)
+Hello, undefined!
+Testing: (1) null (null)
+Hello, null!
+Testing: (2) true (boolean)
+Hello, true!
+Testing: (3) false (boolean)
+Hello, false!
+Testing: (4) 0 (number)
+Hello, 0!
+Testing: (5) 1 (number)
+Hello, 1!
+Testing: (6) 0.5 (number)
+Hello, 0.5!
+Testing: (7) -1 (number)
+Hello, -1!
+Testing: (8) -0.5 (number)
+Hello, -0.5!
+Testing: (9) Infinity (number)
+Hello, Infinity!
+Testing: (10) -Infinity (number)
+Hello, -Infinity!
+Testing: (11) NaN (number)
+Hello, NaN!
+Testing: (12)  (string)
+Hello, !
+Testing: (13) 0 (string)
+Hello, 0!
+Testing: (14) -0 (string)
+Hello, -0!
+Testing: (15) 0.0 (string)
+Hello, 0.0!
+Testing: (16) 1 (string)
+Hello, 1!
+Testing: (17) Hello World! (string)
+Hello, Hello World!!
+Testing: (18) true (string)
+Hello, true!
+Testing: (19) _level0 (string)
+Hello, _level0!
+Testing: (20) _level0 (movieclip)
+Hello, _level0!
+Testing: (21) [object Object] (object)
+Hello, [object Object]!
+Testing: (22) [type Function] (function)
+Hello, [type Function]!
+Testing: (23) [type Object] (object)
+toString called
+Hello, [type Object]!
+Testing: (24) [type Object] (object)
+toString called with 
+Hello, [type Object]!
+Testing: (25) [object Object] (object)
+Hello, [object Object]!
+Testing: (26) undefined (object)
+Hello, [type Object]!
+Testing: (27) undefined (object)
+0: toString!
+Hello, [type Object]!
+Testing: (28) null (object)
+1: toString!
+Hello, [type Object]!
+Testing: (29) true (object)
+2: toString!
+Hello, [type Object]!
+Testing: (30) false (object)
+3: toString!
+Hello, [type Object]!
+Testing: (31) 0 (object)
+4: toString!
+Hello, [type Object]!
+Testing: (32) 1 (object)
+5: toString!
+Hello, [type Object]!
+Testing: (33) 0.5 (object)
+6: toString!
+Hello, [type Object]!
+Testing: (34) -1 (object)
+7: toString!
+Hello, [type Object]!
+Testing: (35) -0.5 (object)
+8: toString!
+Hello, [type Object]!
+Testing: (36) Infinity (object)
+9: toString!
+Hello, [type Object]!
+Testing: (37) -Infinity (object)
+10: toString!
+Hello, [type Object]!
+Testing: (38) NaN (object)
+11: toString!
+Hello, [type Object]!
+Testing: (39)  (object)
+12: toString!
+Hello, !
+Testing: (40) 0 (object)
+13: toString!
+Hello, 0!
+Testing: (41) -0 (object)
+14: toString!
+Hello, -0!
+Testing: (42) 0.0 (object)
+15: toString!
+Hello, 0.0!
+Testing: (43) 1 (object)
+16: toString!
+Hello, 1!
+Testing: (44) Hello World! (object)
+17: toString!
+Hello, Hello World!!
+Testing: (45) true (object)
+18: toString!
+Hello, true!
+Testing: (46) _level0 (object)
+19: toString!
+Hello, _level0!
+Testing: (47) _level0 (object)
+20: toString!
+Hello, [type Object]!
+Testing: (48) [type Object] (object)
+21: toString!
+Hello, [type Object]!
+Testing: (49) [type Object] (object)
+22: toString!
+Hello, [type Object]!
+Testing: (50) [type Object] (object)
+23: toString!
+Hello, [type Object]!
+Testing: (51) [type Object] (object)
+24: toString!
+Hello, [type Object]!
+Testing: (52) [type Object] (object)
+25: toString!
+Hello, [type Object]!
+Testing: (53) [type Object] (object)
+26: toString!
+Hello, [type Object]!

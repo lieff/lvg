@@ -1,0 +1,272 @@
+Check how "Array" and "new Array" react to parameters
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+
+
+null
+null
+true
+true
+false
+false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+0
+-0
+-0
+0.0
+0.0
+1
+1
+Hello World!
+Hello World!
+true
+true
+_level0
+_level0
+_level0
+_level0
+[object Object]
+[object Object]
+[type Function]
+[type Function]
+toString called
+[type Object]
+toString called
+[type Object]
+toString called with 
+[type Object]
+toString called with 
+[type Object]
+[object Object]
+[object Object]
+[type Object]
+[type Object]
+0: toString!
+[type Object]
+0: toString!
+[type Object]
+1: toString!
+[type Object]
+1: toString!
+[type Object]
+2: toString!
+[type Object]
+2: toString!
+[type Object]
+3: toString!
+[type Object]
+3: toString!
+[type Object]
+4: toString!
+[type Object]
+4: toString!
+[type Object]
+5: toString!
+[type Object]
+5: toString!
+[type Object]
+6: toString!
+[type Object]
+6: toString!
+[type Object]
+7: toString!
+[type Object]
+7: toString!
+[type Object]
+8: toString!
+[type Object]
+8: toString!
+[type Object]
+9: toString!
+[type Object]
+9: toString!
+[type Object]
+10: toString!
+[type Object]
+10: toString!
+[type Object]
+11: toString!
+[type Object]
+11: toString!
+[type Object]
+12: toString!
+
+12: toString!
+
+13: toString!
+0
+13: toString!
+0
+14: toString!
+-0
+14: toString!
+-0
+15: toString!
+0.0
+15: toString!
+0.0
+16: toString!
+1
+16: toString!
+1
+17: toString!
+Hello World!
+17: toString!
+Hello World!
+18: toString!
+true
+18: toString!
+true
+19: toString!
+_level0
+19: toString!
+_level0
+20: toString!
+[type Object]
+20: toString!
+[type Object]
+21: toString!
+[type Object]
+21: toString!
+[type Object]
+22: toString!
+[type Object]
+22: toString!
+[type Object]
+23: toString!
+[type Object]
+23: toString!
+[type Object]
+24: toString!
+[type Object]
+24: toString!
+[type Object]
+25: toString!
+[type Object]
+25: toString!
+[type Object]
+26: toString!
+[type Object]
+26: toString!
+[type Object]
+toString called
+toString called with 
+0: toString!
+1: toString!
+2: toString!
+3: toString!
+4: toString!
+5: toString!
+6: toString!
+7: toString!
+8: toString!
+9: toString!
+10: toString!
+11: toString!
+12: toString!
+13: toString!
+14: toString!
+15: toString!
+16: toString!
+17: toString!
+18: toString!
+19: toString!
+20: toString!
+21: toString!
+22: toString!
+23: toString!
+24: toString!
+25: toString!
+26: toString!
+,null,true,false,0,1,0.5,-1,-0.5,Infinity,-Infinity,NaN,,0,-0,0.0,1,Hello World!,true,_level0,_level0,[object Object],[type Function],[type Object],[type Object],[object Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],,0,-0,0.0,1,Hello World!,true,_level0,[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object]
+toString called
+toString called with 
+0: toString!
+1: toString!
+2: toString!
+3: toString!
+4: toString!
+5: toString!
+6: toString!
+7: toString!
+8: toString!
+9: toString!
+10: toString!
+11: toString!
+12: toString!
+13: toString!
+14: toString!
+15: toString!
+16: toString!
+17: toString!
+18: toString!
+19: toString!
+20: toString!
+21: toString!
+22: toString!
+23: toString!
+24: toString!
+25: toString!
+26: toString!
+,null,true,false,0,1,0.5,-1,-0.5,Infinity,-Infinity,NaN,,0,-0,0.0,1,Hello World!,true,_level0,_level0,[object Object],[type Function],[type Object],[type Object],[object Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],,0,-0,0.0,1,Hello World!,true,_level0,[type Object],[type Object],[type Object],[type Object],[type Object],[type Object],[type Object]
+(0)  (undefined),(1) null (null),(2) true (boolean),(3) false (boolean),(4) 0 (number),(5) 1 (number),(6) 0.5 (number),(7) -1 (number),(8) -0.5 (number),(9) Infinity (number),(10) -Infinity (number),(11) NaN (number),(12)  (string),(13) 0 (string),(14) -0 (string),(15) 0.0 (string),(16) 1 (string),(17) Hello World! (string),(18) true (string),(19) _level0 (string),(20) _level0 (movieclip),(21) [object Object] (object),(22) [type Function] (function),(23) [type Object] (object),(24) [type Object] (object),(25) [object Object] (object),(26)  (object),(27)  (object),(28) null (object),(29) true (object),(30) false (object),(31) 0 (object),(32) 1 (object),(33) 0.5 (object),(34) -1 (object),(35) -0.5 (object),(36) Infinity (object),(37) -Infinity (object),(38) NaN (object),(39)  (object),(40) 0 (object),(41) -0 (object),(42) 0.0 (object),(43) 1 (object),(44) Hello World! (object),(45) true (object),(46) _level0 (object),(47) _level0 (object),(48) [type Object] (object),(49) [type Object] (object),(50) [type Object] (object),(51) [type Object] (object),(52) [type Object] (object),(53) [type Object] (object)
+(0)  (undefined),(1) null (null),(2) true (boolean),(3) false (boolean),(4) 0 (number),(5) 1 (number),(6) 0.5 (number),(7) -1 (number),(8) -0.5 (number),(9) Infinity (number),(10) -Infinity (number),(11) NaN (number),(12)  (string),(13) 0 (string),(14) -0 (string),(15) 0.0 (string),(16) 1 (string),(17) Hello World! (string),(18) true (string),(19) _level0 (string),(20) _level0 (movieclip),(21) [object Object] (object),(22) [type Function] (function),(23) [type Object] (object),(24) [type Object] (object),(25) [object Object] (object),(26)  (object),(27)  (object),(28) null (object),(29) true (object),(30) false (object),(31) 0 (object),(32) 1 (object),(33) 0.5 (object),(34) -1 (object),(35) -0.5 (object),(36) Infinity (object),(37) -Infinity (object),(38) NaN (object),(39)  (object),(40) 0 (object),(41) -0 (object),(42) 0.0 (object),(43) 1 (object),(44) Hello World! (object),(45) true (object),(46) _level0 (object),(47) _level0 (object),(48) [type Object] (object),(49) [type Object] (object),(50) [type Object] (object),(51) [type Object] (object),(52) [type Object] (object),(53) [type Object] (object)
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,
+,,,,
+
+

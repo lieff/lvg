@@ -1,0 +1,30 @@
+o.__proto__: 0
+undefined
+o.__proto__: 1
+undefined
+o.__proto__: 2
+undefined
+o.__proto__: 4
+undefined
+o.__proto__: 8
+undefined
+o.__proto__: 16
+undefined
+o.__proto__: 32
+undefined
+o.__proto__: 64
+undefined
+o.__proto__: 128
+undefined
+o.__proto__: 256
+undefined
+o.__proto__: 512
+undefined
+o.__proto__: 1024
+undefined
+o.__proto__: 2048
+undefined
+o.__proto__: 4096
+undefined
+o.__proto__: 8192
+undefined

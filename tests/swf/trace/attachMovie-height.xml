@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="25" frames="2">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DefineBitsJPEG2 objectID="1">
+        <data>
+          <data>/9j/4AAQSkZJRgABAQEASABIAAD/4QAWRXhpZgAATU0AKgAAAAgAAAAAAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAACwn/xAAaEAACAgMAAAAAAAAAAAAAAAAABwgKOXi4/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJ+Uqcpr80AafRUVRPsMEpU5TX5oA0+ioqifYH//2Q==</data>
+        </data>
+      </DefineBitsJPEG2>
+      <DefineShape objectID="2">
+        <bounds>
+          <Rectangle left="0" right="2000" top="0" bottom="2000"/>
+        </bounds>
+        <styles>
+          <StyleList>
+            <fillStyles>
+	      <TiledBitmap objectID="1" />
+            </fillStyles>
+            <lineStyles/>
+          </StyleList>
+        </styles>
+        <shapes>
+          <Shape>
+            <edges>
+              <ShapeSetup x="0" y="0" fillStyle0="1"/>
+              <LineTo x="0" y="2000"/>
+              <LineTo x="2000" y="0"/>
+              <LineTo x="0" y="-2000"/>
+              <LineTo x="-2000" y="0"/>
+              <ShapeSetup/>
+            </edges>
+          </Shape>
+        </shapes>
+      </DefineShape>
+      <DefineSprite objectID="3" frames="1">
+        <tags>
+          <PlaceObject2 replace="0" depth="0" objectID="2"/>
+          <ShowFrame/>
+          <End/>
+        </tags>
+      </DefineSprite>
+      <Export>
+        <symbols>
+          <Symbol objectID="3" name="image"/>
+        </symbols>
+      </Export>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="image"/>
+              <String value="_width"/>
+              <String value="_height"/>
+              <String value="attachMovie"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+              <StackInteger value="200"/>
+              <StackDictionaryLookup index="2"/>
+              <StackInteger value="150"/>
+              <StackInteger value="2"/>
+            </items>
+          </PushData>
+          <DeclareObject/>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackDictionaryLookup index="0"/>
+              <StackDictionaryLookup index="0"/>
+              <StackInteger value="4"/>
+              <StackDictionaryLookup index="3"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+	  <GetURL url="fscommand:quit" target=""/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

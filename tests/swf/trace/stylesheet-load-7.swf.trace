@@ -1,0 +1,11 @@
+onData: test {
+  test: test;
+}
+
+onLoad: true
+* 'test'
+test: 'test'
+onData: undefined
+onLoad: false
+* 'test'
+test: 'test'

@@ -1,0 +1,2 @@
+Test what happens when InitArray doesn't provide all the values it promises
+1,2,3,undefined,undefined

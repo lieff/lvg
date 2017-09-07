@@ -1,0 +1,2 @@
+Test that calling undefined functions doesn't abort
+didn't abort

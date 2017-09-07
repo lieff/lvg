@@ -1,0 +1,860 @@
+### Running tests without ignoreWhite...
+Loading: xml-parse-1.xml
+Success: true
+---
+452
+452
+docTypeDecl: %3C%21DOCTYPE%0A%20html%20PUBLIC%20%22%2D%2F%2FW3C%2F%2FDTD%20XHTML%201%2E1%2F%2FEN%22%0A%20%22http%3A%2F%2Fwww%2Ew3%2Eorg%2FTR%2Fxhtml11%2FDTD%2Fxhtml11%2Edtd%22%3E
+ignoreWhite: true
+loaded: true
+status: 0
+xmlDecl: <?xml version="1.0" encoding="UTF-8"?>
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 1
+nodeValue: null
+prefix: null
+parentNode: undefined
+firstChild: TAG(1): 'html'
+lastChild: TAG(1): 'html'
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 1: TAG(1): 'html'
+---
+attributes: 1: xmlns=http%3A%2F%2Fwww%2Ew3%2Eorg%2F1999%2Fxhtml
+localName: html
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: html
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TAG(1): 'head'
+lastChild: TAG(1): 'body'
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 2: TAG(1): 'head',TAG(1): 'body'
+---
+attributes: 0: 
+localName: head
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: head
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'html'
+firstChild: TAG(1): 'title'
+lastChild: TAG(1): 'link'
+nextSibling: TAG(1): 'body'
+previousSibling: undefined
+childNodes: 2: TAG(1): 'title',TAG(1): 'link'
+---
+attributes: 0: 
+localName: title
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: title
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'head'
+firstChild: TEXT(3): 'Title is something'
+lastChild: TEXT(3): 'Title is something'
+nextSibling: TAG(1): 'link'
+previousSibling: undefined
+childNodes: 1: TEXT(3): 'Title is something'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: Title is something
+prefix: null
+parentNode: TAG(1): 'title'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 4: href=style%2Ecss&media=screen&rel=stylesheet&type=text%2Fcss
+localName: link
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: link
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'head'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: TAG(1): 'title'
+childNodes: 0: 
+---
+attributes: 0: 
+localName: body
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: body
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'html'
+firstChild: TAG(1): 'h1'
+lastChild: TAG(1): 'p'
+nextSibling: undefined
+previousSibling: TAG(1): 'head'
+childNodes: 2: TAG(1): 'h1',TAG(1): 'p'
+---
+attributes: 1: id=main%5Ftopic
+localName: h1
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: h1
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'body'
+firstChild: TEXT(3): 'Main topic'
+lastChild: TEXT(3): 'Main topic'
+nextSibling: TAG(1): 'p'
+previousSibling: undefined
+childNodes: 1: TEXT(3): 'Main topic'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: Main topic
+prefix: null
+parentNode: TAG(1): 'h1'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 2: class=some%5Ftext&id=first%5Ftext%5Fblock
+localName: p
+namespaceURI: http://www.w3.org/1999/xhtml
+nodeName: p
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'body'
+firstChild: TEXT(3): 'Some text'
+lastChild: TEXT(3): 'Some text'
+nextSibling: undefined
+previousSibling: TAG(1): 'h1'
+childNodes: 1: TEXT(3): 'Some text'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: Some text
+prefix: null
+parentNode: TAG(1): 'p'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+Loading: xml-parse-2.xml
+Success: true
+---
+820
+820
+docTypeDecl: <!DOCTYPE foo [ <!ENTITY greeting "hello"> ]>
+ignoreWhite: true
+loaded: true
+status: -9
+xmlDecl: <?xml version="1.0" encoding="UTF-8" ?>
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 1
+nodeValue: null
+prefix: null
+parentNode: undefined
+firstChild: TEXT(3): 'cruft '
+lastChild: TAG(1): 'end_not_missing'
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 8: TEXT(3): 'cruft ',TAG(1): 'normal',TAG(1): 'entities',TAG(1): '俄語',TAG(1): 'comment_inside_text',TAG(1): 'no_comment_inside_text',TAG(1): 'unescaped',TAG(1): 'end_not_missing'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: cruft 
+prefix: null
+parentNode: TAG(1): 'null'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'normal'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: normal
+namespaceURI: 
+nodeName: normal
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20text%0A%20%20'
+lastChild: TEXT(3): '%0A%20%20even%20more%20text%0A'
+nextSibling: TAG(1): 'entities'
+previousSibling: TEXT(3): 'cruft '
+childNodes: 5: TEXT(3): '%0A%20%20text%0A%20%20',TAG(1): 'child',TEXT(3): '%0A%20%20more%20text%0A%20%20',TAG(1): 'empty_element',TEXT(3): '%0A%20%20even%20more%20text%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'child'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 2: attribute=value&second%5Fattribute=second%20value
+localName: child
+namespaceURI: 
+nodeName: child
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'normal'
+firstChild: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+lastChild: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+nextSibling: TEXT(3): '%0A%20%20more%20text%0A%20%20'
+previousSibling: TEXT(3): '%0A%20%20text%0A%20%20'
+childNodes: 1: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%20%20child%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'child'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20more%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'empty_element'
+previousSibling: TAG(1): 'child'
+childNodes: 0: 
+---
+attributes: 1: empty%5Fattribute=
+localName: empty_element
+namespaceURI: 
+nodeName: empty_element
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TEXT(3): '%0A%20%20even%20more%20text%0A'
+previousSibling: TEXT(3): '%0A%20%20more%20text%0A%20%20'
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20even%20more%20text%0A
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: TAG(1): 'empty_element'
+childNodes: 0: 
+---
+attributes: 1: entities%5Fattribute=%3C%20%3E%20%22%20%27%20%26%20%C2%A0
+localName: entities
+namespaceURI: 
+nodeName: entities
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+lastChild: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+nextSibling: TAG(1): '俄語'
+previousSibling: TAG(1): 'normal'
+childNodes: 1: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A
+prefix: null
+parentNode: TAG(1): 'entities'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: 俄語
+namespaceURI: 
+nodeName: 俄語
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'Данные'
+lastChild: TEXT(3): 'Данные'
+nextSibling: TAG(1): 'comment_inside_text'
+previousSibling: TAG(1): 'entities'
+childNodes: 1: TEXT(3): 'Данные'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: Данные
+prefix: null
+parentNode: TAG(1): '俄語'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: comment_inside_text
+namespaceURI: 
+nodeName: comment_inside_text
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'comment '
+lastChild: TEXT(3): 'text'
+nextSibling: TAG(1): 'no_comment_inside_text'
+previousSibling: TAG(1): '俄語'
+childNodes: 2: TEXT(3): 'comment ',TEXT(3): 'text'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: comment 
+prefix: null
+parentNode: TAG(1): 'comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TEXT(3): 'text'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: text
+prefix: null
+parentNode: TAG(1): 'comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: TEXT(3): 'comment '
+childNodes: 0: 
+---
+attributes: 0: 
+localName: no_comment_inside_text
+namespaceURI: 
+nodeName: no_comment_inside_text
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'comment text'
+lastChild: TEXT(3): 'comment text'
+nextSibling: TAG(1): 'unescaped'
+previousSibling: TAG(1): 'comment_inside_text'
+childNodes: 1: TEXT(3): 'comment text'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: comment text
+prefix: null
+parentNode: TAG(1): 'no_comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 1: entities=%3E%20%27%20%26%20%C2%A0%28nbsp%29
+localName: unescaped
+namespaceURI: 
+nodeName: unescaped
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+lastChild: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+nextSibling: TAG(1): 'end_not_missing'
+previousSibling: TAG(1): 'no_comment_inside_text'
+childNodes: 1: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A
+prefix: null
+parentNode: TAG(1): 'unescaped'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: end_not_missing
+namespaceURI: 
+nodeName: end_not_missing
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20text%0A%20%20'
+lastChild: TAG(1): 'end_missing'
+nextSibling: undefined
+previousSibling: TAG(1): 'unescaped'
+childNodes: 2: TEXT(3): '%0A%20%20text%0A%20%20',TAG(1): 'end_missing'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'end_not_missing'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'end_missing'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: end_missing
+namespaceURI: 
+nodeName: end_missing
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'end_not_missing'
+firstChild: TEXT(3): '%0A%20%20%20%20text%0A'
+lastChild: TEXT(3): '%0A%20%20%20%20text%0A'
+nextSibling: undefined
+previousSibling: TEXT(3): '%0A%20%20text%0A%20%20'
+childNodes: 1: TEXT(3): '%0A%20%20%20%20text%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%20%20text%0A
+prefix: null
+parentNode: TAG(1): 'end_missing'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+Loading: xml-parse-3.xml
+Success: false
+---
+0
+undefined
+docTypeDecl: <!DOCTYPE foo [ <!ENTITY greeting "hello"> ]>
+ignoreWhite: true
+loaded: false
+status: -9
+xmlDecl: <?xml version="1.0" encoding="UTF-8" ?>
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 1
+nodeValue: null
+prefix: null
+parentNode: undefined
+firstChild: TEXT(3): 'cruft '
+lastChild: TAG(1): 'end_not_missing'
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 8: TEXT(3): 'cruft ',TAG(1): 'normal',TAG(1): 'entities',TAG(1): '俄語',TAG(1): 'comment_inside_text',TAG(1): 'no_comment_inside_text',TAG(1): 'unescaped',TAG(1): 'end_not_missing'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: cruft 
+prefix: null
+parentNode: TAG(1): 'null'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'normal'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: normal
+namespaceURI: 
+nodeName: normal
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20text%0A%20%20'
+lastChild: TEXT(3): '%0A%20%20even%20more%20text%0A'
+nextSibling: TAG(1): 'entities'
+previousSibling: TEXT(3): 'cruft '
+childNodes: 5: TEXT(3): '%0A%20%20text%0A%20%20',TAG(1): 'child',TEXT(3): '%0A%20%20more%20text%0A%20%20',TAG(1): 'empty_element',TEXT(3): '%0A%20%20even%20more%20text%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'child'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 2: attribute=value&second%5Fattribute=second%20value
+localName: child
+namespaceURI: 
+nodeName: child
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'normal'
+firstChild: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+lastChild: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+nextSibling: TEXT(3): '%0A%20%20more%20text%0A%20%20'
+previousSibling: TEXT(3): '%0A%20%20text%0A%20%20'
+childNodes: 1: TEXT(3): '%0A%20%20%20%20child%20text%0A%20%20'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%20%20child%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'child'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20more%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'empty_element'
+previousSibling: TAG(1): 'child'
+childNodes: 0: 
+---
+attributes: 1: empty%5Fattribute=
+localName: empty_element
+namespaceURI: 
+nodeName: empty_element
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TEXT(3): '%0A%20%20even%20more%20text%0A'
+previousSibling: TEXT(3): '%0A%20%20more%20text%0A%20%20'
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20even%20more%20text%0A
+prefix: null
+parentNode: TAG(1): 'normal'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: TAG(1): 'empty_element'
+childNodes: 0: 
+---
+attributes: 1: entities%5Fattribute=%3C%20%3E%20%22%20%27%20%26%20%C2%A0
+localName: entities
+namespaceURI: 
+nodeName: entities
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+lastChild: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+nextSibling: TAG(1): '俄語'
+previousSibling: TAG(1): 'normal'
+childNodes: 1: TEXT(3): '%0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%3C%20%3E%20%22%20%27%20%26%20%C2%A0%0A
+prefix: null
+parentNode: TAG(1): 'entities'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: 俄語
+namespaceURI: 
+nodeName: 俄語
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'Данные'
+lastChild: TEXT(3): 'Данные'
+nextSibling: TAG(1): 'comment_inside_text'
+previousSibling: TAG(1): 'entities'
+childNodes: 1: TEXT(3): 'Данные'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: Данные
+prefix: null
+parentNode: TAG(1): '俄語'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: comment_inside_text
+namespaceURI: 
+nodeName: comment_inside_text
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'comment '
+lastChild: TEXT(3): 'text'
+nextSibling: TAG(1): 'no_comment_inside_text'
+previousSibling: TAG(1): '俄語'
+childNodes: 2: TEXT(3): 'comment ',TEXT(3): 'text'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: comment 
+prefix: null
+parentNode: TAG(1): 'comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TEXT(3): 'text'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: text
+prefix: null
+parentNode: TAG(1): 'comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: TEXT(3): 'comment '
+childNodes: 0: 
+---
+attributes: 0: 
+localName: no_comment_inside_text
+namespaceURI: 
+nodeName: no_comment_inside_text
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): 'comment text'
+lastChild: TEXT(3): 'comment text'
+nextSibling: TAG(1): 'unescaped'
+previousSibling: TAG(1): 'comment_inside_text'
+childNodes: 1: TEXT(3): 'comment text'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: comment text
+prefix: null
+parentNode: TAG(1): 'no_comment_inside_text'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 1: entities=%3E%20%27%20%26%20%C2%A0%28nbsp%29
+localName: unescaped
+namespaceURI: 
+nodeName: unescaped
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+lastChild: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+nextSibling: TAG(1): 'end_not_missing'
+previousSibling: TAG(1): 'no_comment_inside_text'
+childNodes: 1: TEXT(3): '%0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%3E%20%22%20%27%20%26%20%C2%A0%28nbsp%29%0A
+prefix: null
+parentNode: TAG(1): 'unescaped'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: end_not_missing
+namespaceURI: 
+nodeName: end_not_missing
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'null'
+firstChild: TEXT(3): '%0A%20%20text%0A%20%20'
+lastChild: TAG(1): 'end_missing'
+nextSibling: undefined
+previousSibling: TAG(1): 'unescaped'
+childNodes: 2: TEXT(3): '%0A%20%20text%0A%20%20',TAG(1): 'end_missing'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20text%0A%20%20
+prefix: null
+parentNode: TAG(1): 'end_not_missing'
+firstChild: undefined
+lastChild: undefined
+nextSibling: TAG(1): 'end_missing'
+previousSibling: undefined
+childNodes: 0: 
+---
+attributes: 0: 
+localName: end_missing
+namespaceURI: 
+nodeName: end_missing
+nodeType: 1
+nodeValue: null
+prefix: 
+parentNode: TAG(1): 'end_not_missing'
+firstChild: TEXT(3): '%0A%20%20%20%20text%0A'
+lastChild: TEXT(3): '%0A%20%20%20%20text%0A'
+nextSibling: undefined
+previousSibling: TEXT(3): '%0A%20%20text%0A%20%20'
+childNodes: 1: TEXT(3): '%0A%20%20%20%20text%0A'
+---
+attributes: 0: 
+localName: null
+namespaceURI: null
+nodeName: null
+nodeType: 3
+nodeValue: %0A%20%20%20%20text%0A
+prefix: null
+parentNode: TAG(1): 'end_missing'
+firstChild: undefined
+lastChild: undefined
+nextSibling: undefined
+previousSibling: undefined
+childNodes: 0: 
+---

@@ -1,0 +1,2625 @@
+0 (        ) [object Object]: { 100, 0, 0, 100} (100, 0)
+1 (44      ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+2 (88      ) [object Object]: { 0, 0, 0, 100} (100, 100)
+3 (22      ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+4 (44      ) [object Object]: { 44, 0, 0, 100} (100, 56)
+5 (  42    ) [object Object]: { 100, 0, 42, 100} (100, 0)
+6 (4442    ) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+7 (8842    ) [object Object]: { 0, 0, 42, 100} (100, 100)
+8 (2242    ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+9 (4442    ) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+10 (  84    ) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+11 (4484    ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+12 (8884    ) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+13 (2284    ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+14 (4484    ) [object Object]: { 44, 0, 0, 100} (100, 56)
+15 (  21    ) [object Object]: { 100, 0, 0, 100} (100, 0)
+16 (4421    ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+17 (8821    ) [object Object]: { 0, 0, 0, 100} (100, 100)
+18 (2221    ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+19 (4421    ) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+20 (  42    ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+21 (4442    ) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+22 (8842    ) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+23 (2242    ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+24 (4442    ) [object Object]: { 44, 0, 42, 100} (100, 56)
+25 (    24  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+26 (44  24  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+27 (88  24  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+28 (22  24  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+29 (44  24  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+30 (  4224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+31 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+ll
+ll
+32 (884224  ) [object Object]: { 0, 24, 42, 100} (100, 100)
+33 (224224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+34 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+lr
+lr
+35 (  8424  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+lr
+lr
+36 (448424  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+37 (888424  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+lr
+lr
+38 (228424  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+39 (448424  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+40 (  2124  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+41 (442124  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+42 (882124  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+43 (222124  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+44 (442124  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+45 (  4224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+46 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+47 (884224  ) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+48 (224224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+49 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+rl
+rl
+50 (    48  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+rl
+rl
+51 (44  48  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+rl
+rl
+52 (88  48  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+rl
+rl
+53 (22  48  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+54 (44  48  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+rl
+rl
+55 (  4248  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+rl
+rl
+56 (444248  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+rl
+rl
+57 (884248  ) [object Object]: { 0, 0, 42, 100} (100, 100)
+rl
+rl
+58 (224248  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+59 (444248  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+rl
+rl
+60 (  8448  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+rl
+rl
+61 (448448  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+rl
+rl
+62 (888448  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+rl
+rl
+63 (228448  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+rl
+rl
+64 (448448  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+rl
+rl
+65 (  2148  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+rl
+rl
+66 (442148  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+rl
+rl
+67 (882148  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+rl
+rl
+68 (222148  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+69 (442148  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+rl
+rl
+70 (  4248  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+rl
+rl
+71 (444248  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rl
+rl
+72 (884248  ) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+rl
+rl
+73 (224248  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rl
+rl
+74 (444248  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+75 (    12  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+76 (44  12  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+77 (88  12  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+78 (22  12  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+79 (44  12  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+80 (  4212  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+81 (444212  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+82 (884212  ) [object Object]: { 0, 0, 42, 100} (100, 100)
+83 (224212  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+84 (444212  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+85 (  8412  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+86 (448412  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+87 (888412  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+88 (228412  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+89 (448412  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+90 (  2112  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+91 (442112  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+92 (882112  ) [object Object]: { 0, 0, 0, 100} (100, 100)
+93 (222112  ) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+94 (442112  ) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+95 (  4212  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+96 (444212  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+97 (884212  ) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+98 (224212  ) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+99 (444212  ) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf rl
+valueOf rl
+100 (    24  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+valueOf rl
+101 (44  24  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+102 (88  24  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+valueOf rl
+103 (22  24  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+104 (44  24  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+valueOf rl
+105 (  4224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf rl
+valueOf rl
+106 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+107 (884224  ) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf rl
+valueOf rl
+108 (224224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+109 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf rl
+lr
+lr
+valueOf rl
+110 (  8424  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+lr
+lr
+valueOf rl
+111 (448424  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+lr
+lr
+valueOf rl
+112 (888424  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+lr
+lr
+valueOf rl
+113 (228424  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+lr
+lr
+valueOf rl
+114 (448424  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+valueOf rl
+115 (  2124  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+valueOf rl
+116 (442124  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+117 (882124  ) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+valueOf rl
+118 (222124  ) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+119 (442124  ) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+120 (  4224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+121 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf lr
+valueOf rl
+ll
+ll
+valueOf lr
+valueOf rl
+122 (884224  ) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+123 (224224  ) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf rl
+valueOf ll
+valueOf lr
+valueOf rl
+124 (444224  ) [object Object]: { 44, 24, 42, 100} (100, 56)
+125 (      22) [object Object]: { 100, 0, 0, 22} (100, -78)
+126 (44    22) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+127 (88    22) [object Object]: { 0, 0, 0, 22} (100, 100)
+128 (22    22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+129 (44    22) [object Object]: { 44, 0, 0, 22} (100, 56)
+130 (  42  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+131 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+ll
+ll
+132 (8842  22) [object Object]: { 0, 0, 42, 22} (100, 100)
+133 (2242  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf ll
+134 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+lr
+lr
+135 (  84  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+lr
+lr
+136 (4484  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+lr
+lr
+137 (8884  22) [object Object]: { 0, 0, 0, 22} (100, 100)
+lr
+lr
+138 (2284  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+lr
+lr
+139 (4484  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+140 (  21  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+141 (4421  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+142 (8821  22) [object Object]: { 0, 0, 0, 22} (100, 100)
+143 (2221  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+144 (4421  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf lr
+145 (  42  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf lr
+146 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+147 (8842  22) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf lr
+148 (2242  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+149 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+150 (    2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+151 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+ll
+ll
+152 (88  2422) [object Object]: { 0, 24, 0, 22} (100, 100)
+153 (22  2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+154 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+155 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+156 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+ll
+ll
+157 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+158 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf ll
+159 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+lr
+lr
+160 (  842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+lr
+lr
+161 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+ll
+ll
+lr
+lr
+162 (88842422) [object Object]: { 0, 24, 0, 22} (100, 100)
+lr
+lr
+163 (22842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+lr
+lr
+164 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+165 (  212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+166 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+ll
+ll
+167 (88212422) [object Object]: { 0, 24, 0, 22} (100, 100)
+168 (22212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+169 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf lr
+valueOf lr
+170 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf lr
+valueOf lr
+171 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+172 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf lr
+valueOf lr
+173 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+174 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+rl
+rl
+175 (    4822) [object Object]: { 100, 0, 0, 22} (100, -78)
+rl
+rl
+176 (44  4822) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+rl
+rl
+177 (88  4822) [object Object]: { 0, 0, 0, 22} (100, 100)
+rl
+rl
+178 (22  4822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+rl
+rl
+179 (44  4822) [object Object]: { 44, 0, 0, 22} (100, 56)
+rl
+rl
+180 (  424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+rl
+rl
+181 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+ll
+ll
+rl
+rl
+182 (88424822) [object Object]: { 0, 0, 42, 22} (100, 100)
+rl
+rl
+183 (22424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf ll
+rl
+rl
+184 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+lr
+lr
+rl
+rl
+185 (  844822) [object Object]: { 100, 0, 0, 22} (100, -78)
+lr
+lr
+rl
+rl
+186 (44844822) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+lr
+lr
+rl
+rl
+187 (88844822) [object Object]: { 0, 0, 0, 22} (100, 100)
+lr
+lr
+rl
+rl
+188 (22844822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+lr
+lr
+rl
+rl
+189 (44844822) [object Object]: { 44, 0, 0, 22} (100, 56)
+rl
+rl
+190 (  214822) [object Object]: { 100, 0, 0, 22} (100, -78)
+rl
+rl
+191 (44214822) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+rl
+rl
+192 (88214822) [object Object]: { 0, 0, 0, 22} (100, 100)
+rl
+rl
+193 (22214822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+rl
+rl
+194 (44214822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf lr
+rl
+rl
+195 (  424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf lr
+rl
+rl
+196 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rl
+rl
+197 (88424822) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf lr
+rl
+rl
+198 (22424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rl
+rl
+199 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+200 (    1222) [object Object]: { 100, 0, 0, 22} (100, -78)
+201 (44  1222) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+202 (88  1222) [object Object]: { 0, 0, 0, 22} (100, 100)
+203 (22  1222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+204 (44  1222) [object Object]: { 44, 0, 0, 22} (100, 56)
+205 (  421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+206 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+ll
+ll
+207 (88421222) [object Object]: { 0, 0, 42, 22} (100, 100)
+208 (22421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf ll
+209 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+lr
+lr
+210 (  841222) [object Object]: { 100, 0, 0, 22} (100, -78)
+lr
+lr
+211 (44841222) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+lr
+lr
+212 (88841222) [object Object]: { 0, 0, 0, 22} (100, 100)
+lr
+lr
+213 (22841222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+lr
+lr
+214 (44841222) [object Object]: { 44, 0, 0, 22} (100, 56)
+215 (  211222) [object Object]: { 100, 0, 0, 22} (100, -78)
+216 (44211222) [object Object]: { 44, 0, 0, 22} (100, 56)
+ll
+ll
+217 (88211222) [object Object]: { 0, 0, 0, 22} (100, 100)
+218 (22211222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf ll
+219 (44211222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf lr
+220 (  421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf lr
+221 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+222 (88421222) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf lr
+223 (22421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+224 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rl
+valueOf rl
+225 (    2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rl
+valueOf rl
+226 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+227 (88  2422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rl
+valueOf rl
+228 (22  2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+229 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rl
+valueOf rl
+230 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf rl
+valueOf rl
+231 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+232 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf rl
+valueOf rl
+233 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+234 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rl
+lr
+lr
+valueOf rl
+235 (  842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rl
+lr
+lr
+valueOf rl
+236 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rl
+ll
+ll
+lr
+lr
+valueOf rl
+237 (88842422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rl
+lr
+lr
+valueOf rl
+238 (22842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rl
+valueOf ll
+lr
+lr
+valueOf rl
+239 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rl
+valueOf rl
+240 (  212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rl
+valueOf rl
+241 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+242 (88212422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rl
+valueOf rl
+243 (22212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+244 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+245 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+246 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf lr
+valueOf rl
+ll
+ll
+valueOf lr
+valueOf rl
+247 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+248 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rl
+valueOf ll
+valueOf lr
+valueOf rl
+249 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+rr
+rr
+250 (      44) [object Object]: { 100, 0, 0, 0} (100, -100)
+rr
+rr
+251 (44    44) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+252 (88    44) [object Object]: { 0, 0, 0, 0} (100, 100)
+rr
+rr
+253 (22    44) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+254 (44    44) [object Object]: { 44, 0, 0, 0} (100, 56)
+rr
+rr
+255 (  42  44) [object Object]: { 100, 0, 42, 0} (100, -100)
+rr
+rr
+256 (4442  44) [object Object]: { 44, 0, 42, 0} (100, 56)
+ll
+ll
+rr
+rr
+257 (8842  44) [object Object]: { 0, 0, 42, 0} (100, 100)
+rr
+rr
+258 (2242  44) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+259 (4442  44) [object Object]: { 44, 0, 42, 0} (100, 56)
+lr
+lr
+rr
+rr
+260 (  84  44) [object Object]: { 100, 0, 0, 0} (100, -100)
+lr
+lr
+rr
+rr
+261 (4484  44) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+lr
+lr
+rr
+rr
+262 (8884  44) [object Object]: { 0, 0, 0, 0} (100, 100)
+lr
+lr
+rr
+rr
+263 (2284  44) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+lr
+lr
+rr
+rr
+264 (4484  44) [object Object]: { 44, 0, 0, 0} (100, 56)
+rr
+rr
+265 (  21  44) [object Object]: { 100, 0, 0, 0} (100, -100)
+rr
+rr
+266 (4421  44) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+267 (8821  44) [object Object]: { 0, 0, 0, 0} (100, 100)
+rr
+rr
+268 (2221  44) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+269 (4421  44) [object Object]: { 44, 0, 0, 0} (100, 56)
+valueOf lr
+valueOf lr
+rr
+rr
+270 (  42  44) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf lr
+valueOf lr
+rr
+rr
+271 (4442  44) [object Object]: { 44, 0, 42, 0} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rr
+rr
+272 (8842  44) [object Object]: { 0, 0, 42, 0} (100, 100)
+valueOf lr
+valueOf lr
+rr
+rr
+273 (2242  44) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rr
+rr
+274 (4442  44) [object Object]: { 44, 0, 42, 0} (100, 56)
+rr
+rr
+275 (    2444) [object Object]: { 100, 24, 0, 0} (100, -100)
+rr
+rr
+276 (44  2444) [object Object]: { 44, 24, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+277 (88  2444) [object Object]: { 0, 24, 0, 0} (100, 100)
+rr
+rr
+278 (22  2444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+279 (44  2444) [object Object]: { 44, 24, 0, 0} (100, 56)
+rr
+rr
+280 (  422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+rr
+rr
+281 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+ll
+ll
+rr
+rr
+282 (88422444) [object Object]: { 0, 24, 42, 0} (100, 100)
+rr
+rr
+283 (22422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+284 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+lr
+lr
+rr
+rr
+285 (  842444) [object Object]: { 100, 24, 0, 0} (100, -100)
+lr
+lr
+rr
+rr
+286 (44842444) [object Object]: { 44, 24, 0, 0} (100, 56)
+ll
+ll
+lr
+lr
+rr
+rr
+287 (88842444) [object Object]: { 0, 24, 0, 0} (100, 100)
+lr
+lr
+rr
+rr
+288 (22842444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+lr
+lr
+rr
+rr
+289 (44842444) [object Object]: { 44, 24, 0, 0} (100, 56)
+rr
+rr
+290 (  212444) [object Object]: { 100, 24, 0, 0} (100, -100)
+rr
+rr
+291 (44212444) [object Object]: { 44, 24, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+292 (88212444) [object Object]: { 0, 24, 0, 0} (100, 100)
+rr
+rr
+293 (22212444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+294 (44212444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf lr
+valueOf lr
+rr
+rr
+295 (  422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf lr
+valueOf lr
+rr
+rr
+296 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rr
+rr
+297 (88422444) [object Object]: { 0, 24, 42, 0} (100, 100)
+valueOf lr
+valueOf lr
+rr
+rr
+298 (22422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rr
+rr
+299 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+rl
+rl
+rr
+rr
+300 (    4844) [object Object]: { 100, 0, 0, 0} (100, -100)
+rl
+rl
+rr
+rr
+301 (44  4844) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rl
+rl
+rr
+rr
+302 (88  4844) [object Object]: { 0, 0, 0, 0} (100, 100)
+rl
+rl
+rr
+rr
+303 (22  4844) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rl
+rl
+rr
+rr
+304 (44  4844) [object Object]: { 44, 0, 0, 0} (100, 56)
+rl
+rl
+rr
+rr
+305 (  424844) [object Object]: { 100, 0, 42, 0} (100, -100)
+rl
+rl
+rr
+rr
+306 (44424844) [object Object]: { 44, 0, 42, 0} (100, 56)
+ll
+ll
+rl
+rl
+rr
+rr
+307 (88424844) [object Object]: { 0, 0, 42, 0} (100, 100)
+rl
+rl
+rr
+rr
+308 (22424844) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf ll
+rl
+rl
+rr
+rr
+309 (44424844) [object Object]: { 44, 0, 42, 0} (100, 56)
+lr
+lr
+rl
+rl
+rr
+rr
+310 (  844844) [object Object]: { 100, 0, 0, 0} (100, -100)
+lr
+lr
+rl
+rl
+rr
+rr
+311 (44844844) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+lr
+lr
+rl
+rl
+rr
+rr
+312 (88844844) [object Object]: { 0, 0, 0, 0} (100, 100)
+lr
+lr
+rl
+rl
+rr
+rr
+313 (22844844) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+lr
+lr
+rl
+rl
+rr
+rr
+314 (44844844) [object Object]: { 44, 0, 0, 0} (100, 56)
+rl
+rl
+rr
+rr
+315 (  214844) [object Object]: { 100, 0, 0, 0} (100, -100)
+rl
+rl
+rr
+rr
+316 (44214844) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rl
+rl
+rr
+rr
+317 (88214844) [object Object]: { 0, 0, 0, 0} (100, 100)
+rl
+rl
+rr
+rr
+318 (22214844) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rl
+rl
+rr
+rr
+319 (44214844) [object Object]: { 44, 0, 0, 0} (100, 56)
+valueOf lr
+valueOf lr
+rl
+rl
+rr
+rr
+320 (  424844) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf lr
+valueOf lr
+rl
+rl
+rr
+rr
+321 (44424844) [object Object]: { 44, 0, 42, 0} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rl
+rl
+rr
+rr
+322 (88424844) [object Object]: { 0, 0, 42, 0} (100, 100)
+valueOf lr
+valueOf lr
+rl
+rl
+rr
+rr
+323 (22424844) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rl
+rl
+rr
+rr
+324 (44424844) [object Object]: { 44, 0, 42, 0} (100, 56)
+rr
+rr
+325 (    1244) [object Object]: { 100, 0, 0, 0} (100, -100)
+rr
+rr
+326 (44  1244) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+327 (88  1244) [object Object]: { 0, 0, 0, 0} (100, 100)
+rr
+rr
+328 (22  1244) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+329 (44  1244) [object Object]: { 44, 0, 0, 0} (100, 56)
+rr
+rr
+330 (  421244) [object Object]: { 100, 0, 42, 0} (100, -100)
+rr
+rr
+331 (44421244) [object Object]: { 44, 0, 42, 0} (100, 56)
+ll
+ll
+rr
+rr
+332 (88421244) [object Object]: { 0, 0, 42, 0} (100, 100)
+rr
+rr
+333 (22421244) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+334 (44421244) [object Object]: { 44, 0, 42, 0} (100, 56)
+lr
+lr
+rr
+rr
+335 (  841244) [object Object]: { 100, 0, 0, 0} (100, -100)
+lr
+lr
+rr
+rr
+336 (44841244) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+lr
+lr
+rr
+rr
+337 (88841244) [object Object]: { 0, 0, 0, 0} (100, 100)
+lr
+lr
+rr
+rr
+338 (22841244) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+lr
+lr
+rr
+rr
+339 (44841244) [object Object]: { 44, 0, 0, 0} (100, 56)
+rr
+rr
+340 (  211244) [object Object]: { 100, 0, 0, 0} (100, -100)
+rr
+rr
+341 (44211244) [object Object]: { 44, 0, 0, 0} (100, 56)
+ll
+ll
+rr
+rr
+342 (88211244) [object Object]: { 0, 0, 0, 0} (100, 100)
+rr
+rr
+343 (22211244) [object Object]: { 100, 0, 0, 0} (100, -100)
+valueOf ll
+valueOf ll
+rr
+rr
+344 (44211244) [object Object]: { 44, 0, 0, 0} (100, 56)
+valueOf lr
+valueOf lr
+rr
+rr
+345 (  421244) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf lr
+valueOf lr
+rr
+rr
+346 (44421244) [object Object]: { 44, 0, 42, 0} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rr
+rr
+347 (88421244) [object Object]: { 0, 0, 42, 0} (100, 100)
+valueOf lr
+valueOf lr
+rr
+rr
+348 (22421244) [object Object]: { 100, 0, 42, 0} (100, -100)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rr
+rr
+349 (44421244) [object Object]: { 44, 0, 42, 0} (100, 56)
+valueOf rl
+valueOf rl
+rr
+rr
+350 (    2444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf rl
+valueOf rl
+rr
+rr
+351 (44  2444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+rr
+rr
+352 (88  2444) [object Object]: { 0, 24, 0, 0} (100, 100)
+valueOf rl
+valueOf rl
+rr
+rr
+353 (22  2444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+rr
+rr
+354 (44  2444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf rl
+valueOf rl
+rr
+rr
+355 (  422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf rl
+valueOf rl
+rr
+rr
+356 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+rr
+rr
+357 (88422444) [object Object]: { 0, 24, 42, 0} (100, 100)
+valueOf rl
+valueOf rl
+rr
+rr
+358 (22422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+rr
+rr
+359 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+valueOf rl
+lr
+lr
+valueOf rl
+rr
+rr
+360 (  842444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf rl
+lr
+lr
+valueOf rl
+rr
+rr
+361 (44842444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf rl
+ll
+ll
+lr
+lr
+valueOf rl
+rr
+rr
+362 (88842444) [object Object]: { 0, 24, 0, 0} (100, 100)
+valueOf rl
+lr
+lr
+valueOf rl
+rr
+rr
+363 (22842444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf rl
+valueOf ll
+lr
+lr
+valueOf rl
+rr
+rr
+364 (44842444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf rl
+valueOf rl
+rr
+rr
+365 (  212444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf rl
+valueOf rl
+rr
+rr
+366 (44212444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+rr
+rr
+367 (88212444) [object Object]: { 0, 24, 0, 0} (100, 100)
+valueOf rl
+valueOf rl
+rr
+rr
+368 (22212444) [object Object]: { 100, 24, 0, 0} (100, -100)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+rr
+rr
+369 (44212444) [object Object]: { 44, 24, 0, 0} (100, 56)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+rr
+rr
+370 (  422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+rr
+rr
+371 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+valueOf lr
+valueOf rl
+ll
+ll
+valueOf lr
+valueOf rl
+rr
+rr
+372 (88422444) [object Object]: { 0, 24, 42, 0} (100, 100)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+rr
+rr
+373 (22422444) [object Object]: { 100, 24, 42, 0} (100, -100)
+valueOf ll
+valueOf lr
+valueOf rl
+valueOf ll
+valueOf lr
+valueOf rl
+rr
+rr
+374 (44422444) [object Object]: { 44, 24, 42, 0} (100, 56)
+375 (      11) [object Object]: { 100, 0, 0, 100} (100, 0)
+376 (44    11) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+377 (88    11) [object Object]: { 0, 0, 0, 100} (100, 100)
+378 (22    11) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+379 (44    11) [object Object]: { 44, 0, 0, 100} (100, 56)
+380 (  42  11) [object Object]: { 100, 0, 42, 100} (100, 0)
+381 (4442  11) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+382 (8842  11) [object Object]: { 0, 0, 42, 100} (100, 100)
+383 (2242  11) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+384 (4442  11) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+385 (  84  11) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+386 (4484  11) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+387 (8884  11) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+388 (2284  11) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+389 (4484  11) [object Object]: { 44, 0, 0, 100} (100, 56)
+390 (  21  11) [object Object]: { 100, 0, 0, 100} (100, 0)
+391 (4421  11) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+392 (8821  11) [object Object]: { 0, 0, 0, 100} (100, 100)
+393 (2221  11) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+394 (4421  11) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+395 (  42  11) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+396 (4442  11) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+397 (8842  11) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+398 (2242  11) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+399 (4442  11) [object Object]: { 44, 0, 42, 100} (100, 56)
+400 (    2411) [object Object]: { 100, 24, 0, 100} (100, 0)
+401 (44  2411) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+402 (88  2411) [object Object]: { 0, 24, 0, 100} (100, 100)
+403 (22  2411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+404 (44  2411) [object Object]: { 44, 24, 0, 100} (100, 56)
+405 (  422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+406 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+ll
+ll
+407 (88422411) [object Object]: { 0, 24, 42, 100} (100, 100)
+408 (22422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+409 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+lr
+lr
+410 (  842411) [object Object]: { 100, 24, 0, 100} (100, 0)
+lr
+lr
+411 (44842411) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+412 (88842411) [object Object]: { 0, 24, 0, 100} (100, 100)
+lr
+lr
+413 (22842411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+414 (44842411) [object Object]: { 44, 24, 0, 100} (100, 56)
+415 (  212411) [object Object]: { 100, 24, 0, 100} (100, 0)
+416 (44212411) [object Object]: { 44, 24, 0, 100} (100, 56)
+ll
+ll
+417 (88212411) [object Object]: { 0, 24, 0, 100} (100, 100)
+418 (22212411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+419 (44212411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+420 (  422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+421 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+422 (88422411) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+423 (22422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+424 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+rl
+rl
+425 (    4811) [object Object]: { 100, 0, 0, 100} (100, 0)
+rl
+rl
+426 (44  4811) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+rl
+rl
+427 (88  4811) [object Object]: { 0, 0, 0, 100} (100, 100)
+rl
+rl
+428 (22  4811) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+429 (44  4811) [object Object]: { 44, 0, 0, 100} (100, 56)
+rl
+rl
+430 (  424811) [object Object]: { 100, 0, 42, 100} (100, 0)
+rl
+rl
+431 (44424811) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+rl
+rl
+432 (88424811) [object Object]: { 0, 0, 42, 100} (100, 100)
+rl
+rl
+433 (22424811) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+434 (44424811) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+rl
+rl
+435 (  844811) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+rl
+rl
+436 (44844811) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+rl
+rl
+437 (88844811) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+rl
+rl
+438 (22844811) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+rl
+rl
+439 (44844811) [object Object]: { 44, 0, 0, 100} (100, 56)
+rl
+rl
+440 (  214811) [object Object]: { 100, 0, 0, 100} (100, 0)
+rl
+rl
+441 (44214811) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+rl
+rl
+442 (88214811) [object Object]: { 0, 0, 0, 100} (100, 100)
+rl
+rl
+443 (22214811) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+rl
+rl
+444 (44214811) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+rl
+rl
+445 (  424811) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+rl
+rl
+446 (44424811) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+rl
+rl
+447 (88424811) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+rl
+rl
+448 (22424811) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+rl
+rl
+449 (44424811) [object Object]: { 44, 0, 42, 100} (100, 56)
+450 (    1211) [object Object]: { 100, 0, 0, 100} (100, 0)
+451 (44  1211) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+452 (88  1211) [object Object]: { 0, 0, 0, 100} (100, 100)
+453 (22  1211) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+454 (44  1211) [object Object]: { 44, 0, 0, 100} (100, 56)
+455 (  421211) [object Object]: { 100, 0, 42, 100} (100, 0)
+456 (44421211) [object Object]: { 44, 0, 42, 100} (100, 56)
+ll
+ll
+457 (88421211) [object Object]: { 0, 0, 42, 100} (100, 100)
+458 (22421211) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf ll
+459 (44421211) [object Object]: { 44, 0, 42, 100} (100, 56)
+lr
+lr
+460 (  841211) [object Object]: { 100, 0, 0, 100} (100, 0)
+lr
+lr
+461 (44841211) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+lr
+lr
+462 (88841211) [object Object]: { 0, 0, 0, 100} (100, 100)
+lr
+lr
+463 (22841211) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+lr
+lr
+464 (44841211) [object Object]: { 44, 0, 0, 100} (100, 56)
+465 (  211211) [object Object]: { 100, 0, 0, 100} (100, 0)
+466 (44211211) [object Object]: { 44, 0, 0, 100} (100, 56)
+ll
+ll
+467 (88211211) [object Object]: { 0, 0, 0, 100} (100, 100)
+468 (22211211) [object Object]: { 100, 0, 0, 100} (100, 0)
+valueOf ll
+valueOf ll
+469 (44211211) [object Object]: { 44, 0, 0, 100} (100, 56)
+valueOf lr
+valueOf lr
+470 (  421211) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf lr
+valueOf lr
+471 (44421211) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf lr
+ll
+ll
+valueOf lr
+472 (88421211) [object Object]: { 0, 0, 42, 100} (100, 100)
+valueOf lr
+valueOf lr
+473 (22421211) [object Object]: { 100, 0, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf ll
+valueOf lr
+474 (44421211) [object Object]: { 44, 0, 42, 100} (100, 56)
+valueOf rl
+valueOf rl
+475 (    2411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+valueOf rl
+476 (44  2411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+477 (88  2411) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+valueOf rl
+478 (22  2411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+479 (44  2411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+valueOf rl
+480 (  422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf rl
+valueOf rl
+481 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+482 (88422411) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf rl
+valueOf rl
+483 (22422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+484 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf rl
+lr
+lr
+valueOf rl
+485 (  842411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+lr
+lr
+valueOf rl
+486 (44842411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+lr
+lr
+valueOf rl
+487 (88842411) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+lr
+lr
+valueOf rl
+488 (22842411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+lr
+lr
+valueOf rl
+489 (44842411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+valueOf rl
+490 (  212411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf rl
+valueOf rl
+491 (44212411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf rl
+ll
+ll
+valueOf rl
+492 (88212411) [object Object]: { 0, 24, 0, 100} (100, 100)
+valueOf rl
+valueOf rl
+493 (22212411) [object Object]: { 100, 24, 0, 100} (100, 0)
+valueOf ll
+valueOf rl
+valueOf ll
+valueOf rl
+494 (44212411) [object Object]: { 44, 24, 0, 100} (100, 56)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+495 (  422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+496 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf lr
+valueOf rl
+ll
+ll
+valueOf lr
+valueOf rl
+497 (88422411) [object Object]: { 0, 24, 42, 100} (100, 100)
+valueOf lr
+valueOf rl
+valueOf lr
+valueOf rl
+498 (22422411) [object Object]: { 100, 24, 42, 100} (100, 0)
+valueOf ll
+valueOf lr
+valueOf rl
+valueOf ll
+valueOf lr
+valueOf rl
+499 (44422411) [object Object]: { 44, 24, 42, 100} (100, 56)
+valueOf rr
+valueOf rr
+500 (      22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+501 (44    22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+502 (88    22) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+503 (22    22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+504 (44    22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+505 (  42  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf rr
+valueOf rr
+506 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+507 (8842  22) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf rr
+valueOf rr
+508 (2242  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+509 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+lr
+lr
+valueOf rr
+510 (  84  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+lr
+lr
+valueOf rr
+511 (4484  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+lr
+lr
+valueOf rr
+512 (8884  22) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+lr
+lr
+valueOf rr
+513 (2284  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+lr
+lr
+valueOf rr
+514 (4484  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+515 (  21  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+516 (4421  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+517 (8821  22) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+518 (2221  22) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+519 (4421  22) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+520 (  42  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+521 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+valueOf rr
+ll
+ll
+valueOf lr
+valueOf rr
+522 (8842  22) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+523 (2242  22) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rr
+valueOf ll
+valueOf lr
+valueOf rr
+524 (4442  22) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+valueOf rr
+525 (    2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+526 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+527 (88  2422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+528 (22  2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+529 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+530 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf rr
+valueOf rr
+531 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+532 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf rr
+valueOf rr
+533 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+534 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rr
+lr
+lr
+valueOf rr
+535 (  842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+lr
+lr
+valueOf rr
+536 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+lr
+lr
+valueOf rr
+537 (88842422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+lr
+lr
+valueOf rr
+538 (22842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+lr
+lr
+valueOf rr
+539 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+540 (  212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+541 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+542 (88212422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+543 (22212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+544 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+545 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+546 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf lr
+valueOf rr
+ll
+ll
+valueOf lr
+valueOf rr
+547 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+548 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rr
+valueOf ll
+valueOf lr
+valueOf rr
+549 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rr
+rl
+rl
+valueOf rr
+550 (    4822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+rl
+rl
+valueOf rr
+551 (44  4822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+rl
+rl
+valueOf rr
+552 (88  4822) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+rl
+rl
+valueOf rr
+553 (22  4822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+rl
+rl
+valueOf rr
+554 (44  4822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+rl
+rl
+valueOf rr
+555 (  424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf rr
+rl
+rl
+valueOf rr
+556 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+ll
+ll
+rl
+rl
+valueOf rr
+557 (88424822) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf rr
+rl
+rl
+valueOf rr
+558 (22424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+rl
+rl
+valueOf rr
+559 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+lr
+lr
+rl
+rl
+valueOf rr
+560 (  844822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+lr
+lr
+rl
+rl
+valueOf rr
+561 (44844822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+lr
+lr
+rl
+rl
+valueOf rr
+562 (88844822) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+lr
+lr
+rl
+rl
+valueOf rr
+563 (22844822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+lr
+lr
+rl
+rl
+valueOf rr
+564 (44844822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+rl
+rl
+valueOf rr
+565 (  214822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+rl
+rl
+valueOf rr
+566 (44214822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+rl
+rl
+valueOf rr
+567 (88214822) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+rl
+rl
+valueOf rr
+568 (22214822) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+rl
+rl
+valueOf rr
+569 (44214822) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf lr
+rl
+rl
+valueOf rr
+570 (  424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf rr
+valueOf lr
+rl
+rl
+valueOf rr
+571 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+valueOf rr
+ll
+ll
+valueOf lr
+rl
+rl
+valueOf rr
+572 (88424822) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf rr
+valueOf lr
+rl
+rl
+valueOf rr
+573 (22424822) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rr
+valueOf ll
+valueOf lr
+rl
+rl
+valueOf rr
+574 (44424822) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+valueOf rr
+575 (    1222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+576 (44  1222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+577 (88  1222) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+578 (22  1222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+579 (44  1222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+580 (  421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf rr
+valueOf rr
+581 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+582 (88421222) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf rr
+valueOf rr
+583 (22421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+584 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+lr
+lr
+valueOf rr
+585 (  841222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+lr
+lr
+valueOf rr
+586 (44841222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+lr
+lr
+valueOf rr
+587 (88841222) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+lr
+lr
+valueOf rr
+588 (22841222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+lr
+lr
+valueOf rr
+589 (44841222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+valueOf rr
+590 (  211222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf rr
+valueOf rr
+591 (44211222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf rr
+ll
+ll
+valueOf rr
+592 (88211222) [object Object]: { 0, 0, 0, 22} (100, 100)
+valueOf rr
+valueOf rr
+593 (22211222) [object Object]: { 100, 0, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf ll
+valueOf rr
+594 (44211222) [object Object]: { 44, 0, 0, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+595 (  421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+596 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf lr
+valueOf rr
+ll
+ll
+valueOf lr
+valueOf rr
+597 (88421222) [object Object]: { 0, 0, 42, 22} (100, 100)
+valueOf lr
+valueOf rr
+valueOf lr
+valueOf rr
+598 (22421222) [object Object]: { 100, 0, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rr
+valueOf ll
+valueOf lr
+valueOf rr
+599 (44421222) [object Object]: { 44, 0, 42, 22} (100, 56)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+600 (    2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+601 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rl
+ll
+ll
+valueOf rl
+valueOf rr
+602 (88  2422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+603 (22  2422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf rl
+valueOf ll
+valueOf rl
+valueOf rr
+604 (44  2422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+605 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+606 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rr
+valueOf rl
+ll
+ll
+valueOf rl
+valueOf rr
+607 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+608 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf rl
+valueOf ll
+valueOf rl
+valueOf rr
+609 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf rr
+valueOf rl
+lr
+lr
+valueOf rl
+valueOf rr
+610 (  842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+valueOf rl
+lr
+lr
+valueOf rl
+valueOf rr
+611 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rl
+ll
+ll
+lr
+lr
+valueOf rl
+valueOf rr
+612 (88842422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+valueOf rl
+lr
+lr
+valueOf rl
+valueOf rr
+613 (22842422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf rl
+valueOf ll
+lr
+lr
+valueOf rl
+valueOf rr
+614 (44842422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+615 (  212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+616 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf rr
+valueOf rl
+ll
+ll
+valueOf rl
+valueOf rr
+617 (88212422) [object Object]: { 0, 24, 0, 22} (100, 100)
+valueOf rr
+valueOf rl
+valueOf rl
+valueOf rr
+618 (22212422) [object Object]: { 100, 24, 0, 22} (100, -78)
+valueOf ll
+valueOf rr
+valueOf rl
+valueOf ll
+valueOf rl
+valueOf rr
+619 (44212422) [object Object]: { 44, 24, 0, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf rl
+valueOf lr
+valueOf rl
+valueOf rr
+620 (  422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf lr
+valueOf rr
+valueOf rl
+valueOf lr
+valueOf rl
+valueOf rr
+621 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)
+valueOf lr
+valueOf rr
+valueOf rl
+ll
+ll
+valueOf lr
+valueOf rl
+valueOf rr
+622 (88422422) [object Object]: { 0, 24, 42, 22} (100, 100)
+valueOf lr
+valueOf rr
+valueOf rl
+valueOf lr
+valueOf rl
+valueOf rr
+623 (22422422) [object Object]: { 100, 24, 42, 22} (100, -78)
+valueOf ll
+valueOf lr
+valueOf rr
+valueOf rl
+valueOf ll
+valueOf lr
+valueOf rl
+valueOf rr
+624 (44422422) [object Object]: { 44, 24, 42, 22} (100, 56)

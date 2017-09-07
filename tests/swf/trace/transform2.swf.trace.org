@@ -1,0 +1,47 @@
+# These values are the original values for the transform2.swf test.
+# Reasons why they don't work exactly:
+# - The algorithm for determining the scale isn't known.
+#   It's known that the scale is a multiple of 1/65536, but not how it is
+#   computed.
+
+Test various transformations and their effect on AS variables
+Frame 1
+120.7
+50
+99.9984741210938
+99.9984741210938
+141.4
+141.4
+45
+Frame 2
+50
+50
+99.9984741210938
+99.9969482421875
+70.7
+170.7
+45
+Frame 3
+120.7
+50
+99.9984741210938
+99.9984741210938
+170.7
+70.7
+0
+Frame 4
+50
+50
+199.995422363281
+100
+141.4
+241.4
+45
+Frame 5
+50
+50
+99.9984741210938
+200
+70.7
+270.7
+45

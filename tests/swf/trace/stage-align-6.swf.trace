@@ -1,0 +1,17 @@
+Check Stage.align
+
+L ==> L
+R ==> R
+LR ==> LR
+RL ==> LR
+LRL ==> LR
+RLR ==> LR
+T ==> T
+B ==> B
+BT ==> TB
+TB ==> TB
+BTB ==> TB
+TBT ==> TB
+TRLB ==> LTRB
+tlrb ==> LTRB
+RmoviesdsdgaRsdgagaergBafsgafgaS ==> RB

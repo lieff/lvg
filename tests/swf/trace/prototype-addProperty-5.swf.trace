@@ -1,0 +1,4 @@
+Check addProperty ("__proto__", ...) setting doesn't affect prototypes
+hi
+undefined
+undefined

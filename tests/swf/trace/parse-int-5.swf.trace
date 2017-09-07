@@ -1,0 +1,664 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+Testing: (0)  (undefined)
+NaN
+NaN
+NaN
+Testing: (1) null (null)
+NaN
+NaN
+NaN
+Testing: (2) true (boolean)
+NaN
+NaN
+NaN
+Testing: (3) false (boolean)
+NaN
+NaN
+NaN
+Testing: (4) 0 (number)
+0
+NaN
+NaN
+Testing: (5) 1 (number)
+1
+NaN
+NaN
+Testing: (6) 0.5 (number)
+0
+NaN
+NaN
+Testing: (7) -1 (number)
+-1
+NaN
+NaN
+Testing: (8) -0.5 (number)
+0
+NaN
+NaN
+Testing: (9) Infinity (number)
+NaN
+NaN
+NaN
+Testing: (10) -Infinity (number)
+NaN
+NaN
+NaN
+Testing: (11) NaN (number)
+NaN
+NaN
+NaN
+Testing: (12)  (string)
+NaN
+NaN
+NaN
+Testing: (13) 0 (string)
+0
+NaN
+NaN
+Testing: (14) -0 (string)
+0
+NaN
+NaN
+Testing: (15) 0.0 (string)
+0
+NaN
+NaN
+Testing: (16) 1 (string)
+1
+NaN
+NaN
+Testing: (17) Hello World! (string)
+NaN
+NaN
+NaN
+Testing: (18) true (string)
+NaN
+NaN
+NaN
+Testing: (19) _level0 (string)
+NaN
+NaN
+NaN
+Testing: (20) Ã¤Ã¶Ã¼ (string)
+NaN
+NaN
+NaN
+Testing: (21) _level0 (movieclip)
+NaN
+NaN
+NaN
+Testing: (22) [object Object] (object)
+NaN
+NaN
+NaN
+Testing: (23) 1239752134235.94 (object)
+NaN
+NaN
+NaN
+Testing: (24)  (object)
+NaN
+NaN
+NaN
+Testing: (25)  (undefined)
+NaN
+NaN
+NaN
+Testing: (26) [type Object] (object)
+toString called
+NaN
+toString called
+NaN
+toString called
+NaN
+Testing: (27) [type Object] (object)
+toString called with 
+NaN
+toString called with 
+NaN
+toString called with 
+NaN
+Testing: (28) [object Object] (object)
+NaN
+NaN
+NaN
+Testing: (29)  (object)
+NaN
+NaN
+NaN
+Testing: (30)  (object)
+0: toString!
+NaN
+0: toString!
+NaN
+0: toString!
+NaN
+Testing: (31) null (object)
+1: toString!
+NaN
+1: toString!
+NaN
+1: toString!
+NaN
+Testing: (32) true (object)
+2: toString!
+NaN
+2: toString!
+NaN
+2: toString!
+NaN
+Testing: (33) false (object)
+3: toString!
+NaN
+3: toString!
+NaN
+3: toString!
+NaN
+Testing: (34) 0 (object)
+4: toString!
+NaN
+4: toString!
+NaN
+4: toString!
+NaN
+Testing: (35) 1 (object)
+5: toString!
+NaN
+5: toString!
+NaN
+5: toString!
+NaN
+Testing: (36) 0.5 (object)
+6: toString!
+NaN
+6: toString!
+NaN
+6: toString!
+NaN
+Testing: (37) -1 (object)
+7: toString!
+NaN
+7: toString!
+NaN
+7: toString!
+NaN
+Testing: (38) -0.5 (object)
+8: toString!
+NaN
+8: toString!
+NaN
+8: toString!
+NaN
+Testing: (39) Infinity (object)
+9: toString!
+NaN
+9: toString!
+NaN
+9: toString!
+NaN
+Testing: (40) -Infinity (object)
+10: toString!
+NaN
+10: toString!
+NaN
+10: toString!
+NaN
+Testing: (41) NaN (object)
+11: toString!
+NaN
+11: toString!
+NaN
+11: toString!
+NaN
+Testing: (42)  (object)
+12: toString!
+NaN
+12: toString!
+NaN
+12: toString!
+NaN
+Testing: (43) 0 (object)
+13: toString!
+0
+13: toString!
+NaN
+13: toString!
+NaN
+Testing: (44) -0 (object)
+14: toString!
+0
+14: toString!
+NaN
+14: toString!
+NaN
+Testing: (45) 0.0 (object)
+15: toString!
+0
+15: toString!
+NaN
+15: toString!
+NaN
+Testing: (46) 1 (object)
+16: toString!
+1
+16: toString!
+NaN
+16: toString!
+NaN
+Testing: (47) Hello World! (object)
+17: toString!
+NaN
+17: toString!
+NaN
+17: toString!
+NaN
+Testing: (48) true (object)
+18: toString!
+NaN
+18: toString!
+NaN
+18: toString!
+NaN
+Testing: (49) _level0 (object)
+19: toString!
+NaN
+19: toString!
+NaN
+19: toString!
+NaN
+Testing: (50) Ã¤Ã¶Ã¼ (object)
+20: toString!
+NaN
+20: toString!
+NaN
+20: toString!
+NaN
+Testing: (51) _level0 (object)
+21: toString!
+NaN
+21: toString!
+NaN
+21: toString!
+NaN
+Testing: (52) [type Object] (object)
+22: toString!
+NaN
+22: toString!
+NaN
+22: toString!
+NaN
+Testing: (53) [type Object] (object)
+23: toString!
+NaN
+23: toString!
+NaN
+23: toString!
+NaN
+Testing: (54) [type Object] (object)
+24: toString!
+NaN
+24: toString!
+NaN
+24: toString!
+NaN
+Testing: (55)  (object)
+25: toString!
+NaN
+25: toString!
+NaN
+25: toString!
+NaN
+Testing: (56) [type Object] (object)
+26: toString!
+NaN
+26: toString!
+NaN
+26: toString!
+NaN
+Testing: (57) [type Object] (object)
+27: toString!
+NaN
+27: toString!
+NaN
+27: toString!
+NaN
+Testing: (58) [type Object] (object)
+28: toString!
+NaN
+28: toString!
+NaN
+28: toString!
+NaN
+Testing: (59) [type Object] (object)
+29: toString!
+NaN
+29: toString!
+NaN
+29: toString!
+NaN
+Testing: '0x123'
+291
+38
+83
+123
+291
+0
+Testing: '  0x123'
+0
+0
+0
+0
+0
+0
+Testing: '  0x'
+0
+0
+0
+0
+0
+0
+Testing: '  0xA'
+0
+0
+0
+0
+0
+0
+Testing: '  0xX'
+0
+0
+0
+0
+0
+0
+Testing: ' a 0x123'
+NaN
+NaN
+NaN
+NaN
+10
+0
+Testing: '00x123'
+0
+0
+0
+0
+0
+0
+Testing: '+0x123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '-0x123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: ' +0x123'
+0
+0
+0
+0
+0
+0
+Testing: ' -0x123'
+0
+0
+0
+0
+0
+0
+Testing: '+ 0x123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '- 0x123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '+0y123'
+0
+0
+0
+0
+0
+0
+Testing: '-0 x123'
+0
+0
+0
+0
+0
+0
+Testing: '0x+123'
+291
+38
+83
+123
+291
+0
+Testing: '0x-123'
+-291
+-38
+-83
+-123
+-291
+0
+Testing: '  123'
+123
+38
+83
+123
+291
+123
+Testing: ' 1 2 3'
+1
+1
+1
+1
+1
+0
+Testing: '1.23'
+1
+1
+1
+1
+1
+1
+Testing: '23.'
+23
+13
+19
+23
+35
+23
+Testing: '23asdf'
+23
+13
+19
+23
+570
+0
+Testing: '23.asdf'
+23
+13
+19
+23
+35
+0
+Testing: 'asdf234'
+NaN
+NaN
+NaN
+NaN
+10
+0
+Testing: '+92'
+92
+NaN
+NaN
+92
+146
+92
+Testing: '-92'
+-92
+NaN
+NaN
+-92
+-146
+-92
+Testing: '+-92'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '+-0'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: 'A09C'
+NaN
+NaN
+NaN
+NaN
+41116
+0
+Testing: '4294967296'
+4294967296
+22
+34
+4294967296
+285960729238
+0
+Testing: '8589934592'
+8589934592
+NaN
+NaN
+8589934592
+573538780562
+0
+Testing: '0123'
+83
+38
+83
+123
+291
+123
+Testing: ' 0123'
+123
+38
+83
+123
+291
+123
+Testing: '+0123'
+83
+38
+83
+123
+291
+123
+Testing: '-0123'
+-83
+-38
+-83
+-123
+-291
+-123
+Testing: ' +0123'
+123
+38
+83
+123
+291
+123
+Testing: ' -0123'
+-123
+-38
+-83
+-123
+-291
+-123
+Testing: '+ 0123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '- 0123'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: 'Infinity'
+NaN
+NaN
+NaN
+NaN
+NaN
+0
+Testing: '-Infinity'
+NaN
+NaN
+NaN
+NaN
+NaN
+0

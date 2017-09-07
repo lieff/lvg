@@ -1,0 +1,4439 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+Testing: abs
+NaN
+1.2
+1.2
+1.2
+Testing: abs with (0) undefined (undefined)
+NaN
+0.4
+Testing: abs with (1) null (null)
+NaN
+0.4
+Testing: abs with (2) true (boolean)
+1
+0.4
+Testing: abs with (3) false (boolean)
+0
+0.4
+Testing: abs with (4) 0 (number)
+0
+0.4
+Testing: abs with (5) 1 (number)
+1
+0.4
+Testing: abs with (6) 0.5 (number)
+0.5
+0.4
+Testing: abs with (7) -1 (number)
+1
+0.4
+Testing: abs with (8) -0.5 (number)
+0.5
+0.4
+Testing: abs with (9) Infinity (number)
+Infinity
+0.4
+Testing: abs with (10) -Infinity (number)
+Infinity
+0.4
+Testing: abs with (11) NaN (number)
+NaN
+0.4
+Testing: abs with (12)  (string)
+NaN
+0.4
+Testing: abs with (13) 0 (string)
+0
+0.4
+Testing: abs with (14) -0 (string)
+0
+0.4
+Testing: abs with (15) 0.0 (string)
+0
+0.4
+Testing: abs with (16) 1 (string)
+1
+0.4
+Testing: abs with (17) Hello World! (string)
+NaN
+0.4
+Testing: abs with (18) true (string)
+NaN
+0.4
+Testing: abs with (19) _level0 (string)
+NaN
+0.4
+Testing: abs with (20) äöü (string)
+NaN
+0.4
+Testing: abs with (21) _level0 (movieclip)
+NaN
+0.4
+Testing: abs with (22) [object Object] (object)
+NaN
+0.4
+Testing: abs with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1239752134235.94
+0.4
+Testing: abs with (24)  (object)
+NaN
+0.4
+Testing: abs with (25) [type Function] (function)
+NaN
+0.4
+Testing: abs with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.4
+Testing: abs with (27) [type Object] (object)
+NaN
+0.4
+Testing: abs with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.4
+Testing: abs with (29) undefined (object)
+NaN
+0.4
+Testing: abs with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.4
+Testing: abs with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.4
+Testing: abs with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+0.4
+Testing: abs with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.4
+Testing: abs with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.4
+Testing: abs with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+0.4
+Testing: abs with (36) 0.5 (object)
+6: valueOf!
+0.5
+6: valueOf!
+0.4
+Testing: abs with (37) -1 (object)
+7: valueOf!
+1
+7: valueOf!
+0.4
+Testing: abs with (38) -0.5 (object)
+8: valueOf!
+0.5
+8: valueOf!
+0.4
+Testing: abs with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+0.4
+Testing: abs with (40) -Infinity (object)
+10: valueOf!
+Infinity
+10: valueOf!
+0.4
+Testing: abs with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.4
+Testing: abs with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.4
+Testing: abs with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.4
+Testing: abs with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.4
+Testing: abs with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.4
+Testing: abs with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+0.4
+Testing: abs with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.4
+Testing: abs with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.4
+Testing: abs with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.4
+Testing: abs with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.4
+Testing: abs with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.4
+Testing: abs with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.4
+Testing: abs with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.4
+Testing: abs with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.4
+Testing: abs with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.4
+Testing: abs with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.4
+Testing: abs with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.4
+Testing: abs with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.4
+Testing: abs with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.4
+Testing: min
+Infinity
+NaN
+0.4
+0.4
+Testing: min with (0) undefined (undefined)
+NaN
+NaN
+Testing: min with (1) null (null)
+NaN
+NaN
+Testing: min with (2) true (boolean)
+0.4
+0.4
+Testing: min with (3) false (boolean)
+0
+0
+Testing: min with (4) 0 (number)
+0
+0
+Testing: min with (5) 1 (number)
+0.4
+0.4
+Testing: min with (6) 0.5 (number)
+0.4
+0.4
+Testing: min with (7) -1 (number)
+-1
+-1
+Testing: min with (8) -0.5 (number)
+-0.5
+-0.5
+Testing: min with (9) Infinity (number)
+0.4
+0.4
+Testing: min with (10) -Infinity (number)
+-Infinity
+-Infinity
+Testing: min with (11) NaN (number)
+NaN
+NaN
+Testing: min with (12)  (string)
+NaN
+NaN
+Testing: min with (13) 0 (string)
+0
+0
+Testing: min with (14) -0 (string)
+0
+0
+Testing: min with (15) 0.0 (string)
+0
+0
+Testing: min with (16) 1 (string)
+0.4
+0.4
+Testing: min with (17) Hello World! (string)
+NaN
+NaN
+Testing: min with (18) true (string)
+NaN
+NaN
+Testing: min with (19) _level0 (string)
+NaN
+NaN
+Testing: min with (20) äöü (string)
+NaN
+NaN
+Testing: min with (21) _level0 (movieclip)
+NaN
+NaN
+Testing: min with (22) [object Object] (object)
+NaN
+NaN
+Testing: min with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+0.4
+0.4
+Testing: min with (24)  (object)
+NaN
+NaN
+Testing: min with (25) [type Function] (function)
+NaN
+NaN
+Testing: min with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+NaN
+Testing: min with (27) [type Object] (object)
+NaN
+NaN
+Testing: min with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+NaN
+Testing: min with (29) undefined (object)
+NaN
+NaN
+Testing: min with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+NaN
+Testing: min with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+NaN
+Testing: min with (32) true (object)
+2: valueOf!
+0.4
+2: valueOf!
+0.4
+Testing: min with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0
+Testing: min with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0
+Testing: min with (35) 1 (object)
+5: valueOf!
+0.4
+5: valueOf!
+0.4
+Testing: min with (36) 0.5 (object)
+6: valueOf!
+0.4
+6: valueOf!
+0.4
+Testing: min with (37) -1 (object)
+7: valueOf!
+-1
+7: valueOf!
+-1
+Testing: min with (38) -0.5 (object)
+8: valueOf!
+-0.5
+8: valueOf!
+-0.5
+Testing: min with (39) Infinity (object)
+9: valueOf!
+0.4
+9: valueOf!
+0.4
+Testing: min with (40) -Infinity (object)
+10: valueOf!
+-Infinity
+10: valueOf!
+-Infinity
+Testing: min with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+NaN
+Testing: min with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+NaN
+Testing: min with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0
+Testing: min with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0
+Testing: min with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0
+Testing: min with (46) 1 (object)
+16: valueOf!
+0.4
+16: valueOf!
+0.4
+Testing: min with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+NaN
+Testing: min with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+NaN
+Testing: min with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+NaN
+Testing: min with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+NaN
+Testing: min with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+NaN
+Testing: min with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+NaN
+Testing: min with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+NaN
+Testing: min with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+NaN
+Testing: min with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+NaN
+Testing: min with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+NaN
+Testing: min with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+NaN
+Testing: min with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+NaN
+Testing: min with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+NaN
+Testing: max
+-Infinity
+NaN
+1.2
+1.2
+Testing: max with (0) undefined (undefined)
+NaN
+NaN
+Testing: max with (1) null (null)
+NaN
+NaN
+Testing: max with (2) true (boolean)
+1
+1
+Testing: max with (3) false (boolean)
+0.4
+0.4
+Testing: max with (4) 0 (number)
+0.4
+0.4
+Testing: max with (5) 1 (number)
+1
+1
+Testing: max with (6) 0.5 (number)
+0.5
+0.5
+Testing: max with (7) -1 (number)
+0.4
+0.4
+Testing: max with (8) -0.5 (number)
+0.4
+0.4
+Testing: max with (9) Infinity (number)
+Infinity
+Infinity
+Testing: max with (10) -Infinity (number)
+0.4
+0.4
+Testing: max with (11) NaN (number)
+NaN
+NaN
+Testing: max with (12)  (string)
+NaN
+NaN
+Testing: max with (13) 0 (string)
+0.4
+0.4
+Testing: max with (14) -0 (string)
+0.4
+0.4
+Testing: max with (15) 0.0 (string)
+0.4
+0.4
+Testing: max with (16) 1 (string)
+1
+1
+Testing: max with (17) Hello World! (string)
+NaN
+NaN
+Testing: max with (18) true (string)
+NaN
+NaN
+Testing: max with (19) _level0 (string)
+NaN
+NaN
+Testing: max with (20) äöü (string)
+NaN
+NaN
+Testing: max with (21) _level0 (movieclip)
+NaN
+NaN
+Testing: max with (22) [object Object] (object)
+NaN
+NaN
+Testing: max with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1239752134235.94
+1239752134235.94
+Testing: max with (24)  (object)
+NaN
+NaN
+Testing: max with (25) [type Function] (function)
+NaN
+NaN
+Testing: max with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+NaN
+Testing: max with (27) [type Object] (object)
+NaN
+NaN
+Testing: max with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+NaN
+Testing: max with (29) undefined (object)
+NaN
+NaN
+Testing: max with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+NaN
+Testing: max with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+NaN
+Testing: max with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+1
+Testing: max with (33) false (object)
+3: valueOf!
+0.4
+3: valueOf!
+0.4
+Testing: max with (34) 0 (object)
+4: valueOf!
+0.4
+4: valueOf!
+0.4
+Testing: max with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+1
+Testing: max with (36) 0.5 (object)
+6: valueOf!
+0.5
+6: valueOf!
+0.5
+Testing: max with (37) -1 (object)
+7: valueOf!
+0.4
+7: valueOf!
+0.4
+Testing: max with (38) -0.5 (object)
+8: valueOf!
+0.4
+8: valueOf!
+0.4
+Testing: max with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+Infinity
+Testing: max with (40) -Infinity (object)
+10: valueOf!
+0.4
+10: valueOf!
+0.4
+Testing: max with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+NaN
+Testing: max with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+NaN
+Testing: max with (43) 0 (object)
+13: valueOf!
+0.4
+13: valueOf!
+0.4
+Testing: max with (44) -0 (object)
+14: valueOf!
+0.4
+14: valueOf!
+0.4
+Testing: max with (45) 0.0 (object)
+15: valueOf!
+0.4
+15: valueOf!
+0.4
+Testing: max with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+1
+Testing: max with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+NaN
+Testing: max with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+NaN
+Testing: max with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+NaN
+Testing: max with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+NaN
+Testing: max with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+NaN
+Testing: max with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+NaN
+Testing: max with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+NaN
+Testing: max with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+NaN
+Testing: max with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+NaN
+Testing: max with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+NaN
+Testing: max with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+NaN
+Testing: max with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+NaN
+Testing: max with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+NaN
+Testing: sin
+NaN
+0.932039085967226
+0.932039085967226
+0.932039085967226
+Testing: sin with (0) undefined (undefined)
+NaN
+0.389418342308651
+Testing: sin with (1) null (null)
+NaN
+0.389418342308651
+Testing: sin with (2) true (boolean)
+0.841470984807897
+0.389418342308651
+Testing: sin with (3) false (boolean)
+0
+0.389418342308651
+Testing: sin with (4) 0 (number)
+0
+0.389418342308651
+Testing: sin with (5) 1 (number)
+0.841470984807897
+0.389418342308651
+Testing: sin with (6) 0.5 (number)
+0.479425538604203
+0.389418342308651
+Testing: sin with (7) -1 (number)
+-0.841470984807897
+0.389418342308651
+Testing: sin with (8) -0.5 (number)
+-0.479425538604203
+0.389418342308651
+Testing: sin with (9) Infinity (number)
+NaN
+0.389418342308651
+Testing: sin with (10) -Infinity (number)
+NaN
+0.389418342308651
+Testing: sin with (11) NaN (number)
+NaN
+0.389418342308651
+Testing: sin with (12)  (string)
+NaN
+0.389418342308651
+Testing: sin with (13) 0 (string)
+0
+0.389418342308651
+Testing: sin with (14) -0 (string)
+0
+0.389418342308651
+Testing: sin with (15) 0.0 (string)
+0
+0.389418342308651
+Testing: sin with (16) 1 (string)
+0.841470984807897
+0.389418342308651
+Testing: sin with (17) Hello World! (string)
+NaN
+0.389418342308651
+Testing: sin with (18) true (string)
+NaN
+0.389418342308651
+Testing: sin with (19) _level0 (string)
+NaN
+0.389418342308651
+Testing: sin with (20) äöü (string)
+NaN
+0.389418342308651
+Testing: sin with (21) _level0 (movieclip)
+NaN
+0.389418342308651
+Testing: sin with (22) [object Object] (object)
+NaN
+0.389418342308651
+Skipping: sin with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Testing: sin with (24)  (object)
+NaN
+0.389418342308651
+Testing: sin with (25) [type Function] (function)
+NaN
+0.389418342308651
+valueOf called
+Testing: sin with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.389418342308651
+Testing: sin with (27) [type Object] (object)
+NaN
+0.389418342308651
+valueOf called with 
+Testing: sin with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.389418342308651
+Testing: sin with (29) undefined (object)
+NaN
+0.389418342308651
+0: valueOf!
+Testing: sin with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.389418342308651
+1: valueOf!
+Testing: sin with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.389418342308651
+2: valueOf!
+2: valueOf!
+Testing: sin with (32) true (object)
+2: valueOf!
+0.841470984807897
+2: valueOf!
+0.389418342308651
+3: valueOf!
+3: valueOf!
+Testing: sin with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.389418342308651
+4: valueOf!
+4: valueOf!
+Testing: sin with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.389418342308651
+5: valueOf!
+5: valueOf!
+Testing: sin with (35) 1 (object)
+5: valueOf!
+0.841470984807897
+5: valueOf!
+0.389418342308651
+6: valueOf!
+6: valueOf!
+Testing: sin with (36) 0.5 (object)
+6: valueOf!
+0.479425538604203
+6: valueOf!
+0.389418342308651
+7: valueOf!
+7: valueOf!
+Testing: sin with (37) -1 (object)
+7: valueOf!
+-0.841470984807897
+7: valueOf!
+0.389418342308651
+8: valueOf!
+8: valueOf!
+Testing: sin with (38) -0.5 (object)
+8: valueOf!
+-0.479425538604203
+8: valueOf!
+0.389418342308651
+9: valueOf!
+Testing: sin with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+0.389418342308651
+10: valueOf!
+Testing: sin with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+0.389418342308651
+11: valueOf!
+Testing: sin with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.389418342308651
+12: valueOf!
+Testing: sin with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.389418342308651
+13: valueOf!
+13: valueOf!
+Testing: sin with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.389418342308651
+14: valueOf!
+14: valueOf!
+Testing: sin with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.389418342308651
+15: valueOf!
+15: valueOf!
+Testing: sin with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.389418342308651
+16: valueOf!
+16: valueOf!
+Testing: sin with (46) 1 (object)
+16: valueOf!
+0.841470984807897
+16: valueOf!
+0.389418342308651
+17: valueOf!
+Testing: sin with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.389418342308651
+18: valueOf!
+Testing: sin with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.389418342308651
+19: valueOf!
+Testing: sin with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.389418342308651
+20: valueOf!
+Testing: sin with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.389418342308651
+21: valueOf!
+Testing: sin with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.389418342308651
+22: valueOf!
+Testing: sin with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.389418342308651
+23: valueOf!
+Testing: sin with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.389418342308651
+24: valueOf!
+Testing: sin with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.389418342308651
+25: valueOf!
+Testing: sin with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.389418342308651
+26: valueOf!
+Testing: sin with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.389418342308651
+27: valueOf!
+Testing: sin with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.389418342308651
+28: valueOf!
+Testing: sin with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.389418342308651
+29: valueOf!
+Testing: sin with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.389418342308651
+Testing: cos
+NaN
+0.362357754476674
+0.362357754476674
+0.362357754476674
+Testing: cos with (0) undefined (undefined)
+NaN
+0.921060994002885
+Testing: cos with (1) null (null)
+NaN
+0.921060994002885
+Testing: cos with (2) true (boolean)
+0.54030230586814
+0.921060994002885
+Testing: cos with (3) false (boolean)
+1
+0.921060994002885
+Testing: cos with (4) 0 (number)
+1
+0.921060994002885
+Testing: cos with (5) 1 (number)
+0.54030230586814
+0.921060994002885
+Testing: cos with (6) 0.5 (number)
+0.877582561890373
+0.921060994002885
+Testing: cos with (7) -1 (number)
+0.54030230586814
+0.921060994002885
+Testing: cos with (8) -0.5 (number)
+0.877582561890373
+0.921060994002885
+Testing: cos with (9) Infinity (number)
+NaN
+0.921060994002885
+Testing: cos with (10) -Infinity (number)
+NaN
+0.921060994002885
+Testing: cos with (11) NaN (number)
+NaN
+0.921060994002885
+Testing: cos with (12)  (string)
+NaN
+0.921060994002885
+Testing: cos with (13) 0 (string)
+1
+0.921060994002885
+Testing: cos with (14) -0 (string)
+1
+0.921060994002885
+Testing: cos with (15) 0.0 (string)
+1
+0.921060994002885
+Testing: cos with (16) 1 (string)
+0.54030230586814
+0.921060994002885
+Testing: cos with (17) Hello World! (string)
+NaN
+0.921060994002885
+Testing: cos with (18) true (string)
+NaN
+0.921060994002885
+Testing: cos with (19) _level0 (string)
+NaN
+0.921060994002885
+Testing: cos with (20) äöü (string)
+NaN
+0.921060994002885
+Testing: cos with (21) _level0 (movieclip)
+NaN
+0.921060994002885
+Testing: cos with (22) [object Object] (object)
+NaN
+0.921060994002885
+Skipping: cos with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Testing: cos with (24)  (object)
+NaN
+0.921060994002885
+Testing: cos with (25) [type Function] (function)
+NaN
+0.921060994002885
+valueOf called
+Testing: cos with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.921060994002885
+Testing: cos with (27) [type Object] (object)
+NaN
+0.921060994002885
+valueOf called with 
+Testing: cos with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.921060994002885
+Testing: cos with (29) undefined (object)
+NaN
+0.921060994002885
+0: valueOf!
+Testing: cos with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.921060994002885
+1: valueOf!
+Testing: cos with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.921060994002885
+2: valueOf!
+2: valueOf!
+Testing: cos with (32) true (object)
+2: valueOf!
+0.54030230586814
+2: valueOf!
+0.921060994002885
+3: valueOf!
+3: valueOf!
+Testing: cos with (33) false (object)
+3: valueOf!
+1
+3: valueOf!
+0.921060994002885
+4: valueOf!
+4: valueOf!
+Testing: cos with (34) 0 (object)
+4: valueOf!
+1
+4: valueOf!
+0.921060994002885
+5: valueOf!
+5: valueOf!
+Testing: cos with (35) 1 (object)
+5: valueOf!
+0.54030230586814
+5: valueOf!
+0.921060994002885
+6: valueOf!
+6: valueOf!
+Testing: cos with (36) 0.5 (object)
+6: valueOf!
+0.877582561890373
+6: valueOf!
+0.921060994002885
+7: valueOf!
+7: valueOf!
+Testing: cos with (37) -1 (object)
+7: valueOf!
+0.54030230586814
+7: valueOf!
+0.921060994002885
+8: valueOf!
+8: valueOf!
+Testing: cos with (38) -0.5 (object)
+8: valueOf!
+0.877582561890373
+8: valueOf!
+0.921060994002885
+9: valueOf!
+Testing: cos with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+0.921060994002885
+10: valueOf!
+Testing: cos with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+0.921060994002885
+11: valueOf!
+Testing: cos with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.921060994002885
+12: valueOf!
+Testing: cos with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.921060994002885
+13: valueOf!
+13: valueOf!
+Testing: cos with (43) 0 (object)
+13: valueOf!
+1
+13: valueOf!
+0.921060994002885
+14: valueOf!
+14: valueOf!
+Testing: cos with (44) -0 (object)
+14: valueOf!
+1
+14: valueOf!
+0.921060994002885
+15: valueOf!
+15: valueOf!
+Testing: cos with (45) 0.0 (object)
+15: valueOf!
+1
+15: valueOf!
+0.921060994002885
+16: valueOf!
+16: valueOf!
+Testing: cos with (46) 1 (object)
+16: valueOf!
+0.54030230586814
+16: valueOf!
+0.921060994002885
+17: valueOf!
+Testing: cos with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.921060994002885
+18: valueOf!
+Testing: cos with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.921060994002885
+19: valueOf!
+Testing: cos with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.921060994002885
+20: valueOf!
+Testing: cos with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.921060994002885
+21: valueOf!
+Testing: cos with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.921060994002885
+22: valueOf!
+Testing: cos with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.921060994002885
+23: valueOf!
+Testing: cos with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.921060994002885
+24: valueOf!
+Testing: cos with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.921060994002885
+25: valueOf!
+Testing: cos with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.921060994002885
+26: valueOf!
+Testing: cos with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.921060994002885
+27: valueOf!
+Testing: cos with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.921060994002885
+28: valueOf!
+Testing: cos with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.921060994002885
+29: valueOf!
+Testing: cos with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.921060994002885
+Testing: atan2
+NaN
+NaN
+1.24904577239825
+1.24904577239825
+Testing: atan2 with (0) undefined (undefined)
+NaN
+NaN
+Testing: atan2 with (1) null (null)
+NaN
+NaN
+Testing: atan2 with (2) true (boolean)
+1.19028994968253
+0.380506377112365
+Testing: atan2 with (3) false (boolean)
+0
+1.5707963267949
+Testing: atan2 with (4) 0 (number)
+0
+1.5707963267949
+Testing: atan2 with (5) 1 (number)
+1.19028994968253
+0.380506377112365
+Testing: atan2 with (6) 0.5 (number)
+0.896055384571344
+0.674740942223553
+Testing: atan2 with (7) -1 (number)
+-1.19028994968253
+2.76108627647743
+Testing: atan2 with (8) -0.5 (number)
+-0.896055384571344
+2.46685171136624
+Testing: atan2 with (9) Infinity (number)
+1.5707963267949
+0
+Testing: atan2 with (10) -Infinity (number)
+-1.5707963267949
+3.14159265358979
+Testing: atan2 with (11) NaN (number)
+NaN
+NaN
+Testing: atan2 with (12)  (string)
+NaN
+NaN
+Testing: atan2 with (13) 0 (string)
+0
+1.5707963267949
+Testing: atan2 with (14) -0 (string)
+0
+1.5707963267949
+Testing: atan2 with (15) 0.0 (string)
+0
+1.5707963267949
+Testing: atan2 with (16) 1 (string)
+1.19028994968253
+0.380506377112365
+Testing: atan2 with (17) Hello World! (string)
+NaN
+NaN
+Testing: atan2 with (18) true (string)
+NaN
+NaN
+Testing: atan2 with (19) _level0 (string)
+NaN
+NaN
+Testing: atan2 with (20) äöü (string)
+NaN
+NaN
+Testing: atan2 with (21) _level0 (movieclip)
+NaN
+NaN
+Testing: atan2 with (22) [object Object] (object)
+NaN
+NaN
+Testing: atan2 with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1.57079632679457
+3.22645139261261e-13
+Testing: atan2 with (24)  (object)
+NaN
+NaN
+Testing: atan2 with (25) [type Function] (function)
+NaN
+NaN
+Testing: atan2 with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+NaN
+Testing: atan2 with (27) [type Object] (object)
+NaN
+NaN
+Testing: atan2 with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+NaN
+Testing: atan2 with (29) undefined (object)
+NaN
+NaN
+Testing: atan2 with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+NaN
+Testing: atan2 with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+NaN
+Testing: atan2 with (32) true (object)
+2: valueOf!
+1.19028994968253
+2: valueOf!
+0.380506377112365
+Testing: atan2 with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+1.5707963267949
+Testing: atan2 with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+1.5707963267949
+Testing: atan2 with (35) 1 (object)
+5: valueOf!
+1.19028994968253
+5: valueOf!
+0.380506377112365
+Testing: atan2 with (36) 0.5 (object)
+6: valueOf!
+0.896055384571344
+6: valueOf!
+0.674740942223553
+Testing: atan2 with (37) -1 (object)
+7: valueOf!
+-1.19028994968253
+7: valueOf!
+2.76108627647743
+Testing: atan2 with (38) -0.5 (object)
+8: valueOf!
+-0.896055384571344
+8: valueOf!
+2.46685171136624
+Testing: atan2 with (39) Infinity (object)
+9: valueOf!
+1.5707963267949
+9: valueOf!
+0
+Testing: atan2 with (40) -Infinity (object)
+10: valueOf!
+-1.5707963267949
+10: valueOf!
+3.14159265358979
+Testing: atan2 with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+NaN
+Testing: atan2 with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+NaN
+Testing: atan2 with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+1.5707963267949
+Testing: atan2 with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+1.5707963267949
+Testing: atan2 with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+1.5707963267949
+Testing: atan2 with (46) 1 (object)
+16: valueOf!
+1.19028994968253
+16: valueOf!
+0.380506377112365
+Testing: atan2 with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+NaN
+Testing: atan2 with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+NaN
+Testing: atan2 with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+NaN
+Testing: atan2 with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+NaN
+Testing: atan2 with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+NaN
+Testing: atan2 with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+NaN
+Testing: atan2 with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+NaN
+Testing: atan2 with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+NaN
+Testing: atan2 with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+NaN
+Testing: atan2 with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+NaN
+Testing: atan2 with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+NaN
+Testing: atan2 with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+NaN
+Testing: atan2 with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+NaN
+Testing: tan
+NaN
+2.57215162212632
+2.57215162212632
+2.57215162212632
+Testing: tan with (0) undefined (undefined)
+NaN
+0.422793218738162
+Testing: tan with (1) null (null)
+NaN
+0.422793218738162
+Testing: tan with (2) true (boolean)
+1.5574077246549
+0.422793218738162
+Testing: tan with (3) false (boolean)
+0
+0.422793218738162
+Testing: tan with (4) 0 (number)
+0
+0.422793218738162
+Testing: tan with (5) 1 (number)
+1.5574077246549
+0.422793218738162
+Testing: tan with (6) 0.5 (number)
+0.54630248984379
+0.422793218738162
+Testing: tan with (7) -1 (number)
+-1.5574077246549
+0.422793218738162
+Testing: tan with (8) -0.5 (number)
+-0.54630248984379
+0.422793218738162
+Testing: tan with (9) Infinity (number)
+NaN
+0.422793218738162
+Testing: tan with (10) -Infinity (number)
+NaN
+0.422793218738162
+Testing: tan with (11) NaN (number)
+NaN
+0.422793218738162
+Testing: tan with (12)  (string)
+NaN
+0.422793218738162
+Testing: tan with (13) 0 (string)
+0
+0.422793218738162
+Testing: tan with (14) -0 (string)
+0
+0.422793218738162
+Testing: tan with (15) 0.0 (string)
+0
+0.422793218738162
+Testing: tan with (16) 1 (string)
+1.5574077246549
+0.422793218738162
+Testing: tan with (17) Hello World! (string)
+NaN
+0.422793218738162
+Testing: tan with (18) true (string)
+NaN
+0.422793218738162
+Testing: tan with (19) _level0 (string)
+NaN
+0.422793218738162
+Testing: tan with (20) äöü (string)
+NaN
+0.422793218738162
+Testing: tan with (21) _level0 (movieclip)
+NaN
+0.422793218738162
+Testing: tan with (22) [object Object] (object)
+NaN
+0.422793218738162
+Skipping: tan with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Testing: tan with (24)  (object)
+NaN
+0.422793218738162
+Testing: tan with (25) [type Function] (function)
+NaN
+0.422793218738162
+valueOf called
+Testing: tan with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.422793218738162
+Testing: tan with (27) [type Object] (object)
+NaN
+0.422793218738162
+valueOf called with 
+Testing: tan with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.422793218738162
+Testing: tan with (29) undefined (object)
+NaN
+0.422793218738162
+0: valueOf!
+Testing: tan with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.422793218738162
+1: valueOf!
+Testing: tan with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.422793218738162
+2: valueOf!
+2: valueOf!
+Testing: tan with (32) true (object)
+2: valueOf!
+1.5574077246549
+2: valueOf!
+0.422793218738162
+3: valueOf!
+3: valueOf!
+Testing: tan with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.422793218738162
+4: valueOf!
+4: valueOf!
+Testing: tan with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.422793218738162
+5: valueOf!
+5: valueOf!
+Testing: tan with (35) 1 (object)
+5: valueOf!
+1.5574077246549
+5: valueOf!
+0.422793218738162
+6: valueOf!
+6: valueOf!
+Testing: tan with (36) 0.5 (object)
+6: valueOf!
+0.54630248984379
+6: valueOf!
+0.422793218738162
+7: valueOf!
+7: valueOf!
+Testing: tan with (37) -1 (object)
+7: valueOf!
+-1.5574077246549
+7: valueOf!
+0.422793218738162
+8: valueOf!
+8: valueOf!
+Testing: tan with (38) -0.5 (object)
+8: valueOf!
+-0.54630248984379
+8: valueOf!
+0.422793218738162
+9: valueOf!
+Testing: tan with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+0.422793218738162
+10: valueOf!
+Testing: tan with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+0.422793218738162
+11: valueOf!
+Testing: tan with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.422793218738162
+12: valueOf!
+Testing: tan with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.422793218738162
+13: valueOf!
+13: valueOf!
+Testing: tan with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.422793218738162
+14: valueOf!
+14: valueOf!
+Testing: tan with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.422793218738162
+15: valueOf!
+15: valueOf!
+Testing: tan with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.422793218738162
+16: valueOf!
+16: valueOf!
+Testing: tan with (46) 1 (object)
+16: valueOf!
+1.5574077246549
+16: valueOf!
+0.422793218738162
+17: valueOf!
+Testing: tan with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.422793218738162
+18: valueOf!
+Testing: tan with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.422793218738162
+19: valueOf!
+Testing: tan with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.422793218738162
+20: valueOf!
+Testing: tan with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.422793218738162
+21: valueOf!
+Testing: tan with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.422793218738162
+22: valueOf!
+Testing: tan with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.422793218738162
+23: valueOf!
+Testing: tan with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.422793218738162
+24: valueOf!
+Testing: tan with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.422793218738162
+25: valueOf!
+Testing: tan with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.422793218738162
+26: valueOf!
+Testing: tan with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.422793218738162
+27: valueOf!
+Testing: tan with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.422793218738162
+28: valueOf!
+Testing: tan with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.422793218738162
+29: valueOf!
+Testing: tan with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.422793218738162
+Testing: exp
+NaN
+3.32011692273655
+3.32011692273655
+3.32011692273655
+Testing: exp with (0) undefined (undefined)
+NaN
+1.49182469764127
+Testing: exp with (1) null (null)
+NaN
+1.49182469764127
+Testing: exp with (2) true (boolean)
+2.71828182845905
+1.49182469764127
+Testing: exp with (3) false (boolean)
+1
+1.49182469764127
+Testing: exp with (4) 0 (number)
+1
+1.49182469764127
+Testing: exp with (5) 1 (number)
+2.71828182845905
+1.49182469764127
+Testing: exp with (6) 0.5 (number)
+1.64872127070013
+1.49182469764127
+Testing: exp with (7) -1 (number)
+0.367879441171442
+1.49182469764127
+Testing: exp with (8) -0.5 (number)
+0.606530659712633
+1.49182469764127
+Testing: exp with (9) Infinity (number)
+Infinity
+1.49182469764127
+Testing: exp with (10) -Infinity (number)
+0
+1.49182469764127
+Testing: exp with (11) NaN (number)
+NaN
+1.49182469764127
+Testing: exp with (12)  (string)
+NaN
+1.49182469764127
+Testing: exp with (13) 0 (string)
+1
+1.49182469764127
+Testing: exp with (14) -0 (string)
+1
+1.49182469764127
+Testing: exp with (15) 0.0 (string)
+1
+1.49182469764127
+Testing: exp with (16) 1 (string)
+2.71828182845905
+1.49182469764127
+Testing: exp with (17) Hello World! (string)
+NaN
+1.49182469764127
+Testing: exp with (18) true (string)
+NaN
+1.49182469764127
+Testing: exp with (19) _level0 (string)
+NaN
+1.49182469764127
+Testing: exp with (20) äöü (string)
+NaN
+1.49182469764127
+Testing: exp with (21) _level0 (movieclip)
+NaN
+1.49182469764127
+Testing: exp with (22) [object Object] (object)
+NaN
+1.49182469764127
+Testing: exp with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Infinity
+1.49182469764127
+Testing: exp with (24)  (object)
+NaN
+1.49182469764127
+Testing: exp with (25) [type Function] (function)
+NaN
+1.49182469764127
+Testing: exp with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+1.49182469764127
+Testing: exp with (27) [type Object] (object)
+NaN
+1.49182469764127
+Testing: exp with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+1.49182469764127
+Testing: exp with (29) undefined (object)
+NaN
+1.49182469764127
+Testing: exp with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+1.49182469764127
+Testing: exp with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+1.49182469764127
+Testing: exp with (32) true (object)
+2: valueOf!
+2.71828182845905
+2: valueOf!
+1.49182469764127
+Testing: exp with (33) false (object)
+3: valueOf!
+1
+3: valueOf!
+1.49182469764127
+Testing: exp with (34) 0 (object)
+4: valueOf!
+1
+4: valueOf!
+1.49182469764127
+Testing: exp with (35) 1 (object)
+5: valueOf!
+2.71828182845905
+5: valueOf!
+1.49182469764127
+Testing: exp with (36) 0.5 (object)
+6: valueOf!
+1.64872127070013
+6: valueOf!
+1.49182469764127
+Testing: exp with (37) -1 (object)
+7: valueOf!
+0.367879441171442
+7: valueOf!
+1.49182469764127
+Testing: exp with (38) -0.5 (object)
+8: valueOf!
+0.606530659712633
+8: valueOf!
+1.49182469764127
+Testing: exp with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+1.49182469764127
+Testing: exp with (40) -Infinity (object)
+10: valueOf!
+0
+10: valueOf!
+1.49182469764127
+Testing: exp with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+1.49182469764127
+Testing: exp with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+1.49182469764127
+Testing: exp with (43) 0 (object)
+13: valueOf!
+1
+13: valueOf!
+1.49182469764127
+Testing: exp with (44) -0 (object)
+14: valueOf!
+1
+14: valueOf!
+1.49182469764127
+Testing: exp with (45) 0.0 (object)
+15: valueOf!
+1
+15: valueOf!
+1.49182469764127
+Testing: exp with (46) 1 (object)
+16: valueOf!
+2.71828182845905
+16: valueOf!
+1.49182469764127
+Testing: exp with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+1.49182469764127
+Testing: exp with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+1.49182469764127
+Testing: exp with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+1.49182469764127
+Testing: exp with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+1.49182469764127
+Testing: exp with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+1.49182469764127
+Testing: exp with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+1.49182469764127
+Testing: exp with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+1.49182469764127
+Testing: exp with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+1.49182469764127
+Testing: exp with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+1.49182469764127
+Testing: exp with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+1.49182469764127
+Testing: exp with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+1.49182469764127
+Testing: exp with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+1.49182469764127
+Testing: exp with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+1.49182469764127
+Testing: log
+NaN
+0.182321556793955
+0.182321556793955
+0.182321556793955
+Testing: log with (0) undefined (undefined)
+NaN
+-0.916290731874155
+Testing: log with (1) null (null)
+NaN
+-0.916290731874155
+Testing: log with (2) true (boolean)
+0
+-0.916290731874155
+Testing: log with (3) false (boolean)
+-Infinity
+-0.916290731874155
+Testing: log with (4) 0 (number)
+-Infinity
+-0.916290731874155
+Testing: log with (5) 1 (number)
+0
+-0.916290731874155
+Testing: log with (6) 0.5 (number)
+-0.693147180559945
+-0.916290731874155
+Testing: log with (7) -1 (number)
+NaN
+-0.916290731874155
+Testing: log with (8) -0.5 (number)
+NaN
+-0.916290731874155
+Testing: log with (9) Infinity (number)
+Infinity
+-0.916290731874155
+Testing: log with (10) -Infinity (number)
+NaN
+-0.916290731874155
+Testing: log with (11) NaN (number)
+NaN
+-0.916290731874155
+Testing: log with (12)  (string)
+NaN
+-0.916290731874155
+Testing: log with (13) 0 (string)
+-Infinity
+-0.916290731874155
+Testing: log with (14) -0 (string)
+-Infinity
+-0.916290731874155
+Testing: log with (15) 0.0 (string)
+-Infinity
+-0.916290731874155
+Testing: log with (16) 1 (string)
+0
+-0.916290731874155
+Testing: log with (17) Hello World! (string)
+NaN
+-0.916290731874155
+Testing: log with (18) true (string)
+NaN
+-0.916290731874155
+Testing: log with (19) _level0 (string)
+NaN
+-0.916290731874155
+Testing: log with (20) äöü (string)
+NaN
+-0.916290731874155
+Testing: log with (21) _level0 (movieclip)
+NaN
+-0.916290731874155
+Testing: log with (22) [object Object] (object)
+NaN
+-0.916290731874155
+Testing: log with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+27.8459325838193
+-0.916290731874155
+Testing: log with (24)  (object)
+NaN
+-0.916290731874155
+Testing: log with (25) [type Function] (function)
+NaN
+-0.916290731874155
+Testing: log with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+-0.916290731874155
+Testing: log with (27) [type Object] (object)
+NaN
+-0.916290731874155
+Testing: log with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+-0.916290731874155
+Testing: log with (29) undefined (object)
+NaN
+-0.916290731874155
+Testing: log with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+-0.916290731874155
+Testing: log with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+-0.916290731874155
+Testing: log with (32) true (object)
+2: valueOf!
+0
+2: valueOf!
+-0.916290731874155
+Testing: log with (33) false (object)
+3: valueOf!
+-Infinity
+3: valueOf!
+-0.916290731874155
+Testing: log with (34) 0 (object)
+4: valueOf!
+-Infinity
+4: valueOf!
+-0.916290731874155
+Testing: log with (35) 1 (object)
+5: valueOf!
+0
+5: valueOf!
+-0.916290731874155
+Testing: log with (36) 0.5 (object)
+6: valueOf!
+-0.693147180559945
+6: valueOf!
+-0.916290731874155
+Testing: log with (37) -1 (object)
+7: valueOf!
+NaN
+7: valueOf!
+-0.916290731874155
+Testing: log with (38) -0.5 (object)
+8: valueOf!
+NaN
+8: valueOf!
+-0.916290731874155
+Testing: log with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+-0.916290731874155
+Testing: log with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+-0.916290731874155
+Testing: log with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+-0.916290731874155
+Testing: log with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+-0.916290731874155
+Testing: log with (43) 0 (object)
+13: valueOf!
+-Infinity
+13: valueOf!
+-0.916290731874155
+Testing: log with (44) -0 (object)
+14: valueOf!
+-Infinity
+14: valueOf!
+-0.916290731874155
+Testing: log with (45) 0.0 (object)
+15: valueOf!
+-Infinity
+15: valueOf!
+-0.916290731874155
+Testing: log with (46) 1 (object)
+16: valueOf!
+0
+16: valueOf!
+-0.916290731874155
+Testing: log with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+-0.916290731874155
+Testing: log with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+-0.916290731874155
+Testing: log with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+-0.916290731874155
+Testing: log with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+-0.916290731874155
+Testing: log with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+-0.916290731874155
+Testing: log with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+-0.916290731874155
+Testing: log with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+-0.916290731874155
+Testing: log with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+-0.916290731874155
+Testing: log with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+-0.916290731874155
+Testing: log with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+-0.916290731874155
+Testing: log with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+-0.916290731874155
+Testing: log with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+-0.916290731874155
+Testing: log with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+-0.916290731874155
+Testing: sqrt
+NaN
+1.09544511501033
+1.09544511501033
+1.09544511501033
+Testing: sqrt with (0) undefined (undefined)
+NaN
+0.632455532033676
+Testing: sqrt with (1) null (null)
+NaN
+0.632455532033676
+Testing: sqrt with (2) true (boolean)
+1
+0.632455532033676
+Testing: sqrt with (3) false (boolean)
+0
+0.632455532033676
+Testing: sqrt with (4) 0 (number)
+0
+0.632455532033676
+Testing: sqrt with (5) 1 (number)
+1
+0.632455532033676
+Testing: sqrt with (6) 0.5 (number)
+0.707106781186548
+0.632455532033676
+Testing: sqrt with (7) -1 (number)
+NaN
+0.632455532033676
+Testing: sqrt with (8) -0.5 (number)
+NaN
+0.632455532033676
+Testing: sqrt with (9) Infinity (number)
+Infinity
+0.632455532033676
+Testing: sqrt with (10) -Infinity (number)
+NaN
+0.632455532033676
+Testing: sqrt with (11) NaN (number)
+NaN
+0.632455532033676
+Testing: sqrt with (12)  (string)
+NaN
+0.632455532033676
+Testing: sqrt with (13) 0 (string)
+0
+0.632455532033676
+Testing: sqrt with (14) -0 (string)
+0
+0.632455532033676
+Testing: sqrt with (15) 0.0 (string)
+0
+0.632455532033676
+Testing: sqrt with (16) 1 (string)
+1
+0.632455532033676
+Testing: sqrt with (17) Hello World! (string)
+NaN
+0.632455532033676
+Testing: sqrt with (18) true (string)
+NaN
+0.632455532033676
+Testing: sqrt with (19) _level0 (string)
+NaN
+0.632455532033676
+Testing: sqrt with (20) äöü (string)
+NaN
+0.632455532033676
+Testing: sqrt with (21) _level0 (movieclip)
+NaN
+0.632455532033676
+Testing: sqrt with (22) [object Object] (object)
+NaN
+0.632455532033676
+Testing: sqrt with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1113441.57199017
+0.632455532033676
+Testing: sqrt with (24)  (object)
+NaN
+0.632455532033676
+Testing: sqrt with (25) [type Function] (function)
+NaN
+0.632455532033676
+Testing: sqrt with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.632455532033676
+Testing: sqrt with (27) [type Object] (object)
+NaN
+0.632455532033676
+Testing: sqrt with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.632455532033676
+Testing: sqrt with (29) undefined (object)
+NaN
+0.632455532033676
+Testing: sqrt with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.632455532033676
+Testing: sqrt with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.632455532033676
+Testing: sqrt with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+0.632455532033676
+Testing: sqrt with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.632455532033676
+Testing: sqrt with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.632455532033676
+Testing: sqrt with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+0.632455532033676
+Testing: sqrt with (36) 0.5 (object)
+6: valueOf!
+0.707106781186548
+6: valueOf!
+0.632455532033676
+Testing: sqrt with (37) -1 (object)
+7: valueOf!
+NaN
+7: valueOf!
+0.632455532033676
+Testing: sqrt with (38) -0.5 (object)
+8: valueOf!
+NaN
+8: valueOf!
+0.632455532033676
+Testing: sqrt with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+0.632455532033676
+Testing: sqrt with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+0.632455532033676
+Testing: sqrt with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.632455532033676
+Testing: sqrt with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.632455532033676
+Testing: sqrt with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.632455532033676
+Testing: sqrt with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.632455532033676
+Testing: sqrt with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.632455532033676
+Testing: sqrt with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+0.632455532033676
+Testing: sqrt with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.632455532033676
+Testing: sqrt with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.632455532033676
+Testing: sqrt with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.632455532033676
+Testing: sqrt with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.632455532033676
+Testing: sqrt with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.632455532033676
+Testing: sqrt with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.632455532033676
+Testing: sqrt with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.632455532033676
+Testing: sqrt with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.632455532033676
+Testing: sqrt with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.632455532033676
+Testing: sqrt with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.632455532033676
+Testing: sqrt with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.632455532033676
+Testing: sqrt with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.632455532033676
+Testing: sqrt with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.632455532033676
+Testing: round
+NaN
+1
+1
+1
+Testing: round with (0) undefined (undefined)
+NaN
+0
+Testing: round with (1) null (null)
+NaN
+0
+Testing: round with (2) true (boolean)
+1
+0
+Testing: round with (3) false (boolean)
+0
+0
+Testing: round with (4) 0 (number)
+0
+0
+Testing: round with (5) 1 (number)
+1
+0
+Testing: round with (6) 0.5 (number)
+1
+0
+Testing: round with (7) -1 (number)
+-1
+0
+Testing: round with (8) -0.5 (number)
+0
+0
+Testing: round with (9) Infinity (number)
+Infinity
+0
+Testing: round with (10) -Infinity (number)
+-Infinity
+0
+Testing: round with (11) NaN (number)
+NaN
+0
+Testing: round with (12)  (string)
+NaN
+0
+Testing: round with (13) 0 (string)
+0
+0
+Testing: round with (14) -0 (string)
+0
+0
+Testing: round with (15) 0.0 (string)
+0
+0
+Testing: round with (16) 1 (string)
+1
+0
+Testing: round with (17) Hello World! (string)
+NaN
+0
+Testing: round with (18) true (string)
+NaN
+0
+Testing: round with (19) _level0 (string)
+NaN
+0
+Testing: round with (20) äöü (string)
+NaN
+0
+Testing: round with (21) _level0 (movieclip)
+NaN
+0
+Testing: round with (22) [object Object] (object)
+NaN
+0
+Testing: round with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1239752134236
+0
+Testing: round with (24)  (object)
+NaN
+0
+Testing: round with (25) [type Function] (function)
+NaN
+0
+Testing: round with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0
+Testing: round with (27) [type Object] (object)
+NaN
+0
+Testing: round with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0
+Testing: round with (29) undefined (object)
+NaN
+0
+Testing: round with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0
+Testing: round with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0
+Testing: round with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+0
+Testing: round with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0
+Testing: round with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0
+Testing: round with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+0
+Testing: round with (36) 0.5 (object)
+6: valueOf!
+1
+6: valueOf!
+0
+Testing: round with (37) -1 (object)
+7: valueOf!
+-1
+7: valueOf!
+0
+Testing: round with (38) -0.5 (object)
+8: valueOf!
+0
+8: valueOf!
+0
+Testing: round with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+0
+Testing: round with (40) -Infinity (object)
+10: valueOf!
+-Infinity
+10: valueOf!
+0
+Testing: round with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0
+Testing: round with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0
+Testing: round with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0
+Testing: round with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0
+Testing: round with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0
+Testing: round with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+0
+Testing: round with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0
+Testing: round with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0
+Testing: round with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0
+Testing: round with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0
+Testing: round with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0
+Testing: round with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0
+Testing: round with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0
+Testing: round with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0
+Testing: round with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0
+Testing: round with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0
+Testing: round with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0
+Testing: round with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0
+Testing: round with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0
+Testing: floor
+NaN
+1
+1
+1
+Testing: floor with (0) undefined (undefined)
+NaN
+0
+Testing: floor with (1) null (null)
+NaN
+0
+Testing: floor with (2) true (boolean)
+1
+0
+Testing: floor with (3) false (boolean)
+0
+0
+Testing: floor with (4) 0 (number)
+0
+0
+Testing: floor with (5) 1 (number)
+1
+0
+Testing: floor with (6) 0.5 (number)
+0
+0
+Testing: floor with (7) -1 (number)
+-1
+0
+Testing: floor with (8) -0.5 (number)
+-1
+0
+Testing: floor with (9) Infinity (number)
+Infinity
+0
+Testing: floor with (10) -Infinity (number)
+-Infinity
+0
+Testing: floor with (11) NaN (number)
+NaN
+0
+Testing: floor with (12)  (string)
+NaN
+0
+Testing: floor with (13) 0 (string)
+0
+0
+Testing: floor with (14) -0 (string)
+0
+0
+Testing: floor with (15) 0.0 (string)
+0
+0
+Testing: floor with (16) 1 (string)
+1
+0
+Testing: floor with (17) Hello World! (string)
+NaN
+0
+Testing: floor with (18) true (string)
+NaN
+0
+Testing: floor with (19) _level0 (string)
+NaN
+0
+Testing: floor with (20) äöü (string)
+NaN
+0
+Testing: floor with (21) _level0 (movieclip)
+NaN
+0
+Testing: floor with (22) [object Object] (object)
+NaN
+0
+Testing: floor with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1239752134235
+0
+Testing: floor with (24)  (object)
+NaN
+0
+Testing: floor with (25) [type Function] (function)
+NaN
+0
+Testing: floor with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0
+Testing: floor with (27) [type Object] (object)
+NaN
+0
+Testing: floor with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0
+Testing: floor with (29) undefined (object)
+NaN
+0
+Testing: floor with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0
+Testing: floor with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0
+Testing: floor with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+0
+Testing: floor with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0
+Testing: floor with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0
+Testing: floor with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+0
+Testing: floor with (36) 0.5 (object)
+6: valueOf!
+0
+6: valueOf!
+0
+Testing: floor with (37) -1 (object)
+7: valueOf!
+-1
+7: valueOf!
+0
+Testing: floor with (38) -0.5 (object)
+8: valueOf!
+-1
+8: valueOf!
+0
+Testing: floor with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+0
+Testing: floor with (40) -Infinity (object)
+10: valueOf!
+-Infinity
+10: valueOf!
+0
+Testing: floor with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0
+Testing: floor with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0
+Testing: floor with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0
+Testing: floor with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0
+Testing: floor with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0
+Testing: floor with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+0
+Testing: floor with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0
+Testing: floor with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0
+Testing: floor with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0
+Testing: floor with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0
+Testing: floor with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0
+Testing: floor with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0
+Testing: floor with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0
+Testing: floor with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0
+Testing: floor with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0
+Testing: floor with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0
+Testing: floor with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0
+Testing: floor with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0
+Testing: floor with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0
+Testing: ceil
+NaN
+2
+2
+2
+Testing: ceil with (0) undefined (undefined)
+NaN
+1
+Testing: ceil with (1) null (null)
+NaN
+1
+Testing: ceil with (2) true (boolean)
+1
+1
+Testing: ceil with (3) false (boolean)
+0
+1
+Testing: ceil with (4) 0 (number)
+0
+1
+Testing: ceil with (5) 1 (number)
+1
+1
+Testing: ceil with (6) 0.5 (number)
+1
+1
+Testing: ceil with (7) -1 (number)
+-1
+1
+Testing: ceil with (8) -0.5 (number)
+0
+1
+Testing: ceil with (9) Infinity (number)
+Infinity
+1
+Testing: ceil with (10) -Infinity (number)
+-Infinity
+1
+Testing: ceil with (11) NaN (number)
+NaN
+1
+Testing: ceil with (12)  (string)
+NaN
+1
+Testing: ceil with (13) 0 (string)
+0
+1
+Testing: ceil with (14) -0 (string)
+0
+1
+Testing: ceil with (15) 0.0 (string)
+0
+1
+Testing: ceil with (16) 1 (string)
+1
+1
+Testing: ceil with (17) Hello World! (string)
+NaN
+1
+Testing: ceil with (18) true (string)
+NaN
+1
+Testing: ceil with (19) _level0 (string)
+NaN
+1
+Testing: ceil with (20) äöü (string)
+NaN
+1
+Testing: ceil with (21) _level0 (movieclip)
+NaN
+1
+Testing: ceil with (22) [object Object] (object)
+NaN
+1
+Testing: ceil with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1239752134236
+1
+Testing: ceil with (24)  (object)
+NaN
+1
+Testing: ceil with (25) [type Function] (function)
+NaN
+1
+Testing: ceil with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+1
+Testing: ceil with (27) [type Object] (object)
+NaN
+1
+Testing: ceil with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+1
+Testing: ceil with (29) undefined (object)
+NaN
+1
+Testing: ceil with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+1
+Testing: ceil with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+1
+Testing: ceil with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+1
+Testing: ceil with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+1
+Testing: ceil with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+1
+Testing: ceil with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+1
+Testing: ceil with (36) 0.5 (object)
+6: valueOf!
+1
+6: valueOf!
+1
+Testing: ceil with (37) -1 (object)
+7: valueOf!
+-1
+7: valueOf!
+1
+Testing: ceil with (38) -0.5 (object)
+8: valueOf!
+0
+8: valueOf!
+1
+Testing: ceil with (39) Infinity (object)
+9: valueOf!
+Infinity
+9: valueOf!
+1
+Testing: ceil with (40) -Infinity (object)
+10: valueOf!
+-Infinity
+10: valueOf!
+1
+Testing: ceil with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+1
+Testing: ceil with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+1
+Testing: ceil with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+1
+Testing: ceil with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+1
+Testing: ceil with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+1
+Testing: ceil with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+1
+Testing: ceil with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+1
+Testing: ceil with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+1
+Testing: ceil with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+1
+Testing: ceil with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+1
+Testing: ceil with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+1
+Testing: ceil with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+1
+Testing: ceil with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+1
+Testing: ceil with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+1
+Testing: ceil with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+1
+Testing: ceil with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+1
+Testing: ceil with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+1
+Testing: ceil with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+1
+Testing: ceil with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+1
+Testing: atan
+NaN
+0.876058050598193
+0.876058050598193
+0.876058050598193
+Testing: atan with (0) undefined (undefined)
+NaN
+0.380506377112365
+Testing: atan with (1) null (null)
+NaN
+0.380506377112365
+Testing: atan with (2) true (boolean)
+0.785398163397448
+0.380506377112365
+Testing: atan with (3) false (boolean)
+0
+0.380506377112365
+Testing: atan with (4) 0 (number)
+0
+0.380506377112365
+Testing: atan with (5) 1 (number)
+0.785398163397448
+0.380506377112365
+Testing: atan with (6) 0.5 (number)
+0.463647609000806
+0.380506377112365
+Testing: atan with (7) -1 (number)
+-0.785398163397448
+0.380506377112365
+Testing: atan with (8) -0.5 (number)
+-0.463647609000806
+0.380506377112365
+Testing: atan with (9) Infinity (number)
+1.5707963267949
+0.380506377112365
+Testing: atan with (10) -Infinity (number)
+-1.5707963267949
+0.380506377112365
+Testing: atan with (11) NaN (number)
+NaN
+0.380506377112365
+Testing: atan with (12)  (string)
+NaN
+0.380506377112365
+Testing: atan with (13) 0 (string)
+0
+0.380506377112365
+Testing: atan with (14) -0 (string)
+0
+0.380506377112365
+Testing: atan with (15) 0.0 (string)
+0
+0.380506377112365
+Testing: atan with (16) 1 (string)
+0.785398163397448
+0.380506377112365
+Testing: atan with (17) Hello World! (string)
+NaN
+0.380506377112365
+Testing: atan with (18) true (string)
+NaN
+0.380506377112365
+Testing: atan with (19) _level0 (string)
+NaN
+0.380506377112365
+Testing: atan with (20) äöü (string)
+NaN
+0.380506377112365
+Testing: atan with (21) _level0 (movieclip)
+NaN
+0.380506377112365
+Testing: atan with (22) [object Object] (object)
+NaN
+0.380506377112365
+Testing: atan with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+1.57079632679409
+0.380506377112365
+Testing: atan with (24)  (object)
+NaN
+0.380506377112365
+Testing: atan with (25) [type Function] (function)
+NaN
+0.380506377112365
+Testing: atan with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.380506377112365
+Testing: atan with (27) [type Object] (object)
+NaN
+0.380506377112365
+Testing: atan with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.380506377112365
+Testing: atan with (29) undefined (object)
+NaN
+0.380506377112365
+Testing: atan with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.380506377112365
+Testing: atan with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.380506377112365
+Testing: atan with (32) true (object)
+2: valueOf!
+0.785398163397448
+2: valueOf!
+0.380506377112365
+Testing: atan with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.380506377112365
+Testing: atan with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.380506377112365
+Testing: atan with (35) 1 (object)
+5: valueOf!
+0.785398163397448
+5: valueOf!
+0.380506377112365
+Testing: atan with (36) 0.5 (object)
+6: valueOf!
+0.463647609000806
+6: valueOf!
+0.380506377112365
+Testing: atan with (37) -1 (object)
+7: valueOf!
+-0.785398163397448
+7: valueOf!
+0.380506377112365
+Testing: atan with (38) -0.5 (object)
+8: valueOf!
+-0.463647609000806
+8: valueOf!
+0.380506377112365
+Testing: atan with (39) Infinity (object)
+9: valueOf!
+1.5707963267949
+9: valueOf!
+0.380506377112365
+Testing: atan with (40) -Infinity (object)
+10: valueOf!
+-1.5707963267949
+10: valueOf!
+0.380506377112365
+Testing: atan with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.380506377112365
+Testing: atan with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.380506377112365
+Testing: atan with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.380506377112365
+Testing: atan with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.380506377112365
+Testing: atan with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.380506377112365
+Testing: atan with (46) 1 (object)
+16: valueOf!
+0.785398163397448
+16: valueOf!
+0.380506377112365
+Testing: atan with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.380506377112365
+Testing: atan with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.380506377112365
+Testing: atan with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.380506377112365
+Testing: atan with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.380506377112365
+Testing: atan with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.380506377112365
+Testing: atan with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.380506377112365
+Testing: atan with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.380506377112365
+Testing: atan with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.380506377112365
+Testing: atan with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.380506377112365
+Testing: atan with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.380506377112365
+Testing: atan with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.380506377112365
+Testing: atan with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.380506377112365
+Testing: atan with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.380506377112365
+Testing: asin
+NaN
+NaN
+NaN
+NaN
+Testing: asin with (0) undefined (undefined)
+NaN
+0.411516846067488
+Testing: asin with (1) null (null)
+NaN
+0.411516846067488
+Testing: asin with (2) true (boolean)
+1.5707963267949
+0.411516846067488
+Testing: asin with (3) false (boolean)
+0
+0.411516846067488
+Testing: asin with (4) 0 (number)
+0
+0.411516846067488
+Testing: asin with (5) 1 (number)
+1.5707963267949
+0.411516846067488
+Testing: asin with (6) 0.5 (number)
+0.523598775598299
+0.411516846067488
+Testing: asin with (7) -1 (number)
+-1.5707963267949
+0.411516846067488
+Testing: asin with (8) -0.5 (number)
+-0.523598775598299
+0.411516846067488
+Testing: asin with (9) Infinity (number)
+NaN
+0.411516846067488
+Testing: asin with (10) -Infinity (number)
+NaN
+0.411516846067488
+Testing: asin with (11) NaN (number)
+NaN
+0.411516846067488
+Testing: asin with (12)  (string)
+NaN
+0.411516846067488
+Testing: asin with (13) 0 (string)
+0
+0.411516846067488
+Testing: asin with (14) -0 (string)
+0
+0.411516846067488
+Testing: asin with (15) 0.0 (string)
+0
+0.411516846067488
+Testing: asin with (16) 1 (string)
+1.5707963267949
+0.411516846067488
+Testing: asin with (17) Hello World! (string)
+NaN
+0.411516846067488
+Testing: asin with (18) true (string)
+NaN
+0.411516846067488
+Testing: asin with (19) _level0 (string)
+NaN
+0.411516846067488
+Testing: asin with (20) äöü (string)
+NaN
+0.411516846067488
+Testing: asin with (21) _level0 (movieclip)
+NaN
+0.411516846067488
+Testing: asin with (22) [object Object] (object)
+NaN
+0.411516846067488
+Testing: asin with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+NaN
+0.411516846067488
+Testing: asin with (24)  (object)
+NaN
+0.411516846067488
+Testing: asin with (25) [type Function] (function)
+NaN
+0.411516846067488
+Testing: asin with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+0.411516846067488
+Testing: asin with (27) [type Object] (object)
+NaN
+0.411516846067488
+Testing: asin with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+0.411516846067488
+Testing: asin with (29) undefined (object)
+NaN
+0.411516846067488
+Testing: asin with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+0.411516846067488
+Testing: asin with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+0.411516846067488
+Testing: asin with (32) true (object)
+2: valueOf!
+1.5707963267949
+2: valueOf!
+0.411516846067488
+Testing: asin with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+0.411516846067488
+Testing: asin with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+0.411516846067488
+Testing: asin with (35) 1 (object)
+5: valueOf!
+1.5707963267949
+5: valueOf!
+0.411516846067488
+Testing: asin with (36) 0.5 (object)
+6: valueOf!
+0.523598775598299
+6: valueOf!
+0.411516846067488
+Testing: asin with (37) -1 (object)
+7: valueOf!
+-1.5707963267949
+7: valueOf!
+0.411516846067488
+Testing: asin with (38) -0.5 (object)
+8: valueOf!
+-0.523598775598299
+8: valueOf!
+0.411516846067488
+Testing: asin with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+0.411516846067488
+Testing: asin with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+0.411516846067488
+Testing: asin with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+0.411516846067488
+Testing: asin with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+0.411516846067488
+Testing: asin with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+0.411516846067488
+Testing: asin with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+0.411516846067488
+Testing: asin with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+0.411516846067488
+Testing: asin with (46) 1 (object)
+16: valueOf!
+1.5707963267949
+16: valueOf!
+0.411516846067488
+Testing: asin with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+0.411516846067488
+Testing: asin with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+0.411516846067488
+Testing: asin with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+0.411516846067488
+Testing: asin with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+0.411516846067488
+Testing: asin with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+0.411516846067488
+Testing: asin with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+0.411516846067488
+Testing: asin with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+0.411516846067488
+Testing: asin with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+0.411516846067488
+Testing: asin with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+0.411516846067488
+Testing: asin with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+0.411516846067488
+Testing: asin with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+0.411516846067488
+Testing: asin with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+0.411516846067488
+Testing: asin with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+0.411516846067488
+Testing: acos
+NaN
+NaN
+NaN
+NaN
+Testing: acos with (0) undefined (undefined)
+NaN
+1.15927948072741
+Testing: acos with (1) null (null)
+NaN
+1.15927948072741
+Testing: acos with (2) true (boolean)
+0
+1.15927948072741
+Testing: acos with (3) false (boolean)
+1.5707963267949
+1.15927948072741
+Testing: acos with (4) 0 (number)
+1.5707963267949
+1.15927948072741
+Testing: acos with (5) 1 (number)
+0
+1.15927948072741
+Testing: acos with (6) 0.5 (number)
+1.0471975511966
+1.15927948072741
+Testing: acos with (7) -1 (number)
+3.14159265358979
+1.15927948072741
+Testing: acos with (8) -0.5 (number)
+2.0943951023932
+1.15927948072741
+Testing: acos with (9) Infinity (number)
+NaN
+1.15927948072741
+Testing: acos with (10) -Infinity (number)
+NaN
+1.15927948072741
+Testing: acos with (11) NaN (number)
+NaN
+1.15927948072741
+Testing: acos with (12)  (string)
+NaN
+1.15927948072741
+Testing: acos with (13) 0 (string)
+1.5707963267949
+1.15927948072741
+Testing: acos with (14) -0 (string)
+1.5707963267949
+1.15927948072741
+Testing: acos with (15) 0.0 (string)
+1.5707963267949
+1.15927948072741
+Testing: acos with (16) 1 (string)
+0
+1.15927948072741
+Testing: acos with (17) Hello World! (string)
+NaN
+1.15927948072741
+Testing: acos with (18) true (string)
+NaN
+1.15927948072741
+Testing: acos with (19) _level0 (string)
+NaN
+1.15927948072741
+Testing: acos with (20) äöü (string)
+NaN
+1.15927948072741
+Testing: acos with (21) _level0 (movieclip)
+NaN
+1.15927948072741
+Testing: acos with (22) [object Object] (object)
+NaN
+1.15927948072741
+Testing: acos with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+NaN
+1.15927948072741
+Testing: acos with (24)  (object)
+NaN
+1.15927948072741
+Testing: acos with (25) [type Function] (function)
+NaN
+1.15927948072741
+Testing: acos with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+1.15927948072741
+Testing: acos with (27) [type Object] (object)
+NaN
+1.15927948072741
+Testing: acos with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+1.15927948072741
+Testing: acos with (29) undefined (object)
+NaN
+1.15927948072741
+Testing: acos with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+1.15927948072741
+Testing: acos with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+1.15927948072741
+Testing: acos with (32) true (object)
+2: valueOf!
+0
+2: valueOf!
+1.15927948072741
+Testing: acos with (33) false (object)
+3: valueOf!
+1.5707963267949
+3: valueOf!
+1.15927948072741
+Testing: acos with (34) 0 (object)
+4: valueOf!
+1.5707963267949
+4: valueOf!
+1.15927948072741
+Testing: acos with (35) 1 (object)
+5: valueOf!
+0
+5: valueOf!
+1.15927948072741
+Testing: acos with (36) 0.5 (object)
+6: valueOf!
+1.0471975511966
+6: valueOf!
+1.15927948072741
+Testing: acos with (37) -1 (object)
+7: valueOf!
+3.14159265358979
+7: valueOf!
+1.15927948072741
+Testing: acos with (38) -0.5 (object)
+8: valueOf!
+2.0943951023932
+8: valueOf!
+1.15927948072741
+Testing: acos with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+1.15927948072741
+Testing: acos with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+1.15927948072741
+Testing: acos with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+1.15927948072741
+Testing: acos with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+1.15927948072741
+Testing: acos with (43) 0 (object)
+13: valueOf!
+1.5707963267949
+13: valueOf!
+1.15927948072741
+Testing: acos with (44) -0 (object)
+14: valueOf!
+1.5707963267949
+14: valueOf!
+1.15927948072741
+Testing: acos with (45) 0.0 (object)
+15: valueOf!
+1.5707963267949
+15: valueOf!
+1.15927948072741
+Testing: acos with (46) 1 (object)
+16: valueOf!
+0
+16: valueOf!
+1.15927948072741
+Testing: acos with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+1.15927948072741
+Testing: acos with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+1.15927948072741
+Testing: acos with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+1.15927948072741
+Testing: acos with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+1.15927948072741
+Testing: acos with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+1.15927948072741
+Testing: acos with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+1.15927948072741
+Testing: acos with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+1.15927948072741
+Testing: acos with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+1.15927948072741
+Testing: acos with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+1.15927948072741
+Testing: acos with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+1.15927948072741
+Testing: acos with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+1.15927948072741
+Testing: acos with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+1.15927948072741
+Testing: acos with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+1.15927948072741
+Testing: pow
+NaN
+NaN
+1.07565375693257
+1.07565375693257
+Testing: pow with (0) undefined (undefined)
+NaN
+NaN
+Testing: pow with (1) null (null)
+NaN
+NaN
+Testing: pow with (2) true (boolean)
+1
+0.4
+Testing: pow with (3) false (boolean)
+0
+1
+Testing: pow with (4) 0 (number)
+0
+1
+Testing: pow with (5) 1 (number)
+1
+0.4
+Testing: pow with (6) 0.5 (number)
+0.757858283255199
+0.632455532033676
+Testing: pow with (7) -1 (number)
+NaN
+2.5
+Testing: pow with (8) -0.5 (number)
+NaN
+1.58113883008419
+Testing: pow with (9) Infinity (number)
+NaN
+0
+Testing: pow with (10) -Infinity (number)
+NaN
+Infinity
+Testing: pow with (11) NaN (number)
+NaN
+NaN
+Testing: pow with (12)  (string)
+NaN
+NaN
+Testing: pow with (13) 0 (string)
+0
+1
+Testing: pow with (14) -0 (string)
+0
+1
+Testing: pow with (15) 0.0 (string)
+0
+1
+Testing: pow with (16) 1 (string)
+1
+0.4
+Testing: pow with (17) Hello World! (string)
+NaN
+NaN
+Testing: pow with (18) true (string)
+NaN
+NaN
+Testing: pow with (19) _level0 (string)
+NaN
+NaN
+Testing: pow with (20) äöü (string)
+NaN
+NaN
+Testing: pow with (21) _level0 (movieclip)
+NaN
+NaN
+Testing: pow with (22) [object Object] (object)
+NaN
+NaN
+Skipping: pow with (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Testing: pow with (24)  (object)
+NaN
+NaN
+Testing: pow with (25) [type Function] (function)
+NaN
+NaN
+valueOf called
+Testing: pow with (26) [type Object] (object)
+valueOf called
+NaN
+valueOf called
+NaN
+Testing: pow with (27) [type Object] (object)
+NaN
+NaN
+valueOf called with 
+Testing: pow with (28) [object Object] (object)
+valueOf called with 
+NaN
+valueOf called with 
+NaN
+Testing: pow with (29) undefined (object)
+NaN
+NaN
+0: valueOf!
+Testing: pow with (30) undefined (object)
+0: valueOf!
+NaN
+0: valueOf!
+NaN
+1: valueOf!
+Testing: pow with (31) null (object)
+1: valueOf!
+NaN
+1: valueOf!
+NaN
+2: valueOf!
+2: valueOf!
+Testing: pow with (32) true (object)
+2: valueOf!
+1
+2: valueOf!
+0.4
+3: valueOf!
+3: valueOf!
+Testing: pow with (33) false (object)
+3: valueOf!
+0
+3: valueOf!
+1
+4: valueOf!
+4: valueOf!
+Testing: pow with (34) 0 (object)
+4: valueOf!
+0
+4: valueOf!
+1
+5: valueOf!
+5: valueOf!
+Testing: pow with (35) 1 (object)
+5: valueOf!
+1
+5: valueOf!
+0.4
+6: valueOf!
+6: valueOf!
+Testing: pow with (36) 0.5 (object)
+6: valueOf!
+0.757858283255199
+6: valueOf!
+0.632455532033676
+7: valueOf!
+7: valueOf!
+Testing: pow with (37) -1 (object)
+7: valueOf!
+NaN
+7: valueOf!
+2.5
+8: valueOf!
+8: valueOf!
+Testing: pow with (38) -0.5 (object)
+8: valueOf!
+NaN
+8: valueOf!
+1.58113883008419
+9: valueOf!
+Testing: pow with (39) Infinity (object)
+9: valueOf!
+NaN
+9: valueOf!
+0
+10: valueOf!
+Testing: pow with (40) -Infinity (object)
+10: valueOf!
+NaN
+10: valueOf!
+Infinity
+11: valueOf!
+Testing: pow with (41) NaN (object)
+11: valueOf!
+NaN
+11: valueOf!
+NaN
+12: valueOf!
+Testing: pow with (42)  (object)
+12: valueOf!
+NaN
+12: valueOf!
+NaN
+13: valueOf!
+13: valueOf!
+Testing: pow with (43) 0 (object)
+13: valueOf!
+0
+13: valueOf!
+1
+14: valueOf!
+14: valueOf!
+Testing: pow with (44) -0 (object)
+14: valueOf!
+0
+14: valueOf!
+1
+15: valueOf!
+15: valueOf!
+Testing: pow with (45) 0.0 (object)
+15: valueOf!
+0
+15: valueOf!
+1
+16: valueOf!
+16: valueOf!
+Testing: pow with (46) 1 (object)
+16: valueOf!
+1
+16: valueOf!
+0.4
+17: valueOf!
+Testing: pow with (47) Hello World! (object)
+17: valueOf!
+NaN
+17: valueOf!
+NaN
+18: valueOf!
+Testing: pow with (48) true (object)
+18: valueOf!
+NaN
+18: valueOf!
+NaN
+19: valueOf!
+Testing: pow with (49) _level0 (object)
+19: valueOf!
+NaN
+19: valueOf!
+NaN
+20: valueOf!
+Testing: pow with (50) äöü (object)
+20: valueOf!
+NaN
+20: valueOf!
+NaN
+21: valueOf!
+Testing: pow with (51) _level0 (object)
+21: valueOf!
+NaN
+21: valueOf!
+NaN
+22: valueOf!
+Testing: pow with (52) [type Object] (object)
+22: valueOf!
+NaN
+22: valueOf!
+NaN
+23: valueOf!
+Testing: pow with (53) [type Object] (object)
+23: valueOf!
+NaN
+23: valueOf!
+NaN
+24: valueOf!
+Testing: pow with (54) [type Object] (object)
+24: valueOf!
+NaN
+24: valueOf!
+NaN
+25: valueOf!
+Testing: pow with (55) [type Object] (object)
+25: valueOf!
+NaN
+25: valueOf!
+NaN
+26: valueOf!
+Testing: pow with (56) [type Object] (object)
+26: valueOf!
+NaN
+26: valueOf!
+NaN
+27: valueOf!
+Testing: pow with (57) [type Object] (object)
+27: valueOf!
+NaN
+27: valueOf!
+NaN
+28: valueOf!
+Testing: pow with (58) [type Object] (object)
+28: valueOf!
+NaN
+28: valueOf!
+NaN
+29: valueOf!
+Testing: pow with (59) [type Object] (object)
+29: valueOf!
+NaN
+29: valueOf!
+NaN

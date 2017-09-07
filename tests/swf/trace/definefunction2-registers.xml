@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<swf version="5" compressed="1">
+  <!-- swfmill xml2swf definefunction2-registers.xml definefunction2-registers.swf -->
+  <Header framerate="25" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+	<actions>
+	  <PushData>
+	    <items>
+	      <StackString value="Check how DefineFunction2 handles register counts"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <DeclareFunction2 name="foo" argc="0" regc="0">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <DeclareFunction2 name="foo" argc="0" regc="1">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <DeclareFunction2 name="foo" argc="0" regc="2">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <DeclareFunction2 name="foo" argc="0" regc="3">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <DeclareFunction2 name="foo" argc="0" regc="4">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <DeclareFunction2 name="foo" argc="0" regc="5">
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="hi"/>
+		</items>
+	      </PushData>
+	      <StoreRegister reg="0"/>
+	      <StoreRegister reg="1"/>
+	      <StoreRegister reg="2"/>
+	      <StoreRegister reg="3"/>
+	      <StoreRegister reg="4"/>
+	      <StoreRegister reg="5"/>
+	      <StoreRegister reg="6"/>
+	      <StoreRegister reg="7"/>
+	      <StoreRegister reg="8"/>
+	      <StoreRegister reg="9"/>
+	      <PushData>
+		<items>
+                  <StackRegister reg="9"/>
+                  <StackRegister reg="8"/>
+                  <StackRegister reg="7"/>
+                  <StackRegister reg="6"/>
+                  <StackRegister reg="5"/>
+                  <StackRegister reg="4"/>
+                  <StackRegister reg="3"/>
+                  <StackRegister reg="2"/>
+                  <StackRegister reg="1"/>
+                  <StackRegister reg="0"/>
+		</items>
+	      </PushData>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <GetURL url="fscommand:quit" target=""/>
+	</actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

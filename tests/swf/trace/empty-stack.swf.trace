@@ -1,0 +1,2 @@
+Check that the empty stack is treated as unlimited undefined values
+undefined

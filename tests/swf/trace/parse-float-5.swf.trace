@@ -1,0 +1,185 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+undefined
+1.5
+Testing: (0)  (undefined)
+NaN
+Testing: (1) null (null)
+NaN
+Testing: (2) true (boolean)
+NaN
+Testing: (3) false (boolean)
+NaN
+Testing: (4) 0 (number)
+0
+Testing: (5) 1 (number)
+1
+Testing: (6) 0.5 (number)
+0.5
+Testing: (7) -1 (number)
+-1
+Testing: (8) -0.5 (number)
+-0.5
+Testing: (9) Infinity (number)
+NaN
+Testing: (10) -Infinity (number)
+NaN
+Testing: (11) NaN (number)
+NaN
+Testing: (12)  (string)
+NaN
+Testing: (13) 0 (string)
+0
+Testing: (14) -0 (string)
+0
+Testing: (15) 0.0 (string)
+0
+Testing: (16) 1 (string)
+1
+Testing: (17) Hello World! (string)
+NaN
+Testing: (18) true (string)
+NaN
+Testing: (19) _level0 (string)
+NaN
+Testing: (20) _level0 (movieclip)
+NaN
+Testing: (21) [object Object] (object)
+NaN
+Testing: (22)  (undefined)
+NaN
+Testing: (23) [type Object] (object)
+toString called
+NaN
+Testing: (24) [type Object] (object)
+toString called with 
+NaN
+Testing: (25) [object Object] (object)
+NaN
+Testing: (26)  (object)
+NaN
+Testing: (27)  (object)
+0: toString!
+NaN
+Testing: (28) null (object)
+1: toString!
+NaN
+Testing: (29) true (object)
+2: toString!
+NaN
+Testing: (30) false (object)
+3: toString!
+NaN
+Testing: (31) 0 (object)
+4: toString!
+NaN
+Testing: (32) 1 (object)
+5: toString!
+NaN
+Testing: (33) 0.5 (object)
+6: toString!
+NaN
+Testing: (34) -1 (object)
+7: toString!
+NaN
+Testing: (35) -0.5 (object)
+8: toString!
+NaN
+Testing: (36) Infinity (object)
+9: toString!
+NaN
+Testing: (37) -Infinity (object)
+10: toString!
+NaN
+Testing: (38) NaN (object)
+11: toString!
+NaN
+Testing: (39)  (object)
+12: toString!
+NaN
+Testing: (40) 0 (object)
+13: toString!
+0
+Testing: (41) -0 (object)
+14: toString!
+0
+Testing: (42) 0.0 (object)
+15: toString!
+0
+Testing: (43) 1 (object)
+16: toString!
+1
+Testing: (44) Hello World! (object)
+17: toString!
+NaN
+Testing: (45) true (object)
+18: toString!
+NaN
+Testing: (46) _level0 (object)
+19: toString!
+NaN
+Testing: (47) _level0 (object)
+20: toString!
+NaN
+Testing: (48) [type Object] (object)
+21: toString!
+NaN
+Testing: (49)  (object)
+22: toString!
+NaN
+Testing: (50) [type Object] (object)
+23: toString!
+NaN
+Testing: (51) [type Object] (object)
+24: toString!
+NaN
+Testing: (52) [type Object] (object)
+25: toString!
+NaN
+Testing: (53) [type Object] (object)
+26: toString!
+NaN
+Testing: 0x123
+0
+Testing: 1.234e10
+12340000000
+Testing: 1,5
+1
+Testing: 12e3
+12000
+Testing: 5.12e0
+5.12

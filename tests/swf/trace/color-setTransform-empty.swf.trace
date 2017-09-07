@@ -1,0 +1,20 @@
+Test the that setTransform({}) does the correct thing
+rgb: 0
+ra: 100
+rb: 0
+ga: 100
+gb: 0
+ba: 100
+bb: 0
+aa: 100
+ab: 0
+and again, but after setRGB(0x123456)
+rgb: 1193046
+ra: 0
+rb: 18
+ga: 0
+gb: 52
+ba: 0
+bb: 86
+aa: 100
+ab: 0

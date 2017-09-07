@@ -1,0 +1,25 @@
+>> _level0
+_level0.a: -32769
+_level0.a.a: 0
+_level0.a.b: 1
+: 
+_level0.a.d: 3
+===
+>> _level0.a.a
+_level0.a: -32769
+_level0.a.a: 0
+_level0.a.b: 1
+: 
+_level0.a.d: 3
+>> _level0.a.b
+_level0.a: -32769
+_level0.a.a: 0
+_level0.a.b: 1
+: 
+_level0.a.d: 3
+>> _level0.a
+_level0.a: -32769
+_level0.a.a: 0
+_level0.a.b: 1
+: 
+_level0.a.d: 3

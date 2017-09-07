@@ -1,0 +1,108 @@
+>>> Date
+toString:
+toString:
+String: [type Object]
+toString:
+valueOf: 
+Number: NaN
+toString:
+toString:
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> Number
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> String
+valueOf: 
+String: 
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> Object
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> XML
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> Boolean
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+== "hi": false
+valueOf: 
+== 1: false
+== self: true
+>>> MovieClip
+String: _level0
+Number: NaN
+Self: NaN
+== "hi": false
+== 1: false
+== self: true

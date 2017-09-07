@@ -1,0 +1,448 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+(0) undefined (undefined)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: undefined (object)
+(1) null (null)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: undefined (object)
+(2) true (boolean)
+  Boolean: true (boolean)
+  Integer: 1 (number)
+  Number: 1 (number)
+  Object: true (object)
+(3) false (boolean)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: 0 (number)
+  Object: false (object)
+(4) 0 (number)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: 0 (number)
+  Object: 0 (object)
+(5) 1 (number)
+  Boolean: true (boolean)
+  Integer: 1 (number)
+  Number: 1 (number)
+  Object: 1 (object)
+(6) 0.5 (number)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: 0.5 (number)
+  Object: 0.5 (object)
+(7) -1 (number)
+  Boolean: true (boolean)
+  Integer: -1 (number)
+  Number: -1 (number)
+  Object: -1 (object)
+(8) -0.5 (number)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: -0.5 (number)
+  Object: -0.5 (object)
+(9) Infinity (number)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: Infinity (number)
+  Object: Infinity (object)
+(10) -Infinity (number)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: -Infinity (number)
+  Object: -Infinity (object)
+(11) NaN (number)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: NaN (object)
+(12)  (string)
+  Boolean: false (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object:  (object)
+(13) 0 (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: 0 (number)
+  Object: 0 (object)
+(14) -0 (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: 0 (number)
+  Object: -0 (object)
+(15) 0.0 (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: 0 (number)
+  Object: 0.0 (object)
+(16) 1 (string)
+  Boolean: true (boolean)
+  Integer: 1 (number)
+  Number: 1 (number)
+  Object: 1 (object)
+(17) Hello World! (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: Hello World! (object)
+(18) true (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: true (object)
+(19) _level0 (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: _level0 (object)
+(20) äöü (string)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: äöü (object)
+(21) _level0 (movieclip)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: _level0 (movieclip)
+(22) [object Object] (object)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: [object Object] (object)
+(23) Fri Apr 13 21:20:24 GMT+0000 1973 (object)
+  Boolean: true (boolean)
+  Integer: 504809296 (number)
+  Number: 103584024400.25 (number)
+  Object: Fri Apr 13 21:20:24 GMT+0000 1973 (object)
+(24)  (object)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object:  (object)
+(25) [type Function] (function)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: [type Function] (function)
+(26) [type Object] (object)
+  Boolean: true (boolean)
+valueOf called
+  Integer: 0 (number)
+valueOf called
+  Number: NaN (number)
+valueOf called
+toString called
+  Object: [type Object] (object)
+(27) [type Object] (object)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+toString called with 
+  Object: [type Object] (object)
+(28) [object Object] (object)
+  Boolean: true (boolean)
+valueOf called with 
+  Integer: 0 (number)
+valueOf called with 
+  Number: NaN (number)
+valueOf called with 
+  Object: [object Object] (object)
+(29) undefined (object)
+  Boolean: true (boolean)
+  Integer: 0 (number)
+  Number: NaN (number)
+  Object: undefined (object)
+(30) undefined (object)
+  Boolean: true (boolean)
+0: valueOf!
+  Integer: 0 (number)
+0: valueOf!
+  Number: NaN (number)
+0: valueOf!
+  Object: undefined (object)
+(31) null (object)
+  Boolean: true (boolean)
+1: valueOf!
+  Integer: 0 (number)
+1: valueOf!
+  Number: NaN (number)
+1: valueOf!
+  Object: null (object)
+(32) true (object)
+  Boolean: true (boolean)
+2: valueOf!
+  Integer: 1 (number)
+2: valueOf!
+  Number: 1 (number)
+2: valueOf!
+  Object: true (object)
+(33) false (object)
+  Boolean: true (boolean)
+3: valueOf!
+  Integer: 0 (number)
+3: valueOf!
+  Number: 0 (number)
+3: valueOf!
+  Object: false (object)
+(34) 0 (object)
+  Boolean: true (boolean)
+4: valueOf!
+  Integer: 0 (number)
+4: valueOf!
+  Number: 0 (number)
+4: valueOf!
+  Object: 0 (object)
+(35) 1 (object)
+  Boolean: true (boolean)
+5: valueOf!
+  Integer: 1 (number)
+5: valueOf!
+  Number: 1 (number)
+5: valueOf!
+  Object: 1 (object)
+(36) 0.5 (object)
+  Boolean: true (boolean)
+6: valueOf!
+  Integer: 0 (number)
+6: valueOf!
+  Number: 0.5 (number)
+6: valueOf!
+  Object: 0.5 (object)
+(37) -1 (object)
+  Boolean: true (boolean)
+7: valueOf!
+  Integer: -1 (number)
+7: valueOf!
+  Number: -1 (number)
+7: valueOf!
+  Object: -1 (object)
+(38) -0.5 (object)
+  Boolean: true (boolean)
+8: valueOf!
+  Integer: 0 (number)
+8: valueOf!
+  Number: -0.5 (number)
+8: valueOf!
+  Object: -0.5 (object)
+(39) Infinity (object)
+  Boolean: true (boolean)
+9: valueOf!
+  Integer: 0 (number)
+9: valueOf!
+  Number: Infinity (number)
+9: valueOf!
+  Object: Infinity (object)
+(40) -Infinity (object)
+  Boolean: true (boolean)
+10: valueOf!
+  Integer: 0 (number)
+10: valueOf!
+  Number: -Infinity (number)
+10: valueOf!
+  Object: -Infinity (object)
+(41) NaN (object)
+  Boolean: true (boolean)
+11: valueOf!
+  Integer: 0 (number)
+11: valueOf!
+  Number: NaN (number)
+11: valueOf!
+  Object: NaN (object)
+(42)  (object)
+  Boolean: true (boolean)
+12: valueOf!
+  Integer: 0 (number)
+12: valueOf!
+  Number: NaN (number)
+12: valueOf!
+  Object:  (object)
+(43) 0 (object)
+  Boolean: true (boolean)
+13: valueOf!
+  Integer: 0 (number)
+13: valueOf!
+  Number: 0 (number)
+13: valueOf!
+  Object: 0 (object)
+(44) -0 (object)
+  Boolean: true (boolean)
+14: valueOf!
+  Integer: 0 (number)
+14: valueOf!
+  Number: 0 (number)
+14: valueOf!
+  Object: -0 (object)
+(45) 0.0 (object)
+  Boolean: true (boolean)
+15: valueOf!
+  Integer: 0 (number)
+15: valueOf!
+  Number: 0 (number)
+15: valueOf!
+  Object: 0.0 (object)
+(46) 1 (object)
+  Boolean: true (boolean)
+16: valueOf!
+  Integer: 1 (number)
+16: valueOf!
+  Number: 1 (number)
+16: valueOf!
+  Object: 1 (object)
+(47) Hello World! (object)
+  Boolean: true (boolean)
+17: valueOf!
+  Integer: 0 (number)
+17: valueOf!
+  Number: NaN (number)
+17: valueOf!
+  Object: Hello World! (object)
+(48) true (object)
+  Boolean: true (boolean)
+18: valueOf!
+  Integer: 0 (number)
+18: valueOf!
+  Number: NaN (number)
+18: valueOf!
+  Object: true (object)
+(49) _level0 (object)
+  Boolean: true (boolean)
+19: valueOf!
+  Integer: 0 (number)
+19: valueOf!
+  Number: NaN (number)
+19: valueOf!
+  Object: _level0 (object)
+(50) äöü (object)
+  Boolean: true (boolean)
+20: valueOf!
+  Integer: 0 (number)
+20: valueOf!
+  Number: NaN (number)
+20: valueOf!
+  Object: äöü (object)
+(51) _level0 (object)
+  Boolean: true (boolean)
+21: valueOf!
+  Integer: 0 (number)
+21: valueOf!
+  Number: NaN (number)
+21: valueOf!
+  Object: _level0 (object)
+(52) [type Object] (object)
+  Boolean: true (boolean)
+22: valueOf!
+  Integer: 0 (number)
+22: valueOf!
+  Number: NaN (number)
+22: valueOf!
+22: toString!
+  Object: [type Object] (object)
+(53) [type Object] (object)
+  Boolean: true (boolean)
+23: valueOf!
+  Integer: 0 (number)
+23: valueOf!
+  Number: NaN (number)
+23: valueOf!
+23: toString!
+  Object: [type Object] (object)
+(54) [type Object] (object)
+  Boolean: true (boolean)
+24: valueOf!
+  Integer: 0 (number)
+24: valueOf!
+  Number: NaN (number)
+24: valueOf!
+24: toString!
+  Object: [type Object] (object)
+(55) [type Object] (object)
+  Boolean: true (boolean)
+25: valueOf!
+  Integer: 0 (number)
+25: valueOf!
+  Number: NaN (number)
+25: valueOf!
+25: toString!
+  Object: [type Object] (object)
+(56) [type Object] (object)
+  Boolean: true (boolean)
+26: valueOf!
+  Integer: 0 (number)
+26: valueOf!
+  Number: NaN (number)
+26: valueOf!
+26: toString!
+  Object: [type Object] (object)
+(57) [type Object] (object)
+  Boolean: true (boolean)
+27: valueOf!
+  Integer: 0 (number)
+27: valueOf!
+  Number: NaN (number)
+27: valueOf!
+27: toString!
+  Object: [type Object] (object)
+(58) [type Object] (object)
+  Boolean: true (boolean)
+28: valueOf!
+  Integer: 0 (number)
+28: valueOf!
+  Number: NaN (number)
+28: valueOf!
+28: toString!
+  Object: [type Object] (object)
+(59) [type Object] (object)
+  Boolean: true (boolean)
+29: valueOf!
+  Integer: 0 (number)
+29: valueOf!
+  Number: NaN (number)
+29: valueOf!
+29: toString!
+  Object: [type Object] (object)

@@ -1,0 +1,56 @@
+testing target arguments for MovieClipLoader
+toString
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+onLoadStart: _level2
+onLoadProgress 1487/1487: _level2
+onLoadProgress 1487/1487: _level2
+onLoadComplete: _level2
+onLoadStart: _level6
+onLoadProgress 1487/1487: _level6
+onLoadProgress 1487/1487: _level6
+onLoadComplete: _level6
+onLoadStart: _level11
+onLoadProgress 1487/1487: _level11
+onLoadProgress 1487/1487: _level11
+onLoadComplete: _level11
+hi, quitting from _level9
+hi, quitting from _level11
+hi, quitting from _level8
+hi, quitting from _level6
+hi, quitting from _level3
+hi, quitting from _level2
+undefined
+_level2
+_level3
+undefined
+undefined
+_level6
+undefined
+_level8
+_level9
+undefined
+_level11
+onLoadInit: _level11
+onLoadInit: _level6
+onLoadInit: _level2

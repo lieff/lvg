@@ -1,0 +1,2 @@
+Test if the special properties of Video object show up when enumerating
+deblocking,height,smoothing,width,x

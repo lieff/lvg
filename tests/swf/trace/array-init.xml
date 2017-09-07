@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="15" frames="1">
+    <size>
+      <Rectangle left="0" right="2000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="0"/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="Test what happens when InitArray doesn't provide all the values it promises"/>
+              <String value="FSCommand:quit"/>
+              <String value=""/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup value="0"/>
+            </items>
+          </PushData>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackInteger value="3"/>
+              <StackInteger value="2"/>
+              <StackInteger value="1"/>
+              <StackInteger value="5"/>
+            </items>
+          </PushData>
+          <DeclareArray/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetURL2 method="0"/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

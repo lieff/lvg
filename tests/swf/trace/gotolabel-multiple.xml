@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="15" frames="5">
+    <size>
+      <Rectangle left="0" right="2000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="0"/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_currentframe"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <GotoLabel label="lal"/>
+          <Play/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_currentframe"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_currentframe"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <GotoLabel label="lol"/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <FrameLabel label="lal"/>
+      <FrameLabel label="lel"/>
+      <ShowFrame/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_currentframe"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_currentframe"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <Trace/>
+          <Stop/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <FrameLabel label="lul"/>
+      <FrameLabel label="lol"/>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

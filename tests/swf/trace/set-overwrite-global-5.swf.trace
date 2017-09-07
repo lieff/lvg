@@ -1,0 +1,7 @@
+Check the global object doesn't get overwritten when defining variables
+[type Function]
+undefined
+42
+42
+[type Function]
+undefined

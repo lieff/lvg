@@ -1,0 +1,3 @@
+Check how functions that aren't overwritten are handled when called via super
+4
+foo: 4

@@ -1,0 +1,9 @@
+Test ExportAssets only works after passing the frame with the ExportAssets Tag
+Frame 1
+undefined
+init
+Frame 4
+Test ExportAssets only works after passing the frame with the ExportAssets Tag
+Frame 1
+_level0.foo
+Frame 4

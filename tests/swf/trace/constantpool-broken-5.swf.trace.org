@@ -1,0 +1,12 @@
+1.70690204121556e-39
+
+d
+21
+undefined
+undefined
+1
+undefined
+foo
+undefined
+0
+42

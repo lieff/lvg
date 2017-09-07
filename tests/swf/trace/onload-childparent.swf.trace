@@ -1,0 +1,3 @@
+Check that the parent onLoad event happens before the child's onLoad
+parent
+child

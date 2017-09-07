@@ -1,0 +1,51 @@
+[type Function]
+undefined
+onData: test=2&hi=hello&empty_value&=empty_name&spa%20ce=spa%20ce&sp ace&spa ce=sp ace&many=equal=signs=in=row&eof=
+was there&eof
+=was there&
+
+false
+134
+134
+onLoad: true
+true
+134
+134
+
+ = 
+empty_value = 
+eof = 
+was there
+eof
+ = was there
+hi = hello
+many = equal=signs=in=row
+onData = [type Function]
+onDataReal = [type Function]
+onLoad = [type Function]
+sp ace = 
+spa ce = sp ace
+test = 2
+onData: undefined
+true
+134
+134
+onLoad: false
+true
+134
+134
+
+ = 
+empty_value = 
+eof = 
+was there
+eof
+ = was there
+hi = hello
+many = equal=signs=in=row
+onData = [type Function]
+onDataReal = [type Function]
+onLoad = [type Function]
+sp ace = 
+spa ce = sp ace
+test = 2

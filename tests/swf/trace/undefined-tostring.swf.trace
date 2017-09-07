@@ -1,0 +1,3 @@
+Check undefined gets converted to the empty string
+undefined
+

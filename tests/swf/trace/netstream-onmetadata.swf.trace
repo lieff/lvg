@@ -1,0 +1,21 @@
+Test parsing of onMetaData
+Calling play
+done calling play
+onMetaData
+audiodatarate = number: 0
+audiosize = number: 0
+canSeekToEnd = boolean: false
+creationdate = string: unknown
+datasize = number: 472
+duration = number: 4.995
+filesize = number: 326323
+framerate = number: 3.2
+height = number: 311
+lastkeyframetimestamp = number: 0
+lasttimestamp = number: 4.995
+metadatacreator = string: Manitu Group FLV MetaData Injector 2
+metadatadate = 
+videocodecid = number: 3
+videodatarate = number: 0
+videosize = number: 325838
+width = number: 466

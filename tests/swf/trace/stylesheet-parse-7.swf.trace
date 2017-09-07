@@ -1,0 +1,132 @@
+Parsing: 'a { a: 1; b: 2; }'
+true
+* 'a'
+a: '1'
+b: '2'
+
+Parsing: 'a { a: 1; b: 2; } a { a: 0; c:3; }'
+true
+* 'a'
+a: '0'
+c: '3'
+
+Parsing: 'a, a { a: 1; }'
+true
+* 'a'
+a: '1'
+
+Parsing: ',a,, ,, c,, { a: 1; }, b, ,,{ b: 2; }'
+true
+* 'a'
+a: '1'
+* 'b'
+b: '2'
+* 'c'
+a: '1'
+
+Parsing: 'a { a: 1   ; }'
+true
+* 'a'
+a: '1   '
+* 'b'
+b: '2'
+* 'c'
+a: '1'
+
+Parsing: 'a { a: 1 } b { b: 2   } c { c: 3}'
+true
+* 'a'
+a: '1 '
+* 'b'
+b: '2   '
+* 'c'
+c: '3'
+
+Parsing: 'a { a: 1; b: 2;; }'
+false
+* 'a'
+a: '1 '
+* 'b'
+b: '2   '
+* 'c'
+c: '3'
+
+Parsing: 'a { a: 1; b: 2; '
+true
+* 'a'
+a: '1'
+b: '2'
+* 'b'
+b: '2   '
+* 'c'
+c: '3'
+
+Parsing: 'a { a: 1; b: 2  '
+false
+* 'a'
+a: '1'
+b: '2'
+* 'b'
+b: '2   '
+* 'c'
+c: '3'
+
+Parsing: 'a , b  { a: 1; }'
+true
+* 'a'
+a: '1'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Parsing: 'a b { a: 1; }'
+false
+* 'a'
+a: '1'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Parsing: 'a b, c { a: 1; }'
+false
+* 'a'
+a: '1'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Parsing: 'a { a: 1 } a {}'
+true
+* 'a'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Parsing: 'a { a: 1 } a { }'
+false
+* 'a'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Parsing: 'a { a-a: 1; b--b: 2; c-C: 3; d-+: 4; e-: 5; }'
+true
+* 'a'
+aA: '1'
+b-b: '2'
+cC: '3'
+d+: '4'
+e-: '5'
+* 'b'
+a: '1'
+* 'c'
+c: '3'
+
+Test on non-stylesheet object
+true
+1

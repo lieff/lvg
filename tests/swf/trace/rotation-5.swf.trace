@@ -1,0 +1,14 @@
+Check various values for _rotation in Flash >= 5
+0
+-1
+-80
+180
+-180
+-179
+179
+0.5
+-179.75
+179.75
+-180
+180
+NaN

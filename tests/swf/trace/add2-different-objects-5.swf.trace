@@ -1,0 +1,132 @@
+>>> Date
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> Number
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> String
+valueOf: 
+String: 
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> Object
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> XML
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> Boolean
+valueOf: 
+toString:
+String: [type Object]
+valueOf: 
+valueOf: 
+Number: NaN
+valueOf: 
+valueOf: 
+valueOf: 
+valueOf: 
+Self: NaN
+valueOf: 
+valueOf: 
+== "hi": false
+valueOf: 
+valueOf: 
+== 1: false
+valueOf: 
+valueOf: 
+== self: true
+>>> MovieClip
+String: _level0
+Number: NaN
+Self: NaN
+== "hi": false
+== 1: false
+== self: true

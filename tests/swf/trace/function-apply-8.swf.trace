@@ -1,0 +1,202 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+Testing: (no arguments)
+this: undefined
+arguments: 0: 
+1
+Testing: a
+this: a
+arguments: 0: 
+2
+Testing: a, [1, 2, 3]
+this: a
+arguments: 3: 1,2,3
+3
+Testing: a, [1, 2, 3], [4, 5]
+this: a
+arguments: 3: 1,2,3
+4
+Testing: a, 1, [2, 3]
+this: a
+arguments: 0: 
+5
+Testing: a, 1, 2, 3
+this: a
+arguments: 0: 
+6
+Testing: a, fake_array
+this: a
+arguments: 3: 1,2,3
+7
+Testing: b, [1, 2, 3]
+this: b
+arguments: 3: 1,2,3
+8
+Testing: (0) undefined (undefined), [1, 2, 3]
+this: undefined
+arguments: 3: 1,2,3
+1
+Testing: (2) true (boolean), [1, 2, 3]
+this: true
+arguments: 3: 1,2,3
+3
+Testing: (4) 0 (number), [1, 2, 3]
+this: 0
+arguments: 3: 1,2,3
+5
+Testing: (6) 0.5 (number), [1, 2, 3]
+this: 0.5
+arguments: 3: 1,2,3
+7
+Testing: (8) -0.5 (number), [1, 2, 3]
+this: -0.5
+arguments: 3: 1,2,3
+9
+Testing: (10) -Infinity (number), [1, 2, 3]
+this: -Infinity
+arguments: 3: 1,2,3
+11
+Testing: (12)  (string), [1, 2, 3]
+this: 
+arguments: 3: 1,2,3
+13
+Testing: (14) -0 (string), [1, 2, 3]
+this: -0
+arguments: 3: 1,2,3
+15
+Testing: (16) 1 (string), [1, 2, 3]
+this: 1
+arguments: 3: 1,2,3
+17
+Testing: (18) true (string), [1, 2, 3]
+this: true
+arguments: 3: 1,2,3
+19
+Testing: (20) äöü (string), [1, 2, 3]
+this: äöü
+arguments: 3: 1,2,3
+21
+Testing: (22) [object Object] (object), [1, 2, 3]
+this: [object Object]
+arguments: 3: 1,2,3
+23
+Testing: (24) [type Object] (object), [1, 2, 3]
+valueOf called
+toString called
+this: [type Object]
+arguments: 3: 1,2,3
+25
+Testing: (26) [object Object] (object), [1, 2, 3]
+valueOf called with 
+this: [object Object]
+arguments: 3: 1,2,3
+27
+Testing: (28) undefined (object), [1, 2, 3]
+0: valueOf!
+this: undefined
+arguments: 3: 1,2,3
+29
+Testing: (30) true (object), [1, 2, 3]
+2: valueOf!
+this: true
+arguments: 3: 1,2,3
+31
+Testing: (32) 0 (object), [1, 2, 3]
+4: valueOf!
+this: 0
+arguments: 3: 1,2,3
+33
+Testing: (34) 0.5 (object), [1, 2, 3]
+6: valueOf!
+this: 0.5
+arguments: 3: 1,2,3
+35
+Testing: (36) -0.5 (object), [1, 2, 3]
+8: valueOf!
+this: -0.5
+arguments: 3: 1,2,3
+37
+Testing: (38) -Infinity (object), [1, 2, 3]
+10: valueOf!
+this: -Infinity
+arguments: 3: 1,2,3
+39
+Testing: (40)  (object), [1, 2, 3]
+12: valueOf!
+this: 
+arguments: 3: 1,2,3
+41
+Testing: (42) -0 (object), [1, 2, 3]
+14: valueOf!
+this: -0
+arguments: 3: 1,2,3
+43
+Testing: (44) 1 (object), [1, 2, 3]
+16: valueOf!
+this: 1
+arguments: 3: 1,2,3
+45
+Testing: (46) true (object), [1, 2, 3]
+18: valueOf!
+this: true
+arguments: 3: 1,2,3
+47
+Testing: (48) äöü (object), [1, 2, 3]
+20: valueOf!
+this: äöü
+arguments: 3: 1,2,3
+49
+Testing: (50) [type Object] (object), [1, 2, 3]
+22: valueOf!
+22: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+51
+Testing: (52) [type Object] (object), [1, 2, 3]
+24: valueOf!
+24: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+53
+Testing: (54) [type Object] (object), [1, 2, 3]
+26: valueOf!
+26: toString!
+this: [type Object]
+arguments: 3: 1,2,3
+55

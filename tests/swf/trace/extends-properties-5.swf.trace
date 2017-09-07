@@ -1,0 +1,6 @@
+_global.Foo = function
+  __proto__ (hpn) = _global.Object.__proto__
+  constructor (hp) = _global.Object.constructor
+  prototype (hp) = object
+    __constructor__ (hn) = _global.LoadVars
+    __proto__ (hp) = _global.LoadVars.prototype

@@ -1,0 +1,5 @@
+Check when XML's native properties are initialized
+false
+true
+undefined
+false

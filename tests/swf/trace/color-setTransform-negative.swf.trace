@@ -1,0 +1,7 @@
+test handling of negative offsets to setTransform() in getRGB()
+0
+-65536
+-256
+-1
+-256
+-1

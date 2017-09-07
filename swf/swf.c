@@ -651,7 +651,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_GetCXForm(tag, &cm, 1);
                 }
                 ActionTAG *actions = swf_ActionGet(tag);
+#ifndef _TEST
                 swf_DumpActions(actions, 0);
+#endif
                 swf_ActionFree(actions);
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON2 == tag->id)
@@ -846,7 +848,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         } else if (ST_DOABC == tag->id)
         {
             void*abccode = swf_ReadABC(tag);
+#ifndef _TEST
             swf_DumpABC(stdout, abccode, "");
+#endif
             swf_FreeABC(abccode);
         } else if (ST_SHOWFRAME == tag->id)
             nframe++;
@@ -950,7 +954,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             group->labels = realloc(group->labels, (group->num_labels + 1)*sizeof(LVGFrameLabel));
             LVGFrameLabel *l = group->labels + group->num_labels++;
-            l->name = strdup(tag->data);
+            l->name = strdup((char *)tag->data);
             l->frame_num = group->num_frames;
         } else if (ST_SHOWFRAME == tag->id)
         {

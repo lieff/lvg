@@ -1,0 +1,15 @@
+runnng constructor...
+_level0.foo.one
+undefined
+...doing goto...
+undefined
+undefined
+...done
+after attachMovie:
+_level0.foo
+undefined
+undefined
+frame one:
+undefined
+frame two:
+_level0.foo.two

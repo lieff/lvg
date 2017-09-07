@@ -1,0 +1,317 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+hello
+string
+local.v = string : "hello"
+Testing: (0) undefined (undefined)
+undefined
+undefined
+local.v = undefined
+Testing: (1) null (null)
+undefined
+undefined
+local.v = undefined
+Testing: (2) true (boolean)
+undefined
+undefined
+local.v = undefined
+Testing: (3) false (boolean)
+undefined
+undefined
+local.v = undefined
+Testing: (4) 0 (number)
+undefined
+undefined
+local.v = undefined
+Testing: (5) 1 (number)
+undefined
+undefined
+local.v = undefined
+Testing: (6) 0.5 (number)
+undefined
+undefined
+local.v = undefined
+Testing: (7) -1 (number)
+undefined
+undefined
+local.v = undefined
+Testing: (8) -0.5 (number)
+undefined
+undefined
+local.v = undefined
+Testing: (9) Infinity (number)
+undefined
+undefined
+local.v = undefined
+Testing: (10) -Infinity (number)
+undefined
+undefined
+local.v = undefined
+Testing: (11) NaN (number)
+undefined
+undefined
+local.v = undefined
+Testing: (12)  (string)
+undefined
+undefined
+local.v = undefined
+Testing: (13) 0 (string)
+undefined
+undefined
+local.v = undefined
+Testing: (14) -0 (string)
+undefined
+undefined
+local.v = undefined
+Testing: (15) 0.0 (string)
+undefined
+undefined
+local.v = undefined
+Testing: (16) 1 (string)
+undefined
+undefined
+local.v = undefined
+Testing: (17) Hello World! (string)
+undefined
+undefined
+local.v = undefined
+Testing: (18) true (string)
+undefined
+undefined
+local.v = undefined
+Testing: (19) _level0 (string)
+undefined
+undefined
+local.v = undefined
+Testing: (20) äöü (string)
+undefined
+undefined
+local.v = undefined
+Testing: (21) _level0 (movieclip)
+_level0
+string
+local.v = string : "_level0"
+Testing: (22) [object Object] (object)
+[object Object]
+string
+local.v = string : "[object Object]"
+Testing: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Tue Apr 14 23:35:34 GMT+0000 2009
+string
+local.v = string : "Tue Apr 14 23:35:34 GMT+0000 2009"
+Testing: (24)  (object)
+
+string
+local.v = string : ""
+Testing: (25) [type Function] (function)
+[type Function]
+string
+local.v = string : "[type Function]"
+Testing: (26) [type Object] (object)
+toString called
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (27) [type Object] (object)
+toString called with 
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (28) [object Object] (object)
+[object Object]
+string
+local.v = string : "[object Object]"
+Testing: (29) undefined (object)
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (30) undefined (object)
+0: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (31) null (object)
+1: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (32) true (object)
+2: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (33) false (object)
+3: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (34) 0 (object)
+4: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (35) 1 (object)
+5: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (36) 0.5 (object)
+6: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (37) -1 (object)
+7: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (38) -0.5 (object)
+8: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (39) Infinity (object)
+9: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (40) -Infinity (object)
+10: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (41) NaN (object)
+11: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (42)  (object)
+12: toString!
+
+string
+local.v = string : ""
+Testing: (43) 0 (object)
+13: toString!
+0
+string
+local.v = string : "0"
+Testing: (44) -0 (object)
+14: toString!
+-0
+string
+local.v = string : "-0"
+Testing: (45) 0.0 (object)
+15: toString!
+0.0
+string
+local.v = string : "0.0"
+Testing: (46) 1 (object)
+16: toString!
+1
+string
+local.v = string : "1"
+Testing: (47) Hello World! (object)
+17: toString!
+Hello World!
+string
+local.v = string : "Hello World!"
+Testing: (48) true (object)
+18: toString!
+true
+string
+local.v = string : "true"
+Testing: (49) _level0 (object)
+19: toString!
+_level0
+string
+local.v = string : "_level0"
+Testing: (50) äöü (object)
+20: toString!
+äöü
+string
+local.v = string : "äöü"
+Testing: (51) _level0 (object)
+21: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (52) [type Object] (object)
+22: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (53) [type Object] (object)
+23: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (54) [type Object] (object)
+24: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (55) [type Object] (object)
+25: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (56) [type Object] (object)
+26: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (57) [type Object] (object)
+27: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (58) [type Object] (object)
+28: toString!
+[type Object]
+string
+local.v = string : "[type Object]"
+Testing: (59) [type Object] (object)
+29: toString!
+[type Object]
+string
+local.v = string : "[type Object]"

@@ -1,0 +1,19 @@
+undefined
+>>> CallFunction bar ()
+bar
+undefined
+calling last function's super object: 
+>>> CallMethod bar ()
+calling last function's super object: 
+>>> this.bar ()
+bar
+undefined
+calling last function's super object: 
+>>> new bar ()
+bar
+undefined
+calling last function's super object: 
+>>> new this.bar ()
+bar
+undefined
+calling last function's super object: 

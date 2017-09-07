@@ -1,0 +1,3 @@
+Check that registerClass does not influence previously created instances
+_level0.m2: Constructor
+foo called on _level0.m2

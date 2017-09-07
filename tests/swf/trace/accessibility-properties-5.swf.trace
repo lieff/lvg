@@ -1,0 +1,12 @@
+_global.Accessibility = object
+  __proto__ (hpc) = _global.Object.prototype
+  constructor (hpc) = _global.Object
+  isActive (pcn) = function
+    __proto__ (hpn) = _global.Object.__proto__
+    constructor (hp) = _global.Object.constructor
+  sendEvent (pcn) = function
+    __proto__ (hpn) = _global.Object.__proto__
+    constructor (hp) = _global.Object.constructor
+  updateProperties (pcn) = function
+    __proto__ (hpn) = _global.Object.__proto__
+    constructor (hp) = _global.Object.constructor

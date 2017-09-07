@@ -1,0 +1,144 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+(x=0, y=0, w=0, h=0)
+(x=10, y=undefined, w=undefined, h=undefined)
+(x=10, y=20, w=undefined, h=undefined)
+(x=10, y=20, w=30, h=undefined)
+(x=10, y=20, w=30, h=40)
+(x=10, y=20, w=30, h=40)
+(x=undefined, y=20, w=30, h=40)
+(x=null, y=20, w=30, h=40)
+(x=true, y=20, w=30, h=40)
+(x=false, y=20, w=30, h=40)
+(x=0, y=20, w=30, h=40)
+(x=1, y=20, w=30, h=40)
+(x=0.5, y=20, w=30, h=40)
+(x=-1, y=20, w=30, h=40)
+(x=-0.5, y=20, w=30, h=40)
+(x=Infinity, y=20, w=30, h=40)
+(x=-Infinity, y=20, w=30, h=40)
+(x=NaN, y=20, w=30, h=40)
+(x=, y=20, w=30, h=40)
+(x=0, y=20, w=30, h=40)
+(x=-0, y=20, w=30, h=40)
+(x=0.0, y=20, w=30, h=40)
+(x=1, y=20, w=30, h=40)
+(x=Hello World!, y=20, w=30, h=40)
+(x=true, y=20, w=30, h=40)
+(x=_level0, y=20, w=30, h=40)
+(x=äöü, y=20, w=30, h=40)
+(x=_level0, y=20, w=30, h=40)
+(x=[object Object], y=20, w=30, h=40)
+(x=[type Function], y=20, w=30, h=40)
+valueOf called
+toString called
+(x=[type Object], y=20, w=30, h=40)
+toString called with 
+(x=[type Object], y=20, w=30, h=40)
+valueOf called with 
+(x=[object Object], y=20, w=30, h=40)
+(x=undefined, y=20, w=30, h=40)
+0: valueOf!
+(x=undefined, y=20, w=30, h=40)
+1: valueOf!
+(x=null, y=20, w=30, h=40)
+2: valueOf!
+(x=true, y=20, w=30, h=40)
+3: valueOf!
+(x=false, y=20, w=30, h=40)
+4: valueOf!
+(x=0, y=20, w=30, h=40)
+5: valueOf!
+(x=1, y=20, w=30, h=40)
+6: valueOf!
+(x=0.5, y=20, w=30, h=40)
+7: valueOf!
+(x=-1, y=20, w=30, h=40)
+8: valueOf!
+(x=-0.5, y=20, w=30, h=40)
+9: valueOf!
+(x=Infinity, y=20, w=30, h=40)
+10: valueOf!
+(x=-Infinity, y=20, w=30, h=40)
+11: valueOf!
+(x=NaN, y=20, w=30, h=40)
+12: valueOf!
+(x=, y=20, w=30, h=40)
+13: valueOf!
+(x=0, y=20, w=30, h=40)
+14: valueOf!
+(x=-0, y=20, w=30, h=40)
+15: valueOf!
+(x=0.0, y=20, w=30, h=40)
+16: valueOf!
+(x=1, y=20, w=30, h=40)
+17: valueOf!
+(x=Hello World!, y=20, w=30, h=40)
+18: valueOf!
+(x=true, y=20, w=30, h=40)
+19: valueOf!
+(x=_level0, y=20, w=30, h=40)
+20: valueOf!
+(x=äöü, y=20, w=30, h=40)
+21: valueOf!
+(x=_level0, y=20, w=30, h=40)
+22: valueOf!
+22: toString!
+(x=[type Object], y=20, w=30, h=40)
+23: valueOf!
+23: toString!
+(x=[type Object], y=20, w=30, h=40)
+24: valueOf!
+24: toString!
+(x=[type Object], y=20, w=30, h=40)
+25: valueOf!
+25: toString!
+(x=[type Object], y=20, w=30, h=40)
+26: valueOf!
+26: toString!
+(x=[type Object], y=20, w=30, h=40)
+27: valueOf!
+27: toString!
+(x=[type Object], y=20, w=30, h=40)
+undefined
+(x=10, y=20, w=30, h=40)
+true
+setEmpty
+(x=undefined, y=123, w=undefined, h=undefined)
+(x=10, y=20, w=30, h=40)

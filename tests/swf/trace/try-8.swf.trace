@@ -1,0 +1,6 @@
+Test Try action
+before
+try
+catch: try
+finally
+catch from test: catch

@@ -1,0 +1,36 @@
+Various random testcases for GetVariable
+_level0 => _level0
+a/_level0 => _level0
+_root => _level0
+/_root => _level0
+/b => _level0
+/ => _level0
+// => 
+/.a => [object Object]
+/a/.a => 842
+a/.a => 842
+// => 
+/../ => 
+../ => 
+a/.. => 
+a/../ => 
+/a => _level0.a
+a => [object Object]
+a/ => _level0.a
+a. => 
+a: => 
+a/. => 
+a/: => 
+:a => 
+/:a => [object Object]
+/a/a => _level0.a.a
+a/a => _level0.a.a
+a/A => _level0.a.a
+a/_level0 => _level0
+a.a => 842
+a:a => 842
+:a:a => 842
+/a:a => 842
+/a/:a => 842
+/a/.a => 842
+undefined

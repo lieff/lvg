@@ -1,0 +1,410 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+0
+(0)  (undefined): 100
+0
+(1) null (null): 100
+1
+(2) true (boolean): 1
+0
+(3) false (boolean): 0
+0
+(4) 0 (number): 0
+1
+(5) 1 (number): 1
+0.5
+(6) 0.5 (number): 0.5
+-1
+(7) -1 (number): 100
+-0.5
+(8) -0.5 (number): 100
+Infinity
+(9) Infinity (number): 0
+-Infinity
+(10) -Infinity (number): 100
+NaN
+(11) NaN (number): 100
+NaN
+(12)  (string): 100
+0
+(13) 0 (string): 0
+0
+(14) -0 (string): 0
+0
+(15) 0.0 (string): 0
+1
+(16) 1 (string): 1
+NaN
+(17) Hello World! (string): 100
+NaN
+(18) true (string): 100
+NaN
+(19) _level0 (string): 100
+NaN
+(20) äöü (string): 100
+NaN
+(21) _level0 (movieclip): 100
+NaN
+(22) [object Object] (object): 100
+103584024400.25
+(23) Fri Apr 13 21:20:24 GMT+0000 1973 (object): 75312566.65
+NaN
+(24)  (object): 100
+NaN
+(25) [type Function] (function): 100
+valueOf called
+valueOf called
+NaN
+(26) [type Object] (object): 100
+NaN
+(27) [type Object] (object): 100
+valueOf called with 
+valueOf called with 
+NaN
+(28) [object Object] (object): 100
+0
+(29)  (object): 0
+0: valueOf!
+0: valueOf!
+0
+(30)  (object): 0
+1: valueOf!
+1: valueOf!
+0
+(31) null (object): 0
+2: valueOf!
+2: valueOf!
+1
+(32) true (object): 1
+3: valueOf!
+3: valueOf!
+0
+(33) false (object): 0
+4: valueOf!
+4: valueOf!
+0
+(34) 0 (object): 0
+5: valueOf!
+5: valueOf!
+1
+(35) 1 (object): 1
+6: valueOf!
+6: valueOf!
+0.5
+(36) 0.5 (object): 0.5
+7: valueOf!
+7: valueOf!
+-1
+(37) -1 (object): 100
+8: valueOf!
+8: valueOf!
+-0.5
+(38) -0.5 (object): 100
+9: valueOf!
+9: valueOf!
+Infinity
+(39) Infinity (object): 0
+10: valueOf!
+10: valueOf!
+-Infinity
+(40) -Infinity (object): 100
+11: valueOf!
+11: valueOf!
+NaN
+(41) NaN (object): 100
+12: valueOf!
+12: valueOf!
+NaN
+(42)  (object): 100
+13: valueOf!
+13: valueOf!
+0
+(43) 0 (object): 0
+14: valueOf!
+14: valueOf!
+0
+(44) -0 (object): 0
+15: valueOf!
+15: valueOf!
+0
+(45) 0.0 (object): 0
+16: valueOf!
+16: valueOf!
+1
+(46) 1 (object): 1
+17: valueOf!
+17: valueOf!
+NaN
+(47) Hello World! (object): 100
+18: valueOf!
+18: valueOf!
+NaN
+(48) true (object): 100
+19: valueOf!
+19: valueOf!
+NaN
+(49) _level0 (object): 100
+20: valueOf!
+20: valueOf!
+NaN
+(50) äöü (object): 100
+21: valueOf!
+21: valueOf!
+NaN
+(51) _level0 (object): 100
+22: valueOf!
+22: valueOf!
+NaN
+(52) [type Object] (object): 100
+23: valueOf!
+23: valueOf!
+NaN
+(53) [type Object] (object): 100
+24: valueOf!
+24: valueOf!
+NaN
+(54) [type Object] (object): 100
+25: valueOf!
+25: valueOf!
+NaN
+(55) [type Object] (object): 100
+26: valueOf!
+26: valueOf!
+NaN
+(56) [type Object] (object): 100
+27: valueOf!
+27: valueOf!
+NaN
+(57) [type Object] (object): 100
+28: valueOf!
+28: valueOf!
+NaN
+(58) [type Object] (object): 100
+29: valueOf!
+29: valueOf!
+NaN
+(59) [type Object] (object): 100
+0
+(0)  (undefined): 100
+0
+(1) null (null): 100
+1
+(2) true (boolean): 1
+0
+(3) false (boolean): 0
+0
+(4) 0 (number): 0
+1
+(5) 1 (number): 1
+0.5
+(6) 0.5 (number): 0.5
+-1
+(7) -1 (number): -1
+-0.5
+(8) -0.5 (number): -0.5
+Infinity
+(9) Infinity (number): 0
+-Infinity
+(10) -Infinity (number): 0
+NaN
+(11) NaN (number): 100
+NaN
+(12)  (string): 100
+0
+(13) 0 (string): 0
+0
+(14) -0 (string): 0
+0
+(15) 0.0 (string): 0
+1
+(16) 1 (string): 1
+NaN
+(17) Hello World! (string): 100
+NaN
+(18) true (string): 100
+NaN
+(19) _level0 (string): 100
+NaN
+(20) äöü (string): 100
+NaN
+(21) _level0 (movieclip): 100
+NaN
+(22) [object Object] (object): 100
+103584024400.25
+(23) Fri Apr 13 21:20:24 GMT+0000 1973 (object): 75312566.65
+NaN
+(24)  (object): 100
+NaN
+(25) [type Function] (function): 100
+valueOf called
+valueOf called
+NaN
+(26) [type Object] (object): 100
+NaN
+(27) [type Object] (object): 100
+valueOf called with 
+valueOf called with 
+NaN
+(28) [object Object] (object): 100
+0
+(29)  (object): 0
+0: valueOf!
+0: valueOf!
+0
+(30)  (object): 0
+1: valueOf!
+1: valueOf!
+0
+(31) null (object): 0
+2: valueOf!
+2: valueOf!
+1
+(32) true (object): 1
+3: valueOf!
+3: valueOf!
+0
+(33) false (object): 0
+4: valueOf!
+4: valueOf!
+0
+(34) 0 (object): 0
+5: valueOf!
+5: valueOf!
+1
+(35) 1 (object): 1
+6: valueOf!
+6: valueOf!
+0.5
+(36) 0.5 (object): 0.5
+7: valueOf!
+7: valueOf!
+-1
+(37) -1 (object): -1
+8: valueOf!
+8: valueOf!
+-0.5
+(38) -0.5 (object): -0.5
+9: valueOf!
+9: valueOf!
+Infinity
+(39) Infinity (object): 0
+10: valueOf!
+10: valueOf!
+-Infinity
+(40) -Infinity (object): 0
+11: valueOf!
+11: valueOf!
+NaN
+(41) NaN (object): 100
+12: valueOf!
+12: valueOf!
+NaN
+(42)  (object): 100
+13: valueOf!
+13: valueOf!
+0
+(43) 0 (object): 0
+14: valueOf!
+14: valueOf!
+0
+(44) -0 (object): 0
+15: valueOf!
+15: valueOf!
+0
+(45) 0.0 (object): 0
+16: valueOf!
+16: valueOf!
+1
+(46) 1 (object): 1
+17: valueOf!
+17: valueOf!
+NaN
+(47) Hello World! (object): 100
+18: valueOf!
+18: valueOf!
+NaN
+(48) true (object): 100
+19: valueOf!
+19: valueOf!
+NaN
+(49) _level0 (object): 100
+20: valueOf!
+20: valueOf!
+NaN
+(50) äöü (object): 100
+21: valueOf!
+21: valueOf!
+NaN
+(51) _level0 (object): 100
+22: valueOf!
+22: valueOf!
+NaN
+(52) [type Object] (object): 100
+23: valueOf!
+23: valueOf!
+NaN
+(53) [type Object] (object): 100
+24: valueOf!
+24: valueOf!
+NaN
+(54) [type Object] (object): 100
+25: valueOf!
+25: valueOf!
+NaN
+(55) [type Object] (object): 100
+26: valueOf!
+26: valueOf!
+NaN
+(56) [type Object] (object): 100
+27: valueOf!
+27: valueOf!
+NaN
+(57) [type Object] (object): 100
+28: valueOf!
+28: valueOf!
+NaN
+(58) [type Object] (object): 100
+29: valueOf!
+29: valueOf!
+NaN
+(59) [type Object] (object): 100

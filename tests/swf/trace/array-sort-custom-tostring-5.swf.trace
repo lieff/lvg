@@ -1,0 +1,544 @@
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+a toString
+b toString
+c toString
+d toString
+a,b,c,d
+c valueOf
+a valueOf
+custom (c, a)
+c valueOf
+a valueOf
+a valueOf
+c valueOf
+1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+b valueOf
+a valueOf
+custom (b, a)
+b valueOf
+a valueOf
+a valueOf
+b valueOf
+1
+a toString
+b toString
+b toString
+c toString
+c toString
+c toString
+0
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+a toString
+b toString
+c toString
+d toString
+a,b,c,d
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+a toString
+b toString
+b toString
+c toString
+c toString
+d toString
+a toString
+b toString
+c toString
+d toString
+a,b,c,d
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+d valueOf
+c valueOf
+custom (d, c)
+d valueOf
+c valueOf
+c valueOf
+d valueOf
+1
+a toString
+b toString
+c toString
+c toString
+d toString
+a,b,c,c,d
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+d valueOf
+c valueOf
+custom (d, c)
+d valueOf
+c valueOf
+c valueOf
+d valueOf
+1
+a toString
+b toString
+b toString
+c toString
+c toString
+c toString
+0
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+d valueOf
+c valueOf
+custom (d, c)
+d valueOf
+c valueOf
+c valueOf
+d valueOf
+1
+a toString
+b toString
+c toString
+c toString
+d toString
+a,b,c,c,d
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+a valueOf
+d valueOf
+custom (a, d)
+a valueOf
+d valueOf
+-1
+a valueOf
+b valueOf
+custom (a, b)
+a valueOf
+b valueOf
+-1
+a valueOf
+c valueOf
+custom (a, c)
+a valueOf
+c valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+c valueOf
+custom (c, c)
+c valueOf
+c valueOf
+c valueOf
+c valueOf
+0
+c valueOf
+d valueOf
+custom (c, d)
+c valueOf
+d valueOf
+-1
+c valueOf
+b valueOf
+custom (c, b)
+c valueOf
+b valueOf
+b valueOf
+c valueOf
+1
+d valueOf
+c valueOf
+custom (d, c)
+d valueOf
+c valueOf
+c valueOf
+d valueOf
+1
+a toString
+b toString
+b toString
+c toString
+c toString
+c toString
+0

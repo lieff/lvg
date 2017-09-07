@@ -1,0 +1,10 @@
+Test the that setTransform({...}) does the correct thing
+rgb: 1321020
+ra: 9.765625
+rb: 20
+ga: 29.6875
+gb: 40
+ba: 50
+bb: 60
+aa: 69.921875
+ab: 80

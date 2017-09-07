@@ -1,0 +1,3677 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+Testing: align
+null
+align: (0) undefined (undefined) = null (null)
+align: (1) null (null) = null (null)
+align: (2) true (boolean) = null (null)
+align: (3) false (boolean) = null (null)
+align: (4) 0 (number) = null (null)
+align: (5) 1 (number) = null (null)
+align: (6) 0.5 (number) = null (null)
+align: (7) -1 (number) = null (null)
+align: (8) -0.5 (number) = null (null)
+align: (9) Infinity (number) = null (null)
+align: (10) -Infinity (number) = null (null)
+align: (11) NaN (number) = null (null)
+align: (12)  (string) = null (null)
+align: (13) 0 (string) = null (null)
+align: (14) -0 (string) = null (null)
+align: (15) 0.0 (string) = null (null)
+align: (16) 1 (string) = null (null)
+align: (17) Hello World! (string) = null (null)
+align: (18) true (string) = null (null)
+align: (19) _level0 (string) = null (null)
+align: (20) _level0 (movieclip) = null (null)
+align: (21) [object Object] (object) = null (null)
+align: (22) [type Function] (function) = null (null)
+valueOf called
+valueOf called
+toString called
+align: (23) [type Object] (object) = null (null)
+toString called with 
+align: (24) [type Object] (object) = null (null)
+valueOf called with 
+valueOf called with 
+align: (25) [object Object] (object) = null (null)
+align: (26) undefined (object) = null (null)
+0: valueOf!
+0: valueOf!
+0: toString!
+align: (27) undefined (object) = null (null)
+1: valueOf!
+1: valueOf!
+1: toString!
+align: (28) null (object) = null (null)
+2: valueOf!
+2: valueOf!
+2: toString!
+align: (29) true (object) = null (null)
+3: valueOf!
+3: valueOf!
+3: toString!
+align: (30) false (object) = null (null)
+4: valueOf!
+4: valueOf!
+4: toString!
+align: (31) 0 (object) = null (null)
+5: valueOf!
+5: valueOf!
+5: toString!
+align: (32) 1 (object) = null (null)
+6: valueOf!
+6: valueOf!
+6: toString!
+align: (33) 0.5 (object) = null (null)
+7: valueOf!
+7: valueOf!
+7: toString!
+align: (34) -1 (object) = null (null)
+8: valueOf!
+8: valueOf!
+8: toString!
+align: (35) -0.5 (object) = null (null)
+9: valueOf!
+9: valueOf!
+9: toString!
+align: (36) Infinity (object) = null (null)
+10: valueOf!
+10: valueOf!
+10: toString!
+align: (37) -Infinity (object) = null (null)
+11: valueOf!
+11: valueOf!
+11: toString!
+align: (38) NaN (object) = null (null)
+12: valueOf!
+12: valueOf!
+12: toString!
+align: (39)  (object) = null (null)
+13: valueOf!
+13: valueOf!
+13: toString!
+align: (40) 0 (object) = null (null)
+14: valueOf!
+14: valueOf!
+14: toString!
+align: (41) -0 (object) = null (null)
+15: valueOf!
+15: valueOf!
+15: toString!
+align: (42) 0.0 (object) = null (null)
+16: valueOf!
+16: valueOf!
+16: toString!
+align: (43) 1 (object) = null (null)
+17: valueOf!
+17: valueOf!
+17: toString!
+align: (44) Hello World! (object) = null (null)
+18: valueOf!
+18: valueOf!
+18: toString!
+align: (45) true (object) = null (null)
+19: valueOf!
+19: valueOf!
+19: toString!
+align: (46) _level0 (object) = null (null)
+20: valueOf!
+20: valueOf!
+20: toString!
+align: (47) _level0 (object) = null (null)
+21: valueOf!
+21: valueOf!
+21: toString!
+align: (48) [type Object] (object) = null (null)
+22: valueOf!
+22: valueOf!
+22: toString!
+align: (49) [type Object] (object) = null (null)
+23: valueOf!
+23: valueOf!
+23: toString!
+align: (50) [type Object] (object) = null (null)
+24: valueOf!
+24: valueOf!
+24: toString!
+align: (51) [type Object] (object) = null (null)
+25: valueOf!
+25: valueOf!
+25: toString!
+align: (52) [type Object] (object) = null (null)
+26: valueOf!
+26: valueOf!
+26: toString!
+align: (53) [type Object] (object) = null (null)
+align: left (string) = left (string)
+align: center (string) = center (string)
+align: LEFT (string) = left (string)
+align: right (string) = right (string)
+align: justify (string) = justify (string)
+align: leFT (string) = left (string)
+align: inline (string) = left (string)
+align: block (string) = left (string)
+align: none (string) = left (string)
+align: http://www.google.com (string) = left (string)
+align: _typewriter (string) = left (string)
+align: sans-serif (string) = left (string)
+align: _self (string) = left (string)
+align: _blank (string) = left (string)
+align: _parent (string) = left (string)
+align: _asdfa (string) = left (string)
+align: 52.5 (number) = left (string)
+align: 1 (number) = left (string)
+align: 0 (number) = left (string)
+align: -1 (number) = left (string)
+align: -52.5 (number) = left (string)
+align: NaN (number) = left (string)
+align: Infinity (number) = left (string)
+align: -Infinity (number) = left (string)
+align: undefined (undefined) = left (string)
+align:  (string) = left (string)
+align: undefined (string) = left (string)
+align:  (object) = left (string)
+align: 4,8,12 (object) = left (string)
+align: moi,terve (object) = left (string)
+align: 4812 (string) = left (string)
+align: 4,8,12 (string) = left (string)
+align: true (boolean) = left (string)
+align: false (boolean) = left (string)
+align: null (null) = left (string)
+align: -2147483648 (number) = left (string)
+align: -2147483650 (number) = left (string)
+align: 2147483648 (number) = left (string)
+align: 2147483650 (number) = left (string)
+align:  (object) = left (string)
+align:  (object) = left (string)
+align: 1,2 (object) = left (string)
+align:  (object) = left (string)
+align: null (null) = left (string)
+align:  (object) = left (string)
+align: a,b,3,-2,-2 (object) = left (string)
+Testing: blockIndent
+null
+blockIndent: (0) undefined (undefined) = null (null)
+blockIndent: (1) null (null) = null (null)
+blockIndent: (2) true (boolean) = 1 (number)
+blockIndent: (3) false (boolean) = 0 (number)
+blockIndent: (4) 0 (number) = 0 (number)
+blockIndent: (5) 1 (number) = 1 (number)
+blockIndent: (6) 0.5 (number) = 0 (number)
+blockIndent: (7) -1 (number) = -1 (number)
+blockIndent: (8) -0.5 (number) = 0 (number)
+blockIndent: (9) Infinity (number) = -2147483648 (number)
+blockIndent: (10) -Infinity (number) = -2147483648 (number)
+blockIndent: (11) NaN (number) = -2147483648 (number)
+blockIndent: (12)  (string) = -2147483648 (number)
+blockIndent: (13) 0 (string) = 0 (number)
+blockIndent: (14) -0 (string) = 0 (number)
+blockIndent: (15) 0.0 (string) = 0 (number)
+blockIndent: (16) 1 (string) = 1 (number)
+blockIndent: (17) Hello World! (string) = -2147483648 (number)
+blockIndent: (18) true (string) = -2147483648 (number)
+blockIndent: (19) _level0 (string) = -2147483648 (number)
+blockIndent: (20) _level0 (movieclip) = -2147483648 (number)
+blockIndent: (21) [object Object] (object) = -2147483648 (number)
+blockIndent: (22) [type Function] (function) = -2147483648 (number)
+valueOf called
+valueOf called
+toString called
+blockIndent: (23) [type Object] (object) = -2147483648 (number)
+toString called with 
+blockIndent: (24) [type Object] (object) = -2147483648 (number)
+valueOf called with 
+valueOf called with 
+blockIndent: (25) [object Object] (object) = -2147483648 (number)
+blockIndent: (26) undefined (object) = -2147483648 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+blockIndent: (27) undefined (object) = -2147483648 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+blockIndent: (28) null (object) = -2147483648 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+blockIndent: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+blockIndent: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+blockIndent: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+blockIndent: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+blockIndent: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+blockIndent: (34) -1 (object) = -1 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+blockIndent: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+blockIndent: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+blockIndent: (37) -Infinity (object) = -2147483648 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+blockIndent: (38) NaN (object) = -2147483648 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+blockIndent: (39)  (object) = -2147483648 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+blockIndent: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+blockIndent: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+blockIndent: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+blockIndent: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+blockIndent: (44) Hello World! (object) = -2147483648 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+blockIndent: (45) true (object) = -2147483648 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+blockIndent: (46) _level0 (object) = -2147483648 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+blockIndent: (47) _level0 (object) = -2147483648 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+blockIndent: (48) [type Object] (object) = -2147483648 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+blockIndent: (49) [type Object] (object) = -2147483648 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+blockIndent: (50) [type Object] (object) = -2147483648 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+blockIndent: (51) [type Object] (object) = -2147483648 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+blockIndent: (52) [type Object] (object) = -2147483648 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+blockIndent: (53) [type Object] (object) = -2147483648 (number)
+blockIndent: left (string) = -2147483648 (number)
+blockIndent: center (string) = -2147483648 (number)
+blockIndent: LEFT (string) = -2147483648 (number)
+blockIndent: right (string) = -2147483648 (number)
+blockIndent: justify (string) = -2147483648 (number)
+blockIndent: leFT (string) = -2147483648 (number)
+blockIndent: inline (string) = -2147483648 (number)
+blockIndent: block (string) = -2147483648 (number)
+blockIndent: none (string) = -2147483648 (number)
+blockIndent: http://www.google.com (string) = -2147483648 (number)
+blockIndent: _typewriter (string) = -2147483648 (number)
+blockIndent: sans-serif (string) = -2147483648 (number)
+blockIndent: _self (string) = -2147483648 (number)
+blockIndent: _blank (string) = -2147483648 (number)
+blockIndent: _parent (string) = -2147483648 (number)
+blockIndent: _asdfa (string) = -2147483648 (number)
+blockIndent: 52.5 (number) = 52 (number)
+blockIndent: 1 (number) = 1 (number)
+blockIndent: 0 (number) = 0 (number)
+blockIndent: -1 (number) = -1 (number)
+blockIndent: -52.5 (number) = -52 (number)
+blockIndent: NaN (number) = -2147483648 (number)
+blockIndent: Infinity (number) = -2147483648 (number)
+blockIndent: -Infinity (number) = -2147483648 (number)
+blockIndent: undefined (undefined) = null (null)
+blockIndent:  (string) = -2147483648 (number)
+blockIndent: undefined (string) = -2147483648 (number)
+blockIndent:  (object) = -2147483648 (number)
+blockIndent: 4,8,12 (object) = -2147483648 (number)
+blockIndent: moi,terve (object) = -2147483648 (number)
+blockIndent: 4812 (string) = 4812 (number)
+blockIndent: 4,8,12 (string) = -2147483648 (number)
+blockIndent: true (boolean) = 1 (number)
+blockIndent: false (boolean) = 0 (number)
+blockIndent: null (null) = null (null)
+blockIndent: -2147483648 (number) = -2147483648 (number)
+blockIndent: -2147483650 (number) = -2147483648 (number)
+blockIndent: 2147483648 (number) = -2147483648 (number)
+blockIndent: 2147483650 (number) = -2147483648 (number)
+blockIndent:  (object) = -2147483648 (number)
+blockIndent:  (object) = -2147483648 (number)
+blockIndent: 1,2 (object) = -2147483648 (number)
+blockIndent:  (object) = -2147483648 (number)
+blockIndent: null (null) = null (null)
+blockIndent:  (object) = -2147483648 (number)
+blockIndent: a,b,3,-2,-2 (object) = -2147483648 (number)
+Testing: bold
+null
+bold: (0) undefined (undefined) = null (null)
+bold: (1) null (null) = null (null)
+bold: (2) true (boolean) = true (boolean)
+bold: (3) false (boolean) = false (boolean)
+bold: (4) 0 (number) = false (boolean)
+bold: (5) 1 (number) = true (boolean)
+bold: (6) 0.5 (number) = true (boolean)
+bold: (7) -1 (number) = true (boolean)
+bold: (8) -0.5 (number) = true (boolean)
+bold: (9) Infinity (number) = true (boolean)
+bold: (10) -Infinity (number) = true (boolean)
+bold: (11) NaN (number) = false (boolean)
+bold: (12)  (string) = false (boolean)
+bold: (13) 0 (string) = true (boolean)
+bold: (14) -0 (string) = true (boolean)
+bold: (15) 0.0 (string) = true (boolean)
+bold: (16) 1 (string) = true (boolean)
+bold: (17) Hello World! (string) = true (boolean)
+bold: (18) true (string) = true (boolean)
+bold: (19) _level0 (string) = true (boolean)
+bold: (20) _level0 (movieclip) = true (boolean)
+bold: (21) [object Object] (object) = true (boolean)
+bold: (22) [type Function] (function) = true (boolean)
+valueOf called
+valueOf called
+toString called
+bold: (23) [type Object] (object) = true (boolean)
+toString called with 
+bold: (24) [type Object] (object) = true (boolean)
+valueOf called with 
+valueOf called with 
+bold: (25) [object Object] (object) = true (boolean)
+bold: (26) undefined (object) = true (boolean)
+0: valueOf!
+0: valueOf!
+0: toString!
+bold: (27) undefined (object) = true (boolean)
+1: valueOf!
+1: valueOf!
+1: toString!
+bold: (28) null (object) = true (boolean)
+2: valueOf!
+2: valueOf!
+2: toString!
+bold: (29) true (object) = true (boolean)
+3: valueOf!
+3: valueOf!
+3: toString!
+bold: (30) false (object) = true (boolean)
+4: valueOf!
+4: valueOf!
+4: toString!
+bold: (31) 0 (object) = true (boolean)
+5: valueOf!
+5: valueOf!
+5: toString!
+bold: (32) 1 (object) = true (boolean)
+6: valueOf!
+6: valueOf!
+6: toString!
+bold: (33) 0.5 (object) = true (boolean)
+7: valueOf!
+7: valueOf!
+7: toString!
+bold: (34) -1 (object) = true (boolean)
+8: valueOf!
+8: valueOf!
+8: toString!
+bold: (35) -0.5 (object) = true (boolean)
+9: valueOf!
+9: valueOf!
+9: toString!
+bold: (36) Infinity (object) = true (boolean)
+10: valueOf!
+10: valueOf!
+10: toString!
+bold: (37) -Infinity (object) = true (boolean)
+11: valueOf!
+11: valueOf!
+11: toString!
+bold: (38) NaN (object) = true (boolean)
+12: valueOf!
+12: valueOf!
+12: toString!
+bold: (39)  (object) = true (boolean)
+13: valueOf!
+13: valueOf!
+13: toString!
+bold: (40) 0 (object) = true (boolean)
+14: valueOf!
+14: valueOf!
+14: toString!
+bold: (41) -0 (object) = true (boolean)
+15: valueOf!
+15: valueOf!
+15: toString!
+bold: (42) 0.0 (object) = true (boolean)
+16: valueOf!
+16: valueOf!
+16: toString!
+bold: (43) 1 (object) = true (boolean)
+17: valueOf!
+17: valueOf!
+17: toString!
+bold: (44) Hello World! (object) = true (boolean)
+18: valueOf!
+18: valueOf!
+18: toString!
+bold: (45) true (object) = true (boolean)
+19: valueOf!
+19: valueOf!
+19: toString!
+bold: (46) _level0 (object) = true (boolean)
+20: valueOf!
+20: valueOf!
+20: toString!
+bold: (47) _level0 (object) = true (boolean)
+21: valueOf!
+21: valueOf!
+21: toString!
+bold: (48) [type Object] (object) = true (boolean)
+22: valueOf!
+22: valueOf!
+22: toString!
+bold: (49) [type Object] (object) = true (boolean)
+23: valueOf!
+23: valueOf!
+23: toString!
+bold: (50) [type Object] (object) = true (boolean)
+24: valueOf!
+24: valueOf!
+24: toString!
+bold: (51) [type Object] (object) = true (boolean)
+25: valueOf!
+25: valueOf!
+25: toString!
+bold: (52) [type Object] (object) = true (boolean)
+26: valueOf!
+26: valueOf!
+26: toString!
+bold: (53) [type Object] (object) = true (boolean)
+bold: left (string) = true (boolean)
+bold: center (string) = true (boolean)
+bold: LEFT (string) = true (boolean)
+bold: right (string) = true (boolean)
+bold: justify (string) = true (boolean)
+bold: leFT (string) = true (boolean)
+bold: inline (string) = true (boolean)
+bold: block (string) = true (boolean)
+bold: none (string) = true (boolean)
+bold: http://www.google.com (string) = true (boolean)
+bold: _typewriter (string) = true (boolean)
+bold: sans-serif (string) = true (boolean)
+bold: _self (string) = true (boolean)
+bold: _blank (string) = true (boolean)
+bold: _parent (string) = true (boolean)
+bold: _asdfa (string) = true (boolean)
+bold: 52.5 (number) = true (boolean)
+bold: 1 (number) = true (boolean)
+bold: 0 (number) = false (boolean)
+bold: -1 (number) = true (boolean)
+bold: -52.5 (number) = true (boolean)
+bold: NaN (number) = false (boolean)
+bold: Infinity (number) = true (boolean)
+bold: -Infinity (number) = true (boolean)
+bold: undefined (undefined) = null (null)
+bold:  (string) = false (boolean)
+bold: undefined (string) = true (boolean)
+bold:  (object) = true (boolean)
+bold: 4,8,12 (object) = true (boolean)
+bold: moi,terve (object) = true (boolean)
+bold: 4812 (string) = true (boolean)
+bold: 4,8,12 (string) = true (boolean)
+bold: true (boolean) = true (boolean)
+bold: false (boolean) = false (boolean)
+bold: null (null) = null (null)
+bold: -2147483648 (number) = true (boolean)
+bold: -2147483650 (number) = true (boolean)
+bold: 2147483648 (number) = true (boolean)
+bold: 2147483650 (number) = true (boolean)
+bold:  (object) = true (boolean)
+bold:  (object) = true (boolean)
+bold: 1,2 (object) = true (boolean)
+bold:  (object) = true (boolean)
+bold: null (null) = null (null)
+bold:  (object) = true (boolean)
+bold: a,b,3,-2,-2 (object) = true (boolean)
+Testing: bullet
+null
+bullet: (0) undefined (undefined) = null (null)
+bullet: (1) null (null) = null (null)
+bullet: (2) true (boolean) = true (boolean)
+bullet: (3) false (boolean) = false (boolean)
+bullet: (4) 0 (number) = false (boolean)
+bullet: (5) 1 (number) = true (boolean)
+bullet: (6) 0.5 (number) = true (boolean)
+bullet: (7) -1 (number) = true (boolean)
+bullet: (8) -0.5 (number) = true (boolean)
+bullet: (9) Infinity (number) = true (boolean)
+bullet: (10) -Infinity (number) = true (boolean)
+bullet: (11) NaN (number) = false (boolean)
+bullet: (12)  (string) = false (boolean)
+bullet: (13) 0 (string) = true (boolean)
+bullet: (14) -0 (string) = true (boolean)
+bullet: (15) 0.0 (string) = true (boolean)
+bullet: (16) 1 (string) = true (boolean)
+bullet: (17) Hello World! (string) = true (boolean)
+bullet: (18) true (string) = true (boolean)
+bullet: (19) _level0 (string) = true (boolean)
+bullet: (20) _level0 (movieclip) = true (boolean)
+bullet: (21) [object Object] (object) = true (boolean)
+bullet: (22) [type Function] (function) = true (boolean)
+valueOf called
+valueOf called
+toString called
+bullet: (23) [type Object] (object) = true (boolean)
+toString called with 
+bullet: (24) [type Object] (object) = true (boolean)
+valueOf called with 
+valueOf called with 
+bullet: (25) [object Object] (object) = true (boolean)
+bullet: (26) undefined (object) = true (boolean)
+0: valueOf!
+0: valueOf!
+0: toString!
+bullet: (27) undefined (object) = true (boolean)
+1: valueOf!
+1: valueOf!
+1: toString!
+bullet: (28) null (object) = true (boolean)
+2: valueOf!
+2: valueOf!
+2: toString!
+bullet: (29) true (object) = true (boolean)
+3: valueOf!
+3: valueOf!
+3: toString!
+bullet: (30) false (object) = true (boolean)
+4: valueOf!
+4: valueOf!
+4: toString!
+bullet: (31) 0 (object) = true (boolean)
+5: valueOf!
+5: valueOf!
+5: toString!
+bullet: (32) 1 (object) = true (boolean)
+6: valueOf!
+6: valueOf!
+6: toString!
+bullet: (33) 0.5 (object) = true (boolean)
+7: valueOf!
+7: valueOf!
+7: toString!
+bullet: (34) -1 (object) = true (boolean)
+8: valueOf!
+8: valueOf!
+8: toString!
+bullet: (35) -0.5 (object) = true (boolean)
+9: valueOf!
+9: valueOf!
+9: toString!
+bullet: (36) Infinity (object) = true (boolean)
+10: valueOf!
+10: valueOf!
+10: toString!
+bullet: (37) -Infinity (object) = true (boolean)
+11: valueOf!
+11: valueOf!
+11: toString!
+bullet: (38) NaN (object) = true (boolean)
+12: valueOf!
+12: valueOf!
+12: toString!
+bullet: (39)  (object) = true (boolean)
+13: valueOf!
+13: valueOf!
+13: toString!
+bullet: (40) 0 (object) = true (boolean)
+14: valueOf!
+14: valueOf!
+14: toString!
+bullet: (41) -0 (object) = true (boolean)
+15: valueOf!
+15: valueOf!
+15: toString!
+bullet: (42) 0.0 (object) = true (boolean)
+16: valueOf!
+16: valueOf!
+16: toString!
+bullet: (43) 1 (object) = true (boolean)
+17: valueOf!
+17: valueOf!
+17: toString!
+bullet: (44) Hello World! (object) = true (boolean)
+18: valueOf!
+18: valueOf!
+18: toString!
+bullet: (45) true (object) = true (boolean)
+19: valueOf!
+19: valueOf!
+19: toString!
+bullet: (46) _level0 (object) = true (boolean)
+20: valueOf!
+20: valueOf!
+20: toString!
+bullet: (47) _level0 (object) = true (boolean)
+21: valueOf!
+21: valueOf!
+21: toString!
+bullet: (48) [type Object] (object) = true (boolean)
+22: valueOf!
+22: valueOf!
+22: toString!
+bullet: (49) [type Object] (object) = true (boolean)
+23: valueOf!
+23: valueOf!
+23: toString!
+bullet: (50) [type Object] (object) = true (boolean)
+24: valueOf!
+24: valueOf!
+24: toString!
+bullet: (51) [type Object] (object) = true (boolean)
+25: valueOf!
+25: valueOf!
+25: toString!
+bullet: (52) [type Object] (object) = true (boolean)
+26: valueOf!
+26: valueOf!
+26: toString!
+bullet: (53) [type Object] (object) = true (boolean)
+bullet: left (string) = true (boolean)
+bullet: center (string) = true (boolean)
+bullet: LEFT (string) = true (boolean)
+bullet: right (string) = true (boolean)
+bullet: justify (string) = true (boolean)
+bullet: leFT (string) = true (boolean)
+bullet: inline (string) = true (boolean)
+bullet: block (string) = true (boolean)
+bullet: none (string) = true (boolean)
+bullet: http://www.google.com (string) = true (boolean)
+bullet: _typewriter (string) = true (boolean)
+bullet: sans-serif (string) = true (boolean)
+bullet: _self (string) = true (boolean)
+bullet: _blank (string) = true (boolean)
+bullet: _parent (string) = true (boolean)
+bullet: _asdfa (string) = true (boolean)
+bullet: 52.5 (number) = true (boolean)
+bullet: 1 (number) = true (boolean)
+bullet: 0 (number) = false (boolean)
+bullet: -1 (number) = true (boolean)
+bullet: -52.5 (number) = true (boolean)
+bullet: NaN (number) = false (boolean)
+bullet: Infinity (number) = true (boolean)
+bullet: -Infinity (number) = true (boolean)
+bullet: undefined (undefined) = null (null)
+bullet:  (string) = false (boolean)
+bullet: undefined (string) = true (boolean)
+bullet:  (object) = true (boolean)
+bullet: 4,8,12 (object) = true (boolean)
+bullet: moi,terve (object) = true (boolean)
+bullet: 4812 (string) = true (boolean)
+bullet: 4,8,12 (string) = true (boolean)
+bullet: true (boolean) = true (boolean)
+bullet: false (boolean) = false (boolean)
+bullet: null (null) = null (null)
+bullet: -2147483648 (number) = true (boolean)
+bullet: -2147483650 (number) = true (boolean)
+bullet: 2147483648 (number) = true (boolean)
+bullet: 2147483650 (number) = true (boolean)
+bullet:  (object) = true (boolean)
+bullet:  (object) = true (boolean)
+bullet: 1,2 (object) = true (boolean)
+bullet:  (object) = true (boolean)
+bullet: null (null) = null (null)
+bullet:  (object) = true (boolean)
+bullet: a,b,3,-2,-2 (object) = true (boolean)
+Testing: color
+null
+color: (0) undefined (undefined) = null (null)
+color: (1) null (null) = null (null)
+color: (2) true (boolean) = 1 (number)
+color: (3) false (boolean) = 0 (number)
+color: (4) 0 (number) = 0 (number)
+color: (5) 1 (number) = 1 (number)
+color: (6) 0.5 (number) = 0 (number)
+color: (7) -1 (number) = 4294967295 (number)
+color: (8) -0.5 (number) = 0 (number)
+color: (9) Infinity (number) = 0 (number)
+color: (10) -Infinity (number) = 0 (number)
+color: (11) NaN (number) = 0 (number)
+color: (12)  (string) = 0 (number)
+color: (13) 0 (string) = 0 (number)
+color: (14) -0 (string) = 0 (number)
+color: (15) 0.0 (string) = 0 (number)
+color: (16) 1 (string) = 1 (number)
+color: (17) Hello World! (string) = 0 (number)
+color: (18) true (string) = 0 (number)
+color: (19) _level0 (string) = 0 (number)
+color: (20) _level0 (movieclip) = 0 (number)
+color: (21) [object Object] (object) = 0 (number)
+color: (22) [type Function] (function) = 0 (number)
+valueOf called
+valueOf called
+toString called
+color: (23) [type Object] (object) = 0 (number)
+toString called with 
+color: (24) [type Object] (object) = 0 (number)
+valueOf called with 
+valueOf called with 
+color: (25) [object Object] (object) = 0 (number)
+color: (26) undefined (object) = 0 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+color: (27) undefined (object) = 0 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+color: (28) null (object) = 0 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+color: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+color: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+color: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+color: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+color: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+color: (34) -1 (object) = 4294967295 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+color: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+color: (36) Infinity (object) = 0 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+color: (37) -Infinity (object) = 0 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+color: (38) NaN (object) = 0 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+color: (39)  (object) = 0 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+color: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+color: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+color: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+color: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+color: (44) Hello World! (object) = 0 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+color: (45) true (object) = 0 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+color: (46) _level0 (object) = 0 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+color: (47) _level0 (object) = 0 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+color: (48) [type Object] (object) = 0 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+color: (49) [type Object] (object) = 0 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+color: (50) [type Object] (object) = 0 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+color: (51) [type Object] (object) = 0 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+color: (52) [type Object] (object) = 0 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+color: (53) [type Object] (object) = 0 (number)
+color: left (string) = 0 (number)
+color: center (string) = 0 (number)
+color: LEFT (string) = 0 (number)
+color: right (string) = 0 (number)
+color: justify (string) = 0 (number)
+color: leFT (string) = 0 (number)
+color: inline (string) = 0 (number)
+color: block (string) = 0 (number)
+color: none (string) = 0 (number)
+color: http://www.google.com (string) = 0 (number)
+color: _typewriter (string) = 0 (number)
+color: sans-serif (string) = 0 (number)
+color: _self (string) = 0 (number)
+color: _blank (string) = 0 (number)
+color: _parent (string) = 0 (number)
+color: _asdfa (string) = 0 (number)
+color: 52.5 (number) = 52 (number)
+color: 1 (number) = 1 (number)
+color: 0 (number) = 0 (number)
+color: -1 (number) = 4294967295 (number)
+color: -52.5 (number) = 4294967244 (number)
+color: NaN (number) = 0 (number)
+color: Infinity (number) = 0 (number)
+color: -Infinity (number) = 0 (number)
+color: undefined (undefined) = null (null)
+color:  (string) = 0 (number)
+color: undefined (string) = 0 (number)
+color:  (object) = 0 (number)
+color: 4,8,12 (object) = 0 (number)
+color: moi,terve (object) = 0 (number)
+color: 4812 (string) = 4812 (number)
+color: 4,8,12 (string) = 0 (number)
+color: true (boolean) = 1 (number)
+color: false (boolean) = 0 (number)
+color: null (null) = null (null)
+color: -2147483648 (number) = 2147483648 (number)
+color: -2147483650 (number) = 2147483646 (number)
+color: 2147483648 (number) = 2147483648 (number)
+color: 2147483650 (number) = 2147483650 (number)
+color:  (object) = 0 (number)
+color:  (object) = 0 (number)
+color: 1,2 (object) = 0 (number)
+color:  (object) = 0 (number)
+color: null (null) = null (null)
+color:  (object) = 0 (number)
+color: a,b,3,-2,-2 (object) = 0 (number)
+Testing: display
+block
+display: (0) undefined (undefined) = block (string)
+display: (1) null (null) = block (string)
+display: (2) true (boolean) = block (string)
+display: (3) false (boolean) = block (string)
+display: (4) 0 (number) = block (string)
+display: (5) 1 (number) = block (string)
+display: (6) 0.5 (number) = block (string)
+display: (7) -1 (number) = block (string)
+display: (8) -0.5 (number) = block (string)
+display: (9) Infinity (number) = block (string)
+display: (10) -Infinity (number) = block (string)
+display: (11) NaN (number) = block (string)
+display: (12)  (string) = block (string)
+display: (13) 0 (string) = block (string)
+display: (14) -0 (string) = block (string)
+display: (15) 0.0 (string) = block (string)
+display: (16) 1 (string) = block (string)
+display: (17) Hello World! (string) = block (string)
+display: (18) true (string) = block (string)
+display: (19) _level0 (string) = block (string)
+display: (20) _level0 (movieclip) = block (string)
+display: (21) [object Object] (object) = block (string)
+display: (22) [type Function] (function) = block (string)
+valueOf called
+valueOf called
+toString called
+toString called
+display: (23) [type Object] (object) = block (string)
+toString called with 
+toString called with 
+display: (24) [type Object] (object) = block (string)
+valueOf called with 
+valueOf called with 
+display: (25) [object Object] (object) = block (string)
+display: (26) undefined (object) = block (string)
+0: valueOf!
+0: valueOf!
+0: toString!
+0: toString!
+display: (27) undefined (object) = block (string)
+1: valueOf!
+1: valueOf!
+1: toString!
+1: toString!
+display: (28) null (object) = block (string)
+2: valueOf!
+2: valueOf!
+2: toString!
+2: toString!
+display: (29) true (object) = block (string)
+3: valueOf!
+3: valueOf!
+3: toString!
+3: toString!
+display: (30) false (object) = block (string)
+4: valueOf!
+4: valueOf!
+4: toString!
+4: toString!
+display: (31) 0 (object) = block (string)
+5: valueOf!
+5: valueOf!
+5: toString!
+5: toString!
+display: (32) 1 (object) = block (string)
+6: valueOf!
+6: valueOf!
+6: toString!
+6: toString!
+display: (33) 0.5 (object) = block (string)
+7: valueOf!
+7: valueOf!
+7: toString!
+7: toString!
+display: (34) -1 (object) = block (string)
+8: valueOf!
+8: valueOf!
+8: toString!
+8: toString!
+display: (35) -0.5 (object) = block (string)
+9: valueOf!
+9: valueOf!
+9: toString!
+9: toString!
+display: (36) Infinity (object) = block (string)
+10: valueOf!
+10: valueOf!
+10: toString!
+10: toString!
+display: (37) -Infinity (object) = block (string)
+11: valueOf!
+11: valueOf!
+11: toString!
+11: toString!
+display: (38) NaN (object) = block (string)
+12: valueOf!
+12: valueOf!
+12: toString!
+12: toString!
+display: (39)  (object) = block (string)
+13: valueOf!
+13: valueOf!
+13: toString!
+13: toString!
+display: (40) 0 (object) = block (string)
+14: valueOf!
+14: valueOf!
+14: toString!
+14: toString!
+display: (41) -0 (object) = block (string)
+15: valueOf!
+15: valueOf!
+15: toString!
+15: toString!
+display: (42) 0.0 (object) = block (string)
+16: valueOf!
+16: valueOf!
+16: toString!
+16: toString!
+display: (43) 1 (object) = block (string)
+17: valueOf!
+17: valueOf!
+17: toString!
+17: toString!
+display: (44) Hello World! (object) = block (string)
+18: valueOf!
+18: valueOf!
+18: toString!
+18: toString!
+display: (45) true (object) = block (string)
+19: valueOf!
+19: valueOf!
+19: toString!
+19: toString!
+display: (46) _level0 (object) = block (string)
+20: valueOf!
+20: valueOf!
+20: toString!
+20: toString!
+display: (47) _level0 (object) = block (string)
+21: valueOf!
+21: valueOf!
+21: toString!
+21: toString!
+display: (48) [type Object] (object) = block (string)
+22: valueOf!
+22: valueOf!
+22: toString!
+22: toString!
+display: (49) [type Object] (object) = block (string)
+23: valueOf!
+23: valueOf!
+23: toString!
+23: toString!
+display: (50) [type Object] (object) = block (string)
+24: valueOf!
+24: valueOf!
+24: toString!
+24: toString!
+display: (51) [type Object] (object) = block (string)
+25: valueOf!
+25: valueOf!
+25: toString!
+25: toString!
+display: (52) [type Object] (object) = block (string)
+26: valueOf!
+26: valueOf!
+26: toString!
+26: toString!
+display: (53) [type Object] (object) = block (string)
+display: left (string) = block (string)
+display: center (string) = block (string)
+display: LEFT (string) = block (string)
+display: right (string) = block (string)
+display: justify (string) = block (string)
+display: leFT (string) = block (string)
+display: inline (string) = inline (string)
+display: block (string) = block (string)
+display: none (string) = none (string)
+display: http://www.google.com (string) = block (string)
+display: _typewriter (string) = block (string)
+display: sans-serif (string) = block (string)
+display: _self (string) = block (string)
+display: _blank (string) = block (string)
+display: _parent (string) = block (string)
+display: _asdfa (string) = block (string)
+display: 52.5 (number) = block (string)
+display: 1 (number) = block (string)
+display: 0 (number) = block (string)
+display: -1 (number) = block (string)
+display: -52.5 (number) = block (string)
+display: NaN (number) = block (string)
+display: Infinity (number) = block (string)
+display: -Infinity (number) = block (string)
+display: undefined (undefined) = block (string)
+display:  (string) = block (string)
+display: undefined (string) = block (string)
+display:  (object) = block (string)
+display: 4,8,12 (object) = block (string)
+display: moi,terve (object) = block (string)
+display: 4812 (string) = block (string)
+display: 4,8,12 (string) = block (string)
+display: true (boolean) = block (string)
+display: false (boolean) = block (string)
+display: null (null) = block (string)
+display: -2147483648 (number) = block (string)
+display: -2147483650 (number) = block (string)
+display: 2147483648 (number) = block (string)
+display: 2147483650 (number) = block (string)
+display:  (object) = block (string)
+display:  (object) = block (string)
+display: 1,2 (object) = block (string)
+display:  (object) = block (string)
+display: null (null) = block (string)
+display:  (object) = block (string)
+display: a,b,3,-2,-2 (object) = block (string)
+Testing: font
+null
+font: (0) undefined (undefined) = null (null)
+font: (1) null (null) = null (null)
+font: (2) true (boolean) = true (string)
+font: (3) false (boolean) = false (string)
+font: (4) 0 (number) = 0 (string)
+font: (5) 1 (number) = 1 (string)
+font: (6) 0.5 (number) = 0.5 (string)
+font: (7) -1 (number) = -1 (string)
+font: (8) -0.5 (number) = -0.5 (string)
+font: (9) Infinity (number) = Infinity (string)
+font: (10) -Infinity (number) = -Infinity (string)
+font: (11) NaN (number) = NaN (string)
+font: (12)  (string) =  (string)
+font: (13) 0 (string) = 0 (string)
+font: (14) -0 (string) = -0 (string)
+font: (15) 0.0 (string) = 0.0 (string)
+font: (16) 1 (string) = 1 (string)
+font: (17) Hello World! (string) = Hello World! (string)
+font: (18) true (string) = true (string)
+font: (19) _level0 (string) = _level0 (string)
+font: (20) _level0 (movieclip) = _level0 (string)
+font: (21) [object Object] (object) = [object Object] (string)
+font: (22) [type Function] (function) = [type Function] (string)
+valueOf called
+valueOf called
+toString called
+font: (23) [type Object] (object) = [type Object] (string)
+toString called with 
+font: (24) [type Object] (object) = [type Object] (string)
+valueOf called with 
+valueOf called with 
+font: (25) [object Object] (object) = [object Object] (string)
+font: (26) undefined (object) = [type Object] (string)
+0: valueOf!
+0: valueOf!
+0: toString!
+font: (27) undefined (object) = [type Object] (string)
+1: valueOf!
+1: valueOf!
+1: toString!
+font: (28) null (object) = [type Object] (string)
+2: valueOf!
+2: valueOf!
+2: toString!
+font: (29) true (object) = [type Object] (string)
+3: valueOf!
+3: valueOf!
+3: toString!
+font: (30) false (object) = [type Object] (string)
+4: valueOf!
+4: valueOf!
+4: toString!
+font: (31) 0 (object) = [type Object] (string)
+5: valueOf!
+5: valueOf!
+5: toString!
+font: (32) 1 (object) = [type Object] (string)
+6: valueOf!
+6: valueOf!
+6: toString!
+font: (33) 0.5 (object) = [type Object] (string)
+7: valueOf!
+7: valueOf!
+7: toString!
+font: (34) -1 (object) = [type Object] (string)
+8: valueOf!
+8: valueOf!
+8: toString!
+font: (35) -0.5 (object) = [type Object] (string)
+9: valueOf!
+9: valueOf!
+9: toString!
+font: (36) Infinity (object) = [type Object] (string)
+10: valueOf!
+10: valueOf!
+10: toString!
+font: (37) -Infinity (object) = [type Object] (string)
+11: valueOf!
+11: valueOf!
+11: toString!
+font: (38) NaN (object) = [type Object] (string)
+12: valueOf!
+12: valueOf!
+12: toString!
+font: (39)  (object) =  (string)
+13: valueOf!
+13: valueOf!
+13: toString!
+font: (40) 0 (object) = 0 (string)
+14: valueOf!
+14: valueOf!
+14: toString!
+font: (41) -0 (object) = -0 (string)
+15: valueOf!
+15: valueOf!
+15: toString!
+font: (42) 0.0 (object) = 0.0 (string)
+16: valueOf!
+16: valueOf!
+16: toString!
+font: (43) 1 (object) = 1 (string)
+17: valueOf!
+17: valueOf!
+17: toString!
+font: (44) Hello World! (object) = Hello World! (string)
+18: valueOf!
+18: valueOf!
+18: toString!
+font: (45) true (object) = true (string)
+19: valueOf!
+19: valueOf!
+19: toString!
+font: (46) _level0 (object) = _level0 (string)
+20: valueOf!
+20: valueOf!
+20: toString!
+font: (47) _level0 (object) = [type Object] (string)
+21: valueOf!
+21: valueOf!
+21: toString!
+font: (48) [type Object] (object) = [type Object] (string)
+22: valueOf!
+22: valueOf!
+22: toString!
+font: (49) [type Object] (object) = [type Object] (string)
+23: valueOf!
+23: valueOf!
+23: toString!
+font: (50) [type Object] (object) = [type Object] (string)
+24: valueOf!
+24: valueOf!
+24: toString!
+font: (51) [type Object] (object) = [type Object] (string)
+25: valueOf!
+25: valueOf!
+25: toString!
+font: (52) [type Object] (object) = [type Object] (string)
+26: valueOf!
+26: valueOf!
+26: toString!
+font: (53) [type Object] (object) = [type Object] (string)
+font: left (string) = left (string)
+font: center (string) = center (string)
+font: LEFT (string) = LEFT (string)
+font: right (string) = right (string)
+font: justify (string) = justify (string)
+font: leFT (string) = leFT (string)
+font: inline (string) = inline (string)
+font: block (string) = block (string)
+font: none (string) = none (string)
+font: http://www.google.com (string) = http://www.google.com (string)
+font: _typewriter (string) = _typewriter (string)
+font: sans-serif (string) = sans-serif (string)
+font: _self (string) = _self (string)
+font: _blank (string) = _blank (string)
+font: _parent (string) = _parent (string)
+font: _asdfa (string) = _asdfa (string)
+font: 52.5 (number) = 52.5 (string)
+font: 1 (number) = 1 (string)
+font: 0 (number) = 0 (string)
+font: -1 (number) = -1 (string)
+font: -52.5 (number) = -52.5 (string)
+font: NaN (number) = NaN (string)
+font: Infinity (number) = Infinity (string)
+font: -Infinity (number) = -Infinity (string)
+font: undefined (undefined) = null (null)
+font:  (string) =  (string)
+font: undefined (string) = undefined (string)
+font:  (object) =  (string)
+font: 4,8,12 (object) = 4,8,12 (string)
+font: moi,terve (object) = moi,terve (string)
+font: 4812 (string) = 4812 (string)
+font: 4,8,12 (string) = 4,8,12 (string)
+font: true (boolean) = true (string)
+font: false (boolean) = false (string)
+font: null (null) = null (null)
+font: -2147483648 (number) = -2147483648 (string)
+font: -2147483650 (number) = -2147483650 (string)
+font: 2147483648 (number) = 2147483648 (string)
+font: 2147483650 (number) = 2147483650 (string)
+font:  (object) =  (string)
+font:  (object) =  (string)
+font: 1,2 (object) = 1,2 (string)
+font:  (object) =  (string)
+font: null (null) = null (null)
+font:  (object) =  (string)
+font: a,b,3,-2,-2 (object) = a,b,3,-2,-2 (string)
+Testing: indent
+null
+indent: (0) undefined (undefined) = null (null)
+indent: (1) null (null) = null (null)
+indent: (2) true (boolean) = 1 (number)
+indent: (3) false (boolean) = 0 (number)
+indent: (4) 0 (number) = 0 (number)
+indent: (5) 1 (number) = 1 (number)
+indent: (6) 0.5 (number) = 0 (number)
+indent: (7) -1 (number) = -1 (number)
+indent: (8) -0.5 (number) = 0 (number)
+indent: (9) Infinity (number) = -2147483648 (number)
+indent: (10) -Infinity (number) = -2147483648 (number)
+indent: (11) NaN (number) = -2147483648 (number)
+indent: (12)  (string) = -2147483648 (number)
+indent: (13) 0 (string) = 0 (number)
+indent: (14) -0 (string) = 0 (number)
+indent: (15) 0.0 (string) = 0 (number)
+indent: (16) 1 (string) = 1 (number)
+indent: (17) Hello World! (string) = -2147483648 (number)
+indent: (18) true (string) = -2147483648 (number)
+indent: (19) _level0 (string) = -2147483648 (number)
+indent: (20) _level0 (movieclip) = -2147483648 (number)
+indent: (21) [object Object] (object) = -2147483648 (number)
+indent: (22) [type Function] (function) = -2147483648 (number)
+valueOf called
+valueOf called
+toString called
+indent: (23) [type Object] (object) = -2147483648 (number)
+toString called with 
+indent: (24) [type Object] (object) = -2147483648 (number)
+valueOf called with 
+valueOf called with 
+indent: (25) [object Object] (object) = -2147483648 (number)
+indent: (26) undefined (object) = -2147483648 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+indent: (27) undefined (object) = -2147483648 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+indent: (28) null (object) = -2147483648 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+indent: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+indent: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+indent: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+indent: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+indent: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+indent: (34) -1 (object) = -1 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+indent: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+indent: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+indent: (37) -Infinity (object) = -2147483648 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+indent: (38) NaN (object) = -2147483648 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+indent: (39)  (object) = -2147483648 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+indent: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+indent: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+indent: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+indent: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+indent: (44) Hello World! (object) = -2147483648 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+indent: (45) true (object) = -2147483648 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+indent: (46) _level0 (object) = -2147483648 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+indent: (47) _level0 (object) = -2147483648 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+indent: (48) [type Object] (object) = -2147483648 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+indent: (49) [type Object] (object) = -2147483648 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+indent: (50) [type Object] (object) = -2147483648 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+indent: (51) [type Object] (object) = -2147483648 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+indent: (52) [type Object] (object) = -2147483648 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+indent: (53) [type Object] (object) = -2147483648 (number)
+indent: left (string) = -2147483648 (number)
+indent: center (string) = -2147483648 (number)
+indent: LEFT (string) = -2147483648 (number)
+indent: right (string) = -2147483648 (number)
+indent: justify (string) = -2147483648 (number)
+indent: leFT (string) = -2147483648 (number)
+indent: inline (string) = -2147483648 (number)
+indent: block (string) = -2147483648 (number)
+indent: none (string) = -2147483648 (number)
+indent: http://www.google.com (string) = -2147483648 (number)
+indent: _typewriter (string) = -2147483648 (number)
+indent: sans-serif (string) = -2147483648 (number)
+indent: _self (string) = -2147483648 (number)
+indent: _blank (string) = -2147483648 (number)
+indent: _parent (string) = -2147483648 (number)
+indent: _asdfa (string) = -2147483648 (number)
+indent: 52.5 (number) = 52 (number)
+indent: 1 (number) = 1 (number)
+indent: 0 (number) = 0 (number)
+indent: -1 (number) = -1 (number)
+indent: -52.5 (number) = -52 (number)
+indent: NaN (number) = -2147483648 (number)
+indent: Infinity (number) = -2147483648 (number)
+indent: -Infinity (number) = -2147483648 (number)
+indent: undefined (undefined) = null (null)
+indent:  (string) = -2147483648 (number)
+indent: undefined (string) = -2147483648 (number)
+indent:  (object) = -2147483648 (number)
+indent: 4,8,12 (object) = -2147483648 (number)
+indent: moi,terve (object) = -2147483648 (number)
+indent: 4812 (string) = 4812 (number)
+indent: 4,8,12 (string) = -2147483648 (number)
+indent: true (boolean) = 1 (number)
+indent: false (boolean) = 0 (number)
+indent: null (null) = null (null)
+indent: -2147483648 (number) = -2147483648 (number)
+indent: -2147483650 (number) = -2147483648 (number)
+indent: 2147483648 (number) = -2147483648 (number)
+indent: 2147483650 (number) = -2147483648 (number)
+indent:  (object) = -2147483648 (number)
+indent:  (object) = -2147483648 (number)
+indent: 1,2 (object) = -2147483648 (number)
+indent:  (object) = -2147483648 (number)
+indent: null (null) = null (null)
+indent:  (object) = -2147483648 (number)
+indent: a,b,3,-2,-2 (object) = -2147483648 (number)
+Testing: italic
+null
+italic: (0) undefined (undefined) = null (null)
+italic: (1) null (null) = null (null)
+italic: (2) true (boolean) = true (boolean)
+italic: (3) false (boolean) = false (boolean)
+italic: (4) 0 (number) = false (boolean)
+italic: (5) 1 (number) = true (boolean)
+italic: (6) 0.5 (number) = true (boolean)
+italic: (7) -1 (number) = true (boolean)
+italic: (8) -0.5 (number) = true (boolean)
+italic: (9) Infinity (number) = true (boolean)
+italic: (10) -Infinity (number) = true (boolean)
+italic: (11) NaN (number) = false (boolean)
+italic: (12)  (string) = false (boolean)
+italic: (13) 0 (string) = true (boolean)
+italic: (14) -0 (string) = true (boolean)
+italic: (15) 0.0 (string) = true (boolean)
+italic: (16) 1 (string) = true (boolean)
+italic: (17) Hello World! (string) = true (boolean)
+italic: (18) true (string) = true (boolean)
+italic: (19) _level0 (string) = true (boolean)
+italic: (20) _level0 (movieclip) = true (boolean)
+italic: (21) [object Object] (object) = true (boolean)
+italic: (22) [type Function] (function) = true (boolean)
+valueOf called
+valueOf called
+toString called
+italic: (23) [type Object] (object) = true (boolean)
+toString called with 
+italic: (24) [type Object] (object) = true (boolean)
+valueOf called with 
+valueOf called with 
+italic: (25) [object Object] (object) = true (boolean)
+italic: (26) undefined (object) = true (boolean)
+0: valueOf!
+0: valueOf!
+0: toString!
+italic: (27) undefined (object) = true (boolean)
+1: valueOf!
+1: valueOf!
+1: toString!
+italic: (28) null (object) = true (boolean)
+2: valueOf!
+2: valueOf!
+2: toString!
+italic: (29) true (object) = true (boolean)
+3: valueOf!
+3: valueOf!
+3: toString!
+italic: (30) false (object) = true (boolean)
+4: valueOf!
+4: valueOf!
+4: toString!
+italic: (31) 0 (object) = true (boolean)
+5: valueOf!
+5: valueOf!
+5: toString!
+italic: (32) 1 (object) = true (boolean)
+6: valueOf!
+6: valueOf!
+6: toString!
+italic: (33) 0.5 (object) = true (boolean)
+7: valueOf!
+7: valueOf!
+7: toString!
+italic: (34) -1 (object) = true (boolean)
+8: valueOf!
+8: valueOf!
+8: toString!
+italic: (35) -0.5 (object) = true (boolean)
+9: valueOf!
+9: valueOf!
+9: toString!
+italic: (36) Infinity (object) = true (boolean)
+10: valueOf!
+10: valueOf!
+10: toString!
+italic: (37) -Infinity (object) = true (boolean)
+11: valueOf!
+11: valueOf!
+11: toString!
+italic: (38) NaN (object) = true (boolean)
+12: valueOf!
+12: valueOf!
+12: toString!
+italic: (39)  (object) = true (boolean)
+13: valueOf!
+13: valueOf!
+13: toString!
+italic: (40) 0 (object) = true (boolean)
+14: valueOf!
+14: valueOf!
+14: toString!
+italic: (41) -0 (object) = true (boolean)
+15: valueOf!
+15: valueOf!
+15: toString!
+italic: (42) 0.0 (object) = true (boolean)
+16: valueOf!
+16: valueOf!
+16: toString!
+italic: (43) 1 (object) = true (boolean)
+17: valueOf!
+17: valueOf!
+17: toString!
+italic: (44) Hello World! (object) = true (boolean)
+18: valueOf!
+18: valueOf!
+18: toString!
+italic: (45) true (object) = true (boolean)
+19: valueOf!
+19: valueOf!
+19: toString!
+italic: (46) _level0 (object) = true (boolean)
+20: valueOf!
+20: valueOf!
+20: toString!
+italic: (47) _level0 (object) = true (boolean)
+21: valueOf!
+21: valueOf!
+21: toString!
+italic: (48) [type Object] (object) = true (boolean)
+22: valueOf!
+22: valueOf!
+22: toString!
+italic: (49) [type Object] (object) = true (boolean)
+23: valueOf!
+23: valueOf!
+23: toString!
+italic: (50) [type Object] (object) = true (boolean)
+24: valueOf!
+24: valueOf!
+24: toString!
+italic: (51) [type Object] (object) = true (boolean)
+25: valueOf!
+25: valueOf!
+25: toString!
+italic: (52) [type Object] (object) = true (boolean)
+26: valueOf!
+26: valueOf!
+26: toString!
+italic: (53) [type Object] (object) = true (boolean)
+italic: left (string) = true (boolean)
+italic: center (string) = true (boolean)
+italic: LEFT (string) = true (boolean)
+italic: right (string) = true (boolean)
+italic: justify (string) = true (boolean)
+italic: leFT (string) = true (boolean)
+italic: inline (string) = true (boolean)
+italic: block (string) = true (boolean)
+italic: none (string) = true (boolean)
+italic: http://www.google.com (string) = true (boolean)
+italic: _typewriter (string) = true (boolean)
+italic: sans-serif (string) = true (boolean)
+italic: _self (string) = true (boolean)
+italic: _blank (string) = true (boolean)
+italic: _parent (string) = true (boolean)
+italic: _asdfa (string) = true (boolean)
+italic: 52.5 (number) = true (boolean)
+italic: 1 (number) = true (boolean)
+italic: 0 (number) = false (boolean)
+italic: -1 (number) = true (boolean)
+italic: -52.5 (number) = true (boolean)
+italic: NaN (number) = false (boolean)
+italic: Infinity (number) = true (boolean)
+italic: -Infinity (number) = true (boolean)
+italic: undefined (undefined) = null (null)
+italic:  (string) = false (boolean)
+italic: undefined (string) = true (boolean)
+italic:  (object) = true (boolean)
+italic: 4,8,12 (object) = true (boolean)
+italic: moi,terve (object) = true (boolean)
+italic: 4812 (string) = true (boolean)
+italic: 4,8,12 (string) = true (boolean)
+italic: true (boolean) = true (boolean)
+italic: false (boolean) = false (boolean)
+italic: null (null) = null (null)
+italic: -2147483648 (number) = true (boolean)
+italic: -2147483650 (number) = true (boolean)
+italic: 2147483648 (number) = true (boolean)
+italic: 2147483650 (number) = true (boolean)
+italic:  (object) = true (boolean)
+italic:  (object) = true (boolean)
+italic: 1,2 (object) = true (boolean)
+italic:  (object) = true (boolean)
+italic: null (null) = null (null)
+italic:  (object) = true (boolean)
+italic: a,b,3,-2,-2 (object) = true (boolean)
+Testing: kerning
+null
+kerning: (0) undefined (undefined) = null (null)
+kerning: (1) null (null) = null (null)
+kerning: (2) true (boolean) = true (boolean)
+kerning: (3) false (boolean) = false (boolean)
+kerning: (4) 0 (number) = false (boolean)
+kerning: (5) 1 (number) = true (boolean)
+kerning: (6) 0.5 (number) = true (boolean)
+kerning: (7) -1 (number) = true (boolean)
+kerning: (8) -0.5 (number) = true (boolean)
+kerning: (9) Infinity (number) = true (boolean)
+kerning: (10) -Infinity (number) = true (boolean)
+kerning: (11) NaN (number) = false (boolean)
+kerning: (12)  (string) = false (boolean)
+kerning: (13) 0 (string) = true (boolean)
+kerning: (14) -0 (string) = true (boolean)
+kerning: (15) 0.0 (string) = true (boolean)
+kerning: (16) 1 (string) = true (boolean)
+kerning: (17) Hello World! (string) = true (boolean)
+kerning: (18) true (string) = true (boolean)
+kerning: (19) _level0 (string) = true (boolean)
+kerning: (20) _level0 (movieclip) = true (boolean)
+kerning: (21) [object Object] (object) = true (boolean)
+kerning: (22) [type Function] (function) = true (boolean)
+valueOf called
+valueOf called
+toString called
+kerning: (23) [type Object] (object) = true (boolean)
+toString called with 
+kerning: (24) [type Object] (object) = true (boolean)
+valueOf called with 
+valueOf called with 
+kerning: (25) [object Object] (object) = true (boolean)
+kerning: (26) undefined (object) = true (boolean)
+0: valueOf!
+0: valueOf!
+0: toString!
+kerning: (27) undefined (object) = true (boolean)
+1: valueOf!
+1: valueOf!
+1: toString!
+kerning: (28) null (object) = true (boolean)
+2: valueOf!
+2: valueOf!
+2: toString!
+kerning: (29) true (object) = true (boolean)
+3: valueOf!
+3: valueOf!
+3: toString!
+kerning: (30) false (object) = true (boolean)
+4: valueOf!
+4: valueOf!
+4: toString!
+kerning: (31) 0 (object) = true (boolean)
+5: valueOf!
+5: valueOf!
+5: toString!
+kerning: (32) 1 (object) = true (boolean)
+6: valueOf!
+6: valueOf!
+6: toString!
+kerning: (33) 0.5 (object) = true (boolean)
+7: valueOf!
+7: valueOf!
+7: toString!
+kerning: (34) -1 (object) = true (boolean)
+8: valueOf!
+8: valueOf!
+8: toString!
+kerning: (35) -0.5 (object) = true (boolean)
+9: valueOf!
+9: valueOf!
+9: toString!
+kerning: (36) Infinity (object) = true (boolean)
+10: valueOf!
+10: valueOf!
+10: toString!
+kerning: (37) -Infinity (object) = true (boolean)
+11: valueOf!
+11: valueOf!
+11: toString!
+kerning: (38) NaN (object) = true (boolean)
+12: valueOf!
+12: valueOf!
+12: toString!
+kerning: (39)  (object) = true (boolean)
+13: valueOf!
+13: valueOf!
+13: toString!
+kerning: (40) 0 (object) = true (boolean)
+14: valueOf!
+14: valueOf!
+14: toString!
+kerning: (41) -0 (object) = true (boolean)
+15: valueOf!
+15: valueOf!
+15: toString!
+kerning: (42) 0.0 (object) = true (boolean)
+16: valueOf!
+16: valueOf!
+16: toString!
+kerning: (43) 1 (object) = true (boolean)
+17: valueOf!
+17: valueOf!
+17: toString!
+kerning: (44) Hello World! (object) = true (boolean)
+18: valueOf!
+18: valueOf!
+18: toString!
+kerning: (45) true (object) = true (boolean)
+19: valueOf!
+19: valueOf!
+19: toString!
+kerning: (46) _level0 (object) = true (boolean)
+20: valueOf!
+20: valueOf!
+20: toString!
+kerning: (47) _level0 (object) = true (boolean)
+21: valueOf!
+21: valueOf!
+21: toString!
+kerning: (48) [type Object] (object) = true (boolean)
+22: valueOf!
+22: valueOf!
+22: toString!
+kerning: (49) [type Object] (object) = true (boolean)
+23: valueOf!
+23: valueOf!
+23: toString!
+kerning: (50) [type Object] (object) = true (boolean)
+24: valueOf!
+24: valueOf!
+24: toString!
+kerning: (51) [type Object] (object) = true (boolean)
+25: valueOf!
+25: valueOf!
+25: toString!
+kerning: (52) [type Object] (object) = true (boolean)
+26: valueOf!
+26: valueOf!
+26: toString!
+kerning: (53) [type Object] (object) = true (boolean)
+kerning: left (string) = true (boolean)
+kerning: center (string) = true (boolean)
+kerning: LEFT (string) = true (boolean)
+kerning: right (string) = true (boolean)
+kerning: justify (string) = true (boolean)
+kerning: leFT (string) = true (boolean)
+kerning: inline (string) = true (boolean)
+kerning: block (string) = true (boolean)
+kerning: none (string) = true (boolean)
+kerning: http://www.google.com (string) = true (boolean)
+kerning: _typewriter (string) = true (boolean)
+kerning: sans-serif (string) = true (boolean)
+kerning: _self (string) = true (boolean)
+kerning: _blank (string) = true (boolean)
+kerning: _parent (string) = true (boolean)
+kerning: _asdfa (string) = true (boolean)
+kerning: 52.5 (number) = true (boolean)
+kerning: 1 (number) = true (boolean)
+kerning: 0 (number) = false (boolean)
+kerning: -1 (number) = true (boolean)
+kerning: -52.5 (number) = true (boolean)
+kerning: NaN (number) = false (boolean)
+kerning: Infinity (number) = true (boolean)
+kerning: -Infinity (number) = true (boolean)
+kerning: undefined (undefined) = null (null)
+kerning:  (string) = false (boolean)
+kerning: undefined (string) = true (boolean)
+kerning:  (object) = true (boolean)
+kerning: 4,8,12 (object) = true (boolean)
+kerning: moi,terve (object) = true (boolean)
+kerning: 4812 (string) = true (boolean)
+kerning: 4,8,12 (string) = true (boolean)
+kerning: true (boolean) = true (boolean)
+kerning: false (boolean) = false (boolean)
+kerning: null (null) = null (null)
+kerning: -2147483648 (number) = true (boolean)
+kerning: -2147483650 (number) = true (boolean)
+kerning: 2147483648 (number) = true (boolean)
+kerning: 2147483650 (number) = true (boolean)
+kerning:  (object) = true (boolean)
+kerning:  (object) = true (boolean)
+kerning: 1,2 (object) = true (boolean)
+kerning:  (object) = true (boolean)
+kerning: null (null) = null (null)
+kerning:  (object) = true (boolean)
+kerning: a,b,3,-2,-2 (object) = true (boolean)
+Testing: leading
+null
+leading: (0) undefined (undefined) = null (null)
+leading: (1) null (null) = null (null)
+leading: (2) true (boolean) = 1 (number)
+leading: (3) false (boolean) = 0 (number)
+leading: (4) 0 (number) = 0 (number)
+leading: (5) 1 (number) = 1 (number)
+leading: (6) 0.5 (number) = 0 (number)
+leading: (7) -1 (number) = -1 (number)
+leading: (8) -0.5 (number) = 0 (number)
+leading: (9) Infinity (number) = -2147483648 (number)
+leading: (10) -Infinity (number) = -2147483648 (number)
+leading: (11) NaN (number) = -2147483648 (number)
+leading: (12)  (string) = -2147483648 (number)
+leading: (13) 0 (string) = 0 (number)
+leading: (14) -0 (string) = 0 (number)
+leading: (15) 0.0 (string) = 0 (number)
+leading: (16) 1 (string) = 1 (number)
+leading: (17) Hello World! (string) = -2147483648 (number)
+leading: (18) true (string) = -2147483648 (number)
+leading: (19) _level0 (string) = -2147483648 (number)
+leading: (20) _level0 (movieclip) = -2147483648 (number)
+leading: (21) [object Object] (object) = -2147483648 (number)
+leading: (22) [type Function] (function) = -2147483648 (number)
+valueOf called
+valueOf called
+toString called
+leading: (23) [type Object] (object) = -2147483648 (number)
+toString called with 
+leading: (24) [type Object] (object) = -2147483648 (number)
+valueOf called with 
+valueOf called with 
+leading: (25) [object Object] (object) = -2147483648 (number)
+leading: (26) undefined (object) = -2147483648 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+leading: (27) undefined (object) = -2147483648 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+leading: (28) null (object) = -2147483648 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+leading: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+leading: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+leading: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+leading: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+leading: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+leading: (34) -1 (object) = -1 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+leading: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+leading: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+leading: (37) -Infinity (object) = -2147483648 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+leading: (38) NaN (object) = -2147483648 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+leading: (39)  (object) = -2147483648 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+leading: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+leading: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+leading: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+leading: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+leading: (44) Hello World! (object) = -2147483648 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+leading: (45) true (object) = -2147483648 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+leading: (46) _level0 (object) = -2147483648 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+leading: (47) _level0 (object) = -2147483648 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+leading: (48) [type Object] (object) = -2147483648 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+leading: (49) [type Object] (object) = -2147483648 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+leading: (50) [type Object] (object) = -2147483648 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+leading: (51) [type Object] (object) = -2147483648 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+leading: (52) [type Object] (object) = -2147483648 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+leading: (53) [type Object] (object) = -2147483648 (number)
+leading: left (string) = -2147483648 (number)
+leading: center (string) = -2147483648 (number)
+leading: LEFT (string) = -2147483648 (number)
+leading: right (string) = -2147483648 (number)
+leading: justify (string) = -2147483648 (number)
+leading: leFT (string) = -2147483648 (number)
+leading: inline (string) = -2147483648 (number)
+leading: block (string) = -2147483648 (number)
+leading: none (string) = -2147483648 (number)
+leading: http://www.google.com (string) = -2147483648 (number)
+leading: _typewriter (string) = -2147483648 (number)
+leading: sans-serif (string) = -2147483648 (number)
+leading: _self (string) = -2147483648 (number)
+leading: _blank (string) = -2147483648 (number)
+leading: _parent (string) = -2147483648 (number)
+leading: _asdfa (string) = -2147483648 (number)
+leading: 52.5 (number) = 52 (number)
+leading: 1 (number) = 1 (number)
+leading: 0 (number) = 0 (number)
+leading: -1 (number) = -1 (number)
+leading: -52.5 (number) = -52 (number)
+leading: NaN (number) = -2147483648 (number)
+leading: Infinity (number) = -2147483648 (number)
+leading: -Infinity (number) = -2147483648 (number)
+leading: undefined (undefined) = null (null)
+leading:  (string) = -2147483648 (number)
+leading: undefined (string) = -2147483648 (number)
+leading:  (object) = -2147483648 (number)
+leading: 4,8,12 (object) = -2147483648 (number)
+leading: moi,terve (object) = -2147483648 (number)
+leading: 4812 (string) = 4812 (number)
+leading: 4,8,12 (string) = -2147483648 (number)
+leading: true (boolean) = 1 (number)
+leading: false (boolean) = 0 (number)
+leading: null (null) = null (null)
+leading: -2147483648 (number) = -2147483648 (number)
+leading: -2147483650 (number) = -2147483648 (number)
+leading: 2147483648 (number) = -2147483648 (number)
+leading: 2147483650 (number) = -2147483648 (number)
+leading:  (object) = -2147483648 (number)
+leading:  (object) = -2147483648 (number)
+leading: 1,2 (object) = -2147483648 (number)
+leading:  (object) = -2147483648 (number)
+leading: null (null) = null (null)
+leading:  (object) = -2147483648 (number)
+leading: a,b,3,-2,-2 (object) = -2147483648 (number)
+Testing: leftMargin
+null
+leftMargin: (0) undefined (undefined) = null (null)
+leftMargin: (1) null (null) = null (null)
+leftMargin: (2) true (boolean) = 1 (number)
+leftMargin: (3) false (boolean) = 0 (number)
+leftMargin: (4) 0 (number) = 0 (number)
+leftMargin: (5) 1 (number) = 1 (number)
+leftMargin: (6) 0.5 (number) = 0 (number)
+leftMargin: (7) -1 (number) = 0 (number)
+leftMargin: (8) -0.5 (number) = 0 (number)
+leftMargin: (9) Infinity (number) = -2147483648 (number)
+leftMargin: (10) -Infinity (number) = 0 (number)
+leftMargin: (11) NaN (number) = 0 (number)
+leftMargin: (12)  (string) = 0 (number)
+leftMargin: (13) 0 (string) = 0 (number)
+leftMargin: (14) -0 (string) = 0 (number)
+leftMargin: (15) 0.0 (string) = 0 (number)
+leftMargin: (16) 1 (string) = 1 (number)
+leftMargin: (17) Hello World! (string) = 0 (number)
+leftMargin: (18) true (string) = 0 (number)
+leftMargin: (19) _level0 (string) = 0 (number)
+leftMargin: (20) _level0 (movieclip) = 0 (number)
+leftMargin: (21) [object Object] (object) = 0 (number)
+leftMargin: (22) [type Function] (function) = 0 (number)
+valueOf called
+valueOf called
+toString called
+leftMargin: (23) [type Object] (object) = 0 (number)
+toString called with 
+leftMargin: (24) [type Object] (object) = 0 (number)
+valueOf called with 
+valueOf called with 
+leftMargin: (25) [object Object] (object) = 0 (number)
+leftMargin: (26) undefined (object) = 0 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+leftMargin: (27) undefined (object) = 0 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+leftMargin: (28) null (object) = 0 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+leftMargin: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+leftMargin: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+leftMargin: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+leftMargin: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+leftMargin: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+leftMargin: (34) -1 (object) = 0 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+leftMargin: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+leftMargin: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+leftMargin: (37) -Infinity (object) = 0 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+leftMargin: (38) NaN (object) = 0 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+leftMargin: (39)  (object) = 0 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+leftMargin: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+leftMargin: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+leftMargin: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+leftMargin: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+leftMargin: (44) Hello World! (object) = 0 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+leftMargin: (45) true (object) = 0 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+leftMargin: (46) _level0 (object) = 0 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+leftMargin: (47) _level0 (object) = 0 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+leftMargin: (48) [type Object] (object) = 0 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+leftMargin: (49) [type Object] (object) = 0 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+leftMargin: (50) [type Object] (object) = 0 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+leftMargin: (51) [type Object] (object) = 0 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+leftMargin: (52) [type Object] (object) = 0 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+leftMargin: (53) [type Object] (object) = 0 (number)
+leftMargin: left (string) = 0 (number)
+leftMargin: center (string) = 0 (number)
+leftMargin: LEFT (string) = 0 (number)
+leftMargin: right (string) = 0 (number)
+leftMargin: justify (string) = 0 (number)
+leftMargin: leFT (string) = 0 (number)
+leftMargin: inline (string) = 0 (number)
+leftMargin: block (string) = 0 (number)
+leftMargin: none (string) = 0 (number)
+leftMargin: http://www.google.com (string) = 0 (number)
+leftMargin: _typewriter (string) = 0 (number)
+leftMargin: sans-serif (string) = 0 (number)
+leftMargin: _self (string) = 0 (number)
+leftMargin: _blank (string) = 0 (number)
+leftMargin: _parent (string) = 0 (number)
+leftMargin: _asdfa (string) = 0 (number)
+leftMargin: 52.5 (number) = 52 (number)
+leftMargin: 1 (number) = 1 (number)
+leftMargin: 0 (number) = 0 (number)
+leftMargin: -1 (number) = 0 (number)
+leftMargin: -52.5 (number) = 0 (number)
+leftMargin: NaN (number) = 0 (number)
+leftMargin: Infinity (number) = -2147483648 (number)
+leftMargin: -Infinity (number) = 0 (number)
+leftMargin: undefined (undefined) = null (null)
+leftMargin:  (string) = 0 (number)
+leftMargin: undefined (string) = 0 (number)
+leftMargin:  (object) = 0 (number)
+leftMargin: 4,8,12 (object) = 0 (number)
+leftMargin: moi,terve (object) = 0 (number)
+leftMargin: 4812 (string) = 4812 (number)
+leftMargin: 4,8,12 (string) = 0 (number)
+leftMargin: true (boolean) = 1 (number)
+leftMargin: false (boolean) = 0 (number)
+leftMargin: null (null) = null (null)
+leftMargin: -2147483648 (number) = 0 (number)
+leftMargin: -2147483650 (number) = 0 (number)
+leftMargin: 2147483648 (number) = -2147483648 (number)
+leftMargin: 2147483650 (number) = -2147483648 (number)
+leftMargin:  (object) = 0 (number)
+leftMargin:  (object) = 0 (number)
+leftMargin: 1,2 (object) = 0 (number)
+leftMargin:  (object) = 0 (number)
+leftMargin: null (null) = null (null)
+leftMargin:  (object) = 0 (number)
+leftMargin: a,b,3,-2,-2 (object) = 0 (number)
+Testing: letterSpacing
+null
+letterSpacing: (0) undefined (undefined) = null (null)
+letterSpacing: (1) null (null) = null (null)
+letterSpacing: (2) true (boolean) = 1 (number)
+letterSpacing: (3) false (boolean) = 0 (number)
+letterSpacing: (4) 0 (number) = 0 (number)
+letterSpacing: (5) 1 (number) = 1 (number)
+letterSpacing: (6) 0.5 (number) = 0.5 (number)
+letterSpacing: (7) -1 (number) = -1 (number)
+letterSpacing: (8) -0.5 (number) = -0.5 (number)
+letterSpacing: (9) Infinity (number) = Infinity (number)
+letterSpacing: (10) -Infinity (number) = -Infinity (number)
+letterSpacing: (11) NaN (number) = NaN (number)
+letterSpacing: (12)  (string) = NaN (number)
+letterSpacing: (13) 0 (string) = 0 (number)
+letterSpacing: (14) -0 (string) = 0 (number)
+letterSpacing: (15) 0.0 (string) = 0 (number)
+letterSpacing: (16) 1 (string) = 1 (number)
+letterSpacing: (17) Hello World! (string) = NaN (number)
+letterSpacing: (18) true (string) = NaN (number)
+letterSpacing: (19) _level0 (string) = NaN (number)
+letterSpacing: (20) _level0 (movieclip) = NaN (number)
+letterSpacing: (21) [object Object] (object) = NaN (number)
+letterSpacing: (22) [type Function] (function) = NaN (number)
+valueOf called
+valueOf called
+toString called
+letterSpacing: (23) [type Object] (object) = NaN (number)
+toString called with 
+letterSpacing: (24) [type Object] (object) = NaN (number)
+valueOf called with 
+valueOf called with 
+letterSpacing: (25) [object Object] (object) = NaN (number)
+letterSpacing: (26) undefined (object) = NaN (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+letterSpacing: (27) undefined (object) = NaN (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+letterSpacing: (28) null (object) = NaN (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+letterSpacing: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+letterSpacing: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+letterSpacing: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+letterSpacing: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+letterSpacing: (33) 0.5 (object) = 0.5 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+letterSpacing: (34) -1 (object) = -1 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+letterSpacing: (35) -0.5 (object) = -0.5 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+letterSpacing: (36) Infinity (object) = Infinity (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+letterSpacing: (37) -Infinity (object) = -Infinity (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+letterSpacing: (38) NaN (object) = NaN (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+letterSpacing: (39)  (object) = NaN (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+letterSpacing: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+letterSpacing: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+letterSpacing: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+letterSpacing: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+letterSpacing: (44) Hello World! (object) = NaN (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+letterSpacing: (45) true (object) = NaN (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+letterSpacing: (46) _level0 (object) = NaN (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+letterSpacing: (47) _level0 (object) = NaN (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+letterSpacing: (48) [type Object] (object) = NaN (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+letterSpacing: (49) [type Object] (object) = NaN (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+letterSpacing: (50) [type Object] (object) = NaN (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+letterSpacing: (51) [type Object] (object) = NaN (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+letterSpacing: (52) [type Object] (object) = NaN (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+letterSpacing: (53) [type Object] (object) = NaN (number)
+letterSpacing: left (string) = NaN (number)
+letterSpacing: center (string) = NaN (number)
+letterSpacing: LEFT (string) = NaN (number)
+letterSpacing: right (string) = NaN (number)
+letterSpacing: justify (string) = NaN (number)
+letterSpacing: leFT (string) = NaN (number)
+letterSpacing: inline (string) = NaN (number)
+letterSpacing: block (string) = NaN (number)
+letterSpacing: none (string) = NaN (number)
+letterSpacing: http://www.google.com (string) = NaN (number)
+letterSpacing: _typewriter (string) = NaN (number)
+letterSpacing: sans-serif (string) = NaN (number)
+letterSpacing: _self (string) = NaN (number)
+letterSpacing: _blank (string) = NaN (number)
+letterSpacing: _parent (string) = NaN (number)
+letterSpacing: _asdfa (string) = NaN (number)
+letterSpacing: 52.5 (number) = 52.5 (number)
+letterSpacing: 1 (number) = 1 (number)
+letterSpacing: 0 (number) = 0 (number)
+letterSpacing: -1 (number) = -1 (number)
+letterSpacing: -52.5 (number) = -52.5 (number)
+letterSpacing: NaN (number) = NaN (number)
+letterSpacing: Infinity (number) = Infinity (number)
+letterSpacing: -Infinity (number) = -Infinity (number)
+letterSpacing: undefined (undefined) = null (null)
+letterSpacing:  (string) = NaN (number)
+letterSpacing: undefined (string) = NaN (number)
+letterSpacing:  (object) = NaN (number)
+letterSpacing: 4,8,12 (object) = NaN (number)
+letterSpacing: moi,terve (object) = NaN (number)
+letterSpacing: 4812 (string) = 4812 (number)
+letterSpacing: 4,8,12 (string) = NaN (number)
+letterSpacing: true (boolean) = 1 (number)
+letterSpacing: false (boolean) = 0 (number)
+letterSpacing: null (null) = null (null)
+letterSpacing: -2147483648 (number) = -2147483648 (number)
+letterSpacing: -2147483650 (number) = -2147483650 (number)
+letterSpacing: 2147483648 (number) = 2147483648 (number)
+letterSpacing: 2147483650 (number) = 2147483650 (number)
+letterSpacing:  (object) = NaN (number)
+letterSpacing:  (object) = NaN (number)
+letterSpacing: 1,2 (object) = NaN (number)
+letterSpacing:  (object) = NaN (number)
+letterSpacing: null (null) = null (null)
+letterSpacing:  (object) = NaN (number)
+letterSpacing: a,b,3,-2,-2 (object) = NaN (number)
+Testing: rightMargin
+null
+rightMargin: (0) undefined (undefined) = null (null)
+rightMargin: (1) null (null) = null (null)
+rightMargin: (2) true (boolean) = 1 (number)
+rightMargin: (3) false (boolean) = 0 (number)
+rightMargin: (4) 0 (number) = 0 (number)
+rightMargin: (5) 1 (number) = 1 (number)
+rightMargin: (6) 0.5 (number) = 0 (number)
+rightMargin: (7) -1 (number) = 0 (number)
+rightMargin: (8) -0.5 (number) = 0 (number)
+rightMargin: (9) Infinity (number) = -2147483648 (number)
+rightMargin: (10) -Infinity (number) = 0 (number)
+rightMargin: (11) NaN (number) = 0 (number)
+rightMargin: (12)  (string) = 0 (number)
+rightMargin: (13) 0 (string) = 0 (number)
+rightMargin: (14) -0 (string) = 0 (number)
+rightMargin: (15) 0.0 (string) = 0 (number)
+rightMargin: (16) 1 (string) = 1 (number)
+rightMargin: (17) Hello World! (string) = 0 (number)
+rightMargin: (18) true (string) = 0 (number)
+rightMargin: (19) _level0 (string) = 0 (number)
+rightMargin: (20) _level0 (movieclip) = 0 (number)
+rightMargin: (21) [object Object] (object) = 0 (number)
+rightMargin: (22) [type Function] (function) = 0 (number)
+valueOf called
+valueOf called
+toString called
+rightMargin: (23) [type Object] (object) = 0 (number)
+toString called with 
+rightMargin: (24) [type Object] (object) = 0 (number)
+valueOf called with 
+valueOf called with 
+rightMargin: (25) [object Object] (object) = 0 (number)
+rightMargin: (26) undefined (object) = 0 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+rightMargin: (27) undefined (object) = 0 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+rightMargin: (28) null (object) = 0 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+rightMargin: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+rightMargin: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+rightMargin: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+rightMargin: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+rightMargin: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+rightMargin: (34) -1 (object) = 0 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+rightMargin: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+rightMargin: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+rightMargin: (37) -Infinity (object) = 0 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+rightMargin: (38) NaN (object) = 0 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+rightMargin: (39)  (object) = 0 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+rightMargin: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+rightMargin: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+rightMargin: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+rightMargin: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+rightMargin: (44) Hello World! (object) = 0 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+rightMargin: (45) true (object) = 0 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+rightMargin: (46) _level0 (object) = 0 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+rightMargin: (47) _level0 (object) = 0 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+rightMargin: (48) [type Object] (object) = 0 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+rightMargin: (49) [type Object] (object) = 0 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+rightMargin: (50) [type Object] (object) = 0 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+rightMargin: (51) [type Object] (object) = 0 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+rightMargin: (52) [type Object] (object) = 0 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+rightMargin: (53) [type Object] (object) = 0 (number)
+rightMargin: left (string) = 0 (number)
+rightMargin: center (string) = 0 (number)
+rightMargin: LEFT (string) = 0 (number)
+rightMargin: right (string) = 0 (number)
+rightMargin: justify (string) = 0 (number)
+rightMargin: leFT (string) = 0 (number)
+rightMargin: inline (string) = 0 (number)
+rightMargin: block (string) = 0 (number)
+rightMargin: none (string) = 0 (number)
+rightMargin: http://www.google.com (string) = 0 (number)
+rightMargin: _typewriter (string) = 0 (number)
+rightMargin: sans-serif (string) = 0 (number)
+rightMargin: _self (string) = 0 (number)
+rightMargin: _blank (string) = 0 (number)
+rightMargin: _parent (string) = 0 (number)
+rightMargin: _asdfa (string) = 0 (number)
+rightMargin: 52.5 (number) = 52 (number)
+rightMargin: 1 (number) = 1 (number)
+rightMargin: 0 (number) = 0 (number)
+rightMargin: -1 (number) = 0 (number)
+rightMargin: -52.5 (number) = 0 (number)
+rightMargin: NaN (number) = 0 (number)
+rightMargin: Infinity (number) = -2147483648 (number)
+rightMargin: -Infinity (number) = 0 (number)
+rightMargin: undefined (undefined) = null (null)
+rightMargin:  (string) = 0 (number)
+rightMargin: undefined (string) = 0 (number)
+rightMargin:  (object) = 0 (number)
+rightMargin: 4,8,12 (object) = 0 (number)
+rightMargin: moi,terve (object) = 0 (number)
+rightMargin: 4812 (string) = 4812 (number)
+rightMargin: 4,8,12 (string) = 0 (number)
+rightMargin: true (boolean) = 1 (number)
+rightMargin: false (boolean) = 0 (number)
+rightMargin: null (null) = null (null)
+rightMargin: -2147483648 (number) = 0 (number)
+rightMargin: -2147483650 (number) = 0 (number)
+rightMargin: 2147483648 (number) = -2147483648 (number)
+rightMargin: 2147483650 (number) = -2147483648 (number)
+rightMargin:  (object) = 0 (number)
+rightMargin:  (object) = 0 (number)
+rightMargin: 1,2 (object) = 0 (number)
+rightMargin:  (object) = 0 (number)
+rightMargin: null (null) = null (null)
+rightMargin:  (object) = 0 (number)
+rightMargin: a,b,3,-2,-2 (object) = 0 (number)
+Testing: size
+null
+size: (0) undefined (undefined) = null (null)
+size: (1) null (null) = null (null)
+size: (2) true (boolean) = 1 (number)
+size: (3) false (boolean) = 0 (number)
+size: (4) 0 (number) = 0 (number)
+size: (5) 1 (number) = 1 (number)
+size: (6) 0.5 (number) = 0 (number)
+size: (7) -1 (number) = -1 (number)
+size: (8) -0.5 (number) = 0 (number)
+size: (9) Infinity (number) = -2147483648 (number)
+size: (10) -Infinity (number) = -2147483648 (number)
+size: (11) NaN (number) = -2147483648 (number)
+size: (12)  (string) = -2147483648 (number)
+size: (13) 0 (string) = 0 (number)
+size: (14) -0 (string) = 0 (number)
+size: (15) 0.0 (string) = 0 (number)
+size: (16) 1 (string) = 1 (number)
+size: (17) Hello World! (string) = -2147483648 (number)
+size: (18) true (string) = -2147483648 (number)
+size: (19) _level0 (string) = -2147483648 (number)
+size: (20) _level0 (movieclip) = -2147483648 (number)
+size: (21) [object Object] (object) = -2147483648 (number)
+size: (22) [type Function] (function) = -2147483648 (number)
+valueOf called
+valueOf called
+toString called
+size: (23) [type Object] (object) = -2147483648 (number)
+toString called with 
+size: (24) [type Object] (object) = -2147483648 (number)
+valueOf called with 
+valueOf called with 
+size: (25) [object Object] (object) = -2147483648 (number)
+size: (26) undefined (object) = -2147483648 (number)
+0: valueOf!
+0: valueOf!
+0: toString!
+size: (27) undefined (object) = -2147483648 (number)
+1: valueOf!
+1: valueOf!
+1: toString!
+size: (28) null (object) = -2147483648 (number)
+2: valueOf!
+2: valueOf!
+2: toString!
+size: (29) true (object) = 1 (number)
+3: valueOf!
+3: valueOf!
+3: toString!
+size: (30) false (object) = 0 (number)
+4: valueOf!
+4: valueOf!
+4: toString!
+size: (31) 0 (object) = 0 (number)
+5: valueOf!
+5: valueOf!
+5: toString!
+size: (32) 1 (object) = 1 (number)
+6: valueOf!
+6: valueOf!
+6: toString!
+size: (33) 0.5 (object) = 0 (number)
+7: valueOf!
+7: valueOf!
+7: toString!
+size: (34) -1 (object) = -1 (number)
+8: valueOf!
+8: valueOf!
+8: toString!
+size: (35) -0.5 (object) = 0 (number)
+9: valueOf!
+9: valueOf!
+9: toString!
+size: (36) Infinity (object) = -2147483648 (number)
+10: valueOf!
+10: valueOf!
+10: toString!
+size: (37) -Infinity (object) = -2147483648 (number)
+11: valueOf!
+11: valueOf!
+11: toString!
+size: (38) NaN (object) = -2147483648 (number)
+12: valueOf!
+12: valueOf!
+12: toString!
+size: (39)  (object) = -2147483648 (number)
+13: valueOf!
+13: valueOf!
+13: toString!
+size: (40) 0 (object) = 0 (number)
+14: valueOf!
+14: valueOf!
+14: toString!
+size: (41) -0 (object) = 0 (number)
+15: valueOf!
+15: valueOf!
+15: toString!
+size: (42) 0.0 (object) = 0 (number)
+16: valueOf!
+16: valueOf!
+16: toString!
+size: (43) 1 (object) = 1 (number)
+17: valueOf!
+17: valueOf!
+17: toString!
+size: (44) Hello World! (object) = -2147483648 (number)
+18: valueOf!
+18: valueOf!
+18: toString!
+size: (45) true (object) = -2147483648 (number)
+19: valueOf!
+19: valueOf!
+19: toString!
+size: (46) _level0 (object) = -2147483648 (number)
+20: valueOf!
+20: valueOf!
+20: toString!
+size: (47) _level0 (object) = -2147483648 (number)
+21: valueOf!
+21: valueOf!
+21: toString!
+size: (48) [type Object] (object) = -2147483648 (number)
+22: valueOf!
+22: valueOf!
+22: toString!
+size: (49) [type Object] (object) = -2147483648 (number)
+23: valueOf!
+23: valueOf!
+23: toString!
+size: (50) [type Object] (object) = -2147483648 (number)
+24: valueOf!
+24: valueOf!
+24: toString!
+size: (51) [type Object] (object) = -2147483648 (number)
+25: valueOf!
+25: valueOf!
+25: toString!
+size: (52) [type Object] (object) = -2147483648 (number)
+26: valueOf!
+26: valueOf!
+26: toString!
+size: (53) [type Object] (object) = -2147483648 (number)
+size: left (string) = -2147483648 (number)
+size: center (string) = -2147483648 (number)
+size: LEFT (string) = -2147483648 (number)
+size: right (string) = -2147483648 (number)
+size: justify (string) = -2147483648 (number)
+size: leFT (string) = -2147483648 (number)
+size: inline (string) = -2147483648 (number)
+size: block (string) = -2147483648 (number)
+size: none (string) = -2147483648 (number)
+size: http://www.google.com (string) = -2147483648 (number)
+size: _typewriter (string) = -2147483648 (number)
+size: sans-serif (string) = -2147483648 (number)
+size: _self (string) = -2147483648 (number)
+size: _blank (string) = -2147483648 (number)
+size: _parent (string) = -2147483648 (number)
+size: _asdfa (string) = -2147483648 (number)
+size: 52.5 (number) = 52 (number)
+size: 1 (number) = 1 (number)
+size: 0 (number) = 0 (number)
+size: -1 (number) = -1 (number)
+size: -52.5 (number) = -52 (number)
+size: NaN (number) = -2147483648 (number)
+size: Infinity (number) = -2147483648 (number)
+size: -Infinity (number) = -2147483648 (number)
+size: undefined (undefined) = null (null)
+size:  (string) = -2147483648 (number)
+size: undefined (string) = -2147483648 (number)
+size:  (object) = -2147483648 (number)
+size: 4,8,12 (object) = -2147483648 (number)
+size: moi,terve (object) = -2147483648 (number)
+size: 4812 (string) = 4812 (number)
+size: 4,8,12 (string) = -2147483648 (number)
+size: true (boolean) = 1 (number)
+size: false (boolean) = 0 (number)
+size: null (null) = null (null)
+size: -2147483648 (number) = -2147483648 (number)
+size: -2147483650 (number) = -2147483648 (number)
+size: 2147483648 (number) = -2147483648 (number)
+size: 2147483650 (number) = -2147483648 (number)
+size:  (object) = -2147483648 (number)
+size:  (object) = -2147483648 (number)
+size: 1,2 (object) = -2147483648 (number)
+size:  (object) = -2147483648 (number)
+size: null (null) = null (null)
+size:  (object) = -2147483648 (number)
+size: a,b,3,-2,-2 (object) = -2147483648 (number)
+Testing: tabStops
+null
+tabStops: (0) undefined (undefined) = null (null)
+tabStops: (1) null (null) = null (null)
+tabStops: (2) true (boolean) = null (null)
+tabStops: (3) false (boolean) = null (null)
+tabStops: (4) 0 (number) = null (null)
+tabStops: (5) 1 (number) = null (null)
+tabStops: (6) 0.5 (number) = null (null)
+tabStops: (7) -1 (number) = null (null)
+tabStops: (8) -0.5 (number) = null (null)
+tabStops: (9) Infinity (number) = null (null)
+tabStops: (10) -Infinity (number) = null (null)
+tabStops: (11) NaN (number) = null (null)
+tabStops: (12)  (string) = null (null)
+tabStops: (13) 0 (string) = -2147483648 (object)
+tabStops: (14) -0 (string) = -2147483648,-2147483648 (object)
+tabStops: (15) 0.0 (string) = -2147483648,-2147483648,-2147483648 (object)
+tabStops: (16) 1 (string) = -2147483648 (object)
+tabStops: (17) Hello World! (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: (18) true (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: (19) _level0 (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: (20) _level0 (movieclip) =  (object)
+tabStops: (21) [object Object] (object) =  (object)
+tabStops: (22) [type Function] (function) =  (object)
+valueOf called
+valueOf called
+toString called
+tabStops: (23) [type Object] (object) =  (object)
+toString called with 
+tabStops: (24) [type Object] (object) =  (object)
+valueOf called with 
+valueOf called with 
+tabStops: (25) [object Object] (object) =  (object)
+tabStops: (26) undefined (object) =  (object)
+0: valueOf!
+0: valueOf!
+0: toString!
+tabStops: (27) undefined (object) =  (object)
+1: valueOf!
+1: valueOf!
+1: toString!
+tabStops: (28) null (object) =  (object)
+2: valueOf!
+2: valueOf!
+2: toString!
+tabStops: (29) true (object) =  (object)
+3: valueOf!
+3: valueOf!
+3: toString!
+tabStops: (30) false (object) =  (object)
+4: valueOf!
+4: valueOf!
+4: toString!
+tabStops: (31) 0 (object) =  (object)
+5: valueOf!
+5: valueOf!
+5: toString!
+tabStops: (32) 1 (object) =  (object)
+6: valueOf!
+6: valueOf!
+6: toString!
+tabStops: (33) 0.5 (object) =  (object)
+7: valueOf!
+7: valueOf!
+7: toString!
+tabStops: (34) -1 (object) =  (object)
+8: valueOf!
+8: valueOf!
+8: toString!
+tabStops: (35) -0.5 (object) =  (object)
+9: valueOf!
+9: valueOf!
+9: toString!
+tabStops: (36) Infinity (object) =  (object)
+10: valueOf!
+10: valueOf!
+10: toString!
+tabStops: (37) -Infinity (object) =  (object)
+11: valueOf!
+11: valueOf!
+11: toString!
+tabStops: (38) NaN (object) =  (object)
+12: valueOf!
+12: valueOf!
+12: toString!
+tabStops: (39)  (object) =  (object)
+13: valueOf!
+13: valueOf!
+13: toString!
+tabStops: (40) 0 (object) =  (object)
+14: valueOf!
+14: valueOf!
+14: toString!
+tabStops: (41) -0 (object) =  (object)
+15: valueOf!
+15: valueOf!
+15: toString!
+tabStops: (42) 0.0 (object) =  (object)
+16: valueOf!
+16: valueOf!
+16: toString!
+tabStops: (43) 1 (object) =  (object)
+17: valueOf!
+17: valueOf!
+17: toString!
+tabStops: (44) Hello World! (object) =  (object)
+18: valueOf!
+18: valueOf!
+18: toString!
+tabStops: (45) true (object) =  (object)
+19: valueOf!
+19: valueOf!
+19: toString!
+tabStops: (46) _level0 (object) =  (object)
+20: valueOf!
+20: valueOf!
+20: toString!
+tabStops: (47) _level0 (object) =  (object)
+21: valueOf!
+21: valueOf!
+21: toString!
+tabStops: (48) [type Object] (object) =  (object)
+22: valueOf!
+22: valueOf!
+22: toString!
+tabStops: (49) [type Object] (object) =  (object)
+23: valueOf!
+23: valueOf!
+23: toString!
+tabStops: (50) [type Object] (object) =  (object)
+24: valueOf!
+24: valueOf!
+24: toString!
+tabStops: (51) [type Object] (object) =  (object)
+25: valueOf!
+25: valueOf!
+25: toString!
+tabStops: (52) [type Object] (object) =  (object)
+26: valueOf!
+26: valueOf!
+26: toString!
+tabStops: (53) [type Object] (object) =  (object)
+tabStops: left (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: center (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: LEFT (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: right (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: justify (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: leFT (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: inline (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: block (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: none (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: http://www.google.com (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: _typewriter (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: sans-serif (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: _self (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: _blank (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: _parent (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: _asdfa (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: 52.5 (number) =  (object)
+tabStops: 1 (number) =  (object)
+tabStops: 0 (number) =  (object)
+tabStops: -1 (number) =  (object)
+tabStops: -52.5 (number) =  (object)
+tabStops: NaN (number) =  (object)
+tabStops: Infinity (number) =  (object)
+tabStops: -Infinity (number) =  (object)
+tabStops: undefined (undefined) = null (null)
+tabStops:  (string) = null (null)
+tabStops: undefined (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops:  (object) =  (object)
+tabStops: 4,8,12 (object) = 4,8,12 (object)
+tabStops: moi,terve (object) = -2147483648,-2147483648 (object)
+tabStops: 4812 (string) = -2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: 4,8,12 (string) = -2147483648,-2147483648,-2147483648,-2147483648,-2147483648,-2147483648 (object)
+tabStops: true (boolean) =  (object)
+tabStops: false (boolean) =  (object)
+tabStops: null (null) = null (null)
+tabStops: -2147483648 (number) = null (null)
+tabStops: -2147483650 (number) = null (null)
+tabStops: 2147483648 (number) = null (null)
+tabStops: 2147483650 (number) = null (null)
+tabStops:  (object) = null (null)
+tabStops:  (object) = null (null)
+tabStops: 1,2 (object) = 1,2 (object)
+tabStops:  (object) =  (object)
+tabStops: null (null) = null (null)
+tabStops:  (object) = null (null)
+tabStops: a,b,3,-2,-2 (object) = -2147483648,-2147483648,3,-2,-2 (object)
+Testing: target
+null
+target: (0) undefined (undefined) = null (null)
+target: (1) null (null) = null (null)
+target: (2) true (boolean) = true (string)
+target: (3) false (boolean) = false (string)
+target: (4) 0 (number) = 0 (string)
+target: (5) 1 (number) = 1 (string)
+target: (6) 0.5 (number) = 0.5 (string)
+target: (7) -1 (number) = -1 (string)
+target: (8) -0.5 (number) = -0.5 (string)
+target: (9) Infinity (number) = Infinity (string)
+target: (10) -Infinity (number) = -Infinity (string)
+target: (11) NaN (number) = NaN (string)
+target: (12)  (string) =  (string)
+target: (13) 0 (string) = 0 (string)
+target: (14) -0 (string) = -0 (string)
+target: (15) 0.0 (string) = 0.0 (string)
+target: (16) 1 (string) = 1 (string)
+target: (17) Hello World! (string) = Hello World! (string)
+target: (18) true (string) = true (string)
+target: (19) _level0 (string) = _level0 (string)
+target: (20) _level0 (movieclip) = _level0 (string)
+target: (21) [object Object] (object) = [object Object] (string)
+target: (22) [type Function] (function) = [type Function] (string)
+valueOf called
+valueOf called
+toString called
+target: (23) [type Object] (object) = [type Object] (string)
+toString called with 
+target: (24) [type Object] (object) = [type Object] (string)
+valueOf called with 
+valueOf called with 
+target: (25) [object Object] (object) = [object Object] (string)
+target: (26) undefined (object) = [type Object] (string)
+0: valueOf!
+0: valueOf!
+0: toString!
+target: (27) undefined (object) = [type Object] (string)
+1: valueOf!
+1: valueOf!
+1: toString!
+target: (28) null (object) = [type Object] (string)
+2: valueOf!
+2: valueOf!
+2: toString!
+target: (29) true (object) = [type Object] (string)
+3: valueOf!
+3: valueOf!
+3: toString!
+target: (30) false (object) = [type Object] (string)
+4: valueOf!
+4: valueOf!
+4: toString!
+target: (31) 0 (object) = [type Object] (string)
+5: valueOf!
+5: valueOf!
+5: toString!
+target: (32) 1 (object) = [type Object] (string)
+6: valueOf!
+6: valueOf!
+6: toString!
+target: (33) 0.5 (object) = [type Object] (string)
+7: valueOf!
+7: valueOf!
+7: toString!
+target: (34) -1 (object) = [type Object] (string)
+8: valueOf!
+8: valueOf!
+8: toString!
+target: (35) -0.5 (object) = [type Object] (string)
+9: valueOf!
+9: valueOf!
+9: toString!
+target: (36) Infinity (object) = [type Object] (string)
+10: valueOf!
+10: valueOf!
+10: toString!
+target: (37) -Infinity (object) = [type Object] (string)
+11: valueOf!
+11: valueOf!
+11: toString!
+target: (38) NaN (object) = [type Object] (string)
+12: valueOf!
+12: valueOf!
+12: toString!
+target: (39)  (object) =  (string)
+13: valueOf!
+13: valueOf!
+13: toString!
+target: (40) 0 (object) = 0 (string)
+14: valueOf!
+14: valueOf!
+14: toString!
+target: (41) -0 (object) = -0 (string)
+15: valueOf!
+15: valueOf!
+15: toString!
+target: (42) 0.0 (object) = 0.0 (string)
+16: valueOf!
+16: valueOf!
+16: toString!
+target: (43) 1 (object) = 1 (string)
+17: valueOf!
+17: valueOf!
+17: toString!
+target: (44) Hello World! (object) = Hello World! (string)
+18: valueOf!
+18: valueOf!
+18: toString!
+target: (45) true (object) = true (string)
+19: valueOf!
+19: valueOf!
+19: toString!
+target: (46) _level0 (object) = _level0 (string)
+20: valueOf!
+20: valueOf!
+20: toString!
+target: (47) _level0 (object) = [type Object] (string)
+21: valueOf!
+21: valueOf!
+21: toString!
+target: (48) [type Object] (object) = [type Object] (string)
+22: valueOf!
+22: valueOf!
+22: toString!
+target: (49) [type Object] (object) = [type Object] (string)
+23: valueOf!
+23: valueOf!
+23: toString!
+target: (50) [type Object] (object) = [type Object] (string)
+24: valueOf!
+24: valueOf!
+24: toString!
+target: (51) [type Object] (object) = [type Object] (string)
+25: valueOf!
+25: valueOf!
+25: toString!
+target: (52) [type Object] (object) = [type Object] (string)
+26: valueOf!
+26: valueOf!
+26: toString!
+target: (53) [type Object] (object) = [type Object] (string)
+target: left (string) = left (string)
+target: center (string) = center (string)
+target: LEFT (string) = LEFT (string)
+target: right (string) = right (string)
+target: justify (string) = justify (string)
+target: leFT (string) = leFT (string)
+target: inline (string) = inline (string)
+target: block (string) = block (string)
+target: none (string) = none (string)
+target: http://www.google.com (string) = http://www.google.com (string)
+target: _typewriter (string) = _typewriter (string)
+target: sans-serif (string) = sans-serif (string)
+target: _self (string) = _self (string)
+target: _blank (string) = _blank (string)
+target: _parent (string) = _parent (string)
+target: _asdfa (string) = _asdfa (string)
+target: 52.5 (number) = 52.5 (string)
+target: 1 (number) = 1 (string)
+target: 0 (number) = 0 (string)
+target: -1 (number) = -1 (string)
+target: -52.5 (number) = -52.5 (string)
+target: NaN (number) = NaN (string)
+target: Infinity (number) = Infinity (string)
+target: -Infinity (number) = -Infinity (string)
+target: undefined (undefined) = null (null)
+target:  (string) =  (string)
+target: undefined (string) = undefined (string)
+target:  (object) =  (string)
+target: 4,8,12 (object) = 4,8,12 (string)
+target: moi,terve (object) = moi,terve (string)
+target: 4812 (string) = 4812 (string)
+target: 4,8,12 (string) = 4,8,12 (string)
+target: true (boolean) = true (string)
+target: false (boolean) = false (string)
+target: null (null) = null (null)
+target: -2147483648 (number) = -2147483648 (string)
+target: -2147483650 (number) = -2147483650 (string)
+target: 2147483648 (number) = 2147483648 (string)
+target: 2147483650 (number) = 2147483650 (string)
+target:  (object) =  (string)
+target:  (object) =  (string)
+target: 1,2 (object) = 1,2 (string)
+target:  (object) =  (string)
+target: null (null) = null (null)
+target:  (object) =  (string)
+target: a,b,3,-2,-2 (object) = a,b,3,-2,-2 (string)
+Testing: underline
+null
+underline: (0) undefined (undefined) = null (null)
+underline: (1) null (null) = null (null)
+underline: (2) true (boolean) = true (boolean)
+underline: (3) false (boolean) = false (boolean)
+underline: (4) 0 (number) = false (boolean)
+underline: (5) 1 (number) = true (boolean)
+underline: (6) 0.5 (number) = true (boolean)
+underline: (7) -1 (number) = true (boolean)
+underline: (8) -0.5 (number) = true (boolean)
+underline: (9) Infinity (number) = true (boolean)
+underline: (10) -Infinity (number) = true (boolean)
+underline: (11) NaN (number) = false (boolean)
+underline: (12)  (string) = false (boolean)
+underline: (13) 0 (string) = true (boolean)
+underline: (14) -0 (string) = true (boolean)
+underline: (15) 0.0 (string) = true (boolean)
+underline: (16) 1 (string) = true (boolean)
+underline: (17) Hello World! (string) = true (boolean)
+underline: (18) true (string) = true (boolean)
+underline: (19) _level0 (string) = true (boolean)
+underline: (20) _level0 (movieclip) = true (boolean)
+underline: (21) [object Object] (object) = true (boolean)
+underline: (22) [type Function] (function) = true (boolean)
+valueOf called
+valueOf called
+toString called
+underline: (23) [type Object] (object) = true (boolean)
+toString called with 
+underline: (24) [type Object] (object) = true (boolean)
+valueOf called with 
+valueOf called with 
+underline: (25) [object Object] (object) = true (boolean)
+underline: (26) undefined (object) = true (boolean)
+0: valueOf!
+0: valueOf!
+0: toString!
+underline: (27) undefined (object) = true (boolean)
+1: valueOf!
+1: valueOf!
+1: toString!
+underline: (28) null (object) = true (boolean)
+2: valueOf!
+2: valueOf!
+2: toString!
+underline: (29) true (object) = true (boolean)
+3: valueOf!
+3: valueOf!
+3: toString!
+underline: (30) false (object) = true (boolean)
+4: valueOf!
+4: valueOf!
+4: toString!
+underline: (31) 0 (object) = true (boolean)
+5: valueOf!
+5: valueOf!
+5: toString!
+underline: (32) 1 (object) = true (boolean)
+6: valueOf!
+6: valueOf!
+6: toString!
+underline: (33) 0.5 (object) = true (boolean)
+7: valueOf!
+7: valueOf!
+7: toString!
+underline: (34) -1 (object) = true (boolean)
+8: valueOf!
+8: valueOf!
+8: toString!
+underline: (35) -0.5 (object) = true (boolean)
+9: valueOf!
+9: valueOf!
+9: toString!
+underline: (36) Infinity (object) = true (boolean)
+10: valueOf!
+10: valueOf!
+10: toString!
+underline: (37) -Infinity (object) = true (boolean)
+11: valueOf!
+11: valueOf!
+11: toString!
+underline: (38) NaN (object) = true (boolean)
+12: valueOf!
+12: valueOf!
+12: toString!
+underline: (39)  (object) = true (boolean)
+13: valueOf!
+13: valueOf!
+13: toString!
+underline: (40) 0 (object) = true (boolean)
+14: valueOf!
+14: valueOf!
+14: toString!
+underline: (41) -0 (object) = true (boolean)
+15: valueOf!
+15: valueOf!
+15: toString!
+underline: (42) 0.0 (object) = true (boolean)
+16: valueOf!
+16: valueOf!
+16: toString!
+underline: (43) 1 (object) = true (boolean)
+17: valueOf!
+17: valueOf!
+17: toString!
+underline: (44) Hello World! (object) = true (boolean)
+18: valueOf!
+18: valueOf!
+18: toString!
+underline: (45) true (object) = true (boolean)
+19: valueOf!
+19: valueOf!
+19: toString!
+underline: (46) _level0 (object) = true (boolean)
+20: valueOf!
+20: valueOf!
+20: toString!
+underline: (47) _level0 (object) = true (boolean)
+21: valueOf!
+21: valueOf!
+21: toString!
+underline: (48) [type Object] (object) = true (boolean)
+22: valueOf!
+22: valueOf!
+22: toString!
+underline: (49) [type Object] (object) = true (boolean)
+23: valueOf!
+23: valueOf!
+23: toString!
+underline: (50) [type Object] (object) = true (boolean)
+24: valueOf!
+24: valueOf!
+24: toString!
+underline: (51) [type Object] (object) = true (boolean)
+25: valueOf!
+25: valueOf!
+25: toString!
+underline: (52) [type Object] (object) = true (boolean)
+26: valueOf!
+26: valueOf!
+26: toString!
+underline: (53) [type Object] (object) = true (boolean)
+underline: left (string) = true (boolean)
+underline: center (string) = true (boolean)
+underline: LEFT (string) = true (boolean)
+underline: right (string) = true (boolean)
+underline: justify (string) = true (boolean)
+underline: leFT (string) = true (boolean)
+underline: inline (string) = true (boolean)
+underline: block (string) = true (boolean)
+underline: none (string) = true (boolean)
+underline: http://www.google.com (string) = true (boolean)
+underline: _typewriter (string) = true (boolean)
+underline: sans-serif (string) = true (boolean)
+underline: _self (string) = true (boolean)
+underline: _blank (string) = true (boolean)
+underline: _parent (string) = true (boolean)
+underline: _asdfa (string) = true (boolean)
+underline: 52.5 (number) = true (boolean)
+underline: 1 (number) = true (boolean)
+underline: 0 (number) = false (boolean)
+underline: -1 (number) = true (boolean)
+underline: -52.5 (number) = true (boolean)
+underline: NaN (number) = false (boolean)
+underline: Infinity (number) = true (boolean)
+underline: -Infinity (number) = true (boolean)
+underline: undefined (undefined) = null (null)
+underline:  (string) = false (boolean)
+underline: undefined (string) = true (boolean)
+underline:  (object) = true (boolean)
+underline: 4,8,12 (object) = true (boolean)
+underline: moi,terve (object) = true (boolean)
+underline: 4812 (string) = true (boolean)
+underline: 4,8,12 (string) = true (boolean)
+underline: true (boolean) = true (boolean)
+underline: false (boolean) = false (boolean)
+underline: null (null) = null (null)
+underline: -2147483648 (number) = true (boolean)
+underline: -2147483650 (number) = true (boolean)
+underline: 2147483648 (number) = true (boolean)
+underline: 2147483650 (number) = true (boolean)
+underline:  (object) = true (boolean)
+underline:  (object) = true (boolean)
+underline: 1,2 (object) = true (boolean)
+underline:  (object) = true (boolean)
+underline: null (null) = null (null)
+underline:  (object) = true (boolean)
+underline: a,b,3,-2,-2 (object) = true (boolean)
+Testing: url
+null
+url: (0) undefined (undefined) = null (null)
+url: (1) null (null) = null (null)
+url: (2) true (boolean) = true (string)
+url: (3) false (boolean) = false (string)
+url: (4) 0 (number) = 0 (string)
+url: (5) 1 (number) = 1 (string)
+url: (6) 0.5 (number) = 0.5 (string)
+url: (7) -1 (number) = -1 (string)
+url: (8) -0.5 (number) = -0.5 (string)
+url: (9) Infinity (number) = Infinity (string)
+url: (10) -Infinity (number) = -Infinity (string)
+url: (11) NaN (number) = NaN (string)
+url: (12)  (string) =  (string)
+url: (13) 0 (string) = 0 (string)
+url: (14) -0 (string) = -0 (string)
+url: (15) 0.0 (string) = 0.0 (string)
+url: (16) 1 (string) = 1 (string)
+url: (17) Hello World! (string) = Hello World! (string)
+url: (18) true (string) = true (string)
+url: (19) _level0 (string) = _level0 (string)
+url: (20) _level0 (movieclip) = _level0 (string)
+url: (21) [object Object] (object) = [object Object] (string)
+url: (22) [type Function] (function) = [type Function] (string)
+valueOf called
+valueOf called
+toString called
+url: (23) [type Object] (object) = [type Object] (string)
+toString called with 
+url: (24) [type Object] (object) = [type Object] (string)
+valueOf called with 
+valueOf called with 
+url: (25) [object Object] (object) = [object Object] (string)
+url: (26) undefined (object) = [type Object] (string)
+0: valueOf!
+0: valueOf!
+0: toString!
+url: (27) undefined (object) = [type Object] (string)
+1: valueOf!
+1: valueOf!
+1: toString!
+url: (28) null (object) = [type Object] (string)
+2: valueOf!
+2: valueOf!
+2: toString!
+url: (29) true (object) = [type Object] (string)
+3: valueOf!
+3: valueOf!
+3: toString!
+url: (30) false (object) = [type Object] (string)
+4: valueOf!
+4: valueOf!
+4: toString!
+url: (31) 0 (object) = [type Object] (string)
+5: valueOf!
+5: valueOf!
+5: toString!
+url: (32) 1 (object) = [type Object] (string)
+6: valueOf!
+6: valueOf!
+6: toString!
+url: (33) 0.5 (object) = [type Object] (string)
+7: valueOf!
+7: valueOf!
+7: toString!
+url: (34) -1 (object) = [type Object] (string)
+8: valueOf!
+8: valueOf!
+8: toString!
+url: (35) -0.5 (object) = [type Object] (string)
+9: valueOf!
+9: valueOf!
+9: toString!
+url: (36) Infinity (object) = [type Object] (string)
+10: valueOf!
+10: valueOf!
+10: toString!
+url: (37) -Infinity (object) = [type Object] (string)
+11: valueOf!
+11: valueOf!
+11: toString!
+url: (38) NaN (object) = [type Object] (string)
+12: valueOf!
+12: valueOf!
+12: toString!
+url: (39)  (object) =  (string)
+13: valueOf!
+13: valueOf!
+13: toString!
+url: (40) 0 (object) = 0 (string)
+14: valueOf!
+14: valueOf!
+14: toString!
+url: (41) -0 (object) = -0 (string)
+15: valueOf!
+15: valueOf!
+15: toString!
+url: (42) 0.0 (object) = 0.0 (string)
+16: valueOf!
+16: valueOf!
+16: toString!
+url: (43) 1 (object) = 1 (string)
+17: valueOf!
+17: valueOf!
+17: toString!
+url: (44) Hello World! (object) = Hello World! (string)
+18: valueOf!
+18: valueOf!
+18: toString!
+url: (45) true (object) = true (string)
+19: valueOf!
+19: valueOf!
+19: toString!
+url: (46) _level0 (object) = _level0 (string)
+20: valueOf!
+20: valueOf!
+20: toString!
+url: (47) _level0 (object) = [type Object] (string)
+21: valueOf!
+21: valueOf!
+21: toString!
+url: (48) [type Object] (object) = [type Object] (string)
+22: valueOf!
+22: valueOf!
+22: toString!
+url: (49) [type Object] (object) = [type Object] (string)
+23: valueOf!
+23: valueOf!
+23: toString!
+url: (50) [type Object] (object) = [type Object] (string)
+24: valueOf!
+24: valueOf!
+24: toString!
+url: (51) [type Object] (object) = [type Object] (string)
+25: valueOf!
+25: valueOf!
+25: toString!
+url: (52) [type Object] (object) = [type Object] (string)
+26: valueOf!
+26: valueOf!
+26: toString!
+url: (53) [type Object] (object) = [type Object] (string)
+url: left (string) = left (string)
+url: center (string) = center (string)
+url: LEFT (string) = LEFT (string)
+url: right (string) = right (string)
+url: justify (string) = justify (string)
+url: leFT (string) = leFT (string)
+url: inline (string) = inline (string)
+url: block (string) = block (string)
+url: none (string) = none (string)
+url: http://www.google.com (string) = http://www.google.com (string)
+url: _typewriter (string) = _typewriter (string)
+url: sans-serif (string) = sans-serif (string)
+url: _self (string) = _self (string)
+url: _blank (string) = _blank (string)
+url: _parent (string) = _parent (string)
+url: _asdfa (string) = _asdfa (string)
+url: 52.5 (number) = 52.5 (string)
+url: 1 (number) = 1 (string)
+url: 0 (number) = 0 (string)
+url: -1 (number) = -1 (string)
+url: -52.5 (number) = -52.5 (string)
+url: NaN (number) = NaN (string)
+url: Infinity (number) = Infinity (string)
+url: -Infinity (number) = -Infinity (string)
+url: undefined (undefined) = null (null)
+url:  (string) =  (string)
+url: undefined (string) = undefined (string)
+url:  (object) =  (string)
+url: 4,8,12 (object) = 4,8,12 (string)
+url: moi,terve (object) = moi,terve (string)
+url: 4812 (string) = 4812 (string)
+url: 4,8,12 (string) = 4,8,12 (string)
+url: true (boolean) = true (string)
+url: false (boolean) = false (string)
+url: null (null) = null (null)
+url: -2147483648 (number) = -2147483648 (string)
+url: -2147483650 (number) = -2147483650 (string)
+url: 2147483648 (number) = 2147483648 (string)
+url: 2147483650 (number) = 2147483650 (string)
+url:  (object) =  (string)
+url:  (object) =  (string)
+url: 1,2 (object) = 1,2 (string)
+url:  (object) =  (string)
+url: null (null) = null (null)
+url:  (object) =  (string)
+url: a,b,3,-2,-2 (object) = a,b,3,-2,-2 (string)
+Testing constructor:
+align = center
+blockIndent = null
+bold = true
+bullet = null
+color = 16711935
+display = block
+font = str
+indent = 2
+italic = true
+kerning = null
+leading = null
+leftMargin = 2
+letterSpacing = null
+rightMargin = 2
+size = -2
+tabStops = null
+target = _self
+underline = true
+url = http://www.google.com

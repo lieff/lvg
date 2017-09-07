@@ -1,0 +1,16 @@
+_global.RemoteLSOUsage = function
+  __proto__ (hpn) = _global.Object.__proto__
+  constructor (hp) = _global.Object.constructor
+  getURLPageSupport (h) = function
+    __proto__ (hpn) = _global.Object.__proto__
+    constructor (hp) = _global.Object.constructor
+    prototype (hp) = object
+      __proto__ (hp) = _global.Object.prototype
+      constructor (hp) = _global.RemoteLSOUsage.getURLPageSupport
+  prototype (hp) = object
+    __proto__ (hp) = _global.Object.prototype
+    constructor (hp) = _global.RemoteLSOUsage
+local.a = object
+  __constructor__ (hn) = _global.RemoteLSOUsage
+  __proto__ (hp) = _global.RemoteLSOUsage.prototype
+  constructor (h) = _global.RemoteLSOUsage

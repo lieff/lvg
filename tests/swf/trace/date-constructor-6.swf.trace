@@ -1,0 +1,339 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+Mon Oct 28 21:24:04 GMT+0000 2002
+Mon Oct 28 21:24:04 GMT+0000 2002
+Mon Oct 28 21:24:04 GMT+0000 2002
+Fri Dec 9 00:00:00 GMT+0000 1983
+Mon Oct 28 21:24:04 GMT+0000 2002
+Fri Dec 9 22:43:54 GMT+0000 1983
+Testing: (0)  (undefined)
+Thu Dec 1 00:00:00 GMT+0000 1983
+439084800000
+Testing: (1) null (null)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (2) true (boolean)
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+Testing: (3) false (boolean)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (4) 0 (number)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (5) 1 (number)
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+Testing: (6) 0.5 (number)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (7) -1 (number)
+Tue Nov 29 22:42:59 GMT+0000 1983
+438993779089
+Testing: (8) -0.5 (number)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (9) Infinity (number)
+Sun Jan 1 00:00:00 GMT+0000 1970
+Infinity
+Testing: (10) -Infinity (number)
+Sun Jan 1 00:00:00 GMT+0000 1970
+-Infinity
+Testing: (11) NaN (number)
+Invalid Date
+NaN
+Testing: (12)  (string)
+Invalid Date
+NaN
+Testing: (13) 0 (string)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (14) -0 (string)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (15) 0.0 (string)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+Testing: (16) 1 (string)
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+Testing: (17) Hello World! (string)
+Invalid Date
+NaN
+Testing: (18) true (string)
+Invalid Date
+NaN
+Testing: (19) _level0 (string)
+Invalid Date
+NaN
+Testing: (20) äöü (string)
+Invalid Date
+NaN
+Testing: (21) _level0 (movieclip)
+Invalid Date
+NaN
+Testing: (22) [object Object] (object)
+Invalid Date
+NaN
+Skipping: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+Testing: (24)  (object)
+Invalid Date
+NaN
+Testing: (25) [type Function] (function)
+Invalid Date
+NaN
+valueOf called
+Testing: (26) [type Object] (object)
+valueOf called
+valueOf called
+Invalid Date
+NaN
+Testing: (27) [type Object] (object)
+Invalid Date
+NaN
+valueOf called with 
+Testing: (28) [object Object] (object)
+valueOf called with 
+valueOf called with 
+Invalid Date
+NaN
+Testing: (29)  (object)
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+0: valueOf!
+0: valueOf!
+Testing: (30)  (object)
+0: valueOf!
+0: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+1: valueOf!
+1: valueOf!
+Testing: (31) null (object)
+1: valueOf!
+1: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+2: valueOf!
+2: valueOf!
+Testing: (32) true (object)
+2: valueOf!
+2: valueOf!
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+3: valueOf!
+3: valueOf!
+Testing: (33) false (object)
+3: valueOf!
+3: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+4: valueOf!
+4: valueOf!
+Testing: (34) 0 (object)
+4: valueOf!
+4: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+5: valueOf!
+5: valueOf!
+Testing: (35) 1 (object)
+5: valueOf!
+5: valueOf!
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+6: valueOf!
+6: valueOf!
+Testing: (36) 0.5 (object)
+6: valueOf!
+6: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+7: valueOf!
+7: valueOf!
+Testing: (37) -1 (object)
+7: valueOf!
+7: valueOf!
+Tue Nov 29 22:42:59 GMT+0000 1983
+438993779089
+8: valueOf!
+8: valueOf!
+Testing: (38) -0.5 (object)
+8: valueOf!
+8: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+9: valueOf!
+Testing: (39) Infinity (object)
+9: valueOf!
+9: valueOf!
+Sun Jan 1 00:00:00 GMT+0000 1970
+Infinity
+10: valueOf!
+Testing: (40) -Infinity (object)
+10: valueOf!
+10: valueOf!
+Sun Jan 1 00:00:00 GMT+0000 1970
+-Infinity
+11: valueOf!
+Testing: (41) NaN (object)
+11: valueOf!
+11: valueOf!
+Invalid Date
+NaN
+12: valueOf!
+Testing: (42)  (object)
+12: valueOf!
+12: valueOf!
+Invalid Date
+NaN
+13: valueOf!
+13: valueOf!
+Testing: (43) 0 (object)
+13: valueOf!
+13: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+14: valueOf!
+14: valueOf!
+Testing: (44) -0 (object)
+14: valueOf!
+14: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+15: valueOf!
+15: valueOf!
+Testing: (45) 0.0 (object)
+15: valueOf!
+15: valueOf!
+Wed Nov 30 22:43:00 GMT+0000 1983
+439080180089
+16: valueOf!
+16: valueOf!
+Testing: (46) 1 (object)
+16: valueOf!
+16: valueOf!
+Thu Dec 1 22:43:01 GMT+0000 1983
+439166581089
+17: valueOf!
+Testing: (47) Hello World! (object)
+17: valueOf!
+17: valueOf!
+Invalid Date
+NaN
+18: valueOf!
+Testing: (48) true (object)
+18: valueOf!
+18: valueOf!
+Invalid Date
+NaN
+19: valueOf!
+Testing: (49) _level0 (object)
+19: valueOf!
+19: valueOf!
+Invalid Date
+NaN
+20: valueOf!
+Testing: (50) äöü (object)
+20: valueOf!
+20: valueOf!
+Invalid Date
+NaN
+21: valueOf!
+Testing: (51) _level0 (object)
+21: valueOf!
+21: valueOf!
+Invalid Date
+NaN
+22: valueOf!
+Testing: (52) [type Object] (object)
+22: valueOf!
+22: valueOf!
+Invalid Date
+NaN
+23: valueOf!
+Testing: (53) [type Object] (object)
+23: valueOf!
+23: valueOf!
+Invalid Date
+NaN
+24: valueOf!
+Testing: (54) [type Object] (object)
+24: valueOf!
+24: valueOf!
+Invalid Date
+NaN
+25: valueOf!
+Testing: (55) [type Object] (object)
+25: valueOf!
+25: valueOf!
+Invalid Date
+NaN
+26: valueOf!
+Testing: (56) [type Object] (object)
+26: valueOf!
+26: valueOf!
+Invalid Date
+NaN
+27: valueOf!
+Testing: (57) [type Object] (object)
+27: valueOf!
+27: valueOf!
+Invalid Date
+NaN
+28: valueOf!
+Testing: (58) [type Object] (object)
+28: valueOf!
+28: valueOf!
+Invalid Date
+NaN
+29: valueOf!
+Testing: (59) [type Object] (object)
+29: valueOf!
+29: valueOf!
+Invalid Date
+NaN
+Invalid Date
+Invalid Date
+Invalid Date
+Invalid Date

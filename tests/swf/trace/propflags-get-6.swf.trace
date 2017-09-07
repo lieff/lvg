@@ -1,0 +1,30 @@
+o.test: 0
+true
+o.test: 1
+true
+o.test: 2
+true
+o.test: 4
+true
+o.test: 8
+true
+o.test: 16
+true
+o.test: 32
+true
+o.test: 64
+true
+o.test: 128
+true
+o.test: 256
+undefined
+o.test: 512
+true
+o.test: 1024
+undefined
+o.test: 2048
+true
+o.test: 4096
+undefined
+o.test: 8192
+undefined

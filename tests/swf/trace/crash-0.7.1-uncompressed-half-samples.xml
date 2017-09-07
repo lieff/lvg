@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <SoundStreamHead playbackRate="1" playbackSize="1" playbackStereo="0" compression="3" soundRate="1" soundSize="1" soundStereo="1" sampleSize="1">
+      </SoundStreamHead>
+      <SoundStreamBlock>
+        <data>
+	  <data>AA==</data>
+        </data>
+      </SoundStreamBlock>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

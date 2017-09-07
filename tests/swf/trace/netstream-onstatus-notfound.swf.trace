@@ -1,0 +1,6 @@
+Test onStatus emission for nonexisting movies
+Calling play
+done calling play
+NetStream onStatus called
+NetStream.Play.StreamNotFound
+error

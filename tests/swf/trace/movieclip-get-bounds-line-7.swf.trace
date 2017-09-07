@@ -1,0 +1,28 @@
+Testing: this
+[type Object]
+yMax: 114
+yMin: 6
+xMax: 114
+xMin: 6
+width, height: 108, 108
+Testing: a
+[type Object]
+yMax: 104
+yMin: -4
+xMax: 104
+xMin: -4
+width, height: 108, 108
+Testing: (no args)
+[type Object]
+yMax: 104
+yMin: -4
+xMax: 104
+xMin: -4
+width, height: 108, 108
+Testing: 2
+undefined
+yMax: undefined
+yMin: undefined
+xMax: undefined
+xMin: undefined
+width, height: 108, 108

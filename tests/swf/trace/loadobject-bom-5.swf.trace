@@ -1,0 +1,27 @@
+Loading: utf-8-bom.txt
+Got: string 'ï»¿This is UTF-8, with BOM
+Ãä¿Ð
+'
+Loaded: 35
+Total: 35
+Is loaded: false
+Loading: utf-16-be-bom.txt
+Got: string 'þÿ'
+Loaded: 84
+Total: 84
+Is loaded: false
+Loading: utf-16-le-bom.txt
+Got: string 'ÿþT'
+Loaded: 90
+Total: 90
+Is loaded: false
+Loading: utf-32-be-bom.txt
+Got: string ''
+Loaded: 164
+Total: 164
+Is loaded: false
+Loading: utf-32-le-bom.txt
+Got: string 'ÿþ'
+Loaded: 180
+Total: 180
+Is loaded: false

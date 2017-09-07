@@ -1,0 +1,2 @@
+This exposes a bug in the internal matrix cache update routines, where some matrix conversion function did not ensure the matrix was properly updated. This might explain why the test looks so constructed.
+_level0.a.getBounds (_level0.b) = { 0, 0, 25, 100}

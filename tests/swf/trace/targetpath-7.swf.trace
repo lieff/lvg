@@ -1,0 +1,94 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+_level0
+_level0.foo
+_level0.foo.foo
+(0) undefined (undefined) = undefined
+(1) null (null) = undefined
+(2) true (boolean) = undefined
+(3) false (boolean) = undefined
+(4) 0 (number) = undefined
+(5) 1 (number) = undefined
+(6) 0.5 (number) = undefined
+(7) -1 (number) = undefined
+(8) -0.5 (number) = undefined
+(9) Infinity (number) = undefined
+(10) -Infinity (number) = undefined
+(11) NaN (number) = undefined
+(12)  (string) = undefined
+(13) 0 (string) = undefined
+(14) -0 (string) = undefined
+(15) 0.0 (string) = undefined
+(16) 1 (string) = undefined
+(17) Hello World! (string) = undefined
+(18) true (string) = undefined
+(19) _level0 (string) = undefined
+(20) _level0 (movieclip) = _level0
+(21) [object Object] (object) = undefined
+(22) [type Function] (function) = undefined
+(23) [type Object] (object) = undefined
+(24) [type Object] (object) = undefined
+(25) [object Object] (object) = undefined
+(26) undefined (object) = undefined
+(27) undefined (object) = undefined
+(28) null (object) = undefined
+(29) true (object) = undefined
+(30) false (object) = undefined
+(31) 0 (object) = undefined
+(32) 1 (object) = undefined
+(33) 0.5 (object) = undefined
+(34) -1 (object) = undefined
+(35) -0.5 (object) = undefined
+(36) Infinity (object) = undefined
+(37) -Infinity (object) = undefined
+(38) NaN (object) = undefined
+(39)  (object) = undefined
+(40) 0 (object) = undefined
+(41) -0 (object) = undefined
+(42) 0.0 (object) = undefined
+(43) 1 (object) = undefined
+(44) Hello World! (object) = undefined
+(45) true (object) = undefined
+(46) _level0 (object) = undefined
+(47) _level0 (object) = undefined
+(48) [type Object] (object) = undefined
+(49) [type Object] (object) = undefined
+(50) [type Object] (object) = undefined
+(51) [type Object] (object) = undefined
+(52) [type Object] (object) = undefined
+(53) [type Object] (object) = undefined

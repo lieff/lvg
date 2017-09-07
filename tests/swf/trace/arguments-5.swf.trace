@@ -1,0 +1,69 @@
+Global:
+arguments: 
+caller: 
+callee: 
+Child:
+arguments: 
+caller: null
+callee: child
+Run:
+arguments: 
+caller: null
+callee: run
+Child CallFunction:
+arguments: 
+caller: run
+callee: child
+Child CallMethod:
+arguments: 
+caller: run
+callee: child
+
+toString:
+arguments: 
+caller: run
+callee: func_and_child
+Child:
+arguments: 
+caller: func_and_child
+callee: child
+
+valueOf:
+arguments: 
+caller: run
+callee: func_and_child
+Child:
+arguments: 
+caller: func_and_child
+callee: child
+
+Method:
+arguments: 
+caller: run
+callee: func_and_child
+Child:
+arguments: 
+caller: func_and_child
+callee: child
+
+Call:
+
+Apply:
+
+Sort:
+arguments: a,
+caller: run
+callee: func_and_child
+Child:
+arguments: 
+caller: func_and_child
+callee: child
+
+Timeout:
+arguments: 
+caller: null
+callee: timeout
+Child:
+arguments: 
+caller: timeout
+callee: child

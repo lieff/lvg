@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <!-- swfmill xml2swf definefunction2-arguments-registers.xml definefunction2-arguments-registers.swf -->
+  <Header framerate="25" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+	<actions>
+	  <PushData>
+	    <items>
+	      <StackString value="Check that variables in registers don't get assigned to their value"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <DeclareFunction2 name="foo" argc="1" regc="2" reserved="0">
+	    <args>
+	      <Parameter reg="1" name="a"/>
+	    </args>
+            <actions>
+	      <PushData>
+		<items>
+                  <StackRegister reg="1"/>
+                  <StackString value="a"/>
+		</items>
+	      </PushData>
+	      <GetVariable/>
+	      <Trace/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="42"/>
+              <StackInteger value="1"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <Pop/>
+	  <GetURL url="fscommand:quit" target=""/>
+	</actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

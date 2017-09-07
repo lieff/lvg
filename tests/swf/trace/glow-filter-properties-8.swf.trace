@@ -1,0 +1,17 @@
+_global.flash.filters.GlowFilter = function
+  __proto__ (hp) = _global.Function.prototype
+  constructor (hp) = _global.Function
+  prototype (hp) = object
+    __constructor__ (h) = _global.flash.filters.BitmapFilter
+    __proto__ (hp) = _global.flash.filters.BitmapFilter.prototype
+    alpha (C) = undefined
+    blurX (C) = undefined
+    blurY (C) = undefined
+    color (C) = undefined
+    inner (C) = undefined
+    knockout (C) = undefined
+    quality (C) = undefined
+    strength (C) = undefined
+local.a = object
+  __constructor__ = _global.flash.filters.GlowFilter
+  __proto__ (hp) = _global.flash.filters.GlowFilter.prototype

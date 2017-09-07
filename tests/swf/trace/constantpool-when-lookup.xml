@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="foo"/>
+            </strings>
+          </Dictionary>
+	  <PushData>
+	    <items>
+	      <StackDictionaryLookup index="0"/>
+	    </items>
+	  </PushData>
+          <Dictionary>
+            <strings>
+              <String value="bar"/>
+            </strings>
+          </Dictionary>
+	  <Trace/>
+	  <PushData>
+	    <items>
+	      <StackDictionaryLookup index="0"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <GetURL url="fscommand:quit" target=""/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

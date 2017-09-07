@@ -1,0 +1,54 @@
+This directory contains tests using the tracing functionality of Actionscript.
+
+How does it work?
+
+  ../swfdec-test [FILE1 [FILE2 [...]]]
+The default script in this directory takes all files on the command line or all
+files in the current directory and runs them. Running consists of instancing a
+SwfdecPlayer and iterating $FILE until 10 frames have passed. Everytime the 
+trace function is invoked by that player, its output is appended to a buffer. 
+Finally the captured output is compared to the file $FILE.trace. If the output 
+matches, the test succeeded for the given file, otherwise it failed. In this 
+case a diff is produced and dumped to stdout. The captured trace output is 
+written to a file named "tmp". The return value is 0 if all tests passed, or 
+failure if at least one test failed.
+
+
+What are all the other files?
+
+Some test files are created with Open Source tools. In that case, the sources 
+used for creating them are included and named $FILE.$TOOL-EXTENSION. Every 
+one of those files includes the command that were used for creating the test 
+files. 
+
+
+Why don't you autogenerate the SWF files from sources but include them?
+
+An important thing to note is that this testsuite is supposed to test the 
+correct handling of SWF files, so the reference file must be an SWF file. Since
+Open Source tools could produce different SWF files depending on their version,
+the testsuite could end up testing different files. This is something that is
+definitely not wanted. Consider the source files annotations only.
+
+
+How do I run my new test?
+
+Create a file to test, say "test.swf", and put the expected output in the
+corresponding trace file, in this case "test.swf.trace". After that, just call
+the test application with your file, like this:
+  ../swfdec-test test.swf
+
+
+How do I create a trace file?
+
+The suggested method is to use a Flash debugging player and configure that 
+player to dump the trace poutput to a file. An example of how to do this can be
+found at http://blogs.gnome.org/otte/2007/06/10/how-to-do-tests/
+
+
+How do I add a test to the testsuite?
+
+Just put the file, its trace file and if you have them, source files used for
+creating the file into this directory and add all of them to EXTRA_DIST in 
+Makefile.am. The file should appear in the output when running make check. 
+

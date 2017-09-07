@@ -1,0 +1,10 @@
+all: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+-1: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+-1, 5: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+-1, 30: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+0, -1: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+5, 30: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+2, 4, 6: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+5, 4: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+5, 5: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=
+30, 35: align= blockIndent= bold= bullet= color= display= font= indent= italic= kerning= leading= leftMargin= letterSpacing= rightMargin= size= tabStops= target= underline= url=

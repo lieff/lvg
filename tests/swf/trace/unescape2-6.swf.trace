@@ -1,0 +1,17 @@
+Check unescaping of various interesting strings (add more if you find bugs)
+
+start
+start�nd
+start�nd
+start�nd
+start
+start
+startend
+start¿end
+start�nd
+start
+start1
+start end
+start end   
+start&end
+start&end&

@@ -1,0 +1,6 @@
+Check how _height is handled in the root movie
+0, 0, 100, 100
+0, 0, 0, 0
+0, 0, 100, 100
+200, 200, 100, 100
+200, 100, 100, 50

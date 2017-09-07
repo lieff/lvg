@@ -1,0 +1,3 @@
+Check how removing movieclips affects depth
+0 => -32769
+1000 => -33769

@@ -1,0 +1,211 @@
+>>> a=b&c=d
+a = b
+c = d
+decode = [type Function]
+>>> %26=%3d&%3D=%26
+& = =
+= = &
+decode = [type Function]
+>>> 
+decode = [type Function]
+>>> ???=???
+??? = ???
+decode = [type Function]
+>>> a=
+a = 
+decode = [type Function]
+>>> =b
+decode = [type Function]
+>>> a=&=b&c&d=e
+a = 
+c = 
+d = e
+decode = [type Function]
+>>> id=mplayer&javascriptid=mplayer&frontcolor=0xFFFFFF&backcolor=0x000000&enablejs=true&largecontrols=false&file=http://kanal5.se/c/ext/k5video/playlist?selectType=playlist-name%26selectWord=Mazda%26selectType2=playlist-name%26selectWord2=Fraga Olle 1107&bufferlength=6&displayheight=168&height=168&width=225&autostart=false&repeat=list&shuffle=false&overstretch=fit&volume=80&rotatetime=5&showicons=true&bwfile=/html/themes/kanal5/images/100k.jpg&bwstreams=400_400,640_700&useaudio=false&usecaptions=false&usekeys=false&callback=http://kanal5.se/c/ext/k5video/counter&showvolume=true&usefullscreen=true&allowscriptaccess=always
+allowscriptaccess = always
+autostart = false
+backcolor = 0x000000
+bufferlength = 6
+bwfile = /html/themes/kanal5/images/100k.jpg
+bwstreams = 400_400,640_700
+callback = http://kanal5.se/c/ext/k5video/counter
+decode = [type Function]
+displayheight = 168
+enablejs = true
+file = http://kanal5.se/c/ext/k5video/playlist?selectType=playlist-name&selectWord=Mazda&selectType2=playlist-name&selectWord2=Fraga Olle 1107
+frontcolor = 0xFFFFFF
+height = 168
+id = mplayer
+javascriptid = mplayer
+largecontrols = false
+overstretch = fit
+repeat = list
+rotatetime = 5
+showicons = true
+showvolume = true
+shuffle = false
+useaudio = false
+usecaptions = false
+usefullscreen = true
+usekeys = false
+volume = 80
+width = 225
+>>> 6049
+6049 = 
+decode = [type Function]
+>>> img_id=181477
+decode = [type Function]
+img_id = 181477
+>>> xmlUrl=http://www.svenskfast.se/Pages/ObjectPicturesXML.aspx?ObjectID=3ELJF2R975UU6KB8
+decode = [type Function]
+xmlUrl = http://www.svenskfast.se/Pages/ObjectPicturesXML.aspx?ObjectID=3ELJF2R975UU6KB8
+>>> v=1
+decode = [type Function]
+v = 1
+>>> hl=en&video_id=Ra9tHf5oTGE&l=174&t=OEgsToPDskIiI57FokAGWDU_cVWkk0YQ&sk=jx4HbVzSeNwxQnLPSJ-AeQC&plid=AAQ-wZXLj0LXb-xH&playnext=0
+decode = [type Function]
+hl = en
+l = 174
+playnext = 0
+plid = AAQ-wZXLj0LXb-xH
+sk = jx4HbVzSeNwxQnLPSJ-AeQC
+t = OEgsToPDskIiI57FokAGWDU_cVWkk0YQ
+video_id = Ra9tHf5oTGE
+>>> ns=yt&plid=AAQ-wZXLj0LXb-xH&vid=jx4HbVzSeNwxQnLPSJ-AeQC&docid=Ra9tHf5oTGE&el=detailpage&et=0.04&fv=WIN%209%2C0%2C100%2C0&nbe=0&st=0.04&rt=3.7&len=174
+decode = [type Function]
+docid = Ra9tHf5oTGE
+el = detailpage
+et = 0.04
+fv = WIN 9,0,100,0
+len = 174
+nbe = 0
+ns = yt
+plid = AAQ-wZXLj0LXb-xH
+rt = 3.7
+st = 0.04
+vid = jx4HbVzSeNwxQnLPSJ-AeQC
+>>> f=/wps/wcm/resources/file/eb2d284fab2722c/popcorn.swf&clickTag=javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START BANNER BREDBAND', '');}catch(e){;}finally{location.href='/bredband';}
+clickTag = javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START BANNER BREDBAND', '');}catch(e){;}finally{location.href='/bredband';}
+decode = [type Function]
+f = /wps/wcm/resources/file/eb2d284fab2722c/popcorn.swf
+>>> f=/portal/wcmobject/document/swf/fsecuretavling_puff.swf&clickTag=javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_KAMPANJ FSECURE TAVLING', '');}catch(e){;}finally{location.href='/fsecuretavling';}
+clickTag = javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_KAMPANJ FSECURE TAVLING', '');}catch(e){;}finally{location.href='/fsecuretavling';}
+decode = [type Function]
+f = /portal/wcmobject/document/swf/fsecuretavling_puff.swf
+>>> f=/wps/wcm/resources/file/ebc66e4b245ddf2/telefoni-puff_new.swf&clickTag=javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF TELEFONI', '');}catch(e){;}finally{location.href='/telefoni';}
+clickTag = javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF TELEFONI', '');}catch(e){;}finally{location.href='/telefoni';}
+decode = [type Function]
+f = /wps/wcm/resources/file/ebc66e4b245ddf2/telefoni-puff_new.swf
+>>> f=/wps/wcm/resources/file/ebc66c4b2452908/film.swf&clickTag=javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF VOD', '');}catch(e){;}finally{location.href='/portal/redirect/privat/digitaltv?page=new%26WCM_GLOBAL_CONTEXT=/wps/wcm/connect/b2/privat/digitaltv/filmnarduvill';}&rootdir=
+clickTag = javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF VOD', '');}catch(e){;}finally{location.href='/portal/redirect/privat/digitaltv?page=new&WCM_GLOBAL_CONTEXT=/wps/wcm/connect/b2/privat/digitaltv/filmnarduvill';}
+decode = [type Function]
+f = /wps/wcm/resources/file/ebc66c4b2452908/film.swf
+rootdir = 
+>>> f=/wps/wcm/resources/file/ebc66d4b24596b5/sakerhet_puff.swf&clickTag=javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF SAKERHET', '');}catch(e){;}finally{location.href='/sakerhet';}
+clickTag = javascript:try{Instadia_sendEvent('011kr', 'BANNER # B2_PRIVAT_START PUFF SAKERHET', '');}catch(e){;}finally{location.href='/sakerhet';}
+decode = [type Function]
+f = /wps/wcm/resources/file/ebc66d4b24596b5/sakerhet_puff.swf
+>>> lang=en&enforce=0
+decode = [type Function]
+enforce = 0
+lang = en
+>>> id=22&initView=EU,SE&lang=SV&home=EU,SE&skin=Default
+decode = [type Function]
+home = EU,SE
+id = 22
+initView = EU,SE
+lang = SV
+skin = Default
+>>> linkUrl=http://www.smhi.se/cmp/jsp/polopoly.jsp?d=5236&l=sv&linkTarget=_top
+decode = [type Function]
+l = sv
+linkTarget = _top
+linkUrl = http://www.smhi.se/cmp/jsp/polopoly.jsp?d=5236
+>>> txt=<a href=%22asfunction:_root.launchURL,0%22>ADOBE FLASH CS3 PROFESSIONAL</a>&textcolor=#ffffff&hovercolor=#c00c00&linkcolor=#ffffff&w=640&h=28&sifr_url_0=/products/flash/
+decode = [type Function]
+h = 28
+hovercolor = #c00c00
+linkcolor = #ffffff
+sifr_url_0 = /products/flash/
+textcolor = #ffffff
+txt = <a href="asfunction:_root.launchURL,0">ADOBE FLASH CS3 PROFESSIONAL</a>
+w = 640
+>>> simpleDrapeSwf=http://www.sf.se/sf/component/startplayer/drapeSimple.swf&animDrapeSwf=http://www.sf.se/sf/component/startplayer/drapeAnimation.swf&curl=cycube://internal/document/106364&id=101546&xmlPath=http://www.sf.se/DataProvider
+animDrapeSwf = http://www.sf.se/sf/component/startplayer/drapeAnimation.swf
+curl = cycube://internal/document/106364
+decode = [type Function]
+id = 101546
+simpleDrapeSwf = http://www.sf.se/sf/component/startplayer/drapeSimple.swf
+xmlPath = http://www.sf.se/DataProvider
+>>> txt=ÂKOMMANDEÂ FILMER&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂKOMMANDEÂ FILMER
+w = 265
+>>> txt=ÂKONCEPTÂBIO&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂKONCEPTÂBIO
+w = 265
+>>> txt=ÂNYÂHETER&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂNYÂHETER
+w = 265
+>>> txt=ÂTOPPÂLISTAN&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂTOPPÂLISTAN
+w = 265
+>>> txt=ÂFRÅGA ÂRONNY&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂFRÅGA ÂRONNY
+w = 265
+>>> txt=ÂMOBILÂGODIS&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂMOBILÂGODIS
+w = 265
+>>> txt=ÂPRESENT-Â OCH RABATTKORT&textcolor=%23ffffff&emcolor=%23fed63b&w=265&h=19
+decode = [type Function]
+emcolor = #fed63b
+h = 19
+textcolor = #ffffff
+txt = ÂPRESENT-Â OCH RABATTKORT
+w = 265
+>>> pHost=www.sf.se&pContextPath=/bio&pServer=www.sf.se&pPort=4001&pNumSeats=2&pSeats=&pSplitSeats=false&pAuditorium=2008_53&pVip=false&pListen=2008%2353%23200711131830&pNextUrl=/bio/Booking?cmd=showPaymentTypePage&pAbortUrl=/bio/Booking?cmd=listFilms
+decode = [type Function]
+pAbortUrl = /bio/Booking?cmd=listFilms
+pAuditorium = 2008_53
+pContextPath = /bio
+pHost = www.sf.se
+pListen = 2008#53#200711131830
+pNextUrl = /bio/Booking?cmd=showPaymentTypePage
+pNumSeats = 2
+pPort = 4001
+pSeats = 
+pServer = www.sf.se
+pSplitSeats = false
+pVip = false
+>>> &dynimg=http://img.aftonbladet.se/special/webbtv/bilder2/Noje/0711/p1101779.jpg&dynurl=http://www.aftonbladet.se/atv2/init.html?id=categories/Noje/0711/8220&category=noje&commercial=yes
+category = noje
+commercial = yes
+decode = [type Function]
+dynimg = http://img.aftonbladet.se/special/webbtv/bilder2/Noje/0711/p1101779.jpg
+dynurl = http://www.aftonbladet.se/atv2/init.html?id=categories/Noje/0711/8220
+>>> foo=bar
+decode = [type Function]
+foo = bar

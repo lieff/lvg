@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+        <actions>
+	  <PushData>
+	    <items>
+	      <StackDictionaryLookup index="1"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <PushData>
+	    <items>
+	      <StackInteger value="21"/>
+	      <StackDictionaryLookup index="0"/>
+	      <StackDictionaryLookup index="1"/>
+	      <StackDictionaryLookup index="5"/>
+	      <StackDictionaryLookup index="100"/>
+	      <StackInteger value="24"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+          <Dictionary>
+            <strings>
+              <String value="foo"/>
+            </strings>
+          </Dictionary>
+	  <PushData>
+	    <items>
+	      <StackInteger value="42"/>
+	      <StackDictionaryLookup index="1"/>
+	      <StackDictionaryLookup index="5"/>
+	      <StackDictionaryLookup index="0"/>
+	      <StackDictionaryLookup index="100"/>
+	      <StackInteger value="1"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <Trace/>
+	  <GetURL url="fscommand:quit" target=""/>
+	  <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

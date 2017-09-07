@@ -1,0 +1,286 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+initial:  /  / 1
+(0)  (undefined):  /  / 1
+(0)  (undefined)[2]:  /  / 0
+(0)  (undefined)[3]:  /  / 1
+(1) null (null):  /  / 1
+(1) null (null)[2]:  /  / 0
+(1) null (null)[3]:  /  / 1
+(2) true (boolean):  /  / 1
+(2) true (boolean)[2]:  /  / 1
+(2) true (boolean)[3]:  /  / 1
+(3) false (boolean):  /  / 1
+(3) false (boolean)[2]:  /  / 0
+(3) false (boolean)[3]:  /  / 0
+(4) 0 (number):  /  / 0
+(4) 0 (number)[2]:  /  / 0
+(4) 0 (number)[3]:  /  / 0
+(5) 1 (number):  /  / 0
+(5) 1 (number)[2]:  /  / 1
+(5) 1 (number)[3]:  /  / 1
+(6) 0.5 (number):  /  / 1
+(6) 0.5 (number)[2]:  /  / 1
+(6) 0.5 (number)[3]:  /  / 1
+(7) -1 (number):  /  / 1
+(7) -1 (number)[2]:  /  / 1
+(7) -1 (number)[3]:  /  / 1
+(8) -0.5 (number):  /  / 1
+(8) -0.5 (number)[2]:  /  / 1
+(8) -0.5 (number)[3]:  /  / 1
+(9) Infinity (number):  /  / 1
+(9) Infinity (number)[2]:  /  / 1
+(9) Infinity (number)[3]:  /  / 1
+(10) -Infinity (number):  /  / 1
+(10) -Infinity (number)[2]:  /  / 1
+(10) -Infinity (number)[3]:  /  / 1
+(11) NaN (number):  /  / 1
+(11) NaN (number)[2]:  /  / 0
+(11) NaN (number)[3]:  /  / 1
+(12)  (string):  /  / 1
+(12)  (string)[2]:  /  / 0
+(12)  (string)[3]:  /  / 1
+(13) 0 (string):  /  / 1
+(13) 0 (string)[2]:  /  / 0
+(13) 0 (string)[3]:  /  / 0
+(14) -0 (string):  /  / 0
+(14) -0 (string)[2]:  /  / 0
+(14) -0 (string)[3]:  /  / 0
+(15) 0.0 (string):  /  / 0
+(15) 0.0 (string)[2]:  /  / 0
+(15) 0.0 (string)[3]:  /  / 0
+(16) 1 (string):  /  / 0
+(16) 1 (string)[2]:  /  / 1
+(16) 1 (string)[3]:  /  / 1
+(17) Hello World! (string):  /  / 1
+(17) Hello World! (string)[2]:  /  / 0
+(17) Hello World! (string)[3]:  /  / 1
+(18) true (string):  /  / 1
+(18) true (string)[2]:  /  / 0
+(18) true (string)[3]:  /  / 1
+(19) _level0 (string):  /  / 1
+(19) _level0 (string)[2]:  /  / 0
+(19) _level0 (string)[3]:  /  / 1
+(20) Ã¤Ã¶Ã¼ (string):  /  / 1
+(20) Ã¤Ã¶Ã¼ (string)[2]:  /  / 0
+(20) Ã¤Ã¶Ã¼ (string)[3]:  /  / 1
+(21) _level0 (movieclip):  /  / 1
+(21) _level0 (movieclip)[2]:  /  / 0
+(21) _level0 (movieclip)[3]:  /  / 1
+(22) [object Object] (object):  /  / 1
+(22) [object Object] (object)[2]:  /  / 0
+(22) [object Object] (object)[3]:  /  / 1
+(23) 1035840244000 (object):  /  / 1
+(23) 1035840244000 (object)[2]:  /  / 1
+(23) 1035840244000 (object)[3]:  /  / 1
+(24)  (object):  /  / 1
+(24)  (object)[2]:  /  / 0
+(24)  (object)[3]:  /  / 1
+(25)  (undefined):  /  / 1
+(25)  (undefined)[2]:  /  / 0
+(25)  (undefined)[3]:  /  / 1
+(26) [type Object] (object):  /  / 1
+valueOf called
+(26) [type Object] (object)[2]:  /  / 0
+valueOf called
+(26) [type Object] (object)[3]:  /  / 1
+(27) [type Object] (object):  /  / 1
+(27) [type Object] (object)[2]:  /  / 0
+(27) [type Object] (object)[3]:  /  / 1
+(28) [object Object] (object):  /  / 1
+valueOf called with 
+(28) [object Object] (object)[2]:  /  / 0
+valueOf called with 
+(28) [object Object] (object)[3]:  /  / 1
+(29)  (object):  /  / 1
+(29)  (object)[2]:  /  / 0
+(29)  (object)[3]:  /  / 0
+(30)  (object):  /  / 0
+0: valueOf!
+(30)  (object)[2]:  /  / 0
+0: valueOf!
+(30)  (object)[3]:  /  / 0
+(31) null (object):  /  / 0
+1: valueOf!
+(31) null (object)[2]:  /  / 0
+1: valueOf!
+(31) null (object)[3]:  /  / 0
+(32) true (object):  /  / 0
+2: valueOf!
+(32) true (object)[2]:  /  / 1
+2: valueOf!
+(32) true (object)[3]:  /  / 1
+(33) false (object):  /  / 1
+3: valueOf!
+(33) false (object)[2]:  /  / 0
+3: valueOf!
+(33) false (object)[3]:  /  / 0
+(34) 0 (object):  /  / 0
+4: valueOf!
+(34) 0 (object)[2]:  /  / 0
+4: valueOf!
+(34) 0 (object)[3]:  /  / 0
+(35) 1 (object):  /  / 0
+5: valueOf!
+(35) 1 (object)[2]:  /  / 1
+5: valueOf!
+(35) 1 (object)[3]:  /  / 1
+(36) 0.5 (object):  /  / 1
+6: valueOf!
+(36) 0.5 (object)[2]:  /  / 1
+6: valueOf!
+(36) 0.5 (object)[3]:  /  / 1
+(37) -1 (object):  /  / 1
+7: valueOf!
+(37) -1 (object)[2]:  /  / 1
+7: valueOf!
+(37) -1 (object)[3]:  /  / 1
+(38) -0.5 (object):  /  / 1
+8: valueOf!
+(38) -0.5 (object)[2]:  /  / 1
+8: valueOf!
+(38) -0.5 (object)[3]:  /  / 1
+(39) Infinity (object):  /  / 1
+9: valueOf!
+(39) Infinity (object)[2]:  /  / 1
+9: valueOf!
+(39) Infinity (object)[3]:  /  / 1
+(40) -Infinity (object):  /  / 1
+10: valueOf!
+(40) -Infinity (object)[2]:  /  / 1
+10: valueOf!
+(40) -Infinity (object)[3]:  /  / 1
+(41) NaN (object):  /  / 1
+11: valueOf!
+(41) NaN (object)[2]:  /  / 0
+11: valueOf!
+(41) NaN (object)[3]:  /  / 1
+(42)  (object):  /  / 1
+12: valueOf!
+(42)  (object)[2]:  /  / 0
+12: valueOf!
+(42)  (object)[3]:  /  / 1
+(43) 0 (object):  /  / 1
+13: valueOf!
+(43) 0 (object)[2]:  /  / 0
+13: valueOf!
+(43) 0 (object)[3]:  /  / 0
+(44) -0 (object):  /  / 0
+14: valueOf!
+(44) -0 (object)[2]:  /  / 0
+14: valueOf!
+(44) -0 (object)[3]:  /  / 0
+(45) 0.0 (object):  /  / 0
+15: valueOf!
+(45) 0.0 (object)[2]:  /  / 0
+15: valueOf!
+(45) 0.0 (object)[3]:  /  / 0
+(46) 1 (object):  /  / 0
+16: valueOf!
+(46) 1 (object)[2]:  /  / 1
+16: valueOf!
+(46) 1 (object)[3]:  /  / 1
+(47) Hello World! (object):  /  / 1
+17: valueOf!
+(47) Hello World! (object)[2]:  /  / 0
+17: valueOf!
+(47) Hello World! (object)[3]:  /  / 1
+(48) true (object):  /  / 1
+18: valueOf!
+(48) true (object)[2]:  /  / 0
+18: valueOf!
+(48) true (object)[3]:  /  / 1
+(49) _level0 (object):  /  / 1
+19: valueOf!
+(49) _level0 (object)[2]:  /  / 0
+19: valueOf!
+(49) _level0 (object)[3]:  /  / 1
+(50) Ã¤Ã¶Ã¼ (object):  /  / 1
+20: valueOf!
+(50) Ã¤Ã¶Ã¼ (object)[2]:  /  / 0
+20: valueOf!
+(50) Ã¤Ã¶Ã¼ (object)[3]:  /  / 1
+(51) _level0 (object):  /  / 1
+21: valueOf!
+(51) _level0 (object)[2]:  /  / 0
+21: valueOf!
+(51) _level0 (object)[3]:  /  / 1
+(52) [type Object] (object):  /  / 1
+22: valueOf!
+(52) [type Object] (object)[2]:  /  / 0
+22: valueOf!
+(52) [type Object] (object)[3]:  /  / 1
+(53) [type Object] (object):  /  / 1
+23: valueOf!
+(53) [type Object] (object)[2]:  /  / 0
+23: valueOf!
+(53) [type Object] (object)[3]:  /  / 1
+(54) [type Object] (object):  /  / 1
+24: valueOf!
+(54) [type Object] (object)[2]:  /  / 0
+24: valueOf!
+(54) [type Object] (object)[3]:  /  / 1
+(55)  (object):  /  / 1
+25: valueOf!
+(55)  (object)[2]:  /  / 0
+25: valueOf!
+(55)  (object)[3]:  /  / 0
+(56) [type Object] (object):  /  / 0
+26: valueOf!
+(56) [type Object] (object)[2]:  /  / 0
+26: valueOf!
+(56) [type Object] (object)[3]:  /  / 1
+(57) [type Object] (object):  /  / 1
+27: valueOf!
+(57) [type Object] (object)[2]:  /  / 0
+27: valueOf!
+(57) [type Object] (object)[3]:  /  / 1
+(58) [type Object] (object):  /  / 1
+28: valueOf!
+(58) [type Object] (object)[2]:  /  / 0
+28: valueOf!
+(58) [type Object] (object)[3]:  /  / 1
+(59) [type Object] (object):  /  / 1
+29: valueOf!
+(59) [type Object] (object)[2]:  /  / 0
+29: valueOf!
+(59) [type Object] (object)[3]:  /  / 1

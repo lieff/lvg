@@ -1,0 +1,4 @@
+setup done
+enterFrame: old movie
+onLoadError: URLNotFound (0)
+enterFrame: old movie

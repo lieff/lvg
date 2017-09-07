@@ -1,0 +1,93 @@
+Check initial properties of script-constructed objects
+>>> new Object ()
+[type Function]
+true
+[type Function]
+true
+[object Object]
+true
+>>> {}
+[type Function]
+true
+undefined
+false
+[object Object]
+true
+>>> []
+[type Function]
+true
+undefined
+false
+
+true
+>>> 
+[type Function]
+true
+[type Function]
+true
+[object Object]
+true
+>>> new Foo ()
+[type Function]
+true
+[type Function]
+true
+[object Object]
+true
+>>> 
+[type Function]
+true
+[type Function]
+true
+[object Object]
+true
+>>> new this.Foo ()
+[type Function]
+true
+[type Function]
+true
+[object Object]
+true
+undefined
+>>> 
+[type Function]
+undefined
+[type Function]
+undefined
+undefined
+undefined
+>>> new Foo () - without prototype
+[type Function]
+undefined
+[type Function]
+undefined
+undefined
+undefined
+>>> 
+[type Function]
+undefined
+[type Function]
+undefined
+undefined
+undefined
+>>> new this.Foo () - without prototype
+[type Function]
+true
+[type Function]
+true
+undefined
+false
+>>> 42
+[type Function]
+true
+[type Function]
+true
+[type Object]
+true
+>>> true
+[type Function]
+true
+[type Function]
+true
+[type Object]
+true

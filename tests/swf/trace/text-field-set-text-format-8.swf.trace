@@ -1,0 +1,139 @@
+Starting state:
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=false
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=false
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=false
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+all, font:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=false
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=false
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=false
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+1, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=false
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=false
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+-3, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=false
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=false
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+32, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=false
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=false
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+3, 6, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=true
+4: align=right blockIndent=0 bold=true bullet=true
+5: align=right blockIndent=0 bold=true bullet=true
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+4, 5, !bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=false
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=true
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=true
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+-1, 2, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=true
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=true
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=true
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=false
+8: align=left blockIndent=0 bold=false bullet=false
+9: align=left blockIndent=0 bold=false bullet=false
+10: align=left blockIndent=0 bold=false bullet=false
+11: align=left blockIndent=0 bold=false bullet=false
+7, 30, bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=true
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=true
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=true
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=true
+8: align=left blockIndent=0 bold=false bullet=true
+9: align=left blockIndent=0 bold=false bullet=true
+10: align=left blockIndent=0 bold=false bullet=true
+11: align=left blockIndent=0 bold=false bullet=true
+20, 30, !bullet:
+undefined
+0: align=right blockIndent=0 bold=false bullet=true
+1: align=right blockIndent=0 bold=true bullet=true
+2: align=right blockIndent=0 bold=true bullet=false
+3: align=right blockIndent=0 bold=true bullet=true
+4: align=right blockIndent=0 bold=true bullet=false
+5: align=right blockIndent=0 bold=true bullet=true
+6: align=right blockIndent=0 bold=false bullet=false
+7: align=left blockIndent=0 bold=false bullet=true
+8: align=left blockIndent=0 bold=false bullet=true
+9: align=left blockIndent=0 bold=false bullet=true
+10: align=left blockIndent=0 bold=false bullet=true
+11: align=left blockIndent=0 bold=false bullet=true

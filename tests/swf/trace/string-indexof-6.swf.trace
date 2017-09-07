@@ -1,0 +1,19 @@
+Check String.indexOf
+>>> ABCDEFGHIabcdefghiABCDEFGHIabcdefghi
+36
+12
+15
+-1
+-1
+-1
+35
+17
+>>> ÄÖÜtütGHIabcdefghiABCDEFGHIabcdefghi
+36
+12
+15
+-1
+-1
+-1
+35
+17

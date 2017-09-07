@@ -1,0 +1,4 @@
+Check that deleting from an object does not delete from the prototype
+1
+2
+2

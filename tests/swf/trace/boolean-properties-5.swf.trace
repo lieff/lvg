@@ -1,0 +1,17 @@
+_global.Boolean = function
+  __proto__ (hpn) = _global.Object.__proto__
+  constructor (hp) = _global.Object.constructor
+  prototype (hp) = object
+    __proto__ (hp) = _global.Object.prototype
+    constructor (hp) = _global.Boolean
+    toString (hp) = function
+      __proto__ (hpn) = _global.Object.__proto__
+      constructor (hp) = _global.Object.constructor
+    valueOf (hp) = function
+      __proto__ (hpn) = _global.Object.__proto__
+      constructor (hp) = _global.Object.constructor
+local.a = object
+  __constructor__ (hn) = _global.Boolean
+  __proto__ (hp) = _global.Boolean.prototype
+  constructor (h) = _global.Boolean
+local.b = boolean : true

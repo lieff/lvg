@@ -1,0 +1,8 @@
+Check if flags of variables get reset upon addProperty
+set:
+set called
+mark constant:
+overwrite:
+10
+get
+42

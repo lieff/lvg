@@ -1,0 +1,48 @@
+# EMPTY
+bottomScroll: 1
+hscroll: 0
+maxhscroll: 0
+maxscroll: 1
+scroll: 1
+# WITH TEXT
+bottomScroll: 3
+hscroll: 200
+maxhscroll: 704
+maxscroll: 16
+scroll: 3
+# WITH WORD WRAP
+bottomScroll: 3
+hscroll: 200
+maxhscroll: 0
+maxscroll: 16
+scroll: 3
+# WITHOUT WORD WRAP
+bottomScroll: 3
+hscroll: 200
+maxhscroll: 704
+maxscroll: 16
+scroll: 3
+# WITH WORD WRAP - SCROLL RESET
+bottomScroll: 3
+hscroll: 200
+maxhscroll: 0
+maxscroll: 16
+scroll: 3
+# WITH WORD WRAP - TEXT RESET
+bottomScroll: 3
+hscroll: 0
+maxhscroll: 0
+maxscroll: 100
+scroll: 3
+# WITHOUT WORD WRAP - FORMAT RESET
+bottomScroll: 30
+hscroll: 0
+maxhscroll: 704
+maxscroll: 16
+scroll: 30
+# WITHOUT WORD WRAP - TEXT RESET
+bottomScroll: 16
+hscroll: 0
+maxhscroll: 704
+maxscroll: 16
+scroll: 16

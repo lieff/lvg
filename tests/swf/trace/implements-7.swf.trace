@@ -1,0 +1,34 @@
+Test Implements ActionScript action
+A implements Array, XML
+Before
+true
+false
+false
+false
+test
+After
+true
+true
+true
+false
+B changes prototype to A.prototype
+Before
+false
+false
+false
+false
+After
+true
+true
+true
+false
+C has A as parent
+true
+true
+true
+false
+A.prototype is reset
+true
+false
+false
+false

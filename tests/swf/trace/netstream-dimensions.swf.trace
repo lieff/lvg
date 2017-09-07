@@ -1,0 +1,14 @@
+Test Video object's width and height properties
+Calling play
+done calling play
+width = 0
+height = 0
+onStatus NetStream.Play.Start
+width = 0
+height = 0
+onStatus NetStream.Buffer.Flush
+width = 0
+height = 0
+onStatus NetStream.Play.Stop
+width = 466
+height = 311

@@ -1,0 +1,54 @@
+/* Swfdec
+ * Copyright (C) 2008 Benjamin Otte <otte@gnome.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, 
+ * Boston, MA  02110-1301  USA
+ */
+
+run_test = function (t, file) {
+  var e;
+  print ("Testing " + file);
+  try {
+    t.reset (file);
+    var expected = Buffer.load (file + ".trace");
+    t.advance (0);
+    t.advance (Math.ceil (10000 / t.rate));
+    var diff = t.trace.diff (expected);
+    if (diff) {
+      error ("different trace output");
+      Native.print (diff);
+      return false;
+    }
+  } catch (e) {
+    if (e) {
+      error (e);
+      return false;
+    }
+  };
+  Native.print ("  OK\n");
+  return true;
+};
+
+filenames.sort ();
+t = new Test ();
+fail = [];
+for (var i = 0; i < filenames.length; i++) {
+  if (!run_test (t, filenames[i]))
+    fail.push (filenames[i]);
+};
+if (fail.length > 0) {
+  error (fail.join ("\n       "));
+  throw (fail.length + " failures");
+}

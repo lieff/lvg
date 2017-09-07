@@ -1,0 +1,37 @@
+cruft <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE foo [ <!ENTITY greeting "hello"> ]>
+
+<!-- normal -->
+<normal>
+  text
+  <child attribute="value" second_attribute="second value">
+    child text
+  </child>
+  more text
+  <empty_element empty_attribute=""/>
+  even more text
+</normal>
+
+<!-- entities -->
+<entities entities_attribute="&lt; &gt; &quot; &apos; &amp; &nbsp;">
+  &lt; &gt; &quot; &apos; &amp; &nbsp;
+</entities>
+
+<!-- utf-8 -->
+<俄語>Данные</俄語>
+
+<!-- utf-8 -->
+<comment_inside_text>comment <!-- inside -->text</comment_inside_text>
+<no_comment_inside_text>comment text</no_comment_inside_text>
+
+<!-- unescaped entities -->
+<unescaped entities="> ' &  (nbsp)">
+  > " ' &  (nbsp)
+</unescaped>
+
+<!-- missing end element -->
+<end_not_missing>
+  text
+  <end_missing>
+    text
+</end_not_missing>

@@ -1,0 +1,2 @@
+﻿This is UTF-8, with BOM
+Å俄Д

@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="15" frames="1">
+    <size>
+      <Rectangle left="0" right="2000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <UnknownTag id="0x309">
+        <data>cmZ4</data>
+      </UnknownTag>
+      <FileAttributes hasMetaData="0" useNetwork="0"/>
+      <SetBackgroundColor>
+        <color>
+          <Color red="255" green="255" blue="255"/>
+        </color>
+      </SetBackgroundColor>
+      <DefineEditText objectID="1" wordWrap="0" multiLine="0" password="0" readOnly="0" autoSize="0" hasLayout="1" notSelectable="0" hasBorder="0" isHTML="0" useOutlines="0" align="0" leftMargin="0" rightMargin="0" indent="0" leading="0" variableName="variable1" initialText="Hello1">
+        <size>
+          <Rectangle left="0" right="2000" top="0" bottom="2000"/>
+        </size>
+        <color>
+          <Color red="255" green="255" blue="255" alpha="255"/>
+        </color>
+      </DefineEditText>
+      <UnknownTag id="0x28">
+        <data>AQB0ZXh0MQA=</data>
+      </UnknownTag>
+      <Export>
+        <symbols>
+          <Symbol objectID="1" name="text1"/>
+        </symbols>
+      </Export>
+      <PlaceObject2 replace="0" depth="1" objectID="1" name="text1"/>
+      <DefineEditText objectID="2" wordWrap="0" multiLine="0" password="0" readOnly="0" autoSize="0" hasLayout="1" notSelectable="0" hasBorder="0" isHTML="0" useOutlines="0" align="0" leftMargin="0" rightMargin="0" indent="0" leading="0" variableName="variable4" initialText="">
+        <size>
+          <Rectangle left="0" right="2000" top="0" bottom="2000"/>
+        </size>
+        <color>
+          <Color red="255" green="255" blue="255" alpha="255"/>
+        </color>
+      </DefineEditText>
+      <UnknownTag id="0x28">
+        <data>AgB0ZXh0MgA=</data>
+      </UnknownTag>
+      <Export>
+        <symbols>
+          <Symbol objectID="2" name="text2"/>
+        </symbols>
+      </Export>
+      <PlaceObject2 replace="0" depth="2" objectID="2" name="text2"/>
+      <DefineEditText objectID="3" wordWrap="0" multiLine="0" password="0" readOnly="0" autoSize="0" hasLayout="0" notSelectable="0" hasBorder="0" isHTML="0" useOutlines="0" align="0" leftMargin="0" rightMargin="0" indent="0" leading="0" variableName="variable6">
+        <size>
+          <Rectangle left="0" right="2000" top="0" bottom="2000"/>
+        </size>
+        <color>
+          <Color red="255" green="255" blue="255" alpha="255"/>
+        </color>
+      </DefineEditText>
+      <UnknownTag id="0x28">
+        <data>AwB0ZXh0MwA=</data>
+      </UnknownTag>
+      <Export>
+        <symbols>
+          <Symbol objectID="3" name="text3"/>
+        </symbols>
+      </Export>
+      <PlaceObject2 replace="0" depth="3" objectID="3" name="text3"/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="_root"/>
+              <String value="variable1"/>
+              <String value="text1"/>
+              <String value="variable"/>
+              <String value="variable2"/>
+              <String value="text"/>
+              <String value="Hello2"/>
+              <String value="variable3"/>
+              <String value="variable4"/>
+              <String value="text2"/>
+              <String value="variable5"/>
+              <String value="hasOwnProperty"/>
+              <String value="fscommand:quit"/>
+              <String value=""/>
+              <String value="variable6"/>
+              <String value="variable7"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="5"/>
+              <StackDictionaryLookup index="6"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+              <StackDictionaryLookup index="7"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="7"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="8"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="9"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+              <StackDictionaryLookup index="10"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="10"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="10"/>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="11"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="12"/>
+              <StackDictionaryLookup index="13"/>
+            </items>
+          </PushData>
+          <GetURL2 method="0"/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="14"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="9"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+              <StackDictionaryLookup index="15"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="15"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="15"/>
+              <StackInteger value="1"/>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="11"/>
+            </items>
+          </PushData>
+          <CallMethod/>
+          <Trace/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="12"/>
+              <StackDictionaryLookup index="13"/>
+            </items>
+          </PushData>
+          <GetURL2 method="0"/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

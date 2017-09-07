@@ -1,0 +1,60 @@
+normal
+true
+o.test: 0 -> 1 (user data) : 4
+true
+true
+o.test: 0 -> 1 () : 4
+true
+deleting the variable
+true
+o.test: 0 -> 1 () : 4
+false
+o.test:  -> 2 () : 4
+false
+true
+missing params
+false
+false
+false
+false
+extra params
+true
+o.test: 0 -> 1 (user data) : 4
+true
+deleting the object
+true
+o.test: 0 -> 1 () : 4
+false
+loop
+true
+0 -> 1
+true
+true
+true
+true
+1: 0 -> 1
+2:  -> 2
+3:  -> 3
+true
+deleting inside watch function
+true
+0 -> 1
+false
+ -> 2
+false
+true
+working with native functions
+true
+o.test: 0 -> 1 () : 4
+o.test: 1 -> 2 () : 4
+set 2
+false
+o.test: 2 -> 3 () : 4
+set 3
+set 1
+true
+o.test2: 1 -> 2 () : 4
+set 2
+false
+o.test2: 2 -> 3 () : 4
+set 3

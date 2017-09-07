@@ -1,0 +1,10 @@
+Test the default values of Color getters
+rgb: 0
+ra: 100
+rb: 0
+ga: 100
+gb: 0
+ba: 100
+bb: 0
+aa: 100
+ab: 0

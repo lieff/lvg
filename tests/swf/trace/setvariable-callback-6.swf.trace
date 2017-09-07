@@ -1,0 +1,4 @@
+Check SetVariable in callbacks sets variables on the target at function definition time
+undefined
+42
+undefined

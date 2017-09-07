@@ -1,0 +1,11 @@
+_global.flash.filters.ColorMatrixFilter = function
+  __proto__ (hp) = _global.Function.prototype
+  constructor (hp) = _global.Function
+  prototype (hp) = object
+    __constructor__ (h) = _global.flash.filters.BitmapFilter
+    __proto__ (hp) = _global.flash.filters.BitmapFilter.prototype
+    matrix (C) = undefined
+local.a = object
+  __constructor__ = _global.flash.filters.ColorMatrixFilter
+  __proto__ (hp) = _global.flash.filters.ColorMatrixFilter.prototype
+  constructor (h) = _global.flash.filters.ColorMatrixFilter

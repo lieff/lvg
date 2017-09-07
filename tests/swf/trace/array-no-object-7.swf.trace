@@ -1,0 +1,14 @@
+Before deleting Array
+1,2
+undefined
+2
+1,2
+[type Function]
+2
+After deleting Array
+[type Object]
+undefined
+2
+undefined
+undefined
+undefined

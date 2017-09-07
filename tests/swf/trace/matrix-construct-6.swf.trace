@@ -1,0 +1,158 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+(a=1, b=0, c=0, d=1, tx=0, ty=0)
+(a=10, b=, c=, d=, tx=, ty=)
+(a=10, b=20, c=, d=, tx=, ty=)
+(a=10, b=20, c=30, d=, tx=, ty=)
+(a=10, b=20, c=30, d=40, tx=, ty=)
+(a=10, b=20, c=30, d=40, tx=50, ty=)
+(a=10, b=20, c=30, d=40, tx=50, ty=60)
+(a=10, b=20, c=30, d=40, tx=50, ty=60)
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+(a=null, b=20, c=30, d=40, tx=50, ty=60)
+(a=true, b=20, c=30, d=40, tx=50, ty=60)
+(a=false, b=20, c=30, d=40, tx=50, ty=60)
+(a=0, b=20, c=30, d=40, tx=50, ty=60)
+(a=1, b=20, c=30, d=40, tx=50, ty=60)
+(a=0.5, b=20, c=30, d=40, tx=50, ty=60)
+(a=-1, b=20, c=30, d=40, tx=50, ty=60)
+(a=-0.5, b=20, c=30, d=40, tx=50, ty=60)
+(a=Infinity, b=20, c=30, d=40, tx=50, ty=60)
+(a=-Infinity, b=20, c=30, d=40, tx=50, ty=60)
+(a=NaN, b=20, c=30, d=40, tx=50, ty=60)
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+(a=0, b=20, c=30, d=40, tx=50, ty=60)
+(a=-0, b=20, c=30, d=40, tx=50, ty=60)
+(a=0.0, b=20, c=30, d=40, tx=50, ty=60)
+(a=1, b=20, c=30, d=40, tx=50, ty=60)
+(a=Hello World!, b=20, c=30, d=40, tx=50, ty=60)
+(a=true, b=20, c=30, d=40, tx=50, ty=60)
+(a=_level0, b=20, c=30, d=40, tx=50, ty=60)
+(a=äöü, b=20, c=30, d=40, tx=50, ty=60)
+(a=_level0, b=20, c=30, d=40, tx=50, ty=60)
+(a=[object Object], b=20, c=30, d=40, tx=50, ty=60)
+(a=Tue Apr 14 23:35:34 GMT+0000 2009, b=20, c=30, d=40, tx=50, ty=60)
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+(a=[type Function], b=20, c=30, d=40, tx=50, ty=60)
+valueOf called
+toString called
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+toString called with 
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+valueOf called with 
+(a=[object Object], b=20, c=30, d=40, tx=50, ty=60)
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+0: valueOf!
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+1: valueOf!
+(a=null, b=20, c=30, d=40, tx=50, ty=60)
+2: valueOf!
+(a=true, b=20, c=30, d=40, tx=50, ty=60)
+3: valueOf!
+(a=false, b=20, c=30, d=40, tx=50, ty=60)
+4: valueOf!
+(a=0, b=20, c=30, d=40, tx=50, ty=60)
+5: valueOf!
+(a=1, b=20, c=30, d=40, tx=50, ty=60)
+6: valueOf!
+(a=0.5, b=20, c=30, d=40, tx=50, ty=60)
+7: valueOf!
+(a=-1, b=20, c=30, d=40, tx=50, ty=60)
+8: valueOf!
+(a=-0.5, b=20, c=30, d=40, tx=50, ty=60)
+9: valueOf!
+(a=Infinity, b=20, c=30, d=40, tx=50, ty=60)
+10: valueOf!
+(a=-Infinity, b=20, c=30, d=40, tx=50, ty=60)
+11: valueOf!
+(a=NaN, b=20, c=30, d=40, tx=50, ty=60)
+12: valueOf!
+(a=, b=20, c=30, d=40, tx=50, ty=60)
+13: valueOf!
+(a=0, b=20, c=30, d=40, tx=50, ty=60)
+14: valueOf!
+(a=-0, b=20, c=30, d=40, tx=50, ty=60)
+15: valueOf!
+(a=0.0, b=20, c=30, d=40, tx=50, ty=60)
+16: valueOf!
+(a=1, b=20, c=30, d=40, tx=50, ty=60)
+17: valueOf!
+(a=Hello World!, b=20, c=30, d=40, tx=50, ty=60)
+18: valueOf!
+(a=true, b=20, c=30, d=40, tx=50, ty=60)
+19: valueOf!
+(a=_level0, b=20, c=30, d=40, tx=50, ty=60)
+20: valueOf!
+(a=äöü, b=20, c=30, d=40, tx=50, ty=60)
+21: valueOf!
+(a=_level0, b=20, c=30, d=40, tx=50, ty=60)
+22: valueOf!
+22: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+23: valueOf!
+23: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+24: valueOf!
+24: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+25: valueOf!
+25: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+26: valueOf!
+26: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+27: valueOf!
+27: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+28: valueOf!
+28: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+29: valueOf!
+29: toString!
+(a=[type Object], b=20, c=30, d=40, tx=50, ty=60)
+undefined
+(a=10, b=20, c=30, d=40, tx=50, ty=60)
+true
+identity
+(a=, b=123, c=, d=, tx=, ty=)
+(a=10, b=20, c=30, d=40, tx=50, ty=60)

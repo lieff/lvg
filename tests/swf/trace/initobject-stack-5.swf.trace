@@ -1,0 +1,8 @@
+Check that InitObject consumes the right amount of stack
+1
+2
+3
+undefined
+[object Object]
+undefined
+undefined

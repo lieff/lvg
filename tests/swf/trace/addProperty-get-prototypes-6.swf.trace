@@ -1,0 +1,9 @@
+Check getting of variables when addProperty has been used on prototypes.
+10
+10
+15
+o
+42
+o set
+o
+42

@@ -1,0 +1,1254 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+<root />
+
+<root />
+Constructing with: (0) undefined (undefined)
+
+Constructing with: (1) null (null)
+null
+Constructing with: (2) true (boolean)
+true
+Constructing with: (3) false (boolean)
+false
+Constructing with: (4) 0 (number)
+0
+Constructing with: (5) 1 (number)
+1
+Constructing with: (6) 0.5 (number)
+0.5
+Constructing with: (7) -1 (number)
+-1
+Constructing with: (8) -0.5 (number)
+-0.5
+Constructing with: (9) Infinity (number)
+Infinity
+Constructing with: (10) -Infinity (number)
+-Infinity
+Constructing with: (11) NaN (number)
+NaN
+Constructing with: (12)  (string)
+
+Constructing with: (13) 0 (string)
+0
+Constructing with: (14) -0 (string)
+-0
+Constructing with: (15) 0.0 (string)
+0.0
+Constructing with: (16) 1 (string)
+1
+Constructing with: (17) Hello World! (string)
+Hello World!
+Constructing with: (18) true (string)
+true
+Constructing with: (19) _level0 (string)
+_level0
+Constructing with: (20) äöü (string)
+äöü
+Constructing with: (21) _level0 (movieclip)
+_level0
+Constructing with: (22) [object Object] (object)
+[object Object]
+Constructing with: (23) [type Function] (function)
+[type Function]
+Constructing with: (24) [type Object] (object)
+toString called
+[type Object]
+Constructing with: (25) [type Object] (object)
+toString called with 
+[type Object]
+Constructing with: (26) [object Object] (object)
+[object Object]
+Constructing with: (27) undefined (object)
+[type Object]
+Constructing with: (28) undefined (object)
+0: toString!
+[type Object]
+Constructing with: (29) null (object)
+1: toString!
+[type Object]
+Constructing with: (30) true (object)
+2: toString!
+[type Object]
+Constructing with: (31) false (object)
+3: toString!
+[type Object]
+Constructing with: (32) 0 (object)
+4: toString!
+[type Object]
+Constructing with: (33) 1 (object)
+5: toString!
+[type Object]
+Constructing with: (34) 0.5 (object)
+6: toString!
+[type Object]
+Constructing with: (35) -1 (object)
+7: toString!
+[type Object]
+Constructing with: (36) -0.5 (object)
+8: toString!
+[type Object]
+Constructing with: (37) Infinity (object)
+9: toString!
+[type Object]
+Constructing with: (38) -Infinity (object)
+10: toString!
+[type Object]
+Constructing with: (39) NaN (object)
+11: toString!
+[type Object]
+Constructing with: (40)  (object)
+12: toString!
+
+Constructing with: (41) 0 (object)
+13: toString!
+0
+Constructing with: (42) -0 (object)
+14: toString!
+-0
+Constructing with: (43) 0.0 (object)
+15: toString!
+0.0
+Constructing with: (44) 1 (object)
+16: toString!
+1
+Constructing with: (45) Hello World! (object)
+17: toString!
+Hello World!
+Constructing with: (46) true (object)
+18: toString!
+true
+Constructing with: (47) _level0 (object)
+19: toString!
+_level0
+Constructing with: (48) äöü (object)
+20: toString!
+äöü
+Constructing with: (49) _level0 (object)
+21: toString!
+[type Object]
+Constructing with: (50) [type Object] (object)
+22: toString!
+[type Object]
+Constructing with: (51) [type Object] (object)
+23: toString!
+[type Object]
+Constructing with: (52) [type Object] (object)
+24: toString!
+[type Object]
+Constructing with: (53) [type Object] (object)
+25: toString!
+[type Object]
+Constructing with: (54) [type Object] (object)
+26: toString!
+[type Object]
+Constructing with: (55) [type Object] (object)
+27: toString!
+[type Object]
+undefined
+<?xml XML decl ?><!DOCTYPE doctype decl>
+
+
+<element>
+  text  more text
+  <child_element attribute="value" />
+</element>
+    
+Constructing with: (0) undefined (undefined)
+undefined
+<?xml XML decl ?><!DOCTYPE doctype decl>
+
+
+<element>
+  text  more text
+  <child_element attribute="value" />
+</element>
+    
+Constructing with: (1) null (null)
+undefined
+null
+Constructing with: (2) true (boolean)
+undefined
+true
+Constructing with: (3) false (boolean)
+undefined
+false
+Constructing with: (4) 0 (number)
+undefined
+0
+Constructing with: (5) 1 (number)
+undefined
+1
+Constructing with: (6) 0.5 (number)
+undefined
+0.5
+Constructing with: (7) -1 (number)
+undefined
+-1
+Constructing with: (8) -0.5 (number)
+undefined
+-0.5
+Constructing with: (9) Infinity (number)
+undefined
+Infinity
+Constructing with: (10) -Infinity (number)
+undefined
+-Infinity
+Constructing with: (11) NaN (number)
+undefined
+NaN
+Constructing with: (12)  (string)
+undefined
+
+Constructing with: (13) 0 (string)
+undefined
+0
+Constructing with: (14) -0 (string)
+undefined
+-0
+Constructing with: (15) 0.0 (string)
+undefined
+0.0
+Constructing with: (16) 1 (string)
+undefined
+1
+Constructing with: (17) Hello World! (string)
+undefined
+Hello World!
+Constructing with: (18) true (string)
+undefined
+true
+Constructing with: (19) _level0 (string)
+undefined
+_level0
+Constructing with: (20) äöü (string)
+undefined
+äöü
+Constructing with: (21) _level0 (movieclip)
+undefined
+_level0
+Constructing with: (22) [object Object] (object)
+undefined
+[object Object]
+Constructing with: (23) [type Function] (function)
+undefined
+[type Function]
+Constructing with: (24) [type Object] (object)
+toString called
+undefined
+[type Object]
+Constructing with: (25) [type Object] (object)
+toString called with 
+undefined
+[type Object]
+Constructing with: (26) [object Object] (object)
+undefined
+[object Object]
+Constructing with: (27) undefined (object)
+undefined
+[type Object]
+Constructing with: (28) undefined (object)
+0: toString!
+undefined
+[type Object]
+Constructing with: (29) null (object)
+1: toString!
+undefined
+[type Object]
+Constructing with: (30) true (object)
+2: toString!
+undefined
+[type Object]
+Constructing with: (31) false (object)
+3: toString!
+undefined
+[type Object]
+Constructing with: (32) 0 (object)
+4: toString!
+undefined
+[type Object]
+Constructing with: (33) 1 (object)
+5: toString!
+undefined
+[type Object]
+Constructing with: (34) 0.5 (object)
+6: toString!
+undefined
+[type Object]
+Constructing with: (35) -1 (object)
+7: toString!
+undefined
+[type Object]
+Constructing with: (36) -0.5 (object)
+8: toString!
+undefined
+[type Object]
+Constructing with: (37) Infinity (object)
+9: toString!
+undefined
+[type Object]
+Constructing with: (38) -Infinity (object)
+10: toString!
+undefined
+[type Object]
+Constructing with: (39) NaN (object)
+11: toString!
+undefined
+[type Object]
+Constructing with: (40)  (object)
+12: toString!
+undefined
+
+Constructing with: (41) 0 (object)
+13: toString!
+undefined
+0
+Constructing with: (42) -0 (object)
+14: toString!
+undefined
+-0
+Constructing with: (43) 0.0 (object)
+15: toString!
+undefined
+0.0
+Constructing with: (44) 1 (object)
+16: toString!
+undefined
+1
+Constructing with: (45) Hello World! (object)
+17: toString!
+undefined
+Hello World!
+Constructing with: (46) true (object)
+18: toString!
+undefined
+true
+Constructing with: (47) _level0 (object)
+19: toString!
+undefined
+_level0
+Constructing with: (48) äöü (object)
+20: toString!
+undefined
+äöü
+Constructing with: (49) _level0 (object)
+21: toString!
+undefined
+[type Object]
+Constructing with: (50) [type Object] (object)
+22: toString!
+undefined
+[type Object]
+Constructing with: (51) [type Object] (object)
+23: toString!
+undefined
+[type Object]
+Constructing with: (52) [type Object] (object)
+24: toString!
+undefined
+[type Object]
+Constructing with: (53) [type Object] (object)
+25: toString!
+undefined
+[type Object]
+Constructing with: (54) [type Object] (object)
+26: toString!
+undefined
+[type Object]
+Constructing with: (55) [type Object] (object)
+27: toString!
+undefined
+[type Object]
+<root />
+<name />
+<root />
+value
+<root />
+undefined
+undefined
+<name />
+value
+Creating with: (0) undefined (undefined)
+undefined
+undefined
+Creating with: (1) null (null)
+<null />
+null
+Creating with: (2) true (boolean)
+<true />
+true
+Creating with: (3) false (boolean)
+<false />
+false
+Creating with: (4) 0 (number)
+<0 />
+0
+Creating with: (5) 1 (number)
+<1 />
+1
+Creating with: (6) 0.5 (number)
+<0.5 />
+0.5
+Creating with: (7) -1 (number)
+<-1 />
+-1
+Creating with: (8) -0.5 (number)
+<-0.5 />
+-0.5
+Creating with: (9) Infinity (number)
+<Infinity />
+Infinity
+Creating with: (10) -Infinity (number)
+<-Infinity />
+-Infinity
+Creating with: (11) NaN (number)
+<NaN />
+NaN
+Creating with: (12)  (string)
+< />
+
+Creating with: (13) 0 (string)
+<0 />
+0
+Creating with: (14) -0 (string)
+<-0 />
+-0
+Creating with: (15) 0.0 (string)
+<0.0 />
+0.0
+Creating with: (16) 1 (string)
+<1 />
+1
+Creating with: (17) Hello World! (string)
+<Hello World! />
+Hello World!
+Creating with: (18) true (string)
+<true />
+true
+Creating with: (19) _level0 (string)
+<_level0 />
+_level0
+Creating with: (20) äöü (string)
+<äöü />
+äöü
+Creating with: (21) _level0 (movieclip)
+<_level0 />
+_level0
+Creating with: (22) [object Object] (object)
+<[object Object] />
+[object Object]
+Creating with: (23) [type Function] (function)
+<[type Function] />
+[type Function]
+Creating with: (24) [type Object] (object)
+toString called
+<[type Object] />
+toString called
+[type Object]
+Creating with: (25) [type Object] (object)
+toString called with 
+<[type Object] />
+toString called with 
+[type Object]
+Creating with: (26) [object Object] (object)
+<[object Object] />
+[object Object]
+Creating with: (27) undefined (object)
+<[type Object] />
+[type Object]
+Creating with: (28) undefined (object)
+0: toString!
+<[type Object] />
+0: toString!
+[type Object]
+Creating with: (29) null (object)
+1: toString!
+<[type Object] />
+1: toString!
+[type Object]
+Creating with: (30) true (object)
+2: toString!
+<[type Object] />
+2: toString!
+[type Object]
+Creating with: (31) false (object)
+3: toString!
+<[type Object] />
+3: toString!
+[type Object]
+Creating with: (32) 0 (object)
+4: toString!
+<[type Object] />
+4: toString!
+[type Object]
+Creating with: (33) 1 (object)
+5: toString!
+<[type Object] />
+5: toString!
+[type Object]
+Creating with: (34) 0.5 (object)
+6: toString!
+<[type Object] />
+6: toString!
+[type Object]
+Creating with: (35) -1 (object)
+7: toString!
+<[type Object] />
+7: toString!
+[type Object]
+Creating with: (36) -0.5 (object)
+8: toString!
+<[type Object] />
+8: toString!
+[type Object]
+Creating with: (37) Infinity (object)
+9: toString!
+<[type Object] />
+9: toString!
+[type Object]
+Creating with: (38) -Infinity (object)
+10: toString!
+<[type Object] />
+10: toString!
+[type Object]
+Creating with: (39) NaN (object)
+11: toString!
+<[type Object] />
+11: toString!
+[type Object]
+Creating with: (40)  (object)
+12: toString!
+< />
+12: toString!
+
+Creating with: (41) 0 (object)
+13: toString!
+<0 />
+13: toString!
+0
+Creating with: (42) -0 (object)
+14: toString!
+<-0 />
+14: toString!
+-0
+Creating with: (43) 0.0 (object)
+15: toString!
+<0.0 />
+15: toString!
+0.0
+Creating with: (44) 1 (object)
+16: toString!
+<1 />
+16: toString!
+1
+Creating with: (45) Hello World! (object)
+17: toString!
+<Hello World! />
+17: toString!
+Hello World!
+Creating with: (46) true (object)
+18: toString!
+<true />
+18: toString!
+true
+Creating with: (47) _level0 (object)
+19: toString!
+<_level0 />
+19: toString!
+_level0
+Creating with: (48) äöü (object)
+20: toString!
+<äöü />
+20: toString!
+äöü
+Creating with: (49) _level0 (object)
+21: toString!
+<[type Object] />
+21: toString!
+[type Object]
+Creating with: (50) [type Object] (object)
+22: toString!
+<[type Object] />
+22: toString!
+[type Object]
+Creating with: (51) [type Object] (object)
+23: toString!
+<[type Object] />
+23: toString!
+[type Object]
+Creating with: (52) [type Object] (object)
+24: toString!
+<[type Object] />
+24: toString!
+[type Object]
+Creating with: (53) [type Object] (object)
+25: toString!
+<[type Object] />
+25: toString!
+[type Object]
+Creating with: (54) [type Object] (object)
+26: toString!
+<[type Object] />
+26: toString!
+[type Object]
+Creating with: (55) [type Object] (object)
+27: toString!
+<[type Object] />
+27: toString!
+[type Object]
+application/x-www-form-urlencoded
+<!DOCTYPE doctype declaration >
+false
+undefined
+0
+<?xml XML declaration ?>
+application/x-www-form-urlencoded
+undefined
+false
+undefined
+0
+undefined
+application/x-www-form-urlencoded
+undefined
+false
+undefined
+0
+undefined
+Testing with: (0) undefined (undefined)
+application/x-www-form-urlencoded
+undefined
+false
+undefined
+0
+undefined
+Testing with: (1) null (null)
+null
+null
+false
+false
+0
+null
+Testing with: (2) true (boolean)
+true
+true
+true
+true
+1
+true
+Testing with: (3) false (boolean)
+false
+false
+false
+false
+0
+false
+Testing with: (4) 0 (number)
+0
+0
+false
+false
+0
+0
+Testing with: (5) 1 (number)
+1
+1
+true
+true
+1
+1
+Testing with: (6) 0.5 (number)
+0.5
+0.5
+true
+true
+0
+0.5
+Testing with: (7) -1 (number)
+-1
+-1
+true
+true
+-1
+-1
+Testing with: (8) -0.5 (number)
+-0.5
+-0.5
+true
+true
+0
+-0.5
+Testing with: (9) Infinity (number)
+Infinity
+Infinity
+true
+true
+0
+Infinity
+Testing with: (10) -Infinity (number)
+-Infinity
+-Infinity
+true
+true
+0
+-Infinity
+Testing with: (11) NaN (number)
+NaN
+NaN
+false
+false
+0
+NaN
+Testing with: (12)  (string)
+
+
+false
+false
+0
+
+Testing with: (13) 0 (string)
+0
+0
+true
+true
+0
+0
+Testing with: (14) -0 (string)
+-0
+-0
+true
+true
+0
+-0
+Testing with: (15) 0.0 (string)
+0.0
+0.0
+true
+true
+0
+0.0
+Testing with: (16) 1 (string)
+1
+1
+true
+true
+1
+1
+Testing with: (17) Hello World! (string)
+Hello World!
+Hello World!
+true
+true
+0
+Hello World!
+Testing with: (18) true (string)
+true
+true
+true
+true
+0
+true
+Testing with: (19) _level0 (string)
+_level0
+_level0
+true
+true
+0
+_level0
+Testing with: (20) äöü (string)
+äöü
+äöü
+true
+true
+0
+äöü
+Testing with: (21) _level0 (movieclip)
+_level0
+_level0
+true
+true
+0
+_level0
+Testing with: (22) [object Object] (object)
+[object Object]
+[object Object]
+true
+true
+0
+[object Object]
+Testing with: (23) [type Function] (function)
+[type Function]
+[type Function]
+true
+true
+0
+[type Function]
+Testing with: (24) [type Object] (object)
+toString called
+[type Object]
+toString called
+[type Object]
+toString called
+true
+toString called
+true
+toString called
+valueOf called
+0
+toString called
+[type Object]
+Testing with: (25) [type Object] (object)
+toString called with 
+[type Object]
+toString called with 
+[type Object]
+toString called with 
+true
+toString called with 
+true
+toString called with 
+0
+toString called with 
+[type Object]
+Testing with: (26) [object Object] (object)
+[object Object]
+[object Object]
+true
+true
+valueOf called with 
+0
+[object Object]
+Testing with: (27) undefined (object)
+[type Object]
+[type Object]
+true
+true
+0
+[type Object]
+Testing with: (28) undefined (object)
+0: toString!
+[type Object]
+0: toString!
+[type Object]
+0: toString!
+true
+0: toString!
+true
+0: toString!
+0: valueOf!
+0
+0: toString!
+[type Object]
+Testing with: (29) null (object)
+1: toString!
+[type Object]
+1: toString!
+[type Object]
+1: toString!
+true
+1: toString!
+true
+1: toString!
+1: valueOf!
+0
+1: toString!
+[type Object]
+Testing with: (30) true (object)
+2: toString!
+[type Object]
+2: toString!
+[type Object]
+2: toString!
+true
+2: toString!
+true
+2: toString!
+2: valueOf!
+1
+2: toString!
+[type Object]
+Testing with: (31) false (object)
+3: toString!
+[type Object]
+3: toString!
+[type Object]
+3: toString!
+true
+3: toString!
+true
+3: toString!
+3: valueOf!
+0
+3: toString!
+[type Object]
+Testing with: (32) 0 (object)
+4: toString!
+[type Object]
+4: toString!
+[type Object]
+4: toString!
+true
+4: toString!
+true
+4: toString!
+4: valueOf!
+0
+4: toString!
+[type Object]
+Testing with: (33) 1 (object)
+5: toString!
+[type Object]
+5: toString!
+[type Object]
+5: toString!
+true
+5: toString!
+true
+5: toString!
+5: valueOf!
+1
+5: toString!
+[type Object]
+Testing with: (34) 0.5 (object)
+6: toString!
+[type Object]
+6: toString!
+[type Object]
+6: toString!
+true
+6: toString!
+true
+6: toString!
+6: valueOf!
+0
+6: toString!
+[type Object]
+Testing with: (35) -1 (object)
+7: toString!
+[type Object]
+7: toString!
+[type Object]
+7: toString!
+true
+7: toString!
+true
+7: toString!
+7: valueOf!
+-1
+7: toString!
+[type Object]
+Testing with: (36) -0.5 (object)
+8: toString!
+[type Object]
+8: toString!
+[type Object]
+8: toString!
+true
+8: toString!
+true
+8: toString!
+8: valueOf!
+0
+8: toString!
+[type Object]
+Testing with: (37) Infinity (object)
+9: toString!
+[type Object]
+9: toString!
+[type Object]
+9: toString!
+true
+9: toString!
+true
+9: toString!
+9: valueOf!
+0
+9: toString!
+[type Object]
+Testing with: (38) -Infinity (object)
+10: toString!
+[type Object]
+10: toString!
+[type Object]
+10: toString!
+true
+10: toString!
+true
+10: toString!
+10: valueOf!
+0
+10: toString!
+[type Object]
+Testing with: (39) NaN (object)
+11: toString!
+[type Object]
+11: toString!
+[type Object]
+11: toString!
+true
+11: toString!
+true
+11: toString!
+11: valueOf!
+0
+11: toString!
+[type Object]
+Testing with: (40)  (object)
+12: toString!
+
+12: toString!
+
+12: toString!
+true
+12: toString!
+true
+12: toString!
+12: valueOf!
+0
+12: toString!
+
+Testing with: (41) 0 (object)
+13: toString!
+0
+13: toString!
+0
+13: toString!
+true
+13: toString!
+true
+13: toString!
+13: valueOf!
+0
+13: toString!
+0
+Testing with: (42) -0 (object)
+14: toString!
+-0
+14: toString!
+-0
+14: toString!
+true
+14: toString!
+true
+14: toString!
+14: valueOf!
+0
+14: toString!
+-0
+Testing with: (43) 0.0 (object)
+15: toString!
+0.0
+15: toString!
+0.0
+15: toString!
+true
+15: toString!
+true
+15: toString!
+15: valueOf!
+0
+15: toString!
+0.0
+Testing with: (44) 1 (object)
+16: toString!
+1
+16: toString!
+1
+16: toString!
+true
+16: toString!
+true
+16: toString!
+16: valueOf!
+1
+16: toString!
+1
+Testing with: (45) Hello World! (object)
+17: toString!
+Hello World!
+17: toString!
+Hello World!
+17: toString!
+true
+17: toString!
+true
+17: toString!
+17: valueOf!
+0
+17: toString!
+Hello World!
+Testing with: (46) true (object)
+18: toString!
+true
+18: toString!
+true
+18: toString!
+true
+18: toString!
+true
+18: toString!
+18: valueOf!
+0
+18: toString!
+true
+Testing with: (47) _level0 (object)
+19: toString!
+_level0
+19: toString!
+_level0
+19: toString!
+true
+19: toString!
+true
+19: toString!
+19: valueOf!
+0
+19: toString!
+_level0
+Testing with: (48) äöü (object)
+20: toString!
+äöü
+20: toString!
+äöü
+20: toString!
+true
+20: toString!
+true
+20: toString!
+20: valueOf!
+0
+20: toString!
+äöü
+Testing with: (49) _level0 (object)
+21: toString!
+[type Object]
+21: toString!
+[type Object]
+21: toString!
+true
+21: toString!
+true
+21: toString!
+21: valueOf!
+0
+21: toString!
+[type Object]
+Testing with: (50) [type Object] (object)
+22: toString!
+[type Object]
+22: toString!
+[type Object]
+22: toString!
+true
+22: toString!
+true
+22: toString!
+22: valueOf!
+0
+22: toString!
+[type Object]
+Testing with: (51) [type Object] (object)
+23: toString!
+[type Object]
+23: toString!
+[type Object]
+23: toString!
+true
+23: toString!
+true
+23: toString!
+23: valueOf!
+0
+23: toString!
+[type Object]
+Testing with: (52) [type Object] (object)
+24: toString!
+[type Object]
+24: toString!
+[type Object]
+24: toString!
+true
+24: toString!
+true
+24: toString!
+24: valueOf!
+0
+24: toString!
+[type Object]
+Testing with: (53) [type Object] (object)
+25: toString!
+[type Object]
+25: toString!
+[type Object]
+25: toString!
+true
+25: toString!
+true
+25: toString!
+25: valueOf!
+0
+25: toString!
+[type Object]
+Testing with: (54) [type Object] (object)
+26: toString!
+[type Object]
+26: toString!
+[type Object]
+26: toString!
+true
+26: toString!
+true
+26: toString!
+26: valueOf!
+0
+26: toString!
+[type Object]
+Testing with: (55) [type Object] (object)
+27: toString!
+[type Object]
+27: toString!
+[type Object]
+27: toString!
+true
+27: toString!
+true
+27: toString!
+27: valueOf!
+0
+27: toString!
+[type Object]

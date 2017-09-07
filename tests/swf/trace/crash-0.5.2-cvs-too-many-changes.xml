@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<swf version="6" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="6400" top="0" bottom="4800"/>
+    </size>
+    <tags>
+      <DefineShape3 objectID="1">
+        <bounds>
+          <Rectangle left="0" right="0" top="100" bottom="100"/>
+        </bounds>
+        <styles>
+          <StyleList>
+            <fillStyles>
+              <Solid>
+                <color>
+                  <Color red="0" green="255" blue="255" alpha="255"/>
+                </color>
+              </Solid>
+            </fillStyles>
+            <lineStyles/>
+          </StyleList>
+        </styles>
+        <shapes>
+          <Shape>
+            <edges>
+              <ShapeSetup x="0" y="0" fillStyle0="1"/>
+              <ShapeSetup x="100" y="100" fillStyle0="1" fillStyle1="0" lineStyle="0">
+                <styles>
+                  <StyleList>
+                    <fillStyles>
+                      <Solid>
+                        <color>
+                          <Color red="0" green="255" blue="255" alpha="255"/>
+                        </color>
+                      </Solid>
+                    </fillStyles>
+                    <lineStyles/>
+                  </StyleList>
+                </styles>
+              </ShapeSetup>
+              <LineTo x="0" y="0"/>
+              <LineTo x="100" y="100"/>
+              <ShapeSetup/>
+            </edges>
+          </Shape>
+        </shapes>
+      </DefineShape3>
+      <PlaceObject2 objectID="1" depth="0" />
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

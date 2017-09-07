@@ -1,0 +1,15 @@
+Check RemoveSprite action with various depths
+_level0.movie-2000000 @ -2000000
+_level0.movie-2000000 @ -2000000
+_level0.movie-20000 @ -20000
+_level0.movie-20000 @ -20000
+_level0.movie-10000 @ -10000
+_level0.movie-10000 @ -10000
+_level0.movie-1 @ -1
+_level0.movie-1 @ -1
+_level0.movie0 @ 0
+ @ 
+_level0.movie1000000 @ 1000000
+ @ 
+_level0.movie2000000 @ 2000000
+_level0.movie2000000 @ 2000000

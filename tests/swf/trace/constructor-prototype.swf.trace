@@ -1,0 +1,4 @@
+Test that functions defined on the prototype exist in the new object
+created new Test object: [object Object]
+called function test on [object Object]
+fortytwo = 42

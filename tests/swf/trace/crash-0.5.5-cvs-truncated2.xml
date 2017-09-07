@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<swf version="6" compressed="0">
+  <Header framerate="12" frames="1119">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+    </tags>
+  </Header>
+</swf>

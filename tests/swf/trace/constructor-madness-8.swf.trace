@@ -1,0 +1,5 @@
+Check what version has __constructor__ vs constructor
+[type Function]
+true
+[type Function]
+false

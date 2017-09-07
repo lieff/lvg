@@ -1,0 +1,16 @@
+Creating: a
+onConstruct: _level0.a
+arguments: 
+caller: null
+callee: [type Function]
+Creating duplicate: b
+Creating child: c
+onConstruct: _level0.a.c
+arguments: 
+caller: null
+callee: [type Function]
+Creating text field: d
+onLoad: _level0
+arguments: 
+caller: null
+callee: [type Function]

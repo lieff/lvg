@@ -1,0 +1,25 @@
+local.x = object
+  1 = object
+    __proto__ (hp) = _global.XMLNode.prototype
+    constructor (hp) = _global.XMLNode
+  2 = object
+    __proto__ (hp) = _global.XMLNode.prototype
+    constructor (hp) = _global.XMLNode
+  __constructor__ (hn) = _global.XML
+  __proto__ (hp) = _global.XML.prototype
+  constructor (h) = _global.XML
+
+done
+<a><b id="test" /></a>
+
+done
+ <a> <b id="change" /> <c /> <d id="change" /> </a>
+
+2
+undefined
+[object Object]
+undefined
+[object Object]
+hello
+[object Object]
+hello

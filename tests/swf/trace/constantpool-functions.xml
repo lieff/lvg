@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="foo"/>
+            </strings>
+          </Dictionary>
+	  <DeclareFunction2 name="foo">
+            <args/>
+            <actions>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <Trace/>
+	      <Dictionary>
+		<strings>
+		  <String value="baz"/>
+		</strings>
+	      </Dictionary>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <Trace/>
+            </actions>
+          </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackDictionaryLookup index="0"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+          <Dictionary>
+            <strings>
+              <String value="bar"/>
+            </strings>
+          </Dictionary>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Pop/>
+	  <PushData>
+	    <items>
+	      <StackDictionaryLookup index="0"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <GetURL url="fscommand:quit" target=""/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

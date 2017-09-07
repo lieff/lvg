@@ -1,0 +1,149 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+undefined
+this -5: undefined
+a -5: undefined
+this -4: _level0.f
+a -4: _level0.a.f
+this -3: undefined
+a -3: undefined
+this -2: undefined
+a -2: undefined
+this -1: _level0.e
+a -1: _level0.a.e
+this 0: _level0.a
+a 0: _level0.a.a
+this 1: undefined
+a 1: undefined
+this 2: undefined
+a 2: undefined
+this 3: _level0.c
+a 3: _level0.a.c
+this 4: undefined
+a 4: undefined
+this 5: undefined
+a 5: undefined
+this (0) undefined (undefined): undefined
+this (1) null (null): _level0.a
+this (2) true (boolean): undefined
+this (3) false (boolean): _level0.a
+this (4) 0 (number): _level0.a
+this (5) 1 (number): undefined
+this (6) 0.5 (number): _level0.a
+this (7) -1 (number): _level0.e
+this (8) -0.5 (number): _level0.a
+this (9) Infinity (number): _level0.a
+this (10) -Infinity (number): _level0.a
+this (11) NaN (number): _level0.a
+this (12)  (string): _level0.a
+this (13) 0 (string): _level0.a
+this (14) -0 (string): _level0.a
+this (15) 0.0 (string): _level0.a
+this (16) 1 (string): undefined
+this (17) Hello World! (string): _level0.a
+this (18) true (string): _level0.a
+this (19) _level0 (string): _level0.a
+this (20) äöü (string): _level0.a
+this (21) _level0 (movieclip): _level0.a
+this (22) [object Object] (object): _level0.a
+this (23) [type Function] (function): _level0.a
+valueOf called
+this (24) [type Object] (object): _level0.a
+this (25) [type Object] (object): _level0.a
+valueOf called with 
+this (26) [object Object] (object): _level0.a
+this (27) undefined (object): _level0.a
+0: valueOf!
+this (28) undefined (object): _level0.a
+1: valueOf!
+this (29) null (object): _level0.a
+2: valueOf!
+this (30) true (object): undefined
+3: valueOf!
+this (31) false (object): _level0.a
+4: valueOf!
+this (32) 0 (object): _level0.a
+5: valueOf!
+this (33) 1 (object): undefined
+6: valueOf!
+this (34) 0.5 (object): _level0.a
+7: valueOf!
+this (35) -1 (object): _level0.e
+8: valueOf!
+this (36) -0.5 (object): _level0.a
+9: valueOf!
+this (37) Infinity (object): _level0.a
+10: valueOf!
+this (38) -Infinity (object): _level0.a
+11: valueOf!
+this (39) NaN (object): _level0.a
+12: valueOf!
+this (40)  (object): _level0.a
+13: valueOf!
+this (41) 0 (object): _level0.a
+14: valueOf!
+this (42) -0 (object): _level0.a
+15: valueOf!
+this (43) 0.0 (object): _level0.a
+16: valueOf!
+this (44) 1 (object): undefined
+17: valueOf!
+this (45) Hello World! (object): _level0.a
+18: valueOf!
+this (46) true (object): _level0.a
+19: valueOf!
+this (47) _level0 (object): _level0.a
+20: valueOf!
+this (48) äöü (object): _level0.a
+21: valueOf!
+this (49) _level0 (object): _level0.a
+22: valueOf!
+this (50) [type Object] (object): _level0.a
+23: valueOf!
+this (51) [type Object] (object): _level0.a
+24: valueOf!
+this (52) [type Object] (object): _level0.a
+25: valueOf!
+this (53) [type Object] (object): _level0.a
+26: valueOf!
+this (54) [type Object] (object): _level0.a
+27: valueOf!
+this (55) [type Object] (object): _level0.a
+t 0: _level0.t.a
+t 1: undefined

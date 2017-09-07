@@ -1,0 +1,376 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+(0)  (undefined): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(1) null (null): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(2) true (boolean): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(3) false (boolean): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(4) 0 (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(5) 1 (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(6) 0.5 (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(7) -1 (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(8) -0.5 (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(9) Infinity (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(10) -Infinity (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(11) NaN (number): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(12)  (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(13) 0 (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(14) -0 (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(15) 0.0 (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(16) 1 (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(17) Hello World! (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(18) true (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(19) _level0 (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(20) Ã¤Ã¶Ã¼ (string): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(21) _level0 (movieclip): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(22) [object Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(23)  (undefined): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(24) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(25) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(26) [object Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(27)  (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(28)  (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(29) null (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(30) true (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(31) false (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(32) 0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(33) 1 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(34) 0.5 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(35) -1 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(36) -0.5 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(37) Infinity (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(38) -Infinity (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(39) NaN (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(40)  (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(41) 0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(42) -0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(43) 0.0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(44) 1 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(45) Hello World! (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(46) true (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(47) _level0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(48) Ã¤Ã¶Ã¼ (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(49) _level0 (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(50) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(51)  (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(52) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(53) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(54) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+(55) [type Object] (object): 
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined

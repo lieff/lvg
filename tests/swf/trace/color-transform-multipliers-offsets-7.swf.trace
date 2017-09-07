@@ -1,0 +1,936 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+Testing: -5000
+alphaMultiplier: -5000
+blueMultiplier: -5000
+greenMultiplier: -5000
+redMultiplier: -5000
+alphaOffset: -5000
+blueOffset: -5000
+greenOffset: -5000
+redOffset: -5000
+Testing: 5000
+alphaMultiplier: 5000
+blueMultiplier: 5000
+greenMultiplier: 5000
+redMultiplier: 5000
+alphaOffset: 5000
+blueOffset: 5000
+greenOffset: 5000
+redOffset: 5000
+Testing: (0) undefined (undefined)
+alphaMultiplier: undefined
+blueMultiplier: undefined
+greenMultiplier: undefined
+redMultiplier: undefined
+alphaOffset: undefined
+blueOffset: undefined
+greenOffset: undefined
+redOffset: undefined
+Testing: (1) null (null)
+alphaMultiplier: null
+blueMultiplier: null
+greenMultiplier: null
+redMultiplier: null
+alphaOffset: null
+blueOffset: null
+greenOffset: null
+redOffset: null
+Testing: (2) true (boolean)
+alphaMultiplier: true
+blueMultiplier: true
+greenMultiplier: true
+redMultiplier: true
+alphaOffset: true
+blueOffset: true
+greenOffset: true
+redOffset: true
+Testing: (3) false (boolean)
+alphaMultiplier: false
+blueMultiplier: false
+greenMultiplier: false
+redMultiplier: false
+alphaOffset: false
+blueOffset: false
+greenOffset: false
+redOffset: false
+Testing: (4) 0 (number)
+alphaMultiplier: 0
+blueMultiplier: 0
+greenMultiplier: 0
+redMultiplier: 0
+alphaOffset: 0
+blueOffset: 0
+greenOffset: 0
+redOffset: 0
+Testing: (5) 1 (number)
+alphaMultiplier: 1
+blueMultiplier: 1
+greenMultiplier: 1
+redMultiplier: 1
+alphaOffset: 1
+blueOffset: 1
+greenOffset: 1
+redOffset: 1
+Testing: (6) 0.5 (number)
+alphaMultiplier: 0.5
+blueMultiplier: 0.5
+greenMultiplier: 0.5
+redMultiplier: 0.5
+alphaOffset: 0.5
+blueOffset: 0.5
+greenOffset: 0.5
+redOffset: 0.5
+Testing: (7) -1 (number)
+alphaMultiplier: -1
+blueMultiplier: -1
+greenMultiplier: -1
+redMultiplier: -1
+alphaOffset: -1
+blueOffset: -1
+greenOffset: -1
+redOffset: -1
+Testing: (8) -0.5 (number)
+alphaMultiplier: -0.5
+blueMultiplier: -0.5
+greenMultiplier: -0.5
+redMultiplier: -0.5
+alphaOffset: -0.5
+blueOffset: -0.5
+greenOffset: -0.5
+redOffset: -0.5
+Testing: (9) Infinity (number)
+alphaMultiplier: Infinity
+blueMultiplier: Infinity
+greenMultiplier: Infinity
+redMultiplier: Infinity
+alphaOffset: Infinity
+blueOffset: Infinity
+greenOffset: Infinity
+redOffset: Infinity
+Testing: (10) -Infinity (number)
+alphaMultiplier: -Infinity
+blueMultiplier: -Infinity
+greenMultiplier: -Infinity
+redMultiplier: -Infinity
+alphaOffset: -Infinity
+blueOffset: -Infinity
+greenOffset: -Infinity
+redOffset: -Infinity
+Testing: (11) NaN (number)
+alphaMultiplier: NaN
+blueMultiplier: NaN
+greenMultiplier: NaN
+redMultiplier: NaN
+alphaOffset: NaN
+blueOffset: NaN
+greenOffset: NaN
+redOffset: NaN
+Testing: (12)  (string)
+alphaMultiplier: 
+blueMultiplier: 
+greenMultiplier: 
+redMultiplier: 
+alphaOffset: 
+blueOffset: 
+greenOffset: 
+redOffset: 
+Testing: (13) 0 (string)
+alphaMultiplier: 0
+blueMultiplier: 0
+greenMultiplier: 0
+redMultiplier: 0
+alphaOffset: 0
+blueOffset: 0
+greenOffset: 0
+redOffset: 0
+Testing: (14) -0 (string)
+alphaMultiplier: -0
+blueMultiplier: -0
+greenMultiplier: -0
+redMultiplier: -0
+alphaOffset: -0
+blueOffset: -0
+greenOffset: -0
+redOffset: -0
+Testing: (15) 0.0 (string)
+alphaMultiplier: 0.0
+blueMultiplier: 0.0
+greenMultiplier: 0.0
+redMultiplier: 0.0
+alphaOffset: 0.0
+blueOffset: 0.0
+greenOffset: 0.0
+redOffset: 0.0
+Testing: (16) 1 (string)
+alphaMultiplier: 1
+blueMultiplier: 1
+greenMultiplier: 1
+redMultiplier: 1
+alphaOffset: 1
+blueOffset: 1
+greenOffset: 1
+redOffset: 1
+Testing: (17) Hello World! (string)
+alphaMultiplier: Hello World!
+blueMultiplier: Hello World!
+greenMultiplier: Hello World!
+redMultiplier: Hello World!
+alphaOffset: Hello World!
+blueOffset: Hello World!
+greenOffset: Hello World!
+redOffset: Hello World!
+Testing: (18) true (string)
+alphaMultiplier: true
+blueMultiplier: true
+greenMultiplier: true
+redMultiplier: true
+alphaOffset: true
+blueOffset: true
+greenOffset: true
+redOffset: true
+Testing: (19) _level0 (string)
+alphaMultiplier: _level0
+blueMultiplier: _level0
+greenMultiplier: _level0
+redMultiplier: _level0
+alphaOffset: _level0
+blueOffset: _level0
+greenOffset: _level0
+redOffset: _level0
+Testing: (20) äöü (string)
+alphaMultiplier: äöü
+blueMultiplier: äöü
+greenMultiplier: äöü
+redMultiplier: äöü
+alphaOffset: äöü
+blueOffset: äöü
+greenOffset: äöü
+redOffset: äöü
+Testing: (21) _level0 (movieclip)
+alphaMultiplier: _level0
+blueMultiplier: _level0
+greenMultiplier: _level0
+redMultiplier: _level0
+alphaOffset: _level0
+blueOffset: _level0
+greenOffset: _level0
+redOffset: _level0
+Testing: (22) [object Object] (object)
+alphaMultiplier: [object Object]
+blueMultiplier: [object Object]
+greenMultiplier: [object Object]
+redMultiplier: [object Object]
+alphaOffset: [object Object]
+blueOffset: [object Object]
+greenOffset: [object Object]
+redOffset: [object Object]
+Testing: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+alphaMultiplier: Tue Apr 14 23:35:34 GMT+0000 2009
+blueMultiplier: Tue Apr 14 23:35:34 GMT+0000 2009
+greenMultiplier: Tue Apr 14 23:35:34 GMT+0000 2009
+redMultiplier: Tue Apr 14 23:35:34 GMT+0000 2009
+alphaOffset: Tue Apr 14 23:35:34 GMT+0000 2009
+blueOffset: Tue Apr 14 23:35:34 GMT+0000 2009
+greenOffset: Tue Apr 14 23:35:34 GMT+0000 2009
+redOffset: Tue Apr 14 23:35:34 GMT+0000 2009
+Testing: (24)  (object)
+alphaMultiplier: 
+blueMultiplier: 
+greenMultiplier: 
+redMultiplier: 
+alphaOffset: 
+blueOffset: 
+greenOffset: 
+redOffset: 
+Testing: (25) [type Function] (function)
+alphaMultiplier: [type Function]
+blueMultiplier: [type Function]
+greenMultiplier: [type Function]
+redMultiplier: [type Function]
+alphaOffset: [type Function]
+blueOffset: [type Function]
+greenOffset: [type Function]
+redOffset: [type Function]
+Testing: (26) [type Object] (object)
+valueOf called
+toString called
+alphaMultiplier: [type Object]
+valueOf called
+toString called
+blueMultiplier: [type Object]
+valueOf called
+toString called
+greenMultiplier: [type Object]
+valueOf called
+toString called
+redMultiplier: [type Object]
+valueOf called
+toString called
+alphaOffset: [type Object]
+valueOf called
+toString called
+blueOffset: [type Object]
+valueOf called
+toString called
+greenOffset: [type Object]
+valueOf called
+toString called
+redOffset: [type Object]
+Testing: (27) [type Object] (object)
+toString called with 
+alphaMultiplier: [type Object]
+toString called with 
+blueMultiplier: [type Object]
+toString called with 
+greenMultiplier: [type Object]
+toString called with 
+redMultiplier: [type Object]
+toString called with 
+alphaOffset: [type Object]
+toString called with 
+blueOffset: [type Object]
+toString called with 
+greenOffset: [type Object]
+toString called with 
+redOffset: [type Object]
+Testing: (28) [object Object] (object)
+valueOf called with 
+alphaMultiplier: [object Object]
+valueOf called with 
+blueMultiplier: [object Object]
+valueOf called with 
+greenMultiplier: [object Object]
+valueOf called with 
+redMultiplier: [object Object]
+valueOf called with 
+alphaOffset: [object Object]
+valueOf called with 
+blueOffset: [object Object]
+valueOf called with 
+greenOffset: [object Object]
+valueOf called with 
+redOffset: [object Object]
+Testing: (29) undefined (object)
+alphaMultiplier: undefined
+blueMultiplier: undefined
+greenMultiplier: undefined
+redMultiplier: undefined
+alphaOffset: undefined
+blueOffset: undefined
+greenOffset: undefined
+redOffset: undefined
+Testing: (30) undefined (object)
+0: valueOf!
+alphaMultiplier: undefined
+0: valueOf!
+blueMultiplier: undefined
+0: valueOf!
+greenMultiplier: undefined
+0: valueOf!
+redMultiplier: undefined
+0: valueOf!
+alphaOffset: undefined
+0: valueOf!
+blueOffset: undefined
+0: valueOf!
+greenOffset: undefined
+0: valueOf!
+redOffset: undefined
+Testing: (31) null (object)
+1: valueOf!
+alphaMultiplier: null
+1: valueOf!
+blueMultiplier: null
+1: valueOf!
+greenMultiplier: null
+1: valueOf!
+redMultiplier: null
+1: valueOf!
+alphaOffset: null
+1: valueOf!
+blueOffset: null
+1: valueOf!
+greenOffset: null
+1: valueOf!
+redOffset: null
+Testing: (32) true (object)
+2: valueOf!
+alphaMultiplier: true
+2: valueOf!
+blueMultiplier: true
+2: valueOf!
+greenMultiplier: true
+2: valueOf!
+redMultiplier: true
+2: valueOf!
+alphaOffset: true
+2: valueOf!
+blueOffset: true
+2: valueOf!
+greenOffset: true
+2: valueOf!
+redOffset: true
+Testing: (33) false (object)
+3: valueOf!
+alphaMultiplier: false
+3: valueOf!
+blueMultiplier: false
+3: valueOf!
+greenMultiplier: false
+3: valueOf!
+redMultiplier: false
+3: valueOf!
+alphaOffset: false
+3: valueOf!
+blueOffset: false
+3: valueOf!
+greenOffset: false
+3: valueOf!
+redOffset: false
+Testing: (34) 0 (object)
+4: valueOf!
+alphaMultiplier: 0
+4: valueOf!
+blueMultiplier: 0
+4: valueOf!
+greenMultiplier: 0
+4: valueOf!
+redMultiplier: 0
+4: valueOf!
+alphaOffset: 0
+4: valueOf!
+blueOffset: 0
+4: valueOf!
+greenOffset: 0
+4: valueOf!
+redOffset: 0
+Testing: (35) 1 (object)
+5: valueOf!
+alphaMultiplier: 1
+5: valueOf!
+blueMultiplier: 1
+5: valueOf!
+greenMultiplier: 1
+5: valueOf!
+redMultiplier: 1
+5: valueOf!
+alphaOffset: 1
+5: valueOf!
+blueOffset: 1
+5: valueOf!
+greenOffset: 1
+5: valueOf!
+redOffset: 1
+Testing: (36) 0.5 (object)
+6: valueOf!
+alphaMultiplier: 0.5
+6: valueOf!
+blueMultiplier: 0.5
+6: valueOf!
+greenMultiplier: 0.5
+6: valueOf!
+redMultiplier: 0.5
+6: valueOf!
+alphaOffset: 0.5
+6: valueOf!
+blueOffset: 0.5
+6: valueOf!
+greenOffset: 0.5
+6: valueOf!
+redOffset: 0.5
+Testing: (37) -1 (object)
+7: valueOf!
+alphaMultiplier: -1
+7: valueOf!
+blueMultiplier: -1
+7: valueOf!
+greenMultiplier: -1
+7: valueOf!
+redMultiplier: -1
+7: valueOf!
+alphaOffset: -1
+7: valueOf!
+blueOffset: -1
+7: valueOf!
+greenOffset: -1
+7: valueOf!
+redOffset: -1
+Testing: (38) -0.5 (object)
+8: valueOf!
+alphaMultiplier: -0.5
+8: valueOf!
+blueMultiplier: -0.5
+8: valueOf!
+greenMultiplier: -0.5
+8: valueOf!
+redMultiplier: -0.5
+8: valueOf!
+alphaOffset: -0.5
+8: valueOf!
+blueOffset: -0.5
+8: valueOf!
+greenOffset: -0.5
+8: valueOf!
+redOffset: -0.5
+Testing: (39) Infinity (object)
+9: valueOf!
+alphaMultiplier: Infinity
+9: valueOf!
+blueMultiplier: Infinity
+9: valueOf!
+greenMultiplier: Infinity
+9: valueOf!
+redMultiplier: Infinity
+9: valueOf!
+alphaOffset: Infinity
+9: valueOf!
+blueOffset: Infinity
+9: valueOf!
+greenOffset: Infinity
+9: valueOf!
+redOffset: Infinity
+Testing: (40) -Infinity (object)
+10: valueOf!
+alphaMultiplier: -Infinity
+10: valueOf!
+blueMultiplier: -Infinity
+10: valueOf!
+greenMultiplier: -Infinity
+10: valueOf!
+redMultiplier: -Infinity
+10: valueOf!
+alphaOffset: -Infinity
+10: valueOf!
+blueOffset: -Infinity
+10: valueOf!
+greenOffset: -Infinity
+10: valueOf!
+redOffset: -Infinity
+Testing: (41) NaN (object)
+11: valueOf!
+alphaMultiplier: NaN
+11: valueOf!
+blueMultiplier: NaN
+11: valueOf!
+greenMultiplier: NaN
+11: valueOf!
+redMultiplier: NaN
+11: valueOf!
+alphaOffset: NaN
+11: valueOf!
+blueOffset: NaN
+11: valueOf!
+greenOffset: NaN
+11: valueOf!
+redOffset: NaN
+Testing: (42)  (object)
+12: valueOf!
+alphaMultiplier: 
+12: valueOf!
+blueMultiplier: 
+12: valueOf!
+greenMultiplier: 
+12: valueOf!
+redMultiplier: 
+12: valueOf!
+alphaOffset: 
+12: valueOf!
+blueOffset: 
+12: valueOf!
+greenOffset: 
+12: valueOf!
+redOffset: 
+Testing: (43) 0 (object)
+13: valueOf!
+alphaMultiplier: 0
+13: valueOf!
+blueMultiplier: 0
+13: valueOf!
+greenMultiplier: 0
+13: valueOf!
+redMultiplier: 0
+13: valueOf!
+alphaOffset: 0
+13: valueOf!
+blueOffset: 0
+13: valueOf!
+greenOffset: 0
+13: valueOf!
+redOffset: 0
+Testing: (44) -0 (object)
+14: valueOf!
+alphaMultiplier: -0
+14: valueOf!
+blueMultiplier: -0
+14: valueOf!
+greenMultiplier: -0
+14: valueOf!
+redMultiplier: -0
+14: valueOf!
+alphaOffset: -0
+14: valueOf!
+blueOffset: -0
+14: valueOf!
+greenOffset: -0
+14: valueOf!
+redOffset: -0
+Testing: (45) 0.0 (object)
+15: valueOf!
+alphaMultiplier: 0.0
+15: valueOf!
+blueMultiplier: 0.0
+15: valueOf!
+greenMultiplier: 0.0
+15: valueOf!
+redMultiplier: 0.0
+15: valueOf!
+alphaOffset: 0.0
+15: valueOf!
+blueOffset: 0.0
+15: valueOf!
+greenOffset: 0.0
+15: valueOf!
+redOffset: 0.0
+Testing: (46) 1 (object)
+16: valueOf!
+alphaMultiplier: 1
+16: valueOf!
+blueMultiplier: 1
+16: valueOf!
+greenMultiplier: 1
+16: valueOf!
+redMultiplier: 1
+16: valueOf!
+alphaOffset: 1
+16: valueOf!
+blueOffset: 1
+16: valueOf!
+greenOffset: 1
+16: valueOf!
+redOffset: 1
+Testing: (47) Hello World! (object)
+17: valueOf!
+alphaMultiplier: Hello World!
+17: valueOf!
+blueMultiplier: Hello World!
+17: valueOf!
+greenMultiplier: Hello World!
+17: valueOf!
+redMultiplier: Hello World!
+17: valueOf!
+alphaOffset: Hello World!
+17: valueOf!
+blueOffset: Hello World!
+17: valueOf!
+greenOffset: Hello World!
+17: valueOf!
+redOffset: Hello World!
+Testing: (48) true (object)
+18: valueOf!
+alphaMultiplier: true
+18: valueOf!
+blueMultiplier: true
+18: valueOf!
+greenMultiplier: true
+18: valueOf!
+redMultiplier: true
+18: valueOf!
+alphaOffset: true
+18: valueOf!
+blueOffset: true
+18: valueOf!
+greenOffset: true
+18: valueOf!
+redOffset: true
+Testing: (49) _level0 (object)
+19: valueOf!
+alphaMultiplier: _level0
+19: valueOf!
+blueMultiplier: _level0
+19: valueOf!
+greenMultiplier: _level0
+19: valueOf!
+redMultiplier: _level0
+19: valueOf!
+alphaOffset: _level0
+19: valueOf!
+blueOffset: _level0
+19: valueOf!
+greenOffset: _level0
+19: valueOf!
+redOffset: _level0
+Testing: (50) äöü (object)
+20: valueOf!
+alphaMultiplier: äöü
+20: valueOf!
+blueMultiplier: äöü
+20: valueOf!
+greenMultiplier: äöü
+20: valueOf!
+redMultiplier: äöü
+20: valueOf!
+alphaOffset: äöü
+20: valueOf!
+blueOffset: äöü
+20: valueOf!
+greenOffset: äöü
+20: valueOf!
+redOffset: äöü
+Testing: (51) _level0 (object)
+21: valueOf!
+alphaMultiplier: _level0
+21: valueOf!
+blueMultiplier: _level0
+21: valueOf!
+greenMultiplier: _level0
+21: valueOf!
+redMultiplier: _level0
+21: valueOf!
+alphaOffset: _level0
+21: valueOf!
+blueOffset: _level0
+21: valueOf!
+greenOffset: _level0
+21: valueOf!
+redOffset: _level0
+Testing: (52) [type Object] (object)
+22: valueOf!
+22: toString!
+alphaMultiplier: [type Object]
+22: valueOf!
+22: toString!
+blueMultiplier: [type Object]
+22: valueOf!
+22: toString!
+greenMultiplier: [type Object]
+22: valueOf!
+22: toString!
+redMultiplier: [type Object]
+22: valueOf!
+22: toString!
+alphaOffset: [type Object]
+22: valueOf!
+22: toString!
+blueOffset: [type Object]
+22: valueOf!
+22: toString!
+greenOffset: [type Object]
+22: valueOf!
+22: toString!
+redOffset: [type Object]
+Testing: (53) [type Object] (object)
+23: valueOf!
+23: toString!
+alphaMultiplier: [type Object]
+23: valueOf!
+23: toString!
+blueMultiplier: [type Object]
+23: valueOf!
+23: toString!
+greenMultiplier: [type Object]
+23: valueOf!
+23: toString!
+redMultiplier: [type Object]
+23: valueOf!
+23: toString!
+alphaOffset: [type Object]
+23: valueOf!
+23: toString!
+blueOffset: [type Object]
+23: valueOf!
+23: toString!
+greenOffset: [type Object]
+23: valueOf!
+23: toString!
+redOffset: [type Object]
+Testing: (54) [type Object] (object)
+24: valueOf!
+24: toString!
+alphaMultiplier: [type Object]
+24: valueOf!
+24: toString!
+blueMultiplier: [type Object]
+24: valueOf!
+24: toString!
+greenMultiplier: [type Object]
+24: valueOf!
+24: toString!
+redMultiplier: [type Object]
+24: valueOf!
+24: toString!
+alphaOffset: [type Object]
+24: valueOf!
+24: toString!
+blueOffset: [type Object]
+24: valueOf!
+24: toString!
+greenOffset: [type Object]
+24: valueOf!
+24: toString!
+redOffset: [type Object]
+Testing: (55) [type Object] (object)
+25: valueOf!
+25: toString!
+alphaMultiplier: [type Object]
+25: valueOf!
+25: toString!
+blueMultiplier: [type Object]
+25: valueOf!
+25: toString!
+greenMultiplier: [type Object]
+25: valueOf!
+25: toString!
+redMultiplier: [type Object]
+25: valueOf!
+25: toString!
+alphaOffset: [type Object]
+25: valueOf!
+25: toString!
+blueOffset: [type Object]
+25: valueOf!
+25: toString!
+greenOffset: [type Object]
+25: valueOf!
+25: toString!
+redOffset: [type Object]
+Testing: (56) [type Object] (object)
+26: valueOf!
+26: toString!
+alphaMultiplier: [type Object]
+26: valueOf!
+26: toString!
+blueMultiplier: [type Object]
+26: valueOf!
+26: toString!
+greenMultiplier: [type Object]
+26: valueOf!
+26: toString!
+redMultiplier: [type Object]
+26: valueOf!
+26: toString!
+alphaOffset: [type Object]
+26: valueOf!
+26: toString!
+blueOffset: [type Object]
+26: valueOf!
+26: toString!
+greenOffset: [type Object]
+26: valueOf!
+26: toString!
+redOffset: [type Object]
+Testing: (57) [type Object] (object)
+27: valueOf!
+27: toString!
+alphaMultiplier: [type Object]
+27: valueOf!
+27: toString!
+blueMultiplier: [type Object]
+27: valueOf!
+27: toString!
+greenMultiplier: [type Object]
+27: valueOf!
+27: toString!
+redMultiplier: [type Object]
+27: valueOf!
+27: toString!
+alphaOffset: [type Object]
+27: valueOf!
+27: toString!
+blueOffset: [type Object]
+27: valueOf!
+27: toString!
+greenOffset: [type Object]
+27: valueOf!
+27: toString!
+redOffset: [type Object]
+Testing: (58) [type Object] (object)
+28: valueOf!
+28: toString!
+alphaMultiplier: [type Object]
+28: valueOf!
+28: toString!
+blueMultiplier: [type Object]
+28: valueOf!
+28: toString!
+greenMultiplier: [type Object]
+28: valueOf!
+28: toString!
+redMultiplier: [type Object]
+28: valueOf!
+28: toString!
+alphaOffset: [type Object]
+28: valueOf!
+28: toString!
+blueOffset: [type Object]
+28: valueOf!
+28: toString!
+greenOffset: [type Object]
+28: valueOf!
+28: toString!
+redOffset: [type Object]
+Testing: (59) [type Object] (object)
+29: valueOf!
+29: toString!
+alphaMultiplier: [type Object]
+29: valueOf!
+29: toString!
+blueMultiplier: [type Object]
+29: valueOf!
+29: toString!
+greenMultiplier: [type Object]
+29: valueOf!
+29: toString!
+redMultiplier: [type Object]
+29: valueOf!
+29: toString!
+alphaOffset: [type Object]
+29: valueOf!
+29: toString!
+blueOffset: [type Object]
+29: valueOf!
+29: toString!
+greenOffset: [type Object]
+29: valueOf!
+29: toString!
+redOffset: [type Object]

@@ -1,0 +1,4996 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+Testing (no params):
+new: 
+polar: 
+Testing (0)  (undefined):
+new: 
+polar: 
+Testing (0)  (undefined), (0)  (undefined):
+new: 
+polar: 
+Testing (0)  (undefined), (1) null (null):
+new: 
+polar: 
+Testing (0)  (undefined), (2) true (boolean):
+new: 
+polar: 
+Testing (0)  (undefined), (3) false (boolean):
+new: 
+polar: 
+Testing (0)  (undefined), (4) 0 (number):
+new: 
+polar: 
+Testing (0)  (undefined), (5) 1 (number):
+new: 
+polar: 
+Testing (0)  (undefined), (6) 0.5 (number):
+new: 
+polar: 
+Testing (0)  (undefined), (7) -1 (number):
+new: 
+polar: 
+Testing (0)  (undefined), (8) -0.5 (number):
+new: 
+polar: 
+Testing (0)  (undefined), (9) Infinity (number):
+new: 
+polar: 
+Testing (0)  (undefined), (10) -Infinity (number):
+new: 
+polar: 
+Testing (0)  (undefined), (11) NaN (number):
+new: 
+polar: 
+Testing (0)  (undefined), (12)  (string):
+new: 
+polar: 
+Testing (0)  (undefined), (13) 0 (string):
+new: 
+polar: 
+Testing (0)  (undefined), (14) -0 (string):
+new: 
+polar: 
+Testing (0)  (undefined), (15) 0.0 (string):
+new: 
+polar: 
+Testing (0)  (undefined), (16) 1 (string):
+new: 
+polar: 
+Testing (0)  (undefined), (17) Hello World! (string):
+new: 
+polar: 
+Testing (0)  (undefined), (18) true (string):
+new: 
+polar: 
+Testing (0)  (undefined), (19) _level0 (string):
+new: 
+polar: 
+Testing (0)  (undefined), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (0)  (undefined), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (0)  (undefined), (22) [object Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (23)  (undefined):
+new: 
+polar: 
+Testing (0)  (undefined), (24) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (25) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (26) [object Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (27)  (object):
+new: 
+polar: 
+Testing (0)  (undefined), (28)  (object):
+new: 
+polar: 
+Testing (0)  (undefined), (29) null (object):
+new: 
+polar: 
+Testing (0)  (undefined), (30) true (object):
+new: 
+polar: 
+Testing (0)  (undefined), (31) false (object):
+new: 
+polar: 
+Testing (0)  (undefined), (32) 0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (33) 1 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (34) 0.5 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (35) -1 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (36) -0.5 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (37) Infinity (object):
+new: 
+polar: 
+Testing (0)  (undefined), (38) -Infinity (object):
+new: 
+polar: 
+Testing (0)  (undefined), (39) NaN (object):
+new: 
+polar: 
+Testing (0)  (undefined), (40)  (object):
+new: 
+polar: 
+Testing (0)  (undefined), (41) 0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (42) -0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (43) 0.0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (44) 1 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (45) Hello World! (object):
+new: 
+polar: 
+Testing (0)  (undefined), (46) true (object):
+new: 
+polar: 
+Testing (0)  (undefined), (47) _level0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (0)  (undefined), (49) _level0 (object):
+new: 
+polar: 
+Testing (0)  (undefined), (50) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (51)  (object):
+new: 
+polar: 
+Testing (0)  (undefined), (52) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (53) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (54) [type Object] (object):
+new: 
+polar: 
+Testing (0)  (undefined), (55) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null):
+new: 
+polar: 
+Testing (1) null (null), (1) null (null):
+new: 
+polar: 
+Testing (1) null (null), (2) true (boolean):
+new: 
+polar: 
+Testing (1) null (null), (3) false (boolean):
+new: 
+polar: 
+Testing (1) null (null), (4) 0 (number):
+new: 
+polar: 
+Testing (1) null (null), (5) 1 (number):
+new: 
+polar: 
+Testing (1) null (null), (6) 0.5 (number):
+new: 
+polar: 
+Testing (1) null (null), (7) -1 (number):
+new: 
+polar: 
+Testing (1) null (null), (8) -0.5 (number):
+new: 
+polar: 
+Testing (1) null (null), (9) Infinity (number):
+new: 
+polar: 
+Testing (1) null (null), (10) -Infinity (number):
+new: 
+polar: 
+Testing (1) null (null), (11) NaN (number):
+new: 
+polar: 
+Testing (1) null (null), (12)  (string):
+new: 
+polar: 
+Testing (1) null (null), (13) 0 (string):
+new: 
+polar: 
+Testing (1) null (null), (14) -0 (string):
+new: 
+polar: 
+Testing (1) null (null), (15) 0.0 (string):
+new: 
+polar: 
+Testing (1) null (null), (16) 1 (string):
+new: 
+polar: 
+Testing (1) null (null), (17) Hello World! (string):
+new: 
+polar: 
+Testing (1) null (null), (18) true (string):
+new: 
+polar: 
+Testing (1) null (null), (19) _level0 (string):
+new: 
+polar: 
+Testing (1) null (null), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (1) null (null), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (1) null (null), (22) [object Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (23)  (undefined):
+new: 
+polar: 
+Testing (1) null (null), (24) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (25) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (26) [object Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (27)  (object):
+new: 
+polar: 
+Testing (1) null (null), (28)  (object):
+new: 
+polar: 
+Testing (1) null (null), (29) null (object):
+new: 
+polar: 
+Testing (1) null (null), (30) true (object):
+new: 
+polar: 
+Testing (1) null (null), (31) false (object):
+new: 
+polar: 
+Testing (1) null (null), (32) 0 (object):
+new: 
+polar: 
+Testing (1) null (null), (33) 1 (object):
+new: 
+polar: 
+Testing (1) null (null), (34) 0.5 (object):
+new: 
+polar: 
+Testing (1) null (null), (35) -1 (object):
+new: 
+polar: 
+Testing (1) null (null), (36) -0.5 (object):
+new: 
+polar: 
+Testing (1) null (null), (37) Infinity (object):
+new: 
+polar: 
+Testing (1) null (null), (38) -Infinity (object):
+new: 
+polar: 
+Testing (1) null (null), (39) NaN (object):
+new: 
+polar: 
+Testing (1) null (null), (40)  (object):
+new: 
+polar: 
+Testing (1) null (null), (41) 0 (object):
+new: 
+polar: 
+Testing (1) null (null), (42) -0 (object):
+new: 
+polar: 
+Testing (1) null (null), (43) 0.0 (object):
+new: 
+polar: 
+Testing (1) null (null), (44) 1 (object):
+new: 
+polar: 
+Testing (1) null (null), (45) Hello World! (object):
+new: 
+polar: 
+Testing (1) null (null), (46) true (object):
+new: 
+polar: 
+Testing (1) null (null), (47) _level0 (object):
+new: 
+polar: 
+Testing (1) null (null), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (1) null (null), (49) _level0 (object):
+new: 
+polar: 
+Testing (1) null (null), (50) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (51)  (object):
+new: 
+polar: 
+Testing (1) null (null), (52) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (53) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (54) [type Object] (object):
+new: 
+polar: 
+Testing (1) null (null), (55) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean):
+new: 
+polar: 
+Testing (2) true (boolean), (2) true (boolean):
+new: 
+polar: 
+Testing (2) true (boolean), (3) false (boolean):
+new: 
+polar: 
+Testing (2) true (boolean), (4) 0 (number):
+new: 
+polar: 
+Testing (2) true (boolean), (5) 1 (number):
+new: 
+polar: 
+Testing (2) true (boolean), (6) 0.5 (number):
+new: 
+polar: 
+Testing (2) true (boolean), (7) -1 (number):
+new: 
+polar: 
+Testing (2) true (boolean), (8) -0.5 (number):
+new: 
+polar: 
+Testing (2) true (boolean), (9) Infinity (number):
+new: 
+polar: 
+Testing (2) true (boolean), (10) -Infinity (number):
+new: 
+polar: 
+Testing (2) true (boolean), (11) NaN (number):
+new: 
+polar: 
+Testing (2) true (boolean), (12)  (string):
+new: 
+polar: 
+Testing (2) true (boolean), (13) 0 (string):
+new: 
+polar: 
+Testing (2) true (boolean), (14) -0 (string):
+new: 
+polar: 
+Testing (2) true (boolean), (15) 0.0 (string):
+new: 
+polar: 
+Testing (2) true (boolean), (16) 1 (string):
+new: 
+polar: 
+Testing (2) true (boolean), (17) Hello World! (string):
+new: 
+polar: 
+Testing (2) true (boolean), (18) true (string):
+new: 
+polar: 
+Testing (2) true (boolean), (19) _level0 (string):
+new: 
+polar: 
+Testing (2) true (boolean), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (2) true (boolean), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (2) true (boolean), (22) [object Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (23)  (undefined):
+new: 
+polar: 
+Testing (2) true (boolean), (24) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (25) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (26) [object Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (27)  (object):
+new: 
+polar: 
+Testing (2) true (boolean), (28)  (object):
+new: 
+polar: 
+Testing (2) true (boolean), (29) null (object):
+new: 
+polar: 
+Testing (2) true (boolean), (30) true (object):
+new: 
+polar: 
+Testing (2) true (boolean), (31) false (object):
+new: 
+polar: 
+Testing (2) true (boolean), (32) 0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (33) 1 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (34) 0.5 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (35) -1 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (36) -0.5 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (37) Infinity (object):
+new: 
+polar: 
+Testing (2) true (boolean), (38) -Infinity (object):
+new: 
+polar: 
+Testing (2) true (boolean), (39) NaN (object):
+new: 
+polar: 
+Testing (2) true (boolean), (40)  (object):
+new: 
+polar: 
+Testing (2) true (boolean), (41) 0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (42) -0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (43) 0.0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (44) 1 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (45) Hello World! (object):
+new: 
+polar: 
+Testing (2) true (boolean), (46) true (object):
+new: 
+polar: 
+Testing (2) true (boolean), (47) _level0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (2) true (boolean), (49) _level0 (object):
+new: 
+polar: 
+Testing (2) true (boolean), (50) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (51)  (object):
+new: 
+polar: 
+Testing (2) true (boolean), (52) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (53) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (54) [type Object] (object):
+new: 
+polar: 
+Testing (2) true (boolean), (55) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean):
+new: 
+polar: 
+Testing (3) false (boolean), (3) false (boolean):
+new: 
+polar: 
+Testing (3) false (boolean), (4) 0 (number):
+new: 
+polar: 
+Testing (3) false (boolean), (5) 1 (number):
+new: 
+polar: 
+Testing (3) false (boolean), (6) 0.5 (number):
+new: 
+polar: 
+Testing (3) false (boolean), (7) -1 (number):
+new: 
+polar: 
+Testing (3) false (boolean), (8) -0.5 (number):
+new: 
+polar: 
+Testing (3) false (boolean), (9) Infinity (number):
+new: 
+polar: 
+Testing (3) false (boolean), (10) -Infinity (number):
+new: 
+polar: 
+Testing (3) false (boolean), (11) NaN (number):
+new: 
+polar: 
+Testing (3) false (boolean), (12)  (string):
+new: 
+polar: 
+Testing (3) false (boolean), (13) 0 (string):
+new: 
+polar: 
+Testing (3) false (boolean), (14) -0 (string):
+new: 
+polar: 
+Testing (3) false (boolean), (15) 0.0 (string):
+new: 
+polar: 
+Testing (3) false (boolean), (16) 1 (string):
+new: 
+polar: 
+Testing (3) false (boolean), (17) Hello World! (string):
+new: 
+polar: 
+Testing (3) false (boolean), (18) true (string):
+new: 
+polar: 
+Testing (3) false (boolean), (19) _level0 (string):
+new: 
+polar: 
+Testing (3) false (boolean), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (3) false (boolean), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (3) false (boolean), (22) [object Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (23)  (undefined):
+new: 
+polar: 
+Testing (3) false (boolean), (24) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (25) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (26) [object Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (27)  (object):
+new: 
+polar: 
+Testing (3) false (boolean), (28)  (object):
+new: 
+polar: 
+Testing (3) false (boolean), (29) null (object):
+new: 
+polar: 
+Testing (3) false (boolean), (30) true (object):
+new: 
+polar: 
+Testing (3) false (boolean), (31) false (object):
+new: 
+polar: 
+Testing (3) false (boolean), (32) 0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (33) 1 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (34) 0.5 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (35) -1 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (36) -0.5 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (37) Infinity (object):
+new: 
+polar: 
+Testing (3) false (boolean), (38) -Infinity (object):
+new: 
+polar: 
+Testing (3) false (boolean), (39) NaN (object):
+new: 
+polar: 
+Testing (3) false (boolean), (40)  (object):
+new: 
+polar: 
+Testing (3) false (boolean), (41) 0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (42) -0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (43) 0.0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (44) 1 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (45) Hello World! (object):
+new: 
+polar: 
+Testing (3) false (boolean), (46) true (object):
+new: 
+polar: 
+Testing (3) false (boolean), (47) _level0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (3) false (boolean), (49) _level0 (object):
+new: 
+polar: 
+Testing (3) false (boolean), (50) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (51)  (object):
+new: 
+polar: 
+Testing (3) false (boolean), (52) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (53) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (54) [type Object] (object):
+new: 
+polar: 
+Testing (3) false (boolean), (55) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (4) 0 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (5) 1 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (6) 0.5 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (7) -1 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (8) -0.5 (number):
+new: 
+polar: 
+Testing (4) 0 (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (4) 0 (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (4) 0 (number), (11) NaN (number):
+new: 
+polar: 
+Testing (4) 0 (number), (12)  (string):
+new: 
+polar: 
+Testing (4) 0 (number), (13) 0 (string):
+new: 
+polar: 
+Testing (4) 0 (number), (14) -0 (string):
+new: 
+polar: 
+Testing (4) 0 (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (4) 0 (number), (16) 1 (string):
+new: 
+polar: 
+Testing (4) 0 (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (4) 0 (number), (18) true (string):
+new: 
+polar: 
+Testing (4) 0 (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (4) 0 (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (4) 0 (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (4) 0 (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (23)  (undefined):
+new: 
+polar: 
+Testing (4) 0 (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (27)  (object):
+new: 
+polar: 
+Testing (4) 0 (number), (28)  (object):
+new: 
+polar: 
+Testing (4) 0 (number), (29) null (object):
+new: 
+polar: 
+Testing (4) 0 (number), (30) true (object):
+new: 
+polar: 
+Testing (4) 0 (number), (31) false (object):
+new: 
+polar: 
+Testing (4) 0 (number), (32) 0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (33) 1 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (35) -1 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (4) 0 (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (4) 0 (number), (39) NaN (object):
+new: 
+polar: 
+Testing (4) 0 (number), (40)  (object):
+new: 
+polar: 
+Testing (4) 0 (number), (41) 0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (42) -0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (44) 1 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (4) 0 (number), (46) true (object):
+new: 
+polar: 
+Testing (4) 0 (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (4) 0 (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (4) 0 (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (51)  (object):
+new: 
+polar: 
+Testing (4) 0 (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (4) 0 (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number):
+new: 
+polar: 
+Testing (5) 1 (number), (5) 1 (number):
+new: 
+polar: 
+Testing (5) 1 (number), (6) 0.5 (number):
+new: 
+polar: 
+Testing (5) 1 (number), (7) -1 (number):
+new: 
+polar: 
+Testing (5) 1 (number), (8) -0.5 (number):
+new: 
+polar: 
+Testing (5) 1 (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (5) 1 (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (5) 1 (number), (11) NaN (number):
+new: 
+polar: 
+Testing (5) 1 (number), (12)  (string):
+new: 
+polar: 
+Testing (5) 1 (number), (13) 0 (string):
+new: 
+polar: 
+Testing (5) 1 (number), (14) -0 (string):
+new: 
+polar: 
+Testing (5) 1 (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (5) 1 (number), (16) 1 (string):
+new: 
+polar: 
+Testing (5) 1 (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (5) 1 (number), (18) true (string):
+new: 
+polar: 
+Testing (5) 1 (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (5) 1 (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (5) 1 (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (5) 1 (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (23)  (undefined):
+new: 
+polar: 
+Testing (5) 1 (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (27)  (object):
+new: 
+polar: 
+Testing (5) 1 (number), (28)  (object):
+new: 
+polar: 
+Testing (5) 1 (number), (29) null (object):
+new: 
+polar: 
+Testing (5) 1 (number), (30) true (object):
+new: 
+polar: 
+Testing (5) 1 (number), (31) false (object):
+new: 
+polar: 
+Testing (5) 1 (number), (32) 0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (33) 1 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (35) -1 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (5) 1 (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (5) 1 (number), (39) NaN (object):
+new: 
+polar: 
+Testing (5) 1 (number), (40)  (object):
+new: 
+polar: 
+Testing (5) 1 (number), (41) 0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (42) -0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (44) 1 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (5) 1 (number), (46) true (object):
+new: 
+polar: 
+Testing (5) 1 (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (5) 1 (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (5) 1 (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (51)  (object):
+new: 
+polar: 
+Testing (5) 1 (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (5) 1 (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (6) 0.5 (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (7) -1 (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (8) -0.5 (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (11) NaN (number):
+new: 
+polar: 
+Testing (6) 0.5 (number), (12)  (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (13) 0 (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (14) -0 (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (16) 1 (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (18) true (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (6) 0.5 (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (6) 0.5 (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (23)  (undefined):
+new: 
+polar: 
+Testing (6) 0.5 (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (27)  (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (28)  (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (29) null (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (30) true (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (31) false (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (32) 0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (33) 1 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (35) -1 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (39) NaN (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (40)  (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (41) 0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (42) -0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (44) 1 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (46) true (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (51)  (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (6) 0.5 (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number):
+new: 
+polar: 
+Testing (7) -1 (number), (7) -1 (number):
+new: 
+polar: 
+Testing (7) -1 (number), (8) -0.5 (number):
+new: 
+polar: 
+Testing (7) -1 (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (7) -1 (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (7) -1 (number), (11) NaN (number):
+new: 
+polar: 
+Testing (7) -1 (number), (12)  (string):
+new: 
+polar: 
+Testing (7) -1 (number), (13) 0 (string):
+new: 
+polar: 
+Testing (7) -1 (number), (14) -0 (string):
+new: 
+polar: 
+Testing (7) -1 (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (7) -1 (number), (16) 1 (string):
+new: 
+polar: 
+Testing (7) -1 (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (7) -1 (number), (18) true (string):
+new: 
+polar: 
+Testing (7) -1 (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (7) -1 (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (7) -1 (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (7) -1 (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (23)  (undefined):
+new: 
+polar: 
+Testing (7) -1 (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (27)  (object):
+new: 
+polar: 
+Testing (7) -1 (number), (28)  (object):
+new: 
+polar: 
+Testing (7) -1 (number), (29) null (object):
+new: 
+polar: 
+Testing (7) -1 (number), (30) true (object):
+new: 
+polar: 
+Testing (7) -1 (number), (31) false (object):
+new: 
+polar: 
+Testing (7) -1 (number), (32) 0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (33) 1 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (35) -1 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (7) -1 (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (7) -1 (number), (39) NaN (object):
+new: 
+polar: 
+Testing (7) -1 (number), (40)  (object):
+new: 
+polar: 
+Testing (7) -1 (number), (41) 0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (42) -0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (44) 1 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (7) -1 (number), (46) true (object):
+new: 
+polar: 
+Testing (7) -1 (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (7) -1 (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (7) -1 (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (51)  (object):
+new: 
+polar: 
+Testing (7) -1 (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (7) -1 (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number):
+new: 
+polar: 
+Testing (8) -0.5 (number), (8) -0.5 (number):
+new: 
+polar: 
+Testing (8) -0.5 (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (8) -0.5 (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (8) -0.5 (number), (11) NaN (number):
+new: 
+polar: 
+Testing (8) -0.5 (number), (12)  (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (13) 0 (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (14) -0 (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (16) 1 (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (18) true (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (8) -0.5 (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (8) -0.5 (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (23)  (undefined):
+new: 
+polar: 
+Testing (8) -0.5 (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (27)  (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (28)  (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (29) null (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (30) true (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (31) false (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (32) 0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (33) 1 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (35) -1 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (39) NaN (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (40)  (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (41) 0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (42) -0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (44) 1 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (46) true (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (51)  (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (8) -0.5 (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number):
+new: 
+polar: 
+Testing (9) Infinity (number), (9) Infinity (number):
+new: 
+polar: 
+Testing (9) Infinity (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (9) Infinity (number), (11) NaN (number):
+new: 
+polar: 
+Testing (9) Infinity (number), (12)  (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (13) 0 (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (14) -0 (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (16) 1 (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (18) true (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (9) Infinity (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (9) Infinity (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (23)  (undefined):
+new: 
+polar: 
+Testing (9) Infinity (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (27)  (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (28)  (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (29) null (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (30) true (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (31) false (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (32) 0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (33) 1 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (35) -1 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (39) NaN (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (40)  (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (41) 0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (42) -0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (44) 1 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (46) true (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (51)  (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (9) Infinity (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number):
+new: 
+polar: 
+Testing (10) -Infinity (number), (10) -Infinity (number):
+new: 
+polar: 
+Testing (10) -Infinity (number), (11) NaN (number):
+new: 
+polar: 
+Testing (10) -Infinity (number), (12)  (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (13) 0 (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (14) -0 (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (16) 1 (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (18) true (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (10) -Infinity (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (10) -Infinity (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (23)  (undefined):
+new: 
+polar: 
+Testing (10) -Infinity (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (27)  (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (28)  (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (29) null (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (30) true (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (31) false (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (32) 0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (33) 1 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (35) -1 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (39) NaN (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (40)  (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (41) 0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (42) -0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (44) 1 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (46) true (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (51)  (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (10) -Infinity (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number):
+new: 
+polar: 
+Testing (11) NaN (number), (11) NaN (number):
+new: 
+polar: 
+Testing (11) NaN (number), (12)  (string):
+new: 
+polar: 
+Testing (11) NaN (number), (13) 0 (string):
+new: 
+polar: 
+Testing (11) NaN (number), (14) -0 (string):
+new: 
+polar: 
+Testing (11) NaN (number), (15) 0.0 (string):
+new: 
+polar: 
+Testing (11) NaN (number), (16) 1 (string):
+new: 
+polar: 
+Testing (11) NaN (number), (17) Hello World! (string):
+new: 
+polar: 
+Testing (11) NaN (number), (18) true (string):
+new: 
+polar: 
+Testing (11) NaN (number), (19) _level0 (string):
+new: 
+polar: 
+Testing (11) NaN (number), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (11) NaN (number), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (11) NaN (number), (22) [object Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (23)  (undefined):
+new: 
+polar: 
+Testing (11) NaN (number), (24) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (25) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (26) [object Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (27)  (object):
+new: 
+polar: 
+Testing (11) NaN (number), (28)  (object):
+new: 
+polar: 
+Testing (11) NaN (number), (29) null (object):
+new: 
+polar: 
+Testing (11) NaN (number), (30) true (object):
+new: 
+polar: 
+Testing (11) NaN (number), (31) false (object):
+new: 
+polar: 
+Testing (11) NaN (number), (32) 0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (33) 1 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (34) 0.5 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (35) -1 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (36) -0.5 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (37) Infinity (object):
+new: 
+polar: 
+Testing (11) NaN (number), (38) -Infinity (object):
+new: 
+polar: 
+Testing (11) NaN (number), (39) NaN (object):
+new: 
+polar: 
+Testing (11) NaN (number), (40)  (object):
+new: 
+polar: 
+Testing (11) NaN (number), (41) 0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (42) -0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (43) 0.0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (44) 1 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (45) Hello World! (object):
+new: 
+polar: 
+Testing (11) NaN (number), (46) true (object):
+new: 
+polar: 
+Testing (11) NaN (number), (47) _level0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (11) NaN (number), (49) _level0 (object):
+new: 
+polar: 
+Testing (11) NaN (number), (50) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (51)  (object):
+new: 
+polar: 
+Testing (11) NaN (number), (52) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (53) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (54) [type Object] (object):
+new: 
+polar: 
+Testing (11) NaN (number), (55) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string):
+new: 
+polar: 
+Testing (12)  (string), (12)  (string):
+new: 
+polar: 
+Testing (12)  (string), (13) 0 (string):
+new: 
+polar: 
+Testing (12)  (string), (14) -0 (string):
+new: 
+polar: 
+Testing (12)  (string), (15) 0.0 (string):
+new: 
+polar: 
+Testing (12)  (string), (16) 1 (string):
+new: 
+polar: 
+Testing (12)  (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (12)  (string), (18) true (string):
+new: 
+polar: 
+Testing (12)  (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (12)  (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (12)  (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (12)  (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (23)  (undefined):
+new: 
+polar: 
+Testing (12)  (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (27)  (object):
+new: 
+polar: 
+Testing (12)  (string), (28)  (object):
+new: 
+polar: 
+Testing (12)  (string), (29) null (object):
+new: 
+polar: 
+Testing (12)  (string), (30) true (object):
+new: 
+polar: 
+Testing (12)  (string), (31) false (object):
+new: 
+polar: 
+Testing (12)  (string), (32) 0 (object):
+new: 
+polar: 
+Testing (12)  (string), (33) 1 (object):
+new: 
+polar: 
+Testing (12)  (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (12)  (string), (35) -1 (object):
+new: 
+polar: 
+Testing (12)  (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (12)  (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (12)  (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (12)  (string), (39) NaN (object):
+new: 
+polar: 
+Testing (12)  (string), (40)  (object):
+new: 
+polar: 
+Testing (12)  (string), (41) 0 (object):
+new: 
+polar: 
+Testing (12)  (string), (42) -0 (object):
+new: 
+polar: 
+Testing (12)  (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (12)  (string), (44) 1 (object):
+new: 
+polar: 
+Testing (12)  (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (12)  (string), (46) true (object):
+new: 
+polar: 
+Testing (12)  (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (12)  (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (12)  (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (12)  (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (51)  (object):
+new: 
+polar: 
+Testing (12)  (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (12)  (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (13) 0 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (14) -0 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (15) 0.0 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (16) 1 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (13) 0 (string), (18) true (string):
+new: 
+polar: 
+Testing (13) 0 (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (13) 0 (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (13) 0 (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (13) 0 (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (23)  (undefined):
+new: 
+polar: 
+Testing (13) 0 (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (27)  (object):
+new: 
+polar: 
+Testing (13) 0 (string), (28)  (object):
+new: 
+polar: 
+Testing (13) 0 (string), (29) null (object):
+new: 
+polar: 
+Testing (13) 0 (string), (30) true (object):
+new: 
+polar: 
+Testing (13) 0 (string), (31) false (object):
+new: 
+polar: 
+Testing (13) 0 (string), (32) 0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (33) 1 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (35) -1 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (13) 0 (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (13) 0 (string), (39) NaN (object):
+new: 
+polar: 
+Testing (13) 0 (string), (40)  (object):
+new: 
+polar: 
+Testing (13) 0 (string), (41) 0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (42) -0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (44) 1 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (13) 0 (string), (46) true (object):
+new: 
+polar: 
+Testing (13) 0 (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (13) 0 (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (13) 0 (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (51)  (object):
+new: 
+polar: 
+Testing (13) 0 (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (13) 0 (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string):
+new: 
+polar: 
+Testing (14) -0 (string), (14) -0 (string):
+new: 
+polar: 
+Testing (14) -0 (string), (15) 0.0 (string):
+new: 
+polar: 
+Testing (14) -0 (string), (16) 1 (string):
+new: 
+polar: 
+Testing (14) -0 (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (14) -0 (string), (18) true (string):
+new: 
+polar: 
+Testing (14) -0 (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (14) -0 (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (14) -0 (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (14) -0 (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (23)  (undefined):
+new: 
+polar: 
+Testing (14) -0 (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (27)  (object):
+new: 
+polar: 
+Testing (14) -0 (string), (28)  (object):
+new: 
+polar: 
+Testing (14) -0 (string), (29) null (object):
+new: 
+polar: 
+Testing (14) -0 (string), (30) true (object):
+new: 
+polar: 
+Testing (14) -0 (string), (31) false (object):
+new: 
+polar: 
+Testing (14) -0 (string), (32) 0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (33) 1 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (35) -1 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (14) -0 (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (14) -0 (string), (39) NaN (object):
+new: 
+polar: 
+Testing (14) -0 (string), (40)  (object):
+new: 
+polar: 
+Testing (14) -0 (string), (41) 0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (42) -0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (44) 1 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (14) -0 (string), (46) true (object):
+new: 
+polar: 
+Testing (14) -0 (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (14) -0 (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (14) -0 (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (51)  (object):
+new: 
+polar: 
+Testing (14) -0 (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (14) -0 (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (15) 0.0 (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (16) 1 (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (18) true (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (15) 0.0 (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (15) 0.0 (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (23)  (undefined):
+new: 
+polar: 
+Testing (15) 0.0 (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (27)  (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (28)  (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (29) null (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (30) true (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (31) false (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (32) 0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (33) 1 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (35) -1 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (39) NaN (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (40)  (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (41) 0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (42) -0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (44) 1 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (46) true (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (51)  (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (15) 0.0 (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string):
+new: 
+polar: 
+Testing (16) 1 (string), (16) 1 (string):
+new: 
+polar: 
+Testing (16) 1 (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (16) 1 (string), (18) true (string):
+new: 
+polar: 
+Testing (16) 1 (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (16) 1 (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (16) 1 (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (16) 1 (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (23)  (undefined):
+new: 
+polar: 
+Testing (16) 1 (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (27)  (object):
+new: 
+polar: 
+Testing (16) 1 (string), (28)  (object):
+new: 
+polar: 
+Testing (16) 1 (string), (29) null (object):
+new: 
+polar: 
+Testing (16) 1 (string), (30) true (object):
+new: 
+polar: 
+Testing (16) 1 (string), (31) false (object):
+new: 
+polar: 
+Testing (16) 1 (string), (32) 0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (33) 1 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (35) -1 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (16) 1 (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (16) 1 (string), (39) NaN (object):
+new: 
+polar: 
+Testing (16) 1 (string), (40)  (object):
+new: 
+polar: 
+Testing (16) 1 (string), (41) 0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (42) -0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (44) 1 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (16) 1 (string), (46) true (object):
+new: 
+polar: 
+Testing (16) 1 (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (16) 1 (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (16) 1 (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (51)  (object):
+new: 
+polar: 
+Testing (16) 1 (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (16) 1 (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string):
+new: 
+polar: 
+Testing (17) Hello World! (string), (17) Hello World! (string):
+new: 
+polar: 
+Testing (17) Hello World! (string), (18) true (string):
+new: 
+polar: 
+Testing (17) Hello World! (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (17) Hello World! (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (17) Hello World! (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (17) Hello World! (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (23)  (undefined):
+new: 
+polar: 
+Testing (17) Hello World! (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (27)  (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (28)  (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (29) null (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (30) true (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (31) false (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (32) 0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (33) 1 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (35) -1 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (39) NaN (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (40)  (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (41) 0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (42) -0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (44) 1 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (46) true (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (51)  (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (17) Hello World! (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string):
+new: 
+polar: 
+Testing (18) true (string), (18) true (string):
+new: 
+polar: 
+Testing (18) true (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (18) true (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (18) true (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (18) true (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (23)  (undefined):
+new: 
+polar: 
+Testing (18) true (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (27)  (object):
+new: 
+polar: 
+Testing (18) true (string), (28)  (object):
+new: 
+polar: 
+Testing (18) true (string), (29) null (object):
+new: 
+polar: 
+Testing (18) true (string), (30) true (object):
+new: 
+polar: 
+Testing (18) true (string), (31) false (object):
+new: 
+polar: 
+Testing (18) true (string), (32) 0 (object):
+new: 
+polar: 
+Testing (18) true (string), (33) 1 (object):
+new: 
+polar: 
+Testing (18) true (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (18) true (string), (35) -1 (object):
+new: 
+polar: 
+Testing (18) true (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (18) true (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (18) true (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (18) true (string), (39) NaN (object):
+new: 
+polar: 
+Testing (18) true (string), (40)  (object):
+new: 
+polar: 
+Testing (18) true (string), (41) 0 (object):
+new: 
+polar: 
+Testing (18) true (string), (42) -0 (object):
+new: 
+polar: 
+Testing (18) true (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (18) true (string), (44) 1 (object):
+new: 
+polar: 
+Testing (18) true (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (18) true (string), (46) true (object):
+new: 
+polar: 
+Testing (18) true (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (18) true (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (18) true (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (18) true (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (51)  (object):
+new: 
+polar: 
+Testing (18) true (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (18) true (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string):
+new: 
+polar: 
+Testing (19) _level0 (string), (19) _level0 (string):
+new: 
+polar: 
+Testing (19) _level0 (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (19) _level0 (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (19) _level0 (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (23)  (undefined):
+new: 
+polar: 
+Testing (19) _level0 (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (27)  (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (28)  (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (29) null (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (30) true (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (31) false (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (32) 0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (33) 1 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (35) -1 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (39) NaN (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (40)  (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (41) 0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (42) -0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (44) 1 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (46) true (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (51)  (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (19) _level0 (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (20) Ã¤Ã¶Ã¼ (string):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (22) [object Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (23)  (undefined):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (24) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (25) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (26) [object Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (27)  (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (28)  (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (29) null (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (30) true (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (31) false (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (32) 0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (33) 1 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (34) 0.5 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (35) -1 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (36) -0.5 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (37) Infinity (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (38) -Infinity (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (39) NaN (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (40)  (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (41) 0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (42) -0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (43) 0.0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (44) 1 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (45) Hello World! (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (46) true (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (47) _level0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (49) _level0 (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (50) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (51)  (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (52) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (53) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (54) [type Object] (object):
+new: 
+polar: 
+Testing (20) Ã¤Ã¶Ã¼ (string), (55) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (21) _level0 (movieclip):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (22) [object Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (23)  (undefined):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (24) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (25) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (26) [object Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (27)  (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (28)  (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (29) null (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (30) true (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (31) false (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (32) 0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (33) 1 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (34) 0.5 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (35) -1 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (36) -0.5 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (37) Infinity (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (38) -Infinity (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (39) NaN (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (40)  (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (41) 0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (42) -0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (43) 0.0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (44) 1 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (45) Hello World! (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (46) true (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (47) _level0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (49) _level0 (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (50) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (51)  (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (52) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (53) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (54) [type Object] (object):
+new: 
+polar: 
+Testing (21) _level0 (movieclip), (55) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (22) [object Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (23)  (undefined):
+new: 
+polar: 
+Testing (22) [object Object] (object), (24) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (25) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (26) [object Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (27)  (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (28)  (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (29) null (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (30) true (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (31) false (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (32) 0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (33) 1 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (35) -1 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (39) NaN (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (40)  (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (41) 0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (42) -0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (44) 1 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (46) true (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (51)  (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (22) [object Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined):
+new: 
+polar: 
+Testing (23)  (undefined), (23)  (undefined):
+new: 
+polar: 
+Testing (23)  (undefined), (24) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (25) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (26) [object Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (27)  (object):
+new: 
+polar: 
+Testing (23)  (undefined), (28)  (object):
+new: 
+polar: 
+Testing (23)  (undefined), (29) null (object):
+new: 
+polar: 
+Testing (23)  (undefined), (30) true (object):
+new: 
+polar: 
+Testing (23)  (undefined), (31) false (object):
+new: 
+polar: 
+Testing (23)  (undefined), (32) 0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (33) 1 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (34) 0.5 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (35) -1 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (36) -0.5 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (37) Infinity (object):
+new: 
+polar: 
+Testing (23)  (undefined), (38) -Infinity (object):
+new: 
+polar: 
+Testing (23)  (undefined), (39) NaN (object):
+new: 
+polar: 
+Testing (23)  (undefined), (40)  (object):
+new: 
+polar: 
+Testing (23)  (undefined), (41) 0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (42) -0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (43) 0.0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (44) 1 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (45) Hello World! (object):
+new: 
+polar: 
+Testing (23)  (undefined), (46) true (object):
+new: 
+polar: 
+Testing (23)  (undefined), (47) _level0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (23)  (undefined), (49) _level0 (object):
+new: 
+polar: 
+Testing (23)  (undefined), (50) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (51)  (object):
+new: 
+polar: 
+Testing (23)  (undefined), (52) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (53) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (54) [type Object] (object):
+new: 
+polar: 
+Testing (23)  (undefined), (55) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (24) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (25) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (26) [object Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (27)  (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (28)  (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (29) null (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (30) true (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (31) false (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (32) 0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (33) 1 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (35) -1 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (39) NaN (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (40)  (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (41) 0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (42) -0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (44) 1 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (46) true (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (51)  (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (24) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (25) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (26) [object Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (27)  (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (28)  (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (29) null (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (30) true (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (31) false (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (32) 0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (33) 1 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (35) -1 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (39) NaN (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (40)  (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (41) 0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (42) -0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (44) 1 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (46) true (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (51)  (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (25) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (26) [object Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (27)  (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (28)  (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (29) null (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (30) true (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (31) false (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (32) 0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (33) 1 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (35) -1 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (39) NaN (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (40)  (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (41) 0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (42) -0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (44) 1 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (46) true (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (51)  (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (26) [object Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (27)  (object):
+new: 
+polar: 
+Testing (27)  (object), (27)  (object):
+new: 
+polar: 
+Testing (27)  (object), (28)  (object):
+new: 
+polar: 
+Testing (27)  (object), (29) null (object):
+new: 
+polar: 
+Testing (27)  (object), (30) true (object):
+new: 
+polar: 
+Testing (27)  (object), (31) false (object):
+new: 
+polar: 
+Testing (27)  (object), (32) 0 (object):
+new: 
+polar: 
+Testing (27)  (object), (33) 1 (object):
+new: 
+polar: 
+Testing (27)  (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (27)  (object), (35) -1 (object):
+new: 
+polar: 
+Testing (27)  (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (27)  (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (27)  (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (27)  (object), (39) NaN (object):
+new: 
+polar: 
+Testing (27)  (object), (40)  (object):
+new: 
+polar: 
+Testing (27)  (object), (41) 0 (object):
+new: 
+polar: 
+Testing (27)  (object), (42) -0 (object):
+new: 
+polar: 
+Testing (27)  (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (27)  (object), (44) 1 (object):
+new: 
+polar: 
+Testing (27)  (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (27)  (object), (46) true (object):
+new: 
+polar: 
+Testing (27)  (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (27)  (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (27)  (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (27)  (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (27)  (object), (51)  (object):
+new: 
+polar: 
+Testing (27)  (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (27)  (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (27)  (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (27)  (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (28)  (object):
+new: 
+polar: 
+Testing (28)  (object), (28)  (object):
+new: 
+polar: 
+Testing (28)  (object), (29) null (object):
+new: 
+polar: 
+Testing (28)  (object), (30) true (object):
+new: 
+polar: 
+Testing (28)  (object), (31) false (object):
+new: 
+polar: 
+Testing (28)  (object), (32) 0 (object):
+new: 
+polar: 
+Testing (28)  (object), (33) 1 (object):
+new: 
+polar: 
+Testing (28)  (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (28)  (object), (35) -1 (object):
+new: 
+polar: 
+Testing (28)  (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (28)  (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (28)  (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (28)  (object), (39) NaN (object):
+new: 
+polar: 
+Testing (28)  (object), (40)  (object):
+new: 
+polar: 
+Testing (28)  (object), (41) 0 (object):
+new: 
+polar: 
+Testing (28)  (object), (42) -0 (object):
+new: 
+polar: 
+Testing (28)  (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (28)  (object), (44) 1 (object):
+new: 
+polar: 
+Testing (28)  (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (28)  (object), (46) true (object):
+new: 
+polar: 
+Testing (28)  (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (28)  (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (28)  (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (28)  (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (28)  (object), (51)  (object):
+new: 
+polar: 
+Testing (28)  (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (28)  (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (28)  (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (28)  (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (29) null (object):
+new: 
+polar: 
+Testing (29) null (object), (29) null (object):
+new: 
+polar: 
+Testing (29) null (object), (30) true (object):
+new: 
+polar: 
+Testing (29) null (object), (31) false (object):
+new: 
+polar: 
+Testing (29) null (object), (32) 0 (object):
+new: 
+polar: 
+Testing (29) null (object), (33) 1 (object):
+new: 
+polar: 
+Testing (29) null (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (29) null (object), (35) -1 (object):
+new: 
+polar: 
+Testing (29) null (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (29) null (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (29) null (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (29) null (object), (39) NaN (object):
+new: 
+polar: 
+Testing (29) null (object), (40)  (object):
+new: 
+polar: 
+Testing (29) null (object), (41) 0 (object):
+new: 
+polar: 
+Testing (29) null (object), (42) -0 (object):
+new: 
+polar: 
+Testing (29) null (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (29) null (object), (44) 1 (object):
+new: 
+polar: 
+Testing (29) null (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (29) null (object), (46) true (object):
+new: 
+polar: 
+Testing (29) null (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (29) null (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (29) null (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (29) null (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (29) null (object), (51)  (object):
+new: 
+polar: 
+Testing (29) null (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (29) null (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (29) null (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (29) null (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (30) true (object):
+new: 
+polar: 
+Testing (30) true (object), (30) true (object):
+new: 
+polar: 
+Testing (30) true (object), (31) false (object):
+new: 
+polar: 
+Testing (30) true (object), (32) 0 (object):
+new: 
+polar: 
+Testing (30) true (object), (33) 1 (object):
+new: 
+polar: 
+Testing (30) true (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (30) true (object), (35) -1 (object):
+new: 
+polar: 
+Testing (30) true (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (30) true (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (30) true (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (30) true (object), (39) NaN (object):
+new: 
+polar: 
+Testing (30) true (object), (40)  (object):
+new: 
+polar: 
+Testing (30) true (object), (41) 0 (object):
+new: 
+polar: 
+Testing (30) true (object), (42) -0 (object):
+new: 
+polar: 
+Testing (30) true (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (30) true (object), (44) 1 (object):
+new: 
+polar: 
+Testing (30) true (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (30) true (object), (46) true (object):
+new: 
+polar: 
+Testing (30) true (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (30) true (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (30) true (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (30) true (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (30) true (object), (51)  (object):
+new: 
+polar: 
+Testing (30) true (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (30) true (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (30) true (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (30) true (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (31) false (object):
+new: 
+polar: 
+Testing (31) false (object), (31) false (object):
+new: 
+polar: 
+Testing (31) false (object), (32) 0 (object):
+new: 
+polar: 
+Testing (31) false (object), (33) 1 (object):
+new: 
+polar: 
+Testing (31) false (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (31) false (object), (35) -1 (object):
+new: 
+polar: 
+Testing (31) false (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (31) false (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (31) false (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (31) false (object), (39) NaN (object):
+new: 
+polar: 
+Testing (31) false (object), (40)  (object):
+new: 
+polar: 
+Testing (31) false (object), (41) 0 (object):
+new: 
+polar: 
+Testing (31) false (object), (42) -0 (object):
+new: 
+polar: 
+Testing (31) false (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (31) false (object), (44) 1 (object):
+new: 
+polar: 
+Testing (31) false (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (31) false (object), (46) true (object):
+new: 
+polar: 
+Testing (31) false (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (31) false (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (31) false (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (31) false (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (31) false (object), (51)  (object):
+new: 
+polar: 
+Testing (31) false (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (31) false (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (31) false (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (31) false (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (32) 0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (32) 0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (33) 1 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (35) -1 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (32) 0 (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (32) 0 (object), (39) NaN (object):
+new: 
+polar: 
+Testing (32) 0 (object), (40)  (object):
+new: 
+polar: 
+Testing (32) 0 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (32) 0 (object), (46) true (object):
+new: 
+polar: 
+Testing (32) 0 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (32) 0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (32) 0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (32) 0 (object), (51)  (object):
+new: 
+polar: 
+Testing (32) 0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (32) 0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (32) 0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (32) 0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (33) 1 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (33) 1 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (35) -1 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (33) 1 (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (33) 1 (object), (39) NaN (object):
+new: 
+polar: 
+Testing (33) 1 (object), (40)  (object):
+new: 
+polar: 
+Testing (33) 1 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (33) 1 (object), (46) true (object):
+new: 
+polar: 
+Testing (33) 1 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (33) 1 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (33) 1 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (33) 1 (object), (51)  (object):
+new: 
+polar: 
+Testing (33) 1 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (33) 1 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (33) 1 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (33) 1 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (34) 0.5 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (34) 0.5 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (35) -1 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (39) NaN (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (40)  (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (46) true (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (51)  (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (34) 0.5 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (35) -1 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (35) -1 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (35) -1 (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (35) -1 (object), (39) NaN (object):
+new: 
+polar: 
+Testing (35) -1 (object), (40)  (object):
+new: 
+polar: 
+Testing (35) -1 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (35) -1 (object), (46) true (object):
+new: 
+polar: 
+Testing (35) -1 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (35) -1 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (35) -1 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (35) -1 (object), (51)  (object):
+new: 
+polar: 
+Testing (35) -1 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (35) -1 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (35) -1 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (35) -1 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (36) -0.5 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (36) -0.5 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (39) NaN (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (40)  (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (46) true (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (51)  (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (36) -0.5 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (37) Infinity (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (37) Infinity (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (39) NaN (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (40)  (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (41) 0 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (42) -0 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (44) 1 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (46) true (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (51)  (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (37) Infinity (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (38) -Infinity (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (38) -Infinity (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (39) NaN (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (40)  (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (41) 0 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (42) -0 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (44) 1 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (46) true (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (51)  (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (38) -Infinity (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (39) NaN (object):
+new: 
+polar: 
+Testing (39) NaN (object), (39) NaN (object):
+new: 
+polar: 
+Testing (39) NaN (object), (40)  (object):
+new: 
+polar: 
+Testing (39) NaN (object), (41) 0 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (42) -0 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (44) 1 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (39) NaN (object), (46) true (object):
+new: 
+polar: 
+Testing (39) NaN (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (39) NaN (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (39) NaN (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (39) NaN (object), (51)  (object):
+new: 
+polar: 
+Testing (39) NaN (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (39) NaN (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (39) NaN (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (39) NaN (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (40)  (object):
+new: 
+polar: 
+Testing (40)  (object), (40)  (object):
+new: 
+polar: 
+Testing (40)  (object), (41) 0 (object):
+new: 
+polar: 
+Testing (40)  (object), (42) -0 (object):
+new: 
+polar: 
+Testing (40)  (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (40)  (object), (44) 1 (object):
+new: 
+polar: 
+Testing (40)  (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (40)  (object), (46) true (object):
+new: 
+polar: 
+Testing (40)  (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (40)  (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (40)  (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (40)  (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (40)  (object), (51)  (object):
+new: 
+polar: 
+Testing (40)  (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (40)  (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (40)  (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (40)  (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (41) 0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (41) 0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (41) 0 (object), (46) true (object):
+new: 
+polar: 
+Testing (41) 0 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (41) 0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (41) 0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (41) 0 (object), (51)  (object):
+new: 
+polar: 
+Testing (41) 0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (41) 0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (41) 0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (41) 0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (42) -0 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (42) -0 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (42) -0 (object), (46) true (object):
+new: 
+polar: 
+Testing (42) -0 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (42) -0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (42) -0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (42) -0 (object), (51)  (object):
+new: 
+polar: 
+Testing (42) -0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (42) -0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (42) -0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (42) -0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (43) 0.0 (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (43) 0.0 (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (46) true (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (51)  (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (43) 0.0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (44) 1 (object):
+new: 
+polar: 
+Testing (44) 1 (object), (44) 1 (object):
+new: 
+polar: 
+Testing (44) 1 (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (44) 1 (object), (46) true (object):
+new: 
+polar: 
+Testing (44) 1 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (44) 1 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (44) 1 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (44) 1 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (44) 1 (object), (51)  (object):
+new: 
+polar: 
+Testing (44) 1 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (44) 1 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (44) 1 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (44) 1 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (45) Hello World! (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (45) Hello World! (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (46) true (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (51)  (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (45) Hello World! (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (46) true (object):
+new: 
+polar: 
+Testing (46) true (object), (46) true (object):
+new: 
+polar: 
+Testing (46) true (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (46) true (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (46) true (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (46) true (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (46) true (object), (51)  (object):
+new: 
+polar: 
+Testing (46) true (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (46) true (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (46) true (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (46) true (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (47) _level0 (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (47) _level0 (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (51)  (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (47) _level0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (48) Ã¤Ã¶Ã¼ (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (51)  (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (48) Ã¤Ã¶Ã¼ (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (49) _level0 (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (49) _level0 (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (51)  (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (49) _level0 (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (50) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (51)  (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (50) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (51)  (object):
+new: 
+polar: 
+Testing (51)  (object), (51)  (object):
+new: 
+polar: 
+Testing (51)  (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (51)  (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (51)  (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (51)  (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (52) [type Object] (object):
+new: 
+polar: 
+Testing (52) [type Object] (object), (52) [type Object] (object):
+new: 
+polar: 
+Testing (52) [type Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (52) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (52) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (53) [type Object] (object):
+new: 
+polar: 
+Testing (53) [type Object] (object), (53) [type Object] (object):
+new: 
+polar: 
+Testing (53) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (53) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (54) [type Object] (object):
+new: 
+polar: 
+Testing (54) [type Object] (object), (54) [type Object] (object):
+new: 
+polar: 
+Testing (54) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 
+Testing (55) [type Object] (object):
+new: 
+polar: 
+Testing (55) [type Object] (object), (55) [type Object] (object):
+new: 
+polar: 

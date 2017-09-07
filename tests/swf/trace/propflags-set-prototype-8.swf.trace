@@ -1,0 +1,210 @@
+o.__proto__: 0
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 1
+o
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 2
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 4
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 8
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 16
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 32
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 64
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 128
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 256
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 512
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 1024
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 2048
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 4096
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p
+o.__proto__: 8192
+p
+native_get
+p
+p
+native_get
+p
+native_set: o
+o
+native_get
+p
+p
+native_get
+p

@@ -1,0 +1,48 @@
+Parsing: 'a { a: 1; b: 2; }'
+undefined
+
+Parsing: 'a { a: 1; b: 2; } a { a: 0; c:3; }'
+undefined
+
+Parsing: 'a, a { a: 1; }'
+undefined
+
+Parsing: ',a,, ,, c,, { a: 1; }, b, ,,{ b: 2; }'
+undefined
+
+Parsing: 'a { a: 1   ; }'
+undefined
+
+Parsing: 'a { a: 1 } b { b: 2   } c { c: 3}'
+undefined
+
+Parsing: 'a { a: 1; b: 2;; }'
+undefined
+
+Parsing: 'a { a: 1; b: 2; '
+undefined
+
+Parsing: 'a { a: 1; b: 2  '
+undefined
+
+Parsing: 'a , b  { a: 1; }'
+undefined
+
+Parsing: 'a b { a: 1; }'
+undefined
+
+Parsing: 'a b, c { a: 1; }'
+undefined
+
+Parsing: 'a { a: 1 } a {}'
+undefined
+
+Parsing: 'a { a: 1 } a { }'
+undefined
+
+Parsing: 'a { a-a: 1; b--b: 2; c-C: 3; d-+: 4; e-: 5; }'
+undefined
+
+Test on non-stylesheet object
+undefined
+undefined

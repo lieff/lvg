@@ -1,0 +1,84 @@
+Testing: <a><b/></a>
+<a><b /></a>
+0
+Testing: <a/><?xml A
+<a />
+-3
+Testing: <a/><?xml A ?><b/><?xml B
+<?xml A ?><a /><b />
+-3
+Testing: <a/><!DOCTYPE A
+<a />
+-4
+Testing: <a/><!DOCTYPE A><b/><!DOCTYPE B
+<!DOCTYPE A><a /><b />
+-4
+Testing: <a>
+<a />
+-9
+Testing: <a><b><c/></a>
+<a><b><c /></b></a>
+-9
+Testing: <b><c/></a>
+<b><c /></b>
+-10
+Testing: <a><b></a><c/>
+<a><b /></a>
+-9
+Testing: <a><b></c><d/></b></a>
+<a><b /></a>
+-10
+Testing: </a>
+
+-10
+Testing: <a></b><c/></a>
+<a />
+-10
+Testing: <a></b></a><c/>
+<a />
+-10
+Testing: <a/ ></a/>
+<a/ />
+-10
+Testing: <a>&</a>
+<a>&amp;</a>
+0
+Testing: <a A='&'/>
+<a A="&amp;" />
+0
+Testing: <a A/><b/>
+
+-6
+Testing: <a A=x></a><b/>
+
+-6
+Testing: <a A='x></a><b/>
+
+-8
+Testing: <a/><!-- <b/>
+<a />
+-5
+Testing: <>a
+
+-6
+Testing: </>a
+
+-6
+Testing: <a
+
+-6
+Testing: <a/
+
+-6
+Testing: </a
+
+-6
+Testing: </a b='c'
+
+-6
+Testing: <a b='c'
+
+-6
+Testing: <a ='b'/>
+
+-6

@@ -1,0 +1,888 @@
+Testing: condenseWhite: 0 multiline: 0 html: 0
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 1 multiline: 0 html: 1
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 0 multiline: 2 html: 2
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 1 multiline: 2 html: 3
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 0 multiline: 0 html: 0
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 1 multiline: 0 html: 1
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 0 multiline: 2 html: 2
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>
+Testing: condenseWhite: 1 multiline: 2 html: 3
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+: <tab><br><span><tab><br></span><tab><br>
+<tab><br><span><tab><br></span><tab><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+: <br><span><br></span><br>
+<br><span><br></span><br>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+:  \t\n
+<span> \t\n
+</span> \t\n
+
+ \t\n
+<span> \t\n
+</span> \t\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+:  \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+:  \ta<span> \ta</span> \ta
+ \ta<span> \ta</span> \ta
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+: a\n
+<span>a\n
+</span>a\n
+
+a\n
+<span>a\n
+</span>a\n
+
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+:  a <span> a </span> a 
+ a <span> a </span> a 
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+:  a<span> a</span> a
+ a<span> a</span> a
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+: a <span>a </span>a 
+a <span>a </span>a 
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+: a<span>a</span>a
+a<span>a</span>a
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+:  <span> </span> 
+ <span> </span> 
+<span></span>
+: <span></span>
+<span></span>
+: <span></span>
+<span></span>

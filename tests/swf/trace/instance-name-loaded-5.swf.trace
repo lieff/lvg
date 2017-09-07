@@ -1,0 +1,3 @@
+Check how instances are auto-named when loaded from external files.
+_level0.instance1.load
+_level1.instance2.load

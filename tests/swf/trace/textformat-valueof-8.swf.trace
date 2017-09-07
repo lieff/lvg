@@ -1,0 +1,123 @@
+Testing: align
+valueOf: 1
+valueOf: 2
+toString: 3
+null
+Testing: blockIndent
+valueOf: 4
+valueOf: 5
+toString: 6
+5
+Testing: bold
+valueOf: 7
+valueOf: 8
+toString: 9
+true
+Testing: bullet
+valueOf: 10
+valueOf: 11
+toString: 12
+true
+Testing: color
+valueOf: 13
+valueOf: 14
+toString: 15
+13
+Testing: display
+valueOf: 16
+valueOf: 17
+toString: 18
+toString: 19
+block
+Testing: font
+valueOf: 20
+valueOf: 21
+toString: 22
+toString_22
+Testing: indent
+valueOf: 23
+valueOf: 24
+toString: 25
+24
+Testing: italic
+valueOf: 26
+valueOf: 27
+toString: 28
+true
+Testing: kerning
+valueOf: 29
+valueOf: 30
+toString: 31
+true
+Testing: leading
+valueOf: 32
+valueOf: 33
+toString: 34
+33
+Testing: leftMargin
+valueOf: 35
+valueOf: 36
+toString: 37
+36
+Testing: letterSpacing
+valueOf: 38
+valueOf: 39
+toString: 40
+39
+Testing: rightMargin
+valueOf: 41
+valueOf: 42
+toString: 43
+42
+Testing: size
+valueOf: 44
+valueOf: 45
+toString: 46
+45
+Testing: tabStops
+valueOf: 47
+valueOf: 48
+toString: 49
+null
+Testing: target
+valueOf: 50
+valueOf: 51
+toString: 52
+toString_52
+Testing: underline
+valueOf: 53
+valueOf: 54
+toString: 55
+true
+Testing: url
+valueOf: 56
+valueOf: 57
+toString: 58
+toString_58
+Testing align:
+aling_toString: 1
+justify
+aling_toString: 2
+right
+aling_toString: 3
+center
+aling_toString: 4
+left
+aling_toString: 5
+justify
+Testing display:
+display_toString: 1
+display_toString: 2
+inline
+display_toString: 3
+display_toString: 4
+inline
+display_toString: 5
+display_toString: 6
+none
+display_toString: 7
+display_toString: 8
+inline
+display_toString: 9
+display_toString: 10
+inline

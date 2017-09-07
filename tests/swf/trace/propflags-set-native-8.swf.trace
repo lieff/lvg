@@ -1,0 +1,10 @@
+Test property with get/set functions being hidden with version propflags
+x_get
+x_get_value
+x_get
+x_get_value
+x_set: 1
+x_get
+x_get_value
+x_get
+x_get_value

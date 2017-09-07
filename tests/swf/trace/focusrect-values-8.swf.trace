@@ -1,0 +1,287 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+initial: null / null / true
+(0) undefined (undefined): null / null / true
+(0) undefined (undefined)[2]: null / null / false
+(0) undefined (undefined)[3]: null / null / true
+(1) null (null): null / null / true
+(1) null (null)[2]: null / null / false
+(1) null (null)[3]: null / null / true
+(2) true (boolean): true / null / true
+(2) true (boolean)[2]: true / null / true
+(2) true (boolean)[3]: true / null / true
+(3) false (boolean): false / null / true
+(3) false (boolean)[2]: false / null / false
+(3) false (boolean)[3]: false / null / false
+(4) 0 (number): false / null / false
+(4) 0 (number)[2]: false / null / false
+(4) 0 (number)[3]: false / null / false
+(5) 1 (number): true / null / false
+(5) 1 (number)[2]: true / null / true
+(5) 1 (number)[3]: true / null / true
+(6) 0.5 (number): true / null / true
+(6) 0.5 (number)[2]: true / null / true
+(6) 0.5 (number)[3]: true / null / true
+(7) -1 (number): true / null / true
+(7) -1 (number)[2]: true / null / true
+(7) -1 (number)[3]: true / null / true
+(8) -0.5 (number): true / null / true
+(8) -0.5 (number)[2]: true / null / true
+(8) -0.5 (number)[3]: true / null / true
+(9) Infinity (number): true / null / true
+(9) Infinity (number)[2]: true / null / true
+(9) Infinity (number)[3]: true / null / true
+(10) -Infinity (number): true / null / true
+(10) -Infinity (number)[2]: true / null / true
+(10) -Infinity (number)[3]: true / null / true
+(11) NaN (number): false / null / true
+(11) NaN (number)[2]: false / null / false
+(11) NaN (number)[3]: false / null / true
+(12)  (string): false / null / true
+(12)  (string)[2]: false / null / false
+(12)  (string)[3]: false / null / true
+(13) 0 (string): true / null / true
+(13) 0 (string)[2]: true / null / false
+(13) 0 (string)[3]: true / null / false
+(14) -0 (string): true / null / false
+(14) -0 (string)[2]: true / null / false
+(14) -0 (string)[3]: true / null / false
+(15) 0.0 (string): true / null / false
+(15) 0.0 (string)[2]: true / null / false
+(15) 0.0 (string)[3]: true / null / false
+(16) 1 (string): true / null / false
+(16) 1 (string)[2]: true / null / true
+(16) 1 (string)[3]: true / null / true
+(17) Hello World! (string): true / null / true
+(17) Hello World! (string)[2]: true / null / false
+(17) Hello World! (string)[3]: true / null / true
+(18) true (string): true / null / true
+(18) true (string)[2]: true / null / false
+(18) true (string)[3]: true / null / true
+(19) _level0 (string): true / null / true
+(19) _level0 (string)[2]: true / null / false
+(19) _level0 (string)[3]: true / null / true
+(20) äöü (string): true / null / true
+(20) äöü (string)[2]: true / null / false
+(20) äöü (string)[3]: true / null / true
+(21) _level0 (movieclip): true / null / true
+(21) _level0 (movieclip)[2]: true / null / false
+(21) _level0 (movieclip)[3]: true / null / true
+(22) [object Object] (object): true / null / true
+(22) [object Object] (object)[2]: true / null / false
+(22) [object Object] (object)[3]: true / null / true
+(23) Mon Oct 28 21:24:04 GMT+0000 2002 (object): true / null / true
+(23) Mon Oct 28 21:24:04 GMT+0000 2002 (object)[2]: true / null / true
+(23) Mon Oct 28 21:24:04 GMT+0000 2002 (object)[3]: true / null / true
+(24)  (object): true / null / true
+(24)  (object)[2]: true / null / false
+(24)  (object)[3]: true / null / true
+(25) [type Function] (function): true / null / true
+(25) [type Function] (function)[2]: true / null / false
+(25) [type Function] (function)[3]: true / null / true
+(26) [type Object] (object): true / null / true
+valueOf called
+(26) [type Object] (object)[2]: true / null / false
+valueOf called
+(26) [type Object] (object)[3]: true / null / true
+(27) [type Object] (object): true / null / true
+(27) [type Object] (object)[2]: true / null / false
+(27) [type Object] (object)[3]: true / null / true
+(28) [object Object] (object): true / null / true
+valueOf called with 
+(28) [object Object] (object)[2]: true / null / false
+valueOf called with 
+(28) [object Object] (object)[3]: true / null / true
+(29) undefined (object): true / null / true
+(29) undefined (object)[2]: true / null / false
+(29) undefined (object)[3]: true / null / true
+(30) undefined (object): true / null / true
+0: valueOf!
+(30) undefined (object)[2]: true / null / false
+0: valueOf!
+(30) undefined (object)[3]: true / null / true
+(31) null (object): true / null / true
+1: valueOf!
+(31) null (object)[2]: true / null / false
+1: valueOf!
+(31) null (object)[3]: true / null / true
+(32) true (object): true / null / true
+2: valueOf!
+(32) true (object)[2]: true / null / true
+2: valueOf!
+(32) true (object)[3]: true / null / true
+(33) false (object): true / null / true
+3: valueOf!
+(33) false (object)[2]: true / null / false
+3: valueOf!
+(33) false (object)[3]: true / null / false
+(34) 0 (object): true / null / false
+4: valueOf!
+(34) 0 (object)[2]: true / null / false
+4: valueOf!
+(34) 0 (object)[3]: true / null / false
+(35) 1 (object): true / null / false
+5: valueOf!
+(35) 1 (object)[2]: true / null / true
+5: valueOf!
+(35) 1 (object)[3]: true / null / true
+(36) 0.5 (object): true / null / true
+6: valueOf!
+(36) 0.5 (object)[2]: true / null / true
+6: valueOf!
+(36) 0.5 (object)[3]: true / null / true
+(37) -1 (object): true / null / true
+7: valueOf!
+(37) -1 (object)[2]: true / null / true
+7: valueOf!
+(37) -1 (object)[3]: true / null / true
+(38) -0.5 (object): true / null / true
+8: valueOf!
+(38) -0.5 (object)[2]: true / null / true
+8: valueOf!
+(38) -0.5 (object)[3]: true / null / true
+(39) Infinity (object): true / null / true
+9: valueOf!
+(39) Infinity (object)[2]: true / null / true
+9: valueOf!
+(39) Infinity (object)[3]: true / null / true
+(40) -Infinity (object): true / null / true
+10: valueOf!
+(40) -Infinity (object)[2]: true / null / true
+10: valueOf!
+(40) -Infinity (object)[3]: true / null / true
+(41) NaN (object): true / null / true
+11: valueOf!
+(41) NaN (object)[2]: true / null / false
+11: valueOf!
+(41) NaN (object)[3]: true / null / true
+(42)  (object): true / null / true
+12: valueOf!
+(42)  (object)[2]: true / null / false
+12: valueOf!
+(42)  (object)[3]: true / null / true
+(43) 0 (object): true / null / true
+13: valueOf!
+(43) 0 (object)[2]: true / null / false
+13: valueOf!
+(43) 0 (object)[3]: true / null / false
+(44) -0 (object): true / null / false
+14: valueOf!
+(44) -0 (object)[2]: true / null / false
+14: valueOf!
+(44) -0 (object)[3]: true / null / false
+(45) 0.0 (object): true / null / false
+15: valueOf!
+(45) 0.0 (object)[2]: true / null / false
+15: valueOf!
+(45) 0.0 (object)[3]: true / null / false
+(46) 1 (object): true / null / false
+16: valueOf!
+(46) 1 (object)[2]: true / null / true
+16: valueOf!
+(46) 1 (object)[3]: true / null / true
+(47) Hello World! (object): true / null / true
+17: valueOf!
+(47) Hello World! (object)[2]: true / null / false
+17: valueOf!
+(47) Hello World! (object)[3]: true / null / true
+(48) true (object): true / null / true
+18: valueOf!
+(48) true (object)[2]: true / null / false
+18: valueOf!
+(48) true (object)[3]: true / null / true
+(49) _level0 (object): true / null / true
+19: valueOf!
+(49) _level0 (object)[2]: true / null / false
+19: valueOf!
+(49) _level0 (object)[3]: true / null / true
+(50) äöü (object): true / null / true
+20: valueOf!
+(50) äöü (object)[2]: true / null / false
+20: valueOf!
+(50) äöü (object)[3]: true / null / true
+(51) _level0 (object): true / null / true
+21: valueOf!
+(51) _level0 (object)[2]: true / null / false
+21: valueOf!
+(51) _level0 (object)[3]: true / null / true
+(52) [type Object] (object): true / null / true
+22: valueOf!
+(52) [type Object] (object)[2]: true / null / false
+22: valueOf!
+(52) [type Object] (object)[3]: true / null / true
+(53) [type Object] (object): true / null / true
+23: valueOf!
+(53) [type Object] (object)[2]: true / null / false
+23: valueOf!
+(53) [type Object] (object)[3]: true / null / true
+(54) [type Object] (object): true / null / true
+24: valueOf!
+(54) [type Object] (object)[2]: true / null / false
+24: valueOf!
+(54) [type Object] (object)[3]: true / null / true
+(55) [type Object] (object): true / null / true
+25: valueOf!
+(55) [type Object] (object)[2]: true / null / false
+25: valueOf!
+(55) [type Object] (object)[3]: true / null / true
+(56) [type Object] (object): true / null / true
+26: valueOf!
+(56) [type Object] (object)[2]: true / null / false
+26: valueOf!
+(56) [type Object] (object)[3]: true / null / true
+(57) [type Object] (object): true / null / true
+27: valueOf!
+(57) [type Object] (object)[2]: true / null / false
+27: valueOf!
+(57) [type Object] (object)[3]: true / null / true
+(58) [type Object] (object): true / null / true
+28: valueOf!
+(58) [type Object] (object)[2]: true / null / false
+28: valueOf!
+(58) [type Object] (object)[3]: true / null / true
+(59) [type Object] (object): true / null / true
+29: valueOf!
+(59) [type Object] (object)[2]: true / null / false
+29: valueOf!
+(59) [type Object] (object)[3]: true / null / true

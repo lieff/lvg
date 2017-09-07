@@ -1,0 +1,507 @@
+Test empty or semi-empty stuctures
+,  =>  => , 
+,  =>  => , 
+10,  =>  => 10, 
+, 10 =>  => , 10
+10,  =>  => 10, 
+, 10 =>  => , 10
+Test various values
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+23: valueOf!
+24: valueOf!
+25: valueOf!
+25: toString!
+26: valueOf!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+30: valueOf!
+30: toString!
+,  =>  => , 
+,  =>  => , 
+null, null =>  => null, null
+null, null =>  => null, null
+true, true =>  => true, true
+true, true =>  => true, true
+false, false =>  => false, false
+false, false =>  => false, false
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+1, 1 =>  => 1, 1
+1, 1 =>  => 1, 1
+0.5, 0.5 =>  => 0.5, 0.5
+0.5, 0.5 =>  => 0.5, 0.5
+-1, -1 =>  => -1, -1
+-1, -1 =>  => -1, -1
+-0.5, -0.5 =>  => -0.5, -0.5
+-0.5, -0.5 =>  => -0.5, -0.5
+2147483647, 2147483647 =>  => 2147483647, 2147483647
+2147483647, 2147483647 =>  => 2147483647, 2147483647
+2147483648, 2147483648 =>  => 2147483648, 2147483648
+2147483648, 2147483648 =>  => 2147483648, 2147483648
+8589934593, 8589934593 =>  => 8589934593, 8589934593
+8589934593, 8589934593 =>  => 8589934593, 8589934593
+Infinity, Infinity =>  => Infinity, Infinity
+Infinity, Infinity =>  => Infinity, Infinity
+-Infinity, -Infinity =>  => -Infinity, -Infinity
+-Infinity, -Infinity =>  => -Infinity, -Infinity
+NaN, NaN =>  => NaN, NaN
+NaN, NaN =>  => NaN, NaN
+,  =>  => , 
+,  =>  => , 
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+-0, -0 =>  => -0, -0
+-0, -0 =>  => -0, -0
+0.0, 0.0 =>  => 0.0, 0.0
+0.0, 0.0 =>  => 0.0, 0.0
+1, 1 =>  => 1, 1
+1, 1 =>  => 1, 1
+Hello World!, Hello World! =>  => Hello World!, Hello World!
+Hello World!, Hello World! =>  => Hello World!, Hello World!
+true, true =>  => true, true
+true, true =>  => true, true
+_level0, _level0 =>  => _level0, _level0
+_level0, _level0 =>  => _level0, _level0
+Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼ =>  => Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼
+Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼ =>  => Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼
+_level0, _level0 =>  => _level0, _level0
+_level0, _level0 =>  => _level0, _level0
+[object Object], [object Object] =>  => [object Object], [object Object]
+[object Object], [object Object] =>  => [object Object], [object Object]
+,  =>  => , 
+,  =>  => , 
+valueOf called
+toString called
+valueOf called
+toString called
+valueOf called
+toString called
+valueOf called
+toString called
+[type Object], [type Object] =>  => [type Object], [type Object]
+valueOf called
+toString called
+valueOf called
+toString called
+valueOf called
+toString called
+valueOf called
+toString called
+[type Object], [type Object] =>  => [type Object], [type Object]
+toString called with 
+toString called with 
+toString called with 
+toString called with 
+[type Object], [type Object] =>  => [type Object], [type Object]
+toString called with 
+toString called with 
+toString called with 
+toString called with 
+[type Object], [type Object] =>  => [type Object], [type Object]
+valueOf called with 
+valueOf called with 
+valueOf called with 
+valueOf called with 
+[object Object], [object Object] =>  => [object Object], [object Object]
+valueOf called with 
+valueOf called with 
+valueOf called with 
+valueOf called with 
+[object Object], [object Object] =>  => [object Object], [object Object]
+,  =>  => , 
+,  =>  => , 
+0: valueOf!
+0: valueOf!
+0: valueOf!
+0: valueOf!
+,  =>  => , 
+0: valueOf!
+0: valueOf!
+0: valueOf!
+0: valueOf!
+,  =>  => , 
+1: valueOf!
+1: valueOf!
+1: valueOf!
+1: valueOf!
+null, null =>  => null, null
+1: valueOf!
+1: valueOf!
+1: valueOf!
+1: valueOf!
+null, null =>  => null, null
+2: valueOf!
+2: valueOf!
+2: valueOf!
+2: valueOf!
+true, true =>  => true, true
+2: valueOf!
+2: valueOf!
+2: valueOf!
+2: valueOf!
+true, true =>  => true, true
+3: valueOf!
+3: valueOf!
+3: valueOf!
+3: valueOf!
+false, false =>  => false, false
+3: valueOf!
+3: valueOf!
+3: valueOf!
+3: valueOf!
+false, false =>  => false, false
+4: valueOf!
+4: valueOf!
+4: valueOf!
+4: valueOf!
+0, 0 =>  => 0, 0
+4: valueOf!
+4: valueOf!
+4: valueOf!
+4: valueOf!
+0, 0 =>  => 0, 0
+5: valueOf!
+5: valueOf!
+5: valueOf!
+5: valueOf!
+1, 1 =>  => 1, 1
+5: valueOf!
+5: valueOf!
+5: valueOf!
+5: valueOf!
+1, 1 =>  => 1, 1
+6: valueOf!
+6: valueOf!
+6: valueOf!
+6: valueOf!
+0.5, 0.5 =>  => 0.5, 0.5
+6: valueOf!
+6: valueOf!
+6: valueOf!
+6: valueOf!
+0.5, 0.5 =>  => 0.5, 0.5
+7: valueOf!
+7: valueOf!
+7: valueOf!
+7: valueOf!
+-1, -1 =>  => -1, -1
+7: valueOf!
+7: valueOf!
+7: valueOf!
+7: valueOf!
+-1, -1 =>  => -1, -1
+8: valueOf!
+8: valueOf!
+8: valueOf!
+8: valueOf!
+-0.5, -0.5 =>  => -0.5, -0.5
+8: valueOf!
+8: valueOf!
+8: valueOf!
+8: valueOf!
+-0.5, -0.5 =>  => -0.5, -0.5
+9: valueOf!
+9: valueOf!
+9: valueOf!
+9: valueOf!
+2147483647, 2147483647 =>  => 2147483647, 2147483647
+9: valueOf!
+9: valueOf!
+9: valueOf!
+9: valueOf!
+2147483647, 2147483647 =>  => 2147483647, 2147483647
+10: valueOf!
+10: valueOf!
+10: valueOf!
+10: valueOf!
+2147483648, 2147483648 =>  => 2147483648, 2147483648
+10: valueOf!
+10: valueOf!
+10: valueOf!
+10: valueOf!
+2147483648, 2147483648 =>  => 2147483648, 2147483648
+11: valueOf!
+11: valueOf!
+11: valueOf!
+11: valueOf!
+8589934593, 8589934593 =>  => 8589934593, 8589934593
+11: valueOf!
+11: valueOf!
+11: valueOf!
+11: valueOf!
+8589934593, 8589934593 =>  => 8589934593, 8589934593
+12: valueOf!
+12: valueOf!
+12: valueOf!
+12: valueOf!
+Infinity, Infinity =>  => Infinity, Infinity
+12: valueOf!
+12: valueOf!
+12: valueOf!
+12: valueOf!
+Infinity, Infinity =>  => Infinity, Infinity
+13: valueOf!
+13: valueOf!
+13: valueOf!
+13: valueOf!
+-Infinity, -Infinity =>  => -Infinity, -Infinity
+13: valueOf!
+13: valueOf!
+13: valueOf!
+13: valueOf!
+-Infinity, -Infinity =>  => -Infinity, -Infinity
+14: valueOf!
+14: valueOf!
+14: valueOf!
+14: valueOf!
+NaN, NaN =>  => NaN, NaN
+14: valueOf!
+14: valueOf!
+14: valueOf!
+14: valueOf!
+NaN, NaN =>  => NaN, NaN
+15: valueOf!
+15: valueOf!
+15: valueOf!
+15: valueOf!
+,  =>  => , 
+15: valueOf!
+15: valueOf!
+15: valueOf!
+15: valueOf!
+,  =>  => , 
+16: valueOf!
+16: valueOf!
+16: valueOf!
+16: valueOf!
+0, 0 =>  => 0, 0
+16: valueOf!
+16: valueOf!
+16: valueOf!
+16: valueOf!
+0, 0 =>  => 0, 0
+17: valueOf!
+17: valueOf!
+17: valueOf!
+17: valueOf!
+-0, -0 =>  => -0, -0
+17: valueOf!
+17: valueOf!
+17: valueOf!
+17: valueOf!
+-0, -0 =>  => -0, -0
+18: valueOf!
+18: valueOf!
+18: valueOf!
+18: valueOf!
+0.0, 0.0 =>  => 0.0, 0.0
+18: valueOf!
+18: valueOf!
+18: valueOf!
+18: valueOf!
+0.0, 0.0 =>  => 0.0, 0.0
+19: valueOf!
+19: valueOf!
+19: valueOf!
+19: valueOf!
+1, 1 =>  => 1, 1
+19: valueOf!
+19: valueOf!
+19: valueOf!
+19: valueOf!
+1, 1 =>  => 1, 1
+20: valueOf!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+Hello World!, Hello World! =>  => Hello World!, Hello World!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+Hello World!, Hello World! =>  => Hello World!, Hello World!
+21: valueOf!
+21: valueOf!
+21: valueOf!
+21: valueOf!
+true, true =>  => true, true
+21: valueOf!
+21: valueOf!
+21: valueOf!
+21: valueOf!
+true, true =>  => true, true
+22: valueOf!
+22: valueOf!
+22: valueOf!
+22: valueOf!
+_level0, _level0 =>  => _level0, _level0
+22: valueOf!
+22: valueOf!
+22: valueOf!
+22: valueOf!
+_level0, _level0 =>  => _level0, _level0
+23: valueOf!
+23: valueOf!
+23: valueOf!
+23: valueOf!
+Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼ =>  => Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼
+23: valueOf!
+23: valueOf!
+23: valueOf!
+23: valueOf!
+Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼ =>  => Ã¤Ã¶Ã¼, Ã¤Ã¶Ã¼
+24: valueOf!
+24: valueOf!
+24: valueOf!
+24: valueOf!
+_level0, _level0 =>  => _level0, _level0
+24: valueOf!
+24: valueOf!
+24: valueOf!
+24: valueOf!
+_level0, _level0 =>  => _level0, _level0
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+26: valueOf!
+26: valueOf!
+26: valueOf!
+26: valueOf!
+,  =>  => , 
+26: valueOf!
+26: valueOf!
+26: valueOf!
+26: valueOf!
+,  =>  => , 
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+28: valueOf!
+28: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+29: valueOf!
+29: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+30: valueOf!
+30: toString!
+[type Object], [type Object] =>  => [type Object], [type Object]
+Chaining to see accuracy
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+Testing values on prototype
+0, 0 =>  => 0, 0
+0, 0 =>  => 0, 0
+Testing addProperty
+,  =>  => , 
+,  =>  => , 

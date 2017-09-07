@@ -1,0 +1,27 @@
+load
+enterFrame
+2
+enterFrame
+3
+enterFrame
+4
+enterFrame
+5
+6
+unload
+DoAction 6
+load
+enterFrame
+5
+6
+unload
+DoAction 6
+load
+enterFrame
+5
+6
+unload
+DoAction 6
+load
+enterFrame
+5

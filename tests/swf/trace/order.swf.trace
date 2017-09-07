@@ -1,0 +1,50 @@
+Fade 1
+Rotate 1
+Fade 1
+Fade (contained) enterFrame 2
+Fade 2
+Rotate enterFrame 2
+Rotate 2
+Fade enterFrame 2
+Fade 2
+Fade (contained) enterFrame 3
+Fade 3
+Rotate enterFrame 3
+Rotate 3
+Fade enterFrame 3
+Fade 3
+Fade (contained) enterFrame 4
+Fade 4
+Rotate enterFrame 4
+Rotate 4
+Fade enterFrame 4
+Fade 4
+Fade (contained) enterFrame 5
+Fade 5
+Rotate enterFrame 5
+Rotate 5
+Fade (contained) enterFrame 6
+Rotate enterFrame 6
+Rotate 6
+Fade 1
+Fade enterFrame 2
+Fade 2
+Fade (contained) enterFrame 7
+Fade 7
+Rotate enterFrame 7
+Rotate 7
+Fade enterFrame 3
+Fade 3
+Fade enterFrame 4
+Fade 4
+Rotate 1
+Fade 1
+Fade (contained) enterFrame 2
+Fade 2
+Rotate enterFrame 2
+Rotate 2
+Fade enterFrame 5
+Fade 5
+Fade 1
+Rotate 1
+Fade 1

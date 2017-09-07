@@ -1,0 +1,36 @@
+-- normal
+__resolve: world
+resolved
+__resolve: wORld
+resolved
+assigned
+assigned
+-- with
+assigned
+assigned
+__resolve: missing
+resolved
+-- __proto__
+__resolve: world
+resolved
+-- variable in __proto__
+assigned
+-- __proto__, undefined in the way
+undefined
+-- __proto__, number in the way
+undefined
+-- __proto__, Object in the way
+undefined
+-- addProperty
+undefined
+assigned
+-- addProperty and normal in __proto__
+undefined
+assigned
+-- addProperty and normal together
+__resolve: world
+resolved
+assigned
+-- yaragh
+undefined
+assigned

@@ -1,0 +1,26 @@
+Check event order with on$Foo and $foo clipevents
+load
+onLoad
+enterFrame
+onEnterFrame
+unload
+onUnload
+Check event order with on$Foo and $foo clipevents
+load
+onLoad
+enterFrame
+onEnterFrame
+unload
+onUnload
+Check event order with on$Foo and $foo clipevents
+load
+onLoad
+enterFrame
+onEnterFrame
+unload
+onUnload
+Check event order with on$Foo and $foo clipevents
+load
+onLoad
+enterFrame
+onEnterFrame

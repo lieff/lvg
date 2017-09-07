@@ -1,0 +1,864 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+(0)  (undefined): (x=, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(1) null (null): (x=null, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(2) true (boolean): (x=true, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(3) false (boolean): (x=false, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(4) 0 (number): (x=0, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(5) 1 (number): (x=1, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(6) 0.5 (number): (x=0.5, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(7) -1 (number): (x=-1, y=20, w=30, h=40)
+true
+true
+false
+true
+false
+(8) -0.5 (number): (x=-0.5, y=20, w=30, h=40)
+true
+true
+false
+true
+false
+(9) Infinity (number): (x=Infinity, y=20, w=30, h=40)
+false
+false
+false
+false
+false
+(10) -Infinity (number): (x=-Infinity, y=20, w=30, h=40)
+false
+false
+false
+false
+false
+(11) NaN (number): (x=NaN, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+undefined
+undefined
+(12)  (string): (x=, y=20, w=30, h=40)
+true
+true
+undefined
+false
+undefined
+(13) 0 (string): (x=0, y=20, w=30, h=40)
+true
+true
+false
+true
+true
+(14) -0 (string): (x=-0, y=20, w=30, h=40)
+false
+false
+false
+true
+true
+(15) 0.0 (string): (x=0.0, y=20, w=30, h=40)
+false
+false
+false
+true
+true
+(16) 1 (string): (x=1, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+(17) Hello World! (string): (x=Hello World!, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+true
+undefined
+(18) true (string): (x=true, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+true
+undefined
+(19) _level0 (string): (x=_level0, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+true
+undefined
+(20) äöü (string): (x=äöü, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+true
+undefined
+(21) _level0 (movieclip): (x=_level0, y=20, w=30, h=40)
+undefined
+undefined
+undefined
+undefined
+undefined
+(22) [object Object] (object): (x=[object Object], y=20, w=30, h=40)
+undefined
+undefined
+undefined
+false
+false
+(23) [type Function] (function): (x=[type Function], y=20, w=30, h=40)
+undefined
+undefined
+undefined
+false
+false
+valueOf called
+toString called
+(24) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+valueOf called
+valueOf called
+valueOf called
+undefined
+valueOf called
+valueOf called
+valueOf called
+undefined
+valueOf called
+valueOf called
+valueOf called
+undefined
+valueOf called
+valueOf called
+valueOf called
+valueOf called
+valueOf called
+valueOf called
+false
+valueOf called
+valueOf called
+false
+toString called with 
+(25) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+undefined
+undefined
+undefined
+false
+false
+valueOf called with 
+(26) [object Object] (object): (x=[object Object], y=20, w=30, h=40)
+valueOf called with 
+valueOf called with 
+valueOf called with 
+undefined
+valueOf called with 
+valueOf called with 
+valueOf called with 
+undefined
+valueOf called with 
+valueOf called with 
+valueOf called with 
+undefined
+valueOf called with 
+valueOf called with 
+valueOf called with 
+valueOf called with 
+valueOf called with 
+valueOf called with 
+false
+valueOf called with 
+valueOf called with 
+false
+(27)  (object): (x=, y=20, w=30, h=40)
+true
+true
+true
+true
+true
+0: valueOf!
+(28)  (object): (x=, y=20, w=30, h=40)
+0: valueOf!
+0: valueOf!
+true
+0: valueOf!
+0: valueOf!
+true
+0: valueOf!
+0: valueOf!
+0: valueOf!
+true
+0: valueOf!
+0: valueOf!
+0: valueOf!
+0: valueOf!
+0: valueOf!
+0: valueOf!
+true
+0: valueOf!
+0: valueOf!
+true
+1: valueOf!
+(29) null (object): (x=null, y=20, w=30, h=40)
+1: valueOf!
+1: valueOf!
+true
+1: valueOf!
+1: valueOf!
+true
+1: valueOf!
+1: valueOf!
+1: valueOf!
+true
+1: valueOf!
+1: valueOf!
+1: valueOf!
+1: valueOf!
+1: valueOf!
+1: valueOf!
+true
+1: valueOf!
+1: valueOf!
+true
+2: valueOf!
+(30) true (object): (x=true, y=20, w=30, h=40)
+2: valueOf!
+2: valueOf!
+true
+2: valueOf!
+2: valueOf!
+true
+2: valueOf!
+2: valueOf!
+2: valueOf!
+true
+2: valueOf!
+2: valueOf!
+2: valueOf!
+2: valueOf!
+2: valueOf!
+2: valueOf!
+true
+2: valueOf!
+2: valueOf!
+true
+3: valueOf!
+(31) false (object): (x=false, y=20, w=30, h=40)
+3: valueOf!
+3: valueOf!
+true
+3: valueOf!
+3: valueOf!
+true
+3: valueOf!
+3: valueOf!
+3: valueOf!
+true
+3: valueOf!
+3: valueOf!
+3: valueOf!
+3: valueOf!
+3: valueOf!
+3: valueOf!
+true
+3: valueOf!
+3: valueOf!
+true
+4: valueOf!
+(32) 0 (object): (x=0, y=20, w=30, h=40)
+4: valueOf!
+4: valueOf!
+true
+4: valueOf!
+4: valueOf!
+true
+4: valueOf!
+4: valueOf!
+4: valueOf!
+true
+4: valueOf!
+4: valueOf!
+4: valueOf!
+4: valueOf!
+4: valueOf!
+4: valueOf!
+true
+4: valueOf!
+4: valueOf!
+true
+5: valueOf!
+(33) 1 (object): (x=1, y=20, w=30, h=40)
+5: valueOf!
+5: valueOf!
+true
+5: valueOf!
+5: valueOf!
+true
+5: valueOf!
+5: valueOf!
+5: valueOf!
+true
+5: valueOf!
+5: valueOf!
+5: valueOf!
+5: valueOf!
+5: valueOf!
+5: valueOf!
+true
+5: valueOf!
+5: valueOf!
+true
+6: valueOf!
+(34) 0.5 (object): (x=0.5, y=20, w=30, h=40)
+6: valueOf!
+6: valueOf!
+true
+6: valueOf!
+6: valueOf!
+true
+6: valueOf!
+6: valueOf!
+6: valueOf!
+true
+6: valueOf!
+6: valueOf!
+6: valueOf!
+6: valueOf!
+6: valueOf!
+6: valueOf!
+true
+6: valueOf!
+6: valueOf!
+true
+7: valueOf!
+(35) -1 (object): (x=-1, y=20, w=30, h=40)
+7: valueOf!
+7: valueOf!
+true
+7: valueOf!
+7: valueOf!
+true
+7: valueOf!
+7: valueOf!
+7: valueOf!
+false
+7: valueOf!
+7: valueOf!
+7: valueOf!
+7: valueOf!
+7: valueOf!
+7: valueOf!
+true
+7: valueOf!
+false
+8: valueOf!
+(36) -0.5 (object): (x=-0.5, y=20, w=30, h=40)
+8: valueOf!
+8: valueOf!
+true
+8: valueOf!
+8: valueOf!
+true
+8: valueOf!
+8: valueOf!
+8: valueOf!
+false
+8: valueOf!
+8: valueOf!
+8: valueOf!
+8: valueOf!
+8: valueOf!
+8: valueOf!
+true
+8: valueOf!
+false
+9: valueOf!
+(37) Infinity (object): (x=Infinity, y=20, w=30, h=40)
+9: valueOf!
+false
+9: valueOf!
+false
+9: valueOf!
+9: valueOf!
+false
+9: valueOf!
+9: valueOf!
+9: valueOf!
+9: valueOf!
+9: valueOf!
+false
+9: valueOf!
+9: valueOf!
+false
+10: valueOf!
+(38) -Infinity (object): (x=-Infinity, y=20, w=30, h=40)
+10: valueOf!
+10: valueOf!
+false
+10: valueOf!
+10: valueOf!
+false
+10: valueOf!
+10: valueOf!
+false
+10: valueOf!
+10: valueOf!
+10: valueOf!
+10: valueOf!
+10: valueOf!
+false
+10: valueOf!
+false
+11: valueOf!
+(39) NaN (object): (x=NaN, y=20, w=30, h=40)
+11: valueOf!
+11: valueOf!
+undefined
+11: valueOf!
+11: valueOf!
+undefined
+11: valueOf!
+11: valueOf!
+undefined
+11: valueOf!
+11: valueOf!
+11: valueOf!
+11: valueOf!
+11: valueOf!
+undefined
+11: valueOf!
+11: valueOf!
+undefined
+12: valueOf!
+(40)  (object): (x=, y=20, w=30, h=40)
+12: valueOf!
+12: valueOf!
+true
+12: valueOf!
+12: valueOf!
+true
+12: valueOf!
+12: valueOf!
+12: valueOf!
+undefined
+12: valueOf!
+12: valueOf!
+12: valueOf!
+12: valueOf!
+12: valueOf!
+false
+12: valueOf!
+12: valueOf!
+undefined
+13: valueOf!
+(41) 0 (object): (x=0, y=20, w=30, h=40)
+13: valueOf!
+13: valueOf!
+true
+13: valueOf!
+13: valueOf!
+true
+13: valueOf!
+13: valueOf!
+13: valueOf!
+false
+13: valueOf!
+13: valueOf!
+13: valueOf!
+13: valueOf!
+13: valueOf!
+13: valueOf!
+true
+13: valueOf!
+13: valueOf!
+true
+14: valueOf!
+(42) -0 (object): (x=-0, y=20, w=30, h=40)
+14: valueOf!
+14: valueOf!
+false
+14: valueOf!
+14: valueOf!
+false
+14: valueOf!
+14: valueOf!
+false
+14: valueOf!
+14: valueOf!
+14: valueOf!
+14: valueOf!
+14: valueOf!
+14: valueOf!
+true
+14: valueOf!
+14: valueOf!
+true
+15: valueOf!
+(43) 0.0 (object): (x=0.0, y=20, w=30, h=40)
+15: valueOf!
+15: valueOf!
+false
+15: valueOf!
+15: valueOf!
+false
+15: valueOf!
+15: valueOf!
+false
+15: valueOf!
+15: valueOf!
+15: valueOf!
+15: valueOf!
+15: valueOf!
+15: valueOf!
+true
+15: valueOf!
+15: valueOf!
+true
+16: valueOf!
+(44) 1 (object): (x=1, y=20, w=30, h=40)
+16: valueOf!
+16: valueOf!
+true
+16: valueOf!
+16: valueOf!
+true
+16: valueOf!
+16: valueOf!
+16: valueOf!
+true
+16: valueOf!
+16: valueOf!
+16: valueOf!
+16: valueOf!
+16: valueOf!
+16: valueOf!
+true
+16: valueOf!
+16: valueOf!
+true
+17: valueOf!
+(45) Hello World! (object): (x=Hello World!, y=20, w=30, h=40)
+17: valueOf!
+17: valueOf!
+undefined
+17: valueOf!
+17: valueOf!
+undefined
+17: valueOf!
+17: valueOf!
+undefined
+17: valueOf!
+17: valueOf!
+17: valueOf!
+17: valueOf!
+17: valueOf!
+17: valueOf!
+true
+17: valueOf!
+17: valueOf!
+undefined
+18: valueOf!
+(46) true (object): (x=true, y=20, w=30, h=40)
+18: valueOf!
+18: valueOf!
+undefined
+18: valueOf!
+18: valueOf!
+undefined
+18: valueOf!
+18: valueOf!
+undefined
+18: valueOf!
+18: valueOf!
+18: valueOf!
+18: valueOf!
+18: valueOf!
+18: valueOf!
+true
+18: valueOf!
+18: valueOf!
+undefined
+19: valueOf!
+(47) _level0 (object): (x=_level0, y=20, w=30, h=40)
+19: valueOf!
+19: valueOf!
+undefined
+19: valueOf!
+19: valueOf!
+undefined
+19: valueOf!
+19: valueOf!
+undefined
+19: valueOf!
+19: valueOf!
+19: valueOf!
+19: valueOf!
+19: valueOf!
+19: valueOf!
+true
+19: valueOf!
+19: valueOf!
+undefined
+20: valueOf!
+(48) äöü (object): (x=äöü, y=20, w=30, h=40)
+20: valueOf!
+20: valueOf!
+undefined
+20: valueOf!
+20: valueOf!
+undefined
+20: valueOf!
+20: valueOf!
+undefined
+20: valueOf!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+20: valueOf!
+true
+20: valueOf!
+20: valueOf!
+undefined
+21: valueOf!
+(49) _level0 (object): (x=_level0, y=20, w=30, h=40)
+21: valueOf!
+21: valueOf!
+undefined
+21: valueOf!
+21: valueOf!
+undefined
+21: valueOf!
+21: valueOf!
+undefined
+21: valueOf!
+21: valueOf!
+21: valueOf!
+21: valueOf!
+21: valueOf!
+undefined
+21: valueOf!
+21: valueOf!
+undefined
+22: valueOf!
+22: toString!
+(50) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+22: valueOf!
+22: valueOf!
+22: valueOf!
+undefined
+22: valueOf!
+22: valueOf!
+22: valueOf!
+undefined
+22: valueOf!
+22: valueOf!
+22: valueOf!
+undefined
+22: valueOf!
+22: valueOf!
+22: valueOf!
+22: valueOf!
+22: valueOf!
+22: valueOf!
+false
+22: valueOf!
+22: valueOf!
+false
+23: valueOf!
+23: toString!
+(51) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+23: valueOf!
+23: valueOf!
+23: valueOf!
+undefined
+23: valueOf!
+23: valueOf!
+23: valueOf!
+undefined
+23: valueOf!
+23: valueOf!
+23: valueOf!
+undefined
+23: valueOf!
+23: valueOf!
+23: valueOf!
+23: valueOf!
+23: valueOf!
+23: valueOf!
+false
+23: valueOf!
+23: valueOf!
+false
+24: valueOf!
+24: toString!
+(52) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+24: valueOf!
+24: valueOf!
+24: valueOf!
+undefined
+24: valueOf!
+24: valueOf!
+24: valueOf!
+undefined
+24: valueOf!
+24: valueOf!
+24: valueOf!
+undefined
+24: valueOf!
+24: valueOf!
+24: valueOf!
+24: valueOf!
+24: valueOf!
+24: valueOf!
+false
+24: valueOf!
+24: valueOf!
+false
+25: valueOf!
+25: toString!
+(53) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+25: valueOf!
+25: valueOf!
+25: valueOf!
+undefined
+25: valueOf!
+25: valueOf!
+25: valueOf!
+undefined
+25: valueOf!
+25: valueOf!
+25: valueOf!
+undefined
+25: valueOf!
+25: valueOf!
+25: valueOf!
+25: valueOf!
+25: valueOf!
+25: valueOf!
+false
+25: valueOf!
+25: valueOf!
+false
+26: valueOf!
+26: toString!
+(54) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+26: valueOf!
+26: valueOf!
+26: valueOf!
+undefined
+26: valueOf!
+26: valueOf!
+26: valueOf!
+undefined
+26: valueOf!
+26: valueOf!
+26: valueOf!
+undefined
+26: valueOf!
+26: valueOf!
+26: valueOf!
+26: valueOf!
+26: valueOf!
+26: valueOf!
+false
+26: valueOf!
+26: valueOf!
+false
+27: valueOf!
+27: toString!
+(55) [type Object] (object): (x=[type Object], y=20, w=30, h=40)
+27: valueOf!
+27: valueOf!
+27: valueOf!
+undefined
+27: valueOf!
+27: valueOf!
+27: valueOf!
+undefined
+27: valueOf!
+27: valueOf!
+27: valueOf!
+undefined
+27: valueOf!
+27: valueOf!
+27: valueOf!
+27: valueOf!
+27: valueOf!
+27: valueOf!
+false
+27: valueOf!
+27: valueOf!
+false
+contains called
+true
+containsPoint called
+true
+containsRectangle called
+true

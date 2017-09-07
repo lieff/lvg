@@ -1,0 +1,13 @@
+local.arguments = object
+  0 = undefined
+  1 = undefined
+  __proto__ (hp) = _global.Array.prototype
+  callee (hp) = function
+    __proto__ (hp) = _global.Function.prototype
+    constructor (hp) = _global.Function
+    prototype (hp) = object
+      __proto__ (hp) = _global.Object.prototype
+      constructor (hp) = local.arguments.callee
+  caller (hp) = null
+  constructor (hp) = _global.Array
+  length (hp) = number : 2

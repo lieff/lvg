@@ -1,0 +1,230 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+false
+undefined
+true
+true
+false
+false
+true
+true
+Testing: (0)  (undefined)
+false
+false
+Testing: (1) null (null)
+false
+false
+Testing: (2) true (boolean)
+true
+false
+Testing: (3) false (boolean)
+false
+false
+Testing: (4) 0 (number)
+false
+false
+Testing: (5) 1 (number)
+true
+false
+Testing: (6) 0.5 (number)
+true
+false
+Testing: (7) -1 (number)
+true
+false
+Testing: (8) -0.5 (number)
+true
+false
+Testing: (9) Infinity (number)
+true
+false
+Testing: (10) -Infinity (number)
+true
+false
+Testing: (11) NaN (number)
+false
+false
+Testing: (12)  (string)
+false
+false
+Testing: (13) 0 (string)
+false
+false
+Testing: (14) -0 (string)
+false
+false
+Testing: (15) 0.0 (string)
+false
+false
+Testing: (16) 1 (string)
+true
+false
+Testing: (17) Hello World! (string)
+false
+false
+Testing: (18) true (string)
+false
+false
+Testing: (19) _level0 (string)
+false
+false
+Testing: (20) äöü (string)
+false
+false
+Testing: (21) _level0 (movieclip)
+true
+false
+Testing: (22) [object Object] (object)
+true
+false
+Testing: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+true
+false
+Testing: (24)  (object)
+true
+false
+Testing: (25) [type Function] (function)
+true
+false
+Testing: (26) [type Object] (object)
+true
+false
+Testing: (27) [type Object] (object)
+true
+false
+Testing: (28) [object Object] (object)
+true
+false
+Testing: (29)  (object)
+true
+false
+Testing: (30)  (object)
+true
+false
+Testing: (31) null (object)
+true
+false
+Testing: (32) true (object)
+true
+false
+Testing: (33) false (object)
+true
+false
+Testing: (34) 0 (object)
+true
+false
+Testing: (35) 1 (object)
+true
+false
+Testing: (36) 0.5 (object)
+true
+false
+Testing: (37) -1 (object)
+true
+false
+Testing: (38) -0.5 (object)
+true
+false
+Testing: (39) Infinity (object)
+true
+false
+Testing: (40) -Infinity (object)
+true
+false
+Testing: (41) NaN (object)
+true
+false
+Testing: (42)  (object)
+true
+false
+Testing: (43) 0 (object)
+true
+false
+Testing: (44) -0 (object)
+true
+false
+Testing: (45) 0.0 (object)
+true
+false
+Testing: (46) 1 (object)
+true
+false
+Testing: (47) Hello World! (object)
+true
+false
+Testing: (48) true (object)
+true
+false
+Testing: (49) _level0 (object)
+true
+false
+Testing: (50) äöü (object)
+true
+false
+Testing: (51) _level0 (object)
+true
+false
+Testing: (52) [type Object] (object)
+true
+false
+Testing: (53) [type Object] (object)
+true
+false
+Testing: (54) [type Object] (object)
+true
+false
+Testing: (55) [type Object] (object)
+true
+false
+Testing: (56) [type Object] (object)
+true
+false
+Testing: (57) [type Object] (object)
+true
+false
+Testing: (58) [type Object] (object)
+true
+false
+Testing: (59) [type Object] (object)
+true
+false

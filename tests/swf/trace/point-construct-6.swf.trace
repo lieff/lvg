@@ -1,0 +1,7201 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+Testing (no params):
+new: (x=0, y=0)
+polar: 
+Testing (0)  (undefined):
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (0)  (undefined):
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (1) null (null):
+new: (x=, y=null)
+polar: 
+Testing (0)  (undefined), (2) true (boolean):
+new: (x=, y=true)
+polar: 
+Testing (0)  (undefined), (3) false (boolean):
+new: (x=, y=false)
+polar: 
+Testing (0)  (undefined), (4) 0 (number):
+new: (x=, y=0)
+polar: 
+Testing (0)  (undefined), (5) 1 (number):
+new: (x=, y=1)
+polar: 
+Testing (0)  (undefined), (6) 0.5 (number):
+new: (x=, y=0.5)
+polar: 
+Testing (0)  (undefined), (7) -1 (number):
+new: (x=, y=-1)
+polar: 
+Testing (0)  (undefined), (8) -0.5 (number):
+new: (x=, y=-0.5)
+polar: 
+Testing (0)  (undefined), (9) Infinity (number):
+new: (x=, y=Infinity)
+polar: 
+Testing (0)  (undefined), (10) -Infinity (number):
+new: (x=, y=-Infinity)
+polar: 
+Testing (0)  (undefined), (11) NaN (number):
+new: (x=, y=NaN)
+polar: 
+Testing (0)  (undefined), (12)  (string):
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (13) 0 (string):
+new: (x=, y=0)
+polar: 
+Testing (0)  (undefined), (14) -0 (string):
+new: (x=, y=-0)
+polar: 
+Testing (0)  (undefined), (15) 0.0 (string):
+new: (x=, y=0.0)
+polar: 
+Testing (0)  (undefined), (16) 1 (string):
+new: (x=, y=1)
+polar: 
+Testing (0)  (undefined), (17) Hello World! (string):
+new: (x=, y=Hello World!)
+polar: 
+Testing (0)  (undefined), (18) true (string):
+new: (x=, y=true)
+polar: 
+Testing (0)  (undefined), (19) _level0 (string):
+new: (x=, y=_level0)
+polar: 
+Testing (0)  (undefined), (20) äöü (string):
+new: (x=, y=äöü)
+polar: 
+Testing (0)  (undefined), (21) _level0 (movieclip):
+new: (x=, y=_level0)
+polar: 
+Testing (0)  (undefined), (22) [object Object] (object):
+new: (x=, y=[object Object])
+polar: 
+Testing (0)  (undefined), (23) [type Function] (function):
+new: (x=, y=[type Function])
+polar: 
+Testing (0)  (undefined), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (25) [type Object] (object):
+toString called with 
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (26) [object Object] (object):
+valueOf called with 
+new: (x=, y=[object Object])
+polar: 
+Testing (0)  (undefined), (27)  (object):
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (28)  (object):
+0: valueOf!
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (29) null (object):
+1: valueOf!
+new: (x=, y=null)
+polar: 
+Testing (0)  (undefined), (30) true (object):
+2: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (0)  (undefined), (31) false (object):
+3: valueOf!
+new: (x=, y=false)
+polar: 
+Testing (0)  (undefined), (32) 0 (object):
+4: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (0)  (undefined), (33) 1 (object):
+5: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (0)  (undefined), (34) 0.5 (object):
+6: valueOf!
+new: (x=, y=0.5)
+polar: 
+Testing (0)  (undefined), (35) -1 (object):
+7: valueOf!
+new: (x=, y=-1)
+polar: 
+Testing (0)  (undefined), (36) -0.5 (object):
+8: valueOf!
+new: (x=, y=-0.5)
+polar: 
+Testing (0)  (undefined), (37) Infinity (object):
+9: valueOf!
+new: (x=, y=Infinity)
+polar: 
+Testing (0)  (undefined), (38) -Infinity (object):
+10: valueOf!
+new: (x=, y=-Infinity)
+polar: 
+Testing (0)  (undefined), (39) NaN (object):
+11: valueOf!
+new: (x=, y=NaN)
+polar: 
+Testing (0)  (undefined), (40)  (object):
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (0)  (undefined), (41) 0 (object):
+13: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (0)  (undefined), (42) -0 (object):
+14: valueOf!
+new: (x=, y=-0)
+polar: 
+Testing (0)  (undefined), (43) 0.0 (object):
+15: valueOf!
+new: (x=, y=0.0)
+polar: 
+Testing (0)  (undefined), (44) 1 (object):
+16: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (0)  (undefined), (45) Hello World! (object):
+17: valueOf!
+new: (x=, y=Hello World!)
+polar: 
+Testing (0)  (undefined), (46) true (object):
+18: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (0)  (undefined), (47) _level0 (object):
+19: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (0)  (undefined), (48) äöü (object):
+20: valueOf!
+new: (x=, y=äöü)
+polar: 
+Testing (0)  (undefined), (49) _level0 (object):
+21: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (0)  (undefined), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (0)  (undefined), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (1) null (null):
+new: (x=null, y=)
+polar: 
+Testing (1) null (null), (1) null (null):
+new: (x=null, y=null)
+polar: 
+Testing (1) null (null), (2) true (boolean):
+new: (x=null, y=true)
+polar: 
+Testing (1) null (null), (3) false (boolean):
+new: (x=null, y=false)
+polar: 
+Testing (1) null (null), (4) 0 (number):
+new: (x=null, y=0)
+polar: 
+Testing (1) null (null), (5) 1 (number):
+new: (x=null, y=1)
+polar: 
+Testing (1) null (null), (6) 0.5 (number):
+new: (x=null, y=0.5)
+polar: 
+Testing (1) null (null), (7) -1 (number):
+new: (x=null, y=-1)
+polar: 
+Testing (1) null (null), (8) -0.5 (number):
+new: (x=null, y=-0.5)
+polar: 
+Testing (1) null (null), (9) Infinity (number):
+new: (x=null, y=Infinity)
+polar: 
+Testing (1) null (null), (10) -Infinity (number):
+new: (x=null, y=-Infinity)
+polar: 
+Testing (1) null (null), (11) NaN (number):
+new: (x=null, y=NaN)
+polar: 
+Testing (1) null (null), (12)  (string):
+new: (x=null, y=)
+polar: 
+Testing (1) null (null), (13) 0 (string):
+new: (x=null, y=0)
+polar: 
+Testing (1) null (null), (14) -0 (string):
+new: (x=null, y=-0)
+polar: 
+Testing (1) null (null), (15) 0.0 (string):
+new: (x=null, y=0.0)
+polar: 
+Testing (1) null (null), (16) 1 (string):
+new: (x=null, y=1)
+polar: 
+Testing (1) null (null), (17) Hello World! (string):
+new: (x=null, y=Hello World!)
+polar: 
+Testing (1) null (null), (18) true (string):
+new: (x=null, y=true)
+polar: 
+Testing (1) null (null), (19) _level0 (string):
+new: (x=null, y=_level0)
+polar: 
+Testing (1) null (null), (20) äöü (string):
+new: (x=null, y=äöü)
+polar: 
+Testing (1) null (null), (21) _level0 (movieclip):
+new: (x=null, y=_level0)
+polar: 
+Testing (1) null (null), (22) [object Object] (object):
+new: (x=null, y=[object Object])
+polar: 
+Testing (1) null (null), (23) [type Function] (function):
+new: (x=null, y=[type Function])
+polar: 
+Testing (1) null (null), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (25) [type Object] (object):
+toString called with 
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (26) [object Object] (object):
+valueOf called with 
+new: (x=null, y=[object Object])
+polar: 
+Testing (1) null (null), (27)  (object):
+new: (x=null, y=)
+polar: 
+Testing (1) null (null), (28)  (object):
+0: valueOf!
+new: (x=null, y=)
+polar: 
+Testing (1) null (null), (29) null (object):
+1: valueOf!
+new: (x=null, y=null)
+polar: 
+Testing (1) null (null), (30) true (object):
+2: valueOf!
+new: (x=null, y=true)
+polar: 
+Testing (1) null (null), (31) false (object):
+3: valueOf!
+new: (x=null, y=false)
+polar: 
+Testing (1) null (null), (32) 0 (object):
+4: valueOf!
+new: (x=null, y=0)
+polar: 
+Testing (1) null (null), (33) 1 (object):
+5: valueOf!
+new: (x=null, y=1)
+polar: 
+Testing (1) null (null), (34) 0.5 (object):
+6: valueOf!
+new: (x=null, y=0.5)
+polar: 
+Testing (1) null (null), (35) -1 (object):
+7: valueOf!
+new: (x=null, y=-1)
+polar: 
+Testing (1) null (null), (36) -0.5 (object):
+8: valueOf!
+new: (x=null, y=-0.5)
+polar: 
+Testing (1) null (null), (37) Infinity (object):
+9: valueOf!
+new: (x=null, y=Infinity)
+polar: 
+Testing (1) null (null), (38) -Infinity (object):
+10: valueOf!
+new: (x=null, y=-Infinity)
+polar: 
+Testing (1) null (null), (39) NaN (object):
+11: valueOf!
+new: (x=null, y=NaN)
+polar: 
+Testing (1) null (null), (40)  (object):
+12: valueOf!
+new: (x=null, y=)
+polar: 
+Testing (1) null (null), (41) 0 (object):
+13: valueOf!
+new: (x=null, y=0)
+polar: 
+Testing (1) null (null), (42) -0 (object):
+14: valueOf!
+new: (x=null, y=-0)
+polar: 
+Testing (1) null (null), (43) 0.0 (object):
+15: valueOf!
+new: (x=null, y=0.0)
+polar: 
+Testing (1) null (null), (44) 1 (object):
+16: valueOf!
+new: (x=null, y=1)
+polar: 
+Testing (1) null (null), (45) Hello World! (object):
+17: valueOf!
+new: (x=null, y=Hello World!)
+polar: 
+Testing (1) null (null), (46) true (object):
+18: valueOf!
+new: (x=null, y=true)
+polar: 
+Testing (1) null (null), (47) _level0 (object):
+19: valueOf!
+new: (x=null, y=_level0)
+polar: 
+Testing (1) null (null), (48) äöü (object):
+20: valueOf!
+new: (x=null, y=äöü)
+polar: 
+Testing (1) null (null), (49) _level0 (object):
+21: valueOf!
+new: (x=null, y=_level0)
+polar: 
+Testing (1) null (null), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (1) null (null), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (2) true (boolean):
+new: (x=true, y=)
+polar: 
+Testing (2) true (boolean), (2) true (boolean):
+new: (x=true, y=true)
+polar: 
+Testing (2) true (boolean), (3) false (boolean):
+new: (x=true, y=false)
+polar: 
+Testing (2) true (boolean), (4) 0 (number):
+new: (x=true, y=0)
+polar: 
+Testing (2) true (boolean), (5) 1 (number):
+new: (x=true, y=1)
+polar: 
+Testing (2) true (boolean), (6) 0.5 (number):
+new: (x=true, y=0.5)
+polar: 
+Testing (2) true (boolean), (7) -1 (number):
+new: (x=true, y=-1)
+polar: 
+Testing (2) true (boolean), (8) -0.5 (number):
+new: (x=true, y=-0.5)
+polar: 
+Testing (2) true (boolean), (9) Infinity (number):
+new: (x=true, y=Infinity)
+polar: 
+Testing (2) true (boolean), (10) -Infinity (number):
+new: (x=true, y=-Infinity)
+polar: 
+Testing (2) true (boolean), (11) NaN (number):
+new: (x=true, y=NaN)
+polar: 
+Testing (2) true (boolean), (12)  (string):
+new: (x=true, y=)
+polar: 
+Testing (2) true (boolean), (13) 0 (string):
+new: (x=true, y=0)
+polar: 
+Testing (2) true (boolean), (14) -0 (string):
+new: (x=true, y=-0)
+polar: 
+Testing (2) true (boolean), (15) 0.0 (string):
+new: (x=true, y=0.0)
+polar: 
+Testing (2) true (boolean), (16) 1 (string):
+new: (x=true, y=1)
+polar: 
+Testing (2) true (boolean), (17) Hello World! (string):
+new: (x=true, y=Hello World!)
+polar: 
+Testing (2) true (boolean), (18) true (string):
+new: (x=true, y=true)
+polar: 
+Testing (2) true (boolean), (19) _level0 (string):
+new: (x=true, y=_level0)
+polar: 
+Testing (2) true (boolean), (20) äöü (string):
+new: (x=true, y=äöü)
+polar: 
+Testing (2) true (boolean), (21) _level0 (movieclip):
+new: (x=true, y=_level0)
+polar: 
+Testing (2) true (boolean), (22) [object Object] (object):
+new: (x=true, y=[object Object])
+polar: 
+Testing (2) true (boolean), (23) [type Function] (function):
+new: (x=true, y=[type Function])
+polar: 
+Testing (2) true (boolean), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (25) [type Object] (object):
+toString called with 
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (26) [object Object] (object):
+valueOf called with 
+new: (x=true, y=[object Object])
+polar: 
+Testing (2) true (boolean), (27)  (object):
+new: (x=true, y=)
+polar: 
+Testing (2) true (boolean), (28)  (object):
+0: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (2) true (boolean), (29) null (object):
+1: valueOf!
+new: (x=true, y=null)
+polar: 
+Testing (2) true (boolean), (30) true (object):
+2: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (2) true (boolean), (31) false (object):
+3: valueOf!
+new: (x=true, y=false)
+polar: 
+Testing (2) true (boolean), (32) 0 (object):
+4: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (2) true (boolean), (33) 1 (object):
+5: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (2) true (boolean), (34) 0.5 (object):
+6: valueOf!
+new: (x=true, y=0.5)
+polar: 
+Testing (2) true (boolean), (35) -1 (object):
+7: valueOf!
+new: (x=true, y=-1)
+polar: 
+Testing (2) true (boolean), (36) -0.5 (object):
+8: valueOf!
+new: (x=true, y=-0.5)
+polar: 
+Testing (2) true (boolean), (37) Infinity (object):
+9: valueOf!
+new: (x=true, y=Infinity)
+polar: 
+Testing (2) true (boolean), (38) -Infinity (object):
+10: valueOf!
+new: (x=true, y=-Infinity)
+polar: 
+Testing (2) true (boolean), (39) NaN (object):
+11: valueOf!
+new: (x=true, y=NaN)
+polar: 
+Testing (2) true (boolean), (40)  (object):
+12: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (2) true (boolean), (41) 0 (object):
+13: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (2) true (boolean), (42) -0 (object):
+14: valueOf!
+new: (x=true, y=-0)
+polar: 
+Testing (2) true (boolean), (43) 0.0 (object):
+15: valueOf!
+new: (x=true, y=0.0)
+polar: 
+Testing (2) true (boolean), (44) 1 (object):
+16: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (2) true (boolean), (45) Hello World! (object):
+17: valueOf!
+new: (x=true, y=Hello World!)
+polar: 
+Testing (2) true (boolean), (46) true (object):
+18: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (2) true (boolean), (47) _level0 (object):
+19: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (2) true (boolean), (48) äöü (object):
+20: valueOf!
+new: (x=true, y=äöü)
+polar: 
+Testing (2) true (boolean), (49) _level0 (object):
+21: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (2) true (boolean), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (2) true (boolean), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (3) false (boolean):
+new: (x=false, y=)
+polar: 
+Testing (3) false (boolean), (3) false (boolean):
+new: (x=false, y=false)
+polar: 
+Testing (3) false (boolean), (4) 0 (number):
+new: (x=false, y=0)
+polar: 
+Testing (3) false (boolean), (5) 1 (number):
+new: (x=false, y=1)
+polar: 
+Testing (3) false (boolean), (6) 0.5 (number):
+new: (x=false, y=0.5)
+polar: 
+Testing (3) false (boolean), (7) -1 (number):
+new: (x=false, y=-1)
+polar: 
+Testing (3) false (boolean), (8) -0.5 (number):
+new: (x=false, y=-0.5)
+polar: 
+Testing (3) false (boolean), (9) Infinity (number):
+new: (x=false, y=Infinity)
+polar: 
+Testing (3) false (boolean), (10) -Infinity (number):
+new: (x=false, y=-Infinity)
+polar: 
+Testing (3) false (boolean), (11) NaN (number):
+new: (x=false, y=NaN)
+polar: 
+Testing (3) false (boolean), (12)  (string):
+new: (x=false, y=)
+polar: 
+Testing (3) false (boolean), (13) 0 (string):
+new: (x=false, y=0)
+polar: 
+Testing (3) false (boolean), (14) -0 (string):
+new: (x=false, y=-0)
+polar: 
+Testing (3) false (boolean), (15) 0.0 (string):
+new: (x=false, y=0.0)
+polar: 
+Testing (3) false (boolean), (16) 1 (string):
+new: (x=false, y=1)
+polar: 
+Testing (3) false (boolean), (17) Hello World! (string):
+new: (x=false, y=Hello World!)
+polar: 
+Testing (3) false (boolean), (18) true (string):
+new: (x=false, y=true)
+polar: 
+Testing (3) false (boolean), (19) _level0 (string):
+new: (x=false, y=_level0)
+polar: 
+Testing (3) false (boolean), (20) äöü (string):
+new: (x=false, y=äöü)
+polar: 
+Testing (3) false (boolean), (21) _level0 (movieclip):
+new: (x=false, y=_level0)
+polar: 
+Testing (3) false (boolean), (22) [object Object] (object):
+new: (x=false, y=[object Object])
+polar: 
+Testing (3) false (boolean), (23) [type Function] (function):
+new: (x=false, y=[type Function])
+polar: 
+Testing (3) false (boolean), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (25) [type Object] (object):
+toString called with 
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (26) [object Object] (object):
+valueOf called with 
+new: (x=false, y=[object Object])
+polar: 
+Testing (3) false (boolean), (27)  (object):
+new: (x=false, y=)
+polar: 
+Testing (3) false (boolean), (28)  (object):
+0: valueOf!
+new: (x=false, y=)
+polar: 
+Testing (3) false (boolean), (29) null (object):
+1: valueOf!
+new: (x=false, y=null)
+polar: 
+Testing (3) false (boolean), (30) true (object):
+2: valueOf!
+new: (x=false, y=true)
+polar: 
+Testing (3) false (boolean), (31) false (object):
+3: valueOf!
+new: (x=false, y=false)
+polar: 
+Testing (3) false (boolean), (32) 0 (object):
+4: valueOf!
+new: (x=false, y=0)
+polar: 
+Testing (3) false (boolean), (33) 1 (object):
+5: valueOf!
+new: (x=false, y=1)
+polar: 
+Testing (3) false (boolean), (34) 0.5 (object):
+6: valueOf!
+new: (x=false, y=0.5)
+polar: 
+Testing (3) false (boolean), (35) -1 (object):
+7: valueOf!
+new: (x=false, y=-1)
+polar: 
+Testing (3) false (boolean), (36) -0.5 (object):
+8: valueOf!
+new: (x=false, y=-0.5)
+polar: 
+Testing (3) false (boolean), (37) Infinity (object):
+9: valueOf!
+new: (x=false, y=Infinity)
+polar: 
+Testing (3) false (boolean), (38) -Infinity (object):
+10: valueOf!
+new: (x=false, y=-Infinity)
+polar: 
+Testing (3) false (boolean), (39) NaN (object):
+11: valueOf!
+new: (x=false, y=NaN)
+polar: 
+Testing (3) false (boolean), (40)  (object):
+12: valueOf!
+new: (x=false, y=)
+polar: 
+Testing (3) false (boolean), (41) 0 (object):
+13: valueOf!
+new: (x=false, y=0)
+polar: 
+Testing (3) false (boolean), (42) -0 (object):
+14: valueOf!
+new: (x=false, y=-0)
+polar: 
+Testing (3) false (boolean), (43) 0.0 (object):
+15: valueOf!
+new: (x=false, y=0.0)
+polar: 
+Testing (3) false (boolean), (44) 1 (object):
+16: valueOf!
+new: (x=false, y=1)
+polar: 
+Testing (3) false (boolean), (45) Hello World! (object):
+17: valueOf!
+new: (x=false, y=Hello World!)
+polar: 
+Testing (3) false (boolean), (46) true (object):
+18: valueOf!
+new: (x=false, y=true)
+polar: 
+Testing (3) false (boolean), (47) _level0 (object):
+19: valueOf!
+new: (x=false, y=_level0)
+polar: 
+Testing (3) false (boolean), (48) äöü (object):
+20: valueOf!
+new: (x=false, y=äöü)
+polar: 
+Testing (3) false (boolean), (49) _level0 (object):
+21: valueOf!
+new: (x=false, y=_level0)
+polar: 
+Testing (3) false (boolean), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (3) false (boolean), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (4) 0 (number):
+new: (x=0, y=)
+polar: 
+Testing (4) 0 (number), (4) 0 (number):
+new: (x=0, y=0)
+polar: 
+Testing (4) 0 (number), (5) 1 (number):
+new: (x=0, y=1)
+polar: 
+Testing (4) 0 (number), (6) 0.5 (number):
+new: (x=0, y=0.5)
+polar: 
+Testing (4) 0 (number), (7) -1 (number):
+new: (x=0, y=-1)
+polar: 
+Testing (4) 0 (number), (8) -0.5 (number):
+new: (x=0, y=-0.5)
+polar: 
+Testing (4) 0 (number), (9) Infinity (number):
+new: (x=0, y=Infinity)
+polar: 
+Testing (4) 0 (number), (10) -Infinity (number):
+new: (x=0, y=-Infinity)
+polar: 
+Testing (4) 0 (number), (11) NaN (number):
+new: (x=0, y=NaN)
+polar: 
+Testing (4) 0 (number), (12)  (string):
+new: (x=0, y=)
+polar: 
+Testing (4) 0 (number), (13) 0 (string):
+new: (x=0, y=0)
+polar: 
+Testing (4) 0 (number), (14) -0 (string):
+new: (x=0, y=-0)
+polar: 
+Testing (4) 0 (number), (15) 0.0 (string):
+new: (x=0, y=0.0)
+polar: 
+Testing (4) 0 (number), (16) 1 (string):
+new: (x=0, y=1)
+polar: 
+Testing (4) 0 (number), (17) Hello World! (string):
+new: (x=0, y=Hello World!)
+polar: 
+Testing (4) 0 (number), (18) true (string):
+new: (x=0, y=true)
+polar: 
+Testing (4) 0 (number), (19) _level0 (string):
+new: (x=0, y=_level0)
+polar: 
+Testing (4) 0 (number), (20) äöü (string):
+new: (x=0, y=äöü)
+polar: 
+Testing (4) 0 (number), (21) _level0 (movieclip):
+new: (x=0, y=_level0)
+polar: 
+Testing (4) 0 (number), (22) [object Object] (object):
+new: (x=0, y=[object Object])
+polar: 
+Testing (4) 0 (number), (23) [type Function] (function):
+new: (x=0, y=[type Function])
+polar: 
+Testing (4) 0 (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (25) [type Object] (object):
+toString called with 
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=0, y=[object Object])
+polar: 
+Testing (4) 0 (number), (27)  (object):
+new: (x=0, y=)
+polar: 
+Testing (4) 0 (number), (28)  (object):
+0: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (4) 0 (number), (29) null (object):
+1: valueOf!
+new: (x=0, y=null)
+polar: 
+Testing (4) 0 (number), (30) true (object):
+2: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (4) 0 (number), (31) false (object):
+3: valueOf!
+new: (x=0, y=false)
+polar: 
+Testing (4) 0 (number), (32) 0 (object):
+4: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (4) 0 (number), (33) 1 (object):
+5: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (4) 0 (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=0, y=0.5)
+polar: 
+Testing (4) 0 (number), (35) -1 (object):
+7: valueOf!
+new: (x=0, y=-1)
+polar: 
+Testing (4) 0 (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=0, y=-0.5)
+polar: 
+Testing (4) 0 (number), (37) Infinity (object):
+9: valueOf!
+new: (x=0, y=Infinity)
+polar: 
+Testing (4) 0 (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=0, y=-Infinity)
+polar: 
+Testing (4) 0 (number), (39) NaN (object):
+11: valueOf!
+new: (x=0, y=NaN)
+polar: 
+Testing (4) 0 (number), (40)  (object):
+12: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (4) 0 (number), (41) 0 (object):
+13: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (4) 0 (number), (42) -0 (object):
+14: valueOf!
+new: (x=0, y=-0)
+polar: 
+Testing (4) 0 (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=0, y=0.0)
+polar: 
+Testing (4) 0 (number), (44) 1 (object):
+16: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (4) 0 (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=0, y=Hello World!)
+polar: 
+Testing (4) 0 (number), (46) true (object):
+18: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (4) 0 (number), (47) _level0 (object):
+19: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (4) 0 (number), (48) äöü (object):
+20: valueOf!
+new: (x=0, y=äöü)
+polar: 
+Testing (4) 0 (number), (49) _level0 (object):
+21: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (4) 0 (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (4) 0 (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (5) 1 (number):
+new: (x=1, y=)
+polar: 
+Testing (5) 1 (number), (5) 1 (number):
+new: (x=1, y=1)
+polar: 
+Testing (5) 1 (number), (6) 0.5 (number):
+new: (x=1, y=0.5)
+polar: 
+Testing (5) 1 (number), (7) -1 (number):
+new: (x=1, y=-1)
+polar: 
+Testing (5) 1 (number), (8) -0.5 (number):
+new: (x=1, y=-0.5)
+polar: 
+Testing (5) 1 (number), (9) Infinity (number):
+new: (x=1, y=Infinity)
+polar: 
+Testing (5) 1 (number), (10) -Infinity (number):
+new: (x=1, y=-Infinity)
+polar: 
+Testing (5) 1 (number), (11) NaN (number):
+new: (x=1, y=NaN)
+polar: 
+Testing (5) 1 (number), (12)  (string):
+new: (x=1, y=)
+polar: 
+Testing (5) 1 (number), (13) 0 (string):
+new: (x=1, y=0)
+polar: 
+Testing (5) 1 (number), (14) -0 (string):
+new: (x=1, y=-0)
+polar: 
+Testing (5) 1 (number), (15) 0.0 (string):
+new: (x=1, y=0.0)
+polar: 
+Testing (5) 1 (number), (16) 1 (string):
+new: (x=1, y=1)
+polar: 
+Testing (5) 1 (number), (17) Hello World! (string):
+new: (x=1, y=Hello World!)
+polar: 
+Testing (5) 1 (number), (18) true (string):
+new: (x=1, y=true)
+polar: 
+Testing (5) 1 (number), (19) _level0 (string):
+new: (x=1, y=_level0)
+polar: 
+Testing (5) 1 (number), (20) äöü (string):
+new: (x=1, y=äöü)
+polar: 
+Testing (5) 1 (number), (21) _level0 (movieclip):
+new: (x=1, y=_level0)
+polar: 
+Testing (5) 1 (number), (22) [object Object] (object):
+new: (x=1, y=[object Object])
+polar: 
+Testing (5) 1 (number), (23) [type Function] (function):
+new: (x=1, y=[type Function])
+polar: 
+Testing (5) 1 (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (25) [type Object] (object):
+toString called with 
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=1, y=[object Object])
+polar: 
+Testing (5) 1 (number), (27)  (object):
+new: (x=1, y=)
+polar: 
+Testing (5) 1 (number), (28)  (object):
+0: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (5) 1 (number), (29) null (object):
+1: valueOf!
+new: (x=1, y=null)
+polar: 
+Testing (5) 1 (number), (30) true (object):
+2: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (5) 1 (number), (31) false (object):
+3: valueOf!
+new: (x=1, y=false)
+polar: 
+Testing (5) 1 (number), (32) 0 (object):
+4: valueOf!
+new: (x=1, y=0)
+polar: 
+Testing (5) 1 (number), (33) 1 (object):
+5: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (5) 1 (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=1, y=0.5)
+polar: 
+Testing (5) 1 (number), (35) -1 (object):
+7: valueOf!
+new: (x=1, y=-1)
+polar: 
+Testing (5) 1 (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=1, y=-0.5)
+polar: 
+Testing (5) 1 (number), (37) Infinity (object):
+9: valueOf!
+new: (x=1, y=Infinity)
+polar: 
+Testing (5) 1 (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=1, y=-Infinity)
+polar: 
+Testing (5) 1 (number), (39) NaN (object):
+11: valueOf!
+new: (x=1, y=NaN)
+polar: 
+Testing (5) 1 (number), (40)  (object):
+12: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (5) 1 (number), (41) 0 (object):
+13: valueOf!
+new: (x=1, y=0)
+polar: 
+Testing (5) 1 (number), (42) -0 (object):
+14: valueOf!
+new: (x=1, y=-0)
+polar: 
+Testing (5) 1 (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=1, y=0.0)
+polar: 
+Testing (5) 1 (number), (44) 1 (object):
+16: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (5) 1 (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=1, y=Hello World!)
+polar: 
+Testing (5) 1 (number), (46) true (object):
+18: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (5) 1 (number), (47) _level0 (object):
+19: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (5) 1 (number), (48) äöü (object):
+20: valueOf!
+new: (x=1, y=äöü)
+polar: 
+Testing (5) 1 (number), (49) _level0 (object):
+21: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (5) 1 (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (5) 1 (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (6) 0.5 (number):
+new: (x=0.5, y=)
+polar: 
+Testing (6) 0.5 (number), (6) 0.5 (number):
+new: (x=0.5, y=0.5)
+polar: 
+Testing (6) 0.5 (number), (7) -1 (number):
+new: (x=0.5, y=-1)
+polar: 
+Testing (6) 0.5 (number), (8) -0.5 (number):
+new: (x=0.5, y=-0.5)
+polar: 
+Testing (6) 0.5 (number), (9) Infinity (number):
+new: (x=0.5, y=Infinity)
+polar: 
+Testing (6) 0.5 (number), (10) -Infinity (number):
+new: (x=0.5, y=-Infinity)
+polar: 
+Testing (6) 0.5 (number), (11) NaN (number):
+new: (x=0.5, y=NaN)
+polar: 
+Testing (6) 0.5 (number), (12)  (string):
+new: (x=0.5, y=)
+polar: 
+Testing (6) 0.5 (number), (13) 0 (string):
+new: (x=0.5, y=0)
+polar: 
+Testing (6) 0.5 (number), (14) -0 (string):
+new: (x=0.5, y=-0)
+polar: 
+Testing (6) 0.5 (number), (15) 0.0 (string):
+new: (x=0.5, y=0.0)
+polar: 
+Testing (6) 0.5 (number), (16) 1 (string):
+new: (x=0.5, y=1)
+polar: 
+Testing (6) 0.5 (number), (17) Hello World! (string):
+new: (x=0.5, y=Hello World!)
+polar: 
+Testing (6) 0.5 (number), (18) true (string):
+new: (x=0.5, y=true)
+polar: 
+Testing (6) 0.5 (number), (19) _level0 (string):
+new: (x=0.5, y=_level0)
+polar: 
+Testing (6) 0.5 (number), (20) äöü (string):
+new: (x=0.5, y=äöü)
+polar: 
+Testing (6) 0.5 (number), (21) _level0 (movieclip):
+new: (x=0.5, y=_level0)
+polar: 
+Testing (6) 0.5 (number), (22) [object Object] (object):
+new: (x=0.5, y=[object Object])
+polar: 
+Testing (6) 0.5 (number), (23) [type Function] (function):
+new: (x=0.5, y=[type Function])
+polar: 
+Testing (6) 0.5 (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (25) [type Object] (object):
+toString called with 
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=0.5, y=[object Object])
+polar: 
+Testing (6) 0.5 (number), (27)  (object):
+new: (x=0.5, y=)
+polar: 
+Testing (6) 0.5 (number), (28)  (object):
+0: valueOf!
+new: (x=0.5, y=)
+polar: 
+Testing (6) 0.5 (number), (29) null (object):
+1: valueOf!
+new: (x=0.5, y=null)
+polar: 
+Testing (6) 0.5 (number), (30) true (object):
+2: valueOf!
+new: (x=0.5, y=true)
+polar: 
+Testing (6) 0.5 (number), (31) false (object):
+3: valueOf!
+new: (x=0.5, y=false)
+polar: 
+Testing (6) 0.5 (number), (32) 0 (object):
+4: valueOf!
+new: (x=0.5, y=0)
+polar: 
+Testing (6) 0.5 (number), (33) 1 (object):
+5: valueOf!
+new: (x=0.5, y=1)
+polar: 
+Testing (6) 0.5 (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=0.5, y=0.5)
+polar: 
+Testing (6) 0.5 (number), (35) -1 (object):
+7: valueOf!
+new: (x=0.5, y=-1)
+polar: 
+Testing (6) 0.5 (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=0.5, y=-0.5)
+polar: 
+Testing (6) 0.5 (number), (37) Infinity (object):
+9: valueOf!
+new: (x=0.5, y=Infinity)
+polar: 
+Testing (6) 0.5 (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=0.5, y=-Infinity)
+polar: 
+Testing (6) 0.5 (number), (39) NaN (object):
+11: valueOf!
+new: (x=0.5, y=NaN)
+polar: 
+Testing (6) 0.5 (number), (40)  (object):
+12: valueOf!
+new: (x=0.5, y=)
+polar: 
+Testing (6) 0.5 (number), (41) 0 (object):
+13: valueOf!
+new: (x=0.5, y=0)
+polar: 
+Testing (6) 0.5 (number), (42) -0 (object):
+14: valueOf!
+new: (x=0.5, y=-0)
+polar: 
+Testing (6) 0.5 (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=0.5, y=0.0)
+polar: 
+Testing (6) 0.5 (number), (44) 1 (object):
+16: valueOf!
+new: (x=0.5, y=1)
+polar: 
+Testing (6) 0.5 (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=0.5, y=Hello World!)
+polar: 
+Testing (6) 0.5 (number), (46) true (object):
+18: valueOf!
+new: (x=0.5, y=true)
+polar: 
+Testing (6) 0.5 (number), (47) _level0 (object):
+19: valueOf!
+new: (x=0.5, y=_level0)
+polar: 
+Testing (6) 0.5 (number), (48) äöü (object):
+20: valueOf!
+new: (x=0.5, y=äöü)
+polar: 
+Testing (6) 0.5 (number), (49) _level0 (object):
+21: valueOf!
+new: (x=0.5, y=_level0)
+polar: 
+Testing (6) 0.5 (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (6) 0.5 (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (7) -1 (number):
+new: (x=-1, y=)
+polar: 
+Testing (7) -1 (number), (7) -1 (number):
+new: (x=-1, y=-1)
+polar: 
+Testing (7) -1 (number), (8) -0.5 (number):
+new: (x=-1, y=-0.5)
+polar: 
+Testing (7) -1 (number), (9) Infinity (number):
+new: (x=-1, y=Infinity)
+polar: 
+Testing (7) -1 (number), (10) -Infinity (number):
+new: (x=-1, y=-Infinity)
+polar: 
+Testing (7) -1 (number), (11) NaN (number):
+new: (x=-1, y=NaN)
+polar: 
+Testing (7) -1 (number), (12)  (string):
+new: (x=-1, y=)
+polar: 
+Testing (7) -1 (number), (13) 0 (string):
+new: (x=-1, y=0)
+polar: 
+Testing (7) -1 (number), (14) -0 (string):
+new: (x=-1, y=-0)
+polar: 
+Testing (7) -1 (number), (15) 0.0 (string):
+new: (x=-1, y=0.0)
+polar: 
+Testing (7) -1 (number), (16) 1 (string):
+new: (x=-1, y=1)
+polar: 
+Testing (7) -1 (number), (17) Hello World! (string):
+new: (x=-1, y=Hello World!)
+polar: 
+Testing (7) -1 (number), (18) true (string):
+new: (x=-1, y=true)
+polar: 
+Testing (7) -1 (number), (19) _level0 (string):
+new: (x=-1, y=_level0)
+polar: 
+Testing (7) -1 (number), (20) äöü (string):
+new: (x=-1, y=äöü)
+polar: 
+Testing (7) -1 (number), (21) _level0 (movieclip):
+new: (x=-1, y=_level0)
+polar: 
+Testing (7) -1 (number), (22) [object Object] (object):
+new: (x=-1, y=[object Object])
+polar: 
+Testing (7) -1 (number), (23) [type Function] (function):
+new: (x=-1, y=[type Function])
+polar: 
+Testing (7) -1 (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (25) [type Object] (object):
+toString called with 
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=-1, y=[object Object])
+polar: 
+Testing (7) -1 (number), (27)  (object):
+new: (x=-1, y=)
+polar: 
+Testing (7) -1 (number), (28)  (object):
+0: valueOf!
+new: (x=-1, y=)
+polar: 
+Testing (7) -1 (number), (29) null (object):
+1: valueOf!
+new: (x=-1, y=null)
+polar: 
+Testing (7) -1 (number), (30) true (object):
+2: valueOf!
+new: (x=-1, y=true)
+polar: 
+Testing (7) -1 (number), (31) false (object):
+3: valueOf!
+new: (x=-1, y=false)
+polar: 
+Testing (7) -1 (number), (32) 0 (object):
+4: valueOf!
+new: (x=-1, y=0)
+polar: 
+Testing (7) -1 (number), (33) 1 (object):
+5: valueOf!
+new: (x=-1, y=1)
+polar: 
+Testing (7) -1 (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=-1, y=0.5)
+polar: 
+Testing (7) -1 (number), (35) -1 (object):
+7: valueOf!
+new: (x=-1, y=-1)
+polar: 
+Testing (7) -1 (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=-1, y=-0.5)
+polar: 
+Testing (7) -1 (number), (37) Infinity (object):
+9: valueOf!
+new: (x=-1, y=Infinity)
+polar: 
+Testing (7) -1 (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=-1, y=-Infinity)
+polar: 
+Testing (7) -1 (number), (39) NaN (object):
+11: valueOf!
+new: (x=-1, y=NaN)
+polar: 
+Testing (7) -1 (number), (40)  (object):
+12: valueOf!
+new: (x=-1, y=)
+polar: 
+Testing (7) -1 (number), (41) 0 (object):
+13: valueOf!
+new: (x=-1, y=0)
+polar: 
+Testing (7) -1 (number), (42) -0 (object):
+14: valueOf!
+new: (x=-1, y=-0)
+polar: 
+Testing (7) -1 (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=-1, y=0.0)
+polar: 
+Testing (7) -1 (number), (44) 1 (object):
+16: valueOf!
+new: (x=-1, y=1)
+polar: 
+Testing (7) -1 (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=-1, y=Hello World!)
+polar: 
+Testing (7) -1 (number), (46) true (object):
+18: valueOf!
+new: (x=-1, y=true)
+polar: 
+Testing (7) -1 (number), (47) _level0 (object):
+19: valueOf!
+new: (x=-1, y=_level0)
+polar: 
+Testing (7) -1 (number), (48) äöü (object):
+20: valueOf!
+new: (x=-1, y=äöü)
+polar: 
+Testing (7) -1 (number), (49) _level0 (object):
+21: valueOf!
+new: (x=-1, y=_level0)
+polar: 
+Testing (7) -1 (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (7) -1 (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (8) -0.5 (number):
+new: (x=-0.5, y=)
+polar: 
+Testing (8) -0.5 (number), (8) -0.5 (number):
+new: (x=-0.5, y=-0.5)
+polar: 
+Testing (8) -0.5 (number), (9) Infinity (number):
+new: (x=-0.5, y=Infinity)
+polar: 
+Testing (8) -0.5 (number), (10) -Infinity (number):
+new: (x=-0.5, y=-Infinity)
+polar: 
+Testing (8) -0.5 (number), (11) NaN (number):
+new: (x=-0.5, y=NaN)
+polar: 
+Testing (8) -0.5 (number), (12)  (string):
+new: (x=-0.5, y=)
+polar: 
+Testing (8) -0.5 (number), (13) 0 (string):
+new: (x=-0.5, y=0)
+polar: 
+Testing (8) -0.5 (number), (14) -0 (string):
+new: (x=-0.5, y=-0)
+polar: 
+Testing (8) -0.5 (number), (15) 0.0 (string):
+new: (x=-0.5, y=0.0)
+polar: 
+Testing (8) -0.5 (number), (16) 1 (string):
+new: (x=-0.5, y=1)
+polar: 
+Testing (8) -0.5 (number), (17) Hello World! (string):
+new: (x=-0.5, y=Hello World!)
+polar: 
+Testing (8) -0.5 (number), (18) true (string):
+new: (x=-0.5, y=true)
+polar: 
+Testing (8) -0.5 (number), (19) _level0 (string):
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (8) -0.5 (number), (20) äöü (string):
+new: (x=-0.5, y=äöü)
+polar: 
+Testing (8) -0.5 (number), (21) _level0 (movieclip):
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (8) -0.5 (number), (22) [object Object] (object):
+new: (x=-0.5, y=[object Object])
+polar: 
+Testing (8) -0.5 (number), (23) [type Function] (function):
+new: (x=-0.5, y=[type Function])
+polar: 
+Testing (8) -0.5 (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (25) [type Object] (object):
+toString called with 
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=-0.5, y=[object Object])
+polar: 
+Testing (8) -0.5 (number), (27)  (object):
+new: (x=-0.5, y=)
+polar: 
+Testing (8) -0.5 (number), (28)  (object):
+0: valueOf!
+new: (x=-0.5, y=)
+polar: 
+Testing (8) -0.5 (number), (29) null (object):
+1: valueOf!
+new: (x=-0.5, y=null)
+polar: 
+Testing (8) -0.5 (number), (30) true (object):
+2: valueOf!
+new: (x=-0.5, y=true)
+polar: 
+Testing (8) -0.5 (number), (31) false (object):
+3: valueOf!
+new: (x=-0.5, y=false)
+polar: 
+Testing (8) -0.5 (number), (32) 0 (object):
+4: valueOf!
+new: (x=-0.5, y=0)
+polar: 
+Testing (8) -0.5 (number), (33) 1 (object):
+5: valueOf!
+new: (x=-0.5, y=1)
+polar: 
+Testing (8) -0.5 (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=-0.5, y=0.5)
+polar: 
+Testing (8) -0.5 (number), (35) -1 (object):
+7: valueOf!
+new: (x=-0.5, y=-1)
+polar: 
+Testing (8) -0.5 (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=-0.5, y=-0.5)
+polar: 
+Testing (8) -0.5 (number), (37) Infinity (object):
+9: valueOf!
+new: (x=-0.5, y=Infinity)
+polar: 
+Testing (8) -0.5 (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=-0.5, y=-Infinity)
+polar: 
+Testing (8) -0.5 (number), (39) NaN (object):
+11: valueOf!
+new: (x=-0.5, y=NaN)
+polar: 
+Testing (8) -0.5 (number), (40)  (object):
+12: valueOf!
+new: (x=-0.5, y=)
+polar: 
+Testing (8) -0.5 (number), (41) 0 (object):
+13: valueOf!
+new: (x=-0.5, y=0)
+polar: 
+Testing (8) -0.5 (number), (42) -0 (object):
+14: valueOf!
+new: (x=-0.5, y=-0)
+polar: 
+Testing (8) -0.5 (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=-0.5, y=0.0)
+polar: 
+Testing (8) -0.5 (number), (44) 1 (object):
+16: valueOf!
+new: (x=-0.5, y=1)
+polar: 
+Testing (8) -0.5 (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=-0.5, y=Hello World!)
+polar: 
+Testing (8) -0.5 (number), (46) true (object):
+18: valueOf!
+new: (x=-0.5, y=true)
+polar: 
+Testing (8) -0.5 (number), (47) _level0 (object):
+19: valueOf!
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (8) -0.5 (number), (48) äöü (object):
+20: valueOf!
+new: (x=-0.5, y=äöü)
+polar: 
+Testing (8) -0.5 (number), (49) _level0 (object):
+21: valueOf!
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (8) -0.5 (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (8) -0.5 (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (9) Infinity (number):
+new: (x=Infinity, y=)
+polar: 
+Testing (9) Infinity (number), (9) Infinity (number):
+new: (x=Infinity, y=Infinity)
+polar: 
+Testing (9) Infinity (number), (10) -Infinity (number):
+new: (x=Infinity, y=-Infinity)
+polar: 
+Testing (9) Infinity (number), (11) NaN (number):
+new: (x=Infinity, y=NaN)
+polar: 
+Testing (9) Infinity (number), (12)  (string):
+new: (x=Infinity, y=)
+polar: 
+Testing (9) Infinity (number), (13) 0 (string):
+new: (x=Infinity, y=0)
+polar: 
+Testing (9) Infinity (number), (14) -0 (string):
+new: (x=Infinity, y=-0)
+polar: 
+Testing (9) Infinity (number), (15) 0.0 (string):
+new: (x=Infinity, y=0.0)
+polar: 
+Testing (9) Infinity (number), (16) 1 (string):
+new: (x=Infinity, y=1)
+polar: 
+Testing (9) Infinity (number), (17) Hello World! (string):
+new: (x=Infinity, y=Hello World!)
+polar: 
+Testing (9) Infinity (number), (18) true (string):
+new: (x=Infinity, y=true)
+polar: 
+Testing (9) Infinity (number), (19) _level0 (string):
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (9) Infinity (number), (20) äöü (string):
+new: (x=Infinity, y=äöü)
+polar: 
+Testing (9) Infinity (number), (21) _level0 (movieclip):
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (9) Infinity (number), (22) [object Object] (object):
+new: (x=Infinity, y=[object Object])
+polar: 
+Testing (9) Infinity (number), (23) [type Function] (function):
+new: (x=Infinity, y=[type Function])
+polar: 
+Testing (9) Infinity (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (25) [type Object] (object):
+toString called with 
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=Infinity, y=[object Object])
+polar: 
+Testing (9) Infinity (number), (27)  (object):
+new: (x=Infinity, y=)
+polar: 
+Testing (9) Infinity (number), (28)  (object):
+0: valueOf!
+new: (x=Infinity, y=)
+polar: 
+Testing (9) Infinity (number), (29) null (object):
+1: valueOf!
+new: (x=Infinity, y=null)
+polar: 
+Testing (9) Infinity (number), (30) true (object):
+2: valueOf!
+new: (x=Infinity, y=true)
+polar: 
+Testing (9) Infinity (number), (31) false (object):
+3: valueOf!
+new: (x=Infinity, y=false)
+polar: 
+Testing (9) Infinity (number), (32) 0 (object):
+4: valueOf!
+new: (x=Infinity, y=0)
+polar: 
+Testing (9) Infinity (number), (33) 1 (object):
+5: valueOf!
+new: (x=Infinity, y=1)
+polar: 
+Testing (9) Infinity (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=Infinity, y=0.5)
+polar: 
+Testing (9) Infinity (number), (35) -1 (object):
+7: valueOf!
+new: (x=Infinity, y=-1)
+polar: 
+Testing (9) Infinity (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=Infinity, y=-0.5)
+polar: 
+Testing (9) Infinity (number), (37) Infinity (object):
+9: valueOf!
+new: (x=Infinity, y=Infinity)
+polar: 
+Testing (9) Infinity (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=Infinity, y=-Infinity)
+polar: 
+Testing (9) Infinity (number), (39) NaN (object):
+11: valueOf!
+new: (x=Infinity, y=NaN)
+polar: 
+Testing (9) Infinity (number), (40)  (object):
+12: valueOf!
+new: (x=Infinity, y=)
+polar: 
+Testing (9) Infinity (number), (41) 0 (object):
+13: valueOf!
+new: (x=Infinity, y=0)
+polar: 
+Testing (9) Infinity (number), (42) -0 (object):
+14: valueOf!
+new: (x=Infinity, y=-0)
+polar: 
+Testing (9) Infinity (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=Infinity, y=0.0)
+polar: 
+Testing (9) Infinity (number), (44) 1 (object):
+16: valueOf!
+new: (x=Infinity, y=1)
+polar: 
+Testing (9) Infinity (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=Infinity, y=Hello World!)
+polar: 
+Testing (9) Infinity (number), (46) true (object):
+18: valueOf!
+new: (x=Infinity, y=true)
+polar: 
+Testing (9) Infinity (number), (47) _level0 (object):
+19: valueOf!
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (9) Infinity (number), (48) äöü (object):
+20: valueOf!
+new: (x=Infinity, y=äöü)
+polar: 
+Testing (9) Infinity (number), (49) _level0 (object):
+21: valueOf!
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (9) Infinity (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (9) Infinity (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number):
+new: (x=-Infinity, y=)
+polar: 
+Testing (10) -Infinity (number), (10) -Infinity (number):
+new: (x=-Infinity, y=-Infinity)
+polar: 
+Testing (10) -Infinity (number), (11) NaN (number):
+new: (x=-Infinity, y=NaN)
+polar: 
+Testing (10) -Infinity (number), (12)  (string):
+new: (x=-Infinity, y=)
+polar: 
+Testing (10) -Infinity (number), (13) 0 (string):
+new: (x=-Infinity, y=0)
+polar: 
+Testing (10) -Infinity (number), (14) -0 (string):
+new: (x=-Infinity, y=-0)
+polar: 
+Testing (10) -Infinity (number), (15) 0.0 (string):
+new: (x=-Infinity, y=0.0)
+polar: 
+Testing (10) -Infinity (number), (16) 1 (string):
+new: (x=-Infinity, y=1)
+polar: 
+Testing (10) -Infinity (number), (17) Hello World! (string):
+new: (x=-Infinity, y=Hello World!)
+polar: 
+Testing (10) -Infinity (number), (18) true (string):
+new: (x=-Infinity, y=true)
+polar: 
+Testing (10) -Infinity (number), (19) _level0 (string):
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (10) -Infinity (number), (20) äöü (string):
+new: (x=-Infinity, y=äöü)
+polar: 
+Testing (10) -Infinity (number), (21) _level0 (movieclip):
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (10) -Infinity (number), (22) [object Object] (object):
+new: (x=-Infinity, y=[object Object])
+polar: 
+Testing (10) -Infinity (number), (23) [type Function] (function):
+new: (x=-Infinity, y=[type Function])
+polar: 
+Testing (10) -Infinity (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (25) [type Object] (object):
+toString called with 
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=-Infinity, y=[object Object])
+polar: 
+Testing (10) -Infinity (number), (27)  (object):
+new: (x=-Infinity, y=)
+polar: 
+Testing (10) -Infinity (number), (28)  (object):
+0: valueOf!
+new: (x=-Infinity, y=)
+polar: 
+Testing (10) -Infinity (number), (29) null (object):
+1: valueOf!
+new: (x=-Infinity, y=null)
+polar: 
+Testing (10) -Infinity (number), (30) true (object):
+2: valueOf!
+new: (x=-Infinity, y=true)
+polar: 
+Testing (10) -Infinity (number), (31) false (object):
+3: valueOf!
+new: (x=-Infinity, y=false)
+polar: 
+Testing (10) -Infinity (number), (32) 0 (object):
+4: valueOf!
+new: (x=-Infinity, y=0)
+polar: 
+Testing (10) -Infinity (number), (33) 1 (object):
+5: valueOf!
+new: (x=-Infinity, y=1)
+polar: 
+Testing (10) -Infinity (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=-Infinity, y=0.5)
+polar: 
+Testing (10) -Infinity (number), (35) -1 (object):
+7: valueOf!
+new: (x=-Infinity, y=-1)
+polar: 
+Testing (10) -Infinity (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=-Infinity, y=-0.5)
+polar: 
+Testing (10) -Infinity (number), (37) Infinity (object):
+9: valueOf!
+new: (x=-Infinity, y=Infinity)
+polar: 
+Testing (10) -Infinity (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=-Infinity, y=-Infinity)
+polar: 
+Testing (10) -Infinity (number), (39) NaN (object):
+11: valueOf!
+new: (x=-Infinity, y=NaN)
+polar: 
+Testing (10) -Infinity (number), (40)  (object):
+12: valueOf!
+new: (x=-Infinity, y=)
+polar: 
+Testing (10) -Infinity (number), (41) 0 (object):
+13: valueOf!
+new: (x=-Infinity, y=0)
+polar: 
+Testing (10) -Infinity (number), (42) -0 (object):
+14: valueOf!
+new: (x=-Infinity, y=-0)
+polar: 
+Testing (10) -Infinity (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=-Infinity, y=0.0)
+polar: 
+Testing (10) -Infinity (number), (44) 1 (object):
+16: valueOf!
+new: (x=-Infinity, y=1)
+polar: 
+Testing (10) -Infinity (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=-Infinity, y=Hello World!)
+polar: 
+Testing (10) -Infinity (number), (46) true (object):
+18: valueOf!
+new: (x=-Infinity, y=true)
+polar: 
+Testing (10) -Infinity (number), (47) _level0 (object):
+19: valueOf!
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (10) -Infinity (number), (48) äöü (object):
+20: valueOf!
+new: (x=-Infinity, y=äöü)
+polar: 
+Testing (10) -Infinity (number), (49) _level0 (object):
+21: valueOf!
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (10) -Infinity (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (10) -Infinity (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (11) NaN (number):
+new: (x=NaN, y=)
+polar: 
+Testing (11) NaN (number), (11) NaN (number):
+new: (x=NaN, y=NaN)
+polar: 
+Testing (11) NaN (number), (12)  (string):
+new: (x=NaN, y=)
+polar: 
+Testing (11) NaN (number), (13) 0 (string):
+new: (x=NaN, y=0)
+polar: 
+Testing (11) NaN (number), (14) -0 (string):
+new: (x=NaN, y=-0)
+polar: 
+Testing (11) NaN (number), (15) 0.0 (string):
+new: (x=NaN, y=0.0)
+polar: 
+Testing (11) NaN (number), (16) 1 (string):
+new: (x=NaN, y=1)
+polar: 
+Testing (11) NaN (number), (17) Hello World! (string):
+new: (x=NaN, y=Hello World!)
+polar: 
+Testing (11) NaN (number), (18) true (string):
+new: (x=NaN, y=true)
+polar: 
+Testing (11) NaN (number), (19) _level0 (string):
+new: (x=NaN, y=_level0)
+polar: 
+Testing (11) NaN (number), (20) äöü (string):
+new: (x=NaN, y=äöü)
+polar: 
+Testing (11) NaN (number), (21) _level0 (movieclip):
+new: (x=NaN, y=_level0)
+polar: 
+Testing (11) NaN (number), (22) [object Object] (object):
+new: (x=NaN, y=[object Object])
+polar: 
+Testing (11) NaN (number), (23) [type Function] (function):
+new: (x=NaN, y=[type Function])
+polar: 
+Testing (11) NaN (number), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (25) [type Object] (object):
+toString called with 
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (26) [object Object] (object):
+valueOf called with 
+new: (x=NaN, y=[object Object])
+polar: 
+Testing (11) NaN (number), (27)  (object):
+new: (x=NaN, y=)
+polar: 
+Testing (11) NaN (number), (28)  (object):
+0: valueOf!
+new: (x=NaN, y=)
+polar: 
+Testing (11) NaN (number), (29) null (object):
+1: valueOf!
+new: (x=NaN, y=null)
+polar: 
+Testing (11) NaN (number), (30) true (object):
+2: valueOf!
+new: (x=NaN, y=true)
+polar: 
+Testing (11) NaN (number), (31) false (object):
+3: valueOf!
+new: (x=NaN, y=false)
+polar: 
+Testing (11) NaN (number), (32) 0 (object):
+4: valueOf!
+new: (x=NaN, y=0)
+polar: 
+Testing (11) NaN (number), (33) 1 (object):
+5: valueOf!
+new: (x=NaN, y=1)
+polar: 
+Testing (11) NaN (number), (34) 0.5 (object):
+6: valueOf!
+new: (x=NaN, y=0.5)
+polar: 
+Testing (11) NaN (number), (35) -1 (object):
+7: valueOf!
+new: (x=NaN, y=-1)
+polar: 
+Testing (11) NaN (number), (36) -0.5 (object):
+8: valueOf!
+new: (x=NaN, y=-0.5)
+polar: 
+Testing (11) NaN (number), (37) Infinity (object):
+9: valueOf!
+new: (x=NaN, y=Infinity)
+polar: 
+Testing (11) NaN (number), (38) -Infinity (object):
+10: valueOf!
+new: (x=NaN, y=-Infinity)
+polar: 
+Testing (11) NaN (number), (39) NaN (object):
+11: valueOf!
+new: (x=NaN, y=NaN)
+polar: 
+Testing (11) NaN (number), (40)  (object):
+12: valueOf!
+new: (x=NaN, y=)
+polar: 
+Testing (11) NaN (number), (41) 0 (object):
+13: valueOf!
+new: (x=NaN, y=0)
+polar: 
+Testing (11) NaN (number), (42) -0 (object):
+14: valueOf!
+new: (x=NaN, y=-0)
+polar: 
+Testing (11) NaN (number), (43) 0.0 (object):
+15: valueOf!
+new: (x=NaN, y=0.0)
+polar: 
+Testing (11) NaN (number), (44) 1 (object):
+16: valueOf!
+new: (x=NaN, y=1)
+polar: 
+Testing (11) NaN (number), (45) Hello World! (object):
+17: valueOf!
+new: (x=NaN, y=Hello World!)
+polar: 
+Testing (11) NaN (number), (46) true (object):
+18: valueOf!
+new: (x=NaN, y=true)
+polar: 
+Testing (11) NaN (number), (47) _level0 (object):
+19: valueOf!
+new: (x=NaN, y=_level0)
+polar: 
+Testing (11) NaN (number), (48) äöü (object):
+20: valueOf!
+new: (x=NaN, y=äöü)
+polar: 
+Testing (11) NaN (number), (49) _level0 (object):
+21: valueOf!
+new: (x=NaN, y=_level0)
+polar: 
+Testing (11) NaN (number), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (11) NaN (number), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (12)  (string):
+new: (x=, y=)
+polar: 
+Testing (12)  (string), (12)  (string):
+new: (x=, y=)
+polar: 
+Testing (12)  (string), (13) 0 (string):
+new: (x=, y=0)
+polar: 
+Testing (12)  (string), (14) -0 (string):
+new: (x=, y=-0)
+polar: 
+Testing (12)  (string), (15) 0.0 (string):
+new: (x=, y=0.0)
+polar: 
+Testing (12)  (string), (16) 1 (string):
+new: (x=, y=1)
+polar: 
+Testing (12)  (string), (17) Hello World! (string):
+new: (x=, y=Hello World!)
+polar: 
+Testing (12)  (string), (18) true (string):
+new: (x=, y=true)
+polar: 
+Testing (12)  (string), (19) _level0 (string):
+new: (x=, y=_level0)
+polar: 
+Testing (12)  (string), (20) äöü (string):
+new: (x=, y=äöü)
+polar: 
+Testing (12)  (string), (21) _level0 (movieclip):
+new: (x=, y=_level0)
+polar: 
+Testing (12)  (string), (22) [object Object] (object):
+new: (x=, y=[object Object])
+polar: 
+Testing (12)  (string), (23) [type Function] (function):
+new: (x=, y=[type Function])
+polar: 
+Testing (12)  (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (25) [type Object] (object):
+toString called with 
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=, y=[object Object])
+polar: 
+Testing (12)  (string), (27)  (object):
+new: (x=, y=)
+polar: 
+Testing (12)  (string), (28)  (object):
+0: valueOf!
+new: (x=, y=)
+polar: 
+Testing (12)  (string), (29) null (object):
+1: valueOf!
+new: (x=, y=null)
+polar: 
+Testing (12)  (string), (30) true (object):
+2: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (12)  (string), (31) false (object):
+3: valueOf!
+new: (x=, y=false)
+polar: 
+Testing (12)  (string), (32) 0 (object):
+4: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (12)  (string), (33) 1 (object):
+5: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (12)  (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=, y=0.5)
+polar: 
+Testing (12)  (string), (35) -1 (object):
+7: valueOf!
+new: (x=, y=-1)
+polar: 
+Testing (12)  (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=, y=-0.5)
+polar: 
+Testing (12)  (string), (37) Infinity (object):
+9: valueOf!
+new: (x=, y=Infinity)
+polar: 
+Testing (12)  (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=, y=-Infinity)
+polar: 
+Testing (12)  (string), (39) NaN (object):
+11: valueOf!
+new: (x=, y=NaN)
+polar: 
+Testing (12)  (string), (40)  (object):
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (12)  (string), (41) 0 (object):
+13: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (12)  (string), (42) -0 (object):
+14: valueOf!
+new: (x=, y=-0)
+polar: 
+Testing (12)  (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=, y=0.0)
+polar: 
+Testing (12)  (string), (44) 1 (object):
+16: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (12)  (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=, y=Hello World!)
+polar: 
+Testing (12)  (string), (46) true (object):
+18: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (12)  (string), (47) _level0 (object):
+19: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (12)  (string), (48) äöü (object):
+20: valueOf!
+new: (x=, y=äöü)
+polar: 
+Testing (12)  (string), (49) _level0 (object):
+21: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (12)  (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (12)  (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (13) 0 (string):
+new: (x=0, y=)
+polar: 
+Testing (13) 0 (string), (13) 0 (string):
+new: (x=0, y=0)
+polar: 
+Testing (13) 0 (string), (14) -0 (string):
+new: (x=0, y=-0)
+polar: 
+Testing (13) 0 (string), (15) 0.0 (string):
+new: (x=0, y=0.0)
+polar: 
+Testing (13) 0 (string), (16) 1 (string):
+new: (x=0, y=1)
+polar: 
+Testing (13) 0 (string), (17) Hello World! (string):
+new: (x=0, y=Hello World!)
+polar: 
+Testing (13) 0 (string), (18) true (string):
+new: (x=0, y=true)
+polar: 
+Testing (13) 0 (string), (19) _level0 (string):
+new: (x=0, y=_level0)
+polar: 
+Testing (13) 0 (string), (20) äöü (string):
+new: (x=0, y=äöü)
+polar: 
+Testing (13) 0 (string), (21) _level0 (movieclip):
+new: (x=0, y=_level0)
+polar: 
+Testing (13) 0 (string), (22) [object Object] (object):
+new: (x=0, y=[object Object])
+polar: 
+Testing (13) 0 (string), (23) [type Function] (function):
+new: (x=0, y=[type Function])
+polar: 
+Testing (13) 0 (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (25) [type Object] (object):
+toString called with 
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=0, y=[object Object])
+polar: 
+Testing (13) 0 (string), (27)  (object):
+new: (x=0, y=)
+polar: 
+Testing (13) 0 (string), (28)  (object):
+0: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (13) 0 (string), (29) null (object):
+1: valueOf!
+new: (x=0, y=null)
+polar: 
+Testing (13) 0 (string), (30) true (object):
+2: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (13) 0 (string), (31) false (object):
+3: valueOf!
+new: (x=0, y=false)
+polar: 
+Testing (13) 0 (string), (32) 0 (object):
+4: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (13) 0 (string), (33) 1 (object):
+5: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (13) 0 (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=0, y=0.5)
+polar: 
+Testing (13) 0 (string), (35) -1 (object):
+7: valueOf!
+new: (x=0, y=-1)
+polar: 
+Testing (13) 0 (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=0, y=-0.5)
+polar: 
+Testing (13) 0 (string), (37) Infinity (object):
+9: valueOf!
+new: (x=0, y=Infinity)
+polar: 
+Testing (13) 0 (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=0, y=-Infinity)
+polar: 
+Testing (13) 0 (string), (39) NaN (object):
+11: valueOf!
+new: (x=0, y=NaN)
+polar: 
+Testing (13) 0 (string), (40)  (object):
+12: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (13) 0 (string), (41) 0 (object):
+13: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (13) 0 (string), (42) -0 (object):
+14: valueOf!
+new: (x=0, y=-0)
+polar: 
+Testing (13) 0 (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=0, y=0.0)
+polar: 
+Testing (13) 0 (string), (44) 1 (object):
+16: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (13) 0 (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=0, y=Hello World!)
+polar: 
+Testing (13) 0 (string), (46) true (object):
+18: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (13) 0 (string), (47) _level0 (object):
+19: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (13) 0 (string), (48) äöü (object):
+20: valueOf!
+new: (x=0, y=äöü)
+polar: 
+Testing (13) 0 (string), (49) _level0 (object):
+21: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (13) 0 (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (13) 0 (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (14) -0 (string):
+new: (x=-0, y=)
+polar: 
+Testing (14) -0 (string), (14) -0 (string):
+new: (x=-0, y=-0)
+polar: 
+Testing (14) -0 (string), (15) 0.0 (string):
+new: (x=-0, y=0.0)
+polar: 
+Testing (14) -0 (string), (16) 1 (string):
+new: (x=-0, y=1)
+polar: 
+Testing (14) -0 (string), (17) Hello World! (string):
+new: (x=-0, y=Hello World!)
+polar: 
+Testing (14) -0 (string), (18) true (string):
+new: (x=-0, y=true)
+polar: 
+Testing (14) -0 (string), (19) _level0 (string):
+new: (x=-0, y=_level0)
+polar: 
+Testing (14) -0 (string), (20) äöü (string):
+new: (x=-0, y=äöü)
+polar: 
+Testing (14) -0 (string), (21) _level0 (movieclip):
+new: (x=-0, y=_level0)
+polar: 
+Testing (14) -0 (string), (22) [object Object] (object):
+new: (x=-0, y=[object Object])
+polar: 
+Testing (14) -0 (string), (23) [type Function] (function):
+new: (x=-0, y=[type Function])
+polar: 
+Testing (14) -0 (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (25) [type Object] (object):
+toString called with 
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=-0, y=[object Object])
+polar: 
+Testing (14) -0 (string), (27)  (object):
+new: (x=-0, y=)
+polar: 
+Testing (14) -0 (string), (28)  (object):
+0: valueOf!
+new: (x=-0, y=)
+polar: 
+Testing (14) -0 (string), (29) null (object):
+1: valueOf!
+new: (x=-0, y=null)
+polar: 
+Testing (14) -0 (string), (30) true (object):
+2: valueOf!
+new: (x=-0, y=true)
+polar: 
+Testing (14) -0 (string), (31) false (object):
+3: valueOf!
+new: (x=-0, y=false)
+polar: 
+Testing (14) -0 (string), (32) 0 (object):
+4: valueOf!
+new: (x=-0, y=0)
+polar: 
+Testing (14) -0 (string), (33) 1 (object):
+5: valueOf!
+new: (x=-0, y=1)
+polar: 
+Testing (14) -0 (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=-0, y=0.5)
+polar: 
+Testing (14) -0 (string), (35) -1 (object):
+7: valueOf!
+new: (x=-0, y=-1)
+polar: 
+Testing (14) -0 (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=-0, y=-0.5)
+polar: 
+Testing (14) -0 (string), (37) Infinity (object):
+9: valueOf!
+new: (x=-0, y=Infinity)
+polar: 
+Testing (14) -0 (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=-0, y=-Infinity)
+polar: 
+Testing (14) -0 (string), (39) NaN (object):
+11: valueOf!
+new: (x=-0, y=NaN)
+polar: 
+Testing (14) -0 (string), (40)  (object):
+12: valueOf!
+new: (x=-0, y=)
+polar: 
+Testing (14) -0 (string), (41) 0 (object):
+13: valueOf!
+new: (x=-0, y=0)
+polar: 
+Testing (14) -0 (string), (42) -0 (object):
+14: valueOf!
+new: (x=-0, y=-0)
+polar: 
+Testing (14) -0 (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=-0, y=0.0)
+polar: 
+Testing (14) -0 (string), (44) 1 (object):
+16: valueOf!
+new: (x=-0, y=1)
+polar: 
+Testing (14) -0 (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=-0, y=Hello World!)
+polar: 
+Testing (14) -0 (string), (46) true (object):
+18: valueOf!
+new: (x=-0, y=true)
+polar: 
+Testing (14) -0 (string), (47) _level0 (object):
+19: valueOf!
+new: (x=-0, y=_level0)
+polar: 
+Testing (14) -0 (string), (48) äöü (object):
+20: valueOf!
+new: (x=-0, y=äöü)
+polar: 
+Testing (14) -0 (string), (49) _level0 (object):
+21: valueOf!
+new: (x=-0, y=_level0)
+polar: 
+Testing (14) -0 (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (14) -0 (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string):
+new: (x=0.0, y=)
+polar: 
+Testing (15) 0.0 (string), (15) 0.0 (string):
+new: (x=0.0, y=0.0)
+polar: 
+Testing (15) 0.0 (string), (16) 1 (string):
+new: (x=0.0, y=1)
+polar: 
+Testing (15) 0.0 (string), (17) Hello World! (string):
+new: (x=0.0, y=Hello World!)
+polar: 
+Testing (15) 0.0 (string), (18) true (string):
+new: (x=0.0, y=true)
+polar: 
+Testing (15) 0.0 (string), (19) _level0 (string):
+new: (x=0.0, y=_level0)
+polar: 
+Testing (15) 0.0 (string), (20) äöü (string):
+new: (x=0.0, y=äöü)
+polar: 
+Testing (15) 0.0 (string), (21) _level0 (movieclip):
+new: (x=0.0, y=_level0)
+polar: 
+Testing (15) 0.0 (string), (22) [object Object] (object):
+new: (x=0.0, y=[object Object])
+polar: 
+Testing (15) 0.0 (string), (23) [type Function] (function):
+new: (x=0.0, y=[type Function])
+polar: 
+Testing (15) 0.0 (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (25) [type Object] (object):
+toString called with 
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=0.0, y=[object Object])
+polar: 
+Testing (15) 0.0 (string), (27)  (object):
+new: (x=0.0, y=)
+polar: 
+Testing (15) 0.0 (string), (28)  (object):
+0: valueOf!
+new: (x=0.0, y=)
+polar: 
+Testing (15) 0.0 (string), (29) null (object):
+1: valueOf!
+new: (x=0.0, y=null)
+polar: 
+Testing (15) 0.0 (string), (30) true (object):
+2: valueOf!
+new: (x=0.0, y=true)
+polar: 
+Testing (15) 0.0 (string), (31) false (object):
+3: valueOf!
+new: (x=0.0, y=false)
+polar: 
+Testing (15) 0.0 (string), (32) 0 (object):
+4: valueOf!
+new: (x=0.0, y=0)
+polar: 
+Testing (15) 0.0 (string), (33) 1 (object):
+5: valueOf!
+new: (x=0.0, y=1)
+polar: 
+Testing (15) 0.0 (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=0.0, y=0.5)
+polar: 
+Testing (15) 0.0 (string), (35) -1 (object):
+7: valueOf!
+new: (x=0.0, y=-1)
+polar: 
+Testing (15) 0.0 (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=0.0, y=-0.5)
+polar: 
+Testing (15) 0.0 (string), (37) Infinity (object):
+9: valueOf!
+new: (x=0.0, y=Infinity)
+polar: 
+Testing (15) 0.0 (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=0.0, y=-Infinity)
+polar: 
+Testing (15) 0.0 (string), (39) NaN (object):
+11: valueOf!
+new: (x=0.0, y=NaN)
+polar: 
+Testing (15) 0.0 (string), (40)  (object):
+12: valueOf!
+new: (x=0.0, y=)
+polar: 
+Testing (15) 0.0 (string), (41) 0 (object):
+13: valueOf!
+new: (x=0.0, y=0)
+polar: 
+Testing (15) 0.0 (string), (42) -0 (object):
+14: valueOf!
+new: (x=0.0, y=-0)
+polar: 
+Testing (15) 0.0 (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=0.0, y=0.0)
+polar: 
+Testing (15) 0.0 (string), (44) 1 (object):
+16: valueOf!
+new: (x=0.0, y=1)
+polar: 
+Testing (15) 0.0 (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=0.0, y=Hello World!)
+polar: 
+Testing (15) 0.0 (string), (46) true (object):
+18: valueOf!
+new: (x=0.0, y=true)
+polar: 
+Testing (15) 0.0 (string), (47) _level0 (object):
+19: valueOf!
+new: (x=0.0, y=_level0)
+polar: 
+Testing (15) 0.0 (string), (48) äöü (object):
+20: valueOf!
+new: (x=0.0, y=äöü)
+polar: 
+Testing (15) 0.0 (string), (49) _level0 (object):
+21: valueOf!
+new: (x=0.0, y=_level0)
+polar: 
+Testing (15) 0.0 (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (15) 0.0 (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (16) 1 (string):
+new: (x=1, y=)
+polar: 
+Testing (16) 1 (string), (16) 1 (string):
+new: (x=1, y=1)
+polar: 
+Testing (16) 1 (string), (17) Hello World! (string):
+new: (x=1, y=Hello World!)
+polar: 
+Testing (16) 1 (string), (18) true (string):
+new: (x=1, y=true)
+polar: 
+Testing (16) 1 (string), (19) _level0 (string):
+new: (x=1, y=_level0)
+polar: 
+Testing (16) 1 (string), (20) äöü (string):
+new: (x=1, y=äöü)
+polar: 
+Testing (16) 1 (string), (21) _level0 (movieclip):
+new: (x=1, y=_level0)
+polar: 
+Testing (16) 1 (string), (22) [object Object] (object):
+new: (x=1, y=[object Object])
+polar: 
+Testing (16) 1 (string), (23) [type Function] (function):
+new: (x=1, y=[type Function])
+polar: 
+Testing (16) 1 (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (25) [type Object] (object):
+toString called with 
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=1, y=[object Object])
+polar: 
+Testing (16) 1 (string), (27)  (object):
+new: (x=1, y=)
+polar: 
+Testing (16) 1 (string), (28)  (object):
+0: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (16) 1 (string), (29) null (object):
+1: valueOf!
+new: (x=1, y=null)
+polar: 
+Testing (16) 1 (string), (30) true (object):
+2: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (16) 1 (string), (31) false (object):
+3: valueOf!
+new: (x=1, y=false)
+polar: 
+Testing (16) 1 (string), (32) 0 (object):
+4: valueOf!
+new: (x=1, y=0)
+polar: 
+Testing (16) 1 (string), (33) 1 (object):
+5: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (16) 1 (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=1, y=0.5)
+polar: 
+Testing (16) 1 (string), (35) -1 (object):
+7: valueOf!
+new: (x=1, y=-1)
+polar: 
+Testing (16) 1 (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=1, y=-0.5)
+polar: 
+Testing (16) 1 (string), (37) Infinity (object):
+9: valueOf!
+new: (x=1, y=Infinity)
+polar: 
+Testing (16) 1 (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=1, y=-Infinity)
+polar: 
+Testing (16) 1 (string), (39) NaN (object):
+11: valueOf!
+new: (x=1, y=NaN)
+polar: 
+Testing (16) 1 (string), (40)  (object):
+12: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (16) 1 (string), (41) 0 (object):
+13: valueOf!
+new: (x=1, y=0)
+polar: 
+Testing (16) 1 (string), (42) -0 (object):
+14: valueOf!
+new: (x=1, y=-0)
+polar: 
+Testing (16) 1 (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=1, y=0.0)
+polar: 
+Testing (16) 1 (string), (44) 1 (object):
+16: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (16) 1 (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=1, y=Hello World!)
+polar: 
+Testing (16) 1 (string), (46) true (object):
+18: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (16) 1 (string), (47) _level0 (object):
+19: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (16) 1 (string), (48) äöü (object):
+20: valueOf!
+new: (x=1, y=äöü)
+polar: 
+Testing (16) 1 (string), (49) _level0 (object):
+21: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (16) 1 (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (16) 1 (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (17) Hello World! (string):
+new: (x=Hello World!, y=)
+polar: 
+Testing (17) Hello World! (string), (17) Hello World! (string):
+new: (x=Hello World!, y=Hello World!)
+polar: 
+Testing (17) Hello World! (string), (18) true (string):
+new: (x=Hello World!, y=true)
+polar: 
+Testing (17) Hello World! (string), (19) _level0 (string):
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (17) Hello World! (string), (20) äöü (string):
+new: (x=Hello World!, y=äöü)
+polar: 
+Testing (17) Hello World! (string), (21) _level0 (movieclip):
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (17) Hello World! (string), (22) [object Object] (object):
+new: (x=Hello World!, y=[object Object])
+polar: 
+Testing (17) Hello World! (string), (23) [type Function] (function):
+new: (x=Hello World!, y=[type Function])
+polar: 
+Testing (17) Hello World! (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (25) [type Object] (object):
+toString called with 
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=Hello World!, y=[object Object])
+polar: 
+Testing (17) Hello World! (string), (27)  (object):
+new: (x=Hello World!, y=)
+polar: 
+Testing (17) Hello World! (string), (28)  (object):
+0: valueOf!
+new: (x=Hello World!, y=)
+polar: 
+Testing (17) Hello World! (string), (29) null (object):
+1: valueOf!
+new: (x=Hello World!, y=null)
+polar: 
+Testing (17) Hello World! (string), (30) true (object):
+2: valueOf!
+new: (x=Hello World!, y=true)
+polar: 
+Testing (17) Hello World! (string), (31) false (object):
+3: valueOf!
+new: (x=Hello World!, y=false)
+polar: 
+Testing (17) Hello World! (string), (32) 0 (object):
+4: valueOf!
+new: (x=Hello World!, y=0)
+polar: 
+Testing (17) Hello World! (string), (33) 1 (object):
+5: valueOf!
+new: (x=Hello World!, y=1)
+polar: 
+Testing (17) Hello World! (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=Hello World!, y=0.5)
+polar: 
+Testing (17) Hello World! (string), (35) -1 (object):
+7: valueOf!
+new: (x=Hello World!, y=-1)
+polar: 
+Testing (17) Hello World! (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=Hello World!, y=-0.5)
+polar: 
+Testing (17) Hello World! (string), (37) Infinity (object):
+9: valueOf!
+new: (x=Hello World!, y=Infinity)
+polar: 
+Testing (17) Hello World! (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=Hello World!, y=-Infinity)
+polar: 
+Testing (17) Hello World! (string), (39) NaN (object):
+11: valueOf!
+new: (x=Hello World!, y=NaN)
+polar: 
+Testing (17) Hello World! (string), (40)  (object):
+12: valueOf!
+new: (x=Hello World!, y=)
+polar: 
+Testing (17) Hello World! (string), (41) 0 (object):
+13: valueOf!
+new: (x=Hello World!, y=0)
+polar: 
+Testing (17) Hello World! (string), (42) -0 (object):
+14: valueOf!
+new: (x=Hello World!, y=-0)
+polar: 
+Testing (17) Hello World! (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=Hello World!, y=0.0)
+polar: 
+Testing (17) Hello World! (string), (44) 1 (object):
+16: valueOf!
+new: (x=Hello World!, y=1)
+polar: 
+Testing (17) Hello World! (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=Hello World!, y=Hello World!)
+polar: 
+Testing (17) Hello World! (string), (46) true (object):
+18: valueOf!
+new: (x=Hello World!, y=true)
+polar: 
+Testing (17) Hello World! (string), (47) _level0 (object):
+19: valueOf!
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (17) Hello World! (string), (48) äöü (object):
+20: valueOf!
+new: (x=Hello World!, y=äöü)
+polar: 
+Testing (17) Hello World! (string), (49) _level0 (object):
+21: valueOf!
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (17) Hello World! (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (17) Hello World! (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (18) true (string):
+new: (x=true, y=)
+polar: 
+Testing (18) true (string), (18) true (string):
+new: (x=true, y=true)
+polar: 
+Testing (18) true (string), (19) _level0 (string):
+new: (x=true, y=_level0)
+polar: 
+Testing (18) true (string), (20) äöü (string):
+new: (x=true, y=äöü)
+polar: 
+Testing (18) true (string), (21) _level0 (movieclip):
+new: (x=true, y=_level0)
+polar: 
+Testing (18) true (string), (22) [object Object] (object):
+new: (x=true, y=[object Object])
+polar: 
+Testing (18) true (string), (23) [type Function] (function):
+new: (x=true, y=[type Function])
+polar: 
+Testing (18) true (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (25) [type Object] (object):
+toString called with 
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=true, y=[object Object])
+polar: 
+Testing (18) true (string), (27)  (object):
+new: (x=true, y=)
+polar: 
+Testing (18) true (string), (28)  (object):
+0: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (18) true (string), (29) null (object):
+1: valueOf!
+new: (x=true, y=null)
+polar: 
+Testing (18) true (string), (30) true (object):
+2: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (18) true (string), (31) false (object):
+3: valueOf!
+new: (x=true, y=false)
+polar: 
+Testing (18) true (string), (32) 0 (object):
+4: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (18) true (string), (33) 1 (object):
+5: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (18) true (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=true, y=0.5)
+polar: 
+Testing (18) true (string), (35) -1 (object):
+7: valueOf!
+new: (x=true, y=-1)
+polar: 
+Testing (18) true (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=true, y=-0.5)
+polar: 
+Testing (18) true (string), (37) Infinity (object):
+9: valueOf!
+new: (x=true, y=Infinity)
+polar: 
+Testing (18) true (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=true, y=-Infinity)
+polar: 
+Testing (18) true (string), (39) NaN (object):
+11: valueOf!
+new: (x=true, y=NaN)
+polar: 
+Testing (18) true (string), (40)  (object):
+12: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (18) true (string), (41) 0 (object):
+13: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (18) true (string), (42) -0 (object):
+14: valueOf!
+new: (x=true, y=-0)
+polar: 
+Testing (18) true (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=true, y=0.0)
+polar: 
+Testing (18) true (string), (44) 1 (object):
+16: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (18) true (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=true, y=Hello World!)
+polar: 
+Testing (18) true (string), (46) true (object):
+18: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (18) true (string), (47) _level0 (object):
+19: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (18) true (string), (48) äöü (object):
+20: valueOf!
+new: (x=true, y=äöü)
+polar: 
+Testing (18) true (string), (49) _level0 (object):
+21: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (18) true (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (18) true (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (19) _level0 (string):
+new: (x=_level0, y=)
+polar: 
+Testing (19) _level0 (string), (19) _level0 (string):
+new: (x=_level0, y=_level0)
+polar: 
+Testing (19) _level0 (string), (20) äöü (string):
+new: (x=_level0, y=äöü)
+polar: 
+Testing (19) _level0 (string), (21) _level0 (movieclip):
+new: (x=_level0, y=_level0)
+polar: 
+Testing (19) _level0 (string), (22) [object Object] (object):
+new: (x=_level0, y=[object Object])
+polar: 
+Testing (19) _level0 (string), (23) [type Function] (function):
+new: (x=_level0, y=[type Function])
+polar: 
+Testing (19) _level0 (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (25) [type Object] (object):
+toString called with 
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=_level0, y=[object Object])
+polar: 
+Testing (19) _level0 (string), (27)  (object):
+new: (x=_level0, y=)
+polar: 
+Testing (19) _level0 (string), (28)  (object):
+0: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (19) _level0 (string), (29) null (object):
+1: valueOf!
+new: (x=_level0, y=null)
+polar: 
+Testing (19) _level0 (string), (30) true (object):
+2: valueOf!
+new: (x=_level0, y=true)
+polar: 
+Testing (19) _level0 (string), (31) false (object):
+3: valueOf!
+new: (x=_level0, y=false)
+polar: 
+Testing (19) _level0 (string), (32) 0 (object):
+4: valueOf!
+new: (x=_level0, y=0)
+polar: 
+Testing (19) _level0 (string), (33) 1 (object):
+5: valueOf!
+new: (x=_level0, y=1)
+polar: 
+Testing (19) _level0 (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=_level0, y=0.5)
+polar: 
+Testing (19) _level0 (string), (35) -1 (object):
+7: valueOf!
+new: (x=_level0, y=-1)
+polar: 
+Testing (19) _level0 (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=_level0, y=-0.5)
+polar: 
+Testing (19) _level0 (string), (37) Infinity (object):
+9: valueOf!
+new: (x=_level0, y=Infinity)
+polar: 
+Testing (19) _level0 (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=_level0, y=-Infinity)
+polar: 
+Testing (19) _level0 (string), (39) NaN (object):
+11: valueOf!
+new: (x=_level0, y=NaN)
+polar: 
+Testing (19) _level0 (string), (40)  (object):
+12: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (19) _level0 (string), (41) 0 (object):
+13: valueOf!
+new: (x=_level0, y=0)
+polar: 
+Testing (19) _level0 (string), (42) -0 (object):
+14: valueOf!
+new: (x=_level0, y=-0)
+polar: 
+Testing (19) _level0 (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=_level0, y=0.0)
+polar: 
+Testing (19) _level0 (string), (44) 1 (object):
+16: valueOf!
+new: (x=_level0, y=1)
+polar: 
+Testing (19) _level0 (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=_level0, y=Hello World!)
+polar: 
+Testing (19) _level0 (string), (46) true (object):
+18: valueOf!
+new: (x=_level0, y=true)
+polar: 
+Testing (19) _level0 (string), (47) _level0 (object):
+19: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (19) _level0 (string), (48) äöü (object):
+20: valueOf!
+new: (x=_level0, y=äöü)
+polar: 
+Testing (19) _level0 (string), (49) _level0 (object):
+21: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (19) _level0 (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (19) _level0 (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (20) äöü (string):
+new: (x=äöü, y=)
+polar: 
+Testing (20) äöü (string), (20) äöü (string):
+new: (x=äöü, y=äöü)
+polar: 
+Testing (20) äöü (string), (21) _level0 (movieclip):
+new: (x=äöü, y=_level0)
+polar: 
+Testing (20) äöü (string), (22) [object Object] (object):
+new: (x=äöü, y=[object Object])
+polar: 
+Testing (20) äöü (string), (23) [type Function] (function):
+new: (x=äöü, y=[type Function])
+polar: 
+Testing (20) äöü (string), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (25) [type Object] (object):
+toString called with 
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (26) [object Object] (object):
+valueOf called with 
+new: (x=äöü, y=[object Object])
+polar: 
+Testing (20) äöü (string), (27)  (object):
+new: (x=äöü, y=)
+polar: 
+Testing (20) äöü (string), (28)  (object):
+0: valueOf!
+new: (x=äöü, y=)
+polar: 
+Testing (20) äöü (string), (29) null (object):
+1: valueOf!
+new: (x=äöü, y=null)
+polar: 
+Testing (20) äöü (string), (30) true (object):
+2: valueOf!
+new: (x=äöü, y=true)
+polar: 
+Testing (20) äöü (string), (31) false (object):
+3: valueOf!
+new: (x=äöü, y=false)
+polar: 
+Testing (20) äöü (string), (32) 0 (object):
+4: valueOf!
+new: (x=äöü, y=0)
+polar: 
+Testing (20) äöü (string), (33) 1 (object):
+5: valueOf!
+new: (x=äöü, y=1)
+polar: 
+Testing (20) äöü (string), (34) 0.5 (object):
+6: valueOf!
+new: (x=äöü, y=0.5)
+polar: 
+Testing (20) äöü (string), (35) -1 (object):
+7: valueOf!
+new: (x=äöü, y=-1)
+polar: 
+Testing (20) äöü (string), (36) -0.5 (object):
+8: valueOf!
+new: (x=äöü, y=-0.5)
+polar: 
+Testing (20) äöü (string), (37) Infinity (object):
+9: valueOf!
+new: (x=äöü, y=Infinity)
+polar: 
+Testing (20) äöü (string), (38) -Infinity (object):
+10: valueOf!
+new: (x=äöü, y=-Infinity)
+polar: 
+Testing (20) äöü (string), (39) NaN (object):
+11: valueOf!
+new: (x=äöü, y=NaN)
+polar: 
+Testing (20) äöü (string), (40)  (object):
+12: valueOf!
+new: (x=äöü, y=)
+polar: 
+Testing (20) äöü (string), (41) 0 (object):
+13: valueOf!
+new: (x=äöü, y=0)
+polar: 
+Testing (20) äöü (string), (42) -0 (object):
+14: valueOf!
+new: (x=äöü, y=-0)
+polar: 
+Testing (20) äöü (string), (43) 0.0 (object):
+15: valueOf!
+new: (x=äöü, y=0.0)
+polar: 
+Testing (20) äöü (string), (44) 1 (object):
+16: valueOf!
+new: (x=äöü, y=1)
+polar: 
+Testing (20) äöü (string), (45) Hello World! (object):
+17: valueOf!
+new: (x=äöü, y=Hello World!)
+polar: 
+Testing (20) äöü (string), (46) true (object):
+18: valueOf!
+new: (x=äöü, y=true)
+polar: 
+Testing (20) äöü (string), (47) _level0 (object):
+19: valueOf!
+new: (x=äöü, y=_level0)
+polar: 
+Testing (20) äöü (string), (48) äöü (object):
+20: valueOf!
+new: (x=äöü, y=äöü)
+polar: 
+Testing (20) äöü (string), (49) _level0 (object):
+21: valueOf!
+new: (x=äöü, y=_level0)
+polar: 
+Testing (20) äöü (string), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (20) äöü (string), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip):
+new: (x=_level0, y=)
+polar: 
+Testing (21) _level0 (movieclip), (21) _level0 (movieclip):
+new: (x=_level0, y=_level0)
+polar: 
+Testing (21) _level0 (movieclip), (22) [object Object] (object):
+new: (x=_level0, y=[object Object])
+polar: 
+Testing (21) _level0 (movieclip), (23) [type Function] (function):
+new: (x=_level0, y=[type Function])
+polar: 
+Testing (21) _level0 (movieclip), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (25) [type Object] (object):
+toString called with 
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (26) [object Object] (object):
+valueOf called with 
+new: (x=_level0, y=[object Object])
+polar: 
+Testing (21) _level0 (movieclip), (27)  (object):
+new: (x=_level0, y=)
+polar: 
+Testing (21) _level0 (movieclip), (28)  (object):
+0: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (21) _level0 (movieclip), (29) null (object):
+1: valueOf!
+new: (x=_level0, y=null)
+polar: 
+Testing (21) _level0 (movieclip), (30) true (object):
+2: valueOf!
+new: (x=_level0, y=true)
+polar: 
+Testing (21) _level0 (movieclip), (31) false (object):
+3: valueOf!
+new: (x=_level0, y=false)
+polar: 
+Testing (21) _level0 (movieclip), (32) 0 (object):
+4: valueOf!
+new: (x=_level0, y=0)
+polar: 
+Testing (21) _level0 (movieclip), (33) 1 (object):
+5: valueOf!
+new: (x=_level0, y=1)
+polar: 
+Testing (21) _level0 (movieclip), (34) 0.5 (object):
+6: valueOf!
+new: (x=_level0, y=0.5)
+polar: 
+Testing (21) _level0 (movieclip), (35) -1 (object):
+7: valueOf!
+new: (x=_level0, y=-1)
+polar: 
+Testing (21) _level0 (movieclip), (36) -0.5 (object):
+8: valueOf!
+new: (x=_level0, y=-0.5)
+polar: 
+Testing (21) _level0 (movieclip), (37) Infinity (object):
+9: valueOf!
+new: (x=_level0, y=Infinity)
+polar: 
+Testing (21) _level0 (movieclip), (38) -Infinity (object):
+10: valueOf!
+new: (x=_level0, y=-Infinity)
+polar: 
+Testing (21) _level0 (movieclip), (39) NaN (object):
+11: valueOf!
+new: (x=_level0, y=NaN)
+polar: 
+Testing (21) _level0 (movieclip), (40)  (object):
+12: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (21) _level0 (movieclip), (41) 0 (object):
+13: valueOf!
+new: (x=_level0, y=0)
+polar: 
+Testing (21) _level0 (movieclip), (42) -0 (object):
+14: valueOf!
+new: (x=_level0, y=-0)
+polar: 
+Testing (21) _level0 (movieclip), (43) 0.0 (object):
+15: valueOf!
+new: (x=_level0, y=0.0)
+polar: 
+Testing (21) _level0 (movieclip), (44) 1 (object):
+16: valueOf!
+new: (x=_level0, y=1)
+polar: 
+Testing (21) _level0 (movieclip), (45) Hello World! (object):
+17: valueOf!
+new: (x=_level0, y=Hello World!)
+polar: 
+Testing (21) _level0 (movieclip), (46) true (object):
+18: valueOf!
+new: (x=_level0, y=true)
+polar: 
+Testing (21) _level0 (movieclip), (47) _level0 (object):
+19: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (21) _level0 (movieclip), (48) äöü (object):
+20: valueOf!
+new: (x=_level0, y=äöü)
+polar: 
+Testing (21) _level0 (movieclip), (49) _level0 (object):
+21: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (21) _level0 (movieclip), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (21) _level0 (movieclip), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (22) [object Object] (object):
+new: (x=[object Object], y=)
+polar: 
+Testing (22) [object Object] (object), (22) [object Object] (object):
+new: (x=[object Object], y=[object Object])
+polar: 
+Testing (22) [object Object] (object), (23) [type Function] (function):
+new: (x=[object Object], y=[type Function])
+polar: 
+Testing (22) [object Object] (object), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (25) [type Object] (object):
+toString called with 
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (26) [object Object] (object):
+valueOf called with 
+new: (x=[object Object], y=[object Object])
+polar: 
+Testing (22) [object Object] (object), (27)  (object):
+new: (x=[object Object], y=)
+polar: 
+Testing (22) [object Object] (object), (28)  (object):
+0: valueOf!
+new: (x=[object Object], y=)
+polar: 
+Testing (22) [object Object] (object), (29) null (object):
+1: valueOf!
+new: (x=[object Object], y=null)
+polar: 
+Testing (22) [object Object] (object), (30) true (object):
+2: valueOf!
+new: (x=[object Object], y=true)
+polar: 
+Testing (22) [object Object] (object), (31) false (object):
+3: valueOf!
+new: (x=[object Object], y=false)
+polar: 
+Testing (22) [object Object] (object), (32) 0 (object):
+4: valueOf!
+new: (x=[object Object], y=0)
+polar: 
+Testing (22) [object Object] (object), (33) 1 (object):
+5: valueOf!
+new: (x=[object Object], y=1)
+polar: 
+Testing (22) [object Object] (object), (34) 0.5 (object):
+6: valueOf!
+new: (x=[object Object], y=0.5)
+polar: 
+Testing (22) [object Object] (object), (35) -1 (object):
+7: valueOf!
+new: (x=[object Object], y=-1)
+polar: 
+Testing (22) [object Object] (object), (36) -0.5 (object):
+8: valueOf!
+new: (x=[object Object], y=-0.5)
+polar: 
+Testing (22) [object Object] (object), (37) Infinity (object):
+9: valueOf!
+new: (x=[object Object], y=Infinity)
+polar: 
+Testing (22) [object Object] (object), (38) -Infinity (object):
+10: valueOf!
+new: (x=[object Object], y=-Infinity)
+polar: 
+Testing (22) [object Object] (object), (39) NaN (object):
+11: valueOf!
+new: (x=[object Object], y=NaN)
+polar: 
+Testing (22) [object Object] (object), (40)  (object):
+12: valueOf!
+new: (x=[object Object], y=)
+polar: 
+Testing (22) [object Object] (object), (41) 0 (object):
+13: valueOf!
+new: (x=[object Object], y=0)
+polar: 
+Testing (22) [object Object] (object), (42) -0 (object):
+14: valueOf!
+new: (x=[object Object], y=-0)
+polar: 
+Testing (22) [object Object] (object), (43) 0.0 (object):
+15: valueOf!
+new: (x=[object Object], y=0.0)
+polar: 
+Testing (22) [object Object] (object), (44) 1 (object):
+16: valueOf!
+new: (x=[object Object], y=1)
+polar: 
+Testing (22) [object Object] (object), (45) Hello World! (object):
+17: valueOf!
+new: (x=[object Object], y=Hello World!)
+polar: 
+Testing (22) [object Object] (object), (46) true (object):
+18: valueOf!
+new: (x=[object Object], y=true)
+polar: 
+Testing (22) [object Object] (object), (47) _level0 (object):
+19: valueOf!
+new: (x=[object Object], y=_level0)
+polar: 
+Testing (22) [object Object] (object), (48) äöü (object):
+20: valueOf!
+new: (x=[object Object], y=äöü)
+polar: 
+Testing (22) [object Object] (object), (49) _level0 (object):
+21: valueOf!
+new: (x=[object Object], y=_level0)
+polar: 
+Testing (22) [object Object] (object), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (22) [object Object] (object), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (23) [type Function] (function):
+new: (x=[type Function], y=)
+polar: 
+Testing (23) [type Function] (function), (23) [type Function] (function):
+new: (x=[type Function], y=[type Function])
+polar: 
+Testing (23) [type Function] (function), (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (25) [type Object] (object):
+toString called with 
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (26) [object Object] (object):
+valueOf called with 
+new: (x=[type Function], y=[object Object])
+polar: 
+Testing (23) [type Function] (function), (27)  (object):
+new: (x=[type Function], y=)
+polar: 
+Testing (23) [type Function] (function), (28)  (object):
+0: valueOf!
+new: (x=[type Function], y=)
+polar: 
+Testing (23) [type Function] (function), (29) null (object):
+1: valueOf!
+new: (x=[type Function], y=null)
+polar: 
+Testing (23) [type Function] (function), (30) true (object):
+2: valueOf!
+new: (x=[type Function], y=true)
+polar: 
+Testing (23) [type Function] (function), (31) false (object):
+3: valueOf!
+new: (x=[type Function], y=false)
+polar: 
+Testing (23) [type Function] (function), (32) 0 (object):
+4: valueOf!
+new: (x=[type Function], y=0)
+polar: 
+Testing (23) [type Function] (function), (33) 1 (object):
+5: valueOf!
+new: (x=[type Function], y=1)
+polar: 
+Testing (23) [type Function] (function), (34) 0.5 (object):
+6: valueOf!
+new: (x=[type Function], y=0.5)
+polar: 
+Testing (23) [type Function] (function), (35) -1 (object):
+7: valueOf!
+new: (x=[type Function], y=-1)
+polar: 
+Testing (23) [type Function] (function), (36) -0.5 (object):
+8: valueOf!
+new: (x=[type Function], y=-0.5)
+polar: 
+Testing (23) [type Function] (function), (37) Infinity (object):
+9: valueOf!
+new: (x=[type Function], y=Infinity)
+polar: 
+Testing (23) [type Function] (function), (38) -Infinity (object):
+10: valueOf!
+new: (x=[type Function], y=-Infinity)
+polar: 
+Testing (23) [type Function] (function), (39) NaN (object):
+11: valueOf!
+new: (x=[type Function], y=NaN)
+polar: 
+Testing (23) [type Function] (function), (40)  (object):
+12: valueOf!
+new: (x=[type Function], y=)
+polar: 
+Testing (23) [type Function] (function), (41) 0 (object):
+13: valueOf!
+new: (x=[type Function], y=0)
+polar: 
+Testing (23) [type Function] (function), (42) -0 (object):
+14: valueOf!
+new: (x=[type Function], y=-0)
+polar: 
+Testing (23) [type Function] (function), (43) 0.0 (object):
+15: valueOf!
+new: (x=[type Function], y=0.0)
+polar: 
+Testing (23) [type Function] (function), (44) 1 (object):
+16: valueOf!
+new: (x=[type Function], y=1)
+polar: 
+Testing (23) [type Function] (function), (45) Hello World! (object):
+17: valueOf!
+new: (x=[type Function], y=Hello World!)
+polar: 
+Testing (23) [type Function] (function), (46) true (object):
+18: valueOf!
+new: (x=[type Function], y=true)
+polar: 
+Testing (23) [type Function] (function), (47) _level0 (object):
+19: valueOf!
+new: (x=[type Function], y=_level0)
+polar: 
+Testing (23) [type Function] (function), (48) äöü (object):
+20: valueOf!
+new: (x=[type Function], y=äöü)
+polar: 
+Testing (23) [type Function] (function), (49) _level0 (object):
+21: valueOf!
+new: (x=[type Function], y=_level0)
+polar: 
+Testing (23) [type Function] (function), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (23) [type Function] (function), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=[type Function], y=[type Object])
+polar: 
+Testing (24) [type Object] (object):
+valueOf called
+toString called
+new: (x=[type Object], y=)
+polar: 
+Testing (24) [type Object] (object), (24) [type Object] (object):
+valueOf called
+toString called
+valueOf called
+toString called
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (25) [type Object] (object):
+valueOf called
+toString called
+toString called with 
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (26) [object Object] (object):
+valueOf called
+toString called
+valueOf called with 
+new: (x=[type Object], y=[object Object])
+polar: 
+Testing (24) [type Object] (object), (27)  (object):
+valueOf called
+toString called
+new: (x=[type Object], y=)
+polar: 
+Testing (24) [type Object] (object), (28)  (object):
+valueOf called
+toString called
+0: valueOf!
+new: (x=[type Object], y=)
+polar: 
+Testing (24) [type Object] (object), (29) null (object):
+valueOf called
+toString called
+1: valueOf!
+new: (x=[type Object], y=null)
+polar: 
+Testing (24) [type Object] (object), (30) true (object):
+valueOf called
+toString called
+2: valueOf!
+new: (x=[type Object], y=true)
+polar: 
+Testing (24) [type Object] (object), (31) false (object):
+valueOf called
+toString called
+3: valueOf!
+new: (x=[type Object], y=false)
+polar: 
+Testing (24) [type Object] (object), (32) 0 (object):
+valueOf called
+toString called
+4: valueOf!
+new: (x=[type Object], y=0)
+polar: 
+Testing (24) [type Object] (object), (33) 1 (object):
+valueOf called
+toString called
+5: valueOf!
+new: (x=[type Object], y=1)
+polar: 
+Testing (24) [type Object] (object), (34) 0.5 (object):
+valueOf called
+toString called
+6: valueOf!
+new: (x=[type Object], y=0.5)
+polar: 
+Testing (24) [type Object] (object), (35) -1 (object):
+valueOf called
+toString called
+7: valueOf!
+new: (x=[type Object], y=-1)
+polar: 
+Testing (24) [type Object] (object), (36) -0.5 (object):
+valueOf called
+toString called
+8: valueOf!
+new: (x=[type Object], y=-0.5)
+polar: 
+Testing (24) [type Object] (object), (37) Infinity (object):
+valueOf called
+toString called
+9: valueOf!
+new: (x=[type Object], y=Infinity)
+polar: 
+Testing (24) [type Object] (object), (38) -Infinity (object):
+valueOf called
+toString called
+10: valueOf!
+new: (x=[type Object], y=-Infinity)
+polar: 
+Testing (24) [type Object] (object), (39) NaN (object):
+valueOf called
+toString called
+11: valueOf!
+new: (x=[type Object], y=NaN)
+polar: 
+Testing (24) [type Object] (object), (40)  (object):
+valueOf called
+toString called
+12: valueOf!
+new: (x=[type Object], y=)
+polar: 
+Testing (24) [type Object] (object), (41) 0 (object):
+valueOf called
+toString called
+13: valueOf!
+new: (x=[type Object], y=0)
+polar: 
+Testing (24) [type Object] (object), (42) -0 (object):
+valueOf called
+toString called
+14: valueOf!
+new: (x=[type Object], y=-0)
+polar: 
+Testing (24) [type Object] (object), (43) 0.0 (object):
+valueOf called
+toString called
+15: valueOf!
+new: (x=[type Object], y=0.0)
+polar: 
+Testing (24) [type Object] (object), (44) 1 (object):
+valueOf called
+toString called
+16: valueOf!
+new: (x=[type Object], y=1)
+polar: 
+Testing (24) [type Object] (object), (45) Hello World! (object):
+valueOf called
+toString called
+17: valueOf!
+new: (x=[type Object], y=Hello World!)
+polar: 
+Testing (24) [type Object] (object), (46) true (object):
+valueOf called
+toString called
+18: valueOf!
+new: (x=[type Object], y=true)
+polar: 
+Testing (24) [type Object] (object), (47) _level0 (object):
+valueOf called
+toString called
+19: valueOf!
+new: (x=[type Object], y=_level0)
+polar: 
+Testing (24) [type Object] (object), (48) äöü (object):
+valueOf called
+toString called
+20: valueOf!
+new: (x=[type Object], y=äöü)
+polar: 
+Testing (24) [type Object] (object), (49) _level0 (object):
+valueOf called
+toString called
+21: valueOf!
+new: (x=[type Object], y=_level0)
+polar: 
+Testing (24) [type Object] (object), (50) [type Object] (object):
+valueOf called
+toString called
+22: valueOf!
+22: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (51) [type Object] (object):
+valueOf called
+toString called
+23: valueOf!
+23: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (52) [type Object] (object):
+valueOf called
+toString called
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (53) [type Object] (object):
+valueOf called
+toString called
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (54) [type Object] (object):
+valueOf called
+toString called
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (24) [type Object] (object), (55) [type Object] (object):
+valueOf called
+toString called
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object):
+toString called with 
+new: (x=[type Object], y=)
+polar: 
+Testing (25) [type Object] (object), (25) [type Object] (object):
+toString called with 
+toString called with 
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (26) [object Object] (object):
+toString called with 
+valueOf called with 
+new: (x=[type Object], y=[object Object])
+polar: 
+Testing (25) [type Object] (object), (27)  (object):
+toString called with 
+new: (x=[type Object], y=)
+polar: 
+Testing (25) [type Object] (object), (28)  (object):
+toString called with 
+0: valueOf!
+new: (x=[type Object], y=)
+polar: 
+Testing (25) [type Object] (object), (29) null (object):
+toString called with 
+1: valueOf!
+new: (x=[type Object], y=null)
+polar: 
+Testing (25) [type Object] (object), (30) true (object):
+toString called with 
+2: valueOf!
+new: (x=[type Object], y=true)
+polar: 
+Testing (25) [type Object] (object), (31) false (object):
+toString called with 
+3: valueOf!
+new: (x=[type Object], y=false)
+polar: 
+Testing (25) [type Object] (object), (32) 0 (object):
+toString called with 
+4: valueOf!
+new: (x=[type Object], y=0)
+polar: 
+Testing (25) [type Object] (object), (33) 1 (object):
+toString called with 
+5: valueOf!
+new: (x=[type Object], y=1)
+polar: 
+Testing (25) [type Object] (object), (34) 0.5 (object):
+toString called with 
+6: valueOf!
+new: (x=[type Object], y=0.5)
+polar: 
+Testing (25) [type Object] (object), (35) -1 (object):
+toString called with 
+7: valueOf!
+new: (x=[type Object], y=-1)
+polar: 
+Testing (25) [type Object] (object), (36) -0.5 (object):
+toString called with 
+8: valueOf!
+new: (x=[type Object], y=-0.5)
+polar: 
+Testing (25) [type Object] (object), (37) Infinity (object):
+toString called with 
+9: valueOf!
+new: (x=[type Object], y=Infinity)
+polar: 
+Testing (25) [type Object] (object), (38) -Infinity (object):
+toString called with 
+10: valueOf!
+new: (x=[type Object], y=-Infinity)
+polar: 
+Testing (25) [type Object] (object), (39) NaN (object):
+toString called with 
+11: valueOf!
+new: (x=[type Object], y=NaN)
+polar: 
+Testing (25) [type Object] (object), (40)  (object):
+toString called with 
+12: valueOf!
+new: (x=[type Object], y=)
+polar: 
+Testing (25) [type Object] (object), (41) 0 (object):
+toString called with 
+13: valueOf!
+new: (x=[type Object], y=0)
+polar: 
+Testing (25) [type Object] (object), (42) -0 (object):
+toString called with 
+14: valueOf!
+new: (x=[type Object], y=-0)
+polar: 
+Testing (25) [type Object] (object), (43) 0.0 (object):
+toString called with 
+15: valueOf!
+new: (x=[type Object], y=0.0)
+polar: 
+Testing (25) [type Object] (object), (44) 1 (object):
+toString called with 
+16: valueOf!
+new: (x=[type Object], y=1)
+polar: 
+Testing (25) [type Object] (object), (45) Hello World! (object):
+toString called with 
+17: valueOf!
+new: (x=[type Object], y=Hello World!)
+polar: 
+Testing (25) [type Object] (object), (46) true (object):
+toString called with 
+18: valueOf!
+new: (x=[type Object], y=true)
+polar: 
+Testing (25) [type Object] (object), (47) _level0 (object):
+toString called with 
+19: valueOf!
+new: (x=[type Object], y=_level0)
+polar: 
+Testing (25) [type Object] (object), (48) äöü (object):
+toString called with 
+20: valueOf!
+new: (x=[type Object], y=äöü)
+polar: 
+Testing (25) [type Object] (object), (49) _level0 (object):
+toString called with 
+21: valueOf!
+new: (x=[type Object], y=_level0)
+polar: 
+Testing (25) [type Object] (object), (50) [type Object] (object):
+toString called with 
+22: valueOf!
+22: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (51) [type Object] (object):
+toString called with 
+23: valueOf!
+23: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (52) [type Object] (object):
+toString called with 
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (53) [type Object] (object):
+toString called with 
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (54) [type Object] (object):
+toString called with 
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (25) [type Object] (object), (55) [type Object] (object):
+toString called with 
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object):
+valueOf called with 
+new: (x=[object Object], y=)
+polar: 
+Testing (26) [object Object] (object), (26) [object Object] (object):
+valueOf called with 
+valueOf called with 
+new: (x=[object Object], y=[object Object])
+polar: 
+Testing (26) [object Object] (object), (27)  (object):
+valueOf called with 
+new: (x=[object Object], y=)
+polar: 
+Testing (26) [object Object] (object), (28)  (object):
+valueOf called with 
+0: valueOf!
+new: (x=[object Object], y=)
+polar: 
+Testing (26) [object Object] (object), (29) null (object):
+valueOf called with 
+1: valueOf!
+new: (x=[object Object], y=null)
+polar: 
+Testing (26) [object Object] (object), (30) true (object):
+valueOf called with 
+2: valueOf!
+new: (x=[object Object], y=true)
+polar: 
+Testing (26) [object Object] (object), (31) false (object):
+valueOf called with 
+3: valueOf!
+new: (x=[object Object], y=false)
+polar: 
+Testing (26) [object Object] (object), (32) 0 (object):
+valueOf called with 
+4: valueOf!
+new: (x=[object Object], y=0)
+polar: 
+Testing (26) [object Object] (object), (33) 1 (object):
+valueOf called with 
+5: valueOf!
+new: (x=[object Object], y=1)
+polar: 
+Testing (26) [object Object] (object), (34) 0.5 (object):
+valueOf called with 
+6: valueOf!
+new: (x=[object Object], y=0.5)
+polar: 
+Testing (26) [object Object] (object), (35) -1 (object):
+valueOf called with 
+7: valueOf!
+new: (x=[object Object], y=-1)
+polar: 
+Testing (26) [object Object] (object), (36) -0.5 (object):
+valueOf called with 
+8: valueOf!
+new: (x=[object Object], y=-0.5)
+polar: 
+Testing (26) [object Object] (object), (37) Infinity (object):
+valueOf called with 
+9: valueOf!
+new: (x=[object Object], y=Infinity)
+polar: 
+Testing (26) [object Object] (object), (38) -Infinity (object):
+valueOf called with 
+10: valueOf!
+new: (x=[object Object], y=-Infinity)
+polar: 
+Testing (26) [object Object] (object), (39) NaN (object):
+valueOf called with 
+11: valueOf!
+new: (x=[object Object], y=NaN)
+polar: 
+Testing (26) [object Object] (object), (40)  (object):
+valueOf called with 
+12: valueOf!
+new: (x=[object Object], y=)
+polar: 
+Testing (26) [object Object] (object), (41) 0 (object):
+valueOf called with 
+13: valueOf!
+new: (x=[object Object], y=0)
+polar: 
+Testing (26) [object Object] (object), (42) -0 (object):
+valueOf called with 
+14: valueOf!
+new: (x=[object Object], y=-0)
+polar: 
+Testing (26) [object Object] (object), (43) 0.0 (object):
+valueOf called with 
+15: valueOf!
+new: (x=[object Object], y=0.0)
+polar: 
+Testing (26) [object Object] (object), (44) 1 (object):
+valueOf called with 
+16: valueOf!
+new: (x=[object Object], y=1)
+polar: 
+Testing (26) [object Object] (object), (45) Hello World! (object):
+valueOf called with 
+17: valueOf!
+new: (x=[object Object], y=Hello World!)
+polar: 
+Testing (26) [object Object] (object), (46) true (object):
+valueOf called with 
+18: valueOf!
+new: (x=[object Object], y=true)
+polar: 
+Testing (26) [object Object] (object), (47) _level0 (object):
+valueOf called with 
+19: valueOf!
+new: (x=[object Object], y=_level0)
+polar: 
+Testing (26) [object Object] (object), (48) äöü (object):
+valueOf called with 
+20: valueOf!
+new: (x=[object Object], y=äöü)
+polar: 
+Testing (26) [object Object] (object), (49) _level0 (object):
+valueOf called with 
+21: valueOf!
+new: (x=[object Object], y=_level0)
+polar: 
+Testing (26) [object Object] (object), (50) [type Object] (object):
+valueOf called with 
+22: valueOf!
+22: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object), (51) [type Object] (object):
+valueOf called with 
+23: valueOf!
+23: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object), (52) [type Object] (object):
+valueOf called with 
+24: valueOf!
+24: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object), (53) [type Object] (object):
+valueOf called with 
+25: valueOf!
+25: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object), (54) [type Object] (object):
+valueOf called with 
+26: valueOf!
+26: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (26) [object Object] (object), (55) [type Object] (object):
+valueOf called with 
+27: valueOf!
+27: toString!
+new: (x=[object Object], y=[type Object])
+polar: 
+Testing (27)  (object):
+new: (x=, y=)
+polar: 
+Testing (27)  (object), (27)  (object):
+new: (x=, y=)
+polar: 
+Testing (27)  (object), (28)  (object):
+0: valueOf!
+new: (x=, y=)
+polar: 
+Testing (27)  (object), (29) null (object):
+1: valueOf!
+new: (x=, y=null)
+polar: 
+Testing (27)  (object), (30) true (object):
+2: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (27)  (object), (31) false (object):
+3: valueOf!
+new: (x=, y=false)
+polar: 
+Testing (27)  (object), (32) 0 (object):
+4: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (27)  (object), (33) 1 (object):
+5: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (27)  (object), (34) 0.5 (object):
+6: valueOf!
+new: (x=, y=0.5)
+polar: 
+Testing (27)  (object), (35) -1 (object):
+7: valueOf!
+new: (x=, y=-1)
+polar: 
+Testing (27)  (object), (36) -0.5 (object):
+8: valueOf!
+new: (x=, y=-0.5)
+polar: 
+Testing (27)  (object), (37) Infinity (object):
+9: valueOf!
+new: (x=, y=Infinity)
+polar: 
+Testing (27)  (object), (38) -Infinity (object):
+10: valueOf!
+new: (x=, y=-Infinity)
+polar: 
+Testing (27)  (object), (39) NaN (object):
+11: valueOf!
+new: (x=, y=NaN)
+polar: 
+Testing (27)  (object), (40)  (object):
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (27)  (object), (41) 0 (object):
+13: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (27)  (object), (42) -0 (object):
+14: valueOf!
+new: (x=, y=-0)
+polar: 
+Testing (27)  (object), (43) 0.0 (object):
+15: valueOf!
+new: (x=, y=0.0)
+polar: 
+Testing (27)  (object), (44) 1 (object):
+16: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (27)  (object), (45) Hello World! (object):
+17: valueOf!
+new: (x=, y=Hello World!)
+polar: 
+Testing (27)  (object), (46) true (object):
+18: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (27)  (object), (47) _level0 (object):
+19: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (27)  (object), (48) äöü (object):
+20: valueOf!
+new: (x=, y=äöü)
+polar: 
+Testing (27)  (object), (49) _level0 (object):
+21: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (27)  (object), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (27)  (object), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (27)  (object), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (27)  (object), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (27)  (object), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (27)  (object), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object):
+0: valueOf!
+new: (x=, y=)
+polar: 
+Testing (28)  (object), (28)  (object):
+0: valueOf!
+0: valueOf!
+new: (x=, y=)
+polar: 
+Testing (28)  (object), (29) null (object):
+0: valueOf!
+1: valueOf!
+new: (x=, y=null)
+polar: 
+Testing (28)  (object), (30) true (object):
+0: valueOf!
+2: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (28)  (object), (31) false (object):
+0: valueOf!
+3: valueOf!
+new: (x=, y=false)
+polar: 
+Testing (28)  (object), (32) 0 (object):
+0: valueOf!
+4: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (28)  (object), (33) 1 (object):
+0: valueOf!
+5: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (28)  (object), (34) 0.5 (object):
+0: valueOf!
+6: valueOf!
+new: (x=, y=0.5)
+polar: 
+Testing (28)  (object), (35) -1 (object):
+0: valueOf!
+7: valueOf!
+new: (x=, y=-1)
+polar: 
+Testing (28)  (object), (36) -0.5 (object):
+0: valueOf!
+8: valueOf!
+new: (x=, y=-0.5)
+polar: 
+Testing (28)  (object), (37) Infinity (object):
+0: valueOf!
+9: valueOf!
+new: (x=, y=Infinity)
+polar: 
+Testing (28)  (object), (38) -Infinity (object):
+0: valueOf!
+10: valueOf!
+new: (x=, y=-Infinity)
+polar: 
+Testing (28)  (object), (39) NaN (object):
+0: valueOf!
+11: valueOf!
+new: (x=, y=NaN)
+polar: 
+Testing (28)  (object), (40)  (object):
+0: valueOf!
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (28)  (object), (41) 0 (object):
+0: valueOf!
+13: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (28)  (object), (42) -0 (object):
+0: valueOf!
+14: valueOf!
+new: (x=, y=-0)
+polar: 
+Testing (28)  (object), (43) 0.0 (object):
+0: valueOf!
+15: valueOf!
+new: (x=, y=0.0)
+polar: 
+Testing (28)  (object), (44) 1 (object):
+0: valueOf!
+16: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (28)  (object), (45) Hello World! (object):
+0: valueOf!
+17: valueOf!
+new: (x=, y=Hello World!)
+polar: 
+Testing (28)  (object), (46) true (object):
+0: valueOf!
+18: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (28)  (object), (47) _level0 (object):
+0: valueOf!
+19: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (28)  (object), (48) äöü (object):
+0: valueOf!
+20: valueOf!
+new: (x=, y=äöü)
+polar: 
+Testing (28)  (object), (49) _level0 (object):
+0: valueOf!
+21: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (28)  (object), (50) [type Object] (object):
+0: valueOf!
+22: valueOf!
+22: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object), (51) [type Object] (object):
+0: valueOf!
+23: valueOf!
+23: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object), (52) [type Object] (object):
+0: valueOf!
+24: valueOf!
+24: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object), (53) [type Object] (object):
+0: valueOf!
+25: valueOf!
+25: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object), (54) [type Object] (object):
+0: valueOf!
+26: valueOf!
+26: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (28)  (object), (55) [type Object] (object):
+0: valueOf!
+27: valueOf!
+27: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (29) null (object):
+1: valueOf!
+new: (x=null, y=)
+polar: 
+Testing (29) null (object), (29) null (object):
+1: valueOf!
+1: valueOf!
+new: (x=null, y=null)
+polar: 
+Testing (29) null (object), (30) true (object):
+1: valueOf!
+2: valueOf!
+new: (x=null, y=true)
+polar: 
+Testing (29) null (object), (31) false (object):
+1: valueOf!
+3: valueOf!
+new: (x=null, y=false)
+polar: 
+Testing (29) null (object), (32) 0 (object):
+1: valueOf!
+4: valueOf!
+new: (x=null, y=0)
+polar: 
+Testing (29) null (object), (33) 1 (object):
+1: valueOf!
+5: valueOf!
+new: (x=null, y=1)
+polar: 
+Testing (29) null (object), (34) 0.5 (object):
+1: valueOf!
+6: valueOf!
+new: (x=null, y=0.5)
+polar: 
+Testing (29) null (object), (35) -1 (object):
+1: valueOf!
+7: valueOf!
+new: (x=null, y=-1)
+polar: 
+Testing (29) null (object), (36) -0.5 (object):
+1: valueOf!
+8: valueOf!
+new: (x=null, y=-0.5)
+polar: 
+Testing (29) null (object), (37) Infinity (object):
+1: valueOf!
+9: valueOf!
+new: (x=null, y=Infinity)
+polar: 
+Testing (29) null (object), (38) -Infinity (object):
+1: valueOf!
+10: valueOf!
+new: (x=null, y=-Infinity)
+polar: 
+Testing (29) null (object), (39) NaN (object):
+1: valueOf!
+11: valueOf!
+new: (x=null, y=NaN)
+polar: 
+Testing (29) null (object), (40)  (object):
+1: valueOf!
+12: valueOf!
+new: (x=null, y=)
+polar: 
+Testing (29) null (object), (41) 0 (object):
+1: valueOf!
+13: valueOf!
+new: (x=null, y=0)
+polar: 
+Testing (29) null (object), (42) -0 (object):
+1: valueOf!
+14: valueOf!
+new: (x=null, y=-0)
+polar: 
+Testing (29) null (object), (43) 0.0 (object):
+1: valueOf!
+15: valueOf!
+new: (x=null, y=0.0)
+polar: 
+Testing (29) null (object), (44) 1 (object):
+1: valueOf!
+16: valueOf!
+new: (x=null, y=1)
+polar: 
+Testing (29) null (object), (45) Hello World! (object):
+1: valueOf!
+17: valueOf!
+new: (x=null, y=Hello World!)
+polar: 
+Testing (29) null (object), (46) true (object):
+1: valueOf!
+18: valueOf!
+new: (x=null, y=true)
+polar: 
+Testing (29) null (object), (47) _level0 (object):
+1: valueOf!
+19: valueOf!
+new: (x=null, y=_level0)
+polar: 
+Testing (29) null (object), (48) äöü (object):
+1: valueOf!
+20: valueOf!
+new: (x=null, y=äöü)
+polar: 
+Testing (29) null (object), (49) _level0 (object):
+1: valueOf!
+21: valueOf!
+new: (x=null, y=_level0)
+polar: 
+Testing (29) null (object), (50) [type Object] (object):
+1: valueOf!
+22: valueOf!
+22: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (29) null (object), (51) [type Object] (object):
+1: valueOf!
+23: valueOf!
+23: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (29) null (object), (52) [type Object] (object):
+1: valueOf!
+24: valueOf!
+24: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (29) null (object), (53) [type Object] (object):
+1: valueOf!
+25: valueOf!
+25: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (29) null (object), (54) [type Object] (object):
+1: valueOf!
+26: valueOf!
+26: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (29) null (object), (55) [type Object] (object):
+1: valueOf!
+27: valueOf!
+27: toString!
+new: (x=null, y=[type Object])
+polar: 
+Testing (30) true (object):
+2: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (30) true (object), (30) true (object):
+2: valueOf!
+2: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (30) true (object), (31) false (object):
+2: valueOf!
+3: valueOf!
+new: (x=true, y=false)
+polar: 
+Testing (30) true (object), (32) 0 (object):
+2: valueOf!
+4: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (30) true (object), (33) 1 (object):
+2: valueOf!
+5: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (30) true (object), (34) 0.5 (object):
+2: valueOf!
+6: valueOf!
+new: (x=true, y=0.5)
+polar: 
+Testing (30) true (object), (35) -1 (object):
+2: valueOf!
+7: valueOf!
+new: (x=true, y=-1)
+polar: 
+Testing (30) true (object), (36) -0.5 (object):
+2: valueOf!
+8: valueOf!
+new: (x=true, y=-0.5)
+polar: 
+Testing (30) true (object), (37) Infinity (object):
+2: valueOf!
+9: valueOf!
+new: (x=true, y=Infinity)
+polar: 
+Testing (30) true (object), (38) -Infinity (object):
+2: valueOf!
+10: valueOf!
+new: (x=true, y=-Infinity)
+polar: 
+Testing (30) true (object), (39) NaN (object):
+2: valueOf!
+11: valueOf!
+new: (x=true, y=NaN)
+polar: 
+Testing (30) true (object), (40)  (object):
+2: valueOf!
+12: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (30) true (object), (41) 0 (object):
+2: valueOf!
+13: valueOf!
+new: (x=true, y=0)
+polar: 
+Testing (30) true (object), (42) -0 (object):
+2: valueOf!
+14: valueOf!
+new: (x=true, y=-0)
+polar: 
+Testing (30) true (object), (43) 0.0 (object):
+2: valueOf!
+15: valueOf!
+new: (x=true, y=0.0)
+polar: 
+Testing (30) true (object), (44) 1 (object):
+2: valueOf!
+16: valueOf!
+new: (x=true, y=1)
+polar: 
+Testing (30) true (object), (45) Hello World! (object):
+2: valueOf!
+17: valueOf!
+new: (x=true, y=Hello World!)
+polar: 
+Testing (30) true (object), (46) true (object):
+2: valueOf!
+18: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (30) true (object), (47) _level0 (object):
+2: valueOf!
+19: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (30) true (object), (48) äöü (object):
+2: valueOf!
+20: valueOf!
+new: (x=true, y=äöü)
+polar: 
+Testing (30) true (object), (49) _level0 (object):
+2: valueOf!
+21: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (30) true (object), (50) [type Object] (object):
+2: valueOf!
+22: valueOf!
+22: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (30) true (object), (51) [type Object] (object):
+2: valueOf!
+23: valueOf!
+23: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (30) true (object), (52) [type Object] (object):
+2: valueOf!
+24: valueOf!
+24: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (30) true (object), (53) [type Object] (object):
+2: valueOf!
+25: valueOf!
+25: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (30) true (object), (54) [type Object] (object):
+2: valueOf!
+26: valueOf!
+26: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (30) true (object), (55) [type Object] (object):
+2: valueOf!
+27: valueOf!
+27: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (31) false (object):
+3: valueOf!
+new: (x=false, y=)
+polar: 
+Testing (31) false (object), (31) false (object):
+3: valueOf!
+3: valueOf!
+new: (x=false, y=false)
+polar: 
+Testing (31) false (object), (32) 0 (object):
+3: valueOf!
+4: valueOf!
+new: (x=false, y=0)
+polar: 
+Testing (31) false (object), (33) 1 (object):
+3: valueOf!
+5: valueOf!
+new: (x=false, y=1)
+polar: 
+Testing (31) false (object), (34) 0.5 (object):
+3: valueOf!
+6: valueOf!
+new: (x=false, y=0.5)
+polar: 
+Testing (31) false (object), (35) -1 (object):
+3: valueOf!
+7: valueOf!
+new: (x=false, y=-1)
+polar: 
+Testing (31) false (object), (36) -0.5 (object):
+3: valueOf!
+8: valueOf!
+new: (x=false, y=-0.5)
+polar: 
+Testing (31) false (object), (37) Infinity (object):
+3: valueOf!
+9: valueOf!
+new: (x=false, y=Infinity)
+polar: 
+Testing (31) false (object), (38) -Infinity (object):
+3: valueOf!
+10: valueOf!
+new: (x=false, y=-Infinity)
+polar: 
+Testing (31) false (object), (39) NaN (object):
+3: valueOf!
+11: valueOf!
+new: (x=false, y=NaN)
+polar: 
+Testing (31) false (object), (40)  (object):
+3: valueOf!
+12: valueOf!
+new: (x=false, y=)
+polar: 
+Testing (31) false (object), (41) 0 (object):
+3: valueOf!
+13: valueOf!
+new: (x=false, y=0)
+polar: 
+Testing (31) false (object), (42) -0 (object):
+3: valueOf!
+14: valueOf!
+new: (x=false, y=-0)
+polar: 
+Testing (31) false (object), (43) 0.0 (object):
+3: valueOf!
+15: valueOf!
+new: (x=false, y=0.0)
+polar: 
+Testing (31) false (object), (44) 1 (object):
+3: valueOf!
+16: valueOf!
+new: (x=false, y=1)
+polar: 
+Testing (31) false (object), (45) Hello World! (object):
+3: valueOf!
+17: valueOf!
+new: (x=false, y=Hello World!)
+polar: 
+Testing (31) false (object), (46) true (object):
+3: valueOf!
+18: valueOf!
+new: (x=false, y=true)
+polar: 
+Testing (31) false (object), (47) _level0 (object):
+3: valueOf!
+19: valueOf!
+new: (x=false, y=_level0)
+polar: 
+Testing (31) false (object), (48) äöü (object):
+3: valueOf!
+20: valueOf!
+new: (x=false, y=äöü)
+polar: 
+Testing (31) false (object), (49) _level0 (object):
+3: valueOf!
+21: valueOf!
+new: (x=false, y=_level0)
+polar: 
+Testing (31) false (object), (50) [type Object] (object):
+3: valueOf!
+22: valueOf!
+22: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (31) false (object), (51) [type Object] (object):
+3: valueOf!
+23: valueOf!
+23: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (31) false (object), (52) [type Object] (object):
+3: valueOf!
+24: valueOf!
+24: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (31) false (object), (53) [type Object] (object):
+3: valueOf!
+25: valueOf!
+25: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (31) false (object), (54) [type Object] (object):
+3: valueOf!
+26: valueOf!
+26: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (31) false (object), (55) [type Object] (object):
+3: valueOf!
+27: valueOf!
+27: toString!
+new: (x=false, y=[type Object])
+polar: 
+Testing (32) 0 (object):
+4: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (32) 0 (object), (32) 0 (object):
+4: valueOf!
+4: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (32) 0 (object), (33) 1 (object):
+4: valueOf!
+5: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (32) 0 (object), (34) 0.5 (object):
+4: valueOf!
+6: valueOf!
+new: (x=0, y=0.5)
+polar: 
+Testing (32) 0 (object), (35) -1 (object):
+4: valueOf!
+7: valueOf!
+new: (x=0, y=-1)
+polar: 
+Testing (32) 0 (object), (36) -0.5 (object):
+4: valueOf!
+8: valueOf!
+new: (x=0, y=-0.5)
+polar: 
+Testing (32) 0 (object), (37) Infinity (object):
+4: valueOf!
+9: valueOf!
+new: (x=0, y=Infinity)
+polar: 
+Testing (32) 0 (object), (38) -Infinity (object):
+4: valueOf!
+10: valueOf!
+new: (x=0, y=-Infinity)
+polar: 
+Testing (32) 0 (object), (39) NaN (object):
+4: valueOf!
+11: valueOf!
+new: (x=0, y=NaN)
+polar: 
+Testing (32) 0 (object), (40)  (object):
+4: valueOf!
+12: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (32) 0 (object), (41) 0 (object):
+4: valueOf!
+13: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (32) 0 (object), (42) -0 (object):
+4: valueOf!
+14: valueOf!
+new: (x=0, y=-0)
+polar: 
+Testing (32) 0 (object), (43) 0.0 (object):
+4: valueOf!
+15: valueOf!
+new: (x=0, y=0.0)
+polar: 
+Testing (32) 0 (object), (44) 1 (object):
+4: valueOf!
+16: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (32) 0 (object), (45) Hello World! (object):
+4: valueOf!
+17: valueOf!
+new: (x=0, y=Hello World!)
+polar: 
+Testing (32) 0 (object), (46) true (object):
+4: valueOf!
+18: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (32) 0 (object), (47) _level0 (object):
+4: valueOf!
+19: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (32) 0 (object), (48) äöü (object):
+4: valueOf!
+20: valueOf!
+new: (x=0, y=äöü)
+polar: 
+Testing (32) 0 (object), (49) _level0 (object):
+4: valueOf!
+21: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (32) 0 (object), (50) [type Object] (object):
+4: valueOf!
+22: valueOf!
+22: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (32) 0 (object), (51) [type Object] (object):
+4: valueOf!
+23: valueOf!
+23: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (32) 0 (object), (52) [type Object] (object):
+4: valueOf!
+24: valueOf!
+24: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (32) 0 (object), (53) [type Object] (object):
+4: valueOf!
+25: valueOf!
+25: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (32) 0 (object), (54) [type Object] (object):
+4: valueOf!
+26: valueOf!
+26: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (32) 0 (object), (55) [type Object] (object):
+4: valueOf!
+27: valueOf!
+27: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (33) 1 (object):
+5: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (33) 1 (object), (33) 1 (object):
+5: valueOf!
+5: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (33) 1 (object), (34) 0.5 (object):
+5: valueOf!
+6: valueOf!
+new: (x=1, y=0.5)
+polar: 
+Testing (33) 1 (object), (35) -1 (object):
+5: valueOf!
+7: valueOf!
+new: (x=1, y=-1)
+polar: 
+Testing (33) 1 (object), (36) -0.5 (object):
+5: valueOf!
+8: valueOf!
+new: (x=1, y=-0.5)
+polar: 
+Testing (33) 1 (object), (37) Infinity (object):
+5: valueOf!
+9: valueOf!
+new: (x=1, y=Infinity)
+polar: 
+Testing (33) 1 (object), (38) -Infinity (object):
+5: valueOf!
+10: valueOf!
+new: (x=1, y=-Infinity)
+polar: 
+Testing (33) 1 (object), (39) NaN (object):
+5: valueOf!
+11: valueOf!
+new: (x=1, y=NaN)
+polar: 
+Testing (33) 1 (object), (40)  (object):
+5: valueOf!
+12: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (33) 1 (object), (41) 0 (object):
+5: valueOf!
+13: valueOf!
+new: (x=1, y=0)
+polar: 
+Testing (33) 1 (object), (42) -0 (object):
+5: valueOf!
+14: valueOf!
+new: (x=1, y=-0)
+polar: 
+Testing (33) 1 (object), (43) 0.0 (object):
+5: valueOf!
+15: valueOf!
+new: (x=1, y=0.0)
+polar: 
+Testing (33) 1 (object), (44) 1 (object):
+5: valueOf!
+16: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (33) 1 (object), (45) Hello World! (object):
+5: valueOf!
+17: valueOf!
+new: (x=1, y=Hello World!)
+polar: 
+Testing (33) 1 (object), (46) true (object):
+5: valueOf!
+18: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (33) 1 (object), (47) _level0 (object):
+5: valueOf!
+19: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (33) 1 (object), (48) äöü (object):
+5: valueOf!
+20: valueOf!
+new: (x=1, y=äöü)
+polar: 
+Testing (33) 1 (object), (49) _level0 (object):
+5: valueOf!
+21: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (33) 1 (object), (50) [type Object] (object):
+5: valueOf!
+22: valueOf!
+22: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (33) 1 (object), (51) [type Object] (object):
+5: valueOf!
+23: valueOf!
+23: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (33) 1 (object), (52) [type Object] (object):
+5: valueOf!
+24: valueOf!
+24: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (33) 1 (object), (53) [type Object] (object):
+5: valueOf!
+25: valueOf!
+25: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (33) 1 (object), (54) [type Object] (object):
+5: valueOf!
+26: valueOf!
+26: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (33) 1 (object), (55) [type Object] (object):
+5: valueOf!
+27: valueOf!
+27: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (34) 0.5 (object):
+6: valueOf!
+new: (x=0.5, y=)
+polar: 
+Testing (34) 0.5 (object), (34) 0.5 (object):
+6: valueOf!
+6: valueOf!
+new: (x=0.5, y=0.5)
+polar: 
+Testing (34) 0.5 (object), (35) -1 (object):
+6: valueOf!
+7: valueOf!
+new: (x=0.5, y=-1)
+polar: 
+Testing (34) 0.5 (object), (36) -0.5 (object):
+6: valueOf!
+8: valueOf!
+new: (x=0.5, y=-0.5)
+polar: 
+Testing (34) 0.5 (object), (37) Infinity (object):
+6: valueOf!
+9: valueOf!
+new: (x=0.5, y=Infinity)
+polar: 
+Testing (34) 0.5 (object), (38) -Infinity (object):
+6: valueOf!
+10: valueOf!
+new: (x=0.5, y=-Infinity)
+polar: 
+Testing (34) 0.5 (object), (39) NaN (object):
+6: valueOf!
+11: valueOf!
+new: (x=0.5, y=NaN)
+polar: 
+Testing (34) 0.5 (object), (40)  (object):
+6: valueOf!
+12: valueOf!
+new: (x=0.5, y=)
+polar: 
+Testing (34) 0.5 (object), (41) 0 (object):
+6: valueOf!
+13: valueOf!
+new: (x=0.5, y=0)
+polar: 
+Testing (34) 0.5 (object), (42) -0 (object):
+6: valueOf!
+14: valueOf!
+new: (x=0.5, y=-0)
+polar: 
+Testing (34) 0.5 (object), (43) 0.0 (object):
+6: valueOf!
+15: valueOf!
+new: (x=0.5, y=0.0)
+polar: 
+Testing (34) 0.5 (object), (44) 1 (object):
+6: valueOf!
+16: valueOf!
+new: (x=0.5, y=1)
+polar: 
+Testing (34) 0.5 (object), (45) Hello World! (object):
+6: valueOf!
+17: valueOf!
+new: (x=0.5, y=Hello World!)
+polar: 
+Testing (34) 0.5 (object), (46) true (object):
+6: valueOf!
+18: valueOf!
+new: (x=0.5, y=true)
+polar: 
+Testing (34) 0.5 (object), (47) _level0 (object):
+6: valueOf!
+19: valueOf!
+new: (x=0.5, y=_level0)
+polar: 
+Testing (34) 0.5 (object), (48) äöü (object):
+6: valueOf!
+20: valueOf!
+new: (x=0.5, y=äöü)
+polar: 
+Testing (34) 0.5 (object), (49) _level0 (object):
+6: valueOf!
+21: valueOf!
+new: (x=0.5, y=_level0)
+polar: 
+Testing (34) 0.5 (object), (50) [type Object] (object):
+6: valueOf!
+22: valueOf!
+22: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (34) 0.5 (object), (51) [type Object] (object):
+6: valueOf!
+23: valueOf!
+23: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (34) 0.5 (object), (52) [type Object] (object):
+6: valueOf!
+24: valueOf!
+24: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (34) 0.5 (object), (53) [type Object] (object):
+6: valueOf!
+25: valueOf!
+25: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (34) 0.5 (object), (54) [type Object] (object):
+6: valueOf!
+26: valueOf!
+26: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (34) 0.5 (object), (55) [type Object] (object):
+6: valueOf!
+27: valueOf!
+27: toString!
+new: (x=0.5, y=[type Object])
+polar: 
+Testing (35) -1 (object):
+7: valueOf!
+new: (x=-1, y=)
+polar: 
+Testing (35) -1 (object), (35) -1 (object):
+7: valueOf!
+7: valueOf!
+new: (x=-1, y=-1)
+polar: 
+Testing (35) -1 (object), (36) -0.5 (object):
+7: valueOf!
+8: valueOf!
+new: (x=-1, y=-0.5)
+polar: 
+Testing (35) -1 (object), (37) Infinity (object):
+7: valueOf!
+9: valueOf!
+new: (x=-1, y=Infinity)
+polar: 
+Testing (35) -1 (object), (38) -Infinity (object):
+7: valueOf!
+10: valueOf!
+new: (x=-1, y=-Infinity)
+polar: 
+Testing (35) -1 (object), (39) NaN (object):
+7: valueOf!
+11: valueOf!
+new: (x=-1, y=NaN)
+polar: 
+Testing (35) -1 (object), (40)  (object):
+7: valueOf!
+12: valueOf!
+new: (x=-1, y=)
+polar: 
+Testing (35) -1 (object), (41) 0 (object):
+7: valueOf!
+13: valueOf!
+new: (x=-1, y=0)
+polar: 
+Testing (35) -1 (object), (42) -0 (object):
+7: valueOf!
+14: valueOf!
+new: (x=-1, y=-0)
+polar: 
+Testing (35) -1 (object), (43) 0.0 (object):
+7: valueOf!
+15: valueOf!
+new: (x=-1, y=0.0)
+polar: 
+Testing (35) -1 (object), (44) 1 (object):
+7: valueOf!
+16: valueOf!
+new: (x=-1, y=1)
+polar: 
+Testing (35) -1 (object), (45) Hello World! (object):
+7: valueOf!
+17: valueOf!
+new: (x=-1, y=Hello World!)
+polar: 
+Testing (35) -1 (object), (46) true (object):
+7: valueOf!
+18: valueOf!
+new: (x=-1, y=true)
+polar: 
+Testing (35) -1 (object), (47) _level0 (object):
+7: valueOf!
+19: valueOf!
+new: (x=-1, y=_level0)
+polar: 
+Testing (35) -1 (object), (48) äöü (object):
+7: valueOf!
+20: valueOf!
+new: (x=-1, y=äöü)
+polar: 
+Testing (35) -1 (object), (49) _level0 (object):
+7: valueOf!
+21: valueOf!
+new: (x=-1, y=_level0)
+polar: 
+Testing (35) -1 (object), (50) [type Object] (object):
+7: valueOf!
+22: valueOf!
+22: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (35) -1 (object), (51) [type Object] (object):
+7: valueOf!
+23: valueOf!
+23: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (35) -1 (object), (52) [type Object] (object):
+7: valueOf!
+24: valueOf!
+24: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (35) -1 (object), (53) [type Object] (object):
+7: valueOf!
+25: valueOf!
+25: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (35) -1 (object), (54) [type Object] (object):
+7: valueOf!
+26: valueOf!
+26: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (35) -1 (object), (55) [type Object] (object):
+7: valueOf!
+27: valueOf!
+27: toString!
+new: (x=-1, y=[type Object])
+polar: 
+Testing (36) -0.5 (object):
+8: valueOf!
+new: (x=-0.5, y=)
+polar: 
+Testing (36) -0.5 (object), (36) -0.5 (object):
+8: valueOf!
+8: valueOf!
+new: (x=-0.5, y=-0.5)
+polar: 
+Testing (36) -0.5 (object), (37) Infinity (object):
+8: valueOf!
+9: valueOf!
+new: (x=-0.5, y=Infinity)
+polar: 
+Testing (36) -0.5 (object), (38) -Infinity (object):
+8: valueOf!
+10: valueOf!
+new: (x=-0.5, y=-Infinity)
+polar: 
+Testing (36) -0.5 (object), (39) NaN (object):
+8: valueOf!
+11: valueOf!
+new: (x=-0.5, y=NaN)
+polar: 
+Testing (36) -0.5 (object), (40)  (object):
+8: valueOf!
+12: valueOf!
+new: (x=-0.5, y=)
+polar: 
+Testing (36) -0.5 (object), (41) 0 (object):
+8: valueOf!
+13: valueOf!
+new: (x=-0.5, y=0)
+polar: 
+Testing (36) -0.5 (object), (42) -0 (object):
+8: valueOf!
+14: valueOf!
+new: (x=-0.5, y=-0)
+polar: 
+Testing (36) -0.5 (object), (43) 0.0 (object):
+8: valueOf!
+15: valueOf!
+new: (x=-0.5, y=0.0)
+polar: 
+Testing (36) -0.5 (object), (44) 1 (object):
+8: valueOf!
+16: valueOf!
+new: (x=-0.5, y=1)
+polar: 
+Testing (36) -0.5 (object), (45) Hello World! (object):
+8: valueOf!
+17: valueOf!
+new: (x=-0.5, y=Hello World!)
+polar: 
+Testing (36) -0.5 (object), (46) true (object):
+8: valueOf!
+18: valueOf!
+new: (x=-0.5, y=true)
+polar: 
+Testing (36) -0.5 (object), (47) _level0 (object):
+8: valueOf!
+19: valueOf!
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (36) -0.5 (object), (48) äöü (object):
+8: valueOf!
+20: valueOf!
+new: (x=-0.5, y=äöü)
+polar: 
+Testing (36) -0.5 (object), (49) _level0 (object):
+8: valueOf!
+21: valueOf!
+new: (x=-0.5, y=_level0)
+polar: 
+Testing (36) -0.5 (object), (50) [type Object] (object):
+8: valueOf!
+22: valueOf!
+22: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (36) -0.5 (object), (51) [type Object] (object):
+8: valueOf!
+23: valueOf!
+23: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (36) -0.5 (object), (52) [type Object] (object):
+8: valueOf!
+24: valueOf!
+24: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (36) -0.5 (object), (53) [type Object] (object):
+8: valueOf!
+25: valueOf!
+25: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (36) -0.5 (object), (54) [type Object] (object):
+8: valueOf!
+26: valueOf!
+26: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (36) -0.5 (object), (55) [type Object] (object):
+8: valueOf!
+27: valueOf!
+27: toString!
+new: (x=-0.5, y=[type Object])
+polar: 
+Testing (37) Infinity (object):
+9: valueOf!
+new: (x=Infinity, y=)
+polar: 
+Testing (37) Infinity (object), (37) Infinity (object):
+9: valueOf!
+9: valueOf!
+new: (x=Infinity, y=Infinity)
+polar: 
+Testing (37) Infinity (object), (38) -Infinity (object):
+9: valueOf!
+10: valueOf!
+new: (x=Infinity, y=-Infinity)
+polar: 
+Testing (37) Infinity (object), (39) NaN (object):
+9: valueOf!
+11: valueOf!
+new: (x=Infinity, y=NaN)
+polar: 
+Testing (37) Infinity (object), (40)  (object):
+9: valueOf!
+12: valueOf!
+new: (x=Infinity, y=)
+polar: 
+Testing (37) Infinity (object), (41) 0 (object):
+9: valueOf!
+13: valueOf!
+new: (x=Infinity, y=0)
+polar: 
+Testing (37) Infinity (object), (42) -0 (object):
+9: valueOf!
+14: valueOf!
+new: (x=Infinity, y=-0)
+polar: 
+Testing (37) Infinity (object), (43) 0.0 (object):
+9: valueOf!
+15: valueOf!
+new: (x=Infinity, y=0.0)
+polar: 
+Testing (37) Infinity (object), (44) 1 (object):
+9: valueOf!
+16: valueOf!
+new: (x=Infinity, y=1)
+polar: 
+Testing (37) Infinity (object), (45) Hello World! (object):
+9: valueOf!
+17: valueOf!
+new: (x=Infinity, y=Hello World!)
+polar: 
+Testing (37) Infinity (object), (46) true (object):
+9: valueOf!
+18: valueOf!
+new: (x=Infinity, y=true)
+polar: 
+Testing (37) Infinity (object), (47) _level0 (object):
+9: valueOf!
+19: valueOf!
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (37) Infinity (object), (48) äöü (object):
+9: valueOf!
+20: valueOf!
+new: (x=Infinity, y=äöü)
+polar: 
+Testing (37) Infinity (object), (49) _level0 (object):
+9: valueOf!
+21: valueOf!
+new: (x=Infinity, y=_level0)
+polar: 
+Testing (37) Infinity (object), (50) [type Object] (object):
+9: valueOf!
+22: valueOf!
+22: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (37) Infinity (object), (51) [type Object] (object):
+9: valueOf!
+23: valueOf!
+23: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (37) Infinity (object), (52) [type Object] (object):
+9: valueOf!
+24: valueOf!
+24: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (37) Infinity (object), (53) [type Object] (object):
+9: valueOf!
+25: valueOf!
+25: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (37) Infinity (object), (54) [type Object] (object):
+9: valueOf!
+26: valueOf!
+26: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (37) Infinity (object), (55) [type Object] (object):
+9: valueOf!
+27: valueOf!
+27: toString!
+new: (x=Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object):
+10: valueOf!
+new: (x=-Infinity, y=)
+polar: 
+Testing (38) -Infinity (object), (38) -Infinity (object):
+10: valueOf!
+10: valueOf!
+new: (x=-Infinity, y=-Infinity)
+polar: 
+Testing (38) -Infinity (object), (39) NaN (object):
+10: valueOf!
+11: valueOf!
+new: (x=-Infinity, y=NaN)
+polar: 
+Testing (38) -Infinity (object), (40)  (object):
+10: valueOf!
+12: valueOf!
+new: (x=-Infinity, y=)
+polar: 
+Testing (38) -Infinity (object), (41) 0 (object):
+10: valueOf!
+13: valueOf!
+new: (x=-Infinity, y=0)
+polar: 
+Testing (38) -Infinity (object), (42) -0 (object):
+10: valueOf!
+14: valueOf!
+new: (x=-Infinity, y=-0)
+polar: 
+Testing (38) -Infinity (object), (43) 0.0 (object):
+10: valueOf!
+15: valueOf!
+new: (x=-Infinity, y=0.0)
+polar: 
+Testing (38) -Infinity (object), (44) 1 (object):
+10: valueOf!
+16: valueOf!
+new: (x=-Infinity, y=1)
+polar: 
+Testing (38) -Infinity (object), (45) Hello World! (object):
+10: valueOf!
+17: valueOf!
+new: (x=-Infinity, y=Hello World!)
+polar: 
+Testing (38) -Infinity (object), (46) true (object):
+10: valueOf!
+18: valueOf!
+new: (x=-Infinity, y=true)
+polar: 
+Testing (38) -Infinity (object), (47) _level0 (object):
+10: valueOf!
+19: valueOf!
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (38) -Infinity (object), (48) äöü (object):
+10: valueOf!
+20: valueOf!
+new: (x=-Infinity, y=äöü)
+polar: 
+Testing (38) -Infinity (object), (49) _level0 (object):
+10: valueOf!
+21: valueOf!
+new: (x=-Infinity, y=_level0)
+polar: 
+Testing (38) -Infinity (object), (50) [type Object] (object):
+10: valueOf!
+22: valueOf!
+22: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object), (51) [type Object] (object):
+10: valueOf!
+23: valueOf!
+23: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object), (52) [type Object] (object):
+10: valueOf!
+24: valueOf!
+24: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object), (53) [type Object] (object):
+10: valueOf!
+25: valueOf!
+25: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object), (54) [type Object] (object):
+10: valueOf!
+26: valueOf!
+26: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (38) -Infinity (object), (55) [type Object] (object):
+10: valueOf!
+27: valueOf!
+27: toString!
+new: (x=-Infinity, y=[type Object])
+polar: 
+Testing (39) NaN (object):
+11: valueOf!
+new: (x=NaN, y=)
+polar: 
+Testing (39) NaN (object), (39) NaN (object):
+11: valueOf!
+11: valueOf!
+new: (x=NaN, y=NaN)
+polar: 
+Testing (39) NaN (object), (40)  (object):
+11: valueOf!
+12: valueOf!
+new: (x=NaN, y=)
+polar: 
+Testing (39) NaN (object), (41) 0 (object):
+11: valueOf!
+13: valueOf!
+new: (x=NaN, y=0)
+polar: 
+Testing (39) NaN (object), (42) -0 (object):
+11: valueOf!
+14: valueOf!
+new: (x=NaN, y=-0)
+polar: 
+Testing (39) NaN (object), (43) 0.0 (object):
+11: valueOf!
+15: valueOf!
+new: (x=NaN, y=0.0)
+polar: 
+Testing (39) NaN (object), (44) 1 (object):
+11: valueOf!
+16: valueOf!
+new: (x=NaN, y=1)
+polar: 
+Testing (39) NaN (object), (45) Hello World! (object):
+11: valueOf!
+17: valueOf!
+new: (x=NaN, y=Hello World!)
+polar: 
+Testing (39) NaN (object), (46) true (object):
+11: valueOf!
+18: valueOf!
+new: (x=NaN, y=true)
+polar: 
+Testing (39) NaN (object), (47) _level0 (object):
+11: valueOf!
+19: valueOf!
+new: (x=NaN, y=_level0)
+polar: 
+Testing (39) NaN (object), (48) äöü (object):
+11: valueOf!
+20: valueOf!
+new: (x=NaN, y=äöü)
+polar: 
+Testing (39) NaN (object), (49) _level0 (object):
+11: valueOf!
+21: valueOf!
+new: (x=NaN, y=_level0)
+polar: 
+Testing (39) NaN (object), (50) [type Object] (object):
+11: valueOf!
+22: valueOf!
+22: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (39) NaN (object), (51) [type Object] (object):
+11: valueOf!
+23: valueOf!
+23: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (39) NaN (object), (52) [type Object] (object):
+11: valueOf!
+24: valueOf!
+24: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (39) NaN (object), (53) [type Object] (object):
+11: valueOf!
+25: valueOf!
+25: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (39) NaN (object), (54) [type Object] (object):
+11: valueOf!
+26: valueOf!
+26: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (39) NaN (object), (55) [type Object] (object):
+11: valueOf!
+27: valueOf!
+27: toString!
+new: (x=NaN, y=[type Object])
+polar: 
+Testing (40)  (object):
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (40)  (object), (40)  (object):
+12: valueOf!
+12: valueOf!
+new: (x=, y=)
+polar: 
+Testing (40)  (object), (41) 0 (object):
+12: valueOf!
+13: valueOf!
+new: (x=, y=0)
+polar: 
+Testing (40)  (object), (42) -0 (object):
+12: valueOf!
+14: valueOf!
+new: (x=, y=-0)
+polar: 
+Testing (40)  (object), (43) 0.0 (object):
+12: valueOf!
+15: valueOf!
+new: (x=, y=0.0)
+polar: 
+Testing (40)  (object), (44) 1 (object):
+12: valueOf!
+16: valueOf!
+new: (x=, y=1)
+polar: 
+Testing (40)  (object), (45) Hello World! (object):
+12: valueOf!
+17: valueOf!
+new: (x=, y=Hello World!)
+polar: 
+Testing (40)  (object), (46) true (object):
+12: valueOf!
+18: valueOf!
+new: (x=, y=true)
+polar: 
+Testing (40)  (object), (47) _level0 (object):
+12: valueOf!
+19: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (40)  (object), (48) äöü (object):
+12: valueOf!
+20: valueOf!
+new: (x=, y=äöü)
+polar: 
+Testing (40)  (object), (49) _level0 (object):
+12: valueOf!
+21: valueOf!
+new: (x=, y=_level0)
+polar: 
+Testing (40)  (object), (50) [type Object] (object):
+12: valueOf!
+22: valueOf!
+22: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (40)  (object), (51) [type Object] (object):
+12: valueOf!
+23: valueOf!
+23: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (40)  (object), (52) [type Object] (object):
+12: valueOf!
+24: valueOf!
+24: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (40)  (object), (53) [type Object] (object):
+12: valueOf!
+25: valueOf!
+25: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (40)  (object), (54) [type Object] (object):
+12: valueOf!
+26: valueOf!
+26: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (40)  (object), (55) [type Object] (object):
+12: valueOf!
+27: valueOf!
+27: toString!
+new: (x=, y=[type Object])
+polar: 
+Testing (41) 0 (object):
+13: valueOf!
+new: (x=0, y=)
+polar: 
+Testing (41) 0 (object), (41) 0 (object):
+13: valueOf!
+13: valueOf!
+new: (x=0, y=0)
+polar: 
+Testing (41) 0 (object), (42) -0 (object):
+13: valueOf!
+14: valueOf!
+new: (x=0, y=-0)
+polar: 
+Testing (41) 0 (object), (43) 0.0 (object):
+13: valueOf!
+15: valueOf!
+new: (x=0, y=0.0)
+polar: 
+Testing (41) 0 (object), (44) 1 (object):
+13: valueOf!
+16: valueOf!
+new: (x=0, y=1)
+polar: 
+Testing (41) 0 (object), (45) Hello World! (object):
+13: valueOf!
+17: valueOf!
+new: (x=0, y=Hello World!)
+polar: 
+Testing (41) 0 (object), (46) true (object):
+13: valueOf!
+18: valueOf!
+new: (x=0, y=true)
+polar: 
+Testing (41) 0 (object), (47) _level0 (object):
+13: valueOf!
+19: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (41) 0 (object), (48) äöü (object):
+13: valueOf!
+20: valueOf!
+new: (x=0, y=äöü)
+polar: 
+Testing (41) 0 (object), (49) _level0 (object):
+13: valueOf!
+21: valueOf!
+new: (x=0, y=_level0)
+polar: 
+Testing (41) 0 (object), (50) [type Object] (object):
+13: valueOf!
+22: valueOf!
+22: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (41) 0 (object), (51) [type Object] (object):
+13: valueOf!
+23: valueOf!
+23: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (41) 0 (object), (52) [type Object] (object):
+13: valueOf!
+24: valueOf!
+24: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (41) 0 (object), (53) [type Object] (object):
+13: valueOf!
+25: valueOf!
+25: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (41) 0 (object), (54) [type Object] (object):
+13: valueOf!
+26: valueOf!
+26: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (41) 0 (object), (55) [type Object] (object):
+13: valueOf!
+27: valueOf!
+27: toString!
+new: (x=0, y=[type Object])
+polar: 
+Testing (42) -0 (object):
+14: valueOf!
+new: (x=-0, y=)
+polar: 
+Testing (42) -0 (object), (42) -0 (object):
+14: valueOf!
+14: valueOf!
+new: (x=-0, y=-0)
+polar: 
+Testing (42) -0 (object), (43) 0.0 (object):
+14: valueOf!
+15: valueOf!
+new: (x=-0, y=0.0)
+polar: 
+Testing (42) -0 (object), (44) 1 (object):
+14: valueOf!
+16: valueOf!
+new: (x=-0, y=1)
+polar: 
+Testing (42) -0 (object), (45) Hello World! (object):
+14: valueOf!
+17: valueOf!
+new: (x=-0, y=Hello World!)
+polar: 
+Testing (42) -0 (object), (46) true (object):
+14: valueOf!
+18: valueOf!
+new: (x=-0, y=true)
+polar: 
+Testing (42) -0 (object), (47) _level0 (object):
+14: valueOf!
+19: valueOf!
+new: (x=-0, y=_level0)
+polar: 
+Testing (42) -0 (object), (48) äöü (object):
+14: valueOf!
+20: valueOf!
+new: (x=-0, y=äöü)
+polar: 
+Testing (42) -0 (object), (49) _level0 (object):
+14: valueOf!
+21: valueOf!
+new: (x=-0, y=_level0)
+polar: 
+Testing (42) -0 (object), (50) [type Object] (object):
+14: valueOf!
+22: valueOf!
+22: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (42) -0 (object), (51) [type Object] (object):
+14: valueOf!
+23: valueOf!
+23: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (42) -0 (object), (52) [type Object] (object):
+14: valueOf!
+24: valueOf!
+24: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (42) -0 (object), (53) [type Object] (object):
+14: valueOf!
+25: valueOf!
+25: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (42) -0 (object), (54) [type Object] (object):
+14: valueOf!
+26: valueOf!
+26: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (42) -0 (object), (55) [type Object] (object):
+14: valueOf!
+27: valueOf!
+27: toString!
+new: (x=-0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object):
+15: valueOf!
+new: (x=0.0, y=)
+polar: 
+Testing (43) 0.0 (object), (43) 0.0 (object):
+15: valueOf!
+15: valueOf!
+new: (x=0.0, y=0.0)
+polar: 
+Testing (43) 0.0 (object), (44) 1 (object):
+15: valueOf!
+16: valueOf!
+new: (x=0.0, y=1)
+polar: 
+Testing (43) 0.0 (object), (45) Hello World! (object):
+15: valueOf!
+17: valueOf!
+new: (x=0.0, y=Hello World!)
+polar: 
+Testing (43) 0.0 (object), (46) true (object):
+15: valueOf!
+18: valueOf!
+new: (x=0.0, y=true)
+polar: 
+Testing (43) 0.0 (object), (47) _level0 (object):
+15: valueOf!
+19: valueOf!
+new: (x=0.0, y=_level0)
+polar: 
+Testing (43) 0.0 (object), (48) äöü (object):
+15: valueOf!
+20: valueOf!
+new: (x=0.0, y=äöü)
+polar: 
+Testing (43) 0.0 (object), (49) _level0 (object):
+15: valueOf!
+21: valueOf!
+new: (x=0.0, y=_level0)
+polar: 
+Testing (43) 0.0 (object), (50) [type Object] (object):
+15: valueOf!
+22: valueOf!
+22: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object), (51) [type Object] (object):
+15: valueOf!
+23: valueOf!
+23: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object), (52) [type Object] (object):
+15: valueOf!
+24: valueOf!
+24: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object), (53) [type Object] (object):
+15: valueOf!
+25: valueOf!
+25: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object), (54) [type Object] (object):
+15: valueOf!
+26: valueOf!
+26: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (43) 0.0 (object), (55) [type Object] (object):
+15: valueOf!
+27: valueOf!
+27: toString!
+new: (x=0.0, y=[type Object])
+polar: 
+Testing (44) 1 (object):
+16: valueOf!
+new: (x=1, y=)
+polar: 
+Testing (44) 1 (object), (44) 1 (object):
+16: valueOf!
+16: valueOf!
+new: (x=1, y=1)
+polar: 
+Testing (44) 1 (object), (45) Hello World! (object):
+16: valueOf!
+17: valueOf!
+new: (x=1, y=Hello World!)
+polar: 
+Testing (44) 1 (object), (46) true (object):
+16: valueOf!
+18: valueOf!
+new: (x=1, y=true)
+polar: 
+Testing (44) 1 (object), (47) _level0 (object):
+16: valueOf!
+19: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (44) 1 (object), (48) äöü (object):
+16: valueOf!
+20: valueOf!
+new: (x=1, y=äöü)
+polar: 
+Testing (44) 1 (object), (49) _level0 (object):
+16: valueOf!
+21: valueOf!
+new: (x=1, y=_level0)
+polar: 
+Testing (44) 1 (object), (50) [type Object] (object):
+16: valueOf!
+22: valueOf!
+22: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (44) 1 (object), (51) [type Object] (object):
+16: valueOf!
+23: valueOf!
+23: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (44) 1 (object), (52) [type Object] (object):
+16: valueOf!
+24: valueOf!
+24: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (44) 1 (object), (53) [type Object] (object):
+16: valueOf!
+25: valueOf!
+25: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (44) 1 (object), (54) [type Object] (object):
+16: valueOf!
+26: valueOf!
+26: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (44) 1 (object), (55) [type Object] (object):
+16: valueOf!
+27: valueOf!
+27: toString!
+new: (x=1, y=[type Object])
+polar: 
+Testing (45) Hello World! (object):
+17: valueOf!
+new: (x=Hello World!, y=)
+polar: 
+Testing (45) Hello World! (object), (45) Hello World! (object):
+17: valueOf!
+17: valueOf!
+new: (x=Hello World!, y=Hello World!)
+polar: 
+Testing (45) Hello World! (object), (46) true (object):
+17: valueOf!
+18: valueOf!
+new: (x=Hello World!, y=true)
+polar: 
+Testing (45) Hello World! (object), (47) _level0 (object):
+17: valueOf!
+19: valueOf!
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (45) Hello World! (object), (48) äöü (object):
+17: valueOf!
+20: valueOf!
+new: (x=Hello World!, y=äöü)
+polar: 
+Testing (45) Hello World! (object), (49) _level0 (object):
+17: valueOf!
+21: valueOf!
+new: (x=Hello World!, y=_level0)
+polar: 
+Testing (45) Hello World! (object), (50) [type Object] (object):
+17: valueOf!
+22: valueOf!
+22: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (45) Hello World! (object), (51) [type Object] (object):
+17: valueOf!
+23: valueOf!
+23: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (45) Hello World! (object), (52) [type Object] (object):
+17: valueOf!
+24: valueOf!
+24: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (45) Hello World! (object), (53) [type Object] (object):
+17: valueOf!
+25: valueOf!
+25: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (45) Hello World! (object), (54) [type Object] (object):
+17: valueOf!
+26: valueOf!
+26: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (45) Hello World! (object), (55) [type Object] (object):
+17: valueOf!
+27: valueOf!
+27: toString!
+new: (x=Hello World!, y=[type Object])
+polar: 
+Testing (46) true (object):
+18: valueOf!
+new: (x=true, y=)
+polar: 
+Testing (46) true (object), (46) true (object):
+18: valueOf!
+18: valueOf!
+new: (x=true, y=true)
+polar: 
+Testing (46) true (object), (47) _level0 (object):
+18: valueOf!
+19: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (46) true (object), (48) äöü (object):
+18: valueOf!
+20: valueOf!
+new: (x=true, y=äöü)
+polar: 
+Testing (46) true (object), (49) _level0 (object):
+18: valueOf!
+21: valueOf!
+new: (x=true, y=_level0)
+polar: 
+Testing (46) true (object), (50) [type Object] (object):
+18: valueOf!
+22: valueOf!
+22: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (46) true (object), (51) [type Object] (object):
+18: valueOf!
+23: valueOf!
+23: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (46) true (object), (52) [type Object] (object):
+18: valueOf!
+24: valueOf!
+24: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (46) true (object), (53) [type Object] (object):
+18: valueOf!
+25: valueOf!
+25: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (46) true (object), (54) [type Object] (object):
+18: valueOf!
+26: valueOf!
+26: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (46) true (object), (55) [type Object] (object):
+18: valueOf!
+27: valueOf!
+27: toString!
+new: (x=true, y=[type Object])
+polar: 
+Testing (47) _level0 (object):
+19: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (47) _level0 (object), (47) _level0 (object):
+19: valueOf!
+19: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (47) _level0 (object), (48) äöü (object):
+19: valueOf!
+20: valueOf!
+new: (x=_level0, y=äöü)
+polar: 
+Testing (47) _level0 (object), (49) _level0 (object):
+19: valueOf!
+21: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (47) _level0 (object), (50) [type Object] (object):
+19: valueOf!
+22: valueOf!
+22: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (47) _level0 (object), (51) [type Object] (object):
+19: valueOf!
+23: valueOf!
+23: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (47) _level0 (object), (52) [type Object] (object):
+19: valueOf!
+24: valueOf!
+24: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (47) _level0 (object), (53) [type Object] (object):
+19: valueOf!
+25: valueOf!
+25: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (47) _level0 (object), (54) [type Object] (object):
+19: valueOf!
+26: valueOf!
+26: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (47) _level0 (object), (55) [type Object] (object):
+19: valueOf!
+27: valueOf!
+27: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (48) äöü (object):
+20: valueOf!
+new: (x=äöü, y=)
+polar: 
+Testing (48) äöü (object), (48) äöü (object):
+20: valueOf!
+20: valueOf!
+new: (x=äöü, y=äöü)
+polar: 
+Testing (48) äöü (object), (49) _level0 (object):
+20: valueOf!
+21: valueOf!
+new: (x=äöü, y=_level0)
+polar: 
+Testing (48) äöü (object), (50) [type Object] (object):
+20: valueOf!
+22: valueOf!
+22: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (48) äöü (object), (51) [type Object] (object):
+20: valueOf!
+23: valueOf!
+23: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (48) äöü (object), (52) [type Object] (object):
+20: valueOf!
+24: valueOf!
+24: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (48) äöü (object), (53) [type Object] (object):
+20: valueOf!
+25: valueOf!
+25: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (48) äöü (object), (54) [type Object] (object):
+20: valueOf!
+26: valueOf!
+26: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (48) äöü (object), (55) [type Object] (object):
+20: valueOf!
+27: valueOf!
+27: toString!
+new: (x=äöü, y=[type Object])
+polar: 
+Testing (49) _level0 (object):
+21: valueOf!
+new: (x=_level0, y=)
+polar: 
+Testing (49) _level0 (object), (49) _level0 (object):
+21: valueOf!
+21: valueOf!
+new: (x=_level0, y=_level0)
+polar: 
+Testing (49) _level0 (object), (50) [type Object] (object):
+21: valueOf!
+22: valueOf!
+22: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (49) _level0 (object), (51) [type Object] (object):
+21: valueOf!
+23: valueOf!
+23: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (49) _level0 (object), (52) [type Object] (object):
+21: valueOf!
+24: valueOf!
+24: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (49) _level0 (object), (53) [type Object] (object):
+21: valueOf!
+25: valueOf!
+25: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (49) _level0 (object), (54) [type Object] (object):
+21: valueOf!
+26: valueOf!
+26: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (49) _level0 (object), (55) [type Object] (object):
+21: valueOf!
+27: valueOf!
+27: toString!
+new: (x=_level0, y=[type Object])
+polar: 
+Testing (50) [type Object] (object):
+22: valueOf!
+22: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (50) [type Object] (object), (50) [type Object] (object):
+22: valueOf!
+22: toString!
+22: valueOf!
+22: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (50) [type Object] (object), (51) [type Object] (object):
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (50) [type Object] (object), (52) [type Object] (object):
+22: valueOf!
+22: toString!
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (50) [type Object] (object), (53) [type Object] (object):
+22: valueOf!
+22: toString!
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (50) [type Object] (object), (54) [type Object] (object):
+22: valueOf!
+22: toString!
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (50) [type Object] (object), (55) [type Object] (object):
+22: valueOf!
+22: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (51) [type Object] (object):
+23: valueOf!
+23: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (51) [type Object] (object), (51) [type Object] (object):
+23: valueOf!
+23: toString!
+23: valueOf!
+23: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (51) [type Object] (object), (52) [type Object] (object):
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (51) [type Object] (object), (53) [type Object] (object):
+23: valueOf!
+23: toString!
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (51) [type Object] (object), (54) [type Object] (object):
+23: valueOf!
+23: toString!
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (51) [type Object] (object), (55) [type Object] (object):
+23: valueOf!
+23: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (52) [type Object] (object):
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (52) [type Object] (object), (52) [type Object] (object):
+24: valueOf!
+24: toString!
+24: valueOf!
+24: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (52) [type Object] (object), (53) [type Object] (object):
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (52) [type Object] (object), (54) [type Object] (object):
+24: valueOf!
+24: toString!
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (52) [type Object] (object), (55) [type Object] (object):
+24: valueOf!
+24: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (53) [type Object] (object):
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (53) [type Object] (object), (53) [type Object] (object):
+25: valueOf!
+25: toString!
+25: valueOf!
+25: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (53) [type Object] (object), (54) [type Object] (object):
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (53) [type Object] (object), (55) [type Object] (object):
+25: valueOf!
+25: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (54) [type Object] (object):
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (54) [type Object] (object), (54) [type Object] (object):
+26: valueOf!
+26: toString!
+26: valueOf!
+26: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (54) [type Object] (object), (55) [type Object] (object):
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 
+Testing (55) [type Object] (object):
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=)
+polar: 
+Testing (55) [type Object] (object), (55) [type Object] (object):
+27: valueOf!
+27: toString!
+27: valueOf!
+27: toString!
+new: (x=[type Object], y=[type Object])
+polar: 

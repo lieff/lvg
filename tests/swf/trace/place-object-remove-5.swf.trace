@@ -1,0 +1,5 @@
+1: init _level0.instance1
+1: load _level0.instance1
+2: init _level0.instance2
+2: unload _level0.instance1
+2: load _level0.instance2

@@ -1,0 +1,4 @@
+Check behaviour of Object.prototype.valueOf()
+[object Object]
+undefined
+undefined

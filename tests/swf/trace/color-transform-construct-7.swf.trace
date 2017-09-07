@@ -1,0 +1,234 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (0) undefined (undefined)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (1) null (null)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (2) true (boolean)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (3) false (boolean)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (4) 0 (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (5) 1 (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (6) 0.5 (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (7) -1 (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (8) -0.5 (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (9) Infinity (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (10) -Infinity (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (11) NaN (number)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (12)  (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (13) 0 (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (14) -0 (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (15) 0.0 (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (16) 1 (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (17) Hello World! (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (18) true (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (19) _level0 (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (20) äöü (string)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (21) _level0 (movieclip)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (22) [object Object] (object)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (24)  (object)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (25) [type Function] (function)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (26) [type Object] (object)
+valueOf called
+valueOf called
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (27) [type Object] (object)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (28) [object Object] (object)
+valueOf called with 
+valueOf called with 
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (29) undefined (object)
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (30) undefined (object)
+0: valueOf!
+0: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (31) null (object)
+1: valueOf!
+1: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (32) true (object)
+2: valueOf!
+2: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (33) false (object)
+3: valueOf!
+3: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (34) 0 (object)
+4: valueOf!
+4: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (35) 1 (object)
+5: valueOf!
+5: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (36) 0.5 (object)
+6: valueOf!
+6: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (37) -1 (object)
+7: valueOf!
+7: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (38) -0.5 (object)
+8: valueOf!
+8: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (39) Infinity (object)
+9: valueOf!
+9: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (40) -Infinity (object)
+10: valueOf!
+10: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (41) NaN (object)
+11: valueOf!
+11: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (42)  (object)
+12: valueOf!
+12: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (43) 0 (object)
+13: valueOf!
+13: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (44) -0 (object)
+14: valueOf!
+14: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (45) 0.0 (object)
+15: valueOf!
+15: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (46) 1 (object)
+16: valueOf!
+16: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (47) Hello World! (object)
+17: valueOf!
+17: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (48) true (object)
+18: valueOf!
+18: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (49) _level0 (object)
+19: valueOf!
+19: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (50) äöü (object)
+20: valueOf!
+20: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (51) _level0 (object)
+21: valueOf!
+21: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (52) [type Object] (object)
+22: valueOf!
+22: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (53) [type Object] (object)
+23: valueOf!
+23: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (54) [type Object] (object)
+24: valueOf!
+24: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (55) [type Object] (object)
+25: valueOf!
+25: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (56) [type Object] (object)
+26: valueOf!
+26: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (57) [type Object] (object)
+27: valueOf!
+27: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (58) [type Object] (object)
+28: valueOf!
+28: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)
+Testing: (59) [type Object] (object)
+29: valueOf!
+29: valueOf!
+(redMultiplier=undefined, greenMultiplier=undefined, blueMultiplier=undefined, alphaMultiplier=undefined, redOffset=undefined, greenOffset=undefined, blueOffset=undefined, alphaOffset=undefined)

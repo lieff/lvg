@@ -1,0 +1,236 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+>>> (0)  (undefined)
+undefined
+true
+>>> (1) null (null)
+null
+true
+>>> (2) true (boolean)
+true
+true
+>>> (3) false (boolean)
+false
+true
+>>> (4) 0 (number)
+0
+true
+>>> (5) 1 (number)
+1
+true
+>>> (6) 0.5 (number)
+0.5
+true
+>>> (7) -1 (number)
+-1
+true
+>>> (8) -0.5 (number)
+-0.5
+true
+>>> (9) Infinity (number)
+Infinity
+true
+>>> (10) -Infinity (number)
+-Infinity
+true
+>>> (11) NaN (number)
+NaN
+true
+>>> (12)  (string)
+
+true
+>>> (13) 0 (string)
+0
+true
+>>> (14) -0 (string)
+-0
+true
+>>> (15) 0.0 (string)
+0.0
+true
+>>> (16) 1 (string)
+1
+true
+>>> (17) Hello World! (string)
+Hello World!
+true
+>>> (18) true (string)
+true
+true
+>>> (19) _level0 (string)
+_level0
+true
+>>> (20) äöü (string)
+äöü
+true
+>>> (21) _level0 (movieclip)
+_level0
+false
+>>> (22) [object Object] (object)
+[object Object]
+true
+>>> (23) [type Function] (function)
+[type Function]
+true
+>>> (24) [type Object] (object)
+toString called
+[type Object]
+false
+>>> (25) [type Object] (object)
+toString called with 
+[type Object]
+false
+>>> (26) [object Object] (object)
+[object Object]
+false
+>>> (27)  (object)
+[type Object]
+true
+>>> (28)  (object)
+0: toString!
+[type Object]
+false
+>>> (29) null (object)
+1: toString!
+[type Object]
+false
+>>> (30) true (object)
+2: toString!
+[type Object]
+false
+>>> (31) false (object)
+3: toString!
+[type Object]
+false
+>>> (32) 0 (object)
+4: toString!
+[type Object]
+false
+>>> (33) 1 (object)
+5: toString!
+[type Object]
+false
+>>> (34) 0.5 (object)
+6: toString!
+[type Object]
+false
+>>> (35) -1 (object)
+7: toString!
+[type Object]
+false
+>>> (36) -0.5 (object)
+8: toString!
+[type Object]
+false
+>>> (37) Infinity (object)
+9: toString!
+[type Object]
+false
+>>> (38) -Infinity (object)
+10: toString!
+[type Object]
+false
+>>> (39) NaN (object)
+11: toString!
+[type Object]
+false
+>>> (40)  (object)
+12: toString!
+
+false
+>>> (41) 0 (object)
+13: toString!
+0
+false
+>>> (42) -0 (object)
+14: toString!
+-0
+false
+>>> (43) 0.0 (object)
+15: toString!
+0.0
+false
+>>> (44) 1 (object)
+16: toString!
+1
+false
+>>> (45) Hello World! (object)
+17: toString!
+Hello World!
+false
+>>> (46) true (object)
+18: toString!
+true
+false
+>>> (47) _level0 (object)
+19: toString!
+_level0
+false
+>>> (48) äöü (object)
+20: toString!
+äöü
+false
+>>> (49) _level0 (object)
+21: toString!
+[type Object]
+false
+>>> (50) [type Object] (object)
+22: toString!
+[type Object]
+false
+>>> (51) [type Object] (object)
+23: toString!
+[type Object]
+false
+>>> (52) [type Object] (object)
+24: toString!
+[type Object]
+false
+>>> (53) [type Object] (object)
+25: toString!
+[type Object]
+false
+>>> (54) [type Object] (object)
+26: toString!
+[type Object]
+false
+>>> (55) [type Object] (object)
+27: toString!
+[type Object]
+false

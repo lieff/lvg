@@ -1,0 +1,309 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+0x
+0x
+0x
+Testing: 0xFFFFFFFFFF
+undefined
+Testing: -0xFFFFFFFFFF
+undefined
+Testing: (0)  (undefined)
+undefined
+undefined
+undefined
+Testing: (1) null (null)
+undefined
+undefined
+undefined
+Testing: (2) true (boolean)
+undefined
+undefined
+undefined
+Testing: (3) false (boolean)
+undefined
+undefined
+undefined
+Testing: (4) 0 (number)
+undefined
+undefined
+undefined
+Testing: (5) 1 (number)
+undefined
+undefined
+undefined
+Testing: (6) 0.5 (number)
+undefined
+undefined
+undefined
+Testing: (7) -1 (number)
+undefined
+undefined
+undefined
+Testing: (8) -0.5 (number)
+undefined
+undefined
+undefined
+Testing: (9) Infinity (number)
+undefined
+undefined
+undefined
+Testing: (10) -Infinity (number)
+undefined
+undefined
+undefined
+Testing: (11) NaN (number)
+undefined
+undefined
+undefined
+Testing: (12)  (string)
+undefined
+undefined
+undefined
+Testing: (13) 0 (string)
+undefined
+undefined
+undefined
+Testing: (14) -0 (string)
+undefined
+undefined
+undefined
+Testing: (15) 0.0 (string)
+undefined
+undefined
+undefined
+Testing: (16) 1 (string)
+undefined
+undefined
+undefined
+Testing: (17) Hello World! (string)
+undefined
+undefined
+undefined
+Testing: (18) true (string)
+undefined
+undefined
+undefined
+Testing: (19) _level0 (string)
+undefined
+undefined
+undefined
+Testing: (20) Ã¤Ã¶Ã¼ (string)
+undefined
+undefined
+undefined
+Testing: (21) _level0 (movieclip)
+undefined
+undefined
+undefined
+Testing: (22) [object Object] (object)
+undefined
+undefined
+undefined
+Testing: (23) 1239752134235.94 (object)
+undefined
+undefined
+undefined
+Testing: (24)  (object)
+undefined
+undefined
+undefined
+Testing: (25)  (undefined)
+undefined
+undefined
+undefined
+Testing: (26) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (27) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (28) [object Object] (object)
+undefined
+undefined
+undefined
+Testing: (29)  (object)
+undefined
+undefined
+undefined
+Testing: (30)  (object)
+undefined
+undefined
+undefined
+Testing: (31) null (object)
+undefined
+undefined
+undefined
+Testing: (32) true (object)
+undefined
+undefined
+undefined
+Testing: (33) false (object)
+undefined
+undefined
+undefined
+Testing: (34) 0 (object)
+undefined
+undefined
+undefined
+Testing: (35) 1 (object)
+undefined
+undefined
+undefined
+Testing: (36) 0.5 (object)
+undefined
+undefined
+undefined
+Testing: (37) -1 (object)
+undefined
+undefined
+undefined
+Testing: (38) -0.5 (object)
+undefined
+undefined
+undefined
+Testing: (39) Infinity (object)
+undefined
+undefined
+undefined
+Testing: (40) -Infinity (object)
+undefined
+undefined
+undefined
+Testing: (41) NaN (object)
+undefined
+undefined
+undefined
+Testing: (42)  (object)
+undefined
+undefined
+undefined
+Testing: (43) 0 (object)
+undefined
+undefined
+undefined
+Testing: (44) -0 (object)
+undefined
+undefined
+undefined
+Testing: (45) 0.0 (object)
+undefined
+undefined
+undefined
+Testing: (46) 1 (object)
+undefined
+undefined
+undefined
+Testing: (47) Hello World! (object)
+undefined
+undefined
+undefined
+Testing: (48) true (object)
+undefined
+undefined
+undefined
+Testing: (49) _level0 (object)
+undefined
+undefined
+undefined
+Testing: (50) Ã¤Ã¶Ã¼ (object)
+undefined
+undefined
+undefined
+Testing: (51) _level0 (object)
+undefined
+undefined
+undefined
+Testing: (52) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (53) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (54) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (55)  (object)
+undefined
+undefined
+undefined
+Testing: (56) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (57) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (58) [type Object] (object)
+undefined
+undefined
+undefined
+Testing: (59) [type Object] (object)
+undefined
+undefined
+undefined
+-- -1
+undefined
+undefined
+-- -42
+undefined
+undefined
+-- -1 -2 -3
+undefined
+undefined
+-- -3 -2 -1
+undefined
+undefined
+-- -1 -2 3
+undefined
+undefined
+-- -1 2 3
+undefined
+undefined
+-- 1 -2 3
+undefined
+undefined

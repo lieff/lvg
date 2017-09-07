@@ -1,0 +1,9 @@
+override AsBroadcaster methods
+add
+true
+remove
+[type Function]
+22
+add
+undefined
+remove

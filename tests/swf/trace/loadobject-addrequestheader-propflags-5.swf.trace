@@ -1,0 +1,13 @@
+local.a = object
+  __constructor__ (hn) = _global.LoadVars
+  __proto__ (hp) = _global.LoadVars.prototype
+  constructor (h) = _global.LoadVars
+local.a = object
+  __constructor__ (hn) = _global.XML
+  __proto__ (hp) = _global.XML.prototype
+  _customHeaders (hpn) = object
+    __constructor__ (hn) = _global.Array
+    __proto__ (hp) = _global.Array.prototype
+    constructor (h) = _global.Array
+    length (hp) = number : 0
+  constructor (h) = _global.XML

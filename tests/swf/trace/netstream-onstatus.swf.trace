@@ -1,0 +1,12 @@
+Test what onStatus messages exist in an average movie.
+Calling play
+done calling play
+NetStream onStatus called
+NetStream.Play.Start
+status
+NetStream onStatus called
+NetStream.Buffer.Flush
+status
+NetStream onStatus called
+NetStream.Play.Stop
+status

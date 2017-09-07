@@ -1,0 +1,45 @@
+o.__proto__: 0
+true
+undefined
+o.__proto__: 1
+true
+undefined
+o.__proto__: 2
+true
+undefined
+o.__proto__: 4
+true
+undefined
+o.__proto__: 8
+true
+undefined
+o.__proto__: 16
+true
+undefined
+o.__proto__: 32
+true
+undefined
+o.__proto__: 64
+true
+undefined
+o.__proto__: 128
+undefined
+undefined
+o.__proto__: 256
+true
+undefined
+o.__proto__: 512
+true
+undefined
+o.__proto__: 1024
+undefined
+undefined
+o.__proto__: 2048
+true
+undefined
+o.__proto__: 4096
+undefined
+undefined
+o.__proto__: 8192
+undefined
+undefined

@@ -1,0 +1,2 @@
+Test whether native properties of TextField are initialized if the movie contains an EditText tag
+undefined

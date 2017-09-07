@@ -1,0 +1,12 @@
+_global.flash.filters.BitmapFilter = function
+  __proto__ (hp) = _global.Function.prototype
+  constructor (hp) = _global.Function
+  prototype (hp) = object
+    __proto__ (hp) = _global.Object.prototype
+    clone = function
+      __proto__ (hp) = _global.Function.prototype
+      constructor (hp) = _global.Function
+    constructor (hp) = _global.flash.filters.BitmapFilter
+local.a = object
+  __constructor__ (h) = _global.flash.filters.BitmapFilter
+  __proto__ (hp) = _global.flash.filters.BitmapFilter.prototype

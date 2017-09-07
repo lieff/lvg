@@ -1,0 +1,4 @@
+Check that movies cannot be prototypes
+[type Function]
+undefined
+undefined

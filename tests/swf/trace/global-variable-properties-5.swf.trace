@@ -1,0 +1,3 @@
+_global.Infinity = number : Infinity
+_global.NaN = number : NaN
+_global.o = null

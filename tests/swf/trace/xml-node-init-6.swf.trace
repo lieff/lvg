@@ -1,0 +1,11 @@
+Check when XMLNode's native properties are initialized
+true
+true
+false
+false
+false
+false
+false
+false
+true
+true

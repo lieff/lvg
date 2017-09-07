@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <!-- swfmill xml2swf definefunction2-overwrite.xml definefunction2-overwrite.swf -->
+  <Header framerate="25" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <DoAction>
+	<actions>
+	  <PushData>
+	    <items>
+	      <StackString value="Check if arguments override default variables this, arguments and super"/>
+	    </items>
+	  </PushData>
+	  <Trace/>
+	  <DeclareFunction2 name="foo" argc="3" regc="0" reserved="0">
+	    <args>
+	      <Parameter reg="0" name="arguments"/>
+	      <Parameter reg="0" name="this"/>
+	      <Parameter reg="0" name="super"/>
+	    </args>
+            <actions>
+	      <PushData>
+		<items>
+                  <StackString value="arguments"/>
+                  <StackString value="this"/>
+                  <StackString value="super"/>
+		</items>
+	      </PushData>
+	      <GetVariable/>
+	      <Trace/>
+	      <GetVariable/>
+	      <Trace/>
+	      <GetVariable/>
+	      <Trace/>
+	    </actions>
+	  </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="126"/>
+              <StackInteger value="84"/>
+              <StackInteger value="42"/>
+              <StackInteger value="3"/>
+              <StackString value="foo"/>
+            </items>
+          </PushData>
+	  <CallFunction/>
+	  <GetURL url="fscommand:quit" target=""/>
+	</actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

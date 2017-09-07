@@ -1,0 +1,4640 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+Testing: text (default: hello)
+text: (0)  (undefined) =  (undefined)
+text: (0)  (undefined) =  (undefined)
+text: (1) null (null) = null (null)
+text: (1) null (null) = null (null)
+text: (2) true (boolean) = true (boolean)
+text: (2) true (boolean) = true (boolean)
+text: (3) false (boolean) = false (boolean)
+text: (3) false (boolean) = false (boolean)
+text: (4) 0 (number) = 0 (number)
+text: (4) 0 (number) = 0 (number)
+text: (5) 1 (number) = 1 (number)
+text: (5) 1 (number) = 1 (number)
+text: (6) 0.5 (number) = 0.5 (number)
+text: (6) 0.5 (number) = 0.5 (number)
+text: (7) -1 (number) = -1 (number)
+text: (7) -1 (number) = -1 (number)
+text: (8) -0.5 (number) = -0.5 (number)
+text: (8) -0.5 (number) = -0.5 (number)
+text: (9) Infinity (number) = Infinity (number)
+text: (9) Infinity (number) = Infinity (number)
+text: (10) -Infinity (number) = -Infinity (number)
+text: (10) -Infinity (number) = -Infinity (number)
+text: (11) NaN (number) = NaN (number)
+text: (11) NaN (number) = NaN (number)
+text: (12)  (string) =  (string)
+text: (12)  (string) =  (string)
+text: (13) 0 (string) = 0 (string)
+text: (13) 0 (string) = 0 (string)
+text: (14) -0 (string) = -0 (string)
+text: (14) -0 (string) = -0 (string)
+text: (15) 0.0 (string) = 0.0 (string)
+text: (15) 0.0 (string) = 0.0 (string)
+text: (16) 1 (string) = 1 (string)
+text: (16) 1 (string) = 1 (string)
+text: (17) Hello World! (string) = Hello World! (string)
+text: (17) Hello World! (string) = Hello World! (string)
+text: (18) true (string) = true (string)
+text: (18) true (string) = true (string)
+text: (19) _level0 (string) = _level0 (string)
+text: (19) _level0 (string) = _level0 (string)
+text: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+text: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+text: (21) _level0 (movieclip) = _level0 (movieclip)
+text: (21) _level0 (movieclip) = _level0 (movieclip)
+text: (22) [object Object] (object) = [object Object] (object)
+text: (22) [object Object] (object) = [object Object] (object)
+text: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+text: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+text: (24)  (object) =  (object)
+text: (24)  (object) =  (object)
+text: (25)  (undefined) =  (undefined)
+text: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+text: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+text: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+text: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+text: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+text: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+text: (28) [object Object] (object) = [object Object] (object)
+text: (29)  (object) =  (object)
+text: (29)  (object) =  (object)
+0: valueOf!
+text: (30)  (object) =  (object)
+0: valueOf!
+text: (30)  (object) =  (object)
+1: valueOf!
+text: (31) null (object) = null (object)
+1: valueOf!
+text: (31) null (object) = null (object)
+2: valueOf!
+text: (32) true (object) = true (object)
+2: valueOf!
+text: (32) true (object) = true (object)
+3: valueOf!
+text: (33) false (object) = false (object)
+3: valueOf!
+text: (33) false (object) = false (object)
+4: valueOf!
+text: (34) 0 (object) = 0 (object)
+4: valueOf!
+text: (34) 0 (object) = 0 (object)
+5: valueOf!
+text: (35) 1 (object) = 1 (object)
+5: valueOf!
+text: (35) 1 (object) = 1 (object)
+6: valueOf!
+text: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+text: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+text: (37) -1 (object) = -1 (object)
+7: valueOf!
+text: (37) -1 (object) = -1 (object)
+8: valueOf!
+text: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+text: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+text: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+text: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+text: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+text: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+text: (41) NaN (object) = NaN (object)
+11: valueOf!
+text: (41) NaN (object) = NaN (object)
+12: valueOf!
+text: (42)  (object) =  (object)
+12: valueOf!
+text: (42)  (object) =  (object)
+13: valueOf!
+text: (43) 0 (object) = 0 (object)
+13: valueOf!
+text: (43) 0 (object) = 0 (object)
+14: valueOf!
+text: (44) -0 (object) = -0 (object)
+14: valueOf!
+text: (44) -0 (object) = -0 (object)
+15: valueOf!
+text: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+text: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+text: (46) 1 (object) = 1 (object)
+16: valueOf!
+text: (46) 1 (object) = 1 (object)
+17: valueOf!
+text: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+text: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+text: (48) true (object) = true (object)
+18: valueOf!
+text: (48) true (object) = true (object)
+19: valueOf!
+text: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+text: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+text: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+text: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+text: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+text: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+text: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+text: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+text: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+text: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+text: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+text: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+text: (55)  (object) =  (object)
+25: valueOf!
+text: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+text: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+text: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+text: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+text: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+text: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+text: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+text: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+text: (59) [type Object] (object) = [type Object] (object)
+text: (60) 17000000 (number) = 17000000 (number)
+text: (60) 17000000 (number) = 17000000 (number)
+text: (61) -17000000 (number) = -17000000 (number)
+text: (61) -17000000 (number) = -17000000 (number)
+text: (62) input (string) = input (string)
+text: (62) input (string) = input (string)
+text: (63) 34000000 (number) = 34000000 (number)
+text: (63) 34000000 (number) = 34000000 (number)
+text: (64)  (StyleSheet) =  (undefined)
+text: (64)  (StyleSheet) =  (undefined)
+text: (65) -34000000 (number) = -34000000 (number)
+text: (65) -34000000 (number) = -34000000 (number)
+text: (66) dynamic (string) = dynamic (string)
+text: (66) dynamic (string) = dynamic (string)
+text: (67) true (string) = true (string)
+text: (67) true (string) = true (string)
+Testing: html (default: false)
+html: (0)  (undefined) =  (undefined)
+html: (0)  (undefined) =  (undefined)
+html: (1) null (null) = null (null)
+html: (1) null (null) = null (null)
+html: (2) true (boolean) = true (boolean)
+html: (2) true (boolean) = true (boolean)
+html: (3) false (boolean) = false (boolean)
+html: (3) false (boolean) = false (boolean)
+html: (4) 0 (number) = 0 (number)
+html: (4) 0 (number) = 0 (number)
+html: (5) 1 (number) = 1 (number)
+html: (5) 1 (number) = 1 (number)
+html: (6) 0.5 (number) = 0.5 (number)
+html: (6) 0.5 (number) = 0.5 (number)
+html: (7) -1 (number) = -1 (number)
+html: (7) -1 (number) = -1 (number)
+html: (8) -0.5 (number) = -0.5 (number)
+html: (8) -0.5 (number) = -0.5 (number)
+html: (9) Infinity (number) = Infinity (number)
+html: (9) Infinity (number) = Infinity (number)
+html: (10) -Infinity (number) = -Infinity (number)
+html: (10) -Infinity (number) = -Infinity (number)
+html: (11) NaN (number) = NaN (number)
+html: (11) NaN (number) = NaN (number)
+html: (12)  (string) =  (string)
+html: (12)  (string) =  (string)
+html: (13) 0 (string) = 0 (string)
+html: (13) 0 (string) = 0 (string)
+html: (14) -0 (string) = -0 (string)
+html: (14) -0 (string) = -0 (string)
+html: (15) 0.0 (string) = 0.0 (string)
+html: (15) 0.0 (string) = 0.0 (string)
+html: (16) 1 (string) = 1 (string)
+html: (16) 1 (string) = 1 (string)
+html: (17) Hello World! (string) = Hello World! (string)
+html: (17) Hello World! (string) = Hello World! (string)
+html: (18) true (string) = true (string)
+html: (18) true (string) = true (string)
+html: (19) _level0 (string) = _level0 (string)
+html: (19) _level0 (string) = _level0 (string)
+html: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+html: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+html: (21) _level0 (movieclip) = _level0 (movieclip)
+html: (21) _level0 (movieclip) = _level0 (movieclip)
+html: (22) [object Object] (object) = [object Object] (object)
+html: (22) [object Object] (object) = [object Object] (object)
+html: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+html: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+html: (24)  (object) =  (object)
+html: (24)  (object) =  (object)
+html: (25)  (undefined) =  (undefined)
+html: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+html: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+html: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+html: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+html: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+html: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+html: (28) [object Object] (object) = [object Object] (object)
+html: (29)  (object) =  (object)
+html: (29)  (object) =  (object)
+0: valueOf!
+html: (30)  (object) =  (object)
+0: valueOf!
+html: (30)  (object) =  (object)
+1: valueOf!
+html: (31) null (object) = null (object)
+1: valueOf!
+html: (31) null (object) = null (object)
+2: valueOf!
+html: (32) true (object) = true (object)
+2: valueOf!
+html: (32) true (object) = true (object)
+3: valueOf!
+html: (33) false (object) = false (object)
+3: valueOf!
+html: (33) false (object) = false (object)
+4: valueOf!
+html: (34) 0 (object) = 0 (object)
+4: valueOf!
+html: (34) 0 (object) = 0 (object)
+5: valueOf!
+html: (35) 1 (object) = 1 (object)
+5: valueOf!
+html: (35) 1 (object) = 1 (object)
+6: valueOf!
+html: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+html: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+html: (37) -1 (object) = -1 (object)
+7: valueOf!
+html: (37) -1 (object) = -1 (object)
+8: valueOf!
+html: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+html: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+html: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+html: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+html: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+html: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+html: (41) NaN (object) = NaN (object)
+11: valueOf!
+html: (41) NaN (object) = NaN (object)
+12: valueOf!
+html: (42)  (object) =  (object)
+12: valueOf!
+html: (42)  (object) =  (object)
+13: valueOf!
+html: (43) 0 (object) = 0 (object)
+13: valueOf!
+html: (43) 0 (object) = 0 (object)
+14: valueOf!
+html: (44) -0 (object) = -0 (object)
+14: valueOf!
+html: (44) -0 (object) = -0 (object)
+15: valueOf!
+html: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+html: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+html: (46) 1 (object) = 1 (object)
+16: valueOf!
+html: (46) 1 (object) = 1 (object)
+17: valueOf!
+html: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+html: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+html: (48) true (object) = true (object)
+18: valueOf!
+html: (48) true (object) = true (object)
+19: valueOf!
+html: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+html: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+html: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+html: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+html: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+html: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+html: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+html: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+html: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+html: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+html: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+html: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+html: (55)  (object) =  (object)
+25: valueOf!
+html: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+html: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+html: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+html: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+html: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+html: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+html: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+html: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+html: (59) [type Object] (object) = [type Object] (object)
+html: (60) 17000000 (number) = 17000000 (number)
+html: (60) 17000000 (number) = 17000000 (number)
+html: (61) -17000000 (number) = -17000000 (number)
+html: (61) -17000000 (number) = -17000000 (number)
+html: (62) input (string) = input (string)
+html: (62) input (string) = input (string)
+html: (63) 34000000 (number) = 34000000 (number)
+html: (63) 34000000 (number) = 34000000 (number)
+html: (64)  (StyleSheet) =  (undefined)
+html: (64)  (StyleSheet) =  (undefined)
+html: (65) -34000000 (number) = -34000000 (number)
+html: (65) -34000000 (number) = -34000000 (number)
+html: (66) dynamic (string) = dynamic (string)
+html: (66) dynamic (string) = dynamic (string)
+html: (67) true (string) = true (string)
+html: (67) true (string) = true (string)
+Testing: htmlText (default: hello)
+htmlText: (0)  (undefined) =  (undefined)
+htmlText: (0)  (undefined) =  (undefined)
+htmlText: (1) null (null) = null (null)
+htmlText: (1) null (null) = null (null)
+htmlText: (2) true (boolean) = true (boolean)
+htmlText: (2) true (boolean) = true (boolean)
+htmlText: (3) false (boolean) = false (boolean)
+htmlText: (3) false (boolean) = false (boolean)
+htmlText: (4) 0 (number) = 0 (number)
+htmlText: (4) 0 (number) = 0 (number)
+htmlText: (5) 1 (number) = 1 (number)
+htmlText: (5) 1 (number) = 1 (number)
+htmlText: (6) 0.5 (number) = 0.5 (number)
+htmlText: (6) 0.5 (number) = 0.5 (number)
+htmlText: (7) -1 (number) = -1 (number)
+htmlText: (7) -1 (number) = -1 (number)
+htmlText: (8) -0.5 (number) = -0.5 (number)
+htmlText: (8) -0.5 (number) = -0.5 (number)
+htmlText: (9) Infinity (number) = Infinity (number)
+htmlText: (9) Infinity (number) = Infinity (number)
+htmlText: (10) -Infinity (number) = -Infinity (number)
+htmlText: (10) -Infinity (number) = -Infinity (number)
+htmlText: (11) NaN (number) = NaN (number)
+htmlText: (11) NaN (number) = NaN (number)
+htmlText: (12)  (string) =  (string)
+htmlText: (12)  (string) =  (string)
+htmlText: (13) 0 (string) = 0 (string)
+htmlText: (13) 0 (string) = 0 (string)
+htmlText: (14) -0 (string) = -0 (string)
+htmlText: (14) -0 (string) = -0 (string)
+htmlText: (15) 0.0 (string) = 0.0 (string)
+htmlText: (15) 0.0 (string) = 0.0 (string)
+htmlText: (16) 1 (string) = 1 (string)
+htmlText: (16) 1 (string) = 1 (string)
+htmlText: (17) Hello World! (string) = Hello World! (string)
+htmlText: (17) Hello World! (string) = Hello World! (string)
+htmlText: (18) true (string) = true (string)
+htmlText: (18) true (string) = true (string)
+htmlText: (19) _level0 (string) = _level0 (string)
+htmlText: (19) _level0 (string) = _level0 (string)
+htmlText: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+htmlText: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+htmlText: (21) _level0 (movieclip) = _level0 (movieclip)
+htmlText: (21) _level0 (movieclip) = _level0 (movieclip)
+htmlText: (22) [object Object] (object) = [object Object] (object)
+htmlText: (22) [object Object] (object) = [object Object] (object)
+htmlText: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+htmlText: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+htmlText: (24)  (object) =  (object)
+htmlText: (24)  (object) =  (object)
+htmlText: (25)  (undefined) =  (undefined)
+htmlText: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+htmlText: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+htmlText: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+htmlText: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+htmlText: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+htmlText: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+htmlText: (28) [object Object] (object) = [object Object] (object)
+htmlText: (29)  (object) =  (object)
+htmlText: (29)  (object) =  (object)
+0: valueOf!
+htmlText: (30)  (object) =  (object)
+0: valueOf!
+htmlText: (30)  (object) =  (object)
+1: valueOf!
+htmlText: (31) null (object) = null (object)
+1: valueOf!
+htmlText: (31) null (object) = null (object)
+2: valueOf!
+htmlText: (32) true (object) = true (object)
+2: valueOf!
+htmlText: (32) true (object) = true (object)
+3: valueOf!
+htmlText: (33) false (object) = false (object)
+3: valueOf!
+htmlText: (33) false (object) = false (object)
+4: valueOf!
+htmlText: (34) 0 (object) = 0 (object)
+4: valueOf!
+htmlText: (34) 0 (object) = 0 (object)
+5: valueOf!
+htmlText: (35) 1 (object) = 1 (object)
+5: valueOf!
+htmlText: (35) 1 (object) = 1 (object)
+6: valueOf!
+htmlText: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+htmlText: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+htmlText: (37) -1 (object) = -1 (object)
+7: valueOf!
+htmlText: (37) -1 (object) = -1 (object)
+8: valueOf!
+htmlText: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+htmlText: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+htmlText: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+htmlText: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+htmlText: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+htmlText: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+htmlText: (41) NaN (object) = NaN (object)
+11: valueOf!
+htmlText: (41) NaN (object) = NaN (object)
+12: valueOf!
+htmlText: (42)  (object) =  (object)
+12: valueOf!
+htmlText: (42)  (object) =  (object)
+13: valueOf!
+htmlText: (43) 0 (object) = 0 (object)
+13: valueOf!
+htmlText: (43) 0 (object) = 0 (object)
+14: valueOf!
+htmlText: (44) -0 (object) = -0 (object)
+14: valueOf!
+htmlText: (44) -0 (object) = -0 (object)
+15: valueOf!
+htmlText: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+htmlText: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+htmlText: (46) 1 (object) = 1 (object)
+16: valueOf!
+htmlText: (46) 1 (object) = 1 (object)
+17: valueOf!
+htmlText: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+htmlText: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+htmlText: (48) true (object) = true (object)
+18: valueOf!
+htmlText: (48) true (object) = true (object)
+19: valueOf!
+htmlText: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+htmlText: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+htmlText: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+htmlText: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+htmlText: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+htmlText: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+htmlText: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+htmlText: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+htmlText: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+htmlText: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+htmlText: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+htmlText: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+htmlText: (55)  (object) =  (object)
+25: valueOf!
+htmlText: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+htmlText: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+htmlText: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+htmlText: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+htmlText: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+htmlText: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+htmlText: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+htmlText: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+htmlText: (59) [type Object] (object) = [type Object] (object)
+htmlText: (60) 17000000 (number) = 17000000 (number)
+htmlText: (60) 17000000 (number) = 17000000 (number)
+htmlText: (61) -17000000 (number) = -17000000 (number)
+htmlText: (61) -17000000 (number) = -17000000 (number)
+htmlText: (62) input (string) = input (string)
+htmlText: (62) input (string) = input (string)
+htmlText: (63) 34000000 (number) = 34000000 (number)
+htmlText: (63) 34000000 (number) = 34000000 (number)
+htmlText: (64)  (StyleSheet) =  (undefined)
+htmlText: (64)  (StyleSheet) =  (undefined)
+htmlText: (65) -34000000 (number) = -34000000 (number)
+htmlText: (65) -34000000 (number) = -34000000 (number)
+htmlText: (66) dynamic (string) = dynamic (string)
+htmlText: (66) dynamic (string) = dynamic (string)
+htmlText: (67) true (string) = true (string)
+htmlText: (67) true (string) = true (string)
+Testing: condenseWhite (default: false)
+condenseWhite: (0)  (undefined) =  (undefined)
+condenseWhite: (0)  (undefined) =  (undefined)
+condenseWhite: (1) null (null) = null (null)
+condenseWhite: (1) null (null) = null (null)
+condenseWhite: (2) true (boolean) = true (boolean)
+condenseWhite: (2) true (boolean) = true (boolean)
+condenseWhite: (3) false (boolean) = false (boolean)
+condenseWhite: (3) false (boolean) = false (boolean)
+condenseWhite: (4) 0 (number) = 0 (number)
+condenseWhite: (4) 0 (number) = 0 (number)
+condenseWhite: (5) 1 (number) = 1 (number)
+condenseWhite: (5) 1 (number) = 1 (number)
+condenseWhite: (6) 0.5 (number) = 0.5 (number)
+condenseWhite: (6) 0.5 (number) = 0.5 (number)
+condenseWhite: (7) -1 (number) = -1 (number)
+condenseWhite: (7) -1 (number) = -1 (number)
+condenseWhite: (8) -0.5 (number) = -0.5 (number)
+condenseWhite: (8) -0.5 (number) = -0.5 (number)
+condenseWhite: (9) Infinity (number) = Infinity (number)
+condenseWhite: (9) Infinity (number) = Infinity (number)
+condenseWhite: (10) -Infinity (number) = -Infinity (number)
+condenseWhite: (10) -Infinity (number) = -Infinity (number)
+condenseWhite: (11) NaN (number) = NaN (number)
+condenseWhite: (11) NaN (number) = NaN (number)
+condenseWhite: (12)  (string) =  (string)
+condenseWhite: (12)  (string) =  (string)
+condenseWhite: (13) 0 (string) = 0 (string)
+condenseWhite: (13) 0 (string) = 0 (string)
+condenseWhite: (14) -0 (string) = -0 (string)
+condenseWhite: (14) -0 (string) = -0 (string)
+condenseWhite: (15) 0.0 (string) = 0.0 (string)
+condenseWhite: (15) 0.0 (string) = 0.0 (string)
+condenseWhite: (16) 1 (string) = 1 (string)
+condenseWhite: (16) 1 (string) = 1 (string)
+condenseWhite: (17) Hello World! (string) = Hello World! (string)
+condenseWhite: (17) Hello World! (string) = Hello World! (string)
+condenseWhite: (18) true (string) = true (string)
+condenseWhite: (18) true (string) = true (string)
+condenseWhite: (19) _level0 (string) = _level0 (string)
+condenseWhite: (19) _level0 (string) = _level0 (string)
+condenseWhite: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+condenseWhite: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+condenseWhite: (21) _level0 (movieclip) = _level0 (movieclip)
+condenseWhite: (21) _level0 (movieclip) = _level0 (movieclip)
+condenseWhite: (22) [object Object] (object) = [object Object] (object)
+condenseWhite: (22) [object Object] (object) = [object Object] (object)
+condenseWhite: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+condenseWhite: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+condenseWhite: (24)  (object) =  (object)
+condenseWhite: (24)  (object) =  (object)
+condenseWhite: (25)  (undefined) =  (undefined)
+condenseWhite: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+condenseWhite: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+condenseWhite: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+condenseWhite: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+condenseWhite: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+condenseWhite: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+condenseWhite: (28) [object Object] (object) = [object Object] (object)
+condenseWhite: (29)  (object) =  (object)
+condenseWhite: (29)  (object) =  (object)
+0: valueOf!
+condenseWhite: (30)  (object) =  (object)
+0: valueOf!
+condenseWhite: (30)  (object) =  (object)
+1: valueOf!
+condenseWhite: (31) null (object) = null (object)
+1: valueOf!
+condenseWhite: (31) null (object) = null (object)
+2: valueOf!
+condenseWhite: (32) true (object) = true (object)
+2: valueOf!
+condenseWhite: (32) true (object) = true (object)
+3: valueOf!
+condenseWhite: (33) false (object) = false (object)
+3: valueOf!
+condenseWhite: (33) false (object) = false (object)
+4: valueOf!
+condenseWhite: (34) 0 (object) = 0 (object)
+4: valueOf!
+condenseWhite: (34) 0 (object) = 0 (object)
+5: valueOf!
+condenseWhite: (35) 1 (object) = 1 (object)
+5: valueOf!
+condenseWhite: (35) 1 (object) = 1 (object)
+6: valueOf!
+condenseWhite: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+condenseWhite: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+condenseWhite: (37) -1 (object) = -1 (object)
+7: valueOf!
+condenseWhite: (37) -1 (object) = -1 (object)
+8: valueOf!
+condenseWhite: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+condenseWhite: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+condenseWhite: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+condenseWhite: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+condenseWhite: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+condenseWhite: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+condenseWhite: (41) NaN (object) = NaN (object)
+11: valueOf!
+condenseWhite: (41) NaN (object) = NaN (object)
+12: valueOf!
+condenseWhite: (42)  (object) =  (object)
+12: valueOf!
+condenseWhite: (42)  (object) =  (object)
+13: valueOf!
+condenseWhite: (43) 0 (object) = 0 (object)
+13: valueOf!
+condenseWhite: (43) 0 (object) = 0 (object)
+14: valueOf!
+condenseWhite: (44) -0 (object) = -0 (object)
+14: valueOf!
+condenseWhite: (44) -0 (object) = -0 (object)
+15: valueOf!
+condenseWhite: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+condenseWhite: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+condenseWhite: (46) 1 (object) = 1 (object)
+16: valueOf!
+condenseWhite: (46) 1 (object) = 1 (object)
+17: valueOf!
+condenseWhite: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+condenseWhite: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+condenseWhite: (48) true (object) = true (object)
+18: valueOf!
+condenseWhite: (48) true (object) = true (object)
+19: valueOf!
+condenseWhite: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+condenseWhite: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+condenseWhite: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+condenseWhite: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+condenseWhite: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+condenseWhite: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+condenseWhite: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+condenseWhite: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+condenseWhite: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+condenseWhite: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+condenseWhite: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+condenseWhite: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+condenseWhite: (55)  (object) =  (object)
+25: valueOf!
+condenseWhite: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+condenseWhite: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+condenseWhite: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+condenseWhite: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+condenseWhite: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+condenseWhite: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+condenseWhite: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+condenseWhite: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+condenseWhite: (59) [type Object] (object) = [type Object] (object)
+condenseWhite: (60) 17000000 (number) = 17000000 (number)
+condenseWhite: (60) 17000000 (number) = 17000000 (number)
+condenseWhite: (61) -17000000 (number) = -17000000 (number)
+condenseWhite: (61) -17000000 (number) = -17000000 (number)
+condenseWhite: (62) input (string) = input (string)
+condenseWhite: (62) input (string) = input (string)
+condenseWhite: (63) 34000000 (number) = 34000000 (number)
+condenseWhite: (63) 34000000 (number) = 34000000 (number)
+condenseWhite: (64)  (StyleSheet) =  (undefined)
+condenseWhite: (64)  (StyleSheet) =  (undefined)
+condenseWhite: (65) -34000000 (number) = -34000000 (number)
+condenseWhite: (65) -34000000 (number) = -34000000 (number)
+condenseWhite: (66) dynamic (string) = dynamic (string)
+condenseWhite: (66) dynamic (string) = dynamic (string)
+condenseWhite: (67) true (string) = true (string)
+condenseWhite: (67) true (string) = true (string)
+Testing: maxChars (default: 7)
+maxChars: (0)  (undefined) =  (undefined)
+maxChars: (0)  (undefined) =  (undefined)
+maxChars: (1) null (null) = null (null)
+maxChars: (1) null (null) = null (null)
+maxChars: (2) true (boolean) = true (boolean)
+maxChars: (2) true (boolean) = true (boolean)
+maxChars: (3) false (boolean) = false (boolean)
+maxChars: (3) false (boolean) = false (boolean)
+maxChars: (4) 0 (number) = 0 (number)
+maxChars: (4) 0 (number) = 0 (number)
+maxChars: (5) 1 (number) = 1 (number)
+maxChars: (5) 1 (number) = 1 (number)
+maxChars: (6) 0.5 (number) = 0.5 (number)
+maxChars: (6) 0.5 (number) = 0.5 (number)
+maxChars: (7) -1 (number) = -1 (number)
+maxChars: (7) -1 (number) = -1 (number)
+maxChars: (8) -0.5 (number) = -0.5 (number)
+maxChars: (8) -0.5 (number) = -0.5 (number)
+maxChars: (9) Infinity (number) = Infinity (number)
+maxChars: (9) Infinity (number) = Infinity (number)
+maxChars: (10) -Infinity (number) = -Infinity (number)
+maxChars: (10) -Infinity (number) = -Infinity (number)
+maxChars: (11) NaN (number) = NaN (number)
+maxChars: (11) NaN (number) = NaN (number)
+maxChars: (12)  (string) =  (string)
+maxChars: (12)  (string) =  (string)
+maxChars: (13) 0 (string) = 0 (string)
+maxChars: (13) 0 (string) = 0 (string)
+maxChars: (14) -0 (string) = -0 (string)
+maxChars: (14) -0 (string) = -0 (string)
+maxChars: (15) 0.0 (string) = 0.0 (string)
+maxChars: (15) 0.0 (string) = 0.0 (string)
+maxChars: (16) 1 (string) = 1 (string)
+maxChars: (16) 1 (string) = 1 (string)
+maxChars: (17) Hello World! (string) = Hello World! (string)
+maxChars: (17) Hello World! (string) = Hello World! (string)
+maxChars: (18) true (string) = true (string)
+maxChars: (18) true (string) = true (string)
+maxChars: (19) _level0 (string) = _level0 (string)
+maxChars: (19) _level0 (string) = _level0 (string)
+maxChars: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+maxChars: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+maxChars: (21) _level0 (movieclip) = _level0 (movieclip)
+maxChars: (21) _level0 (movieclip) = _level0 (movieclip)
+maxChars: (22) [object Object] (object) = [object Object] (object)
+maxChars: (22) [object Object] (object) = [object Object] (object)
+maxChars: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+maxChars: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+maxChars: (24)  (object) =  (object)
+maxChars: (24)  (object) =  (object)
+maxChars: (25)  (undefined) =  (undefined)
+maxChars: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+maxChars: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+maxChars: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+maxChars: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+maxChars: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+maxChars: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+maxChars: (28) [object Object] (object) = [object Object] (object)
+maxChars: (29)  (object) =  (object)
+maxChars: (29)  (object) =  (object)
+0: valueOf!
+maxChars: (30)  (object) =  (object)
+0: valueOf!
+maxChars: (30)  (object) =  (object)
+1: valueOf!
+maxChars: (31) null (object) = null (object)
+1: valueOf!
+maxChars: (31) null (object) = null (object)
+2: valueOf!
+maxChars: (32) true (object) = true (object)
+2: valueOf!
+maxChars: (32) true (object) = true (object)
+3: valueOf!
+maxChars: (33) false (object) = false (object)
+3: valueOf!
+maxChars: (33) false (object) = false (object)
+4: valueOf!
+maxChars: (34) 0 (object) = 0 (object)
+4: valueOf!
+maxChars: (34) 0 (object) = 0 (object)
+5: valueOf!
+maxChars: (35) 1 (object) = 1 (object)
+5: valueOf!
+maxChars: (35) 1 (object) = 1 (object)
+6: valueOf!
+maxChars: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+maxChars: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+maxChars: (37) -1 (object) = -1 (object)
+7: valueOf!
+maxChars: (37) -1 (object) = -1 (object)
+8: valueOf!
+maxChars: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+maxChars: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+maxChars: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+maxChars: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+maxChars: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+maxChars: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+maxChars: (41) NaN (object) = NaN (object)
+11: valueOf!
+maxChars: (41) NaN (object) = NaN (object)
+12: valueOf!
+maxChars: (42)  (object) =  (object)
+12: valueOf!
+maxChars: (42)  (object) =  (object)
+13: valueOf!
+maxChars: (43) 0 (object) = 0 (object)
+13: valueOf!
+maxChars: (43) 0 (object) = 0 (object)
+14: valueOf!
+maxChars: (44) -0 (object) = -0 (object)
+14: valueOf!
+maxChars: (44) -0 (object) = -0 (object)
+15: valueOf!
+maxChars: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+maxChars: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+maxChars: (46) 1 (object) = 1 (object)
+16: valueOf!
+maxChars: (46) 1 (object) = 1 (object)
+17: valueOf!
+maxChars: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+maxChars: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+maxChars: (48) true (object) = true (object)
+18: valueOf!
+maxChars: (48) true (object) = true (object)
+19: valueOf!
+maxChars: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+maxChars: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+maxChars: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+maxChars: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+maxChars: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+maxChars: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+maxChars: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+maxChars: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+maxChars: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+maxChars: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+maxChars: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+maxChars: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+maxChars: (55)  (object) =  (object)
+25: valueOf!
+maxChars: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+maxChars: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+maxChars: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+maxChars: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+maxChars: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+maxChars: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+maxChars: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+maxChars: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+maxChars: (59) [type Object] (object) = [type Object] (object)
+maxChars: (60) 17000000 (number) = 17000000 (number)
+maxChars: (60) 17000000 (number) = 17000000 (number)
+maxChars: (61) -17000000 (number) = -17000000 (number)
+maxChars: (61) -17000000 (number) = -17000000 (number)
+maxChars: (62) input (string) = input (string)
+maxChars: (62) input (string) = input (string)
+maxChars: (63) 34000000 (number) = 34000000 (number)
+maxChars: (63) 34000000 (number) = 34000000 (number)
+maxChars: (64)  (StyleSheet) =  (undefined)
+maxChars: (64)  (StyleSheet) =  (undefined)
+maxChars: (65) -34000000 (number) = -34000000 (number)
+maxChars: (65) -34000000 (number) = -34000000 (number)
+maxChars: (66) dynamic (string) = dynamic (string)
+maxChars: (66) dynamic (string) = dynamic (string)
+maxChars: (67) true (string) = true (string)
+maxChars: (67) true (string) = true (string)
+Testing: multiline (default: false)
+multiline: (0)  (undefined) =  (undefined)
+multiline: (0)  (undefined) =  (undefined)
+multiline: (1) null (null) = null (null)
+multiline: (1) null (null) = null (null)
+multiline: (2) true (boolean) = true (boolean)
+multiline: (2) true (boolean) = true (boolean)
+multiline: (3) false (boolean) = false (boolean)
+multiline: (3) false (boolean) = false (boolean)
+multiline: (4) 0 (number) = 0 (number)
+multiline: (4) 0 (number) = 0 (number)
+multiline: (5) 1 (number) = 1 (number)
+multiline: (5) 1 (number) = 1 (number)
+multiline: (6) 0.5 (number) = 0.5 (number)
+multiline: (6) 0.5 (number) = 0.5 (number)
+multiline: (7) -1 (number) = -1 (number)
+multiline: (7) -1 (number) = -1 (number)
+multiline: (8) -0.5 (number) = -0.5 (number)
+multiline: (8) -0.5 (number) = -0.5 (number)
+multiline: (9) Infinity (number) = Infinity (number)
+multiline: (9) Infinity (number) = Infinity (number)
+multiline: (10) -Infinity (number) = -Infinity (number)
+multiline: (10) -Infinity (number) = -Infinity (number)
+multiline: (11) NaN (number) = NaN (number)
+multiline: (11) NaN (number) = NaN (number)
+multiline: (12)  (string) =  (string)
+multiline: (12)  (string) =  (string)
+multiline: (13) 0 (string) = 0 (string)
+multiline: (13) 0 (string) = 0 (string)
+multiline: (14) -0 (string) = -0 (string)
+multiline: (14) -0 (string) = -0 (string)
+multiline: (15) 0.0 (string) = 0.0 (string)
+multiline: (15) 0.0 (string) = 0.0 (string)
+multiline: (16) 1 (string) = 1 (string)
+multiline: (16) 1 (string) = 1 (string)
+multiline: (17) Hello World! (string) = Hello World! (string)
+multiline: (17) Hello World! (string) = Hello World! (string)
+multiline: (18) true (string) = true (string)
+multiline: (18) true (string) = true (string)
+multiline: (19) _level0 (string) = _level0 (string)
+multiline: (19) _level0 (string) = _level0 (string)
+multiline: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+multiline: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+multiline: (21) _level0 (movieclip) = _level0 (movieclip)
+multiline: (21) _level0 (movieclip) = _level0 (movieclip)
+multiline: (22) [object Object] (object) = [object Object] (object)
+multiline: (22) [object Object] (object) = [object Object] (object)
+multiline: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+multiline: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+multiline: (24)  (object) =  (object)
+multiline: (24)  (object) =  (object)
+multiline: (25)  (undefined) =  (undefined)
+multiline: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+multiline: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+multiline: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+multiline: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+multiline: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+multiline: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+multiline: (28) [object Object] (object) = [object Object] (object)
+multiline: (29)  (object) =  (object)
+multiline: (29)  (object) =  (object)
+0: valueOf!
+multiline: (30)  (object) =  (object)
+0: valueOf!
+multiline: (30)  (object) =  (object)
+1: valueOf!
+multiline: (31) null (object) = null (object)
+1: valueOf!
+multiline: (31) null (object) = null (object)
+2: valueOf!
+multiline: (32) true (object) = true (object)
+2: valueOf!
+multiline: (32) true (object) = true (object)
+3: valueOf!
+multiline: (33) false (object) = false (object)
+3: valueOf!
+multiline: (33) false (object) = false (object)
+4: valueOf!
+multiline: (34) 0 (object) = 0 (object)
+4: valueOf!
+multiline: (34) 0 (object) = 0 (object)
+5: valueOf!
+multiline: (35) 1 (object) = 1 (object)
+5: valueOf!
+multiline: (35) 1 (object) = 1 (object)
+6: valueOf!
+multiline: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+multiline: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+multiline: (37) -1 (object) = -1 (object)
+7: valueOf!
+multiline: (37) -1 (object) = -1 (object)
+8: valueOf!
+multiline: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+multiline: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+multiline: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+multiline: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+multiline: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+multiline: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+multiline: (41) NaN (object) = NaN (object)
+11: valueOf!
+multiline: (41) NaN (object) = NaN (object)
+12: valueOf!
+multiline: (42)  (object) =  (object)
+12: valueOf!
+multiline: (42)  (object) =  (object)
+13: valueOf!
+multiline: (43) 0 (object) = 0 (object)
+13: valueOf!
+multiline: (43) 0 (object) = 0 (object)
+14: valueOf!
+multiline: (44) -0 (object) = -0 (object)
+14: valueOf!
+multiline: (44) -0 (object) = -0 (object)
+15: valueOf!
+multiline: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+multiline: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+multiline: (46) 1 (object) = 1 (object)
+16: valueOf!
+multiline: (46) 1 (object) = 1 (object)
+17: valueOf!
+multiline: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+multiline: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+multiline: (48) true (object) = true (object)
+18: valueOf!
+multiline: (48) true (object) = true (object)
+19: valueOf!
+multiline: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+multiline: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+multiline: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+multiline: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+multiline: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+multiline: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+multiline: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+multiline: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+multiline: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+multiline: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+multiline: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+multiline: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+multiline: (55)  (object) =  (object)
+25: valueOf!
+multiline: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+multiline: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+multiline: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+multiline: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+multiline: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+multiline: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+multiline: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+multiline: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+multiline: (59) [type Object] (object) = [type Object] (object)
+multiline: (60) 17000000 (number) = 17000000 (number)
+multiline: (60) 17000000 (number) = 17000000 (number)
+multiline: (61) -17000000 (number) = -17000000 (number)
+multiline: (61) -17000000 (number) = -17000000 (number)
+multiline: (62) input (string) = input (string)
+multiline: (62) input (string) = input (string)
+multiline: (63) 34000000 (number) = 34000000 (number)
+multiline: (63) 34000000 (number) = 34000000 (number)
+multiline: (64)  (StyleSheet) =  (undefined)
+multiline: (64)  (StyleSheet) =  (undefined)
+multiline: (65) -34000000 (number) = -34000000 (number)
+multiline: (65) -34000000 (number) = -34000000 (number)
+multiline: (66) dynamic (string) = dynamic (string)
+multiline: (66) dynamic (string) = dynamic (string)
+multiline: (67) true (string) = true (string)
+multiline: (67) true (string) = true (string)
+Testing: restrict (default: abc)
+restrict: (0)  (undefined) =  (undefined)
+restrict: (0)  (undefined) =  (undefined)
+restrict: (1) null (null) = null (null)
+restrict: (1) null (null) = null (null)
+restrict: (2) true (boolean) = true (boolean)
+restrict: (2) true (boolean) = true (boolean)
+restrict: (3) false (boolean) = false (boolean)
+restrict: (3) false (boolean) = false (boolean)
+restrict: (4) 0 (number) = 0 (number)
+restrict: (4) 0 (number) = 0 (number)
+restrict: (5) 1 (number) = 1 (number)
+restrict: (5) 1 (number) = 1 (number)
+restrict: (6) 0.5 (number) = 0.5 (number)
+restrict: (6) 0.5 (number) = 0.5 (number)
+restrict: (7) -1 (number) = -1 (number)
+restrict: (7) -1 (number) = -1 (number)
+restrict: (8) -0.5 (number) = -0.5 (number)
+restrict: (8) -0.5 (number) = -0.5 (number)
+restrict: (9) Infinity (number) = Infinity (number)
+restrict: (9) Infinity (number) = Infinity (number)
+restrict: (10) -Infinity (number) = -Infinity (number)
+restrict: (10) -Infinity (number) = -Infinity (number)
+restrict: (11) NaN (number) = NaN (number)
+restrict: (11) NaN (number) = NaN (number)
+restrict: (12)  (string) =  (string)
+restrict: (12)  (string) =  (string)
+restrict: (13) 0 (string) = 0 (string)
+restrict: (13) 0 (string) = 0 (string)
+restrict: (14) -0 (string) = -0 (string)
+restrict: (14) -0 (string) = -0 (string)
+restrict: (15) 0.0 (string) = 0.0 (string)
+restrict: (15) 0.0 (string) = 0.0 (string)
+restrict: (16) 1 (string) = 1 (string)
+restrict: (16) 1 (string) = 1 (string)
+restrict: (17) Hello World! (string) = Hello World! (string)
+restrict: (17) Hello World! (string) = Hello World! (string)
+restrict: (18) true (string) = true (string)
+restrict: (18) true (string) = true (string)
+restrict: (19) _level0 (string) = _level0 (string)
+restrict: (19) _level0 (string) = _level0 (string)
+restrict: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+restrict: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+restrict: (21) _level0 (movieclip) = _level0 (movieclip)
+restrict: (21) _level0 (movieclip) = _level0 (movieclip)
+restrict: (22) [object Object] (object) = [object Object] (object)
+restrict: (22) [object Object] (object) = [object Object] (object)
+restrict: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+restrict: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+restrict: (24)  (object) =  (object)
+restrict: (24)  (object) =  (object)
+restrict: (25)  (undefined) =  (undefined)
+restrict: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+restrict: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+restrict: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+restrict: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+restrict: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+restrict: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+restrict: (28) [object Object] (object) = [object Object] (object)
+restrict: (29)  (object) =  (object)
+restrict: (29)  (object) =  (object)
+0: valueOf!
+restrict: (30)  (object) =  (object)
+0: valueOf!
+restrict: (30)  (object) =  (object)
+1: valueOf!
+restrict: (31) null (object) = null (object)
+1: valueOf!
+restrict: (31) null (object) = null (object)
+2: valueOf!
+restrict: (32) true (object) = true (object)
+2: valueOf!
+restrict: (32) true (object) = true (object)
+3: valueOf!
+restrict: (33) false (object) = false (object)
+3: valueOf!
+restrict: (33) false (object) = false (object)
+4: valueOf!
+restrict: (34) 0 (object) = 0 (object)
+4: valueOf!
+restrict: (34) 0 (object) = 0 (object)
+5: valueOf!
+restrict: (35) 1 (object) = 1 (object)
+5: valueOf!
+restrict: (35) 1 (object) = 1 (object)
+6: valueOf!
+restrict: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+restrict: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+restrict: (37) -1 (object) = -1 (object)
+7: valueOf!
+restrict: (37) -1 (object) = -1 (object)
+8: valueOf!
+restrict: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+restrict: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+restrict: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+restrict: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+restrict: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+restrict: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+restrict: (41) NaN (object) = NaN (object)
+11: valueOf!
+restrict: (41) NaN (object) = NaN (object)
+12: valueOf!
+restrict: (42)  (object) =  (object)
+12: valueOf!
+restrict: (42)  (object) =  (object)
+13: valueOf!
+restrict: (43) 0 (object) = 0 (object)
+13: valueOf!
+restrict: (43) 0 (object) = 0 (object)
+14: valueOf!
+restrict: (44) -0 (object) = -0 (object)
+14: valueOf!
+restrict: (44) -0 (object) = -0 (object)
+15: valueOf!
+restrict: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+restrict: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+restrict: (46) 1 (object) = 1 (object)
+16: valueOf!
+restrict: (46) 1 (object) = 1 (object)
+17: valueOf!
+restrict: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+restrict: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+restrict: (48) true (object) = true (object)
+18: valueOf!
+restrict: (48) true (object) = true (object)
+19: valueOf!
+restrict: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+restrict: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+restrict: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+restrict: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+restrict: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+restrict: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+restrict: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+restrict: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+restrict: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+restrict: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+restrict: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+restrict: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+restrict: (55)  (object) =  (object)
+25: valueOf!
+restrict: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+restrict: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+restrict: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+restrict: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+restrict: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+restrict: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+restrict: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+restrict: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+restrict: (59) [type Object] (object) = [type Object] (object)
+restrict: (60) 17000000 (number) = 17000000 (number)
+restrict: (60) 17000000 (number) = 17000000 (number)
+restrict: (61) -17000000 (number) = -17000000 (number)
+restrict: (61) -17000000 (number) = -17000000 (number)
+restrict: (62) input (string) = input (string)
+restrict: (62) input (string) = input (string)
+restrict: (63) 34000000 (number) = 34000000 (number)
+restrict: (63) 34000000 (number) = 34000000 (number)
+restrict: (64)  (StyleSheet) =  (undefined)
+restrict: (64)  (StyleSheet) =  (undefined)
+restrict: (65) -34000000 (number) = -34000000 (number)
+restrict: (65) -34000000 (number) = -34000000 (number)
+restrict: (66) dynamic (string) = dynamic (string)
+restrict: (66) dynamic (string) = dynamic (string)
+restrict: (67) true (string) = true (string)
+restrict: (67) true (string) = true (string)
+Testing: selectable (default: false)
+selectable: (0)  (undefined) =  (undefined)
+selectable: (0)  (undefined) =  (undefined)
+selectable: (1) null (null) = null (null)
+selectable: (1) null (null) = null (null)
+selectable: (2) true (boolean) = true (boolean)
+selectable: (2) true (boolean) = true (boolean)
+selectable: (3) false (boolean) = false (boolean)
+selectable: (3) false (boolean) = false (boolean)
+selectable: (4) 0 (number) = 0 (number)
+selectable: (4) 0 (number) = 0 (number)
+selectable: (5) 1 (number) = 1 (number)
+selectable: (5) 1 (number) = 1 (number)
+selectable: (6) 0.5 (number) = 0.5 (number)
+selectable: (6) 0.5 (number) = 0.5 (number)
+selectable: (7) -1 (number) = -1 (number)
+selectable: (7) -1 (number) = -1 (number)
+selectable: (8) -0.5 (number) = -0.5 (number)
+selectable: (8) -0.5 (number) = -0.5 (number)
+selectable: (9) Infinity (number) = Infinity (number)
+selectable: (9) Infinity (number) = Infinity (number)
+selectable: (10) -Infinity (number) = -Infinity (number)
+selectable: (10) -Infinity (number) = -Infinity (number)
+selectable: (11) NaN (number) = NaN (number)
+selectable: (11) NaN (number) = NaN (number)
+selectable: (12)  (string) =  (string)
+selectable: (12)  (string) =  (string)
+selectable: (13) 0 (string) = 0 (string)
+selectable: (13) 0 (string) = 0 (string)
+selectable: (14) -0 (string) = -0 (string)
+selectable: (14) -0 (string) = -0 (string)
+selectable: (15) 0.0 (string) = 0.0 (string)
+selectable: (15) 0.0 (string) = 0.0 (string)
+selectable: (16) 1 (string) = 1 (string)
+selectable: (16) 1 (string) = 1 (string)
+selectable: (17) Hello World! (string) = Hello World! (string)
+selectable: (17) Hello World! (string) = Hello World! (string)
+selectable: (18) true (string) = true (string)
+selectable: (18) true (string) = true (string)
+selectable: (19) _level0 (string) = _level0 (string)
+selectable: (19) _level0 (string) = _level0 (string)
+selectable: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+selectable: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+selectable: (21) _level0 (movieclip) = _level0 (movieclip)
+selectable: (21) _level0 (movieclip) = _level0 (movieclip)
+selectable: (22) [object Object] (object) = [object Object] (object)
+selectable: (22) [object Object] (object) = [object Object] (object)
+selectable: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+selectable: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+selectable: (24)  (object) =  (object)
+selectable: (24)  (object) =  (object)
+selectable: (25)  (undefined) =  (undefined)
+selectable: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+selectable: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+selectable: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+selectable: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+selectable: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+selectable: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+selectable: (28) [object Object] (object) = [object Object] (object)
+selectable: (29)  (object) =  (object)
+selectable: (29)  (object) =  (object)
+0: valueOf!
+selectable: (30)  (object) =  (object)
+0: valueOf!
+selectable: (30)  (object) =  (object)
+1: valueOf!
+selectable: (31) null (object) = null (object)
+1: valueOf!
+selectable: (31) null (object) = null (object)
+2: valueOf!
+selectable: (32) true (object) = true (object)
+2: valueOf!
+selectable: (32) true (object) = true (object)
+3: valueOf!
+selectable: (33) false (object) = false (object)
+3: valueOf!
+selectable: (33) false (object) = false (object)
+4: valueOf!
+selectable: (34) 0 (object) = 0 (object)
+4: valueOf!
+selectable: (34) 0 (object) = 0 (object)
+5: valueOf!
+selectable: (35) 1 (object) = 1 (object)
+5: valueOf!
+selectable: (35) 1 (object) = 1 (object)
+6: valueOf!
+selectable: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+selectable: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+selectable: (37) -1 (object) = -1 (object)
+7: valueOf!
+selectable: (37) -1 (object) = -1 (object)
+8: valueOf!
+selectable: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+selectable: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+selectable: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+selectable: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+selectable: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+selectable: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+selectable: (41) NaN (object) = NaN (object)
+11: valueOf!
+selectable: (41) NaN (object) = NaN (object)
+12: valueOf!
+selectable: (42)  (object) =  (object)
+12: valueOf!
+selectable: (42)  (object) =  (object)
+13: valueOf!
+selectable: (43) 0 (object) = 0 (object)
+13: valueOf!
+selectable: (43) 0 (object) = 0 (object)
+14: valueOf!
+selectable: (44) -0 (object) = -0 (object)
+14: valueOf!
+selectable: (44) -0 (object) = -0 (object)
+15: valueOf!
+selectable: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+selectable: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+selectable: (46) 1 (object) = 1 (object)
+16: valueOf!
+selectable: (46) 1 (object) = 1 (object)
+17: valueOf!
+selectable: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+selectable: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+selectable: (48) true (object) = true (object)
+18: valueOf!
+selectable: (48) true (object) = true (object)
+19: valueOf!
+selectable: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+selectable: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+selectable: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+selectable: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+selectable: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+selectable: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+selectable: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+selectable: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+selectable: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+selectable: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+selectable: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+selectable: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+selectable: (55)  (object) =  (object)
+25: valueOf!
+selectable: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+selectable: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+selectable: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+selectable: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+selectable: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+selectable: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+selectable: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+selectable: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+selectable: (59) [type Object] (object) = [type Object] (object)
+selectable: (60) 17000000 (number) = 17000000 (number)
+selectable: (60) 17000000 (number) = 17000000 (number)
+selectable: (61) -17000000 (number) = -17000000 (number)
+selectable: (61) -17000000 (number) = -17000000 (number)
+selectable: (62) input (string) = input (string)
+selectable: (62) input (string) = input (string)
+selectable: (63) 34000000 (number) = 34000000 (number)
+selectable: (63) 34000000 (number) = 34000000 (number)
+selectable: (64)  (StyleSheet) =  (undefined)
+selectable: (64)  (StyleSheet) =  (undefined)
+selectable: (65) -34000000 (number) = -34000000 (number)
+selectable: (65) -34000000 (number) = -34000000 (number)
+selectable: (66) dynamic (string) = dynamic (string)
+selectable: (66) dynamic (string) = dynamic (string)
+selectable: (67) true (string) = true (string)
+selectable: (67) true (string) = true (string)
+Testing: type (default: input)
+type: (0)  (undefined) =  (undefined)
+type: (0)  (undefined) =  (undefined)
+type: (1) null (null) = null (null)
+type: (1) null (null) = null (null)
+type: (2) true (boolean) = true (boolean)
+type: (2) true (boolean) = true (boolean)
+type: (3) false (boolean) = false (boolean)
+type: (3) false (boolean) = false (boolean)
+type: (4) 0 (number) = 0 (number)
+type: (4) 0 (number) = 0 (number)
+type: (5) 1 (number) = 1 (number)
+type: (5) 1 (number) = 1 (number)
+type: (6) 0.5 (number) = 0.5 (number)
+type: (6) 0.5 (number) = 0.5 (number)
+type: (7) -1 (number) = -1 (number)
+type: (7) -1 (number) = -1 (number)
+type: (8) -0.5 (number) = -0.5 (number)
+type: (8) -0.5 (number) = -0.5 (number)
+type: (9) Infinity (number) = Infinity (number)
+type: (9) Infinity (number) = Infinity (number)
+type: (10) -Infinity (number) = -Infinity (number)
+type: (10) -Infinity (number) = -Infinity (number)
+type: (11) NaN (number) = NaN (number)
+type: (11) NaN (number) = NaN (number)
+type: (12)  (string) =  (string)
+type: (12)  (string) =  (string)
+type: (13) 0 (string) = 0 (string)
+type: (13) 0 (string) = 0 (string)
+type: (14) -0 (string) = -0 (string)
+type: (14) -0 (string) = -0 (string)
+type: (15) 0.0 (string) = 0.0 (string)
+type: (15) 0.0 (string) = 0.0 (string)
+type: (16) 1 (string) = 1 (string)
+type: (16) 1 (string) = 1 (string)
+type: (17) Hello World! (string) = Hello World! (string)
+type: (17) Hello World! (string) = Hello World! (string)
+type: (18) true (string) = true (string)
+type: (18) true (string) = true (string)
+type: (19) _level0 (string) = _level0 (string)
+type: (19) _level0 (string) = _level0 (string)
+type: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+type: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+type: (21) _level0 (movieclip) = _level0 (movieclip)
+type: (21) _level0 (movieclip) = _level0 (movieclip)
+type: (22) [object Object] (object) = [object Object] (object)
+type: (22) [object Object] (object) = [object Object] (object)
+type: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+type: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+type: (24)  (object) =  (object)
+type: (24)  (object) =  (object)
+type: (25)  (undefined) =  (undefined)
+type: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+type: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+type: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+type: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+type: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+type: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+type: (28) [object Object] (object) = [object Object] (object)
+type: (29)  (object) =  (object)
+type: (29)  (object) =  (object)
+0: valueOf!
+type: (30)  (object) =  (object)
+0: valueOf!
+type: (30)  (object) =  (object)
+1: valueOf!
+type: (31) null (object) = null (object)
+1: valueOf!
+type: (31) null (object) = null (object)
+2: valueOf!
+type: (32) true (object) = true (object)
+2: valueOf!
+type: (32) true (object) = true (object)
+3: valueOf!
+type: (33) false (object) = false (object)
+3: valueOf!
+type: (33) false (object) = false (object)
+4: valueOf!
+type: (34) 0 (object) = 0 (object)
+4: valueOf!
+type: (34) 0 (object) = 0 (object)
+5: valueOf!
+type: (35) 1 (object) = 1 (object)
+5: valueOf!
+type: (35) 1 (object) = 1 (object)
+6: valueOf!
+type: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+type: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+type: (37) -1 (object) = -1 (object)
+7: valueOf!
+type: (37) -1 (object) = -1 (object)
+8: valueOf!
+type: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+type: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+type: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+type: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+type: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+type: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+type: (41) NaN (object) = NaN (object)
+11: valueOf!
+type: (41) NaN (object) = NaN (object)
+12: valueOf!
+type: (42)  (object) =  (object)
+12: valueOf!
+type: (42)  (object) =  (object)
+13: valueOf!
+type: (43) 0 (object) = 0 (object)
+13: valueOf!
+type: (43) 0 (object) = 0 (object)
+14: valueOf!
+type: (44) -0 (object) = -0 (object)
+14: valueOf!
+type: (44) -0 (object) = -0 (object)
+15: valueOf!
+type: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+type: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+type: (46) 1 (object) = 1 (object)
+16: valueOf!
+type: (46) 1 (object) = 1 (object)
+17: valueOf!
+type: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+type: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+type: (48) true (object) = true (object)
+18: valueOf!
+type: (48) true (object) = true (object)
+19: valueOf!
+type: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+type: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+type: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+type: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+type: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+type: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+type: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+type: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+type: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+type: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+type: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+type: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+type: (55)  (object) =  (object)
+25: valueOf!
+type: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+type: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+type: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+type: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+type: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+type: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+type: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+type: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+type: (59) [type Object] (object) = [type Object] (object)
+type: (60) 17000000 (number) = 17000000 (number)
+type: (60) 17000000 (number) = 17000000 (number)
+type: (61) -17000000 (number) = -17000000 (number)
+type: (61) -17000000 (number) = -17000000 (number)
+type: (62) input (string) = input (string)
+type: (62) input (string) = input (string)
+type: (63) 34000000 (number) = 34000000 (number)
+type: (63) 34000000 (number) = 34000000 (number)
+type: (64)  (StyleSheet) =  (undefined)
+type: (64)  (StyleSheet) =  (undefined)
+type: (65) -34000000 (number) = -34000000 (number)
+type: (65) -34000000 (number) = -34000000 (number)
+type: (66) dynamic (string) = dynamic (string)
+type: (66) dynamic (string) = dynamic (string)
+type: (67) true (string) = true (string)
+type: (67) true (string) = true (string)
+Testing: variable (default: test)
+variable: (0)  (undefined) =  (undefined)
+variable: (0)  (undefined) =  (undefined)
+variable: (1) null (null) = null (null)
+variable: (1) null (null) = null (null)
+variable: (2) true (boolean) = true (boolean)
+variable: (2) true (boolean) = true (boolean)
+variable: (3) false (boolean) = false (boolean)
+variable: (3) false (boolean) = false (boolean)
+variable: (4) 0 (number) = 0 (number)
+variable: (4) 0 (number) = 0 (number)
+variable: (5) 1 (number) = 1 (number)
+variable: (5) 1 (number) = 1 (number)
+variable: (6) 0.5 (number) = 0.5 (number)
+variable: (6) 0.5 (number) = 0.5 (number)
+variable: (7) -1 (number) = -1 (number)
+variable: (7) -1 (number) = -1 (number)
+variable: (8) -0.5 (number) = -0.5 (number)
+variable: (8) -0.5 (number) = -0.5 (number)
+variable: (9) Infinity (number) = Infinity (number)
+variable: (9) Infinity (number) = Infinity (number)
+variable: (10) -Infinity (number) = -Infinity (number)
+variable: (10) -Infinity (number) = -Infinity (number)
+variable: (11) NaN (number) = NaN (number)
+variable: (11) NaN (number) = NaN (number)
+variable: (12)  (string) =  (string)
+variable: (12)  (string) =  (string)
+variable: (13) 0 (string) = 0 (string)
+variable: (13) 0 (string) = 0 (string)
+variable: (14) -0 (string) = -0 (string)
+variable: (14) -0 (string) = -0 (string)
+variable: (15) 0.0 (string) = 0.0 (string)
+variable: (15) 0.0 (string) = 0.0 (string)
+variable: (16) 1 (string) = 1 (string)
+variable: (16) 1 (string) = 1 (string)
+variable: (17) Hello World! (string) = Hello World! (string)
+variable: (17) Hello World! (string) = Hello World! (string)
+variable: (18) true (string) = true (string)
+variable: (18) true (string) = true (string)
+variable: (19) _level0 (string) = _level0 (string)
+variable: (19) _level0 (string) = _level0 (string)
+variable: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+variable: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+variable: (21) _level0 (movieclip) = _level0 (movieclip)
+variable: (21) _level0 (movieclip) = _level0 (movieclip)
+variable: (22) [object Object] (object) = [object Object] (object)
+variable: (22) [object Object] (object) = [object Object] (object)
+variable: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+variable: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+variable: (24)  (object) =  (object)
+variable: (24)  (object) =  (object)
+variable: (25)  (undefined) =  (undefined)
+variable: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+variable: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+variable: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+variable: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+variable: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+variable: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+variable: (28) [object Object] (object) = [object Object] (object)
+variable: (29)  (object) =  (object)
+variable: (29)  (object) =  (object)
+0: valueOf!
+variable: (30)  (object) =  (object)
+0: valueOf!
+variable: (30)  (object) =  (object)
+1: valueOf!
+variable: (31) null (object) = null (object)
+1: valueOf!
+variable: (31) null (object) = null (object)
+2: valueOf!
+variable: (32) true (object) = true (object)
+2: valueOf!
+variable: (32) true (object) = true (object)
+3: valueOf!
+variable: (33) false (object) = false (object)
+3: valueOf!
+variable: (33) false (object) = false (object)
+4: valueOf!
+variable: (34) 0 (object) = 0 (object)
+4: valueOf!
+variable: (34) 0 (object) = 0 (object)
+5: valueOf!
+variable: (35) 1 (object) = 1 (object)
+5: valueOf!
+variable: (35) 1 (object) = 1 (object)
+6: valueOf!
+variable: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+variable: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+variable: (37) -1 (object) = -1 (object)
+7: valueOf!
+variable: (37) -1 (object) = -1 (object)
+8: valueOf!
+variable: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+variable: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+variable: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+variable: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+variable: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+variable: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+variable: (41) NaN (object) = NaN (object)
+11: valueOf!
+variable: (41) NaN (object) = NaN (object)
+12: valueOf!
+variable: (42)  (object) =  (object)
+12: valueOf!
+variable: (42)  (object) =  (object)
+13: valueOf!
+variable: (43) 0 (object) = 0 (object)
+13: valueOf!
+variable: (43) 0 (object) = 0 (object)
+14: valueOf!
+variable: (44) -0 (object) = -0 (object)
+14: valueOf!
+variable: (44) -0 (object) = -0 (object)
+15: valueOf!
+variable: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+variable: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+variable: (46) 1 (object) = 1 (object)
+16: valueOf!
+variable: (46) 1 (object) = 1 (object)
+17: valueOf!
+variable: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+variable: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+variable: (48) true (object) = true (object)
+18: valueOf!
+variable: (48) true (object) = true (object)
+19: valueOf!
+variable: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+variable: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+variable: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+variable: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+variable: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+variable: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+variable: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+variable: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+variable: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+variable: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+variable: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+variable: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+variable: (55)  (object) =  (object)
+25: valueOf!
+variable: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+variable: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+variable: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+variable: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+variable: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+variable: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+variable: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+variable: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+variable: (59) [type Object] (object) = [type Object] (object)
+variable: (60) 17000000 (number) = 17000000 (number)
+variable: (60) 17000000 (number) = 17000000 (number)
+variable: (61) -17000000 (number) = -17000000 (number)
+variable: (61) -17000000 (number) = -17000000 (number)
+variable: (62) input (string) = input (string)
+variable: (62) input (string) = input (string)
+variable: (63) 34000000 (number) = 34000000 (number)
+variable: (63) 34000000 (number) = 34000000 (number)
+variable: (64)  (StyleSheet) =  (undefined)
+variable: (64)  (StyleSheet) =  (undefined)
+variable: (65) -34000000 (number) = -34000000 (number)
+variable: (65) -34000000 (number) = -34000000 (number)
+variable: (66) dynamic (string) = dynamic (string)
+variable: (66) dynamic (string) = dynamic (string)
+variable: (67) true (string) = true (string)
+variable: (67) true (string) = true (string)
+Testing: background (default: false)
+background: (0)  (undefined) =  (undefined)
+background: (0)  (undefined) =  (undefined)
+background: (1) null (null) = null (null)
+background: (1) null (null) = null (null)
+background: (2) true (boolean) = true (boolean)
+background: (2) true (boolean) = true (boolean)
+background: (3) false (boolean) = false (boolean)
+background: (3) false (boolean) = false (boolean)
+background: (4) 0 (number) = 0 (number)
+background: (4) 0 (number) = 0 (number)
+background: (5) 1 (number) = 1 (number)
+background: (5) 1 (number) = 1 (number)
+background: (6) 0.5 (number) = 0.5 (number)
+background: (6) 0.5 (number) = 0.5 (number)
+background: (7) -1 (number) = -1 (number)
+background: (7) -1 (number) = -1 (number)
+background: (8) -0.5 (number) = -0.5 (number)
+background: (8) -0.5 (number) = -0.5 (number)
+background: (9) Infinity (number) = Infinity (number)
+background: (9) Infinity (number) = Infinity (number)
+background: (10) -Infinity (number) = -Infinity (number)
+background: (10) -Infinity (number) = -Infinity (number)
+background: (11) NaN (number) = NaN (number)
+background: (11) NaN (number) = NaN (number)
+background: (12)  (string) =  (string)
+background: (12)  (string) =  (string)
+background: (13) 0 (string) = 0 (string)
+background: (13) 0 (string) = 0 (string)
+background: (14) -0 (string) = -0 (string)
+background: (14) -0 (string) = -0 (string)
+background: (15) 0.0 (string) = 0.0 (string)
+background: (15) 0.0 (string) = 0.0 (string)
+background: (16) 1 (string) = 1 (string)
+background: (16) 1 (string) = 1 (string)
+background: (17) Hello World! (string) = Hello World! (string)
+background: (17) Hello World! (string) = Hello World! (string)
+background: (18) true (string) = true (string)
+background: (18) true (string) = true (string)
+background: (19) _level0 (string) = _level0 (string)
+background: (19) _level0 (string) = _level0 (string)
+background: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+background: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+background: (21) _level0 (movieclip) = _level0 (movieclip)
+background: (21) _level0 (movieclip) = _level0 (movieclip)
+background: (22) [object Object] (object) = [object Object] (object)
+background: (22) [object Object] (object) = [object Object] (object)
+background: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+background: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+background: (24)  (object) =  (object)
+background: (24)  (object) =  (object)
+background: (25)  (undefined) =  (undefined)
+background: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+background: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+background: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+background: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+background: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+background: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+background: (28) [object Object] (object) = [object Object] (object)
+background: (29)  (object) =  (object)
+background: (29)  (object) =  (object)
+0: valueOf!
+background: (30)  (object) =  (object)
+0: valueOf!
+background: (30)  (object) =  (object)
+1: valueOf!
+background: (31) null (object) = null (object)
+1: valueOf!
+background: (31) null (object) = null (object)
+2: valueOf!
+background: (32) true (object) = true (object)
+2: valueOf!
+background: (32) true (object) = true (object)
+3: valueOf!
+background: (33) false (object) = false (object)
+3: valueOf!
+background: (33) false (object) = false (object)
+4: valueOf!
+background: (34) 0 (object) = 0 (object)
+4: valueOf!
+background: (34) 0 (object) = 0 (object)
+5: valueOf!
+background: (35) 1 (object) = 1 (object)
+5: valueOf!
+background: (35) 1 (object) = 1 (object)
+6: valueOf!
+background: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+background: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+background: (37) -1 (object) = -1 (object)
+7: valueOf!
+background: (37) -1 (object) = -1 (object)
+8: valueOf!
+background: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+background: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+background: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+background: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+background: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+background: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+background: (41) NaN (object) = NaN (object)
+11: valueOf!
+background: (41) NaN (object) = NaN (object)
+12: valueOf!
+background: (42)  (object) =  (object)
+12: valueOf!
+background: (42)  (object) =  (object)
+13: valueOf!
+background: (43) 0 (object) = 0 (object)
+13: valueOf!
+background: (43) 0 (object) = 0 (object)
+14: valueOf!
+background: (44) -0 (object) = -0 (object)
+14: valueOf!
+background: (44) -0 (object) = -0 (object)
+15: valueOf!
+background: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+background: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+background: (46) 1 (object) = 1 (object)
+16: valueOf!
+background: (46) 1 (object) = 1 (object)
+17: valueOf!
+background: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+background: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+background: (48) true (object) = true (object)
+18: valueOf!
+background: (48) true (object) = true (object)
+19: valueOf!
+background: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+background: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+background: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+background: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+background: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+background: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+background: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+background: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+background: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+background: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+background: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+background: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+background: (55)  (object) =  (object)
+25: valueOf!
+background: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+background: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+background: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+background: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+background: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+background: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+background: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+background: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+background: (59) [type Object] (object) = [type Object] (object)
+background: (60) 17000000 (number) = 17000000 (number)
+background: (60) 17000000 (number) = 17000000 (number)
+background: (61) -17000000 (number) = -17000000 (number)
+background: (61) -17000000 (number) = -17000000 (number)
+background: (62) input (string) = input (string)
+background: (62) input (string) = input (string)
+background: (63) 34000000 (number) = 34000000 (number)
+background: (63) 34000000 (number) = 34000000 (number)
+background: (64)  (StyleSheet) =  (undefined)
+background: (64)  (StyleSheet) =  (undefined)
+background: (65) -34000000 (number) = -34000000 (number)
+background: (65) -34000000 (number) = -34000000 (number)
+background: (66) dynamic (string) = dynamic (string)
+background: (66) dynamic (string) = dynamic (string)
+background: (67) true (string) = true (string)
+background: (67) true (string) = true (string)
+Testing: backgroundColor (default: 52224)
+backgroundColor: (0)  (undefined) =  (undefined)
+backgroundColor: (0)  (undefined) =  (undefined)
+backgroundColor: (1) null (null) = null (null)
+backgroundColor: (1) null (null) = null (null)
+backgroundColor: (2) true (boolean) = true (boolean)
+backgroundColor: (2) true (boolean) = true (boolean)
+backgroundColor: (3) false (boolean) = false (boolean)
+backgroundColor: (3) false (boolean) = false (boolean)
+backgroundColor: (4) 0 (number) = 0 (number)
+backgroundColor: (4) 0 (number) = 0 (number)
+backgroundColor: (5) 1 (number) = 1 (number)
+backgroundColor: (5) 1 (number) = 1 (number)
+backgroundColor: (6) 0.5 (number) = 0.5 (number)
+backgroundColor: (6) 0.5 (number) = 0.5 (number)
+backgroundColor: (7) -1 (number) = -1 (number)
+backgroundColor: (7) -1 (number) = -1 (number)
+backgroundColor: (8) -0.5 (number) = -0.5 (number)
+backgroundColor: (8) -0.5 (number) = -0.5 (number)
+backgroundColor: (9) Infinity (number) = Infinity (number)
+backgroundColor: (9) Infinity (number) = Infinity (number)
+backgroundColor: (10) -Infinity (number) = -Infinity (number)
+backgroundColor: (10) -Infinity (number) = -Infinity (number)
+backgroundColor: (11) NaN (number) = NaN (number)
+backgroundColor: (11) NaN (number) = NaN (number)
+backgroundColor: (12)  (string) =  (string)
+backgroundColor: (12)  (string) =  (string)
+backgroundColor: (13) 0 (string) = 0 (string)
+backgroundColor: (13) 0 (string) = 0 (string)
+backgroundColor: (14) -0 (string) = -0 (string)
+backgroundColor: (14) -0 (string) = -0 (string)
+backgroundColor: (15) 0.0 (string) = 0.0 (string)
+backgroundColor: (15) 0.0 (string) = 0.0 (string)
+backgroundColor: (16) 1 (string) = 1 (string)
+backgroundColor: (16) 1 (string) = 1 (string)
+backgroundColor: (17) Hello World! (string) = Hello World! (string)
+backgroundColor: (17) Hello World! (string) = Hello World! (string)
+backgroundColor: (18) true (string) = true (string)
+backgroundColor: (18) true (string) = true (string)
+backgroundColor: (19) _level0 (string) = _level0 (string)
+backgroundColor: (19) _level0 (string) = _level0 (string)
+backgroundColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+backgroundColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+backgroundColor: (21) _level0 (movieclip) = _level0 (movieclip)
+backgroundColor: (21) _level0 (movieclip) = _level0 (movieclip)
+backgroundColor: (22) [object Object] (object) = [object Object] (object)
+backgroundColor: (22) [object Object] (object) = [object Object] (object)
+backgroundColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+backgroundColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+backgroundColor: (24)  (object) =  (object)
+backgroundColor: (24)  (object) =  (object)
+backgroundColor: (25)  (undefined) =  (undefined)
+backgroundColor: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+backgroundColor: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+backgroundColor: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+backgroundColor: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+backgroundColor: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+backgroundColor: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+backgroundColor: (28) [object Object] (object) = [object Object] (object)
+backgroundColor: (29)  (object) =  (object)
+backgroundColor: (29)  (object) =  (object)
+0: valueOf!
+backgroundColor: (30)  (object) =  (object)
+0: valueOf!
+backgroundColor: (30)  (object) =  (object)
+1: valueOf!
+backgroundColor: (31) null (object) = null (object)
+1: valueOf!
+backgroundColor: (31) null (object) = null (object)
+2: valueOf!
+backgroundColor: (32) true (object) = true (object)
+2: valueOf!
+backgroundColor: (32) true (object) = true (object)
+3: valueOf!
+backgroundColor: (33) false (object) = false (object)
+3: valueOf!
+backgroundColor: (33) false (object) = false (object)
+4: valueOf!
+backgroundColor: (34) 0 (object) = 0 (object)
+4: valueOf!
+backgroundColor: (34) 0 (object) = 0 (object)
+5: valueOf!
+backgroundColor: (35) 1 (object) = 1 (object)
+5: valueOf!
+backgroundColor: (35) 1 (object) = 1 (object)
+6: valueOf!
+backgroundColor: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+backgroundColor: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+backgroundColor: (37) -1 (object) = -1 (object)
+7: valueOf!
+backgroundColor: (37) -1 (object) = -1 (object)
+8: valueOf!
+backgroundColor: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+backgroundColor: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+backgroundColor: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+backgroundColor: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+backgroundColor: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+backgroundColor: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+backgroundColor: (41) NaN (object) = NaN (object)
+11: valueOf!
+backgroundColor: (41) NaN (object) = NaN (object)
+12: valueOf!
+backgroundColor: (42)  (object) =  (object)
+12: valueOf!
+backgroundColor: (42)  (object) =  (object)
+13: valueOf!
+backgroundColor: (43) 0 (object) = 0 (object)
+13: valueOf!
+backgroundColor: (43) 0 (object) = 0 (object)
+14: valueOf!
+backgroundColor: (44) -0 (object) = -0 (object)
+14: valueOf!
+backgroundColor: (44) -0 (object) = -0 (object)
+15: valueOf!
+backgroundColor: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+backgroundColor: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+backgroundColor: (46) 1 (object) = 1 (object)
+16: valueOf!
+backgroundColor: (46) 1 (object) = 1 (object)
+17: valueOf!
+backgroundColor: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+backgroundColor: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+backgroundColor: (48) true (object) = true (object)
+18: valueOf!
+backgroundColor: (48) true (object) = true (object)
+19: valueOf!
+backgroundColor: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+backgroundColor: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+backgroundColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+backgroundColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+backgroundColor: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+backgroundColor: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+backgroundColor: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+backgroundColor: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+backgroundColor: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+backgroundColor: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+backgroundColor: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+backgroundColor: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+backgroundColor: (55)  (object) =  (object)
+25: valueOf!
+backgroundColor: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+backgroundColor: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+backgroundColor: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+backgroundColor: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+backgroundColor: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+backgroundColor: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+backgroundColor: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+backgroundColor: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+backgroundColor: (59) [type Object] (object) = [type Object] (object)
+backgroundColor: (60) 17000000 (number) = 17000000 (number)
+backgroundColor: (60) 17000000 (number) = 17000000 (number)
+backgroundColor: (61) -17000000 (number) = -17000000 (number)
+backgroundColor: (61) -17000000 (number) = -17000000 (number)
+backgroundColor: (62) input (string) = input (string)
+backgroundColor: (62) input (string) = input (string)
+backgroundColor: (63) 34000000 (number) = 34000000 (number)
+backgroundColor: (63) 34000000 (number) = 34000000 (number)
+backgroundColor: (64)  (StyleSheet) =  (undefined)
+backgroundColor: (64)  (StyleSheet) =  (undefined)
+backgroundColor: (65) -34000000 (number) = -34000000 (number)
+backgroundColor: (65) -34000000 (number) = -34000000 (number)
+backgroundColor: (66) dynamic (string) = dynamic (string)
+backgroundColor: (66) dynamic (string) = dynamic (string)
+backgroundColor: (67) true (string) = true (string)
+backgroundColor: (67) true (string) = true (string)
+Testing: border (default: false)
+border: (0)  (undefined) =  (undefined)
+border: (0)  (undefined) =  (undefined)
+border: (1) null (null) = null (null)
+border: (1) null (null) = null (null)
+border: (2) true (boolean) = true (boolean)
+border: (2) true (boolean) = true (boolean)
+border: (3) false (boolean) = false (boolean)
+border: (3) false (boolean) = false (boolean)
+border: (4) 0 (number) = 0 (number)
+border: (4) 0 (number) = 0 (number)
+border: (5) 1 (number) = 1 (number)
+border: (5) 1 (number) = 1 (number)
+border: (6) 0.5 (number) = 0.5 (number)
+border: (6) 0.5 (number) = 0.5 (number)
+border: (7) -1 (number) = -1 (number)
+border: (7) -1 (number) = -1 (number)
+border: (8) -0.5 (number) = -0.5 (number)
+border: (8) -0.5 (number) = -0.5 (number)
+border: (9) Infinity (number) = Infinity (number)
+border: (9) Infinity (number) = Infinity (number)
+border: (10) -Infinity (number) = -Infinity (number)
+border: (10) -Infinity (number) = -Infinity (number)
+border: (11) NaN (number) = NaN (number)
+border: (11) NaN (number) = NaN (number)
+border: (12)  (string) =  (string)
+border: (12)  (string) =  (string)
+border: (13) 0 (string) = 0 (string)
+border: (13) 0 (string) = 0 (string)
+border: (14) -0 (string) = -0 (string)
+border: (14) -0 (string) = -0 (string)
+border: (15) 0.0 (string) = 0.0 (string)
+border: (15) 0.0 (string) = 0.0 (string)
+border: (16) 1 (string) = 1 (string)
+border: (16) 1 (string) = 1 (string)
+border: (17) Hello World! (string) = Hello World! (string)
+border: (17) Hello World! (string) = Hello World! (string)
+border: (18) true (string) = true (string)
+border: (18) true (string) = true (string)
+border: (19) _level0 (string) = _level0 (string)
+border: (19) _level0 (string) = _level0 (string)
+border: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+border: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+border: (21) _level0 (movieclip) = _level0 (movieclip)
+border: (21) _level0 (movieclip) = _level0 (movieclip)
+border: (22) [object Object] (object) = [object Object] (object)
+border: (22) [object Object] (object) = [object Object] (object)
+border: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+border: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+border: (24)  (object) =  (object)
+border: (24)  (object) =  (object)
+border: (25)  (undefined) =  (undefined)
+border: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+border: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+border: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+border: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+border: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+border: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+border: (28) [object Object] (object) = [object Object] (object)
+border: (29)  (object) =  (object)
+border: (29)  (object) =  (object)
+0: valueOf!
+border: (30)  (object) =  (object)
+0: valueOf!
+border: (30)  (object) =  (object)
+1: valueOf!
+border: (31) null (object) = null (object)
+1: valueOf!
+border: (31) null (object) = null (object)
+2: valueOf!
+border: (32) true (object) = true (object)
+2: valueOf!
+border: (32) true (object) = true (object)
+3: valueOf!
+border: (33) false (object) = false (object)
+3: valueOf!
+border: (33) false (object) = false (object)
+4: valueOf!
+border: (34) 0 (object) = 0 (object)
+4: valueOf!
+border: (34) 0 (object) = 0 (object)
+5: valueOf!
+border: (35) 1 (object) = 1 (object)
+5: valueOf!
+border: (35) 1 (object) = 1 (object)
+6: valueOf!
+border: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+border: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+border: (37) -1 (object) = -1 (object)
+7: valueOf!
+border: (37) -1 (object) = -1 (object)
+8: valueOf!
+border: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+border: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+border: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+border: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+border: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+border: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+border: (41) NaN (object) = NaN (object)
+11: valueOf!
+border: (41) NaN (object) = NaN (object)
+12: valueOf!
+border: (42)  (object) =  (object)
+12: valueOf!
+border: (42)  (object) =  (object)
+13: valueOf!
+border: (43) 0 (object) = 0 (object)
+13: valueOf!
+border: (43) 0 (object) = 0 (object)
+14: valueOf!
+border: (44) -0 (object) = -0 (object)
+14: valueOf!
+border: (44) -0 (object) = -0 (object)
+15: valueOf!
+border: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+border: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+border: (46) 1 (object) = 1 (object)
+16: valueOf!
+border: (46) 1 (object) = 1 (object)
+17: valueOf!
+border: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+border: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+border: (48) true (object) = true (object)
+18: valueOf!
+border: (48) true (object) = true (object)
+19: valueOf!
+border: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+border: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+border: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+border: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+border: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+border: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+border: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+border: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+border: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+border: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+border: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+border: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+border: (55)  (object) =  (object)
+25: valueOf!
+border: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+border: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+border: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+border: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+border: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+border: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+border: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+border: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+border: (59) [type Object] (object) = [type Object] (object)
+border: (60) 17000000 (number) = 17000000 (number)
+border: (60) 17000000 (number) = 17000000 (number)
+border: (61) -17000000 (number) = -17000000 (number)
+border: (61) -17000000 (number) = -17000000 (number)
+border: (62) input (string) = input (string)
+border: (62) input (string) = input (string)
+border: (63) 34000000 (number) = 34000000 (number)
+border: (63) 34000000 (number) = 34000000 (number)
+border: (64)  (StyleSheet) =  (undefined)
+border: (64)  (StyleSheet) =  (undefined)
+border: (65) -34000000 (number) = -34000000 (number)
+border: (65) -34000000 (number) = -34000000 (number)
+border: (66) dynamic (string) = dynamic (string)
+border: (66) dynamic (string) = dynamic (string)
+border: (67) true (string) = true (string)
+border: (67) true (string) = true (string)
+Testing: borderColor (default: 52224)
+borderColor: (0)  (undefined) =  (undefined)
+borderColor: (0)  (undefined) =  (undefined)
+borderColor: (1) null (null) = null (null)
+borderColor: (1) null (null) = null (null)
+borderColor: (2) true (boolean) = true (boolean)
+borderColor: (2) true (boolean) = true (boolean)
+borderColor: (3) false (boolean) = false (boolean)
+borderColor: (3) false (boolean) = false (boolean)
+borderColor: (4) 0 (number) = 0 (number)
+borderColor: (4) 0 (number) = 0 (number)
+borderColor: (5) 1 (number) = 1 (number)
+borderColor: (5) 1 (number) = 1 (number)
+borderColor: (6) 0.5 (number) = 0.5 (number)
+borderColor: (6) 0.5 (number) = 0.5 (number)
+borderColor: (7) -1 (number) = -1 (number)
+borderColor: (7) -1 (number) = -1 (number)
+borderColor: (8) -0.5 (number) = -0.5 (number)
+borderColor: (8) -0.5 (number) = -0.5 (number)
+borderColor: (9) Infinity (number) = Infinity (number)
+borderColor: (9) Infinity (number) = Infinity (number)
+borderColor: (10) -Infinity (number) = -Infinity (number)
+borderColor: (10) -Infinity (number) = -Infinity (number)
+borderColor: (11) NaN (number) = NaN (number)
+borderColor: (11) NaN (number) = NaN (number)
+borderColor: (12)  (string) =  (string)
+borderColor: (12)  (string) =  (string)
+borderColor: (13) 0 (string) = 0 (string)
+borderColor: (13) 0 (string) = 0 (string)
+borderColor: (14) -0 (string) = -0 (string)
+borderColor: (14) -0 (string) = -0 (string)
+borderColor: (15) 0.0 (string) = 0.0 (string)
+borderColor: (15) 0.0 (string) = 0.0 (string)
+borderColor: (16) 1 (string) = 1 (string)
+borderColor: (16) 1 (string) = 1 (string)
+borderColor: (17) Hello World! (string) = Hello World! (string)
+borderColor: (17) Hello World! (string) = Hello World! (string)
+borderColor: (18) true (string) = true (string)
+borderColor: (18) true (string) = true (string)
+borderColor: (19) _level0 (string) = _level0 (string)
+borderColor: (19) _level0 (string) = _level0 (string)
+borderColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+borderColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+borderColor: (21) _level0 (movieclip) = _level0 (movieclip)
+borderColor: (21) _level0 (movieclip) = _level0 (movieclip)
+borderColor: (22) [object Object] (object) = [object Object] (object)
+borderColor: (22) [object Object] (object) = [object Object] (object)
+borderColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+borderColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+borderColor: (24)  (object) =  (object)
+borderColor: (24)  (object) =  (object)
+borderColor: (25)  (undefined) =  (undefined)
+borderColor: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+borderColor: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+borderColor: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+borderColor: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+borderColor: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+borderColor: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+borderColor: (28) [object Object] (object) = [object Object] (object)
+borderColor: (29)  (object) =  (object)
+borderColor: (29)  (object) =  (object)
+0: valueOf!
+borderColor: (30)  (object) =  (object)
+0: valueOf!
+borderColor: (30)  (object) =  (object)
+1: valueOf!
+borderColor: (31) null (object) = null (object)
+1: valueOf!
+borderColor: (31) null (object) = null (object)
+2: valueOf!
+borderColor: (32) true (object) = true (object)
+2: valueOf!
+borderColor: (32) true (object) = true (object)
+3: valueOf!
+borderColor: (33) false (object) = false (object)
+3: valueOf!
+borderColor: (33) false (object) = false (object)
+4: valueOf!
+borderColor: (34) 0 (object) = 0 (object)
+4: valueOf!
+borderColor: (34) 0 (object) = 0 (object)
+5: valueOf!
+borderColor: (35) 1 (object) = 1 (object)
+5: valueOf!
+borderColor: (35) 1 (object) = 1 (object)
+6: valueOf!
+borderColor: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+borderColor: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+borderColor: (37) -1 (object) = -1 (object)
+7: valueOf!
+borderColor: (37) -1 (object) = -1 (object)
+8: valueOf!
+borderColor: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+borderColor: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+borderColor: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+borderColor: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+borderColor: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+borderColor: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+borderColor: (41) NaN (object) = NaN (object)
+11: valueOf!
+borderColor: (41) NaN (object) = NaN (object)
+12: valueOf!
+borderColor: (42)  (object) =  (object)
+12: valueOf!
+borderColor: (42)  (object) =  (object)
+13: valueOf!
+borderColor: (43) 0 (object) = 0 (object)
+13: valueOf!
+borderColor: (43) 0 (object) = 0 (object)
+14: valueOf!
+borderColor: (44) -0 (object) = -0 (object)
+14: valueOf!
+borderColor: (44) -0 (object) = -0 (object)
+15: valueOf!
+borderColor: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+borderColor: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+borderColor: (46) 1 (object) = 1 (object)
+16: valueOf!
+borderColor: (46) 1 (object) = 1 (object)
+17: valueOf!
+borderColor: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+borderColor: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+borderColor: (48) true (object) = true (object)
+18: valueOf!
+borderColor: (48) true (object) = true (object)
+19: valueOf!
+borderColor: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+borderColor: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+borderColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+borderColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+borderColor: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+borderColor: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+borderColor: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+borderColor: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+borderColor: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+borderColor: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+borderColor: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+borderColor: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+borderColor: (55)  (object) =  (object)
+25: valueOf!
+borderColor: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+borderColor: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+borderColor: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+borderColor: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+borderColor: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+borderColor: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+borderColor: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+borderColor: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+borderColor: (59) [type Object] (object) = [type Object] (object)
+borderColor: (60) 17000000 (number) = 17000000 (number)
+borderColor: (60) 17000000 (number) = 17000000 (number)
+borderColor: (61) -17000000 (number) = -17000000 (number)
+borderColor: (61) -17000000 (number) = -17000000 (number)
+borderColor: (62) input (string) = input (string)
+borderColor: (62) input (string) = input (string)
+borderColor: (63) 34000000 (number) = 34000000 (number)
+borderColor: (63) 34000000 (number) = 34000000 (number)
+borderColor: (64)  (StyleSheet) =  (undefined)
+borderColor: (64)  (StyleSheet) =  (undefined)
+borderColor: (65) -34000000 (number) = -34000000 (number)
+borderColor: (65) -34000000 (number) = -34000000 (number)
+borderColor: (66) dynamic (string) = dynamic (string)
+borderColor: (66) dynamic (string) = dynamic (string)
+borderColor: (67) true (string) = true (string)
+borderColor: (67) true (string) = true (string)
+Testing: mouseWheelEnabled (default: false)
+mouseWheelEnabled: (0)  (undefined) =  (undefined)
+mouseWheelEnabled: (0)  (undefined) =  (undefined)
+mouseWheelEnabled: (1) null (null) = null (null)
+mouseWheelEnabled: (1) null (null) = null (null)
+mouseWheelEnabled: (2) true (boolean) = true (boolean)
+mouseWheelEnabled: (2) true (boolean) = true (boolean)
+mouseWheelEnabled: (3) false (boolean) = false (boolean)
+mouseWheelEnabled: (3) false (boolean) = false (boolean)
+mouseWheelEnabled: (4) 0 (number) = 0 (number)
+mouseWheelEnabled: (4) 0 (number) = 0 (number)
+mouseWheelEnabled: (5) 1 (number) = 1 (number)
+mouseWheelEnabled: (5) 1 (number) = 1 (number)
+mouseWheelEnabled: (6) 0.5 (number) = 0.5 (number)
+mouseWheelEnabled: (6) 0.5 (number) = 0.5 (number)
+mouseWheelEnabled: (7) -1 (number) = -1 (number)
+mouseWheelEnabled: (7) -1 (number) = -1 (number)
+mouseWheelEnabled: (8) -0.5 (number) = -0.5 (number)
+mouseWheelEnabled: (8) -0.5 (number) = -0.5 (number)
+mouseWheelEnabled: (9) Infinity (number) = Infinity (number)
+mouseWheelEnabled: (9) Infinity (number) = Infinity (number)
+mouseWheelEnabled: (10) -Infinity (number) = -Infinity (number)
+mouseWheelEnabled: (10) -Infinity (number) = -Infinity (number)
+mouseWheelEnabled: (11) NaN (number) = NaN (number)
+mouseWheelEnabled: (11) NaN (number) = NaN (number)
+mouseWheelEnabled: (12)  (string) =  (string)
+mouseWheelEnabled: (12)  (string) =  (string)
+mouseWheelEnabled: (13) 0 (string) = 0 (string)
+mouseWheelEnabled: (13) 0 (string) = 0 (string)
+mouseWheelEnabled: (14) -0 (string) = -0 (string)
+mouseWheelEnabled: (14) -0 (string) = -0 (string)
+mouseWheelEnabled: (15) 0.0 (string) = 0.0 (string)
+mouseWheelEnabled: (15) 0.0 (string) = 0.0 (string)
+mouseWheelEnabled: (16) 1 (string) = 1 (string)
+mouseWheelEnabled: (16) 1 (string) = 1 (string)
+mouseWheelEnabled: (17) Hello World! (string) = Hello World! (string)
+mouseWheelEnabled: (17) Hello World! (string) = Hello World! (string)
+mouseWheelEnabled: (18) true (string) = true (string)
+mouseWheelEnabled: (18) true (string) = true (string)
+mouseWheelEnabled: (19) _level0 (string) = _level0 (string)
+mouseWheelEnabled: (19) _level0 (string) = _level0 (string)
+mouseWheelEnabled: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+mouseWheelEnabled: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+mouseWheelEnabled: (21) _level0 (movieclip) = _level0 (movieclip)
+mouseWheelEnabled: (21) _level0 (movieclip) = _level0 (movieclip)
+mouseWheelEnabled: (22) [object Object] (object) = [object Object] (object)
+mouseWheelEnabled: (22) [object Object] (object) = [object Object] (object)
+mouseWheelEnabled: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+mouseWheelEnabled: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+mouseWheelEnabled: (24)  (object) =  (object)
+mouseWheelEnabled: (24)  (object) =  (object)
+mouseWheelEnabled: (25)  (undefined) =  (undefined)
+mouseWheelEnabled: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+mouseWheelEnabled: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+mouseWheelEnabled: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+mouseWheelEnabled: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+mouseWheelEnabled: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+mouseWheelEnabled: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+mouseWheelEnabled: (28) [object Object] (object) = [object Object] (object)
+mouseWheelEnabled: (29)  (object) =  (object)
+mouseWheelEnabled: (29)  (object) =  (object)
+0: valueOf!
+mouseWheelEnabled: (30)  (object) =  (object)
+0: valueOf!
+mouseWheelEnabled: (30)  (object) =  (object)
+1: valueOf!
+mouseWheelEnabled: (31) null (object) = null (object)
+1: valueOf!
+mouseWheelEnabled: (31) null (object) = null (object)
+2: valueOf!
+mouseWheelEnabled: (32) true (object) = true (object)
+2: valueOf!
+mouseWheelEnabled: (32) true (object) = true (object)
+3: valueOf!
+mouseWheelEnabled: (33) false (object) = false (object)
+3: valueOf!
+mouseWheelEnabled: (33) false (object) = false (object)
+4: valueOf!
+mouseWheelEnabled: (34) 0 (object) = 0 (object)
+4: valueOf!
+mouseWheelEnabled: (34) 0 (object) = 0 (object)
+5: valueOf!
+mouseWheelEnabled: (35) 1 (object) = 1 (object)
+5: valueOf!
+mouseWheelEnabled: (35) 1 (object) = 1 (object)
+6: valueOf!
+mouseWheelEnabled: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+mouseWheelEnabled: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+mouseWheelEnabled: (37) -1 (object) = -1 (object)
+7: valueOf!
+mouseWheelEnabled: (37) -1 (object) = -1 (object)
+8: valueOf!
+mouseWheelEnabled: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+mouseWheelEnabled: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+mouseWheelEnabled: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+mouseWheelEnabled: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+mouseWheelEnabled: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+mouseWheelEnabled: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+mouseWheelEnabled: (41) NaN (object) = NaN (object)
+11: valueOf!
+mouseWheelEnabled: (41) NaN (object) = NaN (object)
+12: valueOf!
+mouseWheelEnabled: (42)  (object) =  (object)
+12: valueOf!
+mouseWheelEnabled: (42)  (object) =  (object)
+13: valueOf!
+mouseWheelEnabled: (43) 0 (object) = 0 (object)
+13: valueOf!
+mouseWheelEnabled: (43) 0 (object) = 0 (object)
+14: valueOf!
+mouseWheelEnabled: (44) -0 (object) = -0 (object)
+14: valueOf!
+mouseWheelEnabled: (44) -0 (object) = -0 (object)
+15: valueOf!
+mouseWheelEnabled: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+mouseWheelEnabled: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+mouseWheelEnabled: (46) 1 (object) = 1 (object)
+16: valueOf!
+mouseWheelEnabled: (46) 1 (object) = 1 (object)
+17: valueOf!
+mouseWheelEnabled: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+mouseWheelEnabled: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+mouseWheelEnabled: (48) true (object) = true (object)
+18: valueOf!
+mouseWheelEnabled: (48) true (object) = true (object)
+19: valueOf!
+mouseWheelEnabled: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+mouseWheelEnabled: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+mouseWheelEnabled: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+mouseWheelEnabled: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+mouseWheelEnabled: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+mouseWheelEnabled: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+mouseWheelEnabled: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+mouseWheelEnabled: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+mouseWheelEnabled: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+mouseWheelEnabled: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+mouseWheelEnabled: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+mouseWheelEnabled: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+mouseWheelEnabled: (55)  (object) =  (object)
+25: valueOf!
+mouseWheelEnabled: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+mouseWheelEnabled: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+mouseWheelEnabled: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+mouseWheelEnabled: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+mouseWheelEnabled: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+mouseWheelEnabled: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+mouseWheelEnabled: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+mouseWheelEnabled: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+mouseWheelEnabled: (59) [type Object] (object) = [type Object] (object)
+mouseWheelEnabled: (60) 17000000 (number) = 17000000 (number)
+mouseWheelEnabled: (60) 17000000 (number) = 17000000 (number)
+mouseWheelEnabled: (61) -17000000 (number) = -17000000 (number)
+mouseWheelEnabled: (61) -17000000 (number) = -17000000 (number)
+mouseWheelEnabled: (62) input (string) = input (string)
+mouseWheelEnabled: (62) input (string) = input (string)
+mouseWheelEnabled: (63) 34000000 (number) = 34000000 (number)
+mouseWheelEnabled: (63) 34000000 (number) = 34000000 (number)
+mouseWheelEnabled: (64)  (StyleSheet) =  (undefined)
+mouseWheelEnabled: (64)  (StyleSheet) =  (undefined)
+mouseWheelEnabled: (65) -34000000 (number) = -34000000 (number)
+mouseWheelEnabled: (65) -34000000 (number) = -34000000 (number)
+mouseWheelEnabled: (66) dynamic (string) = dynamic (string)
+mouseWheelEnabled: (66) dynamic (string) = dynamic (string)
+mouseWheelEnabled: (67) true (string) = true (string)
+mouseWheelEnabled: (67) true (string) = true (string)
+Testing: autoSize (default: center)
+autoSize: (0)  (undefined) =  (undefined)
+autoSize: (0)  (undefined) =  (undefined)
+autoSize: (1) null (null) = null (null)
+autoSize: (1) null (null) = null (null)
+autoSize: (2) true (boolean) = true (boolean)
+autoSize: (2) true (boolean) = true (boolean)
+autoSize: (3) false (boolean) = false (boolean)
+autoSize: (3) false (boolean) = false (boolean)
+autoSize: (4) 0 (number) = 0 (number)
+autoSize: (4) 0 (number) = 0 (number)
+autoSize: (5) 1 (number) = 1 (number)
+autoSize: (5) 1 (number) = 1 (number)
+autoSize: (6) 0.5 (number) = 0.5 (number)
+autoSize: (6) 0.5 (number) = 0.5 (number)
+autoSize: (7) -1 (number) = -1 (number)
+autoSize: (7) -1 (number) = -1 (number)
+autoSize: (8) -0.5 (number) = -0.5 (number)
+autoSize: (8) -0.5 (number) = -0.5 (number)
+autoSize: (9) Infinity (number) = Infinity (number)
+autoSize: (9) Infinity (number) = Infinity (number)
+autoSize: (10) -Infinity (number) = -Infinity (number)
+autoSize: (10) -Infinity (number) = -Infinity (number)
+autoSize: (11) NaN (number) = NaN (number)
+autoSize: (11) NaN (number) = NaN (number)
+autoSize: (12)  (string) =  (string)
+autoSize: (12)  (string) =  (string)
+autoSize: (13) 0 (string) = 0 (string)
+autoSize: (13) 0 (string) = 0 (string)
+autoSize: (14) -0 (string) = -0 (string)
+autoSize: (14) -0 (string) = -0 (string)
+autoSize: (15) 0.0 (string) = 0.0 (string)
+autoSize: (15) 0.0 (string) = 0.0 (string)
+autoSize: (16) 1 (string) = 1 (string)
+autoSize: (16) 1 (string) = 1 (string)
+autoSize: (17) Hello World! (string) = Hello World! (string)
+autoSize: (17) Hello World! (string) = Hello World! (string)
+autoSize: (18) true (string) = true (string)
+autoSize: (18) true (string) = true (string)
+autoSize: (19) _level0 (string) = _level0 (string)
+autoSize: (19) _level0 (string) = _level0 (string)
+autoSize: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+autoSize: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+autoSize: (21) _level0 (movieclip) = _level0 (movieclip)
+autoSize: (21) _level0 (movieclip) = _level0 (movieclip)
+autoSize: (22) [object Object] (object) = [object Object] (object)
+autoSize: (22) [object Object] (object) = [object Object] (object)
+autoSize: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+autoSize: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+autoSize: (24)  (object) =  (object)
+autoSize: (24)  (object) =  (object)
+autoSize: (25)  (undefined) =  (undefined)
+autoSize: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+autoSize: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+autoSize: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+autoSize: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+autoSize: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+autoSize: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+autoSize: (28) [object Object] (object) = [object Object] (object)
+autoSize: (29)  (object) =  (object)
+autoSize: (29)  (object) =  (object)
+0: valueOf!
+autoSize: (30)  (object) =  (object)
+0: valueOf!
+autoSize: (30)  (object) =  (object)
+1: valueOf!
+autoSize: (31) null (object) = null (object)
+1: valueOf!
+autoSize: (31) null (object) = null (object)
+2: valueOf!
+autoSize: (32) true (object) = true (object)
+2: valueOf!
+autoSize: (32) true (object) = true (object)
+3: valueOf!
+autoSize: (33) false (object) = false (object)
+3: valueOf!
+autoSize: (33) false (object) = false (object)
+4: valueOf!
+autoSize: (34) 0 (object) = 0 (object)
+4: valueOf!
+autoSize: (34) 0 (object) = 0 (object)
+5: valueOf!
+autoSize: (35) 1 (object) = 1 (object)
+5: valueOf!
+autoSize: (35) 1 (object) = 1 (object)
+6: valueOf!
+autoSize: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+autoSize: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+autoSize: (37) -1 (object) = -1 (object)
+7: valueOf!
+autoSize: (37) -1 (object) = -1 (object)
+8: valueOf!
+autoSize: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+autoSize: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+autoSize: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+autoSize: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+autoSize: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+autoSize: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+autoSize: (41) NaN (object) = NaN (object)
+11: valueOf!
+autoSize: (41) NaN (object) = NaN (object)
+12: valueOf!
+autoSize: (42)  (object) =  (object)
+12: valueOf!
+autoSize: (42)  (object) =  (object)
+13: valueOf!
+autoSize: (43) 0 (object) = 0 (object)
+13: valueOf!
+autoSize: (43) 0 (object) = 0 (object)
+14: valueOf!
+autoSize: (44) -0 (object) = -0 (object)
+14: valueOf!
+autoSize: (44) -0 (object) = -0 (object)
+15: valueOf!
+autoSize: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+autoSize: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+autoSize: (46) 1 (object) = 1 (object)
+16: valueOf!
+autoSize: (46) 1 (object) = 1 (object)
+17: valueOf!
+autoSize: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+autoSize: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+autoSize: (48) true (object) = true (object)
+18: valueOf!
+autoSize: (48) true (object) = true (object)
+19: valueOf!
+autoSize: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+autoSize: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+autoSize: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+autoSize: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+autoSize: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+autoSize: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+autoSize: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+autoSize: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+autoSize: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+autoSize: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+autoSize: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+autoSize: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+autoSize: (55)  (object) =  (object)
+25: valueOf!
+autoSize: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+autoSize: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+autoSize: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+autoSize: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+autoSize: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+autoSize: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+autoSize: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+autoSize: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+autoSize: (59) [type Object] (object) = [type Object] (object)
+autoSize: (60) 17000000 (number) = 17000000 (number)
+autoSize: (60) 17000000 (number) = 17000000 (number)
+autoSize: (61) -17000000 (number) = -17000000 (number)
+autoSize: (61) -17000000 (number) = -17000000 (number)
+autoSize: (62) input (string) = input (string)
+autoSize: (62) input (string) = input (string)
+autoSize: (63) 34000000 (number) = 34000000 (number)
+autoSize: (63) 34000000 (number) = 34000000 (number)
+autoSize: (64)  (StyleSheet) =  (undefined)
+autoSize: (64)  (StyleSheet) =  (undefined)
+autoSize: (65) -34000000 (number) = -34000000 (number)
+autoSize: (65) -34000000 (number) = -34000000 (number)
+autoSize: (66) dynamic (string) = dynamic (string)
+autoSize: (66) dynamic (string) = dynamic (string)
+autoSize: (67) true (string) = true (string)
+autoSize: (67) true (string) = true (string)
+Testing: password (default: false)
+password: (0)  (undefined) =  (undefined)
+password: (0)  (undefined) =  (undefined)
+password: (1) null (null) = null (null)
+password: (1) null (null) = null (null)
+password: (2) true (boolean) = true (boolean)
+password: (2) true (boolean) = true (boolean)
+password: (3) false (boolean) = false (boolean)
+password: (3) false (boolean) = false (boolean)
+password: (4) 0 (number) = 0 (number)
+password: (4) 0 (number) = 0 (number)
+password: (5) 1 (number) = 1 (number)
+password: (5) 1 (number) = 1 (number)
+password: (6) 0.5 (number) = 0.5 (number)
+password: (6) 0.5 (number) = 0.5 (number)
+password: (7) -1 (number) = -1 (number)
+password: (7) -1 (number) = -1 (number)
+password: (8) -0.5 (number) = -0.5 (number)
+password: (8) -0.5 (number) = -0.5 (number)
+password: (9) Infinity (number) = Infinity (number)
+password: (9) Infinity (number) = Infinity (number)
+password: (10) -Infinity (number) = -Infinity (number)
+password: (10) -Infinity (number) = -Infinity (number)
+password: (11) NaN (number) = NaN (number)
+password: (11) NaN (number) = NaN (number)
+password: (12)  (string) =  (string)
+password: (12)  (string) =  (string)
+password: (13) 0 (string) = 0 (string)
+password: (13) 0 (string) = 0 (string)
+password: (14) -0 (string) = -0 (string)
+password: (14) -0 (string) = -0 (string)
+password: (15) 0.0 (string) = 0.0 (string)
+password: (15) 0.0 (string) = 0.0 (string)
+password: (16) 1 (string) = 1 (string)
+password: (16) 1 (string) = 1 (string)
+password: (17) Hello World! (string) = Hello World! (string)
+password: (17) Hello World! (string) = Hello World! (string)
+password: (18) true (string) = true (string)
+password: (18) true (string) = true (string)
+password: (19) _level0 (string) = _level0 (string)
+password: (19) _level0 (string) = _level0 (string)
+password: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+password: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+password: (21) _level0 (movieclip) = _level0 (movieclip)
+password: (21) _level0 (movieclip) = _level0 (movieclip)
+password: (22) [object Object] (object) = [object Object] (object)
+password: (22) [object Object] (object) = [object Object] (object)
+password: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+password: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+password: (24)  (object) =  (object)
+password: (24)  (object) =  (object)
+password: (25)  (undefined) =  (undefined)
+password: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+password: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+password: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+password: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+password: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+password: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+password: (28) [object Object] (object) = [object Object] (object)
+password: (29)  (object) =  (object)
+password: (29)  (object) =  (object)
+0: valueOf!
+password: (30)  (object) =  (object)
+0: valueOf!
+password: (30)  (object) =  (object)
+1: valueOf!
+password: (31) null (object) = null (object)
+1: valueOf!
+password: (31) null (object) = null (object)
+2: valueOf!
+password: (32) true (object) = true (object)
+2: valueOf!
+password: (32) true (object) = true (object)
+3: valueOf!
+password: (33) false (object) = false (object)
+3: valueOf!
+password: (33) false (object) = false (object)
+4: valueOf!
+password: (34) 0 (object) = 0 (object)
+4: valueOf!
+password: (34) 0 (object) = 0 (object)
+5: valueOf!
+password: (35) 1 (object) = 1 (object)
+5: valueOf!
+password: (35) 1 (object) = 1 (object)
+6: valueOf!
+password: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+password: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+password: (37) -1 (object) = -1 (object)
+7: valueOf!
+password: (37) -1 (object) = -1 (object)
+8: valueOf!
+password: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+password: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+password: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+password: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+password: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+password: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+password: (41) NaN (object) = NaN (object)
+11: valueOf!
+password: (41) NaN (object) = NaN (object)
+12: valueOf!
+password: (42)  (object) =  (object)
+12: valueOf!
+password: (42)  (object) =  (object)
+13: valueOf!
+password: (43) 0 (object) = 0 (object)
+13: valueOf!
+password: (43) 0 (object) = 0 (object)
+14: valueOf!
+password: (44) -0 (object) = -0 (object)
+14: valueOf!
+password: (44) -0 (object) = -0 (object)
+15: valueOf!
+password: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+password: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+password: (46) 1 (object) = 1 (object)
+16: valueOf!
+password: (46) 1 (object) = 1 (object)
+17: valueOf!
+password: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+password: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+password: (48) true (object) = true (object)
+18: valueOf!
+password: (48) true (object) = true (object)
+19: valueOf!
+password: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+password: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+password: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+password: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+password: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+password: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+password: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+password: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+password: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+password: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+password: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+password: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+password: (55)  (object) =  (object)
+25: valueOf!
+password: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+password: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+password: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+password: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+password: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+password: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+password: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+password: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+password: (59) [type Object] (object) = [type Object] (object)
+password: (60) 17000000 (number) = 17000000 (number)
+password: (60) 17000000 (number) = 17000000 (number)
+password: (61) -17000000 (number) = -17000000 (number)
+password: (61) -17000000 (number) = -17000000 (number)
+password: (62) input (string) = input (string)
+password: (62) input (string) = input (string)
+password: (63) 34000000 (number) = 34000000 (number)
+password: (63) 34000000 (number) = 34000000 (number)
+password: (64)  (StyleSheet) =  (undefined)
+password: (64)  (StyleSheet) =  (undefined)
+password: (65) -34000000 (number) = -34000000 (number)
+password: (65) -34000000 (number) = -34000000 (number)
+password: (66) dynamic (string) = dynamic (string)
+password: (66) dynamic (string) = dynamic (string)
+password: (67) true (string) = true (string)
+password: (67) true (string) = true (string)
+Testing: wordWrap (default: false)
+wordWrap: (0)  (undefined) =  (undefined)
+wordWrap: (0)  (undefined) =  (undefined)
+wordWrap: (1) null (null) = null (null)
+wordWrap: (1) null (null) = null (null)
+wordWrap: (2) true (boolean) = true (boolean)
+wordWrap: (2) true (boolean) = true (boolean)
+wordWrap: (3) false (boolean) = false (boolean)
+wordWrap: (3) false (boolean) = false (boolean)
+wordWrap: (4) 0 (number) = 0 (number)
+wordWrap: (4) 0 (number) = 0 (number)
+wordWrap: (5) 1 (number) = 1 (number)
+wordWrap: (5) 1 (number) = 1 (number)
+wordWrap: (6) 0.5 (number) = 0.5 (number)
+wordWrap: (6) 0.5 (number) = 0.5 (number)
+wordWrap: (7) -1 (number) = -1 (number)
+wordWrap: (7) -1 (number) = -1 (number)
+wordWrap: (8) -0.5 (number) = -0.5 (number)
+wordWrap: (8) -0.5 (number) = -0.5 (number)
+wordWrap: (9) Infinity (number) = Infinity (number)
+wordWrap: (9) Infinity (number) = Infinity (number)
+wordWrap: (10) -Infinity (number) = -Infinity (number)
+wordWrap: (10) -Infinity (number) = -Infinity (number)
+wordWrap: (11) NaN (number) = NaN (number)
+wordWrap: (11) NaN (number) = NaN (number)
+wordWrap: (12)  (string) =  (string)
+wordWrap: (12)  (string) =  (string)
+wordWrap: (13) 0 (string) = 0 (string)
+wordWrap: (13) 0 (string) = 0 (string)
+wordWrap: (14) -0 (string) = -0 (string)
+wordWrap: (14) -0 (string) = -0 (string)
+wordWrap: (15) 0.0 (string) = 0.0 (string)
+wordWrap: (15) 0.0 (string) = 0.0 (string)
+wordWrap: (16) 1 (string) = 1 (string)
+wordWrap: (16) 1 (string) = 1 (string)
+wordWrap: (17) Hello World! (string) = Hello World! (string)
+wordWrap: (17) Hello World! (string) = Hello World! (string)
+wordWrap: (18) true (string) = true (string)
+wordWrap: (18) true (string) = true (string)
+wordWrap: (19) _level0 (string) = _level0 (string)
+wordWrap: (19) _level0 (string) = _level0 (string)
+wordWrap: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+wordWrap: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+wordWrap: (21) _level0 (movieclip) = _level0 (movieclip)
+wordWrap: (21) _level0 (movieclip) = _level0 (movieclip)
+wordWrap: (22) [object Object] (object) = [object Object] (object)
+wordWrap: (22) [object Object] (object) = [object Object] (object)
+wordWrap: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+wordWrap: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+wordWrap: (24)  (object) =  (object)
+wordWrap: (24)  (object) =  (object)
+wordWrap: (25)  (undefined) =  (undefined)
+wordWrap: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+wordWrap: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+wordWrap: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+wordWrap: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+wordWrap: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+wordWrap: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+wordWrap: (28) [object Object] (object) = [object Object] (object)
+wordWrap: (29)  (object) =  (object)
+wordWrap: (29)  (object) =  (object)
+0: valueOf!
+wordWrap: (30)  (object) =  (object)
+0: valueOf!
+wordWrap: (30)  (object) =  (object)
+1: valueOf!
+wordWrap: (31) null (object) = null (object)
+1: valueOf!
+wordWrap: (31) null (object) = null (object)
+2: valueOf!
+wordWrap: (32) true (object) = true (object)
+2: valueOf!
+wordWrap: (32) true (object) = true (object)
+3: valueOf!
+wordWrap: (33) false (object) = false (object)
+3: valueOf!
+wordWrap: (33) false (object) = false (object)
+4: valueOf!
+wordWrap: (34) 0 (object) = 0 (object)
+4: valueOf!
+wordWrap: (34) 0 (object) = 0 (object)
+5: valueOf!
+wordWrap: (35) 1 (object) = 1 (object)
+5: valueOf!
+wordWrap: (35) 1 (object) = 1 (object)
+6: valueOf!
+wordWrap: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+wordWrap: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+wordWrap: (37) -1 (object) = -1 (object)
+7: valueOf!
+wordWrap: (37) -1 (object) = -1 (object)
+8: valueOf!
+wordWrap: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+wordWrap: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+wordWrap: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+wordWrap: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+wordWrap: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+wordWrap: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+wordWrap: (41) NaN (object) = NaN (object)
+11: valueOf!
+wordWrap: (41) NaN (object) = NaN (object)
+12: valueOf!
+wordWrap: (42)  (object) =  (object)
+12: valueOf!
+wordWrap: (42)  (object) =  (object)
+13: valueOf!
+wordWrap: (43) 0 (object) = 0 (object)
+13: valueOf!
+wordWrap: (43) 0 (object) = 0 (object)
+14: valueOf!
+wordWrap: (44) -0 (object) = -0 (object)
+14: valueOf!
+wordWrap: (44) -0 (object) = -0 (object)
+15: valueOf!
+wordWrap: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+wordWrap: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+wordWrap: (46) 1 (object) = 1 (object)
+16: valueOf!
+wordWrap: (46) 1 (object) = 1 (object)
+17: valueOf!
+wordWrap: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+wordWrap: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+wordWrap: (48) true (object) = true (object)
+18: valueOf!
+wordWrap: (48) true (object) = true (object)
+19: valueOf!
+wordWrap: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+wordWrap: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+wordWrap: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+wordWrap: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+wordWrap: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+wordWrap: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+wordWrap: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+wordWrap: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+wordWrap: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+wordWrap: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+wordWrap: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+wordWrap: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+wordWrap: (55)  (object) =  (object)
+25: valueOf!
+wordWrap: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+wordWrap: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+wordWrap: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+wordWrap: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+wordWrap: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+wordWrap: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+wordWrap: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+wordWrap: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+wordWrap: (59) [type Object] (object) = [type Object] (object)
+wordWrap: (60) 17000000 (number) = 17000000 (number)
+wordWrap: (60) 17000000 (number) = 17000000 (number)
+wordWrap: (61) -17000000 (number) = -17000000 (number)
+wordWrap: (61) -17000000 (number) = -17000000 (number)
+wordWrap: (62) input (string) = input (string)
+wordWrap: (62) input (string) = input (string)
+wordWrap: (63) 34000000 (number) = 34000000 (number)
+wordWrap: (63) 34000000 (number) = 34000000 (number)
+wordWrap: (64)  (StyleSheet) =  (undefined)
+wordWrap: (64)  (StyleSheet) =  (undefined)
+wordWrap: (65) -34000000 (number) = -34000000 (number)
+wordWrap: (65) -34000000 (number) = -34000000 (number)
+wordWrap: (66) dynamic (string) = dynamic (string)
+wordWrap: (66) dynamic (string) = dynamic (string)
+wordWrap: (67) true (string) = true (string)
+wordWrap: (67) true (string) = true (string)
+Testing: embedFonts (default: false)
+embedFonts: (0)  (undefined) =  (undefined)
+embedFonts: (0)  (undefined) =  (undefined)
+embedFonts: (1) null (null) = null (null)
+embedFonts: (1) null (null) = null (null)
+embedFonts: (2) true (boolean) = true (boolean)
+embedFonts: (2) true (boolean) = true (boolean)
+embedFonts: (3) false (boolean) = false (boolean)
+embedFonts: (3) false (boolean) = false (boolean)
+embedFonts: (4) 0 (number) = 0 (number)
+embedFonts: (4) 0 (number) = 0 (number)
+embedFonts: (5) 1 (number) = 1 (number)
+embedFonts: (5) 1 (number) = 1 (number)
+embedFonts: (6) 0.5 (number) = 0.5 (number)
+embedFonts: (6) 0.5 (number) = 0.5 (number)
+embedFonts: (7) -1 (number) = -1 (number)
+embedFonts: (7) -1 (number) = -1 (number)
+embedFonts: (8) -0.5 (number) = -0.5 (number)
+embedFonts: (8) -0.5 (number) = -0.5 (number)
+embedFonts: (9) Infinity (number) = Infinity (number)
+embedFonts: (9) Infinity (number) = Infinity (number)
+embedFonts: (10) -Infinity (number) = -Infinity (number)
+embedFonts: (10) -Infinity (number) = -Infinity (number)
+embedFonts: (11) NaN (number) = NaN (number)
+embedFonts: (11) NaN (number) = NaN (number)
+embedFonts: (12)  (string) =  (string)
+embedFonts: (12)  (string) =  (string)
+embedFonts: (13) 0 (string) = 0 (string)
+embedFonts: (13) 0 (string) = 0 (string)
+embedFonts: (14) -0 (string) = -0 (string)
+embedFonts: (14) -0 (string) = -0 (string)
+embedFonts: (15) 0.0 (string) = 0.0 (string)
+embedFonts: (15) 0.0 (string) = 0.0 (string)
+embedFonts: (16) 1 (string) = 1 (string)
+embedFonts: (16) 1 (string) = 1 (string)
+embedFonts: (17) Hello World! (string) = Hello World! (string)
+embedFonts: (17) Hello World! (string) = Hello World! (string)
+embedFonts: (18) true (string) = true (string)
+embedFonts: (18) true (string) = true (string)
+embedFonts: (19) _level0 (string) = _level0 (string)
+embedFonts: (19) _level0 (string) = _level0 (string)
+embedFonts: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+embedFonts: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+embedFonts: (21) _level0 (movieclip) = _level0 (movieclip)
+embedFonts: (21) _level0 (movieclip) = _level0 (movieclip)
+embedFonts: (22) [object Object] (object) = [object Object] (object)
+embedFonts: (22) [object Object] (object) = [object Object] (object)
+embedFonts: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+embedFonts: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+embedFonts: (24)  (object) =  (object)
+embedFonts: (24)  (object) =  (object)
+embedFonts: (25)  (undefined) =  (undefined)
+embedFonts: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+embedFonts: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+embedFonts: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+embedFonts: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+embedFonts: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+embedFonts: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+embedFonts: (28) [object Object] (object) = [object Object] (object)
+embedFonts: (29)  (object) =  (object)
+embedFonts: (29)  (object) =  (object)
+0: valueOf!
+embedFonts: (30)  (object) =  (object)
+0: valueOf!
+embedFonts: (30)  (object) =  (object)
+1: valueOf!
+embedFonts: (31) null (object) = null (object)
+1: valueOf!
+embedFonts: (31) null (object) = null (object)
+2: valueOf!
+embedFonts: (32) true (object) = true (object)
+2: valueOf!
+embedFonts: (32) true (object) = true (object)
+3: valueOf!
+embedFonts: (33) false (object) = false (object)
+3: valueOf!
+embedFonts: (33) false (object) = false (object)
+4: valueOf!
+embedFonts: (34) 0 (object) = 0 (object)
+4: valueOf!
+embedFonts: (34) 0 (object) = 0 (object)
+5: valueOf!
+embedFonts: (35) 1 (object) = 1 (object)
+5: valueOf!
+embedFonts: (35) 1 (object) = 1 (object)
+6: valueOf!
+embedFonts: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+embedFonts: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+embedFonts: (37) -1 (object) = -1 (object)
+7: valueOf!
+embedFonts: (37) -1 (object) = -1 (object)
+8: valueOf!
+embedFonts: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+embedFonts: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+embedFonts: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+embedFonts: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+embedFonts: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+embedFonts: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+embedFonts: (41) NaN (object) = NaN (object)
+11: valueOf!
+embedFonts: (41) NaN (object) = NaN (object)
+12: valueOf!
+embedFonts: (42)  (object) =  (object)
+12: valueOf!
+embedFonts: (42)  (object) =  (object)
+13: valueOf!
+embedFonts: (43) 0 (object) = 0 (object)
+13: valueOf!
+embedFonts: (43) 0 (object) = 0 (object)
+14: valueOf!
+embedFonts: (44) -0 (object) = -0 (object)
+14: valueOf!
+embedFonts: (44) -0 (object) = -0 (object)
+15: valueOf!
+embedFonts: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+embedFonts: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+embedFonts: (46) 1 (object) = 1 (object)
+16: valueOf!
+embedFonts: (46) 1 (object) = 1 (object)
+17: valueOf!
+embedFonts: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+embedFonts: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+embedFonts: (48) true (object) = true (object)
+18: valueOf!
+embedFonts: (48) true (object) = true (object)
+19: valueOf!
+embedFonts: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+embedFonts: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+embedFonts: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+embedFonts: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+embedFonts: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+embedFonts: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+embedFonts: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+embedFonts: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+embedFonts: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+embedFonts: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+embedFonts: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+embedFonts: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+embedFonts: (55)  (object) =  (object)
+25: valueOf!
+embedFonts: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+embedFonts: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+embedFonts: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+embedFonts: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+embedFonts: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+embedFonts: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+embedFonts: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+embedFonts: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+embedFonts: (59) [type Object] (object) = [type Object] (object)
+embedFonts: (60) 17000000 (number) = 17000000 (number)
+embedFonts: (60) 17000000 (number) = 17000000 (number)
+embedFonts: (61) -17000000 (number) = -17000000 (number)
+embedFonts: (61) -17000000 (number) = -17000000 (number)
+embedFonts: (62) input (string) = input (string)
+embedFonts: (62) input (string) = input (string)
+embedFonts: (63) 34000000 (number) = 34000000 (number)
+embedFonts: (63) 34000000 (number) = 34000000 (number)
+embedFonts: (64)  (StyleSheet) =  (undefined)
+embedFonts: (64)  (StyleSheet) =  (undefined)
+embedFonts: (65) -34000000 (number) = -34000000 (number)
+embedFonts: (65) -34000000 (number) = -34000000 (number)
+embedFonts: (66) dynamic (string) = dynamic (string)
+embedFonts: (66) dynamic (string) = dynamic (string)
+embedFonts: (67) true (string) = true (string)
+embedFonts: (67) true (string) = true (string)
+Testing: styleSheet (default: null)
+styleSheet: (0)  (undefined) =  (undefined)
+styleSheet: (0)  (undefined) =  (undefined)
+styleSheet: (1) null (null) = null (null)
+styleSheet: (1) null (null) = null (null)
+styleSheet: (2) true (boolean) = true (boolean)
+styleSheet: (2) true (boolean) = true (boolean)
+styleSheet: (3) false (boolean) = false (boolean)
+styleSheet: (3) false (boolean) = false (boolean)
+styleSheet: (4) 0 (number) = 0 (number)
+styleSheet: (4) 0 (number) = 0 (number)
+styleSheet: (5) 1 (number) = 1 (number)
+styleSheet: (5) 1 (number) = 1 (number)
+styleSheet: (6) 0.5 (number) = 0.5 (number)
+styleSheet: (6) 0.5 (number) = 0.5 (number)
+styleSheet: (7) -1 (number) = -1 (number)
+styleSheet: (7) -1 (number) = -1 (number)
+styleSheet: (8) -0.5 (number) = -0.5 (number)
+styleSheet: (8) -0.5 (number) = -0.5 (number)
+styleSheet: (9) Infinity (number) = Infinity (number)
+styleSheet: (9) Infinity (number) = Infinity (number)
+styleSheet: (10) -Infinity (number) = -Infinity (number)
+styleSheet: (10) -Infinity (number) = -Infinity (number)
+styleSheet: (11) NaN (number) = NaN (number)
+styleSheet: (11) NaN (number) = NaN (number)
+styleSheet: (12)  (string) =  (string)
+styleSheet: (12)  (string) =  (string)
+styleSheet: (13) 0 (string) = 0 (string)
+styleSheet: (13) 0 (string) = 0 (string)
+styleSheet: (14) -0 (string) = -0 (string)
+styleSheet: (14) -0 (string) = -0 (string)
+styleSheet: (15) 0.0 (string) = 0.0 (string)
+styleSheet: (15) 0.0 (string) = 0.0 (string)
+styleSheet: (16) 1 (string) = 1 (string)
+styleSheet: (16) 1 (string) = 1 (string)
+styleSheet: (17) Hello World! (string) = Hello World! (string)
+styleSheet: (17) Hello World! (string) = Hello World! (string)
+styleSheet: (18) true (string) = true (string)
+styleSheet: (18) true (string) = true (string)
+styleSheet: (19) _level0 (string) = _level0 (string)
+styleSheet: (19) _level0 (string) = _level0 (string)
+styleSheet: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+styleSheet: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+styleSheet: (21) _level0 (movieclip) = _level0 (movieclip)
+styleSheet: (21) _level0 (movieclip) = _level0 (movieclip)
+styleSheet: (22) [object Object] (object) = [object Object] (object)
+styleSheet: (22) [object Object] (object) = [object Object] (object)
+styleSheet: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+styleSheet: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+styleSheet: (24)  (object) =  (object)
+styleSheet: (24)  (object) =  (object)
+styleSheet: (25)  (undefined) =  (undefined)
+styleSheet: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+styleSheet: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+styleSheet: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+styleSheet: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+styleSheet: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+styleSheet: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+styleSheet: (28) [object Object] (object) = [object Object] (object)
+styleSheet: (29)  (object) =  (object)
+styleSheet: (29)  (object) =  (object)
+0: valueOf!
+styleSheet: (30)  (object) =  (object)
+0: valueOf!
+styleSheet: (30)  (object) =  (object)
+1: valueOf!
+styleSheet: (31) null (object) = null (object)
+1: valueOf!
+styleSheet: (31) null (object) = null (object)
+2: valueOf!
+styleSheet: (32) true (object) = true (object)
+2: valueOf!
+styleSheet: (32) true (object) = true (object)
+3: valueOf!
+styleSheet: (33) false (object) = false (object)
+3: valueOf!
+styleSheet: (33) false (object) = false (object)
+4: valueOf!
+styleSheet: (34) 0 (object) = 0 (object)
+4: valueOf!
+styleSheet: (34) 0 (object) = 0 (object)
+5: valueOf!
+styleSheet: (35) 1 (object) = 1 (object)
+5: valueOf!
+styleSheet: (35) 1 (object) = 1 (object)
+6: valueOf!
+styleSheet: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+styleSheet: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+styleSheet: (37) -1 (object) = -1 (object)
+7: valueOf!
+styleSheet: (37) -1 (object) = -1 (object)
+8: valueOf!
+styleSheet: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+styleSheet: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+styleSheet: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+styleSheet: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+styleSheet: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+styleSheet: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+styleSheet: (41) NaN (object) = NaN (object)
+11: valueOf!
+styleSheet: (41) NaN (object) = NaN (object)
+12: valueOf!
+styleSheet: (42)  (object) =  (object)
+12: valueOf!
+styleSheet: (42)  (object) =  (object)
+13: valueOf!
+styleSheet: (43) 0 (object) = 0 (object)
+13: valueOf!
+styleSheet: (43) 0 (object) = 0 (object)
+14: valueOf!
+styleSheet: (44) -0 (object) = -0 (object)
+14: valueOf!
+styleSheet: (44) -0 (object) = -0 (object)
+15: valueOf!
+styleSheet: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+styleSheet: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+styleSheet: (46) 1 (object) = 1 (object)
+16: valueOf!
+styleSheet: (46) 1 (object) = 1 (object)
+17: valueOf!
+styleSheet: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+styleSheet: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+styleSheet: (48) true (object) = true (object)
+18: valueOf!
+styleSheet: (48) true (object) = true (object)
+19: valueOf!
+styleSheet: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+styleSheet: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+styleSheet: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+styleSheet: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+styleSheet: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+styleSheet: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+styleSheet: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+styleSheet: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+styleSheet: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+styleSheet: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+styleSheet: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+styleSheet: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+styleSheet: (55)  (object) =  (object)
+25: valueOf!
+styleSheet: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+styleSheet: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+styleSheet: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+styleSheet: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+styleSheet: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+styleSheet: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+styleSheet: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+styleSheet: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+styleSheet: (59) [type Object] (object) = [type Object] (object)
+styleSheet: (60) 17000000 (number) = 17000000 (number)
+styleSheet: (60) 17000000 (number) = 17000000 (number)
+styleSheet: (61) -17000000 (number) = -17000000 (number)
+styleSheet: (61) -17000000 (number) = -17000000 (number)
+styleSheet: (62) input (string) = input (string)
+styleSheet: (62) input (string) = input (string)
+styleSheet: (63) 34000000 (number) = 34000000 (number)
+styleSheet: (63) 34000000 (number) = 34000000 (number)
+styleSheet: (64)  (StyleSheet) =  (undefined)
+styleSheet: (64)  (StyleSheet) =  (undefined)
+styleSheet: (65) -34000000 (number) = -34000000 (number)
+styleSheet: (65) -34000000 (number) = -34000000 (number)
+styleSheet: (66) dynamic (string) = dynamic (string)
+styleSheet: (66) dynamic (string) = dynamic (string)
+styleSheet: (67) true (string) = true (string)
+styleSheet: (67) true (string) = true (string)
+Testing: textColor (default: 52224)
+textColor: (0)  (undefined) =  (undefined)
+textColor: (0)  (undefined) =  (undefined)
+textColor: (1) null (null) = null (null)
+textColor: (1) null (null) = null (null)
+textColor: (2) true (boolean) = true (boolean)
+textColor: (2) true (boolean) = true (boolean)
+textColor: (3) false (boolean) = false (boolean)
+textColor: (3) false (boolean) = false (boolean)
+textColor: (4) 0 (number) = 0 (number)
+textColor: (4) 0 (number) = 0 (number)
+textColor: (5) 1 (number) = 1 (number)
+textColor: (5) 1 (number) = 1 (number)
+textColor: (6) 0.5 (number) = 0.5 (number)
+textColor: (6) 0.5 (number) = 0.5 (number)
+textColor: (7) -1 (number) = -1 (number)
+textColor: (7) -1 (number) = -1 (number)
+textColor: (8) -0.5 (number) = -0.5 (number)
+textColor: (8) -0.5 (number) = -0.5 (number)
+textColor: (9) Infinity (number) = Infinity (number)
+textColor: (9) Infinity (number) = Infinity (number)
+textColor: (10) -Infinity (number) = -Infinity (number)
+textColor: (10) -Infinity (number) = -Infinity (number)
+textColor: (11) NaN (number) = NaN (number)
+textColor: (11) NaN (number) = NaN (number)
+textColor: (12)  (string) =  (string)
+textColor: (12)  (string) =  (string)
+textColor: (13) 0 (string) = 0 (string)
+textColor: (13) 0 (string) = 0 (string)
+textColor: (14) -0 (string) = -0 (string)
+textColor: (14) -0 (string) = -0 (string)
+textColor: (15) 0.0 (string) = 0.0 (string)
+textColor: (15) 0.0 (string) = 0.0 (string)
+textColor: (16) 1 (string) = 1 (string)
+textColor: (16) 1 (string) = 1 (string)
+textColor: (17) Hello World! (string) = Hello World! (string)
+textColor: (17) Hello World! (string) = Hello World! (string)
+textColor: (18) true (string) = true (string)
+textColor: (18) true (string) = true (string)
+textColor: (19) _level0 (string) = _level0 (string)
+textColor: (19) _level0 (string) = _level0 (string)
+textColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+textColor: (20) Ã¤Ã¶Ã¼ (string) = Ã¤Ã¶Ã¼ (string)
+textColor: (21) _level0 (movieclip) = _level0 (movieclip)
+textColor: (21) _level0 (movieclip) = _level0 (movieclip)
+textColor: (22) [object Object] (object) = [object Object] (object)
+textColor: (22) [object Object] (object) = [object Object] (object)
+textColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+textColor: (23) 1239752134235.94 (object) = 1239752134235.94 (object)
+textColor: (24)  (object) =  (object)
+textColor: (24)  (object) =  (object)
+textColor: (25)  (undefined) =  (undefined)
+textColor: (25)  (undefined) =  (undefined)
+valueOf called
+toString called
+textColor: (26) [type Object] (object) = [type Object] (object)
+valueOf called
+toString called
+textColor: (26) [type Object] (object) = [type Object] (object)
+toString called with 
+textColor: (27) [type Object] (object) = [type Object] (object)
+toString called with 
+textColor: (27) [type Object] (object) = [type Object] (object)
+valueOf called with 
+textColor: (28) [object Object] (object) = [object Object] (object)
+valueOf called with 
+textColor: (28) [object Object] (object) = [object Object] (object)
+textColor: (29)  (object) =  (object)
+textColor: (29)  (object) =  (object)
+0: valueOf!
+textColor: (30)  (object) =  (object)
+0: valueOf!
+textColor: (30)  (object) =  (object)
+1: valueOf!
+textColor: (31) null (object) = null (object)
+1: valueOf!
+textColor: (31) null (object) = null (object)
+2: valueOf!
+textColor: (32) true (object) = true (object)
+2: valueOf!
+textColor: (32) true (object) = true (object)
+3: valueOf!
+textColor: (33) false (object) = false (object)
+3: valueOf!
+textColor: (33) false (object) = false (object)
+4: valueOf!
+textColor: (34) 0 (object) = 0 (object)
+4: valueOf!
+textColor: (34) 0 (object) = 0 (object)
+5: valueOf!
+textColor: (35) 1 (object) = 1 (object)
+5: valueOf!
+textColor: (35) 1 (object) = 1 (object)
+6: valueOf!
+textColor: (36) 0.5 (object) = 0.5 (object)
+6: valueOf!
+textColor: (36) 0.5 (object) = 0.5 (object)
+7: valueOf!
+textColor: (37) -1 (object) = -1 (object)
+7: valueOf!
+textColor: (37) -1 (object) = -1 (object)
+8: valueOf!
+textColor: (38) -0.5 (object) = -0.5 (object)
+8: valueOf!
+textColor: (38) -0.5 (object) = -0.5 (object)
+9: valueOf!
+textColor: (39) Infinity (object) = Infinity (object)
+9: valueOf!
+textColor: (39) Infinity (object) = Infinity (object)
+10: valueOf!
+textColor: (40) -Infinity (object) = -Infinity (object)
+10: valueOf!
+textColor: (40) -Infinity (object) = -Infinity (object)
+11: valueOf!
+textColor: (41) NaN (object) = NaN (object)
+11: valueOf!
+textColor: (41) NaN (object) = NaN (object)
+12: valueOf!
+textColor: (42)  (object) =  (object)
+12: valueOf!
+textColor: (42)  (object) =  (object)
+13: valueOf!
+textColor: (43) 0 (object) = 0 (object)
+13: valueOf!
+textColor: (43) 0 (object) = 0 (object)
+14: valueOf!
+textColor: (44) -0 (object) = -0 (object)
+14: valueOf!
+textColor: (44) -0 (object) = -0 (object)
+15: valueOf!
+textColor: (45) 0.0 (object) = 0.0 (object)
+15: valueOf!
+textColor: (45) 0.0 (object) = 0.0 (object)
+16: valueOf!
+textColor: (46) 1 (object) = 1 (object)
+16: valueOf!
+textColor: (46) 1 (object) = 1 (object)
+17: valueOf!
+textColor: (47) Hello World! (object) = Hello World! (object)
+17: valueOf!
+textColor: (47) Hello World! (object) = Hello World! (object)
+18: valueOf!
+textColor: (48) true (object) = true (object)
+18: valueOf!
+textColor: (48) true (object) = true (object)
+19: valueOf!
+textColor: (49) _level0 (object) = _level0 (object)
+19: valueOf!
+textColor: (49) _level0 (object) = _level0 (object)
+20: valueOf!
+textColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+20: valueOf!
+textColor: (50) Ã¤Ã¶Ã¼ (object) = Ã¤Ã¶Ã¼ (object)
+21: valueOf!
+textColor: (51) _level0 (object) = _level0 (object)
+21: valueOf!
+textColor: (51) _level0 (object) = _level0 (object)
+22: valueOf!
+22: toString!
+textColor: (52) [type Object] (object) = [type Object] (object)
+22: valueOf!
+22: toString!
+textColor: (52) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+textColor: (53) [type Object] (object) = [type Object] (object)
+23: valueOf!
+23: toString!
+textColor: (53) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+textColor: (54) [type Object] (object) = [type Object] (object)
+24: valueOf!
+24: toString!
+textColor: (54) [type Object] (object) = [type Object] (object)
+25: valueOf!
+textColor: (55)  (object) =  (object)
+25: valueOf!
+textColor: (55)  (object) =  (object)
+26: valueOf!
+26: toString!
+textColor: (56) [type Object] (object) = [type Object] (object)
+26: valueOf!
+26: toString!
+textColor: (56) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+textColor: (57) [type Object] (object) = [type Object] (object)
+27: valueOf!
+27: toString!
+textColor: (57) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+textColor: (58) [type Object] (object) = [type Object] (object)
+28: valueOf!
+28: toString!
+textColor: (58) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+textColor: (59) [type Object] (object) = [type Object] (object)
+29: valueOf!
+29: toString!
+textColor: (59) [type Object] (object) = [type Object] (object)
+textColor: (60) 17000000 (number) = 17000000 (number)
+textColor: (60) 17000000 (number) = 17000000 (number)
+textColor: (61) -17000000 (number) = -17000000 (number)
+textColor: (61) -17000000 (number) = -17000000 (number)
+textColor: (62) input (string) = input (string)
+textColor: (62) input (string) = input (string)
+textColor: (63) 34000000 (number) = 34000000 (number)
+textColor: (63) 34000000 (number) = 34000000 (number)
+textColor: (64)  (StyleSheet) =  (undefined)
+textColor: (64)  (StyleSheet) =  (undefined)
+textColor: (65) -34000000 (number) = -34000000 (number)
+textColor: (65) -34000000 (number) = -34000000 (number)
+textColor: (66) dynamic (string) = dynamic (string)
+textColor: (66) dynamic (string) = dynamic (string)
+textColor: (67) true (string) = true (string)
+textColor: (67) true (string) = true (string)

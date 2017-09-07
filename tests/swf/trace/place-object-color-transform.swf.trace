@@ -1,0 +1,69 @@
+a:
+_alpha: 80.078125
+Color:
+aa: 80.078125
+ab: 0
+ba: 21.875
+bb: 0
+ga: 78.125
+gb: 0
+ra: 60.9375
+rb: 0
+ColorTransform:
+(redMultiplier=0.609375, greenMultiplier=0.78125, blueMultiplier=0.21875, alphaMultiplier=0.80078125, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=0)
+
+b:
+_alpha: 80.078125
+Color:
+aa: 80.078125
+ab: 0
+ba: 21.875
+bb: 0
+ga: 78.125
+gb: 0
+ra: 60.9375
+rb: 0
+ColorTransform:
+(redMultiplier=0.609375, greenMultiplier=0.78125, blueMultiplier=0.21875, alphaMultiplier=0.80078125, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=0)
+
+a (changed):
+_alpha: 39.84375
+Color:
+aa: 39.84375
+ab: 70
+ba: 11.71875
+bb: 90
+ga: 39.84375
+gb: 112
+ra: 50
+rb: 244
+ColorTransform:
+(redMultiplier=0.5, greenMultiplier=0.3984375, blueMultiplier=0.1171875, alphaMultiplier=0.3984375, redOffset=244, greenOffset=112, blueOffset=90, alphaOffset=70)
+
+c:
+_alpha: 39.84375
+Color:
+aa: 39.84375
+ab: 70
+ba: 11.71875
+bb: 90
+ga: 39.84375
+gb: 112
+ra: 50
+rb: 244
+ColorTransform:
+(redMultiplier=0.5, greenMultiplier=0.3984375, blueMultiplier=0.1171875, alphaMultiplier=0.3984375, redOffset=244, greenOffset=112, blueOffset=90, alphaOffset=70)
+
+a (loaded):
+_alpha: 39.84375
+Color:
+aa: 39.84375
+ab: 70
+ba: 11.71875
+bb: 90
+ga: 39.84375
+gb: 112
+ra: 50
+rb: 244
+ColorTransform:
+(redMultiplier=0.5, greenMultiplier=0.3984375, blueMultiplier=0.1171875, alphaMultiplier=0.3984375, redOffset=244, greenOffset=112, blueOffset=90, alphaOffset=70)

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="1" frames="1">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="1"/>
+      <DoAction>
+        <actions>
+          <Dictionary>
+            <strings>
+              <String value="hi"/>
+              <String value="foo"/>
+              <String value="fscommand:quit"/>
+              <String value=""/>
+            </strings>
+          </Dictionary>
+          <DeclareFunction2 name="foo" argc="0" regc="0" preloadThis="0" suppressThis="0" preloadArguments="0" suppressArguments="0" preloadSuper="0" suppressSuper="0" preloadRoot="0" preloadParent="0" reserved="0" preloadGlobal="0">
+            <args/>
+            <actions>
+              <Try doFinally="0" doCatch="1" trySize="11" catchSize="1" finallySize="0" reg="0"/>
+              <PushData>
+                <items>
+                  <StackUndefined/>
+                </items>
+              </PushData>
+              <Return/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="0"/>
+                </items>
+              </PushData>
+              <Trace/>
+              <Trace/>
+            </actions>
+          </DeclareFunction2>
+          <PushData>
+            <items>
+              <StackInteger value="0"/>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <CallFunction/>
+          <Throw/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="2"/>
+              <StackDictionaryLookup index="3"/>
+            </items>
+          </PushData>
+          <GetURL2 method="64"/>
+          <EndAction/>
+        </actions>
+      </DoAction>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

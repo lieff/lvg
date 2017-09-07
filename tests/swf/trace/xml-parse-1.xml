@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE
+ html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+ "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>Title is something</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="main_topic">Main topic</h1>
+
+    <p class="some_text" id="first_text_block">Some text</p>
+
+  </body>
+
+</html>

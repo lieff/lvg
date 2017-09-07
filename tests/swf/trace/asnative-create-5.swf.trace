@@ -1,0 +1,7 @@
+Check ASnative creates a new functio object every time
+[type Function]
+42
+undefined
+true
+true
+undefined

@@ -1,0 +1,374 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+0x40506
+0x-1387fafa
+0x-1387fafa
+Testing: 0xFFFFFFFFFF
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=255, greenOffset=255, blueOffset=255, alphaOffset=7.5)
+Testing: -0xFFFFFFFFFF
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+Testing: (0) undefined (undefined)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (1) null (null)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (2) true (boolean)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (3) false (boolean)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (4) 0 (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (5) 1 (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (6) 0.5 (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0.5, alphaOffset=7.5)
+263424
+Testing: (7) -1 (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=255, greenOffset=255, blueOffset=255, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-1, alphaOffset=7.5)
+-1
+Testing: (8) -0.5 (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-0.5, alphaOffset=7.5)
+263424
+Testing: (9) Infinity (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=Infinity, alphaOffset=7.5)
+263424
+Testing: (10) -Infinity (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-Infinity, alphaOffset=7.5)
+263424
+Testing: (11) NaN (number)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (12)  (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (13) 0 (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (14) -0 (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (15) 0.0 (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (16) 1 (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (17) Hello World! (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (18) true (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (19) _level0 (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (20) äöü (string)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (21) _level0 (movieclip)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (22) [object Object] (object)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (23) Tue Apr 14 23:35:34 GMT+0000 2009 (object)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=252, greenOffset=78, blueOffset=91, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1239752134235.94, alphaOffset=7.5)
+-1493414053
+Testing: (24)  (object)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (25) [type Function] (function)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (26) [type Object] (object)
+valueOf called
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+valueOf called
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (27) [type Object] (object)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (28) [object Object] (object)
+valueOf called with 
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+valueOf called with 
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (29) undefined (object)
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (30) undefined (object)
+0: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+0: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (31) null (object)
+1: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+1: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (32) true (object)
+2: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+2: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (33) false (object)
+3: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+3: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (34) 0 (object)
+4: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+4: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (35) 1 (object)
+5: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+5: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (36) 0.5 (object)
+6: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+6: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0.5, alphaOffset=7.5)
+263424
+Testing: (37) -1 (object)
+7: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=255, greenOffset=255, blueOffset=255, alphaOffset=7.5)
+7: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-1, alphaOffset=7.5)
+-1
+Testing: (38) -0.5 (object)
+8: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+8: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-0.5, alphaOffset=7.5)
+263424
+Testing: (39) Infinity (object)
+9: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+9: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=Infinity, alphaOffset=7.5)
+263424
+Testing: (40) -Infinity (object)
+10: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+10: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-Infinity, alphaOffset=7.5)
+263424
+Testing: (41) NaN (object)
+11: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+11: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (42)  (object)
+12: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+12: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (43) 0 (object)
+13: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+13: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (44) -0 (object)
+14: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+14: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (45) 0.0 (object)
+15: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+15: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=0, alphaOffset=7.5)
+263424
+Testing: (46) 1 (object)
+16: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=1, alphaOffset=7.5)
+16: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=1, alphaOffset=7.5)
+263425
+Testing: (47) Hello World! (object)
+17: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+17: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (48) true (object)
+18: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+18: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (49) _level0 (object)
+19: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+19: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (50) äöü (object)
+20: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+20: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (51) _level0 (object)
+21: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+21: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (52) [type Object] (object)
+22: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+22: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (53) [type Object] (object)
+23: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+23: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (54) [type Object] (object)
+24: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+24: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (55) [type Object] (object)
+25: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+25: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (56) [type Object] (object)
+26: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+26: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (57) [type Object] (object)
+27: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+27: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (58) [type Object] (object)
+28: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+28: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+Testing: (59) [type Object] (object)
+29: valueOf!
+(redMultiplier=0, greenMultiplier=0, blueMultiplier=0, alphaMultiplier=3.5, redOffset=0, greenOffset=0, blueOffset=0, alphaOffset=7.5)
+29: valueOf!
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=NaN, alphaOffset=7.5)
+263424
+-- -1
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-1, alphaOffset=7.5)
+-1
+-- -42
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=-42, alphaOffset=7.5)
+-42
+-- -1 -2 -3
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=-1, greenOffset=-2, blueOffset=-3, alphaOffset=7.5)
+-3
+-- -3 -2 -1
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=-3, greenOffset=-2, blueOffset=-1, alphaOffset=7.5)
+-1
+-- -1 -2 3
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=-1, greenOffset=-2, blueOffset=3, alphaOffset=7.5)
+-509
+-- -1 2 3
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=-1, greenOffset=2, blueOffset=3, alphaOffset=7.5)
+-65021
+-- 1 -2 3
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=1, greenOffset=-2, blueOffset=3, alphaOffset=7.5)
+-509

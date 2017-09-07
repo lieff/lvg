@@ -1,0 +1,13 @@
+Check that delete inside a With doesn't delete from prototypes.
+1
+0
+1
+2
+2
+0
+2
+2
+2
+undefined
+2
+2

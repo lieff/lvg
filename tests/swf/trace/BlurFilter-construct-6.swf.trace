@@ -1,0 +1,113 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+0 args:  /  / 
+1 arg:  /  / 
+2 args:  /  / 
+3 args:  /  / 
+no new:  /  / 
+(0)  (undefined):  /  / 
+(1) null (null):  /  / 
+(2) true (boolean):  /  / 
+(3) false (boolean):  /  / 
+(4) 0 (number):  /  / 
+(5) 1 (number):  /  / 
+(6) 0.5 (number):  /  / 
+(7) -1 (number):  /  / 
+(8) -0.5 (number):  /  / 
+(9) Infinity (number):  /  / 
+(10) -Infinity (number):  /  / 
+(11) NaN (number):  /  / 
+(12)  (string):  /  / 
+(13) 0 (string):  /  / 
+(14) -0 (string):  /  / 
+(15) 0.0 (string):  /  / 
+(16) 1 (string):  /  / 
+(17) Hello World! (string):  /  / 
+(18) true (string):  /  / 
+(19) _level0 (string):  /  / 
+(20) äöü (string):  /  / 
+(21) _level0 (movieclip):  /  / 
+(22) [object Object] (object):  /  / 
+(23) Fri Apr 13 21:20:24 GMT+0000 1973 (object):  /  / 
+(24)  (object):  /  / 
+(25) [type Function] (function):  /  / 
+(26) [type Object] (object):  /  / 
+(27) [type Object] (object):  /  / 
+(28) [object Object] (object):  /  / 
+(29)  (object):  /  / 
+(30)  (object):  /  / 
+(31) null (object):  /  / 
+(32) true (object):  /  / 
+(33) false (object):  /  / 
+(34) 0 (object):  /  / 
+(35) 1 (object):  /  / 
+(36) 0.5 (object):  /  / 
+(37) -1 (object):  /  / 
+(38) -0.5 (object):  /  / 
+(39) Infinity (object):  /  / 
+(40) -Infinity (object):  /  / 
+(41) NaN (object):  /  / 
+(42)  (object):  /  / 
+(43) 0 (object):  /  / 
+(44) -0 (object):  /  / 
+(45) 0.0 (object):  /  / 
+(46) 1 (object):  /  / 
+(47) Hello World! (object):  /  / 
+(48) true (object):  /  / 
+(49) _level0 (object):  /  / 
+(50) äöü (object):  /  / 
+(51) _level0 (object):  /  / 
+(52) [type Object] (object):  /  / 
+(53) [type Object] (object):  /  / 
+(54) [type Object] (object):  /  / 
+(55) [type Object] (object):  /  / 
+(56) [type Object] (object):  /  / 
+(57) [type Object] (object):  /  / 
+(58) [type Object] (object):  /  / 
+(59) [type Object] (object):  /  / 
+-0.2:  /  / 
+255.125:  /  / 
+15.125:  /  / 
+undefined
+:  /  / 
+:  /  / 

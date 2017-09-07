@@ -1,0 +1,91 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+21: toString!
+22: valueOf!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+check If action
+(0)  (undefined): FALSE
+(1) null (null): FALSE
+(2) true (boolean): TRUE
+(3) false (boolean): FALSE
+(4) 0 (number): FALSE
+(5) 1 (number): TRUE
+(6) 0.5 (number): TRUE
+(7) -1 (number): TRUE
+(8) -0.5 (number): TRUE
+(9) Infinity (number): TRUE
+(10) -Infinity (number): TRUE
+(11) NaN (number): FALSE
+(12)  (string): FALSE
+(13) 0 (string): FALSE
+(14) -0 (string): FALSE
+(15) 0.0 (string): FALSE
+(16) 1 (string): TRUE
+(17) Hello World! (string): FALSE
+(18) true (string): FALSE
+(19) _level0 (string): FALSE
+(20) _level0 (movieclip): TRUE
+(21) [object Object] (object): TRUE
+(22)  (undefined): FALSE
+(23) [type Object] (object): TRUE
+(24) [type Object] (object): TRUE
+(25) [object Object] (object): TRUE
+(26)  (object): TRUE
+(27)  (object): TRUE
+(28) null (object): TRUE
+(29) true (object): TRUE
+(30) false (object): TRUE
+(31) 0 (object): TRUE
+(32) 1 (object): TRUE
+(33) 0.5 (object): TRUE
+(34) -1 (object): TRUE
+(35) -0.5 (object): TRUE
+(36) Infinity (object): TRUE
+(37) -Infinity (object): TRUE
+(38) NaN (object): TRUE
+(39)  (object): TRUE
+(40) 0 (object): TRUE
+(41) -0 (object): TRUE
+(42) 0.0 (object): TRUE
+(43) 1 (object): TRUE
+(44) Hello World! (object): TRUE
+(45) true (object): TRUE
+(46) _level0 (object): TRUE
+(47) _level0 (object): TRUE
+(48) [type Object] (object): TRUE
+(49)  (object): TRUE
+(50) [type Object] (object): TRUE
+(51) [type Object] (object): TRUE
+(52) [type Object] (object): TRUE
+(53) [type Object] (object): TRUE

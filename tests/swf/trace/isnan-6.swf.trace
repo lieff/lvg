@@ -1,0 +1,7 @@
+Check isNaN and isFinite
+Infinity: inifinite
+-Infinity: inifinite
+NaN: inifinite, NaN
+0: finite
+_level0: inifinite, NaN
+true: finite

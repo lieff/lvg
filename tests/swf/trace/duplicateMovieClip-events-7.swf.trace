@@ -1,0 +1,8 @@
+_level0.movie: init
+_level0.movie: construct
+duplicating...
+_level0.foo: construct
+...done
+_level0.foo: init
+_level0.movie: load
+_level0.foo: load

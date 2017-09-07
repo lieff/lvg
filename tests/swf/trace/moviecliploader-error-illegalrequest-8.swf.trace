@@ -1,0 +1,4 @@
+setup done
+enterFrame: old movie
+onLoadError: IllegalRequest (0)
+enterFrame: old movie

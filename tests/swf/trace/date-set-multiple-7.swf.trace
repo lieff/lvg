@@ -1,0 +1,46 @@
+Setting multiple fields with single setWhatever call
+Testing: setYear
+Sun Mar 3 14:13:12 GMT+0000 1901
+-2172131207989
+Testing: setFullYear
+Sat Mar 3 14:13:12 GMT+0000 1
+-62130275207989
+Testing: setUTCFullYear
+Sat Mar 3 14:13:12 GMT+0000 1
+-62130275207989
+Testing: setMonth
+Sun Feb 2 14:13:12 GMT+0000 2020
+1580652792011
+Testing: setUTCMonth
+Sun Feb 2 14:13:12 GMT+0000 2020
+1580652792011
+Testing: setDate
+Sun Nov 1 14:13:12 GMT+0000 2020
+1604239992011
+Testing: setUTCDate
+Sun Nov 1 14:13:12 GMT+0000 2020
+1604239992011
+Testing: setHours
+Sun Nov 15 01:02:03 GMT+0000 2020
+1605402123004
+Testing: setUTCHours
+Sun Nov 15 01:02:03 GMT+0000 2020
+1605402123004
+Testing: setMinutes
+Sun Nov 15 14:01:02 GMT+0000 2020
+1605448862003
+Testing: setUTCMinutes
+Sun Nov 15 14:01:02 GMT+0000 2020
+1605448862003
+Testing: setSeconds
+Sun Nov 15 14:13:01 GMT+0000 2020
+1605449581002
+Testing: setUTCSeconds
+Sun Nov 15 14:13:01 GMT+0000 2020
+1605449581002
+Testing: setMilliseconds
+Sun Nov 15 14:13:12 GMT+0000 2020
+1605449592001
+Testing: setUTCMilliseconds
+Sun Nov 15 14:13:12 GMT+0000 2020
+1605449592001

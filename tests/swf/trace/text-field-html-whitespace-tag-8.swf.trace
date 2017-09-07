@@ -1,0 +1,600 @@
+Testing: condenseWhite: false multiline: false html: false
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: true multiline: false html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+6: \ta\ta\ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta\ta\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+3: \t\t\t
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t\t\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+0: 
+
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+0: 
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+0: 
+
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: false multiline: true html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+9: \ta\n\ta\n\ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+6: \t\n\t\n\t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+3: \n\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+12:  \t\n \t\n \t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+15:  \ta\n \ta\n \ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+9:  \ta \ta \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta \ta \ta</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+9: a\na\na\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+9:  a  a  a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a  a  a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+6:  a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+3:    
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">   </FONT></P>
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: true multiline: true html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+9: \ta\n\ta\n\ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+6: \t\n\t\n\t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+3: \n\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+0: 
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+0: 
+
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: false multiline: false html: false
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: true multiline: false html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+6: \ta\ta\ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta\ta\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+3: \t\t\t
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t\t\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+0: 
+
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+0: 
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+0: 
+
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: false multiline: true html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+9: \ta\n\ta\n\ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+6: \t\n\t\n\t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+3: \n\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+12:  \t\n \t\n \t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+15:  \ta\n \ta\n \ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+9:  \ta \ta \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta \ta \ta</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+9: a\na\na\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+9:  a  a  a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a  a  a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+6:  a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+3:    
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">   </FONT></P>
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>
+Testing: condenseWhite: true multiline: true html: true
+<tab>a<br><span><tab>a<br></span><tab>a<br>
+9: \ta\n\ta\n\ta\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\ta</FONT></P>
+43: <tab>a<br><span><tab>a<br></span><tab>a<br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;a&lt;br&gt;&lt;span&gt;&lt;tab&gt;a&lt;br&gt;&lt;/span&gt;&lt;tab&gt;a&lt;br&gt;</FONT></P>
+<tab><br><span><tab><br></span><tab><br>
+6: \t\n\t\n\t\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">\t</FONT></P>
+40: <tab><br><span><tab><br></span><tab><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;tab&gt;&lt;br&gt;&lt;span&gt;&lt;tab&gt;&lt;br&gt;&lt;/span&gt;&lt;tab&gt;&lt;br&gt;</FONT></P>
+<br><span><br></span><br>
+3: \n\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+25: <br><span><br></span><br>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;</FONT></P>
+ \t\n
+<span> \t\n
+</span> \t\n
+
+0: 
+
+25:  \t\n\n<span> \t\n\n</span> \t\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \t</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta\n
+<span> \ta\n
+</span> \ta\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+28:  \ta\n\n<span> \ta\n\n</span> \ta\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt; \ta</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ \ta<span> \ta</span> \ta
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+22:  \ta<span> \ta</span> \ta
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> \ta&lt;span&gt; \ta&lt;/span&gt; \ta</FONT></P>
+a\n
+<span>a\n
+</span>a\n
+
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22: a\n\n<span>a\n\n</span>a\n\n
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;/span&gt;a</FONT></P><P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P>
+ a <span> a </span> a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+22:  a <span> a </span> a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a &lt;span&gt; a &lt;/span&gt; a </FONT></P>
+ a<span> a</span> a
+5: a a a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a</FONT></P>
+19:  a<span> a</span> a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> a&lt;span&gt; a&lt;/span&gt; a</FONT></P>
+a <span>a </span>a 
+6: a a a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a a a </FONT></P>
+19: a <span>a </span>a 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a &lt;span&gt;a &lt;/span&gt;a </FONT></P>
+a<span>a</span>a
+3: aaa
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">aaa</FONT></P>
+16: a<span>a</span>a
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">a&lt;span&gt;a&lt;/span&gt;a</FONT></P>
+ <span> </span> 
+0: 
+
+16:  <span> </span> 
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0"> &lt;span&gt; &lt;/span&gt; </FONT></P>
+<span></span>
+0: 
+
+13: <span></span>
+<P ALIGN="LEFT"><FONT FACE="Bitstream Vera Sans" SIZE="12" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;span&gt;&lt;/span&gt;</FONT></P>

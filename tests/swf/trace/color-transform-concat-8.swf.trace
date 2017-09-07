@@ -1,0 +1,5 @@
+(redMultiplier=0.5, greenMultiplier=1.5, blueMultiplier=2.5, alphaMultiplier=3.5, redOffset=4.5, greenOffset=5.5, blueOffset=6.5, alphaOffset=7.5)
+undefined
+(redMultiplier=0.25, greenMultiplier=2.25, blueMultiplier=6.25, alphaMultiplier=12.25, redOffset=6.75, greenOffset=13.75, blueOffset=22.75, alphaOffset=33.75)
+(redMultiplier=0.125, greenMultiplier=3.375, blueMultiplier=15.625, alphaMultiplier=42.875, redOffset=7.875, greenOffset=26.125, blueOffset=63.375, alphaOffset=125.625)
+(redMultiplier=-0.125, greenMultiplier=-6.75, blueMultiplier=-46.875, alphaMultiplier=-171.5, redOffset=7.25, greenOffset=5.875, blueOffset=-46, alphaOffset=-217.375)

@@ -1,0 +1,4 @@
+check onUnload even gets called when only defined on the prototype.
+done with 
+done with 
+done with 

@@ -1,0 +1,10 @@
+Check super when calling functions on various objects
+[object Object]
+undefined
+[object Object]
+[type Function]
+[type Function]
+[object Object]
+[type Object]
+Wohoo
+hi

@@ -1,0 +1,1 @@
+This is part of swfdec test suite.

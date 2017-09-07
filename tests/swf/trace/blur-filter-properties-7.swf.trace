@@ -1,0 +1,12 @@
+_global.flash.filters.BlurFilter = function
+  __proto__ (hp) = _global.Function.prototype
+  constructor (hp) = _global.Function
+  prototype (hp) = object
+    __constructor__ (h) = _global.flash.filters.BitmapFilter
+    __proto__ (hp) = _global.flash.filters.BitmapFilter.prototype
+    blurX (C) = undefined
+    blurY (C) = undefined
+    quality (C) = undefined
+local.a = object
+  __constructor__ = _global.flash.filters.BlurFilter
+  __proto__ (hp) = _global.flash.filters.BlurFilter.prototype

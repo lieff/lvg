@@ -1,0 +1,6 @@
+after attachMovie:
+_level0.foo
+_level0.foo.one
+undefined
+frame one:
+_level0.foo.one

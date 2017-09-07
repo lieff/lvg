@@ -1,0 +1,27 @@
+test Stage.scaleMode
+showAll
+noborder ==> noBorder
+noBorder ==> noBorder
+NOBORDER ==> noBorder
+exactfit ==> exactFit
+exactFit ==> exactFit
+EXACTFIT ==> exactFit
+showall ==> showAll
+showAll ==> showAll
+SHOWALL ==> showAll
+noscale ==> noScale
+noScale ==> noScale
+NOSCALE ==> noScale
+foo ==> showAll
+bar ==> showAll
+null ==> showAll
+undefined ==> showAll
+ ==> showAll
+0 ==> showAll
+1 ==> showAll
+2 ==> showAll
+3 ==> showAll
+4 ==> showAll
+thishasnoborder ==> showAll
+noBorder
+exactFit

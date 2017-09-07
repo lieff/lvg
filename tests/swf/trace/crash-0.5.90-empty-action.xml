@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<swf version="7" compressed="1">
+  <Header framerate="30" frames="2">
+    <size>
+      <Rectangle left="0" right="4000" top="0" bottom="3000"/>
+    </size>
+    <tags>
+      <UnknownTag id="0xC" />
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

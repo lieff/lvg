@@ -1,0 +1,182 @@
+Testing:
+(x=0, y=0)
+length: 0
+clone: (x=0, y=0)
+normalize: 
+offset: 
+distance 0: 0
+interpolate 0: (x=0, y=0)
+add 0: (x=0, y=0)
+equals 0: true
+substract 0: 
+distance 0: 2.23606797749979
+interpolate 0: (x=0.32, y=0.64)
+add 0: (x=1, y=2)
+equals 0: false
+substract 0: 
+distance 0: 9.76129376670941
+interpolate 0: (x=1.03488, y=-2.9472)
+add 0: (x=3.234, y=-9.21)
+equals 0: false
+substract 0: 
+distance 0: 1000000.0000125
+interpolate 0: (x=1.6, y=-320000)
+add 0: (x=5, y=-1000000)
+equals 0: false
+substract 0: 
+distance 0: NaN
+interpolate 0: (x=12.8, y=NaN)
+add 0: (x=40, y=NaN)
+equals 0: false
+substract 0: 
+distance 0: Infinity
+interpolate 0: (x=16, y=NaN)
+add 0: (x=50, y=-Infinity)
+equals 0: false
+substract 0: 
+distance 0: Infinity
+interpolate 0: (x=NaN, y=0)
+add 0: (x=Infinity, y=0)
+equals 0: false
+substract 0: 
+Testing:
+(x=1, y=2)
+length: 2.23606797749979
+clone: (x=1, y=2)
+normalize: 
+offset: 
+distance 1: 0
+interpolate 1: (x=1, y=2)
+add 1: (x=2, y=4)
+equals 1: true
+substract 1: 
+distance 1: 11.4304355122629
+interpolate 1: (x=1.71488, y=-1.5872)
+add 1: (x=4.234, y=-7.21)
+equals 1: false
+substract 1: 
+distance 1: 1000002.000008
+interpolate 1: (x=2.28, y=-319998.64)
+add 1: (x=6, y=-999998)
+equals 1: false
+substract 1: 
+distance 1: NaN
+interpolate 1: (x=13.48, y=NaN)
+add 1: (x=41, y=NaN)
+equals 1: false
+substract 1: 
+distance 1: Infinity
+interpolate 1: (x=16.68, y=NaN)
+add 1: (x=51, y=-Infinity)
+equals 1: false
+substract 1: 
+distance 1: Infinity
+interpolate 1: (x=NaN, y=1.36)
+add 1: (x=Infinity, y=2)
+equals 1: false
+substract 1: 
+Testing:
+(x=3.234, y=-9.21)
+length: 9.76129376670941
+clone: (x=3.234, y=-9.21)
+normalize: 
+offset: 
+distance 2: 0
+interpolate 2: (x=3.234, y=-9.21)
+add 2: (x=6.468, y=-18.42)
+equals 2: true
+substract 2: 
+distance 2: 999990.790001559
+interpolate 2: (x=3.79912, y=-320006.2628)
+add 2: (x=8.234, y=-1000009.21)
+equals 2: false
+substract 2: 
+distance 2: NaN
+interpolate 2: (x=14.99912, y=NaN)
+add 2: (x=43.234, y=NaN)
+equals 2: false
+substract 2: 
+distance 2: Infinity
+interpolate 2: (x=18.19912, y=NaN)
+add 2: (x=53.234, y=-Infinity)
+equals 2: false
+substract 2: 
+distance 2: Infinity
+interpolate 2: (x=NaN, y=-6.2628)
+add 2: (x=Infinity, y=-9.21)
+equals 2: false
+substract 2: 
+Testing:
+(x=5, y=-1000000)
+length: 1000000.0000125
+clone: (x=5, y=-1000000)
+normalize: 
+offset: 
+distance 3: 0
+interpolate 3: (x=5, y=-1000000)
+add 3: (x=10, y=-2000000)
+equals 3: true
+substract 3: 
+distance 3: NaN
+interpolate 3: (x=16.2, y=NaN)
+add 3: (x=45, y=NaN)
+equals 3: false
+substract 3: 
+distance 3: Infinity
+interpolate 3: (x=19.4, y=NaN)
+add 3: (x=55, y=-Infinity)
+equals 3: false
+substract 3: 
+distance 3: Infinity
+interpolate 3: (x=NaN, y=-680000)
+add 3: (x=Infinity, y=-1000000)
+equals 3: false
+substract 3: 
+Testing:
+(x=40, y=NaN)
+length: NaN
+clone: (x=40, y=NaN)
+normalize: 
+offset: 
+distance 4: NaN
+interpolate 4: (x=40, y=NaN)
+add 4: (x=80, y=NaN)
+equals 4: true
+substract 4: 
+distance 4: NaN
+interpolate 4: (x=43.2, y=NaN)
+add 4: (x=90, y=NaN)
+equals 4: false
+substract 4: 
+distance 4: NaN
+interpolate 4: (x=NaN, y=NaN)
+add 4: (x=Infinity, y=NaN)
+equals 4: false
+substract 4: 
+Testing:
+(x=50, y=-Infinity)
+length: Infinity
+clone: (x=50, y=-Infinity)
+normalize: 
+offset: 
+distance 5: NaN
+interpolate 5: (x=50, y=NaN)
+add 5: (x=100, y=-Infinity)
+equals 5: true
+substract 5: 
+distance 5: Infinity
+interpolate 5: (x=NaN, y=-Infinity)
+add 5: (x=Infinity, y=-Infinity)
+equals 5: false
+substract 5: 
+Testing:
+(x=Infinity, y=0)
+length: Infinity
+clone: (x=Infinity, y=0)
+normalize: 
+offset: 
+distance 6: NaN
+interpolate 6: (x=NaN, y=0)
+add 6: (x=Infinity, y=0)
+equals 6: true
+substract 6: 

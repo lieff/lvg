@@ -1,0 +1,85 @@
+>>> before setting fullscreen
+normal
+showAll
+200
+150
+>>> fullscreen: true
+fullScreen
+showAll
+200
+150
+>>> after setting fullscreen
+fullScreen
+showAll
+200
+150
+>>> before Stage.displayState = "normal"
+fullScreen
+showAll
+200
+150
+>>> fullscreen: false
+normal
+showAll
+200
+150
+>>> after Stage.displayState = "normal"
+normal
+showAll
+200
+150
+>>> before Stage.scaleMode = "noScale"
+normal
+showAll
+200
+150
+>>> before Stage.displayState = "fullScreen"
+normal
+noScale
+200
+150
+>>> onResize
+fullScreen
+noScale
+1024
+768
+>>> fullscreen: true
+fullScreen
+noScale
+1024
+768
+>>> after Stage.displayState = "fullScreen"
+fullScreen
+noScale
+1024
+768
+>>> before Stage.displayState = "normal"
+fullScreen
+noScale
+1024
+768
+>>> onResize
+normal
+noScale
+200
+150
+>>> fullscreen: false
+normal
+noScale
+200
+150
+>>> after Stage.displayState = "normal"
+normal
+noScale
+200
+150
+>>> before Stage.scaleMode = "showAll"
+normal
+noScale
+200
+150
+>>> when quitting
+normal
+showAll
+200
+150

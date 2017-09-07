@@ -1,0 +1,5 @@
+true
+Got: string 'test=2&hi=hello&empty_value&=empty_name&spa%20ce=spa%20ce&sp ace&spa ce=sp ace&many=equal=signs=in=row&eof=
+was there&eof
+=was there&
+'

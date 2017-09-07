@@ -1,0 +1,12 @@
+Foo
+hi
+/:Foo
+hi
+/:::Foo
+undefined
+a.Bar
+undefined
+a/Bar
+undefined
+/a/..:a.Bar
+undefined

@@ -1,0 +1,4 @@
+Check calls to differently named functions on super
+4
+foo: x
+bla: x

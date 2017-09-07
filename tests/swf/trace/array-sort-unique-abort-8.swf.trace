@@ -1,0 +1,7 @@
+Test whether the sorting is aborted with UNIQUESORT, when the first equal element is found
+Custom function: 
+0
+false
+Builtin function: 
+0
+false

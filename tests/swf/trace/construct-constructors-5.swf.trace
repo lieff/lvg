@@ -1,0 +1,5 @@
+Check that [] and {} don't call their constructors
+new Array ()
+[]
+new Object ()
+{}

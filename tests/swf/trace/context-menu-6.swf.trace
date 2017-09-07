@@ -1,0 +1,43 @@
+Normal
+onSelect: [type Function]
+customItems: 
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+No parameters
+onSelect: 
+customItems: 
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+Weird parameter
+onSelect: 123
+customItems: 
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+Hide built in items
+onSelect: [type Function]
+customItems: 
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+Copy
+Original:
+onSelect: [type Function]
+customItems: 
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+Copy:
+onSelect: 
+customItems: 
+builtInItems:
+Add custom to original
+Original:
+onSelect: [type Function]
+customItems: test
+builtInItems: forward_back: true loop: true play: true print: true quality: true rewind: true save: true zoom: true
+Copy:
+onSelect: 
+customItems: 
+builtInItems:
+Change builtIn in original
+Original:
+onSelect: [type Function]
+customItems: test
+builtInItems: forward_back: true loop: false play: true print: true quality: true rewind: true save: true zoom: true
+Copy:
+onSelect: 
+customItems: 
+builtInItems:

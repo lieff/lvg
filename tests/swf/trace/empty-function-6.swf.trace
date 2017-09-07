@@ -1,0 +1,1 @@
+Just define an empty function and call it. Swfdec likes to crash on that one.

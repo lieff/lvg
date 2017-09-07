@@ -1,0 +1,209 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+23: toString!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+28: valueOf!
+28: toString!
+29: valueOf!
+29: toString!
+0 args: 4 / 4 / 1
+1 arg: 1 / 4 / 1
+2 args: 1 / 2 / 1
+3 args: 1 / 2 / 3
+no new: undefined / undefined / undefined
+(0) undefined (undefined): NaN / NaN / 0
+(1) null (null): NaN / NaN / 0
+(2) true (boolean): 1 / 1 / 1
+(3) false (boolean): 0 / 0 / 0
+(4) 0 (number): 0 / 0 / 0
+(5) 1 (number): 1 / 1 / 1
+(6) 0.5 (number): 0.5 / 0.5 / 0
+(7) -1 (number): 0 / 0 / 0
+(8) -0.5 (number): 0 / 0 / 0
+(9) Infinity (number): 255 / 255 / 0
+(10) -Infinity (number): 0 / 0 / 0
+(11) NaN (number): NaN / NaN / 0
+(12)  (string): NaN / NaN / 0
+(13) 0 (string): 0 / 0 / 0
+(14) -0 (string): 0 / 0 / 0
+(15) 0.0 (string): 0 / 0 / 0
+(16) 1 (string): 1 / 1 / 1
+(17) Hello World! (string): NaN / NaN / 0
+(18) true (string): NaN / NaN / 0
+(19) _level0 (string): NaN / NaN / 0
+(20) äöü (string): NaN / NaN / 0
+(21) _level0 (movieclip): NaN / NaN / 0
+(22) [object Object] (object): NaN / NaN / 0
+(23) Fri Apr 13 21:20:24 GMT+0000 1973 (object): 255 / 255 / 15
+(24)  (object): NaN / NaN / 0
+(25) [type Function] (function): NaN / NaN / 0
+valueOf called
+valueOf called
+valueOf called
+(26) [type Object] (object): NaN / NaN / 0
+(27) [type Object] (object): NaN / NaN / 0
+valueOf called with 
+valueOf called with 
+valueOf called with 
+(28) [object Object] (object): NaN / NaN / 0
+(29) undefined (object): NaN / NaN / 0
+0: valueOf!
+0: valueOf!
+0: valueOf!
+(30) undefined (object): NaN / NaN / 0
+1: valueOf!
+1: valueOf!
+1: valueOf!
+(31) null (object): NaN / NaN / 0
+2: valueOf!
+2: valueOf!
+2: valueOf!
+(32) true (object): 1 / 1 / 1
+3: valueOf!
+3: valueOf!
+3: valueOf!
+(33) false (object): 0 / 0 / 0
+4: valueOf!
+4: valueOf!
+4: valueOf!
+(34) 0 (object): 0 / 0 / 0
+5: valueOf!
+5: valueOf!
+5: valueOf!
+(35) 1 (object): 1 / 1 / 1
+6: valueOf!
+6: valueOf!
+6: valueOf!
+(36) 0.5 (object): 0.5 / 0.5 / 0
+7: valueOf!
+7: valueOf!
+7: valueOf!
+(37) -1 (object): 0 / 0 / 0
+8: valueOf!
+8: valueOf!
+8: valueOf!
+(38) -0.5 (object): 0 / 0 / 0
+9: valueOf!
+9: valueOf!
+9: valueOf!
+(39) Infinity (object): 255 / 255 / 0
+10: valueOf!
+10: valueOf!
+10: valueOf!
+(40) -Infinity (object): 0 / 0 / 0
+11: valueOf!
+11: valueOf!
+11: valueOf!
+(41) NaN (object): NaN / NaN / 0
+12: valueOf!
+12: valueOf!
+12: valueOf!
+(42)  (object): NaN / NaN / 0
+13: valueOf!
+13: valueOf!
+13: valueOf!
+(43) 0 (object): 0 / 0 / 0
+14: valueOf!
+14: valueOf!
+14: valueOf!
+(44) -0 (object): 0 / 0 / 0
+15: valueOf!
+15: valueOf!
+15: valueOf!
+(45) 0.0 (object): 0 / 0 / 0
+16: valueOf!
+16: valueOf!
+16: valueOf!
+(46) 1 (object): 1 / 1 / 1
+17: valueOf!
+17: valueOf!
+17: valueOf!
+(47) Hello World! (object): NaN / NaN / 0
+18: valueOf!
+18: valueOf!
+18: valueOf!
+(48) true (object): NaN / NaN / 0
+19: valueOf!
+19: valueOf!
+19: valueOf!
+(49) _level0 (object): NaN / NaN / 0
+20: valueOf!
+20: valueOf!
+20: valueOf!
+(50) äöü (object): NaN / NaN / 0
+21: valueOf!
+21: valueOf!
+21: valueOf!
+(51) _level0 (object): NaN / NaN / 0
+22: valueOf!
+22: valueOf!
+22: valueOf!
+(52) [type Object] (object): NaN / NaN / 0
+23: valueOf!
+23: valueOf!
+23: valueOf!
+(53) [type Object] (object): NaN / NaN / 0
+24: valueOf!
+24: valueOf!
+24: valueOf!
+(54) [type Object] (object): NaN / NaN / 0
+25: valueOf!
+25: valueOf!
+25: valueOf!
+(55) [type Object] (object): NaN / NaN / 0
+26: valueOf!
+26: valueOf!
+26: valueOf!
+(56) [type Object] (object): NaN / NaN / 0
+27: valueOf!
+27: valueOf!
+27: valueOf!
+(57) [type Object] (object): NaN / NaN / 0
+28: valueOf!
+28: valueOf!
+28: valueOf!
+(58) [type Object] (object): NaN / NaN / 0
+29: valueOf!
+29: valueOf!
+29: valueOf!
+(59) [type Object] (object): NaN / NaN / 0
+-0.2: 0 / 0 / 0
+255.125: 255 / 255 / 15
+15.125: 15.125 / 15.125 / 15
+undefined
+undefined: 1 / 2 / 3
+undefined: 1 / 2 / 3

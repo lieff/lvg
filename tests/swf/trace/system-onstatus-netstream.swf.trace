@@ -1,0 +1,9 @@
+Test System.onStatus
+Calling play
+get
+System.onStatus NetStream.Play.StreamNotFound
+[object Object]
+null
+[type Function]
+Calling play
+ns.onStatus NetStream.Play.StreamNotFound

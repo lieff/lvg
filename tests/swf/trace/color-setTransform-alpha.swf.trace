@@ -1,0 +1,11 @@
+Test the that setTransform({ra:1,ga:-10,ba:1000,aa:-10000}) does the correct thing
+rgb: 0
+ra: 0.78125
+rb: 0
+ga: -9.765625
+gb: 0
+ba: 1000
+bb: 0
+aa: -10000
+ab: 0
+_alpha: -10000

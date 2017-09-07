@@ -1,0 +1,31 @@
+Normal
+caption: test
+onSelect: 
+separatorBefore: true
+enabled: false
+visible: false
+No parameters
+caption: 
+onSelect: 
+separatorBefore: false
+enabled: true
+visible: true
+Weird parameter
+caption: 123
+onSelect: 123
+separatorBefore: 123
+enabled: 123
+visible: 123
+Copying
+Original:
+caption: 123
+onSelect: 123
+separatorBefore: 123
+enabled: 123
+visible: 123
+Copy:
+caption: 
+onSelect: 
+separatorBefore: 
+enabled: 
+visible: 

@@ -1,0 +1,3 @@
+Check that variables in registers don't get assigned to their value
+undefined
+42

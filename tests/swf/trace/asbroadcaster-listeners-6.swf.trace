@@ -1,0 +1,3 @@
+Check what happens if _listeners is not an array
+[object Object]
+undefined

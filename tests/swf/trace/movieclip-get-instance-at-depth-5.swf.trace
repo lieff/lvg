@@ -1,0 +1,118 @@
+valueOf called
+toString called
+toString called with 
+valueOf called with 
+0: valueOf!
+1: valueOf!
+2: valueOf!
+3: valueOf!
+4: valueOf!
+5: valueOf!
+6: valueOf!
+7: valueOf!
+8: valueOf!
+9: valueOf!
+10: valueOf!
+11: valueOf!
+12: valueOf!
+13: valueOf!
+14: valueOf!
+15: valueOf!
+16: valueOf!
+17: valueOf!
+18: valueOf!
+19: valueOf!
+20: valueOf!
+21: valueOf!
+22: valueOf!
+22: toString!
+23: valueOf!
+24: valueOf!
+24: toString!
+25: valueOf!
+25: toString!
+26: valueOf!
+26: toString!
+27: valueOf!
+27: toString!
+undefined
+this -5: 
+a -5: 
+this -4: 
+a -4: 
+this -3: 
+a -3: 
+this -2: 
+a -2: 
+this -1: 
+a -1: 
+this 0: 
+a 0: 
+this 1: 
+a 1: 
+this 2: 
+a 2: 
+this 3: 
+a 3: 
+this 4: 
+a 4: 
+this 5: 
+a 5: 
+this (0)  (undefined): 
+this (1) null (null): 
+this (2) true (boolean): 
+this (3) false (boolean): 
+this (4) 0 (number): 
+this (5) 1 (number): 
+this (6) 0.5 (number): 
+this (7) -1 (number): 
+this (8) -0.5 (number): 
+this (9) Infinity (number): 
+this (10) -Infinity (number): 
+this (11) NaN (number): 
+this (12)  (string): 
+this (13) 0 (string): 
+this (14) -0 (string): 
+this (15) 0.0 (string): 
+this (16) 1 (string): 
+this (17) Hello World! (string): 
+this (18) true (string): 
+this (19) _level0 (string): 
+this (20) Ã¤Ã¶Ã¼ (string): 
+this (21) _level0 (movieclip): 
+this (22) [object Object] (object): 
+this (23)  (undefined): 
+this (24) [type Object] (object): 
+this (25) [type Object] (object): 
+this (26) [object Object] (object): 
+this (27)  (object): 
+this (28)  (object): 
+this (29) null (object): 
+this (30) true (object): 
+this (31) false (object): 
+this (32) 0 (object): 
+this (33) 1 (object): 
+this (34) 0.5 (object): 
+this (35) -1 (object): 
+this (36) -0.5 (object): 
+this (37) Infinity (object): 
+this (38) -Infinity (object): 
+this (39) NaN (object): 
+this (40)  (object): 
+this (41) 0 (object): 
+this (42) -0 (object): 
+this (43) 0.0 (object): 
+this (44) 1 (object): 
+this (45) Hello World! (object): 
+this (46) true (object): 
+this (47) _level0 (object): 
+this (48) Ã¤Ã¶Ã¼ (object): 
+this (49) _level0 (object): 
+this (50) [type Object] (object): 
+this (51)  (object): 
+this (52) [type Object] (object): 
+this (53) [type Object] (object): 
+this (54) [type Object] (object): 
+this (55) [type Object] (object): 
+t 0: 
+t 1: 

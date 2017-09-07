@@ -1,0 +1,276 @@
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (c, b)
+1
+custom (c, d)
+-1
+custom (c, b)
+1
+a,b,c,d
+custom (a, c)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (c, b)
+1
+custom (c, d)
+-1
+custom (c, c)
+0
+custom (c, d)
+-1
+custom (c, b)
+1
+custom (d, c)
+1
+0
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (c, b)
+1
+custom (c, d)
+-1
+custom (c, b)
+1
+a,b,c,d
+custom (a, c)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (c, b)
+1
+custom (c, d)
+-1
+custom (c, c)
+1 instead of 0
+custom (c, c)
+1 instead of 0
+custom (c, d)
+-1
+custom (c, c)
+1 instead of 0
+custom (c, b)
+1
+0
+custom (a, c)
+-1
+custom (a, C)
+1
+custom (a, C)
+1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, C)
+1
+custom (b, d)
+-1
+custom (b, c)
+-1
+custom (b, d)
+-1
+custom (d, c)
+1
+C,a,b,c,d
+custom (a, c)
+-1
+custom (a, C)
+1
+custom (a, C)
+1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, C)
+1
+custom (b, d)
+-1
+custom (b, c)
+-1
+custom (b, d)
+-1
+custom (d, c)
+1
+C,a,b,c,d
+custom (a, c)
+-1
+custom (a, C)
+1
+custom (a, C)
+1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, C)
+1
+custom (b, d)
+-1
+custom (b, c)
+-1
+custom (b, d)
+-1
+custom (d, c)
+1
+C,a,b,c,d
+custom (a, c)
+-1
+custom (a, C)
+1
+custom (a, C)
+1
+custom (a, b)
+-1
+custom (a, c)
+-1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, C)
+1
+custom (b, d)
+-1
+custom (b, c)
+-1
+custom (b, d)
+-1
+custom (d, c)
+1
+C,a,b,c,d
+custom (a, 01)
+1
+custom (a, b)
+-1
+custom (a, 1)
+1
+custom (a, 1)
+1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, d)
+-1
+custom (a, 1)
+1
+custom (1, 01)
+1
+custom (d, b)
+1
+01,1,a,b,d
+custom (a, 01)
+1
+custom (a, b)
+-1
+custom (a, 1)
+1
+custom (a, 1)
+1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, d)
+-1
+custom (a, 1)
+1
+custom (1, 01)
+1
+custom (d, b)
+1
+01,1,a,b,d
+custom (a, 01)
+1
+custom (a, b)
+-1
+custom (a, 1)
+1
+custom (a, 1)
+1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, d)
+-1
+custom (a, 1)
+1
+custom (1, 01)
+1
+custom (d, b)
+1
+01,1,a,b,d
+custom (a, 01)
+1
+custom (a, b)
+-1
+custom (a, 1)
+1
+custom (a, 1)
+1
+custom (a, d)
+-1
+custom (a, b)
+-1
+custom (a, d)
+-1
+custom (a, 1)
+1
+custom (1, 01)
+1
+custom (d, b)
+1
+01,1,a,b,d
+custom (a, b)
+-1
+custom (a, a)
+0
+custom (a, b)
+-1
+custom (b, a)
+1
+0
+custom (a, b)
+custom (a, a)
+custom (a, b)
+custom (b, a)
+a,b,a

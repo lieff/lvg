@@ -1,0 +1,15 @@
+_global.flash.geom.Transform = function
+  __proto__ (hp) = _global.Function.prototype
+  constructor (hp) = _global.Function
+  prototype (hp) = object
+    __proto__ (hp) = _global.Object.prototype
+    colorTransform (C) = undefined
+    concatenatedColorTransform (C) = undefined
+    concatenatedMatrix (C) = undefined
+    constructor (hp) = _global.flash.geom.Transform
+    matrix (C) = undefined
+    pixelBounds (C) = undefined
+local.a = object
+  __constructor__ (h) = _global.flash.geom.Transform
+  __proto__ (hp) = _global.flash.geom.Transform.prototype
+  constructor (h) = _global.flash.geom.Transform

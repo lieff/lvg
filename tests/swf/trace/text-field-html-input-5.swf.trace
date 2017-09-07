@@ -1,0 +1,360 @@
+0: a: multiline: 0 condenseWhite: 0
+undefined
+a
+0: a: multiline: 1 condenseWhite: 0
+undefined
+a
+0: a: multiline: 0 condenseWhite: 2
+undefined
+a
+0: a: multiline: 1 condenseWhite: 2
+undefined
+a
+1: ab: multiline: 0 condenseWhite: 0
+undefined
+ab
+1: ab: multiline: 1 condenseWhite: 0
+undefined
+ab
+1: ab: multiline: 0 condenseWhite: 2
+undefined
+ab
+1: ab: multiline: 1 condenseWhite: 2
+undefined
+ab
+2: a
+b: multiline: 0 condenseWhite: 0
+undefined
+a
+b
+2: a
+b: multiline: 1 condenseWhite: 0
+undefined
+a
+b
+2: a
+b: multiline: 0 condenseWhite: 2
+undefined
+a
+b
+2: a
+b: multiline: 1 condenseWhite: 2
+undefined
+a
+b
+3: ab: multiline: 0 condenseWhite: 0
+undefined
+ab
+3: ab: multiline: 1 condenseWhite: 0
+undefined
+ab
+3: ab: multiline: 0 condenseWhite: 2
+undefined
+ab
+3: ab: multiline: 1 condenseWhite: 2
+undefined
+ab
+4: a
+
+b: multiline: 0 condenseWhite: 0
+undefined
+a
+
+b
+4: a
+
+b: multiline: 1 condenseWhite: 0
+undefined
+a
+
+b
+4: a
+
+b: multiline: 0 condenseWhite: 2
+undefined
+a
+
+b
+4: a
+
+b: multiline: 1 condenseWhite: 2
+undefined
+a
+
+b
+5: a<p align='right'>b</p>c: multiline: 0 condenseWhite: 0
+undefined
+a<p align='right'>b</p>c
+5: a<p align='right'>b</p>c: multiline: 1 condenseWhite: 0
+undefined
+a<p align='right'>b</p>c
+5: a<p align='right'>b</p>c: multiline: 0 condenseWhite: 2
+undefined
+a<p align='right'>b</p>c
+5: a<p align='right'>b</p>c: multiline: 1 condenseWhite: 2
+undefined
+a<p align='right'>b</p>c
+6: a<p align='right'>Ã¤</p>c: multiline: 0 condenseWhite: 0
+undefined
+a<p align='right'>Ã¤</p>c
+6: a<p align='right'>Ã¤</p>c: multiline: 1 condenseWhite: 0
+undefined
+a<p align='right'>Ã¤</p>c
+6: a<p align='right'>Ã¤</p>c: multiline: 0 condenseWhite: 2
+undefined
+a<p align='right'>Ã¤</p>c
+6: a<p align='right'>Ã¤</p>c: multiline: 1 condenseWhite: 2
+undefined
+a<p align='right'>Ã¤</p>c
+7: a<!-- b -->c: multiline: 0 condenseWhite: 0
+undefined
+a<!-- b -->c
+7: a<!-- b -->c: multiline: 1 condenseWhite: 0
+undefined
+a<!-- b -->c
+7: a<!-- b -->c: multiline: 0 condenseWhite: 2
+undefined
+a<!-- b -->c
+7: a<!-- b -->c: multiline: 1 condenseWhite: 2
+undefined
+a<!-- b -->c
+8: a<!--->b: multiline: 0 condenseWhite: 0
+undefined
+a<!--->b
+8: a<!--->b: multiline: 1 condenseWhite: 0
+undefined
+a<!--->b
+8: a<!--->b: multiline: 0 condenseWhite: 2
+undefined
+a<!--->b
+8: a<!--->b: multiline: 1 condenseWhite: 2
+undefined
+a<!--->b
+9: a<br><li>b</li>c<p>d</p>e<br>: multiline: 0 condenseWhite: 0
+undefined
+a<br><li>b</li>c<p>d</p>e<br>
+9: a<br><li>b</li>c<p>d</p>e<br>: multiline: 1 condenseWhite: 0
+undefined
+a<br><li>b</li>c<p>d</p>e<br>
+9: a<br><li>b</li>c<p>d</p>e<br>: multiline: 0 condenseWhite: 2
+undefined
+a<br><li>b</li>c<p>d</p>e<br>
+9: a<br><li>b</li>c<p>d</p>e<br>: multiline: 1 condenseWhite: 2
+undefined
+a<br><li>b</li>c<p>d</p>e<br>
+10: a<br>
+b: multiline: 0 condenseWhite: 0
+undefined
+a<br>
+b
+10: a<br>
+b: multiline: 1 condenseWhite: 0
+undefined
+a<br>
+b
+10: a<br>
+b: multiline: 0 condenseWhite: 2
+undefined
+a<br>
+b
+10: a<br>
+b: multiline: 1 condenseWhite: 2
+undefined
+a<br>
+b
+11: a<u>b<b>c</b>d</u>e: multiline: 0 condenseWhite: 0
+undefined
+a<u>b<b>c</b>d</u>e
+11: a<u>b<b>c</b>d</u>e: multiline: 1 condenseWhite: 0
+undefined
+a<u>b<b>c</b>d</u>e
+11: a<u>b<b>c</b>d</u>e: multiline: 0 condenseWhite: 2
+undefined
+a<u>b<b>c</b>d</u>e
+11: a<u>b<b>c</b>d</u>e: multiline: 1 condenseWhite: 2
+undefined
+a<u>b<b>c</b>d</u>e
+12: a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e: multiline: 0 condenseWhite: 0
+undefined
+a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e
+12: a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e: multiline: 1 condenseWhite: 0
+undefined
+a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e
+12: a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e: multiline: 0 condenseWhite: 2
+undefined
+a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e
+12: a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e: multiline: 1 condenseWhite: 2
+undefined
+a<font size='1' color='#ff0000'>b<font size='2' color='#00ff00'>c<font color='#0000ff'>d<u>e
+13: a<p>b: multiline: 0 condenseWhite: 0
+undefined
+a<p>b
+13: a<p>b: multiline: 1 condenseWhite: 0
+undefined
+a<p>b
+13: a<p>b: multiline: 0 condenseWhite: 2
+undefined
+a<p>b
+13: a<p>b: multiline: 1 condenseWhite: 2
+undefined
+a<p>b
+14: a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i: multiline: 0 condenseWhite: 0
+undefined
+a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i
+14: a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i: multiline: 1 condenseWhite: 0
+undefined
+a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i
+14: a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i: multiline: 0 condenseWhite: 2
+undefined
+a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i
+14: a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i: multiline: 1 condenseWhite: 2
+undefined
+a<li>b</li>c<li>d</li>e
+<li>f</li>g<br><li>h</li>i
+15: a<li>b<li>c</li>d</li>e: multiline: 0 condenseWhite: 0
+undefined
+a<li>b<li>c</li>d</li>e
+15: a<li>b<li>c</li>d</li>e: multiline: 1 condenseWhite: 0
+undefined
+a<li>b<li>c</li>d</li>e
+15: a<li>b<li>c</li>d</li>e: multiline: 0 condenseWhite: 2
+undefined
+a<li>b<li>c</li>d</li>e
+15: a<li>b<li>c</li>d</li>e: multiline: 1 condenseWhite: 2
+undefined
+a<li>b<li>c</li>d</li>e
+16: a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i: multiline: 0 condenseWhite: 0
+undefined
+a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i
+16: a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i: multiline: 1 condenseWhite: 0
+undefined
+a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i
+16: a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i: multiline: 0 condenseWhite: 2
+undefined
+a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i
+16: a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i: multiline: 1 condenseWhite: 2
+undefined
+a<p>b</p>c<p>d</p>e
+<p>f</p>g<br><p>h</p>i
+17: a<p>b<p>c</p>d</p>e: multiline: 0 condenseWhite: 0
+undefined
+a<p>b<p>c</p>d</p>e
+17: a<p>b<p>c</p>d</p>e: multiline: 1 condenseWhite: 0
+undefined
+a<p>b<p>c</p>d</p>e
+17: a<p>b<p>c</p>d</p>e: multiline: 0 condenseWhite: 2
+undefined
+a<p>b<p>c</p>d</p>e
+17: a<p>b<p>c</p>d</p>e: multiline: 1 condenseWhite: 2
+undefined
+a<p>b<p>c</p>d</p>e
+18: a<li>b<p>c</p>d</li>e: multiline: 0 condenseWhite: 0
+undefined
+a<li>b<p>c</p>d</li>e
+18: a<li>b<p>c</p>d</li>e: multiline: 1 condenseWhite: 0
+undefined
+a<li>b<p>c</p>d</li>e
+18: a<li>b<p>c</p>d</li>e: multiline: 0 condenseWhite: 2
+undefined
+a<li>b<p>c</p>d</li>e
+18: a<li>b<p>c</p>d</li>e: multiline: 1 condenseWhite: 2
+undefined
+a<li>b<p>c</p>d</li>e
+19: a<p align='right'>b<p align='center'>c: multiline: 0 condenseWhite: 0
+undefined
+a<p align='right'>b<p align='center'>c
+19: a<p align='right'>b<p align='center'>c: multiline: 1 condenseWhite: 0
+undefined
+a<p align='right'>b<p align='center'>c
+19: a<p align='right'>b<p align='center'>c: multiline: 0 condenseWhite: 2
+undefined
+a<p align='right'>b<p align='center'>c
+19: a<p align='right'>b<p align='center'>c: multiline: 1 condenseWhite: 2
+undefined
+a<p align='right'>b<p align='center'>c
+20: a<p>b<u>c</p>d: multiline: 0 condenseWhite: 0
+undefined
+a<p>b<u>c</p>d
+20: a<p>b<u>c</p>d: multiline: 1 condenseWhite: 0
+undefined
+a<p>b<u>c</p>d
+20: a<p>b<u>c</p>d: multiline: 0 condenseWhite: 2
+undefined
+a<p>b<u>c</p>d
+20: a<p>b<u>c</p>d: multiline: 1 condenseWhite: 2
+undefined
+a<p>b<u>c</p>d
+21: a<u>b</p>c: multiline: 0 condenseWhite: 0
+undefined
+a<u>b</p>c
+21: a<u>b</p>c: multiline: 1 condenseWhite: 0
+undefined
+a<u>b</p>c
+21: a<u>b</p>c: multiline: 0 condenseWhite: 2
+undefined
+a<u>b</p>c
+21: a<u>b</p>c: multiline: 1 condenseWhite: 2
+undefined
+a<u>b</p>c
+22: a<p>b<li>c</p>d: multiline: 0 condenseWhite: 0
+undefined
+a<p>b<li>c</p>d
+22: a<p>b<li>c</p>d: multiline: 1 condenseWhite: 0
+undefined
+a<p>b<li>c</p>d
+22: a<p>b<li>c</p>d: multiline: 0 condenseWhite: 2
+undefined
+a<p>b<li>c</p>d
+22: a<p>b<li>c</p>d: multiline: 1 condenseWhite: 2
+undefined
+a<p>b<li>c</p>d
+23: a<p>b<textformat indent='10'>c</p>d: multiline: 0 condenseWhite: 0
+undefined
+a<p>b<textformat indent='10'>c</p>d
+23: a<p>b<textformat indent='10'>c</p>d: multiline: 1 condenseWhite: 0
+undefined
+a<p>b<textformat indent='10'>c</p>d
+23: a<p>b<textformat indent='10'>c</p>d: multiline: 0 condenseWhite: 2
+undefined
+a<p>b<textformat indent='10'>c</p>d
+23: a<p>b<textformat indent='10'>c</p>d: multiline: 1 condenseWhite: 2
+undefined
+a<p>b<textformat indent='10'>c</p>d
+24: a<p>b<font size='10'>c</p>d: multiline: 0 condenseWhite: 0
+undefined
+a<p>b<font size='10'>c</p>d
+24: a<p>b<font size='10'>c</p>d: multiline: 1 condenseWhite: 0
+undefined
+a<p>b<font size='10'>c</p>d
+24: a<p>b<font size='10'>c</p>d: multiline: 0 condenseWhite: 2
+undefined
+a<p>b<font size='10'>c</p>d
+24: a<p>b<font size='10'>c</p>d: multiline: 1 condenseWhite: 2
+undefined
+a<p>b<font size='10'>c</p>d
+25: a<tab>b	<tab> c: multiline: 0 condenseWhite: 0
+undefined
+a<tab>b	<tab> c
+25: a<tab>b	<tab> c: multiline: 1 condenseWhite: 0
+undefined
+a<tab>b	<tab> c
+25: a<tab>b	<tab> c: multiline: 0 condenseWhite: 2
+undefined
+a<tab>b	<tab> c
+25: a<tab>b	<tab> c: multiline: 1 condenseWhite: 2
+undefined
+a<tab>b	<tab> c

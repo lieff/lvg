@@ -1,0 +1,59 @@
+o.__proto__: 0
+true
+native_get
+true
+o.__proto__: 1
+true
+native_get
+true
+o.__proto__: 2
+true
+native_get
+true
+o.__proto__: 4
+true
+native_get
+true
+o.__proto__: 8
+true
+native_get
+true
+o.__proto__: 16
+true
+native_get
+true
+o.__proto__: 32
+true
+native_get
+true
+o.__proto__: 64
+true
+native_get
+true
+o.__proto__: 128
+true
+native_get
+true
+o.__proto__: 256
+true
+native_get
+true
+o.__proto__: 512
+true
+native_get
+true
+o.__proto__: 1024
+undefined
+undefined
+o.__proto__: 2048
+true
+native_get
+true
+o.__proto__: 4096
+true
+native_get
+true
+o.__proto__: 8192
+true
+native_get
+true

@@ -1,0 +1,316 @@
+normal
+true
+o.test: 0 -> 1 (user data) : 4
+true
+true
+o.test: 0 -> 1 (undefined) : 4
+true
+deleting the variable
+true
+o.test: 0 -> 1 (undefined) : 4
+false
+o.test: undefined -> 2 (undefined) : 4
+false
+true
+missing params
+false
+false
+false
+false
+extra params
+true
+o.test: 0 -> 1 (user data) : 4
+true
+deleting the object
+true
+o.test: 0 -> 1 (undefined) : 4
+false
+loop
+true
+0 -> 1
+0 -> 2
+0 -> 3
+0 -> 4
+0 -> 5
+0 -> 6
+0 -> 7
+0 -> 8
+0 -> 9
+0 -> 10
+0 -> 11
+0 -> 12
+0 -> 13
+0 -> 14
+0 -> 15
+0 -> 16
+0 -> 17
+0 -> 18
+0 -> 19
+0 -> 20
+0 -> 21
+0 -> 22
+0 -> 23
+0 -> 24
+0 -> 25
+0 -> 26
+0 -> 27
+0 -> 28
+0 -> 29
+0 -> 30
+0 -> 31
+0 -> 32
+0 -> 33
+0 -> 34
+0 -> 35
+0 -> 36
+0 -> 37
+0 -> 38
+0 -> 39
+0 -> 40
+0 -> 41
+0 -> 42
+0 -> 43
+0 -> 44
+0 -> 45
+0 -> 46
+0 -> 47
+0 -> 48
+0 -> 49
+0 -> 50
+0 -> 51
+0 -> 52
+0 -> 53
+0 -> 54
+0 -> 55
+0 -> 56
+0 -> 57
+0 -> 58
+0 -> 59
+0 -> 60
+0 -> 61
+0 -> 62
+0 -> 63
+0 -> 64
+0 -> 65
+true
+true
+true
+true
+1: 0 -> 1
+2: undefined -> 2
+3: undefined -> 3
+1: 0 -> 4
+2: undefined -> 5
+3: undefined -> 6
+1: 0 -> 7
+2: undefined -> 8
+3: undefined -> 9
+1: 0 -> 10
+2: undefined -> 11
+3: undefined -> 12
+1: 0 -> 13
+2: undefined -> 14
+3: undefined -> 15
+1: 0 -> 16
+2: undefined -> 17
+3: undefined -> 18
+1: 0 -> 19
+2: undefined -> 20
+3: undefined -> 21
+1: 0 -> 22
+2: undefined -> 23
+3: undefined -> 24
+1: 0 -> 25
+2: undefined -> 26
+3: undefined -> 27
+1: 0 -> 28
+2: undefined -> 29
+3: undefined -> 30
+1: 0 -> 31
+2: undefined -> 32
+3: undefined -> 33
+1: 0 -> 34
+2: undefined -> 35
+3: undefined -> 36
+1: 0 -> 37
+2: undefined -> 38
+3: undefined -> 39
+1: 0 -> 40
+2: undefined -> 41
+3: undefined -> 42
+1: 0 -> 43
+2: undefined -> 44
+3: undefined -> 45
+1: 0 -> 46
+2: undefined -> 47
+3: undefined -> 48
+1: 0 -> 49
+2: undefined -> 50
+3: undefined -> 51
+1: 0 -> 52
+2: undefined -> 53
+3: undefined -> 54
+1: 0 -> 55
+2: undefined -> 56
+3: undefined -> 57
+1: 0 -> 58
+2: undefined -> 59
+3: undefined -> 60
+1: 0 -> 61
+2: undefined -> 62
+3: undefined -> 63
+1: 0 -> 64
+2: undefined -> 65
+3: undefined -> 66
+1: 0 -> 67
+2: undefined -> 68
+3: undefined -> 69
+1: 0 -> 70
+2: undefined -> 71
+3: undefined -> 72
+1: 0 -> 73
+2: undefined -> 74
+3: undefined -> 75
+1: 0 -> 76
+2: undefined -> 77
+3: undefined -> 78
+1: 0 -> 79
+2: undefined -> 80
+3: undefined -> 81
+1: 0 -> 82
+2: undefined -> 83
+3: undefined -> 84
+1: 0 -> 85
+2: undefined -> 86
+3: undefined -> 87
+1: 0 -> 88
+2: undefined -> 89
+3: undefined -> 90
+1: 0 -> 91
+2: undefined -> 92
+3: undefined -> 93
+1: 0 -> 94
+2: undefined -> 95
+3: undefined -> 96
+1: 0 -> 97
+2: undefined -> 98
+3: undefined -> 99
+1: 0 -> 100
+2: undefined -> 101
+3: undefined -> 102
+1: 0 -> 103
+2: undefined -> 104
+3: undefined -> 105
+1: 0 -> 106
+2: undefined -> 107
+3: undefined -> 108
+1: 0 -> 109
+2: undefined -> 110
+3: undefined -> 111
+1: 0 -> 112
+2: undefined -> 113
+3: undefined -> 114
+1: 0 -> 115
+2: undefined -> 116
+3: undefined -> 117
+1: 0 -> 118
+2: undefined -> 119
+3: undefined -> 120
+1: 0 -> 121
+2: undefined -> 122
+3: undefined -> 123
+1: 0 -> 124
+2: undefined -> 125
+3: undefined -> 126
+1: 0 -> 127
+2: undefined -> 128
+3: undefined -> 129
+1: 0 -> 130
+2: undefined -> 131
+3: undefined -> 132
+1: 0 -> 133
+2: undefined -> 134
+3: undefined -> 135
+1: 0 -> 136
+2: undefined -> 137
+3: undefined -> 138
+1: 0 -> 139
+2: undefined -> 140
+3: undefined -> 141
+1: 0 -> 142
+2: undefined -> 143
+3: undefined -> 144
+1: 0 -> 145
+2: undefined -> 146
+3: undefined -> 147
+1: 0 -> 148
+2: undefined -> 149
+3: undefined -> 150
+1: 0 -> 151
+2: undefined -> 152
+3: undefined -> 153
+1: 0 -> 154
+2: undefined -> 155
+3: undefined -> 156
+1: 0 -> 157
+2: undefined -> 158
+3: undefined -> 159
+1: 0 -> 160
+2: undefined -> 161
+3: undefined -> 162
+1: 0 -> 163
+2: undefined -> 164
+3: undefined -> 165
+1: 0 -> 166
+2: undefined -> 167
+3: undefined -> 168
+1: 0 -> 169
+2: undefined -> 170
+3: undefined -> 171
+1: 0 -> 172
+2: undefined -> 173
+3: undefined -> 174
+1: 0 -> 175
+2: undefined -> 176
+3: undefined -> 177
+1: 0 -> 178
+2: undefined -> 179
+3: undefined -> 180
+1: 0 -> 181
+2: undefined -> 182
+3: undefined -> 183
+1: 0 -> 184
+2: undefined -> 185
+3: undefined -> 186
+1: 0 -> 187
+2: undefined -> 188
+3: undefined -> 189
+1: 0 -> 190
+2: undefined -> 191
+3: undefined -> 192
+1: 0 -> 193
+2: undefined -> 194
+3: undefined -> 195
+true
+deleting inside watch function
+true
+0 -> 1
+false
+undefined -> 2
+false
+true
+working with native functions
+true
+o.test: 0 -> 1 (undefined) : 4
+o.test: 1 -> 2 (undefined) : 4
+set 2
+false
+o.test: 2 -> 3 (undefined) : 4
+set 3
+set 1
+true
+o.test2: 1 -> 2 (undefined) : 4
+set 2
+false
+o.test2: 2 -> 3 (undefined) : 4
+set 3
