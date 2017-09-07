@@ -2,7 +2,7 @@
 #include "nanovg.h"
 #include "nanosvg.h"
 #include "lvg_header.h"
-#if ENABLE_AUDIO && AUDIO_SDL
+#if ENABLE_AUDIO && AUDIO_SDL && !defined(_TEST)
 #include <stddef.h>
 #include <stdlib.h>
 #include <sys/param.h>

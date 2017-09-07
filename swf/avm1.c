@@ -6,7 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef _DEBUG
+#ifdef _TEST
+#define DBG(n, m) n, m,
+#define DBG_BREAK printf("unsupported: %s", __FUNCTION__); exit(0);
+#elif defined(_DEBUG)
 #define DBG(n, m) n, m,
 #define DBG_BREAK raise(SIGTRAP)
 #else

@@ -588,7 +588,10 @@ void lvgCloseClip(LVGMovieClip *clip)
                 free(frame->actions);
             }
         }
+        for (j = 0; j < group->num_labels; j++)
+            free((void*)group->labels[j].name);
         free(group->frames);
+        free(group->labels);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {
@@ -985,6 +988,8 @@ int main(int argc, char **argv)
         return -1;
     }
     lvgDrawClip(g_clip);
+    lvgCloseClip(g_clip);
+    lvgZipClose(&g_zip);
     return 0;
 #endif
 #if defined(EMSCRIPTEN)

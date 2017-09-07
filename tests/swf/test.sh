@@ -10,13 +10,17 @@ fi
 num_fail=0
 num_pass=0
 for i in trace/*.swf; do
-$APP $i >$i.failed
+tput ed
+echo -ne "test $i (${num_pass} passed, ${num_fail} failed)\r"
+$($APP $i >$i.failed 2>&1)
+if [ ! $? -eq 0 ]; then
+    tput ed
+    echo $i exited with non-zero error code
+fi
 cmp -s $i.failed $i.trace > /dev/null
 if [ $? -eq 1 ]; then
-    echo test $i failed
     num_fail=$((num_fail + 1))
 else
-    echo test $i passed
     rm $i.failed
     num_pass=$((num_pass + 1))
 fi
