@@ -918,7 +918,9 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
             if (p.actions)
             {
+#ifndef _TEST
                 swf_DumpActions(p.actions, 0); fflush(stdout);
+#endif
                 swf_ActionFree(p.actions);
             }
         } else if (ST_DEFINESPRITE == tag->id)
