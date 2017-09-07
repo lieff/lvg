@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifdef _DEBUG
 #define DBG(n, m) n, m,
@@ -113,8 +114,42 @@ static void action_get_variable(LVGActionCtx *ctx, LVGAction *a)
 static void action_set_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_set_target2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_get_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_set_property(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+
+static const char *props[] = { "_X", "_Y", "_xscale", "_yscale", "_currentframe", "_totalframes", "_alpha", "_visible",
+                              "_width", "_height", "_rotation", "_target", "_framesloaded", "" /*_name*/, "_droptarget",
+                              "_url", "_highquality", "_focusrect", "_soundbuftime", "_quality", "_xmouse", "_ymouse" };
+static void action_get_property(LVGActionCtx *ctx, LVGAction *a)
+{
+    /*_X 0 _Y 1 _xscale 2 _yscale 3 _currentframe 4 _totalframes 5 _alpha 6 _visible 7
+    _width 8 _height 9 _rotation 10 _target 11 _framesloaded 12 _name 13 _droptarget 14
+    _url 15 _highquality 16 _focusrect 17 _soundbuftime 18 _quality 19 _xmouse 20 _ymouse 21*/
+    StackEntry *se_idx = &ctx->stack[ctx->stack_ptr];
+    StackEntry *se_target = se_idx + 1;
+    ctx->stack_ptr += 1;
+    assert(STACK_INT == se_idx->type);
+    assert(STACK_STRING == se_target->type);
+    assert(se_idx->i32 <= 21);
+    StackEntry *res = &ctx->stack[ctx->stack_ptr];
+    res->type = STACK_STRING;
+    res->str = props[se_idx->i32];
+}
+
+static void action_set_property(LVGActionCtx *ctx, LVGAction *a)
+{
+    StackEntry *se_val = &ctx->stack[ctx->stack_ptr];
+    StackEntry *se_idx = se_val + 1;
+    StackEntry *se_target = se_val + 2;
+    ctx->stack_ptr += 3;
+    assert(STACK_STRING == se_val->type || STACK_CLASS == se_val->type);
+    assert(STACK_INT == se_idx->type);
+    assert(STACK_STRING == se_target->type);
+    assert(se_idx->i32 <= 21);
+    if (STACK_CLASS == se_val->type)
+        props[se_idx->i32] = "_level0";
+    else
+        props[se_idx->i32] = se_val->str;
+}
+
 static void action_clone_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_remove_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_trace(LVGActionCtx *ctx, LVGAction *a)
@@ -124,6 +159,8 @@ static void action_trace(LVGActionCtx *ctx, LVGAction *a)
     ctx->stack_ptr++;
     if (STACK_STRING == se->type)
         printf("%s\n", se->str);
+    else if (STACK_CLASS == se->type)
+        printf("_level0\n");
     fflush(stdout);
 #endif
 }
@@ -255,7 +292,18 @@ static void action_push(LVGActionCtx *ctx, LVGAction *a)
     } while (len > 0);
 }
 static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_get_url2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_url2(LVGActionCtx *ctx, LVGAction *a)
+{
+    //int flags = *(uint8_t*)a->data;
+    StackEntry *se_target = &ctx->stack[ctx->stack_ptr];
+    StackEntry *se_url = se_target + 1;
+    ctx->stack_ptr += 2;
+#ifdef _DEBUG
+    if (0 == strcmp(se_url->str, "FSCommand:quit"))
+        exit(0);
+#endif
+}
+
 static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
 {
     ctx->stack_ptr--;
