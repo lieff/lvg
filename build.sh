@@ -8,7 +8,7 @@ video/ffmpeg/ffmpeg_dec.c \
 -Lscripting/tcc -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg -Wl,-Map=lvg.map -lm -lglfw -lGL -ltcc2 -ldl -lSDL2 -lavcodec -lavutil
 objcopy --remove-section=.comment --remove-section=.note* --remove-section=.gnu.version --remove-section=.eh_frame* --remove-section=.jcr ./lvg
 scripts/compress.sh ./lvg
-if [ "$TRAVIS" == "true" ]; then
+if [ "$TRAVIS" = "true" ]; then
     zip -9 -u lvg_linux.zip lvg
     cd tests/swf
     ./test.sh

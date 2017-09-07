@@ -46,6 +46,6 @@ video/ffmpeg/ffmpeg_dec.c \
 -Iglfw/include -Iglfw/deps -ISDL/include -Ivideo/ffmpeg/FFmpeg \
 -DNDEBUG -D_GNU_SOURCE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 scripts/compress.sh ./lvg_win.exe
-if [ "$TRAVIS" == "true" ]; then
+if [ "$TRAVIS" = "true" ]; then
     zip -9 -u lvg_win.zip lvg_win.exe
 fi

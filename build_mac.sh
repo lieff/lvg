@@ -9,6 +9,6 @@ video/ffmpeg/ffmpeg_dec.c \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 -DNDEBUG -D_GNU_SOURCE -o lvg_macos -lm -lglfw -ltcc -ldl -lSDL2 -lavcodec -lavutil \
 -framework OpenGL `pkg-config --static --libs glfw3`
 upx --best --ultra-brute ./lvg_macos
-if [ "$TRAVIS" == "true" ]; then
+if [ "$TRAVIS" = "true" ]; then
     zip -9 -u lvg_macos.zip lvg_macos
 fi
