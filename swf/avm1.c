@@ -8,7 +8,7 @@
 
 #ifdef _TEST
 #define DBG(n, m) n, m,
-#define DBG_BREAK printf("unsupported: %s", __FUNCTION__); exit(0);
+#define DBG_BREAK printf("unsupported: %s\n", __FUNCTION__); fflush(stdout); ctx->do_exit = 1;
 #elif defined(_DEBUG)
 #define DBG(n, m) n, m,
 #define DBG_BREAK raise(SIGTRAP)
@@ -43,7 +43,7 @@ typedef struct LVGActionCtx
     StackEntry stack[STACK_SIZE];
     StackEntry regs[256];
     const char **cpool;
-    int stack_ptr, cpool_size, pc;
+    int stack_ptr, cpool_size, pc, do_exit;
 } LVGActionCtx;
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
@@ -515,6 +515,8 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
         const ActionEntry *ae = &g_avm1_actions[a->opcode];
         if (ae->vm_func)
             ae->vm_func(&ctx, a);
+        if (ctx.do_exit)
+            break;
     }
     if (ctx.cpool)
         free(ctx.cpool);
