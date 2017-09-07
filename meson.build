@@ -25,6 +25,7 @@ sources = [
     'render/render_null.c',
     'swf/adpcm.c',
     'swf/avm1.c',
+    'swf/avm1_globals.c',
     'swf/swf.c',
     'swf/swftools/lib/bitio.c',
     'swf/swftools/lib/drawer.c',

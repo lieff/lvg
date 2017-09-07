@@ -105,3 +105,37 @@ typedef enum {
     ACTION_CALL = 0x9E,
     ACTION_GOTO_FRAME2 = 0x9F
 } Actions;
+
+typedef enum {
+    ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION, ASVAL_NATIVE_FN
+} ASValType;
+
+typedef struct ASVal
+{
+    union {
+        const char *str;
+        float f_int;
+        double d_int;
+        uint32_t ui32;
+        int boolean;
+    };
+    ASValType type;
+} ASVal;
+
+typedef struct ASMember
+{
+    const char *name;
+    ASVal val;
+} ASMember;
+
+typedef struct ASClass
+{
+    const char *name;
+    ASMember *members;
+    int num_members;
+} ASClass;
+
+extern ASClass *g_classes[];
+extern int g_num_classes;
+extern ASMember g_properties[];
+extern int g_num_properties;

@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #ifdef _TEST
 #define DBG(n, m) n, m,
@@ -18,33 +19,32 @@
 #endif
 
 #define STACK_SIZE 4096
-
-typedef enum {
-    ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION
-} ASValType;
-
-typedef struct StackEntry
-{
-    union {
-        const char *str;
-        float f_int;
-        double d_int;
-        uint32_t ui32;
-        int boolean;
-    };
-    ASValType type;
-} StackEntry;
+#define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
+#define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
 
 typedef struct LVGActionCtx
 {
     LVGMovieClip *clip;
     LVGMovieClipGroup *group;
     LVGMovieClipFrame *frame;
-    StackEntry stack[STACK_SIZE];
-    StackEntry regs[256];
+    ASVal stack[STACK_SIZE];
+    ASVal regs[256];
     const char **cpool;
-    int stack_ptr, cpool_size, pc, do_exit;
+    int version, stack_ptr, cpool_size, pc, do_exit;
 } LVGActionCtx;
+
+double to_double(ASVal *v)
+{
+    if (ASVAL_DOUBLE == v->type)
+        return v->d_int;
+    else if (ASVAL_FLOAT == v->type)
+        return v->f_int;
+    else if (ASVAL_INT == v->type)
+        return v->ui32;
+    else if (ASVAL_BOOL == v->type)
+        return v->boolean;
+    return 0.0;
+}
 
 static void action_end(LVGActionCtx *ctx, LVGAction *a)
 {
@@ -86,7 +86,30 @@ static void action_stop_sounds(LVGActionCtx *ctx, LVGAction *a)
 static void action_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_sub(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_mul(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_div(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_div(LVGActionCtx *ctx, LVGAction *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (0.0 == va)
+    {
+        if (ctx->version < 5)
+            SET_STRING(res, "#ERROR#")
+        else if (0.0 == vb || isnan(vb) || isnan(va))
+            SET_DOUBLE(res, NAN)
+        else
+        {
+            double r = (vb < 0) ? -INFINITY : INFINITY;
+            SET_DOUBLE(res, r);
+        }
+        return;
+    }
+    SET_DOUBLE(res, vb/va);
+}
+
 static void action_old_eq(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_old_less(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_and(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -100,20 +123,30 @@ static void action_pop(LVGActionCtx *ctx, LVGAction *a)
     ctx->stack_ptr++;
     assert(ctx->stack_ptr < sizeof(ctx->stack)/sizeof(ctx->stack[0]));
 }
+
 static void action_to_integer(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_variable(LVGActionCtx *ctx, LVGAction *a)
 {
-    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_STRING == se->type);
-    if (0 == strcmp(se->str, "Stage") || 0 == strcmp(se->str, "this"))
-    {
-        se->type = ASVAL_CLASS;
-        se->str = 0;
-    } else
-    {
-        assert(0);
-    }
+    int i;
+    for (i = 0; i < g_num_properties; i++)
+        if (0 == strcmp(se->str, g_properties[i].name))
+        {
+            se->type = g_properties[i].val.type;
+            se->str  = g_properties[i].val.str;
+            return;
+        }
+    for (i = 0; i < g_num_classes; i++)
+        if (0 == strcmp(se->str, g_classes[i]->name))
+        {
+            se->type = ASVAL_CLASS;
+            se->str  = (void*)g_classes[i];
+            return;
+        }
+    assert(0);
 }
+
 static void action_set_variable(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_set_target2(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_add(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -126,22 +159,22 @@ static void action_get_property(LVGActionCtx *ctx, LVGAction *a)
     /*_X 0 _Y 1 _xscale 2 _yscale 3 _currentframe 4 _totalframes 5 _alpha 6 _visible 7
     _width 8 _height 9 _rotation 10 _target 11 _framesloaded 12 _name 13 _droptarget 14
     _url 15 _highquality 16 _focusrect 17 _soundbuftime 18 _quality 19 _xmouse 20 _ymouse 21*/
-    StackEntry *se_idx = &ctx->stack[ctx->stack_ptr];
-    StackEntry *se_target = se_idx + 1;
+    ASVal *se_idx = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_target = se_idx + 1;
     ctx->stack_ptr += 1;
     assert(ASVAL_INT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
     assert(se_idx->ui32 <= 21);
-    StackEntry *res = &ctx->stack[ctx->stack_ptr];
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
     res->type = ASVAL_STRING;
     res->str = props[se_idx->ui32];
 }
 
 static void action_set_property(LVGActionCtx *ctx, LVGAction *a)
 {
-    StackEntry *se_val = &ctx->stack[ctx->stack_ptr];
-    StackEntry *se_idx = se_val + 1;
-    StackEntry *se_target = se_val + 2;
+    ASVal *se_val = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_idx = se_val + 1;
+    ASVal *se_target = se_val + 2;
     ctx->stack_ptr += 3;
     assert(ASVAL_STRING == se_val->type || ASVAL_CLASS == se_val->type);
     assert(ASVAL_INT == se_idx->type);
@@ -158,15 +191,22 @@ static void action_remove_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_trace(LVGActionCtx *ctx, LVGAction *a)
 {
 #ifdef _DEBUG
-    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
     if (ASVAL_STRING == se->type)
         printf("%s\n", se->str);
+    else if (ASVAL_INT == se->type)
+        printf("%u\n", se->ui32);
+    else if (ASVAL_FLOAT == se->type)
+        printf("%f\n", se->f_int);
+    else if (ASVAL_DOUBLE == se->type)
+        printf("%f\n", se->d_int);
     else if (ASVAL_CLASS == se->type)
         printf("_level0\n");
     fflush(stdout);
 #endif
 }
+
 static void action_start_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_end_drag(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_string_compare_le(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -201,16 +241,43 @@ static void action_to_number(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_to_string(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_push_duplicate(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_swap(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
-static void action_get_member(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
+static void action_get_member(LVGActionCtx *ctx, LVGAction *a)
+{
+    ASVal *se_member = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_var = se_member + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    ASClass *c = (ASClass *)se_var->str;
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(se_member->str, c->members[i].name))
+        {
+            *res = c->members[i].val;
+            return;
+        }
+    assert(0);
+}
+
 static void action_set_member(LVGActionCtx *ctx, LVGAction *a)
 {
-    StackEntry *se_val = &ctx->stack[ctx->stack_ptr];
-    StackEntry *se_member = se_val + 1;
-    StackEntry *se_var = se_val + 2;
+    ASVal *se_val = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_member = se_val + 1;
+    ASVal *se_var = se_val + 2;
     ctx->stack_ptr += 3;
-    assert(ASVAL_CLASS == se_var->type && ASVAL_STRING == se_member->type);
-    // ignore sets for now
+    assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
+    ASClass *c = (ASClass *)se_var->str;
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(se_member->str, c->members[i].name))
+        {
+            //assert(c->members[i].val.type == se_val->type);
+            if (c->members[i].val.type != se_val->type)
+                return;
+            c->members[i].val.str = se_val->str;
+            return;
+        }
+    assert(0);
 }
+
 static void action_increment(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_decrement(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_call_method(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -271,7 +338,7 @@ static void action_push(LVGActionCtx *ctx, LVGAction *a)
     const char *data = (const char *)a->data;
     do {
         ctx->stack_ptr--;
-        StackEntry *se = &ctx->stack[ctx->stack_ptr];
+        ASVal *se = &ctx->stack[ctx->stack_ptr];
         assert(ctx->stack_ptr >= 0);
         int size = 0, type = *(uint8_t*)data;
         switch(type)
@@ -298,19 +365,19 @@ static void action_jump(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_url2(LVGActionCtx *ctx, LVGAction *a)
 {
     //int flags = *(uint8_t*)a->data;
-    StackEntry *se_target = &ctx->stack[ctx->stack_ptr];
-    StackEntry *se_url = se_target + 1;
+    ASVal *se_target = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
 #ifdef _DEBUG
     if (0 == strcmp(se_url->str, "FSCommand:quit"))
-        exit(0);
+        ctx->do_exit = 1;
 #endif
 }
 
 static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
 {
     ctx->stack_ptr--;
-    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
     se->type = ASVAL_FUNCTION;
     se->str = 0;
 
@@ -336,7 +403,7 @@ static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
 static void action_if(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a)
 {
-    StackEntry *se = &ctx->stack[ctx->stack_ptr];
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
     assert(ASVAL_INT == se->type || ASVAL_STRING == se->type);
     int add = 0, flags = *(uint8_t*)a->data;
