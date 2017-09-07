@@ -12,7 +12,7 @@ Why C scripts? Because C compiler is small, and runtime written in C, so no othe
 
 Following assets currently supported:
 
- * SVG vector images (loaded using [nanoSVG](https://github.com/memononen/nanosvg))
+ * SVG vector images (loaded using [NanoSVG](https://github.com/memononen/nanosvg))
  * Raster images (loaded using stb_image.h)
  * MP3 files
  * Flash SWF files (can contain vector, raster, video and audio)
@@ -20,7 +20,7 @@ Following assets currently supported:
 Render can be done using following backends:
 
  * NVIDIA Path Rendering
- * [nanoVG](https://github.com/memononen/nanovg)
+ * [NanoVG](https://github.com/memononen/nanovg)
 
 ## Current Status:
 
@@ -50,16 +50,17 @@ Not works:
 
 ## Building
 
+For now windows executables builds only on linux host using mingw.
 For windows and linux install all build dependencies with the following command:
 
 ```
-apt-get install -qq -y git mercurial cmake yasm libglfw3-dev libsdl2-dev libavcodec-dev mingw-w64 wget
+apt-get install -qq -y git mercurial cmake meson yasm libglfw3-dev libsdl2-dev libavcodec-dev mingw-w64 wget
 ```
 
 For macos brew must be installed:
 
 ```
-brew install upx glfw sdl2 ffmpeg tcc
+brew install meson upx glfw sdl2 ffmpeg tcc
 ```
 
 LVG uses meson as build system. Actual building with the following commands in project directory:
