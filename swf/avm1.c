@@ -20,8 +20,8 @@
 #define STACK_SIZE 4096
 
 typedef enum {
-    STACK_STRING, STACK_FLOAT, STACK_DOUBLE, STACK_BOOL, STACK_INT, STACK_NULL, STACK_UNDEFINED, STACK_CLASS, STACK_FUNCTION
-} StackValType;
+    ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION
+} ASValType;
 
 typedef struct StackEntry
 {
@@ -29,10 +29,10 @@ typedef struct StackEntry
         const char *str;
         float f_int;
         double d_int;
-        uint32_t i32;
+        uint32_t ui32;
         int boolean;
     };
-    StackValType type;
+    ASValType type;
 } StackEntry;
 
 typedef struct LVGActionCtx
@@ -104,10 +104,10 @@ static void action_to_integer(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
 static void action_get_variable(LVGActionCtx *ctx, LVGAction *a)
 {
     StackEntry *se = &ctx->stack[ctx->stack_ptr];
-    assert(STACK_STRING == se->type);
+    assert(ASVAL_STRING == se->type);
     if (0 == strcmp(se->str, "Stage") || 0 == strcmp(se->str, "this"))
     {
-        se->type = STACK_CLASS;
+        se->type = ASVAL_CLASS;
         se->str = 0;
     } else
     {
@@ -129,12 +129,12 @@ static void action_get_property(LVGActionCtx *ctx, LVGAction *a)
     StackEntry *se_idx = &ctx->stack[ctx->stack_ptr];
     StackEntry *se_target = se_idx + 1;
     ctx->stack_ptr += 1;
-    assert(STACK_INT == se_idx->type);
-    assert(STACK_STRING == se_target->type);
-    assert(se_idx->i32 <= 21);
+    assert(ASVAL_INT == se_idx->type);
+    assert(ASVAL_STRING == se_target->type);
+    assert(se_idx->ui32 <= 21);
     StackEntry *res = &ctx->stack[ctx->stack_ptr];
-    res->type = STACK_STRING;
-    res->str = props[se_idx->i32];
+    res->type = ASVAL_STRING;
+    res->str = props[se_idx->ui32];
 }
 
 static void action_set_property(LVGActionCtx *ctx, LVGAction *a)
@@ -143,14 +143,14 @@ static void action_set_property(LVGActionCtx *ctx, LVGAction *a)
     StackEntry *se_idx = se_val + 1;
     StackEntry *se_target = se_val + 2;
     ctx->stack_ptr += 3;
-    assert(STACK_STRING == se_val->type || STACK_CLASS == se_val->type);
-    assert(STACK_INT == se_idx->type);
-    assert(STACK_STRING == se_target->type);
-    assert(se_idx->i32 <= 21);
-    if (STACK_CLASS == se_val->type)
-        props[se_idx->i32] = "_level0";
+    assert(ASVAL_STRING == se_val->type || ASVAL_CLASS == se_val->type);
+    assert(ASVAL_INT == se_idx->type);
+    assert(ASVAL_STRING == se_target->type);
+    assert(se_idx->ui32 <= 21);
+    if (ASVAL_CLASS == se_val->type)
+        props[se_idx->ui32] = "_level0";
     else
-        props[se_idx->i32] = se_val->str;
+        props[se_idx->ui32] = se_val->str;
 }
 
 static void action_clone_sprite(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -160,9 +160,9 @@ static void action_trace(LVGActionCtx *ctx, LVGAction *a)
 #ifdef _DEBUG
     StackEntry *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
-    if (STACK_STRING == se->type)
+    if (ASVAL_STRING == se->type)
         printf("%s\n", se->str);
-    else if (STACK_CLASS == se->type)
+    else if (ASVAL_CLASS == se->type)
         printf("_level0\n");
     fflush(stdout);
 #endif
@@ -208,7 +208,7 @@ static void action_set_member(LVGActionCtx *ctx, LVGAction *a)
     StackEntry *se_member = se_val + 1;
     StackEntry *se_var = se_val + 2;
     ctx->stack_ptr += 3;
-    assert(STACK_CLASS == se_var->type && STACK_STRING == se_member->type);
+    assert(ASVAL_CLASS == se_var->type && ASVAL_STRING == se_member->type);
     // ignore sets for now
 }
 static void action_increment(LVGActionCtx *ctx, LVGAction *a) { DBG_BREAK; }
@@ -276,16 +276,16 @@ static void action_push(LVGActionCtx *ctx, LVGAction *a)
         int size = 0, type = *(uint8_t*)data;
         switch(type)
         {
-        case 0: se->type = STACK_STRING; se->str = (const char*)data + 1; size = strlen(se->str) + 1; break;
-        case 1: se->type = STACK_FLOAT; se->f_int = *(float*)((char*)data + 1); size = 4; break;
-        case 2: se->type = STACK_NULL;
-        case 3: se->type = STACK_UNDEFINED;
+        case 0: se->type = ASVAL_STRING; se->str = (const char*)data + 1; size = strlen(se->str) + 1; break;
+        case 1: se->type = ASVAL_FLOAT; se->f_int = *(float*)((char*)data + 1); size = 4; break;
+        case 2: se->type = ASVAL_NULL;
+        case 3: se->type = ASVAL_UNDEFINED;
         case 4: { int reg = *((uint8_t*)data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; size = 1; } break;
-        case 5: se->type = STACK_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
-        case 6: se->type = STACK_DOUBLE; se->d_int = *(double*)((char*)data + 1); size = 8; break;
-        case 7: se->type = STACK_INT; se->i32 = *(uint32_t*)((char*)data + 1); size = 4; break;
-        case 8: se->type = STACK_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)data + 1)]; size = 1; break;
-        case 9: se->type = STACK_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)data + 1)]; size = 2; break;
+        case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
+        case 6: se->type = ASVAL_DOUBLE; se->d_int = *(double*)((char*)data + 1); size = 8; break;
+        case 7: se->type = ASVAL_INT; se->ui32 = *(uint32_t*)((char*)data + 1); size = 4; break;
+        case 8: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)data + 1)]; size = 1; break;
+        case 9: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)data + 1)]; size = 2; break;
         default:
             assert(0);
             return;
@@ -311,7 +311,7 @@ static void action_define_function(LVGActionCtx *ctx, LVGAction *a)
 {
     ctx->stack_ptr--;
     StackEntry *se = &ctx->stack[ctx->stack_ptr];
-    se->type = STACK_FUNCTION;
+    se->type = ASVAL_FUNCTION;
     se->str = 0;
 
     int i = 0;
@@ -338,15 +338,15 @@ static void action_goto_frame2(LVGActionCtx *ctx, LVGAction *a)
 {
     StackEntry *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
-    assert(STACK_INT == se->type || STACK_STRING == se->type);
+    assert(ASVAL_INT == se->type || ASVAL_STRING == se->type);
     int add = 0, flags = *(uint8_t*)a->data;
     ctx->group->play_state = (flags & 1) ? LVG_PLAYING : LVG_STOPPED;
     if (flags & 2)
         add = *(uint16_t*)((char*)a->data + 1);
-    if (STACK_INT == se->type)
+    if (ASVAL_INT == se->type)
     {
-        ctx->group->cur_frame = (se->i32 + add) % ctx->group->num_frames;
-    } else if (STACK_STRING == se->type)
+        ctx->group->cur_frame = (se->ui32 + add) % ctx->group->num_frames;
+    } else if (ASVAL_STRING == se->type)
     {
         LVGFrameLabel *l = ctx->group->labels;
         for (int i = 0; i < ctx->group->num_labels; i++)
