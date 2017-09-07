@@ -977,8 +977,7 @@ int main(int argc, char **argv)
         is_swf = 1;
         //return -1;
     }
-//#define TEST
-#ifdef TEST
+#ifdef _TEST
     g_render = &null_render;
     if (open_swf(file_name))
     {

@@ -734,7 +734,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     U32 condition = swf_GetU16(tag);                // condition
                     ActionTAG *actions = swf_ActionGet(tag);
                     ActionTAG *atag = actions;
-                    printf("  condition %04x\n", condition);
                     int nactions = 0;
                     while (atag)
                     {
@@ -744,7 +743,10 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     b->actions = realloc(b->actions, (b->num_actions + nactions)*sizeof(LVGAction));
                     actions_to_lvg(actions, b->actions + b->num_actions);
                     b->num_actions += nactions;
+#ifndef _TEST
+                    printf("  condition %04x\n", condition);
                     swf_DumpActions(actions, "  ");
+#endif
                     swf_ActionFree(actions);
                 }
                 swf_SetTagPos(tag, oldTagPos);
@@ -836,8 +838,10 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             frame->actions = realloc(frame->actions, (frame->num_actions + nactions)*sizeof(LVGAction));
             actions_to_lvg(actions, frame->actions + frame->num_actions);
             frame->num_actions += nactions;
+#ifndef _TEST
             printf("frame %d actions:\n", nframe);
             swf_DumpActions(actions, 0);
+#endif
             swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {

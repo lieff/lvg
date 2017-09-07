@@ -86,3 +86,5 @@ if host_os_family == 'windows'
 endif
 
 executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
+
+executable('lvg_test', sources, c_args: '-D_TEST', link_args : ext_link_args, include_directories : include_directories(incdirs))

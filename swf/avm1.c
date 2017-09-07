@@ -513,4 +513,6 @@ void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions)
         if (ae->vm_func)
             ae->vm_func(&ctx, a);
     }
+    if (ctx.cpool)
+        free(ctx.cpool);
 }
