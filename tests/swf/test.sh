@@ -12,7 +12,7 @@ num_pass=0
 num_error=0
 for i in trace/*.swf; do
 tput ed
-echo -ne "test $i (${num_pass} passed, ${num_fail} failed)\r"
+echo -ne "(${num_pass} passed, ${num_fail} failed) testing $i\r"
 $($APP $i >$i.failed 2>&1)
 if [ ! $? -eq 0 ]; then
     tput ed

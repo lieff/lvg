@@ -29,8 +29,9 @@ typedef struct LVGActionCtx
     LVGMovieClipFrame *frame;
     ASVal stack[STACK_SIZE];
     ASVal regs[256];
+    ASMember *locals;
     const char **cpool;
-    int version, stack_ptr, cpool_size, pc, do_exit;
+    int version, stack_ptr, cpool_size, pc, do_exit, num_locals;
 } LVGActionCtx;
 
 double to_double(ASVal *v)
@@ -224,7 +225,22 @@ static void action_mb_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; 
 static void action_mb_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_delete(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_delete2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_define_local(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_val = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_name = se_val + 1;
+    ctx->stack_ptr += 2;
+    for (int i = 0; i < ctx->num_locals; i++)
+        if (0 == strcmp(ctx->locals[i].name, se_name->str))
+        {
+            ctx->locals[i].val = *se_val;
+            return;
+        }
+    ctx->locals = realloc(ctx->locals, (ctx->num_locals + 1)*sizeof(ctx->locals[0]));
+    ASMember *res = ctx->locals + ctx->num_locals++;
+    res->val = *se_val;
+}
+
 static void action_call_function(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_return(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_modulo(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -299,7 +315,7 @@ static void action_extends(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 /*------------------------- vv --- with len --- vv -------------------------*/
 static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
 {
-    int frame = *(uint16_t*)a + 2;
+    int frame = *(uint16_t*)(a + 2);
     ctx->group->cur_frame = frame % ctx->group->num_frames;
 }
 
@@ -307,7 +323,8 @@ static void action_get_url(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_store_register(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_constant_pool(LVGActionCtx *ctx, uint8_t *a)
 {
-    ctx->cpool_size = *(uint16_t*)a + 2;
+    //int size = *(uint16_t*)a;
+    ctx->cpool_size = *(uint16_t*)(a + 2);
     ctx->cpool = realloc(ctx->cpool, ctx->cpool_size*sizeof(char *));
     const char *s = (const char *)a + 4;
     for (int i = 0; i < ctx->cpool_size; i++)
@@ -335,7 +352,32 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
 }
 
 static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_define_function2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_define_function2(LVGActionCtx *ctx, uint8_t *a)
+{
+    ctx->stack_ptr--;
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    se->type = ASVAL_FUNCTION;
+
+    //const char *name = (const char *)a + 2;
+    const uint8_t *data = (const uint8_t *)a + 2;
+    int i = 0;
+    while (data[i++]);
+    int nparams = *(uint16_t*)&data[i]; i += 2;
+    /*uint8_t nregs = data[i++];
+    uint8_t flags1 = data[i++];
+    uint8_t flags2 = data[i++];*/
+    i += 3;
+    for (int p = 0; p < nparams; p++)
+    {
+        //uint8_t regs = data[i++];
+        i++;
+        while (data[i++]);
+    }
+    se->str = (const char *)&data[i];
+    int codesize = *(uint16_t*)&data[i]; i += 2;
+    ctx->pc += codesize;
+}
+
 static void action_try(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_with(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_push(LVGActionCtx *ctx, uint8_t *a)
@@ -408,7 +450,7 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
     assert(ASVAL_INT == se->type || ASVAL_STRING == se->type);
-    int add = 0, flags = *(uint8_t*)a + 2;
+    int add = 0, flags = *(uint8_t*)(a + 2);
     ctx->group->play_state = (flags & 1) ? LVG_PLAYING : LVG_STOPPED;
     if (flags & 2)
         add = *(uint16_t*)(a + 3);
@@ -593,6 +635,8 @@ void lvgExecuteActions(LVGMovieClip *clip, uint8_t *actions, int is_function)
         if (ctx.do_exit)
             break;
     }
+    if (ctx.locals)
+        free(ctx.locals);
     if (ctx.cpool)
         free(ctx.cpool);
 }

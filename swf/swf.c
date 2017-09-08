@@ -368,13 +368,23 @@ add_shape:
 
 static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
 {
-    /*assert(frame_num >= 0);
+    assert(frame_num >= 0);
     LVGMovieClipFrame *frame = group->frames + frame_num;
-    frame->actions = realloc(frame->actions, (frame->num_actions + 1)*sizeof(LVGAction));
-    LVGAction *a = frame->actions + frame->num_actions++;
-    memset(a, 0, sizeof(LVGAction));
-    a->opcode = ACTION_STOP_SOUNDS; // our extension: play sound if sdata != 0 with id = sdata - 1
-    a->sdata = sound_id + 1;*/
+    uint8_t buf[3];
+    buf[0] = ACTION_STOP_SOUNDS;
+    *(uint16_t*)(buf + 1) = sound_id + 1;
+    if (!frame->actions)
+    {
+        frame->actions = realloc(frame->actions, 4 + 3);
+        *(uint32_t*)frame->actions = 3;
+        memcpy(frame->actions + 4, buf, 3);
+    } else
+    {
+        uint32_t size = *(uint32_t*)frame->actions;
+        frame->actions = realloc(frame->actions, 4 + size + 3);
+        memmove(frame->actions + 4 + 3, frame->actions + 4, size);
+        memcpy(frame->actions + 4, buf, 3);
+    }
 }
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
@@ -724,9 +734,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             swf_GetU16(tag);                // condition
                     int pos = tag->pos;
                     ActionTAG *actions = swf_ActionGet(tag);
-                    b->actions = realloc(b->actions, tag->pos - pos + 4);
-                    *(uint32_t*)b->actions = tag->pos - pos;
-                    memcpy(b->actions + 4, tag->data + pos, tag->pos - pos);
+                    int size = tag->pos - pos;
+                    b->actions = realloc(b->actions, size + 4);
+                    *(uint32_t*)b->actions = size;
+                    memcpy(b->actions + 4, tag->data + pos, size);
+                    assert(0 == b->actions[4 + size - 1]);
 #ifndef _TEST
                     printf("  condition %04x\n", condition);
                     swf_DumpActions(actions, "  ");
@@ -813,9 +825,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             LVGMovieClipFrame *frame = group->frames + nframe;
             int pos = tag->pos;
             ActionTAG *actions = swf_ActionGet(tag);
-            frame->actions = realloc(frame->actions, tag->pos - pos + 4);
-            *(uint32_t*)frame->actions = tag->pos - pos;
-            memcpy(frame->actions + 4, tag->data + pos, tag->pos - pos);
+            int size = tag->pos - pos;
+            frame->actions = realloc(frame->actions, size + 4);
+            *(uint32_t*)frame->actions = size;
+            memcpy(frame->actions + 4, tag->data + pos, size);
+            assert(0 == frame->actions[4 + size - 1]);
 #ifndef _TEST
             printf("frame %d actions:\n", nframe);
             swf_DumpActions(actions, 0);
@@ -852,7 +866,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         if (2 == stream_format)
         {
             sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
+#ifndef _TEST
             assert(stream_samples == sound->num_samples);
+#endif
         }
         if (!((0 == stream_format && stream_bits) || 1 == stream_format))
             free(stream_buffer);
