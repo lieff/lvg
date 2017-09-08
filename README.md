@@ -72,6 +72,11 @@ meson ..
 ninja
 ```
 
+## Future
+
+ * Use other scripting lanuages like [JerryScript](https://github.com/jerryscript-project/jerryscript) and [AngelScript](http://angelcode.com/angelscript/).
+ * Shaders and 3D support.
+
 ## Interesting graphics libraries
 
  * https://github.com/01org/fastuidraw
