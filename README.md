@@ -13,13 +13,13 @@ Why C scripts? Because C compiler is small, and runtime written in C, so no othe
 Following assets currently supported:
 
  * SVG vector images (loaded using [NanoSVG](https://github.com/memononen/nanosvg))
- * Raster images (loaded using stb_image.h)
+ * Raster images (loaded using [stb_image.h](https://github.com/nothings/stb))
  * MP3 files
  * Flash SWF files (can contain vector, raster, video and audio)
 
 Render can be done using following backends:
 
- * NVIDIA Path Rendering
+ * [NVIDIA Path Rendering](https://developer.nvidia.com/nv-path-rendering)
  * [NanoVG](https://github.com/memononen/nanovg)
 
 ## Current Status:
@@ -50,7 +50,7 @@ Not works:
 
 ## Building
 
-For now windows executables builds only on linux host using mingw.
+For now windows executables builds only on linux host using [mingw](https://mingw-w64.org/).
 For windows and linux install all build dependencies with the following command:
 
 ```
@@ -89,6 +89,9 @@ ninja
  * https://swfdec.freedesktop.org/wiki/
  * http://www.swftools.org/
  * http://www.libming.org/
+ * SWF v19 reference http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/swf/pdf/swf-file-format-spec.pdf
+ * AMF v0 referemce http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/amf/pdf/amf0-file-format-specification.pdf
+ * AMF v3 reference http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/amf/pdf/amf-file-format-spec.pdf
  * AS2 reference http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html
 
 LVG System is developed and maintained by https://github.com/lieff
