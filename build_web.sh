@@ -3,7 +3,7 @@ set -e
 . ~/Public/emsdk_portable/emsdk_set_env.sh
 emcc -O3 nanovg/nanovg.c src/lvg.c src/svgb.c src/lunzip.c \
 audio/sdl/lvg_audio.c \
-swf/swf.c swf/adpcm.c swf/avm1.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
+swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
 render/common.c render/render_nanovg.c \
 video/ffmpeg/ffmpeg_dec.c \
 -Ivideo/ffmpeg/FFmpeg -Lvideo/ffmpeg/web -lavcodec -lavutil \
