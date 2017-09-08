@@ -335,15 +335,20 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
                     event_flags |= swf_GetU16(tag) << 16;
                 if (!event_flags)
                     break;
-                /*int actions_size = */swf_GetU32(tag);
+                int actions_size = swf_GetU32(tag);
                 if (event_flags & (2 << 16))
                 {
                     /*int key_code = */swf_GetU8(tag);
                 }
-                obj->actions = swf_ActionGet(tag);
+                for (int i = 0; i < 32; i++)
+                    if (event_flags & (1 << i))
+                    {
+                        obj->actions[i] = realloc(obj->actions[i], 4 + actions_size);
+                        *(int*)(obj->actions[i]) = actions_size;
+                        memcpy(obj->actions[i] + 4, tag->data + tag->pos, actions_size);
+                    }
             }
-        } else
-            obj->actions = 0;
+        }
         return flags;
     } else
         fprintf(stderr, "rfxswf: Bad Tag: %d not a placeobject\n", tag->id);

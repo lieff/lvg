@@ -23,22 +23,11 @@ typedef struct LVGObject
     float color_add[4];
 } LVGObject;
 
-typedef struct LVGAction
-{
-    union {
-        const void *data;
-        int idata;
-        unsigned short sdata;
-    };
-    unsigned short len;
-    unsigned char opcode;
-} LVGAction;
-
 typedef struct LVGMovieClipFrame
 {
     LVGObject *objects;
-    LVGAction *actions;
-    int num_objects, num_actions;
+    unsigned char *actions;
+    int num_objects;
 } LVGMovieClipFrame;
 
 typedef struct LVGFrameLabel
@@ -86,7 +75,7 @@ typedef struct LVGButton
     LVGObject *over_shapes;
     LVGObject *down_shapes;
     LVGObject *hit_shapes;
-    LVGAction *actions;
+    unsigned char *actions;
     int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_actions;
 } LVGButton;
 
@@ -121,7 +110,8 @@ short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
 void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
-void lvgExecuteActions(LVGMovieClip *clip, LVGAction *actions, int num_actions);
+// action block begins with 32bit size, functions begins with 16bit size
+void lvgExecuteActions(LVGMovieClip *clip, unsigned char *actions, int is_function);
 
 #ifdef __TINYC__
 extern NVGcontext *vg;

@@ -989,7 +989,7 @@ typedef struct _SWFPLACEOBJECT {
     char*name;
     char*class_name;
     U16 clipdepth;
-    ActionTAG* actions;
+    U8 *actions[32];
     U8 blendmode;
     FILTERLIST*filters;
 } SWFPLACEOBJECT;

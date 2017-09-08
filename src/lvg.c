@@ -414,7 +414,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 {
     int nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
-    lvgExecuteActions(clip, frame->actions, frame->num_actions);
+    lvgExecuteActions(clip, frame->actions, 0);
     float save_transform[6];
     assert(nframe < group->num_frames);
     if (next_frame)
@@ -581,12 +581,7 @@ void lvgCloseClip(LVGMovieClip *clip)
             if (frame->objects)
                 free(frame->objects);
             if (frame->actions)
-            {
-                for (int k = 0; k < frame->num_actions; k++)
-                    if (frame->actions[k].len)
-                        free((void*)frame->actions[k].data);
                 free(frame->actions);
-            }
         }
         for (j = 0; j < group->num_labels; j++)
             free((void*)group->labels[j].name);

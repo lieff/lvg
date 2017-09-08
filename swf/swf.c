@@ -366,36 +366,15 @@ add_shape:
     g_render->cache_shape(g_render_obj, shape);
 }
 
-static void actions_to_lvg(ActionTAG *actions, LVGAction *a)
-{
-    ActionTAG *atag = actions;
-    while (atag)
-    {
-        a->data = 0;
-        a->len  = 0;
-        a->opcode = atag->op;
-        if (ACTION_GOTO_FRAME == atag->op)
-            a->sdata = *(uint16_t*)atag->data;
-        else if (atag->len)
-        {
-            a->data = malloc(atag->len);
-            a->len  = atag->len;
-            memcpy((void*)a->data, atag->data, atag->len);
-        }
-        a++;
-        atag = atag->next;
-    }
-}
-
 static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
 {
-    assert(frame_num >= 0);
+    /*assert(frame_num >= 0);
     LVGMovieClipFrame *frame = group->frames + frame_num;
     frame->actions = realloc(frame->actions, (frame->num_actions + 1)*sizeof(LVGAction));
     LVGAction *a = frame->actions + frame->num_actions++;
     memset(a, 0, sizeof(LVGAction));
     a->opcode = ACTION_STOP_SOUNDS; // our extension: play sound if sdata != 0 with id = sdata - 1
-    a->sdata = sound_id + 1;
+    a->sdata = sound_id + 1;*/
 }
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
@@ -637,7 +616,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON == tag->id)
             {
+#ifndef _TEST
                 printf("button actions:\n");
+#endif
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
                 int state;
@@ -660,7 +641,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
             {
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
+#ifndef _TEST
                 printf("button2(%d) actions:\n", id);
+#endif
                 idtable[id].type = button_type;
                 idtable[id].lvg_id = clip->num_buttons;
                 clip->buttons = realloc(clip->buttons, (clip->num_buttons + 1)*sizeof(LVGButton));
@@ -676,7 +659,9 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 {
                     int cid   = swf_GetU16(tag);
                     int depth = swf_GetU16(tag);
+#ifndef _TEST
                     printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
+#endif
                     LVGObject *o = 0;
                     assert(state < 16);
                     if (state & 15)
@@ -733,18 +718,15 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     if (tag->pos >= tag->len)
                         break;
                     offsetpos = swf_GetU16(tag);
-                    U32 condition = swf_GetU16(tag);                // condition
+#ifndef _TEST
+                    U32 condition =
+#endif
+                            swf_GetU16(tag);                // condition
+                    int pos = tag->pos;
                     ActionTAG *actions = swf_ActionGet(tag);
-                    ActionTAG *atag = actions;
-                    int nactions = 0;
-                    while (atag)
-                    {
-                        nactions++;
-                        atag = atag->next;
-                    }
-                    b->actions = realloc(b->actions, (b->num_actions + nactions)*sizeof(LVGAction));
-                    actions_to_lvg(actions, b->actions + b->num_actions);
-                    b->num_actions += nactions;
+                    b->actions = realloc(b->actions, tag->pos - pos + 4);
+                    *(uint32_t*)b->actions = tag->pos - pos;
+                    memcpy(b->actions + 4, tag->data + pos, tag->pos - pos);
 #ifndef _TEST
                     printf("  condition %04x\n", condition);
                     swf_DumpActions(actions, "  ");
@@ -829,17 +811,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         } else if (ST_DOACTION == tag->id)
         {
             LVGMovieClipFrame *frame = group->frames + nframe;
+            int pos = tag->pos;
             ActionTAG *actions = swf_ActionGet(tag);
-            ActionTAG *atag = actions;
-            int nactions = 0;
-            while (atag)
-            {
-                nactions++;
-                atag = atag->next;
-            }
-            frame->actions = realloc(frame->actions, (frame->num_actions + nactions)*sizeof(LVGAction));
-            actions_to_lvg(actions, frame->actions + frame->num_actions);
-            frame->num_actions += nactions;
+            frame->actions = realloc(frame->actions, tag->pos - pos + 4);
+            *(uint32_t*)frame->actions = tag->pos - pos;
+            memcpy(frame->actions + 4, tag->data + pos, tag->pos - pos);
 #ifndef _TEST
             printf("frame %d actions:\n", nframe);
             swf_DumpActions(actions, 0);
@@ -916,13 +892,14 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
-            if (p.actions)
-            {
+            for (i = 0; i < 32; i++)
+                if (p.actions[i])
+                {
 #ifndef _TEST
-                swf_DumpActions(p.actions, 0); fflush(stdout);
+                    printf("place id=%d have action in event %i\n", p.id, i);
 #endif
-                swf_ActionFree(p.actions);
-            }
+                    free(p.actions[i]);
+                }
         } else if (ST_DEFINESPRITE == tag->id)
         {
             swf_UnFoldSprite(tag);
