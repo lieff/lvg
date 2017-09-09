@@ -15,6 +15,8 @@
 enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP, LVG_OBJ_BUTTON };
 enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
+typedef struct LVGActionCtx LVGActionCtx;
+
 typedef struct LVGObject
 {
     int id, type, depth, ratio;
@@ -41,7 +43,7 @@ typedef struct LVGMovieClipGroup
     LVGMovieClipFrame *frames;
     LVGFrameLabel *labels;
     uint8_t *events[19]; // swf events
-    void *events_vm; // action script vm for events
+    LVGActionCtx *events_vm; // action script vm for events
     int num_frames, num_labels, cur_frame, play_state;
 } LVGMovieClipGroup;
 
@@ -113,7 +115,6 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
 void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
 // action block begins with 32bit size, functions begins with 16bit size
-typedef struct LVGActionCtx LVGActionCtx;
 void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function);
 void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);

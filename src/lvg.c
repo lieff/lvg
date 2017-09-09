@@ -418,6 +418,19 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
     LVGActionCtx ctx;
     lvgInitVM(&ctx, clip);
     lvgExecuteActions(&ctx, frame->actions, 0);
+
+    if (group->events[1])
+    {
+        if (!group->events_vm)
+        {
+            group->events_vm = malloc(sizeof(LVGActionCtx));
+            lvgInitVM(group->events_vm, clip);
+        }
+        if (group->events[0])
+            lvgExecuteActions(group->events_vm, group->events[0], 0);
+        lvgExecuteActions(group->events_vm, group->events[1], 0);
+    }
+
     float save_transform[6];
     assert(nframe < group->num_frames);
     if (next_frame)
@@ -526,7 +539,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 void lvgDrawClip(LVGMovieClip *clip)
 {
     int next_frame = 0;
-    if (/*LVG_PLAYING == clip->groups[0].play_state*/1)
+    if (LVG_PLAYING == clip->groups[0].play_state)
     {
         if ((g_time - clip->last_time) > (1.0/clip->fps))
         {
@@ -594,6 +607,12 @@ void lvgCloseClip(LVGMovieClip *clip)
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);
+        if (group->events_vm)
+        {
+            lvgFreeVM(group->events_vm);
+            free(group->events_vm);
+        }
+
     }
     for (i = 0; i < clip->num_sounds; i++)
     {

@@ -326,7 +326,16 @@ static void action_get_variable(LVGActionCtx *ctx, uint8_t *a)
     assert(0);
 }
 
-static void action_set_variable(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_set_variable(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_val = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_var = se_val + 1;
+    ctx->stack_ptr += 2;
+    assert(ASVAL_STRING == se_var->type);
+    ASVal *res = create_local(ctx, se_var->str);
+    *res = *se_val;
+}
+
 static void action_set_target2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_string_add(LVGActionCtx *ctx, uint8_t *a)
 {
@@ -460,7 +469,7 @@ static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
         } else
         if (ASVAL_NATIVE_FN == var->type)
         {
-            void (*function)(LVGActionCtx *ctx, uint8_t *a, int nargs) = 
+            void (*function)(LVGActionCtx *ctx, uint8_t *a, int nargs) =
                     (void (*)(LVGActionCtx *ctx, uint8_t *a, int nargs))var->str;
             function(ctx, a, nargs);
         }
@@ -903,6 +912,7 @@ void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function)
     actions += 4;
     ctx->actions = actions;
     ctx->size = size;
+    ctx->pc = 0;
 restart:
     for (; ctx->pc < ctx->size;)
     {
