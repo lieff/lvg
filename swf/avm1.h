@@ -6,6 +6,7 @@
 #define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
 #define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
 #define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL; (se)->boolean = value; }
+#define SET_UNDEF(se)          { (se)->type = ASVAL_UNDEFINED; (se)->str = 0; }
 
 typedef enum {
     ACTION_END = 0x00,

@@ -475,7 +475,17 @@ static void action_target_path(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_enumerate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_add2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_less2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_equals2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_equals2(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_BOOL(res, (vb == va) ? 1 : 0)
+}
+
 static void action_to_number(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_to_string(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_push_duplicate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }

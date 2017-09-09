@@ -265,6 +265,22 @@ static void gotoAndStop(LVGActionCtx *ctx, uint8_t *a, int nargs)
     g_clip->groups->play_state = LVG_STOPPED;
 }
 
+static void play(LVGActionCtx *ctx, uint8_t *a, int nargs)
+{
+    ctx->stack_ptr--;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_UNDEF(res);
+    g_clip->groups->play_state = LVG_PLAYING;
+}
+
+static void stop(LVGActionCtx *ctx, uint8_t *a, int nargs)
+{
+    ctx->stack_ptr--;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_UNDEF(res);
+    g_clip->groups->play_state = LVG_STOPPED;
+}
+
 ASMember g_movieclip_members[] =
 {
     // properties
@@ -363,12 +379,12 @@ ASMember g_movieclip_members[] =
     { "localToGlobal", { { .str = 0 }, ASVAL_NATIVE_FN } }, //(pt: Object) : Void
     { "moveTo",        { { .str = 0 }, ASVAL_NATIVE_FN } }, //(x: Number, y: Number) : Void
     { "nextFrame",     { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
-    { "play",          { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
+    { "play",          { { .fn = play }, ASVAL_NATIVE_FN } }, //() : Void
     { "prevFrame",     { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
     { "removeMovieClip", { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
     { "setMask",       { { .str = 0 }, ASVAL_NATIVE_FN } }, //(mc: Object) : Void
     { "startDrag",     { { .str = 0 }, ASVAL_NATIVE_FN } }, //([lockCenter: Boolean], [left: Number], [top: Number], [right: Number], [bottom: Number]) : Void
-    { "stop",          { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
+    { "stop",          { { .fn = stop }, ASVAL_NATIVE_FN } }, //() : Void
     { "stopDrag",      { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
     { "swapDepths",    { { .str = 0 }, ASVAL_NATIVE_FN } }, //(target: Object) : Void
     { "unloadMovie",   { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void

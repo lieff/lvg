@@ -661,8 +661,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 memset(b, 0, sizeof(LVGButton));
                 /*int flags = */swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
 
-                U32 offsetpos = swf_GetTagPos(tag);  // first offset
-                swf_GetU16(tag);
+                U32 offsetpos = swf_GetU16(tag);
 
                 int state;
                 while ((state = swf_GetU8(tag)))
@@ -673,7 +672,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
 #endif
                     LVGObject *o = 0;
-                    assert(state < 16);
+                    assert(state < 64); // bits 5-6 unsupported ButtonHasFilterList and ButtonHasBlendMode
+                    //assert(state < 16);
                     if (state & 15)
                     {
                         if (state & 1)
@@ -702,6 +702,19 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     CXFORM cx;
                     swf_GetMatrix(tag, &m);
                     swf_GetCXForm(tag, &cx, 1);
+                    if (state & 16)
+                    {   // ButtonHasFilterList
+                        int nfilters = swf_GetU8(tag);
+                        for (int i = 0; i < nfilters; i++)
+                        {
+                            FILTER *f = swf_GetFilter(tag);
+                            swf_DeleteFilter(f);
+                        }
+                    }
+                    if (state & 32)
+                    {   // ButtonHasBlendMode
+                        swf_GetU8(tag);
+                    }
                     if (o)
                     {
                         o->id    = idtable[cid].lvg_id;
