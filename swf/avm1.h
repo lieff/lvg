@@ -3,6 +3,9 @@
 #include <../render/render.h>
 
 #define STACK_SIZE 4096
+#define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
+#define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
+#define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL; (se)->boolean = value; }
 
 typedef enum {
     ACTION_END = 0x00,
@@ -113,10 +116,15 @@ typedef enum {
     ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION, ASVAL_NATIVE_FN
 } ASValType;
 
+typedef void (*as_native_fn)(LVGActionCtx *ctx, uint8_t *a, int nargs);
+typedef struct ASClass ASClass;
+
 typedef struct ASVal
 {
     union {
         const char *str;
+        as_native_fn fn;
+        ASClass *cls;
         float f_int;
         double d_int;
         uint32_t ui32;
@@ -158,7 +166,11 @@ typedef struct LVGActionCtx
     int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit, num_locals;
 } LVGActionCtx;
 
-extern ASClass *g_classes[];
+extern ASVal g_classes[];
 extern int g_num_classes;
 extern ASMember g_properties[];
 extern int g_num_properties;
+
+double to_double(ASVal *v);
+uint32_t to_int(ASVal *v);
+ASVal *create_local(LVGActionCtx *ctx, const char *name);

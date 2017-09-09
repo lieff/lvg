@@ -38,7 +38,7 @@
 #include "lvg.h"
 #include "swf/avm1.h"
 
-static LVGMovieClip *g_clip;
+LVGMovieClip *g_clip;
 static zip_t g_zip;
 static GLFWwindow *window;
 NVGcolor g_bgColor;
