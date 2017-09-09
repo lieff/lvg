@@ -1063,6 +1063,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     free(idtable);
     assert(clip->groups->num_frames == swf->frameCount);
     clip->last_time = g_time;
+    clip->as_version = swf->fileVersion;
     return clip;
 }
 

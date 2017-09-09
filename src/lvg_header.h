@@ -89,7 +89,7 @@ typedef struct LVGMovieClip
     LVGButton *buttons;
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups, num_sounds, num_videos, num_buttons;
+    int num_shapes, num_images, num_groups, num_sounds, num_videos, num_buttons, as_version;
     float fps;
     double last_time;
 } LVGMovieClip;

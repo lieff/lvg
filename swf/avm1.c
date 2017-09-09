@@ -21,6 +21,7 @@
 #define STACK_SIZE 4096
 #define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
 #define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
+#define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL; (se)->boolean = value; }
 
 typedef struct LVGActionCtx
 {
@@ -45,6 +46,19 @@ double to_double(ASVal *v)
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
     return 0.0;
+}
+
+uint32_t to_int(ASVal *v)
+{
+    if (ASVAL_DOUBLE == v->type)
+        return v->d_int;
+    else if (ASVAL_FLOAT == v->type)
+        return v->f_int;
+    else if (ASVAL_INT == v->type)
+        return v->ui32;
+    else if (ASVAL_BOOL == v->type)
+        return v->boolean;
+    return 0;
 }
 
 static void action_end(LVGActionCtx *ctx, uint8_t *a)
@@ -85,9 +99,40 @@ static void action_stop_sounds(LVGActionCtx *ctx, uint8_t *a)
     } else
         lvgStopAudio();
 }
-static void action_add(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_sub(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_mul(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+
+static void action_add(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_DOUBLE(res, vb + va);
+}
+
+static void action_sub(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_DOUBLE(res, vb - va);
+}
+
+static void action_mul(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_DOUBLE(res, vb*va);
+}
+
 static void action_div(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
@@ -112,14 +157,110 @@ static void action_div(LVGActionCtx *ctx, uint8_t *a)
     SET_DOUBLE(res, vb/va);
 }
 
-static void action_old_eq(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_old_less(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_and(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_or(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_not(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_compare_eq(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_length(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_extract(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_old_eq(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, (vb == va) ? 1.0 : 0.0)
+    else
+        SET_BOOL(res, (vb == va) ? 1 : 0)
+}
+
+static void action_old_less(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, (vb < va) ? 1.0 : 0.0)
+    else
+        SET_BOOL(res, (vb < va) ? 1 : 0)
+}
+
+static void action_and(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, (vb != 0.0 && va != 0.0) ? 1.0 : 0.0)
+    else
+        SET_BOOL(res, (vb != 0.0 && va != 0.0) ? 1 : 0)
+}
+
+static void action_or(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, (vb != 0.0 || va != 0.0) ? 1.0 : 0.0)
+    else
+        SET_BOOL(res, (vb != 0.0 || va != 0.0) ? 1 : 0)
+}
+
+static void action_not(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    double va = to_double(se_a);
+    if (ctx->version < 5)
+        SET_DOUBLE(se_a, (va != 0.0) ? 0.0 : 1.0)
+    else
+        SET_BOOL(se_a, (va != 0.0) ? 0 : 1)
+}
+
+static void action_string_compare_eq(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_STRING == se_a->type && ASVAL_STRING == se_b->type);
+    int cmp = strcmp(se_b->str, se_a->str);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, cmp ? 0.0 : 1.0)
+    else
+        SET_BOOL(res, cmp ? 0 : 1)
+}
+
+static void action_string_length(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    assert(ASVAL_STRING == se_a->type);
+    int len = strlen(se_a->str);
+    SET_DOUBLE(se_a, len);
+}
+
+static void action_string_extract(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_count = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_index = se_count + 1;
+    ASVal *se_str   = se_count + 2;
+    ctx->stack_ptr += 2;
+    assert(ASVAL_STRING == se_str->type);
+    assert(ASVAL_INT == se_count->type || ASVAL_DOUBLE == se_count->type || ASVAL_FLOAT == se_count->type);
+    assert(ASVAL_INT == se_index->type || ASVAL_DOUBLE == se_index->type || ASVAL_FLOAT == se_index->type);
+    size_t len = strlen(se_str->str);
+    uint32_t idx = to_int(se_index);
+    assert(idx <= len);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_STRING(res, se_str->str + idx); // TODO: use se_count and allocate new string with gc
+}
+
 static void action_pop(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->stack_ptr++;
@@ -151,7 +292,15 @@ static void action_get_variable(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_set_variable(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_set_target2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_add(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_string_add(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_STRING == se_a->type && ASVAL_STRING == se_b->type);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_STRING(res, se_b->str); // TODO: use se_a and allocate new string with gc
+}
 
 static const char *props[] = { "_X", "_Y", "_xscale", "_yscale", "_currentframe", "_totalframes", "_alpha", "_visible",
                               "_width", "_height", "_rotation", "_target", "_framesloaded", "" /*_name*/, "_droptarget",
@@ -211,7 +360,21 @@ static void action_trace(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_start_drag(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_end_drag(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_compare_le(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+
+static void action_string_compare_le(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_STRING == se_a->type && ASVAL_STRING == se_b->type);
+    int cmp = strcmp(se_b->str, se_a->str);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->version < 5)
+        SET_DOUBLE(res, (cmp < 0) ? 0.0 : 1.0)
+    else
+        SET_BOOL(res, (cmp < 0) ? 0 : 1)
+}
+
 static void action_throw(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_cast(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_implements(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -241,7 +404,11 @@ static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
     res->val = *se_val;
 }
 
-static void action_call_function(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
+{
+    DBG_BREAK;
+}
+
 static void action_return(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_modulo(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_new_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -309,7 +476,18 @@ static void action_rshift(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_urshift(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_strict_equals(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_gt(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_string_compare_gt(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_string_compare_gt(LVGActionCtx *ctx, uint8_t *a)
+{
+    assert(ctx->version >= 6);
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_STRING == se_a->type && ASVAL_STRING == se_b->type);
+    int cmp = strcmp(se_b->str, se_a->str);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_BOOL(res, (cmp > 0) ? 0 : 1);
+}
+
 static void action_extends(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 
 /*------------------------- vv --- with len --- vv -------------------------*/
@@ -319,7 +497,16 @@ static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
     ctx->group->cur_frame = frame % ctx->group->num_frames;
 }
 
-static void action_get_url(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
+{
+    const char *url = (const char*)(a + 2);
+    const uint8_t *data = (const uint8_t *)a + 2;
+    int i = 0;
+    while (data[i++]);
+    const char *target = (const char *)&data[i];
+    printf("URL=%s target=%s", url, target);
+}
+
 static void action_store_register(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_constant_pool(LVGActionCtx *ctx, uint8_t *a)
 {
@@ -338,7 +525,15 @@ static void action_wait_for_frame(LVGActionCtx *ctx, uint8_t *a)
 {   // all frames always loaded - never skip actions
 }
 
-static void action_set_target(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_set_target(LVGActionCtx *ctx, uint8_t *a)
+{
+    const char *target = (const char*)(a + 2);
+    if (strcmp(target, ""))
+    {
+        assert(0);
+    }
+}
+
 static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
 {
     LVGFrameLabel *l = ctx->group->labels;
@@ -620,6 +815,7 @@ void lvgExecuteActions(LVGMovieClip *clip, uint8_t *actions, int is_function)
     ctx.group  = clip->groups;
     ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
     ctx.stack_ptr = sizeof(ctx.stack)/sizeof(ctx.stack[0]) - 1;
+    ctx.version = clip->as_version;
     uint32_t size = is_function ? *(uint16_t*)actions : *(uint32_t*)actions;
     actions += 4;
     for (; ctx.pc < size;)
