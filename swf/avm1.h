@@ -1,5 +1,8 @@
 #pragma once
 #include <stdint.h>
+#include <../render/render.h>
+
+#define STACK_SIZE 4096
 
 typedef enum {
     ACTION_END = 0x00,
@@ -134,6 +137,26 @@ typedef struct ASClass
     ASMember *members;
     int num_members;
 } ASClass;
+
+typedef struct LVGActionCall
+{
+    int save_pc;
+    int save_size;
+} LVGActionCall;
+
+typedef struct LVGActionCtx
+{
+    LVGMovieClip *clip;
+    LVGMovieClipGroup *group;
+    LVGMovieClipFrame *frame;
+    ASVal stack[STACK_SIZE];
+    ASVal regs[256];
+    LVGActionCall calls[256];
+    ASMember *locals;
+    const char **cpool;
+    uint8_t *actions;
+    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit, num_locals;
+} LVGActionCtx;
 
 extern ASClass *g_classes[];
 extern int g_num_classes;

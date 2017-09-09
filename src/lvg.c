@@ -36,6 +36,7 @@
 #include <video/video.h>
 #include <render/render.h>
 #include "lvg.h"
+#include "swf/avm1.h"
 
 static LVGMovieClip *g_clip;
 static zip_t g_zip;
@@ -414,7 +415,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 {
     int nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
-    lvgExecuteActions(clip, frame->actions, 0);
+    LVGActionCtx ctx;
+    lvgInitVM(&ctx, clip);
+    lvgExecuteActions(&ctx, frame->actions, 0);
     float save_transform[6];
     assert(nframe < group->num_frames);
     if (next_frame)
@@ -504,7 +507,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
             {
                 ob = b->down_shapes;
                 nshapes = b->num_down_shapes;
-                lvgExecuteActions(clip, b->actions, b->num_actions);
+                lvgExecuteActions(&ctx, b->actions, 0);
             }
             for (int j = 0; j < nshapes; j++)
             {
@@ -517,6 +520,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
+    lvgFreeVM(&ctx);
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
@@ -587,6 +591,9 @@ void lvgCloseClip(LVGMovieClip *clip)
             free((void*)group->labels[j].name);
         free(group->frames);
         free(group->labels);
+        for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
+            if (group->events[j])
+                free(group->events[j]);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {

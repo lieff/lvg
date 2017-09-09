@@ -343,10 +343,14 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
                 for (int i = 0; i < 32; i++)
                     if (event_flags & (1 << i))
                     {
+                        assert(i <= 18);
                         obj->actions[i] = realloc(obj->actions[i], 4 + actions_size);
                         *(int*)(obj->actions[i]) = actions_size;
                         memcpy(obj->actions[i] + 4, tag->data + tag->pos, actions_size);
+                        assert(0 == *(obj->actions[i] + 4 + actions_size - 1));
                     }
+                for (int i = 0; i < actions_size; i++)
+                    swf_GetU8(tag);
             }
         }
         return flags;

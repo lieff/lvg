@@ -908,13 +908,15 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
-            for (i = 0; i < 32; i++)
+            for (i = 0; i < 19; i++)
                 if (p.actions[i])
                 {
+                    assert(sprite_type == idtable[p.id].type);
+                    LVGMovieClipGroup *g = &clip->groups[idtable[p.id].lvg_id];
 #ifndef _TEST
                     printf("place id=%d have action in event %i\n", p.id, i);
 #endif
-                    free(p.actions[i]);
+                    g->events[i] = p.actions[i];
                 }
         } else if (ST_DEFINESPRITE == tag->id)
         {

@@ -252,6 +252,7 @@ short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samp
 
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata)
 {
+    return 0;
 }
 
 void lvgPlaySound(LVGSound *sound)

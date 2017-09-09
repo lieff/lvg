@@ -1,5 +1,4 @@
 #include "avm1.h"
-#include <../render/render.h>
 #include <signal.h>
 #include <assert.h>
 #include <string.h>
@@ -18,30 +17,9 @@
 #define DBG_BREAK
 #endif
 
-#define STACK_SIZE 4096
 #define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
 #define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
 #define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL; (se)->boolean = value; }
-
-typedef struct LVGActionCall
-{
-    int save_pc;
-    int save_size;
-} LVGActionCall;
-
-typedef struct LVGActionCtx
-{
-    LVGMovieClip *clip;
-    LVGMovieClipGroup *group;
-    LVGMovieClipFrame *frame;
-    ASVal stack[STACK_SIZE];
-    ASVal regs[256];
-    LVGActionCall calls[256];
-    ASMember *locals;
-    const char **cpool;
-    uint8_t *actions;
-    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit, num_locals;
-} LVGActionCtx;
 
 double to_double(ASVal *v)
 {
@@ -897,45 +875,54 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 }
 };
 
-void lvgExecuteActions(LVGMovieClip *clip, uint8_t *actions, int is_function)
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip)
+{
+    memset(ctx, 0, sizeof(*ctx));
+    ctx->clip   = clip;
+    ctx->group  = clip->groups;
+    ctx->frame  = ctx->group->frames + ctx->group->cur_frame;
+    ctx->stack_ptr = sizeof(ctx->stack)/sizeof(ctx->stack[0]) - 1;
+    ctx->version = clip->as_version;
+}
+
+void lvgFreeVM(LVGActionCtx *ctx)
+{
+    if (ctx->locals)
+        free(ctx->locals);
+    if (ctx->cpool)
+        free(ctx->cpool);
+    ctx->locals = NULL;
+    ctx->cpool  = NULL;
+}
+
+void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function)
 {
     if (!actions)
         return;
-    LVGActionCtx ctx;
-    memset(&ctx, 0, sizeof(ctx));
-    ctx.clip   = clip;
-    ctx.group  = clip->groups;
-    ctx.frame  = ctx.group->frames + ctx.group->cur_frame;
-    ctx.stack_ptr = sizeof(ctx.stack)/sizeof(ctx.stack[0]) - 1;
-    ctx.version = clip->as_version;
     uint32_t size = is_function ? *(uint16_t*)actions : *(uint32_t*)actions;
     actions += 4;
-    ctx.actions = actions;
-    ctx.size = size;
+    ctx->actions = actions;
+    ctx->size = size;
 restart:
-    for (; ctx.pc < ctx.size;)
+    for (; ctx->pc < ctx->size;)
     {
-        Actions a = actions[ctx.pc++];
+        Actions a = actions[ctx->pc++];
         int len = 0;
         if (a >= 0x80)
-            len = *(uint16_t*)(actions + ctx.pc) + 2;
+            len = *(uint16_t*)(actions + ctx->pc) + 2;
         const ActionEntry *ae = &g_avm1_actions[a];
-        uint8_t *opdata = &actions[ctx.pc];
-        ctx.pc += len;
+        uint8_t *opdata = &actions[ctx->pc];
+        ctx->pc += len;
         if (ae->vm_func)
-            ae->vm_func(&ctx, opdata);
-        if (ctx.do_exit)
+            ae->vm_func(ctx, opdata);
+        if (ctx->do_exit)
             break;
     }
-    if (ctx.call_depth && !ctx.do_exit)
+    if (ctx->call_depth && !ctx->do_exit)
     {
-        ctx.call_depth--;
-        ctx.pc   = ctx.calls[ctx.call_depth].save_pc;
-        ctx.size = ctx.calls[ctx.call_depth].save_size;
+        ctx->call_depth--;
+        ctx->pc   = ctx->calls[ctx->call_depth].save_pc;
+        ctx->size = ctx->calls[ctx->call_depth].save_size;
         goto restart;
     }
-    if (ctx.locals)
-        free(ctx.locals);
-    if (ctx.cpool)
-        free(ctx.cpool);
 }
