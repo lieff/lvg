@@ -30,6 +30,8 @@ ASClass *g_classes[] =
 
 int g_num_classes = sizeof(g_classes)/sizeof(g_classes[0]);
 
+void createEmptyMovieClip(void *ctx, uint8_t *a, int nargs);
+
 ASMember g_movieclip_members[] =
 {
     // properties
@@ -101,7 +103,7 @@ ASMember g_movieclip_members[] =
     { "beginFill",     { { .str = 0 }, ASVAL_NATIVE_FN } }, //(rgb: Number, [alpha: Number]) : Void
     { "beginGradientFill", { { .str = 0 }, ASVAL_NATIVE_FN } }, //(fillType: String, colors: Array, alphas: Array, ratios: Array, matrix: Object, [spreadMethod: String], [interpolationMethod: String], [focalPointRatio: Number]) : Void
     { "clear",         { { .str = 0 }, ASVAL_NATIVE_FN } }, //() : Void
-    { "createEmptyMovieClip", { { .str = 0 }, ASVAL_NATIVE_FN } }, //(name: String, depth: Number) : MovieClip
+    { "createEmptyMovieClip", { { .str = (const char *)createEmptyMovieClip }, ASVAL_NATIVE_FN } }, //(name: String, depth: Number) : MovieClip
     { "createTextField", { { .str = 0 }, ASVAL_NATIVE_FN } }, //(instanceName: String, depth: Number, x: Number, y: Number, width: Number, height: Number) : TextField
     { "curveTo",       { { .str = 0 }, ASVAL_NATIVE_FN } }, //(controlX: Number, controlY: Number, anchorX: Number, anchorY: Number) : Void
     { "duplicateMovieClip", { { .str = 0 }, ASVAL_NATIVE_FN } }, //(name: String, depth: Number, [initObject: Object]) : MovieClip
@@ -146,6 +148,8 @@ ASClass g_movieclip =
 
 ASMember g_properties[] =
 {
+    { "this", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } },
+    { "_root", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } },
     { "_accProps", { { .str = 0 }, ASVAL_CLASS } },
     { "_focusrect", { { .str = 0 }, ASVAL_CLASS } },
     { "_global", { { .str = 0 }, ASVAL_CLASS } },
@@ -154,10 +158,8 @@ ASMember g_properties[] =
     { "maxscroll", { { .str = 0 }, ASVAL_CLASS } },
     { "_parent", { { .str = 0 }, ASVAL_CLASS } },
     { "_quality", { { .str = 0 }, ASVAL_CLASS } },
-    { "_root", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } },
     { "scroll", { { .str = 0 }, ASVAL_CLASS } },
-    { "_soundbuftime", { { .str = 0 }, ASVAL_CLASS } },
-    { "this", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } }
+    { "_soundbuftime", { { .str = 0 }, ASVAL_CLASS } }
 };
 
 int g_num_properties = sizeof(g_properties)/sizeof(g_properties[0]);
