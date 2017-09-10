@@ -938,6 +938,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
 #ifndef _TEST
                     printf("place id=%d have action in event %i\n", p.id, i);
 #endif
+                    if (g->events[i])
+                        free(g->events[i]);
                     g->events[i] = p.actions[i];
                 }
         } else if (ST_DEFINESPRITE == tag->id)
