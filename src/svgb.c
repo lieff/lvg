@@ -77,8 +77,8 @@ static void saveObject(FILE *file, LVGObject *o)
     fwrite(&o->depth, 1, 4, file);
     fwrite(&o->ratio, 1, 4, file);
     fwrite(&o->t, 1, 4*6, file);
-    fwrite(&o->color_mul, 1, 4*4, file);
-    fwrite(&o->color_add, 1, 4*4, file);
+    fwrite(&o->cxform.mul, 1, 4*4, file);
+    fwrite(&o->cxform.add, 1, 4*4, file);
 }
 
 static void saveFrame(FILE *file, LVGMovieClipFrame *frame)

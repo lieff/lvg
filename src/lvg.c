@@ -330,8 +330,8 @@ static char *loadObject(char *buf, LVGObject *o)
     READ(&o->depth, 4);
     READ(&o->ratio, 4);
     READ(&o->t, 4*6);
-    READ(&o->color_mul, 4*4);
-    READ(&o->color_add, 4*4);
+    READ(&o->cxform.mul, 4*4);
+    READ(&o->cxform.add, 4*4);
     return buf;
 }
 
@@ -395,9 +395,9 @@ fail:
     return clip;
 }
 
-void lvgDrawShape(NSVGshape *shape, LVGObject *o)
+void lvgDrawShape(NSVGshape *shape, LVGColorTransform *cxform)
 {
-    g_render->render_shape(g_render_obj, shape, o);
+    g_render->render_shape(g_render_obj, shape, cxform);
 }
 
 void lvgDrawSVG(NSVGimage *image)
@@ -411,7 +411,13 @@ void lvgDrawSVG(NSVGimage *image)
     }
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
+static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxform)
+{
+    newcxform->add[0] += cxform->add[0]; newcxform->add[1] += cxform->add[1]; newcxform->add[2] += cxform->add[2]; newcxform->add[3] += cxform->add[3];
+    newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3];
+}
+
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGColorTransform *cxform, int next_frame)
 {
     int i, j, nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
@@ -451,8 +457,10 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         g_render->set_transform(g_render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type)
         {
+            LVGColorTransform newcxform = *cxform;
+            combine_cxform(&newcxform, &o->cxform);
             for (j = 0; j < clip->shapes[o->id].num_shapes; j++)
-                lvgDrawShape(&clip->shapes[o->id].shapes[j], o);
+                lvgDrawShape(&clip->shapes[o->id].shapes[j], &newcxform);
         } else
         if (LVG_OBJ_IMAGE == o->type)
         {
@@ -518,7 +526,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         } else
         if (LVG_OBJ_GROUP == o->type)
         {
-            lvgDrawClipGroup(clip, clip->groups + o->id, next_frame);
+            LVGColorTransform newcxform = *cxform;
+            combine_cxform(&newcxform, &o->cxform);
+            lvgDrawClipGroup(clip, clip->groups + o->id, &newcxform, next_frame);
         } else
         if (LVG_OBJ_BUTTON == o->type)
         {
@@ -533,10 +543,12 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
             }
             for (j = 0; j < nshapes; j++)
             {
+                LVGColorTransform newcxform = *cxform;
+                combine_cxform(&newcxform, &ob->cxform);
                 if (LVG_OBJ_SHAPE != ob->type)
                     continue;
                 for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
-                    lvgDrawShape(&clip->shapes[ob->id].shapes[k], ob);
+                    lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform);
                 ob++;
             }
         }
@@ -565,7 +577,10 @@ void lvgDrawClip(LVGMovieClip *clip)
 #else
     int next_frame = 1;
 #endif
-    lvgDrawClipGroup(clip, clip->groups, next_frame);
+    LVGColorTransform startcxform;
+    memset(&startcxform, 0, sizeof(startcxform));
+    startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
+    lvgDrawClipGroup(clip, clip->groups, &startcxform, next_frame);
 }
 
 static void deletePaint(NSVGpaint* paint)

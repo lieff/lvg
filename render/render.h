@@ -19,16 +19,16 @@ typedef struct render
     int (*cache_gradient)(NSVGpaint *fill);
     void (*free_image)(int image);
     void (*update_image)(void *render, int image, const void *rgba);
-    void (*render_shape)(void *render, NSVGshape *shape, LVGObject *o);
+    void (*render_shape)(void *render, NSVGshape *shape, LVGColorTransform *cxform);
     void (*render_image)(void *render, int image);
     void (*set_transform)(void *render, float *t, int reset);
     void (*get_transform)(void *render, float *t);
 } render;
 
 NVGcolor nvgColorU32(uint32_t c);
-NVGcolor transformColor(NVGcolor color, LVGObject *o);
-int LinearGradientStops(NSVGgradient *gradient, LVGObject *o);
-int RadialGradientStops(NSVGgradient *gradient, LVGObject *o);
+NVGcolor transformColor(NVGcolor color, LVGColorTransform *x);
+int LinearGradientStops(NSVGgradient *gradient, LVGColorTransform *x);
+int RadialGradientStops(NSVGgradient *gradient, LVGColorTransform *x);
 void gl_free_image(int image);
 
 typedef float Transform3x2[2][3];

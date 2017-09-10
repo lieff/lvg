@@ -14,7 +14,7 @@
 #include "render.h"
 #include "nanovg_gl.h"
 
-static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     /*float sx = shape->bounds[0];
@@ -67,7 +67,7 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
         nvgStrokePaint(vg, p);
 }
 
-static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     float *xf = gradient->xform;
@@ -103,7 +103,7 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
         nvgStrokePaint(vg, p);
 }
 
-static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject *o, int is_fill)
+static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGpaint *sp = is_fill ? &shape->fill : &shape->stroke;
     GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(vg)->userPtr;
@@ -150,7 +150,7 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGObject
         nvgStrokePaint(vg, p);
 }
 
-static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
+static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGColorTransform *cxform)
 {
     int i;
     NSVGpath *path;
@@ -171,17 +171,17 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
     if (NSVG_PAINT_NONE != shape->fill.type)
     {
         if (NSVG_PAINT_COLOR == shape->fill.type)
-            nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), o));
+            nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), cxform));
         else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, o, 1);
+            nvgSVGLinearGrad(vg, shape, cxform, 1);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-            nvgSVGRadialGrad(vg, shape, o, 1);
+            nvgSVGRadialGrad(vg, shape, cxform, 1);
         else if (NSVG_PAINT_IMAGE == shape->fill.type)
         {
             /*int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
             NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
             nvgFillPaint(vg, imgPaint);*/
-            ImagePaint(vg, shape, o, 1);
+            ImagePaint(vg, shape, cxform, 1);
         }
         if (NSVG_FILLRULE_EVENODD == shape->fillRule)
             nvgPathWinding(vg, NVG_HOLE);
@@ -190,11 +190,11 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGObject *o)
     if (NSVG_PAINT_NONE != shape->stroke.type)
     {
         if (NSVG_PAINT_COLOR == shape->stroke.type)
-            nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), o));
+            nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), cxform));
         else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
-            nvgSVGLinearGrad(vg, shape, o, 0);
+            nvgSVGLinearGrad(vg, shape, cxform, 0);
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
-            nvgSVGRadialGrad(vg, shape, o, 0);
+            nvgSVGRadialGrad(vg, shape, cxform, 0);
         nvgStrokeWidth(vg, shape->strokeWidth);
         nvgStroke(vg);
     }
@@ -270,10 +270,10 @@ static void nvg_update_image(void *render, int image, const void *rgba)
     nvgUpdateImage(vg, image, rgba);
 }
 
-static void nvg_render_shape(void *render, NSVGshape *shape, LVGObject *o)
+static void nvg_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform)
 {
     NVGcontext *vg = render;
-    nvgDrawShape(vg, shape, o);
+    nvgDrawShape(vg, shape, cxform);
 }
 
 static void nvg_render_image(void *render, int image)

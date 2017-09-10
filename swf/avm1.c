@@ -239,12 +239,7 @@ static void action_quality(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_stop_sounds(LVGActionCtx *ctx, uint8_t *a)
 {
-    int sound = *(uint16_t*)a;
-    if (sound)
-    {
-        lvgPlaySound(ctx->clip->sounds + sound - 1);
-    } else
-        lvgStopAudio();
+    lvgStopAudio();
 }
 
 static void action_add(LVGActionCtx *ctx, uint8_t *a)
@@ -584,7 +579,17 @@ static void action_type_of(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_target_path(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_enumerate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_add2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_less2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_less2(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_BOOL(res, (vb < va) ? 1 : 0)
+}
+
 static void action_equals2(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
@@ -901,6 +906,12 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
     }
 }
 
+static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
+{
+    int sound = *(uint16_t*)(a + 2);
+    lvgPlaySound(ctx->clip->sounds + sound);
+}
+
 typedef struct
 {
     void      (*vm_func)(LVGActionCtx *ctx, uint8_t *a);
@@ -1039,7 +1050,8 @@ const ActionEntry g_avm1_actions[256] =
     /* version 4 */
     [ACTION_IF]                = { action_if,                DBG("If", 4)              1, 0 },
     [ACTION_CALL]              = { 0,                        DBG("Call", 4)           -1, -1 },
-    [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 }
+    [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 },
+    [ACTION_PLAY_LVG_SOUND]    = { action_play_lvg_sound,    DBG("PlayLVGSound", 0)    0, 0 },
 };
 
 void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group)

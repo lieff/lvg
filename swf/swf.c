@@ -370,20 +370,21 @@ static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int so
 {
     assert(frame_num >= 0);
     LVGMovieClipFrame *frame = group->frames + frame_num;
-    uint8_t buf[3];
-    buf[0] = ACTION_STOP_SOUNDS;
-    *(uint16_t*)(buf + 1) = sound_id + 1;
+    uint8_t buf[5];
+    buf[0] = ACTION_PLAY_LVG_SOUND;
+    *(uint16_t*)(buf + 1) = 2;
+    *(uint16_t*)(buf + 3) = sound_id;
     if (!frame->actions)
     {
-        frame->actions = realloc(frame->actions, 4 + 3);
-        *(uint32_t*)frame->actions = 3;
-        memcpy(frame->actions + 4, buf, 3);
+        frame->actions = realloc(frame->actions, 4 + 5);
+        *(uint32_t*)frame->actions = 5;
+        memcpy(frame->actions + 4, buf, 5);
     } else
     {
         uint32_t size = *(uint32_t*)frame->actions;
-        frame->actions = realloc(frame->actions, 4 + size + 3);
-        memmove(frame->actions + 4 + 3, frame->actions + 4, size);
-        memcpy(frame->actions + 4, buf, 3);
+        frame->actions = realloc(frame->actions, 4 + size + 5);
+        memmove(frame->actions + 4 + 5, frame->actions + 4, size);
+        memcpy(frame->actions + 4, buf, 5);
     }
 }
 
@@ -582,7 +583,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
                         int frame_size = mp3_decode(dec, buf, buf_size, frame_buf, &info);
                         assert(frame_size && info.audio_bytes > 0);
-                        if (!frame_size || info.audio_bytes <= 0)
+                        if (frame_size <= 0 || info.audio_bytes <= 0)
                             break;
                         assert(info.channels == sound->channels);
                         assert(info.sample_rate == sound->rate);
@@ -726,14 +727,14 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                         o->t[3] = m.sy/65536.0f;
                         o->t[4] = m.tx/20.0f;
                         o->t[5] = m.ty/20.0f;
-                        o->color_mul[0] = cx.r0/256.0f;
-                        o->color_mul[1] = cx.g0/256.0f;
-                        o->color_mul[2] = cx.b0/256.0f;
-                        o->color_mul[3] = cx.a0/256.0f;
-                        o->color_add[0] = cx.r1/256.0f;
-                        o->color_add[1] = cx.g1/256.0f;
-                        o->color_add[2] = cx.b1/256.0f;
-                        o->color_add[3] = cx.a1/256.0f;
+                        o->cxform.mul[0] = cx.r0/256.0f;
+                        o->cxform.mul[1] = cx.g0/256.0f;
+                        o->cxform.mul[2] = cx.b0/256.0f;
+                        o->cxform.mul[3] = cx.a0/256.0f;
+                        o->cxform.add[0] = cx.r1/256.0f;
+                        o->cxform.add[1] = cx.g1/256.0f;
+                        o->cxform.add[2] = cx.b1/256.0f;
+                        o->cxform.add[3] = cx.a1/256.0f;
                     }
                 }
                 while (offsetpos)
@@ -1007,14 +1008,14 @@ do_show_frame:
                 o->t[3] = m->sy/65536.0f;
                 o->t[4] = m->tx/20.0f;
                 o->t[5] = m->ty/20.0f;
-                o->color_mul[0] = cx->r0/256.0f;
-                o->color_mul[1] = cx->g0/256.0f;
-                o->color_mul[2] = cx->b0/256.0f;
-                o->color_mul[3] = cx->a0/256.0f;
-                o->color_add[0] = cx->r1/256.0f;
-                o->color_add[1] = cx->g1/256.0f;
-                o->color_add[2] = cx->b1/256.0f;
-                o->color_add[3] = cx->a1/256.0f;
+                o->cxform.mul[0] = cx->r0/256.0f;
+                o->cxform.mul[1] = cx->g0/256.0f;
+                o->cxform.mul[2] = cx->b0/256.0f;
+                o->cxform.mul[3] = cx->a0/256.0f;
+                o->cxform.add[0] = cx->r1/256.0f;
+                o->cxform.add[1] = cx->g1/256.0f;
+                o->cxform.add[2] = cx->b1/256.0f;
+                o->cxform.add[3] = cx->a1/256.0f;
             }
             group->num_frames++;
             if (ST_END == tag->id)

@@ -1207,7 +1207,7 @@ TAG * swf_ReadTag(reader_t*reader, TAG * prev)
   t->id  = id;
 
   if (t->len)
-  { t->data = (U8*)malloc(t->len);
+  { t->data = (U8*)malloc(t->len + 4); // pad for mp3 bitbuf
     t->memsize = t->len;
     if (reader->read(reader, t->data, t->len) != t->len) {
       #ifdef DEBUG_RFXSWF
@@ -1454,10 +1454,7 @@ int swf_ReadSWF2(reader_t*reader, SWF * swf)   // Reads SWF to memory (malloc'ed
     int len;
     TAG * t;
     TAG t1;
-#ifdef HAVE_ZLIB
-    reader_t zreader;
-#endif
-    if ((len = reader->read(reader ,b,8))<8) return -1;
+    if ((len = reader->read(reader, b, 8)) < 8) return -1;
 
     if (b[0]!='F' && b[0]!='C') return -1;
     if (b[1]!='W') return -1;
@@ -1467,12 +1464,7 @@ int swf_ReadSWF2(reader_t*reader, SWF * swf)   // Reads SWF to memory (malloc'ed
     swf->fileSize    = GET32(&b[4]);
 
     if(swf->compressed) {
-#ifdef HAVE_ZLIB
-        reader_init_zlibinflate(&zreader, reader);
-        reader = &zreader;
-#else
         return -1;
-#endif
     }
     swf->compressed = 0; // derive from version number from now on
 

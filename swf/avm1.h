@@ -111,7 +111,8 @@ typedef enum {
     ACTION_DEFINE_FUNCTION = 0x9B,
     ACTION_IF = 0x9D,
     ACTION_CALL = 0x9E,
-    ACTION_GOTO_FRAME2 = 0x9F
+    ACTION_GOTO_FRAME2 = 0x9F,
+    ACTION_PLAY_LVG_SOUND = 0xA0
 } Actions;
 
 typedef enum {

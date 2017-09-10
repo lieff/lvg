@@ -17,12 +17,17 @@ enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
 typedef struct LVGActionCtx LVGActionCtx;
 
+typedef struct LVGColorTransform
+{
+    float mul[4];
+    float add[4];
+} LVGColorTransform;
+
 typedef struct LVGObject
 {
     int id, type, depth, ratio;
     float t[6];
-    float color_mul[4];
-    float color_add[4];
+    LVGColorTransform cxform;
 } LVGObject;
 
 typedef struct LVGMovieClipFrame

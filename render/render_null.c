@@ -41,7 +41,7 @@ static void null_update_image(void *render, int image, const void *rgba)
 {
 }
 
-static void null_render_shape(void *render, NSVGshape *shape, LVGObject *o)
+static void null_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform)
 {
 }
 
