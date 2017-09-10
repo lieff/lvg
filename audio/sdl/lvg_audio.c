@@ -17,6 +17,7 @@
 #ifndef MIN
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
+#define SDL2
 
 //static struct rs_data *g_resample;
 SDL_AudioCVT g_cvt, g_cvt_record;
@@ -24,7 +25,9 @@ SDL_AudioCallback g_audio_cb;
 void *g_audio_cb_user_data;
 SDL_AudioCallback g_record_cb;
 void *g_record_cb_user_data;
-int g_dev = -1, g_dev_record = -1;
+#ifdef SDL2
+int g_dev, g_dev_record;
+#endif
 
 /*struct
 {
@@ -149,14 +152,13 @@ static void sound_play_cb(void *udata, char *stream, int len)
         memset(stream, 0, len);
 }
 
-#define SDL2
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata)
 {
 #ifdef SDL2
-    if (!is_capture && g_dev >= 0)
+    if (!is_capture && g_dev > 0)
         return -1;
 #else
-    if (is_capture || g_dev >= 0)
+    if (is_capture)
         return -1;
 #endif
     SDL_AudioSpec wanted, have;
@@ -178,7 +180,7 @@ int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_c
     }
 #ifdef SDL2
     int dev = SDL_OpenAudioDevice(NULL, is_capture, &wanted, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
-    if (dev < 0)
+    if (dev <= 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
         return -1;
