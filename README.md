@@ -76,6 +76,7 @@ ninja
 
  * Use other scripting lanuages like [JerryScript](https://github.com/jerryscript-project/jerryscript) and [AngelScript](http://angelcode.com/angelscript/).
  * Shaders and 3D support.
+ * Parallel shape\image decoding and use file compression with parallel decoding support (like pbzip2).
 
 ## Interesting graphics libraries
 
