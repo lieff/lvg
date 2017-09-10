@@ -48,7 +48,7 @@ double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
 static const char *g_main_script;
-static int is_swf;
+static int is_swf, b_no_actionscript;
 #ifdef EMSCRIPTEN
 static int is_gles3;
 #endif
@@ -421,31 +421,34 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
 {
     int i, j, nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
-    if (!group->vm)
+    if (!b_no_actionscript)
     {
-        group->vm = malloc(sizeof(LVGActionCtx));
-        lvgInitVM(group->vm, clip, group);
-    }
-    for (i = 0; i < group->num_group_labels; i++)
-    {
-        LVGGroupLabel *gl = &group->group_labels[i];
-        ASVal *v = create_local(group->vm, gl->name);
-        v->type = ASVAL_CLASS;
-        v->cls = &g_movieclip;
-    }
-    if ((group->cur_frame + 1) != group->last_acton_frame)
-    {   // call frame actions only once
-        group->last_acton_frame = group->cur_frame + 1;
-        lvgExecuteActions(group->vm, frame->actions, 0);
-    }
-    for (i = 0; i < group->num_timers; i++)
-    {
-        LVGTimer *t = group->timers + i;
-        double time = g_time - t->last_time;
-        if (time > t->timeout)
+        if (!group->vm)
         {
-            t->last_time = g_time;
-            lvgExecuteActions(group->vm, t->func, 1);
+            group->vm = malloc(sizeof(LVGActionCtx));
+            lvgInitVM(group->vm, clip, group);
+        }
+        for (i = 0; i < group->num_group_labels; i++)
+        {
+            LVGGroupLabel *gl = &group->group_labels[i];
+            ASVal *v = create_local(group->vm, gl->name);
+            v->type = ASVAL_CLASS;
+            v->cls = &g_movieclip;
+        }
+        if ((group->cur_frame + 1) != group->last_acton_frame)
+        {   // call frame actions only once
+            group->last_acton_frame = group->cur_frame + 1;
+            lvgExecuteActions(group->vm, frame->actions, 0);
+        }
+        for (i = 0; i < group->num_timers; i++)
+        {
+            LVGTimer *t = group->timers + i;
+            double time = g_time - t->last_time;
+            if (time > t->timeout)
+            {
+                t->last_time = g_time;
+                lvgExecuteActions(group->vm, t->func, 1);
+            }
         }
     }
 
@@ -552,7 +555,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             LVGButton *b = clip->buttons + o->id;
             LVGObject *ob = b->up_shapes;
             int nshapes = b->num_up_shapes;
-            if (mkeys)
+            if (mkeys && group->vm)
             {
                 ob = b->down_shapes;
                 nshapes = b->num_down_shapes;
@@ -668,6 +671,8 @@ void lvgCloseClip(LVGMovieClip *clip)
             lvgFreeVM(group->vm);
             free(group->vm);
         }
+        if (group->timers)
+            free(group->timers);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {
@@ -1047,7 +1052,31 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 int main(int argc, char **argv)
 {
 #endif
-    char *file_name = argc > 1 ? argv[1] : "main.lvg";
+    // check switches
+    int i;
+    for(i = 1; i < argc; i++)
+    {
+        if (argv[i][0] != '-')
+            break;
+        switch (argv[i][1])
+        {
+        case 'n': b_no_actionscript = 1; break;
+        default:
+            printf("error: unrecognized option\n");
+            return 1;
+        }
+    }
+    char *file_name;
+    if (argc <= i)
+    {
+#if defined(EMSCRIPTEN)
+        file_name = "main.lvg";
+#else
+        printf("error: not enough parameters\n");
+        return 1;
+#endif
+    } else
+        file_name = argv[i];
     char *e = strrchr(file_name, '.');
     is_swf = e && !strcmp(e, ".swf");
     if (!is_swf && open_lvg(file_name))
