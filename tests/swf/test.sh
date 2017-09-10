@@ -14,9 +14,10 @@ for i in trace/*.swf; do
 tput ed
 echo -ne "(${num_pass} passed, ${num_fail} failed) testing $i\r"
 $($APP $i >$i.failed 2>&1)
-if [ ! $? -eq 0 ]; then
+retval=$?
+if [ ! $retval -eq 0 ]; then
     tput ed
-    echo $i exited with non-zero error code
+    echo $i exited with code=$retval
     num_error=$((num_error + 1))
 fi
 cmp -s $i.failed $i.trace > /dev/null
