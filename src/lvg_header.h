@@ -49,6 +49,14 @@ typedef struct LVGGroupLabel
     int group_num;
 } LVGGroupLabel;
 
+typedef struct LVGTimer
+{
+    uint8_t *func;
+    double last_time;
+    double timeout;
+    int id;
+} LVGTimer;
+
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
@@ -56,7 +64,9 @@ typedef struct LVGMovieClipGroup
     LVGGroupLabel *group_labels;
     uint8_t *events[19]; // swf events
     LVGActionCtx *events_vm; // action script vm for events
-    int num_frames, num_labels, num_group_labels, cur_frame, play_state;
+    LVGActionCtx *vm;        // action script vm for frames and timer
+    LVGTimer *timers;
+    int num_frames, num_labels, num_group_labels, num_timers, cur_frame, last_acton_frame, play_state;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection

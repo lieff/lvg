@@ -578,7 +578,15 @@ static void action_init_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_type_of(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_target_path(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_enumerate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_add2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_add2(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    *res = *se_b; // TODO: allocate with gc and concatenate
+}
+
 static void action_less2(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
@@ -652,7 +660,9 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
             }
             return;
         }
+#ifdef _TEST
     assert(0);
+#endif
 }
 
 static void action_increment(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -732,7 +742,13 @@ static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
     printf("URL=%s target=%s", url, target);
 }
 
-static void action_store_register(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_store_register(LVGActionCtx *ctx, uint8_t *a)
+{
+    int reg = *(uint8_t*)(a + 2);
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    ctx->regs[reg] = *se;
+}
+
 static void action_constant_pool(LVGActionCtx *ctx, uint8_t *a)
 {
     //int size = *(uint16_t*)a;
@@ -1078,10 +1094,18 @@ void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function)
 {
     if (!actions)
         return;
-    uint32_t size = is_function ? *(uint16_t*)actions : *(uint32_t*)actions;
-    actions += 4;
+    if (is_function)
+    {
+        ctx->size = *(uint16_t*)actions;
+        actions += 2;
+        // TODO: use DEFINEFUNCTION2 flags
+        ctx->regs[1] = *search_var(ctx, "_root");
+    } else
+    {
+        ctx->size = *(uint32_t*)actions;
+        actions += 4;
+    }
     ctx->actions = actions;
-    ctx->size = size;
     ctx->pc = 0;
 restart:
     for (; ctx->pc < ctx->size;)

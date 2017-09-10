@@ -421,16 +421,33 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
 {
     int i, j, nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
-    LVGActionCtx ctx;
-    lvgInitVM(&ctx, clip, group);
+    if (!group->vm)
+    {
+        group->vm = malloc(sizeof(LVGActionCtx));
+        lvgInitVM(group->vm, clip, group);
+    }
     for (i = 0; i < group->num_group_labels; i++)
     {
         LVGGroupLabel *gl = &group->group_labels[i];
-        ASVal *v = create_local(&ctx, gl->name);
+        ASVal *v = create_local(group->vm, gl->name);
         v->type = ASVAL_CLASS;
         v->cls = &g_movieclip;
     }
-    lvgExecuteActions(&ctx, frame->actions, 0);
+    if ((group->cur_frame + 1) != group->last_acton_frame)
+    {   // call frame actions only once
+        group->last_acton_frame = group->cur_frame + 1;
+        lvgExecuteActions(group->vm, frame->actions, 0);
+    }
+    for (i = 0; i < group->num_timers; i++)
+    {
+        LVGTimer *t = group->timers + i;
+        double time = g_time - t->last_time;
+        if (time > t->timeout)
+        {
+            t->last_time = g_time;
+            lvgExecuteActions(group->vm, t->func, 1);
+        }
+    }
 
     if (group->events[1])
     {
@@ -539,7 +556,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             {
                 ob = b->down_shapes;
                 nshapes = b->num_down_shapes;
-                lvgExecuteActions(&ctx, b->actions, 0);
+                lvgExecuteActions(group->vm, b->actions, 0);
             }
             for (j = 0; j < nshapes; j++)
             {
@@ -554,7 +571,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
-    lvgFreeVM(&ctx);
 #ifdef _TEST
     if (next_frame)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
@@ -647,7 +663,11 @@ void lvgCloseClip(LVGMovieClip *clip)
             lvgFreeVM(group->events_vm);
             free(group->events_vm);
         }
-
+        if (group->vm)
+        {
+            lvgFreeVM(group->vm);
+            free(group->vm);
+        }
     }
     for (i = 0; i < clip->num_sounds; i++)
     {

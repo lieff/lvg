@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 #include <strings.h>
 
 ASMember g_stage_members[] =
@@ -24,7 +25,7 @@ ASMember g_stage_members[] =
 
 ASClass g_stage =
 {
-    "Stage", &g_stage_members[0], sizeof(g_stage_members)/sizeof(g_stage_members[0])
+    "Stage", &g_stage_members[0], 0, sizeof(g_stage_members)/sizeof(g_stage_members[0])
 };
 
 static void math_abs(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
@@ -203,7 +204,7 @@ ASMember g_math_members[] =
 
 ASClass g_math =
 {
-    "Math", &g_math_members[0], sizeof(g_math_members)/sizeof(g_math_members[0])
+    "Math", &g_math_members[0], 0, sizeof(g_math_members)/sizeof(g_math_members[0])
 };
 
 ASVal g_classes[] =
@@ -392,8 +393,48 @@ ASMember g_movieclip_members[] =
 
 ASClass g_movieclip =
 {
-    "MovieClip", &g_movieclip_members[0], sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0])
+    "MovieClip", &g_movieclip_members[0], 0, sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0])
 };
+
+static void setInterval(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+{
+    assert(2 == nargs);
+    ASVal *se_func = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_timeout = se_func + 1;
+    ctx->stack_ptr += (int32_t)nargs - 1;
+    assert(ASVAL_FUNCTION == se_func->type);
+    assert(ASVAL_INT == se_timeout->type || ASVAL_DOUBLE == se_timeout->type || ASVAL_FLOAT == se_timeout->type);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (ctx->group->num_timers > 10)
+    {
+        SET_INT(res, 0);
+        return;
+    }
+    ctx->group->timers = realloc(ctx->group->timers, (ctx->group->num_timers + 1)*sizeof(ctx->group->timers[0]));
+    LVGTimer *t = ctx->group->timers + ctx->group->num_timers++;
+    t->func = (uint8_t *)se_func->str;
+    t->last_time = g_time;
+    t->timeout = to_double(se_timeout);
+    static int counter = 0;
+    t->id = ++counter;
+    SET_INT(res, t->id);
+}
+
+static void clearInterval(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+{
+    assert(1 == nargs);
+    ASVal *se_id = &ctx->stack[ctx->stack_ptr];
+    assert(ASVAL_INT == se_id->type || ASVAL_DOUBLE == se_id->type || ASVAL_FLOAT == se_id->type);
+    int id = to_int(se_id);
+    for (int i = 0; i < ctx->group->num_timers; i++)
+        if (ctx->group->timers[i].id == id)
+        {
+            memmove(&ctx->group->timers[i], &ctx->group->timers[i + 1], (ctx->group->num_timers - i - 1)*sizeof(ctx->group->timers[0]));
+            ctx->group->num_timers--;
+            return;
+        }
+    assert(0);
+}
 
 ASMember g_properties[] =
 {
@@ -408,7 +449,10 @@ ASMember g_properties[] =
     { "_parent", { { .str = 0 }, ASVAL_CLASS } },
     { "_quality", { { .str = 0 }, ASVAL_CLASS } },
     { "scroll", { { .str = 0 }, ASVAL_CLASS } },
-    { "_soundbuftime", { { .str = 0 }, ASVAL_CLASS } }
+    { "_soundbuftime", { { .str = 0 }, ASVAL_CLASS } },
+    // global functions
+    { "setInterval", { { .fn = setInterval }, ASVAL_NATIVE_FN } },
+    { "clearInterval", { { .fn = clearInterval }, ASVAL_NATIVE_FN } }
 };
 
 int g_num_properties = sizeof(g_properties)/sizeof(g_properties[0]);

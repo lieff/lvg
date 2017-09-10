@@ -147,6 +147,7 @@ typedef struct ASClass
 {
     const char *name;
     ASMember *members;
+    void *priv;
     int num_members;
 } ASClass;
 

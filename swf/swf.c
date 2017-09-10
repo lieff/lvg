@@ -923,7 +923,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
             if (flags & PF_NAME)
             {   // name to access sprite is action script
-                assert(sprite_type == idtable[p.id].type);
+                assert(sprite_type == idtable[p.id].type || none_type == idtable[p.id].type/*text*/);
                 group->group_labels = realloc(group->group_labels, (group->num_group_labels + 1)*sizeof(group->group_labels[0]));
                 LVGGroupLabel *gl = group->group_labels + group->num_group_labels++;
                 gl->name = strdup(p.name);
