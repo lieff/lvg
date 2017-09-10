@@ -38,13 +38,20 @@ typedef struct LVGFrameLabel
     int frame_num;
 } LVGFrameLabel;
 
+typedef struct LVGGroupLabel
+{
+    const char *name;
+    int group_num;
+} LVGGroupLabel;
+
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
     LVGFrameLabel *labels;
+    LVGGroupLabel *group_labels;
     uint8_t *events[19]; // swf events
     LVGActionCtx *events_vm; // action script vm for events
-    int num_frames, num_labels, cur_frame, play_state;
+    int num_frames, num_labels, num_group_labels, cur_frame, play_state;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection
@@ -116,7 +123,7 @@ void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
 // action block begins with 32bit size, functions begins with 16bit size
 void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function);
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group);
 void lvgFreeVM(LVGActionCtx *ctx);
 
 #ifdef __TINYC__

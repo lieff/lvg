@@ -413,10 +413,17 @@ void lvgDrawSVG(NSVGimage *image)
 
 static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int next_frame)
 {
-    int nframe = group->cur_frame;
+    int i, j, nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
     LVGActionCtx ctx;
-    lvgInitVM(&ctx, clip);
+    lvgInitVM(&ctx, clip, group);
+    for (i = 0; i < group->num_group_labels; i++)
+    {
+        LVGGroupLabel *gl = &group->group_labels[i];
+        ASVal *v = create_local(&ctx, gl->name);
+        v->type = ASVAL_CLASS;
+        v->cls = &g_movieclip;
+    }
     lvgExecuteActions(&ctx, frame->actions, 0);
 
     if (group->events[1])
@@ -424,7 +431,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         if (!group->events_vm)
         {
             group->events_vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(group->events_vm, clip);
+            lvgInitVM(group->events_vm, clip, group);
         }
         if (group->events[0])
             lvgExecuteActions(group->events_vm, group->events[0], 0);
@@ -433,16 +440,18 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
 
     float save_transform[6];
     assert(nframe < group->num_frames);
+#ifndef _TEST
     if (next_frame)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
-    for (int i = 0; i < group->frames[nframe].num_objects; i++)
+#endif
+    for (i = 0; i < group->frames[nframe].num_objects; i++)
     {
         LVGObject *o = &group->frames[nframe].objects[i];
         g_render->get_transform(g_render_obj, save_transform);
         g_render->set_transform(g_render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type)
         {
-            for (int j = 0; j < clip->shapes[o->id].num_shapes; j++)
+            for (j = 0; j < clip->shapes[o->id].num_shapes; j++)
                 lvgDrawShape(&clip->shapes[o->id].shapes[j], o);
         } else
         if (LVG_OBJ_IMAGE == o->type)
@@ -522,7 +531,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
                 nshapes = b->num_down_shapes;
                 lvgExecuteActions(&ctx, b->actions, 0);
             }
-            for (int j = 0; j < nshapes; j++)
+            for (j = 0; j < nshapes; j++)
             {
                 if (LVG_OBJ_SHAPE != ob->type)
                     continue;
@@ -534,10 +543,15 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, int n
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
     lvgFreeVM(&ctx);
+#ifdef _TEST
+    if (next_frame)
+        group->cur_frame = (group->cur_frame + 1) % group->num_frames;
+#endif
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
 {
+#ifndef _TEST
     int next_frame = 0;
     if (LVG_PLAYING == clip->groups[0].play_state)
     {
@@ -548,6 +562,9 @@ void lvgDrawClip(LVGMovieClip *clip)
         }
     } else
         clip->last_time = g_time;
+#else
+    int next_frame = 1;
+#endif
     lvgDrawClipGroup(clip, clip->groups, next_frame);
 }
 
@@ -602,8 +619,11 @@ void lvgCloseClip(LVGMovieClip *clip)
         }
         for (j = 0; j < group->num_labels; j++)
             free((void*)group->labels[j].name);
+        for (j = 0; j < group->num_group_labels; j++)
+            free((void*)group->group_labels[j].name);
         free(group->frames);
         free(group->labels);
+        free(group->group_labels);
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);
@@ -1008,7 +1028,8 @@ int main(int argc, char **argv)
         printf("error: could not open swf file\n");
         return -1;
     }
-    lvgDrawClip(g_clip);
+    for (int i = 0; i < g_clip->groups->num_frames; i++)
+        lvgDrawClip(g_clip);
     lvgCloseClip(g_clip);
     lvgZipClose(&g_zip);
     return 0;

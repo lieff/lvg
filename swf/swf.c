@@ -908,7 +908,6 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
         {
             SWFPLACEOBJECT p;
             int flags = swf_GetPlaceObject(tag, &p, version);
-            swf_PlaceObjectFree(&p);
             if (!(flags & PF_CHAR))
                 p.id = INVALID_ID;
             SWFPLACEOBJECT *target = &placements[p.depth];
@@ -921,6 +920,15 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
+            if (flags & PF_NAME)
+            {   // name to access sprite is action script
+                assert(sprite_type == idtable[p.id].type);
+                group->group_labels = realloc(group->group_labels, (group->num_group_labels + 1)*sizeof(group->group_labels[0]));
+                LVGGroupLabel *gl = group->group_labels + group->num_group_labels++;
+                gl->name = strdup(p.name);
+                gl->group_num = idtable[p.id].lvg_id;
+            }
+            swf_PlaceObjectFree(&p);
             for (i = 0; i < 19; i++)
                 if (p.actions[i])
                 {

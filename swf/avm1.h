@@ -5,7 +5,8 @@
 #define STACK_SIZE 4096
 #define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
 #define SET_DOUBLE(se, number) { (se)->type = ASVAL_DOUBLE; (se)->d_int = number; }
-#define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL; (se)->boolean = value; }
+#define SET_INT(se, number)    { (se)->type = ASVAL_INT;    (se)->i32 = number; }
+#define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL;   (se)->boolean = value; }
 #define SET_UNDEF(se)          { (se)->type = ASVAL_UNDEFINED; (se)->str = 0; }
 
 typedef enum {
@@ -117,7 +118,7 @@ typedef enum {
     ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION, ASVAL_NATIVE_FN
 } ASValType;
 
-typedef void (*as_native_fn)(LVGActionCtx *ctx, uint8_t *a, int nargs);
+typedef void (*as_native_fn)(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs);
 typedef struct ASClass ASClass;
 
 typedef struct ASVal
@@ -129,6 +130,7 @@ typedef struct ASVal
         float f_int;
         double d_int;
         uint32_t ui32;
+        int32_t i32;
         int boolean;
     };
     ASValType type;
@@ -171,7 +173,8 @@ extern ASVal g_classes[];
 extern int g_num_classes;
 extern ASMember g_properties[];
 extern int g_num_properties;
+extern ASClass g_movieclip;
 
 double to_double(ASVal *v);
-uint32_t to_int(ASVal *v);
+int32_t to_int(ASVal *v);
 ASVal *create_local(LVGActionCtx *ctx, const char *name);

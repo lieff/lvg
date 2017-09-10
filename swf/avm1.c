@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <math.h>
 
 #ifdef _TEST
@@ -17,6 +18,112 @@
 #define DBG_BREAK
 #endif
 
+static float read_float(const uint8_t *p)
+{
+    union {
+        float f;
+        uint32_t i;
+        struct {
+            uint16_t s0;
+            uint16_t s1;
+        } s;
+        struct {
+            uint8_t c0;
+            uint8_t c1;
+            uint8_t c2;
+            uint8_t c3;
+        } c;
+    } u;
+
+    u.f = 1.0;
+    switch (u.s.s0)
+    {
+    case 0x0000: // little-endian host
+        memcpy(&u.i, p, 4);
+        break;
+    case 0x3f80: // big-endian host
+        u.c.c0 = p[3];
+        u.c.c1 = p[2];
+        u.c.c2 = p[1];
+        u.c.c3 = p[0];
+        break;
+    default:
+        assert(0);
+    }
+
+    return u.f;
+}
+
+static double read_double(const uint8_t *p)
+{
+    union {
+        double d;
+        uint64_t i;
+        struct {
+            uint32_t l0;
+            uint32_t l1;
+        } l;
+        struct {
+            uint16_t s0;
+            uint16_t s1;
+            uint16_t s2;
+            uint16_t s3;
+        } s;
+        struct {
+            uint8_t c0;
+            uint8_t c1;
+            uint8_t c2;
+            uint8_t c3;
+            uint8_t c4;
+            uint8_t c5;
+            uint8_t c6;
+            uint8_t c7;
+        } c;
+    } u;
+
+    static_assert(sizeof(u) == sizeof(u.i), "double must be 8 bytes");
+
+    // Detect endianness of doubles by storing a value that is
+    // exactly representable and that has different values in the
+    // four 16-bit words.
+    // 0x11223344 is represented as 0x41b1 2233 4400 0000 (bigendian)
+    u.d = 0x11223344;
+    switch (u.s.s0)
+    {
+    case 0x0000: // little-endian host
+        memcpy(&u.l.l1, p, 4);
+        memcpy(&u.l.l0, p + 4, 4);
+        break;
+    case 0x41b1: // big-endian host
+        u.c.c0 = p[3];
+        u.c.c1 = p[2];
+        u.c.c2 = p[1];
+        u.c.c3 = p[0];
+        u.c.c4 = p[7];
+        u.c.c5 = p[6];
+        u.c.c6 = p[5];
+        u.c.c7 = p[4];
+        break;
+    case 0x2233: // word-swapped little-endian host (PDP / ARM FPA)
+        memcpy(&u.i, p, 8);
+        break;
+    case 0x4400: // word-swapped big-endian host: does this exist?
+        u.c.c0 = p[7];
+        u.c.c1 = p[6];
+        u.c.c2 = p[5];
+        u.c.c3 = p[4];
+        u.c.c4 = p[3];
+        u.c.c5 = p[2];
+        u.c.c6 = p[1];
+        u.c.c7 = p[0];
+        break;
+    default:
+        assert(0);
+    }
+
+    return u.d;
+}
+
 double to_double(ASVal *v)
 {
     if (ASVAL_DOUBLE == v->type)
@@ -24,23 +131,28 @@ double to_double(ASVal *v)
     else if (ASVAL_FLOAT == v->type)
         return v->f_int;
     else if (ASVAL_INT == v->type)
-        return v->ui32;
+        return v->i32;
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
     return 0.0;
 }
 
-uint32_t to_int(ASVal *v)
+int32_t to_int(ASVal *v)
 {
     if (ASVAL_DOUBLE == v->type)
         return v->d_int;
     else if (ASVAL_FLOAT == v->type)
         return v->f_int;
     else if (ASVAL_INT == v->type)
-        return v->ui32;
+        return v->i32;
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
     return 0;
+}
+
+int is_number(ASVal *v)
+{
+    return ASVAL_DOUBLE == v->type || ASVAL_FLOAT == v->type || ASVAL_INT == v->type || ASVAL_BOOL == v->type;
 }
 
 static ASVal *search_var(LVGActionCtx *ctx, const char *name)
@@ -76,7 +188,7 @@ ASVal *create_local(LVGActionCtx *ctx, const char *name)
     return &res->val;
 }
 
-static void do_call(LVGActionCtx *ctx, ASVal *var, uint8_t *a, int nargs)
+static void do_call(LVGActionCtx *ctx, ASVal *var, uint8_t *a, uint32_t nargs)
 {
     if (ASVAL_FUNCTION == var->type)
     {
@@ -89,9 +201,7 @@ static void do_call(LVGActionCtx *ctx, ASVal *var, uint8_t *a, int nargs)
     } else
     if (ASVAL_NATIVE_FN == var->type)
     {
-        void (*function)(LVGActionCtx *ctx, uint8_t *a, int nargs) =
-                (void (*)(LVGActionCtx *ctx, uint8_t *a, int nargs))var->str;
-        function(ctx, a, nargs);
+        var->fn(ctx, a, nargs);
     } else
     {
         assert(0);
@@ -309,7 +419,7 @@ static void action_to_integer(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_var = &ctx->stack[ctx->stack_ptr];
     double var = to_double(se_var);
     se_var->type = ASVAL_INT;
-    se_var->ui32 = (uint32_t)floor(var);
+    se_var->i32 = (int32_t)floor(var);
 }
 
 static void action_get_variable(LVGActionCtx *ctx, uint8_t *a)
@@ -392,11 +502,11 @@ static void action_trace(LVGActionCtx *ctx, uint8_t *a)
     if (ASVAL_STRING == se->type)
         printf("%s\n", se->str);
     else if (ASVAL_INT == se->type)
-        printf("%u\n", se->ui32);
+        printf("%d\n", se->i32);
     else if (ASVAL_FLOAT == se->type)
-        printf("%f\n", se->f_int);
+        printf("%.6f\n", se->f_int);
     else if (ASVAL_DOUBLE == se->type)
-        printf("%f\n", se->d_int);
+        printf("%.10f\n", se->d_int);
     else if (ASVAL_CLASS == se->type)
         printf("_level0\n");
     fflush(stdout);
@@ -454,7 +564,7 @@ static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr += 2;
     assert(ASVAL_STRING == se_name->type);
     assert(ASVAL_INT == se_nargs->type || ASVAL_DOUBLE == se_nargs->type || ASVAL_FLOAT == se_nargs->type);
-    int nargs = to_int(se_nargs);
+    uint32_t nargs = to_int(se_nargs);
     ASVal *var = search_var(ctx, se_name->str);
     if (var)
     {
@@ -519,10 +629,22 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp(se_member->str, c->members[i].name))
         {
-            //assert(c->members[i].val.type == se_val->type);
-            if (c->members[i].val.type != se_val->type)
-                return;
-            c->members[i].val.str = se_val->str;
+            int mnum = is_number(&c->members[i].val), vnum = is_number(se_val);
+            if ((mnum && vnum) || c->members[i].val.type == se_val->type)
+                c->members[i].val = *se_val;
+            else if (mnum && ASVAL_STRING == se_val->type)
+            {
+                char *end = 0;
+                long int ival = strtol(se_val->str, &end, 10);
+                if (end && 0 == *end)
+                {
+                    SET_INT(&c->members[i].val, ival);
+                    return;
+                }
+                double dval = strtod(se_val->str, &end);
+                if (end && 0 == *end)
+                    SET_DOUBLE(&c->members[i].val, dval);
+            }
             return;
         }
     assert(0);
@@ -637,7 +759,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
     LVGFrameLabel *l = ctx->group->labels;
     const char *name = (const char *)a + 2;
     for (int i = 0; i < ctx->group->num_labels; i++)
-        if (0 == strcmp(name, l[i].name))
+        if (0 == strcasecmp(name, l[i].name))
         {
             ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
             return;
@@ -689,12 +811,12 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
         switch(type)
         {
         case 0: se->type = ASVAL_STRING; se->str = (const char*)data + 1; size = strlen(se->str) + 1; break;
-        case 1: se->type = ASVAL_FLOAT; se->f_int = *(float*)((char*)data + 1); size = 4; break;
-        case 2: se->type = ASVAL_NULL;
-        case 3: se->type = ASVAL_UNDEFINED;
+        case 1: se->type = ASVAL_FLOAT; se->f_int = read_float((uint8_t*)data + 1); size = 4; break;
+        case 2: se->type = ASVAL_NULL; break;
+        case 3: se->type = ASVAL_UNDEFINED; break;
         case 4: { int reg = *((uint8_t*)data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; size = 1; } break;
         case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
-        case 6: se->type = ASVAL_DOUBLE; se->d_int = *(double*)((char*)data + 1); size = 8; break;
+        case 6: se->type = ASVAL_DOUBLE; se->d_int = read_double((uint8_t*)data + 1); size = 8; break;
         case 7: se->type = ASVAL_INT; se->ui32 = *(uint32_t*)((char*)data + 1); size = 4; break;
         case 8: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)data + 1)]; size = 1; break;
         case 9: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)data + 1)]; size = 2; break;
@@ -715,7 +837,7 @@ static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
 #ifdef _DEBUG
-    if (0 == strcmp(se_url->str, "FSCommand:quit"))
+    if (0 == strcasecmp(se_url->str, "FSCommand:quit"))
         ctx->do_exit = 1;
 #endif
 }
@@ -920,11 +1042,11 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_GOTO_FRAME2]       = { action_goto_frame2,       DBG("GotoFrame2", 4)      1, 0 }
 };
 
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip)
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     memset(ctx, 0, sizeof(*ctx));
     ctx->clip   = clip;
-    ctx->group  = clip->groups;
+    ctx->group  = group;
     ctx->frame  = ctx->group->frames + ctx->group->cur_frame;
     ctx->stack_ptr = sizeof(ctx->stack)/sizeof(ctx->stack[0]) - 1;
     ctx->version = clip->as_version;
