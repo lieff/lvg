@@ -19,6 +19,9 @@ if [ ! $retval -eq 0 ]; then
     tput ed
     echo $i exited with code=$retval
     num_error=$((num_error + 1))
+    if [ $retval -eq 1 ]; then
+        cat $i.failed
+    fi
 fi
 cmp -s $i.failed $i.trace > /dev/null
 if [ $? -eq 1 ]; then
