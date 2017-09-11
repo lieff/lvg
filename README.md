@@ -22,7 +22,7 @@ Render can be done using following backends:
  * [NVIDIA Path Rendering](https://developer.nvidia.com/nv-path-rendering)
  * [NanoVG](https://github.com/memononen/nanovg)
 
-## Current Status:
+## Current Status
 
 Works:
 
@@ -40,13 +40,19 @@ Not works:
  * SWF: network access
  * SWF: audio mixer
 
-[Tiger demo](https://lieff.github.io/lvg_player.html?file=test.lvg)
+## Demos
 
-[Nanovg demo](https://lieff.github.io/lvg_player.html?file=test_nanovg.lvg)
+Basic svg demo (images clickable):
 
-[Nuklear demo](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
+[![SVG Screenshot](images/svg_tiger.png?raw=true)](https://lieff.github.io/lvg_player.html?file=test.lvg)
 
-![Screenshot](svg_tiger.png?raw=true "demo")
+NanoVG demo incapsulated in lvg:
+
+[![NanoVG Screenshot](images/nanovg.png?raw=true)](https://lieff.github.io/lvg_player.html?file=test_nanovg.lvg)
+
+Nuklear GUI demo:
+
+[![Nuklear Screenshot](images/nuklear.png?raw=true)](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
 
 ## Building
 
@@ -90,7 +96,7 @@ ninja
  * https://github.com/micahpearlman/MonkVG
  * https://github.com/KhronosGroup/OpenVG-Registry
 
-## Flash related projects:
+## Flash related projects
 
  * https://www.gnu.org/software/gnash/
  * https://swfdec.freedesktop.org/wiki/
