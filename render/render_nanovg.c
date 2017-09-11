@@ -115,9 +115,9 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorT
     else
         tex->flags |= NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY;
     //if (sp->filtered) TODO
-    int tw, th;
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
+    int tw = tex->width, th = tex->height;
+    //glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
+    //glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
     glBindTexture(GL_TEXTURE_2D, 0);
     float *xf = sp->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
