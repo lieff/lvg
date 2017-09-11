@@ -47,6 +47,7 @@ int width = 0, height = 0;
 double mx = 0, my = 0;
 double g_time;
 int mkeys = 0;
+int last_mkeys;
 static const char *g_main_script;
 static int is_swf, b_no_actionscript;
 #ifdef EMSCRIPTEN
@@ -564,12 +565,42 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         if (LVG_OBJ_BUTTON == o->type)
         {
             LVGButton *b = clip->buttons + o->id;
+            int mouse_hit = 0;
+            float t[6];
+            g_render->get_transform(g_render_obj, t);
+            for (j = 0; j < b->num_hit_shapes; j++)
+            {
+                LVGShapeCollection *col = &clip->shapes[b->hit_shapes->id];
+                for (int k = 0; k < col->num_shapes; k++)
+                {
+                    NSVGshape *s = col->shapes + k;
+                    float x  = s->bounds[0], y  = s->bounds[1];
+                    float x1 = s->bounds[2], y1 = s->bounds[3];
+                    x  = t[0]*x  + t[2]*y  + t[4];
+                    y  = t[1]*x  + t[3]*y  + t[5];
+                    x1 = t[0]*x1 + t[2]*y1 + t[4];
+                    y1 = t[1]*x1 + t[3]*y1 + t[5];
+                    if (mx >= x && mx <=x1 && my >= y && my <=y1)
+                    {
+                        mouse_hit = 1;
+                        break;
+                    }
+                }
+            }
             LVGObject *ob = b->up_shapes;
             int nshapes = b->num_up_shapes;
-            if (mkeys && group->vm)
+            if (mouse_hit && b->num_over_shapes)
+            {
+                ob = b->over_shapes;
+                nshapes = b->num_over_shapes;
+            }
+            if (mouse_hit && (mkeys & 1) && b->num_down_shapes)
             {
                 ob = b->down_shapes;
                 nshapes = b->num_down_shapes;
+            }
+            if (last_mkeys != mkeys && mouse_hit && group->vm)
+            {
                 lvgExecuteActions(group->vm, b->actions, 0);
             }
             for (j = 0; j < nshapes; j++)
@@ -747,6 +778,7 @@ void drawframe()
 
     g_render->end_frame(g_render_obj);
     glfwSwapBuffers(window);
+    last_mkeys = mkeys;
 }
 
 #if ENABLE_SCRIPT && !defined(EMSCRIPTEN) && !defined(__MINGW32__)

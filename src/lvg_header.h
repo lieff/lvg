@@ -152,6 +152,7 @@ extern int winHeight;
 extern int width;
 extern int height;
 extern int mkeys;
+extern int last_mkeys;
 extern double mx;
 extern double my;
 extern double g_time;
