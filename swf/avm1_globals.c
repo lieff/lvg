@@ -28,35 +28,35 @@ ASClass g_stage =
     "Stage", &g_stage_members[0], 0, sizeof(g_stage_members)/sizeof(g_stage_members[0])
 };
 
-static void math_abs(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_abs(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, fabs(va));
 }
 
-static void math_acos(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_acos(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, acos(va));
 }
 
-static void math_asin(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_asin(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, asin(va));
 }
 
-static void math_atan(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_atan(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, atan(va));
 }
 
-static void math_atan2(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_atan2(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
@@ -67,42 +67,42 @@ static void math_atan2(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     SET_DOUBLE(res, atan2(vb, va));
 }
 
-static void math_ceil(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_ceil(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, ceil(va));
 }
 
-static void math_cos(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_cos(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, cos(va));
 }
 
-static void math_exp(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_exp(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, exp(va));
 }
 
-static void math_floor(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_floor(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, floor(va));
 }
 
-static void math_log(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_log(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, exp(va));
 }
 
-static void math_max(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_max(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
@@ -113,7 +113,7 @@ static void math_max(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     SET_DOUBLE(res, fmax(vb, va));
 }
 
-static void math_min(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_min(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
@@ -124,7 +124,7 @@ static void math_min(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     SET_DOUBLE(res, fmin(vb, va));
 }
 
-static void math_pow(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_pow(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
@@ -135,35 +135,35 @@ static void math_pow(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     SET_DOUBLE(res, pow(vb, va));
 }
 
-static void math_random(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_random(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, (double)rand()/(double)RAND_MAX);
 }
 
-static void math_round(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_round(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, floor(va + 0.5));
 }
 
-static void math_sin(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_sin(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, sin(va));
 }
 
-static void math_sqrt(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_sqrt(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
     SET_DOUBLE(se_a, sin(va));
 }
 
-static void math_tan(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void math_tan(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     double va = to_double(se_a);
@@ -215,7 +215,7 @@ ASVal g_classes[] =
 
 int g_num_classes = sizeof(g_classes)/sizeof(g_classes[0]);
 
-static void createEmptyMovieClip(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void createEmptyMovieClip(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_name = &ctx->stack[ctx->stack_ptr];
     ASVal *se_depth = se_name + 1;
@@ -229,7 +229,7 @@ static void createEmptyMovieClip(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     *res = *loc;
 }
 
-static void getBytesLoaded(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void getBytesLoaded(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
@@ -238,12 +238,12 @@ static void getBytesLoaded(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
 
 extern LVGMovieClip *g_clip;
 
-static void gotoAndPlay(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     assert(1 == nargs);
     ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se_frame->type || ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_STRING == se_frame->type);
-    LVGMovieClipGroup *group = g_clip->groups;
+    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
     if (ASVAL_STRING == se_frame->type)
     {
         LVGFrameLabel *l = group->labels;
@@ -260,26 +260,29 @@ static void gotoAndPlay(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     group->play_state = LVG_PLAYING;
 }
 
-static void gotoAndStop(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
-    gotoAndPlay(ctx, a, nargs);
-    g_clip->groups->play_state = LVG_STOPPED;
+    gotoAndPlay(ctx, cls, a, nargs);
+    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
+    group->play_state = LVG_STOPPED;
 }
 
-static void play(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    g_clip->groups->play_state = LVG_PLAYING;
+    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
+    group->play_state = LVG_PLAYING;
 }
 
-static void stop(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    g_clip->groups->play_state = LVG_STOPPED;
+    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
+    group->play_state = LVG_STOPPED;
 }
 
 ASMember g_movieclip_members[] =
@@ -396,7 +399,7 @@ ASClass g_movieclip =
     "MovieClip", &g_movieclip_members[0], 0, sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0])
 };
 
-static void setInterval(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     assert(2 == nargs);
     ASVal *se_func = &ctx->stack[ctx->stack_ptr];
@@ -420,7 +423,7 @@ static void setInterval(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
     SET_INT(res, t->id);
 }
 
-static void clearInterval(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs)
+static void clearInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     assert(1 == nargs);
     ASVal *se_id = &ctx->stack[ctx->stack_ptr];

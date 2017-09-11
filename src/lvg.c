@@ -421,19 +421,35 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
 {
     int i, j, nframe = group->cur_frame;
     LVGMovieClipFrame *frame = group->frames + nframe;
+    int cur_frame = group->cur_frame;
     if (!b_no_actionscript)
     {
         if (!group->vm)
         {
             group->vm = malloc(sizeof(LVGActionCtx));
             lvgInitVM(group->vm, clip, group);
+            for (i = 0; i < clip->num_groups; i++)
+            {
+                LVGMovieClipGroup *g = clip->groups + i;
+                if (!g->movieclip)
+                {
+                    ASClass *cls = create_instance(&g_movieclip);
+                    g->movieclip = cls;
+                    cls->priv = (void*)(size_t)i;
+                }
+            }
         }
-        for (i = 0; i < group->num_group_labels; i++)
+        g_properties[0].val.str = (char *)group->movieclip;        // this
+        g_properties[1].val.str = (char *)clip->groups->movieclip; // _root
+        for (i = 0; i < clip->num_groups; i++)
         {
-            LVGGroupLabel *gl = &group->group_labels[i];
-            ASVal *v = create_local(group->vm, gl->name);
-            v->type = ASVAL_CLASS;
-            v->cls = &g_movieclip;
+            LVGMovieClipGroup *g = clip->groups + i;
+            for (j = 0; j < g->num_group_labels; j++)
+            {
+                LVGGroupLabel *gl = &g->group_labels[j];
+                ASVal *v = create_local(group->vm, gl->name);
+                SET_CLASS(v, (clip->groups + gl->group_num)->movieclip);
+            }
         }
         if ((group->cur_frame + 1) != group->last_acton_frame)
         {   // call frame actions only once
@@ -444,32 +460,27 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         {
             LVGTimer *t = group->timers + i;
             double time = g_time - t->last_time;
-            if (time > t->timeout)
+            if (time > t->timeout/1000.0)
             {
                 t->last_time = g_time;
                 lvgExecuteActions(group->vm, t->func, 1);
             }
         }
-    }
-
-    if (group->events[1])
-    {
-        if (!group->events_vm)
+        if (group->events[1])
         {
-            group->events_vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(group->events_vm, clip, group);
+            if (!group->events_vm)
+            {
+                group->events_vm = malloc(sizeof(LVGActionCtx));
+                lvgInitVM(group->events_vm, clip, group);
+            }
+            if (group->events[0])
+                lvgExecuteActions(group->events_vm, group->events[0], 0);
+            lvgExecuteActions(group->events_vm, group->events[1], 0);
         }
-        if (group->events[0])
-            lvgExecuteActions(group->events_vm, group->events[0], 0);
-        lvgExecuteActions(group->events_vm, group->events[1], 0);
     }
 
     float save_transform[6];
     assert(nframe < group->num_frames);
-#ifndef _TEST
-    if (next_frame)
-        group->cur_frame = (group->cur_frame + 1) % group->num_frames;
-#endif
     for (i = 0; i < group->frames[nframe].num_objects; i++)
     {
         LVGObject *o = &group->frames[nframe].objects[i];
@@ -574,10 +585,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
-#ifdef _TEST
-    if (next_frame)
+    if (next_frame && LVG_PLAYING == group->play_state && cur_frame == group->cur_frame/*not changed by as*/)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
-#endif
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
@@ -671,6 +680,8 @@ void lvgCloseClip(LVGMovieClip *clip)
             lvgFreeVM(group->vm);
             free(group->vm);
         }
+        if (group->movieclip)
+            free_instance(group->movieclip);
         if (group->timers)
             free(group->timers);
     }

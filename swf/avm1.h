@@ -8,6 +8,7 @@
 #define SET_INT(se, number)    { (se)->type = ASVAL_INT;    (se)->i32 = number; }
 #define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL;   (se)->boolean = value; }
 #define SET_UNDEF(se)          { (se)->type = ASVAL_UNDEFINED; (se)->str = 0; }
+#define SET_CLASS(se, cls_val) { (se)->type = ASVAL_CLASS;  (se)->cls = cls_val; }
 
 typedef enum {
     ACTION_END = 0x00,
@@ -119,8 +120,8 @@ typedef enum {
     ASVAL_STRING, ASVAL_FLOAT, ASVAL_DOUBLE, ASVAL_BOOL, ASVAL_INT, ASVAL_NULL, ASVAL_UNDEFINED, ASVAL_CLASS, ASVAL_FUNCTION, ASVAL_NATIVE_FN
 } ASValType;
 
-typedef void (*as_native_fn)(LVGActionCtx *ctx, uint8_t *a, uint32_t nargs);
 typedef struct ASClass ASClass;
+typedef void (*as_native_fn)(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs);
 
 typedef struct ASVal
 {
@@ -180,3 +181,5 @@ extern ASClass g_movieclip;
 double to_double(ASVal *v);
 int32_t to_int(ASVal *v);
 ASVal *create_local(LVGActionCtx *ctx, const char *name);
+ASClass *create_instance(ASClass *base);
+void free_instance(ASClass *cls);

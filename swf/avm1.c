@@ -188,7 +188,22 @@ ASVal *create_local(LVGActionCtx *ctx, const char *name)
     return &res->val;
 }
 
-static void do_call(LVGActionCtx *ctx, ASVal *var, uint8_t *a, uint32_t nargs)
+ASClass *create_instance(ASClass *base)
+{
+    ASClass *cls = malloc(sizeof(ASClass));
+    memcpy(cls, base, sizeof(ASClass));
+    cls->members = malloc(cls->num_members*sizeof(ASMember));
+    memcpy(cls->members, base->members, cls->num_members*sizeof(ASMember));
+    return cls;
+}
+
+void free_instance(ASClass *cls)
+{
+    free(cls->members);
+    free(cls);
+}
+
+static void do_call(LVGActionCtx *ctx, ASClass *c, ASVal *var, uint8_t *a, uint32_t nargs)
 {
     if (ASVAL_FUNCTION == var->type)
     {
@@ -201,7 +216,7 @@ static void do_call(LVGActionCtx *ctx, ASVal *var, uint8_t *a, uint32_t nargs)
     } else
     if (ASVAL_NATIVE_FN == var->type)
     {
-        var->fn(ctx, a, nargs);
+        var->fn(ctx, c, a, nargs);
     } else
     {
         assert(0);
@@ -563,7 +578,7 @@ static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
     ASVal *var = search_var(ctx, se_name->str);
     if (var)
     {
-        do_call(ctx, var, a, nargs);
+        do_call(ctx, 0, var, a, nargs);
         return;
     }
     assert(0);
@@ -681,7 +696,7 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
         if (0 == strcmp(se_method->str, c->members[i].name))
         {
             uint32_t nargs = to_int(se_nargs);
-            do_call(ctx, &c->members[i].val, a, nargs);
+            do_call(ctx, c, &c->members[i].val, a, nargs);
             return;
         }
     assert(0);
