@@ -624,15 +624,11 @@ void lvgDrawClip(LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
-    if (LVG_PLAYING == clip->groups[0].play_state)
+    if ((g_time - clip->last_time) > (1.0/clip->fps))
     {
-        if ((g_time - clip->last_time) > (1.0/clip->fps))
-        {
-            next_frame = 1;
-            clip->last_time += (1.0/clip->fps);
-        }
-    } else
-        clip->last_time = g_time;
+        next_frame = 1;
+        clip->last_time += (1.0/clip->fps);
+    }
 #else
     int next_frame = 1;
 #endif
