@@ -84,6 +84,7 @@ ninja
  * Speed up action script with jit like [sljit](http://sljit.sourceforge.net/).
  * Shaders and 3D support.
  * Parallel shape\image decoding and use file compression with parallel decoding support (like pbzip2).
+ * More audio\video\codec backends.
 
 ## Interesting graphics libraries
 
