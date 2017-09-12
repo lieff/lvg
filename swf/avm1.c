@@ -184,7 +184,9 @@ static ASVal *search_var(LVGActionCtx *ctx, const char *name)
     for (i = 0; i < g_num_classes; i++)
         if (0 == strcmp(g_classes[i].cls->name, name))
             return &g_classes[i];
-    assert(0);
+#ifdef _DEBUG
+    printf("warning: var %s not found\n", name); fflush(stdout);
+#endif
     return 0;
 }
 
@@ -455,8 +457,8 @@ static void action_get_variable(LVGActionCtx *ctx, uint8_t *a)
         se->type = var->type;
         se->str  = var->str;
         return;
-    }
-    assert(0);
+    } else
+        SET_UNDEF(se);
 }
 
 static void action_set_variable(LVGActionCtx *ctx, uint8_t *a)
@@ -877,7 +879,12 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
     } while (len > 0);
 }
 
-static void action_jump(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_jump(LVGActionCtx *ctx, uint8_t *a)
+{
+    int8_t offset = *(uint16_t *)(a + 2);
+    ctx->pc += offset;
+}
+
 static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
 {
     //int flags = *(uint8_t*)a->data;
