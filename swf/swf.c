@@ -707,7 +707,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
 #ifndef _TEST
-                printf("button(id) actions:\n", id);
+                printf("button(%d) actions:\n", id);
 #endif
                 idtable[id].type = button_type;
                 idtable[id].lvg_id = clip->num_buttons;

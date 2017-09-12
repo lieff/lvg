@@ -216,6 +216,8 @@ void free_instance(ASClass *cls)
 
 static void do_call(LVGActionCtx *ctx, ASClass *c, ASVal *var, uint8_t *a, uint32_t nargs)
 {
+    if (!var->str)
+        return;
     if (ASVAL_FUNCTION == var->type)
     {
         uint8_t *func = (uint8_t *)var->str;
@@ -807,6 +809,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
         if (0 == strcasecmp(name, l[i].name))
         {
             ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
+            ctx->group->play_state = LVG_STOPPED;
             return;
         }
 }
