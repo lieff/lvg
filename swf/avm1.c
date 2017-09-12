@@ -134,6 +134,17 @@ double to_double(ASVal *v)
         return v->i32;
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
+    else if (ASVAL_UNDEFINED == v->type)
+        return NAN;
+    else if (ASVAL_STRING == v->type)
+    {
+        char *end = 0;
+        double dval = strtod(v->str, &end);
+        if (end && 0 == *end)
+            return dval;
+        return NAN;
+    } else if (ASVAL_CLASS == v->type)
+        return 0.0; // TODO
     return 0.0;
 }
 
@@ -718,8 +729,6 @@ static void action_gt(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    assert(ASVAL_INT == se_a->type || ASVAL_DOUBLE == se_a->type || ASVAL_FLOAT == se_a->type);
-    assert(ASVAL_INT == se_a->type || ASVAL_DOUBLE == se_a->type || ASVAL_FLOAT == se_a->type);
     double va = to_double(se_a);
     double vb = to_double(se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
