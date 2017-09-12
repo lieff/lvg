@@ -388,6 +388,83 @@ static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int so
     }
 }
 
+static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
+{
+    int state;
+    while ((state = swf_GetU8(tag)))
+    {
+        int cid   = swf_GetU16(tag);
+        int depth = swf_GetU16(tag);
+#ifndef _TEST
+        printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
+#endif
+        LVGObject *o = 0;
+        assert(state < 64); // bits 5-6 unsupported ButtonHasFilterList and ButtonHasBlendMode
+        //assert(state < 16);
+        if (state & 15)
+        {
+            if (state & 1)
+            {
+                b->up_shapes = realloc(b->up_shapes, (b->num_up_shapes + 1)*sizeof(LVGObject));
+                o = b->up_shapes + b->num_up_shapes++;
+            }
+            if (state & 2)
+            {
+                b->over_shapes = realloc(b->over_shapes, (b->num_over_shapes + 1)*sizeof(LVGObject));
+                o = b->over_shapes + b->num_over_shapes++;
+            }
+            if (state & 4)
+            {
+                b->down_shapes = realloc(b->down_shapes, (b->num_down_shapes + 1)*sizeof(LVGObject));
+                o = b->down_shapes + b->num_down_shapes++;
+            }
+            if (state & 8)
+            {
+                b->hit_shapes = realloc(b->hit_shapes, (b->num_hit_shapes + 1)*sizeof(LVGObject));
+                o = b->hit_shapes + b->num_hit_shapes++;
+            }
+            memset(o, 0, sizeof(LVGObject));
+        }
+        MATRIX m;
+        CXFORM cx;
+        swf_GetMatrix(tag, &m);
+        swf_GetCXForm(tag, &cx, 1);
+        if (state & 16)
+        {   // ButtonHasFilterList
+            int nfilters = swf_GetU8(tag);
+            for (int i = 0; i < nfilters; i++)
+            {
+                FILTER *f = swf_GetFilter(tag);
+                swf_DeleteFilter(f);
+            }
+        }
+        if (state & 32)
+        {   // ButtonHasBlendMode
+            swf_GetU8(tag);
+        }
+        if (o)
+        {
+            o->id    = idtable[cid].lvg_id;
+            o->type  = idtable[cid].type;
+            o->depth = depth;
+            o->t[0] = m.sx/65536.0f;
+            o->t[1] = m.r0/65536.0f;
+            o->t[2] = m.r1/65536.0f;
+            o->t[3] = m.sy/65536.0f;
+            o->t[4] = m.tx/20.0f;
+            o->t[5] = m.ty/20.0f;
+            o->cxform.mul[0] = cx.r0/256.0f;
+            o->cxform.mul[1] = cx.g0/256.0f;
+            o->cxform.mul[2] = cx.b0/256.0f;
+            o->cxform.mul[3] = cx.a0/256.0f;
+            o->cxform.add[0] = cx.r1/256.0f;
+            o->cxform.add[1] = cx.g1/256.0f;
+            o->cxform.add[2] = cx.b1/256.0f;
+            o->cxform.add[3] = cx.a1/256.0f;
+        }
+    }
+}
+
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
@@ -627,22 +704,25 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON == tag->id)
             {
-#ifndef _TEST
-                printf("button actions:\n");
-#endif
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
-                int state;
-                while ((state = swf_GetU8(tag)))
-                {
-                    /*int cid   = */swf_GetU16(tag);
-                    /*int depth = */swf_GetU16(tag);
-                    MATRIX m;
-                    CXFORM cm;
-                    swf_GetMatrix(tag, &m);
-                    swf_GetCXForm(tag, &cm, 1);
-                }
+#ifndef _TEST
+                printf("button(id) actions:\n", id);
+#endif
+                idtable[id].type = button_type;
+                idtable[id].lvg_id = clip->num_buttons;
+                clip->buttons = realloc(clip->buttons, (clip->num_buttons + 1)*sizeof(LVGButton));
+                LVGButton *b = clip->buttons + clip->num_buttons++;
+                memset(b, 0, sizeof(LVGButton));
+
+                parse_button_record(tag, b, idtable);
+                int pos = tag->pos;
                 ActionTAG *actions = swf_ActionGet(tag);
+                int size = tag->pos - pos;
+                b->actions = realloc(b->actions, size + 4);
+                *(uint32_t*)b->actions = size;
+                memcpy(b->actions + 4, tag->data + pos, size);
+                assert(0 == b->actions[4 + size - 1]);
 #ifndef _TEST
                 swf_DumpActions(actions, 0);
 #endif
@@ -664,79 +744,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 
                 U32 offsetpos = swf_GetU16(tag);
 
-                int state;
-                while ((state = swf_GetU8(tag)))
-                {
-                    int cid   = swf_GetU16(tag);
-                    int depth = swf_GetU16(tag);
-#ifndef _TEST
-                    printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
-#endif
-                    LVGObject *o = 0;
-                    assert(state < 64); // bits 5-6 unsupported ButtonHasFilterList and ButtonHasBlendMode
-                    //assert(state < 16);
-                    if (state & 15)
-                    {
-                        if (state & 1)
-                        {
-                            b->up_shapes = realloc(b->up_shapes, (b->num_up_shapes + 1)*sizeof(LVGObject));
-                            o = b->up_shapes + b->num_up_shapes++;
-                        }
-                        if (state & 2)
-                        {
-                            b->over_shapes = realloc(b->over_shapes, (b->num_over_shapes + 1)*sizeof(LVGObject));
-                            o = b->over_shapes + b->num_over_shapes++;
-                        }
-                        if (state & 4)
-                        {
-                            b->down_shapes = realloc(b->down_shapes, (b->num_down_shapes + 1)*sizeof(LVGObject));
-                            o = b->down_shapes + b->num_down_shapes++;
-                        }
-                        if (state & 8)
-                        {
-                            b->hit_shapes = realloc(b->hit_shapes, (b->num_hit_shapes + 1)*sizeof(LVGObject));
-                            o = b->hit_shapes + b->num_hit_shapes++;
-                        }
-                        memset(o, 0, sizeof(LVGObject));
-                    }
-                    MATRIX m;
-                    CXFORM cx;
-                    swf_GetMatrix(tag, &m);
-                    swf_GetCXForm(tag, &cx, 1);
-                    if (state & 16)
-                    {   // ButtonHasFilterList
-                        int nfilters = swf_GetU8(tag);
-                        for (int i = 0; i < nfilters; i++)
-                        {
-                            FILTER *f = swf_GetFilter(tag);
-                            swf_DeleteFilter(f);
-                        }
-                    }
-                    if (state & 32)
-                    {   // ButtonHasBlendMode
-                        swf_GetU8(tag);
-                    }
-                    if (o)
-                    {
-                        o->id    = idtable[cid].lvg_id;
-                        o->type  = idtable[cid].type;
-                        o->depth = depth;
-                        o->t[0] = m.sx/65536.0f;
-                        o->t[1] = m.r0/65536.0f;
-                        o->t[2] = m.r1/65536.0f;
-                        o->t[3] = m.sy/65536.0f;
-                        o->t[4] = m.tx/20.0f;
-                        o->t[5] = m.ty/20.0f;
-                        o->cxform.mul[0] = cx.r0/256.0f;
-                        o->cxform.mul[1] = cx.g0/256.0f;
-                        o->cxform.mul[2] = cx.b0/256.0f;
-                        o->cxform.mul[3] = cx.a0/256.0f;
-                        o->cxform.add[0] = cx.r1/256.0f;
-                        o->cxform.add[1] = cx.g1/256.0f;
-                        o->cxform.add[2] = cx.b1/256.0f;
-                        o->cxform.add[3] = cx.a1/256.0f;
-                    }
-                }
+                parse_button_record(tag, b, idtable);
                 while (offsetpos)
                 {
                     if (tag->pos >= tag->len)
