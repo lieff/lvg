@@ -108,7 +108,6 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorT
     NSVGpaint *sp = is_fill ? &shape->fill : &shape->stroke;
     GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(vg)->userPtr;
     GLNVGtexture* tex = glnvg__findTexture(gl, sp->color);
-    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, tex->tex);
     if (NSVG_SPREAD_PAD == sp->spread)
         tex->flags &= ~(NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY);
@@ -254,7 +253,11 @@ static int nvg_cache_shape(void *render, NSVGshape *shape)
 static int nvg_cache_image(void *render, int width, int height, int flags, const void *rgba)
 {
     NVGcontext *vg = render;
-    return nvgCreateImageRGBA(vg, width, height, NVG_IMAGE_GENERATE_MIPMAPS | ((flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0), (const unsigned char *)rgba);
+    return nvgCreateImageRGBA(vg, width, height,
+#ifndef EMSCRIPTEN
+                              NVG_IMAGE_GENERATE_MIPMAPS |
+#endif
+                              ((flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0), (const unsigned char *)rgba);
 }
 
 static int nvg_cache_gradient(NSVGpaint *fill)
