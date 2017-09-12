@@ -26,6 +26,7 @@ sources = [
     'swf/adpcm.c',
     'swf/avm1.c',
     'swf/avm1_globals.c',
+    'scripting/tcc/script_tcc.c',
     'swf/swf.c',
     'swf/swftools/lib/bitio.c',
     'swf/swftools/lib/drawer.c',
