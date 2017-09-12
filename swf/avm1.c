@@ -482,23 +482,34 @@ static void action_string_add(LVGActionCtx *ctx, uint8_t *a)
     SET_STRING(res, se_b->str); // TODO: use se_a and allocate new string with gc
 }
 
-static const char *props[] = { "_X", "_Y", "_xscale", "_yscale", "_currentframe", "_totalframes", "_alpha", "_visible",
-                              "_width", "_height", "_rotation", "_target", "_framesloaded", "" /*_name*/, "_droptarget",
-                              "_url", "_highquality", "_focusrect", "_soundbuftime", "_quality", "_xmouse", "_ymouse" };
+static const char *props[] =
+{
+    "_X", "_Y", "_xscale", "_yscale", "_currentframe", "_totalframes", "_alpha", "_visible",
+    "_width", "_height", "_rotation", "_target", "_framesloaded", "_name", "_droptarget",
+    "_url", "_highquality", "_focusrect", "_soundbuftime", "_quality", "_xmouse", "_ymouse"
+};
+
 static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
 {
-    /*_X 0 _Y 1 _xscale 2 _yscale 3 _currentframe 4 _totalframes 5 _alpha 6 _visible 7
-    _width 8 _height 9 _rotation 10 _target 11 _framesloaded 12 _name 13 _droptarget 14
-    _url 15 _highquality 16 _focusrect 17 _soundbuftime 18 _quality 19 _xmouse 20 _ymouse 21*/
     ASVal *se_idx = &ctx->stack[ctx->stack_ptr];
     ASVal *se_target = se_idx + 1;
     ctx->stack_ptr += 1;
     assert(ASVAL_INT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
     assert(se_idx->ui32 <= 21);
+    uint32_t idx = to_int(se_idx);
+    if (idx > 21)
+        return;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    res->type = ASVAL_STRING;
-    res->str = props[se_idx->ui32];
+    ASClass *c = ctx->group->movieclip;
+    const char *prop = props[idx];
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(c->members[i].name, prop))
+        {
+            *res = c->members[i].val;
+            return;
+        }
+    assert(0);
 }
 
 static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
@@ -507,14 +518,21 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_idx = se_val + 1;
     ASVal *se_target = se_val + 2;
     ctx->stack_ptr += 3;
-    assert(ASVAL_STRING == se_val->type || ASVAL_CLASS == se_val->type);
     assert(ASVAL_INT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
     assert(se_idx->ui32 <= 21);
-    if (ASVAL_CLASS == se_val->type)
-        props[se_idx->ui32] = "_level0";
-    else
-        props[se_idx->ui32] = se_val->str;
+    uint32_t idx = to_int(se_idx);
+    if (idx > 21)
+        return;
+    ASClass *c = ctx->group->movieclip;
+    const char *prop = props[idx];
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(c->members[i].name, prop))
+        {
+            c->members[i].val = *se_val;
+            return;
+        }
+    assert(0);
 }
 
 static void action_clone_sprite(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }

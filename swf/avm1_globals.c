@@ -321,7 +321,7 @@ ASMember g_movieclip_members[] =
     { "transform" ,    { { "" }, ASVAL_STRING } }, //Transform
     { "_url",          { { "" }, ASVAL_STRING } }, //String [read-only]
     { "useHandCursor", { { "" }, ASVAL_STRING } }, //Boolean
-    { "_visible",      { { "" }, ASVAL_STRING } }, //Boolean
+    { "_visible",      { { .boolean = 1 }, ASVAL_BOOL } }, //Boolean
     { "_width",        { { "" }, ASVAL_STRING } }, //Number
     { "_x",            { { "" }, ASVAL_STRING } }, //Number
     { "_xmouse",       { { "" }, ASVAL_STRING } }, //Number [read-only]
