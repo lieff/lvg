@@ -97,14 +97,32 @@ typedef struct LVGVideo
     int cur_frame, image;
 } LVGVideo;
 
+#define CondKeyPress(f)       (f >> 17)
+#define CondOverDownToIdle    256
+#define CondIdleToOverDown    128
+#define CondOutDownToIdle     64
+#define CondOutDownToOverDown 32
+#define CondOverDownToOutDown 16
+#define CondOverDownToOverUp  8
+#define CondOverUpToOverDown  4
+#define CondOverUpToIdle      2
+#define CondIdleToOverUp      1
+
+typedef struct LVGButtonAction
+{
+    unsigned char *actions;
+    uint16_t flags;
+} LVGButtonAction;
+
 typedef struct LVGButton
 {
     LVGObject *up_shapes;
     LVGObject *over_shapes;
     LVGObject *down_shapes;
     LVGObject *hit_shapes;
-    unsigned char *actions;
-    int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_actions;
+    LVGButtonAction *btnactions;
+    int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_btnactions;
+    int prev_mousehit;
 } LVGButton;
 
 typedef struct LVGMovieClip

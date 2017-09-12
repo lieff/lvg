@@ -719,10 +719,13 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int pos = tag->pos;
                 ActionTAG *actions = swf_ActionGet(tag);
                 int size = tag->pos - pos;
-                b->actions = realloc(b->actions, size + 4);
-                *(uint32_t*)b->actions = size;
-                memcpy(b->actions + 4, tag->data + pos, size);
-                assert(0 == b->actions[4 + size - 1]);
+                b->btnactions = realloc(b->btnactions, (b->num_btnactions + 1)*sizeof(LVGButtonAction));
+                LVGButtonAction *ba = b->btnactions + b->num_btnactions++;
+                ba->actions = malloc(size + 4);
+                *(uint32_t*)ba->actions = size;
+                memcpy(ba->actions + 4, tag->data + pos, size);
+                ba->flags = CondOverDownToOverUp;
+                assert(0 == ba->actions[4 + size - 1]);
 #ifndef _TEST
                 swf_DumpActions(actions, 0);
 #endif
@@ -750,17 +753,17 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     if (tag->pos >= tag->len)
                         break;
                     offsetpos = swf_GetU16(tag);
-#ifndef _TEST
-                    U32 condition =
-#endif
-                            swf_GetU16(tag);                // condition
+                    U32 condition = swf_GetU16(tag);                // condition
                     int pos = tag->pos;
                     ActionTAG *actions = swf_ActionGet(tag);
                     int size = tag->pos - pos;
-                    b->actions = realloc(b->actions, size + 4);
-                    *(uint32_t*)b->actions = size;
-                    memcpy(b->actions + 4, tag->data + pos, size);
-                    assert(0 == b->actions[4 + size - 1]);
+                    b->btnactions = realloc(b->btnactions, (b->num_btnactions + 1)*sizeof(LVGButtonAction));
+                    LVGButtonAction *ba = b->btnactions + b->num_btnactions++;
+                    ba->actions = malloc(size + 4);
+                    *(uint32_t*)ba->actions = size;
+                    memcpy(ba->actions + 4, tag->data + pos, size);
+                    ba->flags = condition;
+                    assert(0 == ba->actions[4 + size - 1]);
 #ifndef _TEST
                     printf("  condition %04x\n", condition);
                     swf_DumpActions(actions, "  ");

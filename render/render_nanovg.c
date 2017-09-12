@@ -255,9 +255,9 @@ static int nvg_cache_image(void *render, int width, int height, int flags, const
     NVGcontext *vg = render;
     return nvgCreateImageRGBA(vg, width, height,
 #ifndef EMSCRIPTEN
-                              NVG_IMAGE_GENERATE_MIPMAPS |
+        NVG_IMAGE_GENERATE_MIPMAPS |
 #endif
-                              ((flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0), (const unsigned char *)rgba);
+        ((flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0), (const unsigned char *)rgba);
 }
 
 static int nvg_cache_gradient(NSVGpaint *fill)
