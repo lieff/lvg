@@ -293,7 +293,7 @@ ASMember g_movieclip_members[] =
     { "_alpha",        { { "" }, ASVAL_STRING } }, //Number
     { "blendMode",     { { "" }, ASVAL_STRING } }, //Object
     { "cacheAsBitmap", { { "" }, ASVAL_STRING } }, //Boolean
-    { "_currentframe", { { "" }, ASVAL_STRING } }, //Number [read-only]
+    { "_currentframe", { { .ui32 = 0 }, ASVAL_INT } }, //Number [read-only]
     { "_droptarget",   { { "" }, ASVAL_STRING } }, //String [read-only]
     { "enabled",       { { "" }, ASVAL_STRING } }, //Boolean
     { "filters",       { { "" }, ASVAL_STRING } }, //Array
@@ -318,7 +318,7 @@ ASMember g_movieclip_members[] =
     { "tabEnabled",    { { "" }, ASVAL_STRING } }, //Boolean
     { "tabIndex",      { { "" }, ASVAL_STRING } }, //Number
     { "_target",       { { "" }, ASVAL_STRING } }, //String [read-only]
-    { "_totalframes",  { { "" }, ASVAL_STRING } }, //Number [read-only]
+    { "_totalframes",  { { .ui32 = 0 }, ASVAL_INT } }, //Number [read-only]
     { "trackAsMenu",   { { "" }, ASVAL_STRING } }, //Boolean
     { "transform" ,    { { "" }, ASVAL_STRING } }, //Transform
     { "_url",          { { "" }, ASVAL_STRING } }, //String [read-only]

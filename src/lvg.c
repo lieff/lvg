@@ -372,12 +372,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
             }
         }
-        ASClass *mc = group->movieclip;
         g_properties[0].val.str = (char *)group->movieclip;        // this
         g_properties[1].val.str = (char *)clip->groups->movieclip; // _root
-        ASVal *_currentframe = find_class_member(mc, "_currentframe");
-        SET_INT(_currentframe, cur_frame + 1);
-        ASVal *_totalframes = find_class_member(mc, "_totalframes");
+        ASVal *_totalframes = find_class_member(group->movieclip, "_totalframes");
         SET_INT(_totalframes, group->num_frames);
         for (i = 0; i < clip->num_groups; i++)
         {
@@ -403,17 +400,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 t->last_time = g_time;
                 lvgExecuteActions(group->vm, t->func, 1);
             }
-        }
-        if (group->events[1])
-        {
-            if (!group->events_vm)
-            {
-                group->events_vm = malloc(sizeof(LVGActionCtx));
-                lvgInitVM(group->events_vm, clip, group);
-            }
-            if (group->events[0])
-                lvgExecuteActions(group->events_vm, group->events[0], 0);
-            lvgExecuteActions(group->events_vm, group->events[1], 0);
         }
     }
 
@@ -570,6 +556,19 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
     }
     if (next_frame && LVG_PLAYING == group->play_state && cur_frame == group->cur_frame/*not changed by as*/)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
+    ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
+    SET_INT(_currentframe, group->cur_frame + 1);
+    if (!b_no_actionscript && group->events[1])
+    {   // execute sprite events after frame advance
+        if (!group->events_vm)
+        {
+            group->events_vm = malloc(sizeof(LVGActionCtx));
+            lvgInitVM(group->events_vm, clip, group);
+        }
+        if (group->events[0])
+            lvgExecuteActions(group->events_vm, group->events[0], 0);
+        lvgExecuteActions(group->events_vm, group->events[1], 0);
+    }
 }
 
 void lvgDrawClip(LVGMovieClip *clip)
@@ -834,7 +833,7 @@ int main(int argc, char **argv)
         printf("error: could not open swf file\n");
         return -1;
     }
-    for (int i = 0; i < g_clip->groups->num_frames; i++)
+    for (int i = 0; i < 10; i++)
         lvgDrawClip(g_clip);
     lvgCloseClip(g_clip);
     lvgZipClose(&g_zip);
