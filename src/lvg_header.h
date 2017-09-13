@@ -68,7 +68,7 @@ typedef struct LVGMovieClipGroup
     LVGActionCtx *vm;        // action script vm for frames and timer
     LVGTimer *timers;
     void *movieclip;         // MivieClip class instance
-    int num_frames, num_labels, num_group_labels, num_timers, cur_frame, last_acton_frame, play_state;
+    int num_frames, num_labels, num_group_labels, num_timers, cur_frame, last_acton_frame, play_state, events_initialized;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection

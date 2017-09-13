@@ -557,13 +557,17 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
     }
     if (next_frame && LVG_PLAYING == group->play_state && cur_frame == group->cur_frame/*not changed by as*/)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
-    ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
-    SET_INT(_currentframe, group->cur_frame + 1);
-    if (!b_no_actionscript && group->events[1])
+    if (!b_no_actionscript)
     {   // execute sprite events after frame advance
-        if (group->events[0])
+        ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
+        SET_INT(_currentframe, group->cur_frame + 1);
+        if (!group->events_initialized && group->events[0])
+        {
+            group->events_initialized = 1;
             lvgExecuteActions(group->vm, group->events[0], 0);
-        lvgExecuteActions(group->vm, group->events[1], 0);
+        }
+        if (group->events[1])
+            lvgExecuteActions(group->vm, group->events[1], 0);
     }
 }
 
