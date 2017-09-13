@@ -749,8 +749,22 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
 #endif
 }
 
-static void action_increment(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_decrement(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_increment(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    assert(ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type || ASVAL_BOOL == se->type);
+    double d = to_double(se) + 1.0;
+    SET_DOUBLE(se, d);
+}
+
+static void action_decrement(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    assert(ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type || ASVAL_BOOL == se->type);
+    double d = to_double(se) - 1.0;
+    SET_DOUBLE(se, d);
+}
+
 static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_method = &ctx->stack[ctx->stack_ptr];
