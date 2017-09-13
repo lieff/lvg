@@ -99,6 +99,8 @@ ninja
 
 ## Flash related projects
 
+ * https://github.com/lightspark/lightspark
+ * https://github.com/mozilla/shumway
  * https://www.gnu.org/software/gnash/
  * https://swfdec.freedesktop.org/wiki/
  * http://www.swftools.org/
