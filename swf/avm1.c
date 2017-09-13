@@ -657,10 +657,46 @@ static void action_equals2(LVGActionCtx *ctx, uint8_t *a)
     SET_BOOL(res, (vb == va) ? 1 : 0)
 }
 
-static void action_to_number(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_to_string(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_push_duplicate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_swap(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_to_number(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    double d = to_double(se);
+    SET_DOUBLE(se, d);
+    // TODO: support valueOF()
+}
+
+static void action_to_string(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    if (ASVAL_STRING == se->type)
+        return;
+    if (ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type || ASVAL_BOOL == se->type)
+    {
+        // TODO: allocate string with gc
+    }
+    if (ASVAL_CLASS == se->type)
+    {
+        // TODO: support toString()
+    }
+    assert(0);
+}
+
+static void action_push_duplicate(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_top = &ctx->stack[ctx->stack_ptr];
+    ctx->stack_ptr--;
+    ctx->stack[ctx->stack_ptr] = *se_top;
+}
+
+static void action_swap(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ASVal tmp = *se_a;
+    *se_a = *se_b;
+    *se_b = tmp;
+}
+
 static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_member = &ctx->stack[ctx->stack_ptr];
@@ -834,7 +870,13 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
         }
 }
 
-static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a)
+{   // all frames always loaded - never skip actions
+    ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
+    ctx->stack_ptr++;
+    assert(ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_INT == se_frame->type || ASVAL_BOOL == se_frame->type);
+}
+
 static void action_define_function2(LVGActionCtx *ctx, uint8_t *a)
 {
     const char *fname = (const char *)a + 2;
