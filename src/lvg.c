@@ -525,25 +525,29 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 ob = b->down_shapes;
                 nshapes = b->num_down_shapes;
             }
+            int flags = 0, keypressed = (mkeys & 1), waspressed = (last_mkeys & 1);
+            flags |= (!b->prev_mousehit && mouse_hit) ? CondIdleToOverUp : 0;
+            flags |= (b->prev_mousehit && !mouse_hit) ? CondOverUpToIdle : 0;
+            flags |= (mouse_hit && !waspressed && keypressed) ? CondOverUpToOverDown : 0;
+            flags |= (mouse_hit && waspressed && !keypressed) ? CondOverDownToOverUp : 0;
+            flags |= (!mouse_hit && waspressed) ? CondOverDownToOutDown : 0;
+            flags |= (!b->prev_mousehit && mouse_hit && keypressed) ? CondOutDownToOverDown : 0;
+            //flags |= (!b->prev_mousehit && waspressed && !keypressed) ? CondOutDownToIdle : 0;
+            flags |= (!b->prev_mousehit && mouse_hit && waspressed && keypressed) ? CondIdleToOverDown : 0;
+            //flags |= (mouse_hit && !waspressed && keypressed) ? CondOverDownToIdle : 0;
             for (j = 0; j < b->num_btnactions; j++)
             {
                 LVGButtonAction *ba = b->btnactions + j;
-                int flags = 0, keypressed = (mkeys & 1), waspressed = (last_mkeys & 1);
-                flags |= (!b->prev_mousehit && mouse_hit) ? CondIdleToOverUp : 0;
-                flags |= (b->prev_mousehit && !mouse_hit) ? CondOverUpToIdle : 0;
-                flags |= (mouse_hit && !waspressed && keypressed) ? CondOverUpToOverDown : 0;
-                flags |= (mouse_hit && waspressed && !keypressed) ? CondOverDownToOverUp : 0;
-                flags |= (!mouse_hit && waspressed) ? CondOverDownToOutDown : 0;
-                flags |= (!b->prev_mousehit && mouse_hit && keypressed) ? CondOutDownToOverDown : 0;
-                //flags |= (!b->prev_mousehit && waspressed && !keypressed) ? CondOutDownToIdle : 0;
-                flags |= (!b->prev_mousehit && mouse_hit && waspressed && keypressed) ? CondIdleToOverDown : 0;
-                //flags |= (mouse_hit && !waspressed && keypressed) ? CondOverDownToIdle : 0;
                 if ((ba->flags & flags) && group->vm)
                 {
+                    /*printf("events=%x ", flags);
+                    for (int k = 0; k < b->num_btnactions; k++)
+                        printf("%x ", b->btnactions[k].flags);
+                    printf("\n"); fflush(stdout);*/
                     lvgExecuteActions(group->vm, ba->actions, 0);
                 }
-                b->prev_mousehit = mouse_hit;
             }
+            b->prev_mousehit = mouse_hit;
             if (visible)
                 for (j = 0; j < nshapes; j++)
                 {
