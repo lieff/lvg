@@ -375,8 +375,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         g_properties[0].val.str = (char *)group->movieclip;        // this
         g_properties[1].val.str = (char *)clip->groups->movieclip; // _root
         g_properties[2].val.str = (char *)clip->groups->movieclip; // _level0
-        ASVal *_totalframes = find_class_member(group->movieclip, "_totalframes");
-        SET_INT(_totalframes, group->num_frames);
+        ASVal *val = find_class_member(group->movieclip, "_totalframes"); SET_INT(val, group->num_frames);
+        val = find_class_member(group->movieclip, "_framesloaded"); SET_INT(val, group->num_frames);
+
         for (i = 0; i < clip->num_groups; i++)
         {
             LVGMovieClipGroup *g = clip->groups + i;

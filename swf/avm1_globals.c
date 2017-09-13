@@ -300,7 +300,7 @@ ASMember g_movieclip_members[] =
     { "focusEnabled",  { { "" }, ASVAL_STRING } }, //Boolean
     { "_focusrect",    { { "" }, ASVAL_STRING } }, //Boolean
     { "forceSmoothing", { { "" }, ASVAL_STRING } }, //Boolean
-    { "_framesloaded", { { "" }, ASVAL_STRING } }, //Number [read-only]
+    { "_framesloaded", { { .ui32 = 0 }, ASVAL_INT } }, //Number [read-only]
     { "_height",       { { "" }, ASVAL_STRING } }, //Number
     { "_highquality",  { { "" }, ASVAL_STRING } }, //Number
     { "hitArea",       { { "" }, ASVAL_STRING } }, //Object
