@@ -352,7 +352,7 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
 
 static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGColorTransform *cxform, int next_frame)
 {
-    int i, j, nframe = group->cur_frame;
+    int i, j, nframe = group->cur_frame, visible = 1;
     LVGMovieClipFrame *frame = group->frames + nframe;
     int cur_frame = group->cur_frame;
     if (!b_no_actionscript)
@@ -377,6 +377,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         g_properties[2].val.str = (char *)clip->groups->movieclip; // _level0
         ASVal *val = find_class_member(group->movieclip, "_totalframes"); SET_INT(val, group->num_frames);
         val = find_class_member(group->movieclip, "_framesloaded"); SET_INT(val, group->num_frames);
+        val = find_class_member(group->movieclip, "_visible"); visible = to_int(val);
 
         for (i = 0; i < clip->num_groups; i++)
         {
@@ -412,18 +413,18 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         LVGObject *o = &group->frames[nframe].objects[i];
         g_render->get_transform(g_render_obj, save_transform);
         g_render->set_transform(g_render_obj, o->t, 0);
-        if (LVG_OBJ_SHAPE == o->type)
+        if (LVG_OBJ_SHAPE == o->type && visible)
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform);
             for (j = 0; j < clip->shapes[o->id].num_shapes; j++)
                 lvgDrawShape(&clip->shapes[o->id].shapes[j], &newcxform);
         } else
-        if (LVG_OBJ_IMAGE == o->type)
+        if (LVG_OBJ_IMAGE == o->type && visible)
         {
             g_render->render_image(g_render_obj, clip->images[o->id]);
         } else
-        if (LVG_OBJ_VIDEO == o->type)
+        if (LVG_OBJ_VIDEO == o->type && visible)
         {
             LVGVideo *video = &clip->videos[o->id];
 #if ENABLE_VIDEO && VIDEO_FFMPEG
@@ -543,16 +544,17 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
                 b->prev_mousehit = mouse_hit;
             }
-            for (j = 0; j < nshapes; j++)
-            {
-                LVGColorTransform newcxform = *cxform;
-                combine_cxform(&newcxform, &ob->cxform);
-                if (LVG_OBJ_SHAPE != ob->type)
-                    continue;
-                for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
-                    lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform);
-                ob++;
-            }
+            if (visible)
+                for (j = 0; j < nshapes; j++)
+                {
+                    LVGColorTransform newcxform = *cxform;
+                    combine_cxform(&newcxform, &ob->cxform);
+                    if (LVG_OBJ_SHAPE != ob->type)
+                        continue;
+                    for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
+                        lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform);
+                    ob++;
+                }
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
