@@ -9,6 +9,7 @@
 #define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL;   (se)->boolean = value; }
 #define SET_UNDEF(se)          { (se)->type = ASVAL_UNDEFINED; (se)->str = 0; }
 #define SET_CLASS(se, cls_val) { (se)->type = ASVAL_CLASS;  (se)->cls = cls_val; }
+#define THIS g_properties[0].val.cls
 
 typedef enum {
     ACTION_END = 0x00,
@@ -166,10 +167,9 @@ typedef struct LVGActionCtx
     ASVal stack[STACK_SIZE];
     ASVal regs[256];
     LVGActionCall calls[256];
-    ASMember *locals;
     const char **cpool;
     uint8_t *actions;
-    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit, num_locals;
+    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit;
 } LVGActionCtx;
 
 extern ASVal g_classes[];
@@ -181,6 +181,6 @@ extern ASClass g_movieclip;
 double to_double(ASVal *v);
 int32_t to_int(ASVal *v);
 ASVal *find_class_member(ASClass *c, const char *name);
-ASVal *create_local(LVGActionCtx *ctx, const char *name);
+ASVal *create_local(ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);
 void free_instance(ASClass *cls);

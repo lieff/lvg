@@ -169,15 +169,10 @@ int is_number(ASVal *v)
 static ASVal *search_var(LVGActionCtx *ctx, const char *name)
 {
     int i;
-    for (int i = 0; i < ctx->num_locals; i++)
-        if (0 == strcmp(ctx->locals[i].name, name))
-            return &ctx->locals[i].val;
     for (i = 0; i < g_num_properties; i++)
         if (0 == strcmp(g_properties[i].name, name))
             return &g_properties[i].val;
-    ASVal *as_this = &g_properties[0].val;
-    assert(ASVAL_CLASS == as_this->type);
-    ASClass *pthis = (ASClass *)as_this->str;
+    ASClass *pthis = THIS;
     for (i = 0; i < pthis->num_members; i++)
         if (0 == strcmp(pthis->members[i].name, name))
             return &pthis->members[i].val;
@@ -198,13 +193,13 @@ ASVal *find_class_member(ASClass *c, const char *name)
     return 0;
 }
 
-ASVal *create_local(LVGActionCtx *ctx, const char *name)
+ASVal *create_local(ASClass *c, const char *name)
 {
-    for (int i = 0; i < ctx->num_locals; i++)
-        if (0 == strcmp(ctx->locals[i].name, name))
-            return &ctx->locals[i].val;
-    ctx->locals = realloc(ctx->locals, (ctx->num_locals + 1)*sizeof(ctx->locals[0]));
-    ASMember *res = ctx->locals + ctx->num_locals++;
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(c->members[i].name, name))
+            return &c->members[i].val;
+    c->members = realloc(c->members, (c->num_members + 1)*sizeof(c->members[0]));
+    ASMember *res = c->members + c->num_members++;
     res->name = name;
     return &res->val;
 }
@@ -479,7 +474,7 @@ static void action_set_variable(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_var = se_val + 1;
     ctx->stack_ptr += 2;
     assert(ASVAL_STRING == se_var->type);
-    ASVal *res = create_local(ctx, se_var->str);
+    ASVal *res = create_local(THIS, se_var->str);
     *res = *se_val;
 }
 
@@ -603,7 +598,7 @@ static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
     ASVal *se_name = se_val + 1;
     ctx->stack_ptr += 2;
-    ASVal *res = create_local(ctx, se_name->str);
+    ASVal *res = create_local(THIS, se_name->str);
     *res = *se_val;
 }
 
@@ -1017,7 +1012,7 @@ static void action_define_function2(LVGActionCtx *ctx, uint8_t *a)
         ctx->stack_ptr--;
         res = &ctx->stack[ctx->stack_ptr];
     } else
-        res = create_local(ctx, fname);
+        res = create_local(THIS, fname);
     res->type = ASVAL_FUNCTION;
     res->str  = (const char *)&data[i];
     int codesize = *(uint16_t*)&data[i]; i += 2;
@@ -1092,7 +1087,7 @@ static void action_define_function(LVGActionCtx *ctx, uint8_t *a)
         ctx->stack_ptr--;
         res = &ctx->stack[ctx->stack_ptr];
     } else
-        res = create_local(ctx, fname);
+        res = create_local(THIS, fname);
     res->type = ASVAL_FUNCTION;
     res->str  = (const char *)&data[i];
     int codesize = data[i++];
@@ -1295,11 +1290,8 @@ void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group)
 
 void lvgFreeVM(LVGActionCtx *ctx)
 {
-    if (ctx->locals)
-        free(ctx->locals);
     if (ctx->cpool)
         free(ctx->cpool);
-    ctx->locals = NULL;
     ctx->cpool  = NULL;
 }
 

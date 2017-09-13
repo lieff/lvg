@@ -938,6 +938,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 group->group_labels = realloc(group->group_labels, (group->num_group_labels + 1)*sizeof(group->group_labels[0]));
                 LVGGroupLabel *gl = group->group_labels + group->num_group_labels++;
                 gl->name = strdup(p.name);
+                gl->type = idtable[p.id].type;
                 gl->group_num = idtable[p.id].lvg_id;
             }
             swf_PlaceObjectFree(&p);

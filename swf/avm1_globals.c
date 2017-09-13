@@ -221,7 +221,7 @@ static void createEmptyMovieClip(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, ui
     ASVal *se_depth = se_name + 1;
     assert(ASVAL_INT == se_depth->type || ASVAL_DOUBLE == se_depth->type || ASVAL_FLOAT == se_depth->type);
     assert(ASVAL_STRING == se_name->type);
-    ASVal *loc = create_local(ctx, se_name->str);
+    ASVal *loc = create_local(THIS, se_name->str);
     loc->type = ASVAL_UNDEFINED;
     loc->str  = 0;
     ctx->stack_ptr += nargs - 1;
@@ -443,8 +443,9 @@ static void clearInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t 
 
 ASMember g_properties[] =
 {
-    { "this", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } },
-    { "_root", { { .str = (void*)&g_movieclip }, ASVAL_CLASS } },
+    { "this", { { .str = 0 }, ASVAL_CLASS } },
+    { "_root", { { .str = 0 }, ASVAL_CLASS } },
+    { "_level0", { { .str = 0 }, ASVAL_CLASS } },
     { "_accProps", { { .str = 0 }, ASVAL_CLASS } },
     { "_focusrect", { { .str = 0 }, ASVAL_CLASS } },
     { "_global", { { .str = 0 }, ASVAL_CLASS } },

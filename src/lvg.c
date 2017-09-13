@@ -374,6 +374,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         }
         g_properties[0].val.str = (char *)group->movieclip;        // this
         g_properties[1].val.str = (char *)clip->groups->movieclip; // _root
+        g_properties[2].val.str = (char *)clip->groups->movieclip; // _level0
         ASVal *_totalframes = find_class_member(group->movieclip, "_totalframes");
         SET_INT(_totalframes, group->num_frames);
         for (i = 0; i < clip->num_groups; i++)
@@ -382,7 +383,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             for (j = 0; j < g->num_group_labels; j++)
             {
                 LVGGroupLabel *gl = &g->group_labels[j];
-                ASVal *v = create_local(group->vm, gl->name);
+                ASVal *v = create_local(THIS, gl->name);
                 SET_CLASS(v, (clip->groups + gl->group_num)->movieclip);
             }
         }
@@ -560,14 +561,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
     SET_INT(_currentframe, group->cur_frame + 1);
     if (!b_no_actionscript && group->events[1])
     {   // execute sprite events after frame advance
-        if (!group->events_vm)
-        {
-            group->events_vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(group->events_vm, clip, group);
-        }
         if (group->events[0])
-            lvgExecuteActions(group->events_vm, group->events[0], 0);
-        lvgExecuteActions(group->events_vm, group->events[1], 0);
+            lvgExecuteActions(group->vm, group->events[0], 0);
+        lvgExecuteActions(group->vm, group->events[1], 0);
     }
 }
 
@@ -648,11 +644,6 @@ void lvgCloseClip(LVGMovieClip *clip)
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);
-        if (group->events_vm)
-        {
-            lvgFreeVM(group->events_vm);
-            free(group->events_vm);
-        }
         if (group->vm)
         {
             lvgFreeVM(group->vm);
