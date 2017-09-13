@@ -774,13 +774,88 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
 static void action_new_method(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_instance_of(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_enumerate2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_bitwise_and(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_bitwise_or(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_bitwise_xor(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_lshift(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_rshift(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_urshift(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_strict_equals(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_bitwise_and(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    uint32_t vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb & va);
+}
+
+static void action_bitwise_or(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    uint32_t vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb | va);
+}
+
+static void action_bitwise_xor(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    uint32_t vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb ^ va);
+}
+
+static void action_lshift(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    int32_t  vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb << (va & 31));
+}
+
+static void action_rshift(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    int32_t  vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb >> (va & 31));
+}
+
+static void action_urshift(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    uint32_t va = to_int(se_a);
+    uint32_t vb = to_int(se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, vb >> (va & 31));
+}
+
+static void action_strict_equals(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (se_a->type != se_b->type)
+    {
+        SET_BOOL(res, 0);
+        return;
+    }
+    double va = to_double(se_a);
+    double vb = to_double(se_b);
+    SET_BOOL(res, (vb == va) ? 1 : 0)
+}
+
 static void action_gt(LVGActionCtx *ctx, uint8_t *a)
 {
     assert(ctx->version >= 6);
