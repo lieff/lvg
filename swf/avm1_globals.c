@@ -259,7 +259,7 @@ static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     group->cur_frame = frame % group->num_frames;
     group->play_state = LVG_PLAYING;
     ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
-    SET_INT(_currentframe, group->cur_frame);
+    SET_INT(_currentframe, group->cur_frame + 1);
 }
 
 static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)

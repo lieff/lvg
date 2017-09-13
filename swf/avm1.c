@@ -254,7 +254,7 @@ static void action_next_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->group->cur_frame = (ctx->group->cur_frame + 1) % ctx->group->num_frames;
     ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame);
+    SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
 static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
@@ -262,7 +262,7 @@ static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
     if (ctx->group->cur_frame)
         ctx->group->cur_frame--;
     ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame);
+    SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
 static void action_play(LVGActionCtx *ctx, uint8_t *a)
@@ -914,7 +914,7 @@ static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
     int frame = *(uint16_t*)(a + 2);
     ctx->group->cur_frame = frame % ctx->group->num_frames;
     ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame);
+    SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
 static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
@@ -970,7 +970,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
             ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
             ctx->group->play_state = LVG_STOPPED;
             ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
-            SET_INT(_currentframe, ctx->group->cur_frame);
+            SET_INT(_currentframe, ctx->group->cur_frame + 1);
             return;
         }
 }
@@ -1120,7 +1120,7 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
             }
     }
     ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame);
+    SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
 static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
