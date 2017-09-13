@@ -453,6 +453,9 @@ ASMember g_properties[] =
     { "_quality", { { .str = 0 }, ASVAL_CLASS } },
     { "scroll", { { .str = 0 }, ASVAL_CLASS } },
     { "_soundbuftime", { { .str = 0 }, ASVAL_CLASS } },
+    // math
+    { "Infinity", { { .d_int = INFINITY }, ASVAL_DOUBLE } },
+    { "NaN", { { .d_int = NAN }, ASVAL_DOUBLE } },
     // global functions
     { "setInterval", { { .fn = setInterval }, ASVAL_NATIVE_FN } },
     { "clearInterval", { { .fn = clearInterval }, ASVAL_NATIVE_FN } }

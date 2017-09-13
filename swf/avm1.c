@@ -1054,7 +1054,7 @@ static void action_define_function(LVGActionCtx *ctx, uint8_t *a)
     while (data[i++]);
     int params = data[i++];
     params += data[i++]*256;
-    for(int j = 0; j < params;j++)
+    for (int j = 0; j < params;j++)
     {
         while (data[i++]);
     }
