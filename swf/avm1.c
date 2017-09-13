@@ -714,9 +714,14 @@ static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_member = &ctx->stack[ctx->stack_ptr];
     ASVal *se_var = se_member + 1;
     ctx->stack_ptr += 1;
-    assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    ASClass *c = (ASClass *)se_var->str;
+    if (ASVAL_UNDEFINED == se_var->type)
+    {
+        SET_UNDEF(res);
+        return;
+    }
+    assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
+    ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp(se_member->str, c->members[i].name))
         {
