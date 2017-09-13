@@ -190,6 +190,14 @@ static ASVal *search_var(LVGActionCtx *ctx, const char *name)
     return 0;
 }
 
+ASVal *find_class_member(ASClass *c, const char *name)
+{
+    for (int i = 0; i < c->num_members; i++)
+        if (0 == strcmp(c->members[i].name, name))
+            return &c->members[i].val;
+    return 0;
+}
+
 ASVal *create_local(LVGActionCtx *ctx, const char *name)
 {
     for (int i = 0; i < ctx->num_locals; i++)
@@ -245,12 +253,16 @@ static void action_end(LVGActionCtx *ctx, uint8_t *a)
 static void action_next_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->group->cur_frame = (ctx->group->cur_frame + 1) % ctx->group->num_frames;
+    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->group->cur_frame);
 }
 
 static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     if (ctx->group->cur_frame)
         ctx->group->cur_frame--;
+    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->group->cur_frame);
 }
 
 static void action_play(LVGActionCtx *ctx, uint8_t *a)
@@ -901,6 +913,8 @@ static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     int frame = *(uint16_t*)(a + 2);
     ctx->group->cur_frame = frame % ctx->group->num_frames;
+    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->group->cur_frame);
 }
 
 static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
@@ -955,6 +969,8 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
         {
             ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
             ctx->group->play_state = LVG_STOPPED;
+            ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+            SET_INT(_currentframe, ctx->group->cur_frame);
             return;
         }
 }
@@ -1100,9 +1116,11 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
             if (0 == strcmp(se->str, l[i].name))
             {
                 ctx->group->cur_frame = (l[i].frame_num + add) % ctx->group->num_frames;
-                return;
+                break;
             }
     }
+    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->group->cur_frame);
 }
 
 static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
