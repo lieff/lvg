@@ -784,13 +784,20 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_nargs = se_method + 2;
     ctx->stack_ptr += 3;
     assert(ASVAL_STRING == se_method->type);
-    assert(ASVAL_CLASS == se_obj->type);
     assert(ASVAL_INT == se_nargs->type || ASVAL_DOUBLE == se_nargs->type || ASVAL_FLOAT == se_nargs->type);
+    int32_t nargs = to_int(se_nargs);
+    if (ASVAL_UNDEFINED == se_obj->type)
+    {
+        ctx->stack_ptr += nargs - 1;
+        ASVal *res = &ctx->stack[ctx->stack_ptr];
+        SET_UNDEF(res);
+        return;
+    }
+    assert(ASVAL_CLASS == se_obj->type);
     ASClass *c = (ASClass *)se_obj->str;
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp(se_method->str, c->members[i].name))
         {
-            uint32_t nargs = to_int(se_nargs);
             do_call(ctx, c, &c->members[i].val, a, nargs);
             return;
         }
