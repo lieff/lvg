@@ -1187,24 +1187,25 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
         case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
         case 6: se->type = ASVAL_DOUBLE; se->d_int = read_double((uint8_t*)data + 1); size = 8; break;
         case 7: se->type = ASVAL_INT; se->ui32 = *(uint32_t*)((char*)data + 1); size = 4; break;
-        case 8: {
-            unsigned ptr = *(uint8_t*)((char*)data + 1);  size = 1;
+        case 8:
+        case 9:
+        {
+            unsigned ptr;
+            if (8 == type)
+            {
+                ptr = *(uint8_t*)((char*)data + 1);  size = 1;
+            } else
+            {
+                ptr = *(uint16_t*)((char*)data + 1); size = 2;
+            }
             if (ptr >= ctx->cpool_size)
             {
                 SET_UNDEF(se);
                 break;
             }
             se->type = ASVAL_STRING; se->str = ctx->cpool[ptr];
-            break; }
-        case 9: {
-            unsigned ptr = *(uint16_t*)((char*)data + 1); size = 2;
-            if (ptr >= ctx->cpool_size)
-            {
-                SET_UNDEF(se);
-                break;
-            }
-            se->type = ASVAL_STRING; se->str = ctx->cpool[ptr];
-            break; }
+            break;
+        }
         default:
             assert(0);
             return;
