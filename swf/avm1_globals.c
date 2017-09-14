@@ -340,7 +340,7 @@ static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 ASMember g_movieclip_members[] =
 {
     // properties
-    { "_alpha",        { { "" }, ASVAL_STRING } }, //Number
+    { "_alpha",        { { .d_int = 1.0 }, ASVAL_DOUBLE } }, //Number
     { "blendMode",     { { "" }, ASVAL_STRING } }, //Object
     { "cacheAsBitmap", { { "" }, ASVAL_STRING } }, //Boolean
     { "_currentframe", { { .ui32 = 0 }, ASVAL_INT } }, //Number [read-only]
