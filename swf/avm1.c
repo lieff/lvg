@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <math.h>
+#include <inttypes.h>
 
 #ifdef _TEST
 #define DBG(n, m, l, k) n, m, l, k,
@@ -159,6 +160,95 @@ int32_t to_int(ASVal *v)
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
     return 0;
+}
+
+char *double_to_str(double d)
+{
+    if (isnan(d))
+        return "NaN";
+    if (isinf(d))
+        return (d < 0) ? "-Infinity" : "Infinity";
+    if (d == 0.0 || d == -0.0)
+        return "0";
+    static char g_nunber_buf[64];
+    g_nunber_buf[0] = ' ';
+    char *end, *start, *s = g_nunber_buf + 1;
+    if (fabs(d) >= 0.00001 && fabs(d) < 0.0001)
+    {
+        snprintf(s, sizeof(g_nunber_buf) - 1, "%.22f", d);
+    } else
+        snprintf(s, sizeof(g_nunber_buf) - 1, "%.25f", d);
+    int digits = 15, found = 0, gotdot = 0;
+    start = s;
+    // skip - sign
+    if (*start == '-')
+        start++;
+    // count digits (maximum allowed is 15)
+    while (digits)
+    {
+        if (*start == '.')
+        {
+            start++;
+            gotdot = 1;
+            continue;
+        }
+        if (*start < '0' || *start > '9')
+            break;
+        if (found || *start != '0')
+        {
+            digits--;
+            found = 1;
+        }
+        start++;
+    }
+    end = start;
+    // go to end of string
+    while (*end != 'e' && *end != 0)
+        end++;
+    // round using the next digit
+    if (*start >= '5' && *start <= '9')
+    {
+        char *finish = NULL;
+        // skip all 9s at the end
+        while (start[-1] == '9')
+            start--;
+        // if we're before the dot, replace 9s with 0s
+        if (start[-1] == '.')
+        {
+            finish = start;
+            start--;
+        }
+        while (start[-1] == '9')
+        {
+            start[-1] = '0';
+            start--;
+        }
+        // write out correct number
+        if (start[-1] == '-')
+        {
+            s--;
+            start[-2] = '-';
+            start[-1] = '1';
+        } else if (start[-1] == ' ') {
+            s--;
+            start[-1] = '1';
+        } else {
+            start[-1]++;
+        }
+        // reposition cursor at end
+        if (finish)
+            start = finish;
+    }
+    // remove trailing zeros (note we skipped zero above, so there will be non-0 bytes left)
+    if (gotdot)
+    {
+        while (start[-1] == '0')
+            start--;
+        if (start[-1] == '.')
+            start--;
+    }
+    *start = 0;
+    return s;
 }
 
 int is_number(ASVal *v)
@@ -554,10 +644,14 @@ static void action_trace(LVGActionCtx *ctx, uint8_t *a)
     else if (ASVAL_INT == se->type)
         printf("%d\n", se->i32);
     else if (ASVAL_FLOAT == se->type)
-        printf("%.6f\n", se->f_int);
-    else if (ASVAL_DOUBLE == se->type)
-        printf("%.10f\n", se->d_int);
-    else if (ASVAL_CLASS == se->type)
+    {
+        char *s = double_to_str(se->f_int);
+        printf("%s\n", s);
+    } else if (ASVAL_DOUBLE == se->type)
+    {
+        char *s = double_to_str(se->d_int);
+        printf("%s\n", s);
+    } else if (ASVAL_CLASS == se->type)
         printf("_level0\n");
     fflush(stdout);
 #endif

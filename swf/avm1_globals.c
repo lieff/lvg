@@ -64,7 +64,7 @@ static void math_atan2(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nar
     double va = to_double(se_a);
     double vb = to_double(se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_DOUBLE(res, atan2(vb, va));
+    SET_DOUBLE(res, atan2(va, vb));
 }
 
 static void math_ceil(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -110,7 +110,7 @@ static void math_max(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     double va = to_double(se_a);
     double vb = to_double(se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_DOUBLE(res, fmax(vb, va));
+    SET_DOUBLE(res, fmax(va, vb));
 }
 
 static void math_min(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -121,7 +121,7 @@ static void math_min(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     double va = to_double(se_a);
     double vb = to_double(se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_DOUBLE(res, fmin(vb, va));
+    SET_DOUBLE(res, fmin(va, vb));
 }
 
 static void math_pow(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -132,7 +132,7 @@ static void math_pow(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     double va = to_double(se_a);
     double vb = to_double(se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_DOUBLE(res, pow(vb, va));
+    SET_DOUBLE(res, pow(va, vb));
 }
 
 static void math_random(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
