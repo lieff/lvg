@@ -207,6 +207,56 @@ ASClass g_math =
     "Math", &g_math_members[0], 0, sizeof(g_math_members)/sizeof(g_math_members[0])
 };
 
+static void string_length(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
+{
+    assert(1 == nargs);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    const char *str = (const char *)cls;
+    SET_INT(res, strlen(str));
+}
+
+static void string_substr(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
+{
+    assert(2 == nargs);
+    ASVal *se_start = &ctx->stack[ctx->stack_ptr];
+    //ASVal *se_len = se_start + 1;
+    ctx->stack_ptr += 1;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    uint32_t start = to_int(se_start);
+    //uint32_t len = to_int(se_len);
+    const char *str = (const char *)cls;
+    uint32_t max_len = strlen(str);
+    if (start > max_len)
+        start = max_len;
+    SET_STRING(res, str + start); // TODO: allocate new string and use len
+}
+
+ASMember g_string_members[] =
+{
+    // properties
+    { "length",       { { .fn = string_length }, ASVAL_NATIVE_FN } },
+    // methods
+    { "charAt",       { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(index: Number) : String
+    { "charCodeAt",   { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(index: Number) : Number
+    { "concat",       { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(value: Object) : String
+    { "fromCharCode", { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+    { "indexOf",      { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(value: String, [startIndex: Number]) : Number
+    { "lastIndexOf",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(value: String, [startIndex: Number]) : Number
+    { "slice",        { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(start: Number, end: Number) : String
+    { "split",        { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(delimiter: String, [limit: Number]) : Array
+    { "substr",       { { .fn = string_substr }, ASVAL_NATIVE_FN } }, //(start: Number, length: Number) : String
+    { "substring",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(start: Number, end: Number) : String
+    { "toLowerCase",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+    { "toString",     { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+    { "toUpperCase",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+    { "valueOf",      { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+};
+
+ASClass g_string =
+{
+    "String", &g_string_members[0], 0, sizeof(g_string_members)/sizeof(g_string_members[0])
+};
+
 ASVal g_classes[] =
 {
     { { .cls = &g_stage }, ASVAL_CLASS },

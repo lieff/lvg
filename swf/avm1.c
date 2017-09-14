@@ -846,7 +846,17 @@ static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
         SET_UNDEF(res);
         return;
     }
-    assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
+    assert(ASVAL_STRING == se_member->type);
+    if (ASVAL_STRING == se_var->type)
+    {
+        ASVal *fn = find_class_member(ctx, &g_string, se_member->str);
+        assert(fn && fn->fn);
+        if (!fn)
+            goto do_exit;
+        do_call(ctx, (ASClass*)se_var->str, fn, a, 1);
+        return;
+    }
+    assert(ASVAL_CLASS == se_var->type && se_var->str);
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
@@ -854,6 +864,7 @@ static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
             *res = c->members[i].val;
             return;
         }
+do_exit:
     SET_UNDEF(res);
 }
 
@@ -917,10 +928,10 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr += 3;
     assert(ASVAL_INT == se_nargs->type || ASVAL_DOUBLE == se_nargs->type || ASVAL_FLOAT == se_nargs->type);
     int32_t nargs = to_int(se_nargs);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ASVAL_UNDEFINED == se_obj->type)
     {
         ctx->stack_ptr += nargs - 1;
-        ASVal *res = &ctx->stack[ctx->stack_ptr];
         SET_UNDEF(res);
         return;
     }
@@ -931,6 +942,15 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
         return;
     }
     assert(ASVAL_STRING == se_method->type);
+    if (ASVAL_STRING == se_obj->type)
+    {
+        ASVal *fn = find_class_member(ctx, &g_string, se_method->str);
+        assert(fn && fn->fn);
+        if (!fn)
+            goto do_exit;
+        do_call(ctx, (ASClass*)se_obj->str, fn, a, nargs);
+        return;
+    }
     assert(ASVAL_CLASS == se_obj->type);
     ASClass *c = (ASClass *)se_obj->str;
     for (int i = 0; i < c->num_members; i++)
@@ -939,6 +959,9 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
             do_call(ctx, c, &c->members[i].val, a, nargs);
             return;
         }
+do_exit:
+    ctx->stack_ptr += nargs - 1;
+    SET_UNDEF(res);
     assert(0);
 }
 
