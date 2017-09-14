@@ -1070,8 +1070,12 @@ static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
     const uint8_t *data = (const uint8_t *)a + 2;
     int i = 0;
     while (data[i++]);
+#if defined(_DEBUG) && !defined(_TEST)
     const char *target = (const char *)&data[i];
     printf("URL=%s target=%s", url, target);
+#endif
+    if (0 == strcmp_identifier(ctx, url, "FSCommand:quit"))
+        ctx->do_exit = 1;
 }
 
 static void action_store_register(LVGActionCtx *ctx, uint8_t *a)
@@ -1180,8 +1184,24 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
         case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
         case 6: se->type = ASVAL_DOUBLE; se->d_int = read_double((uint8_t*)data + 1); size = 8; break;
         case 7: se->type = ASVAL_INT; se->ui32 = *(uint32_t*)((char*)data + 1); size = 4; break;
-        case 8: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint8_t*)((char*)data + 1)]; size = 1; break;
-        case 9: se->type = ASVAL_STRING; se->str = ctx->cpool[*(uint16_t*)((char*)data + 1)]; size = 2; break;
+        case 8: {
+            unsigned ptr = *(uint8_t*)((char*)data + 1);  size = 1;
+            if (ptr >= ctx->cpool_size)
+            {
+                SET_UNDEF(se);
+                break;
+            }
+            se->type = ASVAL_STRING; se->str = ctx->cpool[ptr];
+            break; }
+        case 9: {
+            unsigned ptr = *(uint16_t*)((char*)data + 1); size = 2;
+            if (ptr >= ctx->cpool_size)
+            {
+                SET_UNDEF(se);
+                break;
+            }
+            se->type = ASVAL_STRING; se->str = ctx->cpool[ptr];
+            break; }
         default:
             assert(0);
             return;
