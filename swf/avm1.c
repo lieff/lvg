@@ -125,7 +125,7 @@ static double read_double(const uint8_t *p)
     return u.d;
 }
 
-double to_double(ASVal *v)
+double to_double(LVGActionCtx *ctx, ASVal *v)
 {
     if (ASVAL_DOUBLE == v->type)
         return v->d_int;
@@ -135,8 +135,8 @@ double to_double(ASVal *v)
         return v->i32;
     else if (ASVAL_BOOL == v->type)
         return v->boolean;
-    else if (ASVAL_UNDEFINED == v->type)
-        return NAN;
+    else if (ASVAL_UNDEFINED == v->type || ASVAL_NULL == v->type)
+        return (ctx->version >= 7) ? NAN : 0.0;
     else if (ASVAL_STRING == v->type)
     {
         char *end = 0;
@@ -389,8 +389,8 @@ static void action_add(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, vb + va);
 }
@@ -400,8 +400,8 @@ static void action_sub(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, vb - va);
 }
@@ -411,8 +411,8 @@ static void action_mul(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, vb*va);
 }
@@ -422,8 +422,8 @@ static void action_div(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (0.0 == va)
     {
@@ -446,8 +446,8 @@ static void action_old_eq(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ctx->version < 5)
         SET_DOUBLE(res, (vb == va) ? 1.0 : 0.0)
@@ -460,8 +460,8 @@ static void action_old_less(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ctx->version < 5)
         SET_DOUBLE(res, (vb < va) ? 1.0 : 0.0)
@@ -474,8 +474,8 @@ static void action_and(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ctx->version < 5)
         SET_DOUBLE(res, (vb != 0.0 && va != 0.0) ? 1.0 : 0.0)
@@ -488,8 +488,8 @@ static void action_or(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ctx->version < 5)
         SET_DOUBLE(res, (vb != 0.0 || va != 0.0) ? 1.0 : 0.0)
@@ -500,7 +500,7 @@ static void action_or(LVGActionCtx *ctx, uint8_t *a)
 static void action_not(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     if (ctx->version < 5)
         SET_DOUBLE(se_a, (va != 0.0) ? 0.0 : 1.0)
     else
@@ -554,7 +554,7 @@ static void action_pop(LVGActionCtx *ctx, uint8_t *a)
 static void action_to_integer(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_var = &ctx->stack[ctx->stack_ptr];
-    double var = to_double(se_var);
+    double var = to_double(ctx, se_var);
     se_var->type = ASVAL_INT;
     se_var->i32 = (int32_t)floor(var);
 }
@@ -660,7 +660,13 @@ static void action_trace(LVGActionCtx *ctx, uint8_t *a)
         printf("null\n");
     if (ASVAL_STRING == se->type)
         printf("%s\n", se->str);
-    else if (ASVAL_INT == se->type)
+    else if (ASVAL_BOOL == se->type)
+    {
+        if (ctx->version < 5)
+            printf(se->boolean ? "1\n" : "0\n");
+        else
+            printf(se->boolean ? "true\n" : "false\n");
+    } else if (ASVAL_INT == se->type)
         printf("%d\n", se->i32);
     else if (ASVAL_FLOAT == se->type)
     {
@@ -764,9 +770,14 @@ static void action_less2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (isnan(va) || isnan(vb))
+    {
+        SET_UNDEF(res);
+        return;
+    }
     SET_BOOL(res, (vb < va) ? 1 : 0)
 }
 
@@ -775,8 +786,8 @@ static void action_equals2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_BOOL(res, (vb == va) ? 1 : 0)
 }
@@ -784,7 +795,7 @@ static void action_equals2(LVGActionCtx *ctx, uint8_t *a)
 static void action_to_number(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se = &ctx->stack[ctx->stack_ptr];
-    double d = to_double(se);
+    double d = to_double(ctx, se);
     SET_DOUBLE(se, d);
     // TODO: support valueOF()
 }
@@ -883,7 +894,7 @@ static void action_increment(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type || ASVAL_BOOL == se->type);
-    double d = to_double(se) + 1.0;
+    double d = to_double(ctx, se) + 1.0;
     SET_DOUBLE(se, d);
 }
 
@@ -891,7 +902,7 @@ static void action_decrement(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type || ASVAL_BOOL == se->type);
-    double d = to_double(se) - 1.0;
+    double d = to_double(ctx, se) - 1.0;
     SET_DOUBLE(se, d);
 }
 
@@ -1008,8 +1019,8 @@ static void action_strict_equals(LVGActionCtx *ctx, uint8_t *a)
         SET_BOOL(res, 0);
         return;
     }
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     SET_BOOL(res, (vb == va) ? 1 : 0)
 }
 
@@ -1019,9 +1030,14 @@ static void action_gt(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (isnan(va) || isnan(vb))
+    {
+        SET_UNDEF(res);
+        return;
+    }
     SET_BOOL(res, (vb > va) ? 1 : 0);
 }
 
@@ -1222,7 +1238,7 @@ static void action_define_function(LVGActionCtx *ctx, uint8_t *a)
 static void action_if(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_cond = &ctx->stack[ctx->stack_ptr++];
-    double cond = to_double(se_cond);
+    double cond = to_double(ctx, se_cond);
     int offset = *(int16_t *)(a + 2);
     if (0.0 != cond)
         ctx->pc += offset;

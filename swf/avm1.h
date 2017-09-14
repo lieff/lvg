@@ -179,7 +179,7 @@ extern ASMember g_properties[];
 extern int g_num_properties;
 extern ASClass g_movieclip;
 
-double to_double(ASVal *v);
+double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
 ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);

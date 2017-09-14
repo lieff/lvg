@@ -31,28 +31,28 @@ ASClass g_stage =
 static void math_abs(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, fabs(va));
 }
 
 static void math_acos(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, acos(va));
 }
 
 static void math_asin(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, asin(va));
 }
 
 static void math_atan(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, atan(va));
 }
 
@@ -61,8 +61,8 @@ static void math_atan2(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nar
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr++;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, atan2(va, vb));
 }
@@ -70,35 +70,35 @@ static void math_atan2(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nar
 static void math_ceil(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, ceil(va));
 }
 
 static void math_cos(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, cos(va));
 }
 
 static void math_exp(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, exp(va));
 }
 
 static void math_floor(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, floor(va));
 }
 
 static void math_log(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, exp(va));
 }
 
@@ -107,8 +107,8 @@ static void math_max(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr++;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, fmax(va, vb));
 }
@@ -118,8 +118,8 @@ static void math_min(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr++;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, fmin(va, vb));
 }
@@ -129,8 +129,8 @@ static void math_pow(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr++;
-    double va = to_double(se_a);
-    double vb = to_double(se_b);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_DOUBLE(res, pow(va, vb));
 }
@@ -145,28 +145,28 @@ static void math_random(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
 static void math_round(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, floor(va + 0.5));
 }
 
 static void math_sin(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, sin(va));
 }
 
 static void math_sqrt(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, sin(va));
 }
 
 static void math_tan(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
-    double va = to_double(se_a);
+    double va = to_double(ctx, se_a);
     SET_DOUBLE(se_a, sin(va));
 }
 
@@ -419,7 +419,7 @@ static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     LVGTimer *t = ctx->group->timers + ctx->group->num_timers++;
     t->func = (uint8_t *)se_func->str;
     t->last_time = g_time;
-    t->timeout = to_double(se_timeout);
+    t->timeout = to_double(ctx, se_timeout);
     static int counter = 0;
     t->id = ++counter;
     SET_INT(res, t->id);
