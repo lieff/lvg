@@ -407,7 +407,10 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
     }
 
     float save_transform[6];
+#ifndef _TEST
     assert(nframe < group->num_frames);
+#endif
+    if (nframe < group->num_frames)
     for (i = 0; i < group->frames[nframe].num_objects; i++)
     {
         LVGObject *o = &group->frames[nframe].objects[i];
@@ -562,6 +565,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
+    if (!group->num_frames)
+        group->cur_frame = 0; else
     if (next_frame && LVG_PLAYING == group->play_state && cur_frame == group->cur_frame/*not changed by as*/)
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
     if (!b_no_actionscript)
