@@ -1099,7 +1099,9 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->num_groups = 1;
     parsePlacements(swf->firstTag, idtable, clip, clip->groups, swf->fileVersion);
     free(idtable);
+#ifndef _TEST
     assert(clip->groups->num_frames == swf->frameCount);
+#endif
     clip->last_time = g_time;
     clip->as_version = swf->fileVersion;
     return clip;
