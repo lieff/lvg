@@ -318,13 +318,22 @@ static void do_call(LVGActionCtx *ctx, ASClass *c, ASVal *var, uint8_t *a, uint3
         uint8_t *func = (uint8_t *)var->str;
         ctx->calls[ctx->call_depth].save_pc   = ctx->pc;
         ctx->calls[ctx->call_depth].save_size = ctx->size;
+        ctx->calls[ctx->call_depth].save_this = THIS;
         ctx->call_depth++;
+        THIS = c;
+        if (!c)
+            g_properties[0].val.type = ASVAL_UNDEFINED;
         ctx->pc = func - ctx->actions + 2;
         ctx->size = ctx->pc + *(uint16_t*)func;
     } else
     if (ASVAL_NATIVE_FN == var->type)
     {
+        ASClass *old_this = THIS;
+        THIS = c;
+        if (!c)
+            g_properties[0].val.type = ASVAL_UNDEFINED;
         var->fn(ctx, c, a, nargs);
+        THIS = old_this;
     } else
     {
         assert(0);
@@ -639,6 +648,10 @@ static void action_trace(LVGActionCtx *ctx, uint8_t *a)
 #ifdef _DEBUG
     ASVal *se = &ctx->stack[ctx->stack_ptr];
     ctx->stack_ptr++;
+    if (ASVAL_UNDEFINED == se->type)
+        printf("undefined\n");
+    if (ASVAL_NULL == se->type)
+        printf("null\n");
     if (ASVAL_STRING == se->type)
         printf("%s\n", se->str);
     else if (ASVAL_INT == se->type)
@@ -712,13 +725,17 @@ static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
     ASVal *var = search_var(ctx, se_name->str);
     if (var)
     {
-        do_call(ctx, 0, var, a, nargs);
+        do_call(ctx, THIS, var, a, nargs);
         return;
     }
     assert(0);
 }
 
-static void action_return(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_return(LVGActionCtx *ctx, uint8_t *a)
+{
+    ctx->pc = ctx->size;
+}
+
 static void action_modulo(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_new_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_define_local2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -817,7 +834,7 @@ static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
             *res = c->members[i].val;
             return;
         }
-    assert(0);
+    SET_UNDEF(res);
 }
 
 static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
@@ -828,7 +845,8 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr += 3;
     if (ASVAL_UNDEFINED == se_var->type)
         return;
-    ASClass *c = (ASClass *)se_var->str;
+    assert(ASVAL_CLASS == se_var->type);
+    ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp(se_member->str, c->members[i].name))
         {
@@ -851,7 +869,7 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
             return;
         }
 #ifdef _TEST
-    assert(0);
+    //assert(0);
 #endif
 }
 
@@ -877,7 +895,6 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_obj = se_method + 1;
     ASVal *se_nargs = se_method + 2;
     ctx->stack_ptr += 3;
-    assert(ASVAL_STRING == se_method->type);
     assert(ASVAL_INT == se_nargs->type || ASVAL_DOUBLE == se_nargs->type || ASVAL_FLOAT == se_nargs->type);
     int32_t nargs = to_int(se_nargs);
     if (ASVAL_UNDEFINED == se_obj->type)
@@ -887,6 +904,13 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
         SET_UNDEF(res);
         return;
     }
+    if (ASVAL_UNDEFINED == se_method->type || (ASVAL_STRING == se_method->type && !*se_method->str))
+    {
+        assert(ASVAL_FUNCTION == se_obj->type);
+        do_call(ctx, 0, se_obj, a, nargs);
+        return;
+    }
+    assert(ASVAL_STRING == se_method->type);
     assert(ASVAL_CLASS == se_obj->type);
     ASClass *c = (ASClass *)se_obj->str;
     for (int i = 0; i < c->num_members; i++)
@@ -1426,6 +1450,8 @@ restart:
         ctx->call_depth--;
         ctx->pc   = ctx->calls[ctx->call_depth].save_pc;
         ctx->size = ctx->calls[ctx->call_depth].save_size;
+        THIS = ctx->calls[ctx->call_depth].save_this;
+        g_properties[0].val.type = THIS ? ASVAL_CLASS : ASVAL_UNDEFINED;
         goto restart;
     }
 }
