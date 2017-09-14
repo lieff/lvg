@@ -221,7 +221,7 @@ static void createEmptyMovieClip(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, ui
     ASVal *se_depth = se_name + 1;
     assert(ASVAL_INT == se_depth->type || ASVAL_DOUBLE == se_depth->type || ASVAL_FLOAT == se_depth->type);
     assert(ASVAL_STRING == se_name->type);
-    ASVal *loc = create_local(THIS, se_name->str);
+    ASVal *loc = create_local(ctx, THIS, se_name->str);
     loc->type = ASVAL_UNDEFINED;
     loc->str  = 0;
     ctx->stack_ptr += nargs - 1;
@@ -258,7 +258,7 @@ static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     uint32_t frame = to_int(se_frame);
     group->cur_frame = frame % group->num_frames;
     group->play_state = LVG_PLAYING;
-    ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
+    ASVal *_currentframe = find_class_member(ctx, group->movieclip, "_currentframe");
     SET_INT(_currentframe, group->cur_frame + 1);
 }
 

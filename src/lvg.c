@@ -372,12 +372,12 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
             }
         }
-        g_properties[0].val.str = (char *)group->movieclip;        // this
-        g_properties[1].val.str = (char *)clip->groups->movieclip; // _root
-        g_properties[2].val.str = (char *)clip->groups->movieclip; // _level0
-        ASVal *val = find_class_member(group->movieclip, "_totalframes"); SET_INT(val, group->num_frames);
-        val = find_class_member(group->movieclip, "_framesloaded"); SET_INT(val, group->num_frames);
-        val = find_class_member(group->movieclip, "_visible"); visible = to_int(val);
+        g_properties[0].val.cls = group->movieclip;        // this
+        g_properties[1].val.cls = clip->groups->movieclip; // _root
+        g_properties[2].val.cls = clip->groups->movieclip; // _level0
+        ASVal *val = find_class_member(group->vm, THIS, "_totalframes"); SET_INT(val, group->num_frames);
+        val = find_class_member(group->vm, THIS, "_framesloaded"); SET_INT(val, group->num_frames);
+        val = find_class_member(group->vm, THIS, "_visible"); visible = to_int(val);
 
         for (i = 0; i < clip->num_groups; i++)
         {
@@ -385,7 +385,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             for (j = 0; j < g->num_group_labels; j++)
             {
                 LVGGroupLabel *gl = &g->group_labels[j];
-                ASVal *v = create_local(THIS, gl->name);
+                ASVal *v = create_local(group->vm, THIS, gl->name);
                 SET_CLASS(v, (clip->groups + gl->group_num)->movieclip);
             }
         }
@@ -566,7 +566,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         group->cur_frame = (group->cur_frame + 1) % group->num_frames;
     if (!b_no_actionscript)
     {   // execute sprite events after frame advance
-        ASVal *_currentframe = find_class_member(group->movieclip, "_currentframe");
+        ASVal *_currentframe = find_class_member(group->vm, group->movieclip, "_currentframe");
         SET_INT(_currentframe, group->cur_frame + 1);
         if (!group->events_initialized && group->events[0])
         {

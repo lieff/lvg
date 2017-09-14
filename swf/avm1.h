@@ -181,7 +181,7 @@ extern ASClass g_movieclip;
 
 double to_double(ASVal *v);
 int32_t to_int(ASVal *v);
-ASVal *find_class_member(ASClass *c, const char *name);
-ASVal *create_local(ASClass *c, const char *name);
+ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
+ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);
 void free_instance(ASClass *cls);

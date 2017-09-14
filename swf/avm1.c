@@ -256,37 +256,43 @@ int is_number(ASVal *v)
     return ASVAL_DOUBLE == v->type || ASVAL_FLOAT == v->type || ASVAL_INT == v->type || ASVAL_BOOL == v->type;
 }
 
+static int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2)
+{
+    if (ctx->version >= 7)
+        return strcmp(s1, s2);
+    else
+        return strcasecmp(s1, s2);
+}
+
 static ASVal *search_var(LVGActionCtx *ctx, const char *name)
 {
     int i;
     for (i = 0; i < g_num_properties; i++)
-        if (0 == strcmp(g_properties[i].name, name))
+        if (0 == strcmp_identifier(ctx, g_properties[i].name, name))
             return &g_properties[i].val;
     ASClass *pthis = THIS;
-    for (i = 0; i < pthis->num_members; i++)
-        if (0 == strcmp(pthis->members[i].name, name))
-            return &pthis->members[i].val;
+    if (pthis)
+        for (i = 0; i < pthis->num_members; i++)
+            if (0 == strcmp_identifier(ctx, pthis->members[i].name, name))
+                return &pthis->members[i].val;
     for (i = 0; i < g_num_classes; i++)
-        if (0 == strcmp(g_classes[i].cls->name, name))
+        if (0 == strcmp_identifier(ctx, g_classes[i].cls->name, name))
             return &g_classes[i];
-#ifdef _DEBUG
-    printf("warning: var %s not found\n", name); fflush(stdout);
-#endif
     return 0;
 }
 
-ASVal *find_class_member(ASClass *c, const char *name)
+ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name)
 {
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(c->members[i].name, name))
+        if (0 == strcmp_identifier(ctx, c->members[i].name, name))
             return &c->members[i].val;
     return 0;
 }
 
-ASVal *create_local(ASClass *c, const char *name)
+ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name)
 {
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(c->members[i].name, name))
+        if (0 == strcmp_identifier(ctx, c->members[i].name, name))
             return &c->members[i].val;
     c->members = realloc(c->members, (c->num_members + 1)*sizeof(c->members[0]));
     ASMember *res = c->members + c->num_members++;
@@ -347,7 +353,7 @@ static void action_end(LVGActionCtx *ctx, uint8_t *a)
 static void action_next_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->group->cur_frame = (ctx->group->cur_frame + 1) % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
     SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
@@ -355,7 +361,7 @@ static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     if (ctx->group->cur_frame)
         ctx->group->cur_frame--;
-    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
     SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
@@ -573,7 +579,7 @@ static void action_set_variable(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_var = se_val + 1;
     ctx->stack_ptr += 2;
     assert(ASVAL_STRING == se_var->type);
-    ASVal *res = create_local(THIS, se_var->str);
+    ASVal *res = create_local(ctx, THIS, se_var->str);
     *res = *se_val;
 }
 
@@ -610,7 +616,7 @@ static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
     ASClass *c = ctx->group->movieclip;
     const char *prop = props[idx];
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(c->members[i].name, prop))
+        if (0 == strcmp_identifier(ctx, c->members[i].name, prop))
         {
             *res = c->members[i].val;
             return;
@@ -633,7 +639,7 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
     ASClass *c = ctx->group->movieclip;
     const char *prop = props[idx];
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(c->members[i].name, prop))
+        if (0 == strcmp_identifier(ctx, c->members[i].name, prop))
         {
             c->members[i].val = *se_val;
             return;
@@ -705,7 +711,7 @@ static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
     ASVal *se_name = se_val + 1;
     ctx->stack_ptr += 2;
-    ASVal *res = create_local(THIS, se_name->str);
+    ASVal *res = create_local(ctx, THIS, se_name->str);
     *res = *se_val;
 }
 
@@ -829,7 +835,7 @@ static void action_get_member(LVGActionCtx *ctx, uint8_t *a)
     assert(ASVAL_CLASS == se_var->type && se_var->str && ASVAL_STRING == se_member->type);
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(se_member->str, c->members[i].name))
+        if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
         {
             *res = c->members[i].val;
             return;
@@ -848,7 +854,7 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     assert(ASVAL_CLASS == se_var->type);
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(se_member->str, c->members[i].name))
+        if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
         {
             int mnum = is_number(&c->members[i].val), vnum = is_number(se_val);
             if ((mnum && vnum) || c->members[i].val.type == se_val->type)
@@ -914,7 +920,7 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
     assert(ASVAL_CLASS == se_obj->type);
     ASClass *c = (ASClass *)se_obj->str;
     for (int i = 0; i < c->num_members; i++)
-        if (0 == strcmp(se_method->str, c->members[i].name))
+        if (0 == strcmp_identifier(ctx, se_method->str, c->members[i].name))
         {
             do_call(ctx, c, &c->members[i].val, a, nargs);
             return;
@@ -1038,7 +1044,7 @@ static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     int frame = *(uint16_t*)(a + 2);
     ctx->group->cur_frame = frame % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
     SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
@@ -1090,11 +1096,11 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
     LVGFrameLabel *l = ctx->group->labels;
     const char *name = (const char *)a + 2;
     for (int i = 0; i < ctx->group->num_labels; i++)
-        if (0 == strcasecmp(name, l[i].name))
+        if (0 == strcmp_identifier(ctx, name, l[i].name))
         {
             ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
             ctx->group->play_state = LVG_STOPPED;
-            ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+            ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
             SET_INT(_currentframe, ctx->group->cur_frame + 1);
             return;
         }
@@ -1130,7 +1136,7 @@ static void action_define_function2(LVGActionCtx *ctx, uint8_t *a)
         ctx->stack_ptr--;
         res = &ctx->stack[ctx->stack_ptr];
     } else
-        res = create_local(THIS, fname);
+        res = create_local(ctx, THIS, fname);
     res->type = ASVAL_FUNCTION;
     res->str  = (const char *)&data[i];
     int codesize = *(uint16_t*)&data[i]; i += 2;
@@ -1182,7 +1188,7 @@ static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
 #ifdef _DEBUG
-    if (0 == strcasecmp(se_url->str, "FSCommand:quit"))
+    if (0 == strcmp_identifier(ctx, se_url->str, "FSCommand:quit"))
         ctx->do_exit = 1;
 #endif
 }
@@ -1205,7 +1211,7 @@ static void action_define_function(LVGActionCtx *ctx, uint8_t *a)
         ctx->stack_ptr--;
         res = &ctx->stack[ctx->stack_ptr];
     } else
-        res = create_local(THIS, fname);
+        res = create_local(ctx, THIS, fname);
     res->type = ASVAL_FUNCTION;
     res->str  = (const char *)&data[i];
     int codesize = data[i++];
@@ -1238,13 +1244,13 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
     {
         LVGFrameLabel *l = ctx->group->labels;
         for (int i = 0; i < ctx->group->num_labels; i++)
-            if (0 == strcmp(se->str, l[i].name))
+            if (0 == strcmp_identifier(ctx, se->str, l[i].name))
             {
                 ctx->group->cur_frame = (l[i].frame_num + add) % ctx->group->num_frames;
                 break;
             }
     }
-    ASVal *_currentframe = find_class_member(ctx->group->movieclip, "_currentframe");
+    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
     SET_INT(_currentframe, ctx->group->cur_frame + 1);
 }
 
