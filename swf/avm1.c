@@ -547,8 +547,11 @@ static void action_string_extract(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_pop(LVGActionCtx *ctx, uint8_t *a)
 {
-    ctx->stack_ptr++;
-    assert(ctx->stack_ptr < sizeof(ctx->stack)/sizeof(ctx->stack[0]));
+#ifndef _TEST
+    assert((ctx->stack_ptr + 1) < sizeof(ctx->stack)/sizeof(ctx->stack[0]));
+#endif
+    if (ctx->stack_ptr < sizeof(ctx->stack)/sizeof(ctx->stack[0]))
+        ctx->stack_ptr++;
 }
 
 static void action_to_integer(LVGActionCtx *ctx, uint8_t *a)
