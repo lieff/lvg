@@ -396,6 +396,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             group->last_acton_frame = group->cur_frame + 1;
             lvgExecuteActions(group->vm, frame->actions, 0);
         }
+        ASVal *onEnterFrame = find_class_member(group->vm, THIS, "onEnterFrame");
+        if (onEnterFrame && onEnterFrame->str)
+            lvgExecuteActions(group->vm, (uint8_t*)onEnterFrame->str, 1);
         for (i = 0; i < group->num_timers; i++)
         {
             LVGTimer *t = group->timers + i;

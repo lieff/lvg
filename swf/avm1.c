@@ -765,7 +765,15 @@ static void action_add2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_b = se_a + 1;
     ctx->stack_ptr += 1;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    *res = *se_b; // TODO: allocate with gc and concatenate
+    if (ASVAL_STRING == se_a->type || ASVAL_STRING == se_b->type)
+    {
+        *res = *se_b; // TODO: allocate with gc and concatenate
+    } else
+    {
+        double va = to_double(ctx, se_a);
+        double vb = to_double(ctx, se_b);
+        SET_DOUBLE(res, vb + va);
+    }
 }
 
 static void action_less2(LVGActionCtx *ctx, uint8_t *a)
@@ -881,22 +889,7 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
         {
-            int mnum = is_number(&c->members[i].val), vnum = is_number(se_val);
-            if ((mnum && vnum) || c->members[i].val.type == se_val->type)
-                c->members[i].val = *se_val;
-            else if (mnum && ASVAL_STRING == se_val->type)
-            {
-                char *end = 0;
-                long int ival = strtol(se_val->str, &end, 10);
-                if (end && 0 == *end)
-                {
-                    SET_INT(&c->members[i].val, ival);
-                    return;
-                }
-                double dval = strtod(se_val->str, &end);
-                if (end && 0 == *end)
-                    SET_DOUBLE(&c->members[i].val, dval);
-            }
+            c->members[i].val = *se_val;
             return;
         }
 #ifdef _TEST
@@ -1204,8 +1197,8 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
         {
         case 0: se->type = ASVAL_STRING; se->str = (const char*)data + 1; size = strlen(se->str) + 1; break;
         case 1: se->type = ASVAL_FLOAT; se->f_int = read_float((uint8_t*)data + 1); size = 4; break;
-        case 2: se->type = ASVAL_NULL; break;
-        case 3: se->type = ASVAL_UNDEFINED; break;
+        case 2: se->type = ASVAL_NULL; se->str = 0; break;
+        case 3: se->type = ASVAL_UNDEFINED; se->str = 0; break;
         case 4: { int reg = *((uint8_t*)data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; size = 1; } break;
         case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
         case 6: se->type = ASVAL_DOUBLE; se->d_int = read_double((uint8_t*)data + 1); size = 8; break;
