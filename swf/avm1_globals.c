@@ -25,7 +25,7 @@ ASMember g_stage_members[] =
 
 ASClass g_stage =
 {
-    "Stage", &g_stage_members[0], 0, sizeof(g_stage_members)/sizeof(g_stage_members[0])
+    "Stage", &g_stage_members[0], 0, sizeof(g_stage_members)/sizeof(g_stage_members[0]), 0
 };
 
 static void math_abs(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -204,7 +204,7 @@ ASMember g_math_members[] =
 
 ASClass g_math =
 {
-    "Math", &g_math_members[0], 0, sizeof(g_math_members)/sizeof(g_math_members[0])
+    "Math", &g_math_members[0], 0, sizeof(g_math_members)/sizeof(g_math_members[0]), 0
 };
 
 static void string_length(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -254,13 +254,32 @@ ASMember g_string_members[] =
 
 ASClass g_string =
 {
-    "String", &g_string_members[0], 0, sizeof(g_string_members)/sizeof(g_string_members[0])
+    "String", &g_string_members[0], 0, sizeof(g_string_members)/sizeof(g_string_members[0]), 0
+};
+
+ASMember g_number_members[] =
+{
+    // properties
+    { "MAX_VALUE",         { { .d_int = 0 }, ASVAL_DOUBLE } }, //: Number
+    { "MIN_VALUE",         { { .d_int = 0 }, ASVAL_DOUBLE } }, //: Number
+    { "NaN",               { { .d_int = NAN }, ASVAL_DOUBLE } }, //: Number
+    { "NEGATIVE_INFINITY", { { .d_int = -INFINITY }, ASVAL_DOUBLE } }, //: Number
+    { "POSITIVE_INFINITY", { { .d_int =  INFINITY }, ASVAL_DOUBLE } }, //: Number
+    // methods
+    { "toString",          { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(radix: Number) : String
+    { "valueOf",           { { .fn = 0 }, ASVAL_NATIVE_FN } }  //() : Number
+};
+
+ASClass g_number =
+{
+    "Number", &g_number_members[0], 0, sizeof(g_number_members)/sizeof(g_number_members[0]), 0
 };
 
 ASVal g_classes[] =
 {
     { { .cls = &g_stage }, ASVAL_CLASS },
-    { { .cls = &g_math }, ASVAL_CLASS }
+    { { .cls = &g_math }, ASVAL_CLASS },
+    { { .cls = &g_number }, ASVAL_CLASS }
 };
 
 int g_num_classes = sizeof(g_classes)/sizeof(g_classes[0]);
@@ -448,7 +467,7 @@ ASMember g_movieclip_members[] =
 
 ASClass g_movieclip =
 {
-    "MovieClip", &g_movieclip_members[0], 0, sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0])
+    "MovieClip", &g_movieclip_members[0], 0, sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0]), 0
 };
 
 static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)

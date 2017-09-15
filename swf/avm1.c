@@ -162,6 +162,24 @@ int32_t to_int(ASVal *v)
     return 0;
 }
 
+ASClass *to_object(ASVal *v)
+{
+    ASClass *base, *res;
+    if (ASVAL_STRING == v->type)
+    {
+        base = &g_string;
+        res = create_instance(base);
+        res->priv = strdup(v->str);
+    } else if (ASVAL_DOUBLE == v->type || ASVAL_FLOAT == v->type || ASVAL_INT == v->type)
+    {
+
+    } else if (ASVAL_BOOL == v->type)
+    {
+
+    }
+    return res;
+}
+
 char *double_to_str(double d)
 {
     if (isnan(d))
@@ -306,11 +324,16 @@ ASClass *create_instance(ASClass *base)
     memcpy(cls, base, sizeof(ASClass));
     cls->members = malloc(cls->num_members*sizeof(ASMember));
     memcpy(cls->members, base->members, cls->num_members*sizeof(ASMember));
+    cls->priv = 0;
+    cls->ref_count = 1;
     return cls;
 }
 
 void free_instance(ASClass *cls)
 {
+    cls->ref_count--;
+    if (cls->ref_count)
+        return;
     free(cls->members);
     free(cls);
 }
@@ -889,7 +912,23 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
         {
-            c->members[i].val = *se_val;
+            int mnum = is_number(&c->members[i].val), vnum = is_number(se_val);
+            if ((mnum && vnum) || c->members[i].val.type == se_val->type)
+                c->members[i].val = *se_val;
+            else if (mnum && ASVAL_STRING == se_val->type)
+            {
+                char *end = 0;
+                long int ival = strtol(se_val->str, &end, 10);
+                if (end && 0 == *end)
+                {
+                    SET_INT(&c->members[i].val, ival);
+                    return;
+                }
+                double dval = strtod(se_val->str, &end);
+                if (end && 0 == *end)
+                    SET_DOUBLE(&c->members[i].val, dval);
+            } else
+                c->members[i].val = *se_val;
             return;
         }
 #ifdef _TEST

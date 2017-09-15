@@ -8,6 +8,7 @@
 #define SET_INT(se, number)    { (se)->type = ASVAL_INT;    (se)->i32 = number; }
 #define SET_BOOL(se, value)    { (se)->type = ASVAL_BOOL;   (se)->boolean = value; }
 #define SET_UNDEF(se)          { (se)->type = ASVAL_UNDEFINED; (se)->str = 0; }
+#define SET_NULL(se)           { (se)->type = ASVAL_NULL;   (se)->str = 0; }
 #define SET_CLASS(se, cls_val) { (se)->type = ASVAL_CLASS;  (se)->cls = cls_val; }
 #define THIS g_properties[0].val.cls
 
@@ -150,7 +151,7 @@ typedef struct ASClass
     const char *name;
     ASMember *members;
     void *priv;
-    int num_members;
+    int num_members, ref_count;
 } ASClass;
 
 typedef struct LVGActionCall
@@ -182,6 +183,7 @@ extern ASClass g_string;
 
 double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
+ASClass *to_object(ASVal *v);
 ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);
