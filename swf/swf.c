@@ -385,6 +385,7 @@ static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int so
         frame->actions = realloc(frame->actions, 4 + size + 5);
         memmove(frame->actions + 4 + 5, frame->actions + 4, size);
         memcpy(frame->actions + 4, buf, 5);
+        *(uint32_t*)frame->actions += 5;
     }
 }
 

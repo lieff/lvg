@@ -1182,6 +1182,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
             SET_INT(_currentframe, ctx->group->cur_frame + 1);
             return;
         }
+    assert(0);
 }
 
 static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a)
