@@ -381,24 +381,26 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         val = find_class_member(group->vm, THIS, "_visible"); visible = to_int(val);
         val = find_class_member(group->vm, THIS, "_alpha"); alpha = to_double(group->vm, val);
 
-        for (i = 0; i < clip->num_groups; i++)
+        if (frame->obj_labels)
         {
-            LVGMovieClipGroup *g = clip->groups + i;
-            for (j = 0; j < g->num_group_labels; j++)
+            for (i = 0; i < frame->num_labels; i++)
             {
-                LVGGroupLabel *gl = &g->group_labels[j];
-                ASVal *v = create_local(group->vm, THIS, gl->name);
-                if (LVG_OBJ_GROUP == gl->type)
-                    SET_CLASS(v, (clip->groups + gl->id)->movieclip)
-                else if (LVG_OBJ_BUTTON == gl->type)
+                LVGObjectLabel *l = frame->obj_labels + i;
+                ASVal *v = create_local(group->vm, THIS, l->name);
+                if (LVG_OBJ_GROUP == l->type)
+                    SET_CLASS(v, (clip->groups + l->id)->movieclip)
+                else if (LVG_OBJ_BUTTON == l->type)
                 {
-                    LVGButton *b = clip->buttons + gl->id;
+                    LVGButton *b = clip->buttons + l->id;
                     if (!b->button_obj)
                     {
                         ASClass *cls = create_instance(&g_button);
                         b->button_obj = cls;
                     }
                     SET_CLASS(v, b->button_obj);
+                } else
+                {
+                    assert(0);
                 }
             }
         }
@@ -511,10 +513,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         {
             LVGButton *b = clip->buttons + o->id;
             double btn_alpha = 1.0;
+            int btn_visible = 1;
             if (b->button_obj)
             {
                 ASVal *val = find_class_member(group->vm, b->button_obj, "_alpha");
                 btn_alpha = to_double(group->vm, val);
+                val = find_class_member(group->vm, b->button_obj, "_visible");
+                btn_visible = to_int(val);
             }
             int mouse_hit = 0;
             float t[6];
@@ -573,7 +578,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
             }
             b->prev_mousehit = mouse_hit;
-            if (visible)
+            if (visible && btn_visible)
                 for (j = 0; j < nshapes; j++)
                 {
                     LVGColorTransform newcxform = *cxform;
@@ -671,14 +676,18 @@ void lvgCloseClip(LVGMovieClip *clip)
                 free(frame->objects);
             if (frame->actions)
                 free(frame->actions);
+            if (frame->obj_labels)
+            {
+                for (int k = 0; k < frame->num_labels; k++)
+                    if (frame->obj_labels[k].name)
+                        free((void*)frame->obj_labels[k].name);
+                free(frame->obj_labels);
+            }
         }
         for (j = 0; j < group->num_labels; j++)
             free((void*)group->labels[j].name);
-        for (j = 0; j < group->num_group_labels; j++)
-            free((void*)group->group_labels[j].name);
         free(group->frames);
         free(group->labels);
-        free(group->group_labels);
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);

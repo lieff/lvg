@@ -934,14 +934,11 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             if (flags & PF_CLIPDEPTH) target->clipdepth = p.clipdepth;
             if (flags & PF_NAME)
             {   // name to access objects in action script
+                if (target->name)
+                    free(target->name);
+                target->name = p.name;
                 assert(sprite_type == idtable[p.id].type || button_type == idtable[p.id].type || none_type == idtable[p.id].type/*text*/);
-                group->group_labels = realloc(group->group_labels, (group->num_group_labels + 1)*sizeof(group->group_labels[0]));
-                LVGGroupLabel *gl = group->group_labels + group->num_group_labels++;
-                gl->name = strdup(p.name);
-                gl->type = idtable[p.id].type;
-                gl->id = idtable[p.id].lvg_id;
             }
-            swf_PlaceObjectFree(&p);
             for (i = 0; i < 19; i++)
                 if (p.actions[i])
                 {
@@ -1001,8 +998,9 @@ do_show_frame:
                     continue;
                 numplacements++;
             }
-            group->frames[group->num_frames].num_objects = numplacements;
-            group->frames[group->num_frames].objects = calloc(1, sizeof(LVGObject)*numplacements);
+            LVGMovieClipFrame *frame = group->frames + group->num_frames;
+            frame->num_objects = numplacements;
+            frame->objects = calloc(1, sizeof(LVGObject)*numplacements);
             for (i = 0, j = 0; i < 65536; i++)
             {
                 SWFPLACEOBJECT *p = &placements[i];
@@ -1010,7 +1008,7 @@ do_show_frame:
                     continue;
                 MATRIX *m = &p->matrix;
                 CXFORM *cx = &p->cxform;
-                LVGObject *o = &group->frames[group->num_frames].objects[j++];
+                LVGObject *o = &frame->objects[j++];
                 character_t *c = &idtable[p->id];
                 o->id = c->lvg_id;
                 o->type = c->type;
@@ -1030,6 +1028,15 @@ do_show_frame:
                 o->cxform.add[1] = cx->g1/256.0f;
                 o->cxform.add[2] = cx->b1/256.0f;
                 o->cxform.add[3] = cx->a1/256.0f;
+                if (p->name)
+                {
+                    frame->obj_labels = realloc(frame->obj_labels, (frame->num_labels + 1)*sizeof(frame->obj_labels[0]));
+                    LVGObjectLabel *l = frame->obj_labels + frame->num_labels++;
+                    l->name = p->name;
+                    l->type = o->type;
+                    l->id   = o->id;
+                    p->name = 0;
+                }
             }
             group->num_frames++;
             if (ST_END == tag->id)

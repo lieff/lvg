@@ -23,6 +23,12 @@ typedef struct LVGColorTransform
     float add[4];
 } LVGColorTransform;
 
+typedef struct LVGObjectLabel
+{
+    const char *name;
+    int type, id;
+} LVGObjectLabel;
+
 typedef struct LVGObject
 {
     int id, type, depth, ratio;
@@ -34,7 +40,8 @@ typedef struct LVGMovieClipFrame
 {
     LVGObject *objects;
     unsigned char *actions;
-    int num_objects;
+    LVGObjectLabel *obj_labels; // to access objects from action script
+    int num_objects, num_labels;
 } LVGMovieClipFrame;
 
 typedef struct LVGFrameLabel
@@ -42,13 +49,6 @@ typedef struct LVGFrameLabel
     const char *name;
     int frame_num;
 } LVGFrameLabel;
-
-typedef struct LVGGroupLabel
-{
-    const char *name;
-    int type;
-    int id;
-} LVGGroupLabel;
 
 typedef struct LVGTimer
 {
@@ -62,13 +62,12 @@ typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
     LVGFrameLabel *labels;
-    LVGGroupLabel *group_labels;
     // action script
     uint8_t *events[19];     // swf events
     LVGActionCtx *vm;        // action script vm for frames and timer
     LVGTimer *timers;
     void *movieclip;         // MovieClip class instance
-    int num_frames, num_labels, num_group_labels, num_timers, cur_frame, last_acton_frame, play_state, events_initialized;
+    int num_frames, num_labels, num_timers, cur_frame, last_acton_frame, play_state, events_initialized;
 } LVGMovieClipGroup;
 
 typedef struct LVGShapeCollection
