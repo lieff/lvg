@@ -47,7 +47,7 @@ typedef struct LVGGroupLabel
 {
     const char *name;
     int type;
-    int group_num;
+    int id;
 } LVGGroupLabel;
 
 typedef struct LVGTimer
@@ -67,7 +67,7 @@ typedef struct LVGMovieClipGroup
     uint8_t *events[19];     // swf events
     LVGActionCtx *vm;        // action script vm for frames and timer
     LVGTimer *timers;
-    void *movieclip;         // MivieClip class instance
+    void *movieclip;         // MovieClip class instance
     int num_frames, num_labels, num_group_labels, num_timers, cur_frame, last_acton_frame, play_state, events_initialized;
 } LVGMovieClipGroup;
 
@@ -121,6 +121,7 @@ typedef struct LVGButton
     LVGObject *down_shapes;
     LVGObject *hit_shapes;
     LVGButtonAction *btnactions;
+    void *button_obj;  // Button class instance
     int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_btnactions;
     int prev_mousehit;
 } LVGButton;

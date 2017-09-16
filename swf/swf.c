@@ -939,7 +939,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 LVGGroupLabel *gl = group->group_labels + group->num_group_labels++;
                 gl->name = strdup(p.name);
                 gl->type = idtable[p.id].type;
-                gl->group_num = idtable[p.id].lvg_id;
+                gl->id = idtable[p.id].lvg_id;
             }
             swf_PlaceObjectFree(&p);
             for (i = 0; i < 19; i++)

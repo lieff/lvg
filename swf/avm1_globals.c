@@ -470,6 +470,59 @@ ASClass g_movieclip =
     "MovieClip", &g_movieclip_members[0], 0, sizeof(g_movieclip_members)/sizeof(g_movieclip_members[0]), 0
 };
 
+ASMember g_button_members[] =
+{
+    // properties
+    { "_alpha",        { { .d_int = 1.0 }, ASVAL_DOUBLE } }, //: Number
+    { "blendMode",     { { "" }, ASVAL_STRING } }, //: Object
+    { "cacheAsBitmap", { { "" }, ASVAL_STRING } }, //: Boolean
+    { "enabled",       { { "" }, ASVAL_STRING } }, //: Boolean
+    { "filters",       { { "" }, ASVAL_STRING } }, //: Array
+    { "_focusrect",    { { "" }, ASVAL_STRING } }, //: Boolean
+    { "_height",       { { "" }, ASVAL_STRING } }, //: Number
+    { "_highquality",  { { "" }, ASVAL_STRING } }, //: Number
+    { "menu",          { { "" }, ASVAL_STRING } }, //: ContextMenu
+    { "_name",         { { "" }, ASVAL_STRING } }, //: String
+    { "_parent",       { { "" }, ASVAL_STRING } }, //: MovieClip
+    { "_quality",      { { "" }, ASVAL_STRING } }, //: String
+    { "_rotation",     { { "" }, ASVAL_STRING } }, //: Number
+    { "scale9Grid",    { { "" }, ASVAL_STRING } }, //: Rectangle
+    { "_soundbuftime", { { "" }, ASVAL_STRING } }, //: Number
+    { "tabEnabled",    { { "" }, ASVAL_STRING } }, //: Boolean
+    { "tabIndex",      { { "" }, ASVAL_STRING } }, //: Number
+    { "_target",       { { "" }, ASVAL_STRING } }, //: String [read-only]
+    { "trackAsMenu",   { { "" }, ASVAL_STRING } }, //: Boolean
+    { "_url",          { { "" }, ASVAL_STRING } }, //: String [read-only]
+    { "useHandCursor", { { "" }, ASVAL_STRING } }, //: Boolean
+    { "_visible",      { { "" }, ASVAL_STRING } }, //: Boolean
+    { "_width",        { { "" }, ASVAL_STRING } }, //: Number
+    { "_x",            { { "" }, ASVAL_STRING } }, //: Number
+    { "_xmouse",       { { "" }, ASVAL_STRING } }, //: Number [read-only]
+    { "_xscale",       { { "" }, ASVAL_STRING } }, //: Number
+    { "_y",            { { "" }, ASVAL_STRING } }, //: Number
+    { "_ymouse",       { { "" }, ASVAL_STRING } }, //: Number [read-only]
+    { "_yscale",       { { "" }, ASVAL_STRING } }, //: Number
+    // events
+    { "onDragOut",        { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onDragOver",       { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onKeyDown",        { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onKeyUp",          { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onKillFocus",      { { .str = 0 }, ASVAL_FUNCTION } }, // = function(newFocus: Object) {}
+    { "onPress",          { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onRelease",        { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onReleaseOutside", { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onRollOut",        { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onRollOver",       { { .str = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onSetFocus",       { { .str = 0 }, ASVAL_FUNCTION } }, // = function(oldFocus: Object) {}
+    // methods
+    { "getDepth",         { { .ui32 = 0 }, ASVAL_INT } } //() : Number
+};
+
+ASClass g_button =
+{
+    "Button", &g_button_members[0], 0, sizeof(g_button_members)/sizeof(g_button_members[0]), 0
+};
+
 static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     assert(2 == nargs);

@@ -179,6 +179,7 @@ extern int g_num_classes;
 extern ASMember g_properties[];
 extern int g_num_properties;
 extern ASClass g_movieclip;
+extern ASClass g_button;
 extern ASClass g_string;
 
 double to_double(LVGActionCtx *ctx, ASVal *v);

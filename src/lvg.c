@@ -388,7 +388,18 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             {
                 LVGGroupLabel *gl = &g->group_labels[j];
                 ASVal *v = create_local(group->vm, THIS, gl->name);
-                SET_CLASS(v, (clip->groups + gl->group_num)->movieclip);
+                if (LVG_OBJ_GROUP == gl->type)
+                    SET_CLASS(v, (clip->groups + gl->id)->movieclip)
+                else if (LVG_OBJ_BUTTON == gl->type)
+                {
+                    LVGButton *b = clip->buttons + gl->id;
+                    if (!b->button_obj)
+                    {
+                        ASClass *cls = create_instance(&g_button);
+                        b->button_obj = cls;
+                    }
+                    SET_CLASS(v, b->button_obj);
+                }
             }
         }
         if ((group->cur_frame + 1) != group->last_acton_frame)
@@ -499,6 +510,12 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         if (LVG_OBJ_BUTTON == o->type)
         {
             LVGButton *b = clip->buttons + o->id;
+            double btn_alpha = 1.0;
+            if (b->button_obj)
+            {
+                ASVal *val = find_class_member(group->vm, b->button_obj, "_alpha");
+                btn_alpha = to_double(group->vm, val);
+            }
             int mouse_hit = 0;
             float t[6];
             g_render->get_transform(g_render_obj, t);
@@ -548,7 +565,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 LVGButtonAction *ba = b->btnactions + j;
                 if ((ba->flags & flags) && group->vm)
                 {
-                    /*printf("events=%x ", flags);
+                    /*printf("button %d events=%x ", o->id, flags);
                     for (int k = 0; k < b->num_btnactions; k++)
                         printf("%x ", b->btnactions[k].flags);
                     printf("\n"); fflush(stdout);*/
@@ -560,7 +577,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 for (j = 0; j < nshapes; j++)
                 {
                     LVGColorTransform newcxform = *cxform;
-                    combine_cxform(&newcxform, &ob->cxform, alpha);
+                    combine_cxform(&newcxform, &ob->cxform, alpha*btn_alpha);
                     if (LVG_OBJ_SHAPE != ob->type)
                         continue;
                     for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
