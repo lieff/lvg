@@ -923,6 +923,17 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             int flags = swf_GetPlaceObject(tag, &p, version);
             if (!(flags & PF_CHAR))
                 p.id = INVALID_ID;
+            if (INVALID_ID != p.id && sprite_type == idtable[p.id].type)
+            {
+                int group_num = idtable[p.id].lvg_id;
+                p.id = 65536 + clip->num_groupstates;
+                idtable[p.id].lvg_id = clip->num_groupstates;
+                idtable[p.id].type = sprite_type;
+                clip->groupstates = realloc(clip->groupstates, (clip->num_groupstates + 1)*sizeof(clip->groupstates[0]));
+                LVGMovieClipGroupState *groupstate = clip->groupstates + clip->num_groupstates++;
+                memset(groupstate, 0, sizeof(LVGMovieClipGroupState));
+                groupstate->group_num = group_num;
+            }
             SWFPLACEOBJECT *target = &placements[p.depth];
             if (INVALID_ID == p.id)
                 p.id = target->id;
@@ -1011,16 +1022,8 @@ do_show_frame:
                 CXFORM *cx = &p->cxform;
                 LVGObject *o = &frame->objects[j++];
                 character_t *c = &idtable[p->id];
+                o->id = c->lvg_id;
                 o->type = c->type;
-                if (LVG_OBJ_GROUP == o->type)
-                {
-                    o->id = clip->num_groupstates;
-                    clip->groupstates = realloc(clip->groupstates, (clip->num_groupstates + 1)*sizeof(clip->groupstates[0]));
-                    LVGMovieClipGroupState *groupstate = clip->groupstates + clip->num_groupstates++;
-                    memset(groupstate, 0, sizeof(LVGMovieClipGroupState));
-                    groupstate->group_num = c->lvg_id;
-                } else
-                    o->id = c->lvg_id;
                 o->depth = p->depth;
                 o->ratio = p->ratio;
                 o->t[0] = m->sx/65536.0f;
@@ -1067,7 +1070,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     swf_FoldAll(swf);
     swf_RemoveJPEGTables(swf);
 
-    character_t *idtable = (character_t*)calloc(1, sizeof(character_t)*65536);
+    character_t *idtable = (character_t*)calloc(1, sizeof(character_t)*65536*2);
     LVGMovieClip *clip = calloc(1, sizeof(LVGMovieClip));
     clip->bounds[0] = swf->movieSize.xmin/20.0f;
     clip->bounds[1] = swf->movieSize.ymin/20.0f;
