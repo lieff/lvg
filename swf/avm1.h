@@ -186,6 +186,7 @@ extern ASClass g_string;
 double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
 ASClass *to_object(ASVal *v);
+int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2);
 ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);

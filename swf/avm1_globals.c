@@ -361,7 +361,7 @@ ASMember g_movieclip_members[] =
 {
     // properties
     { "_alpha",        { { .d_int = 1.0 }, ASVAL_DOUBLE } }, //Number
-    { "blendMode",     { { "" }, ASVAL_STRING } }, //Object
+    { "blendMode",     { { "normal" }, ASVAL_STRING } }, //Object
     { "cacheAsBitmap", { { "" }, ASVAL_STRING } }, //Boolean
     { "_currentframe", { { .ui32 = 0 }, ASVAL_INT } }, //Number [read-only]
     { "_droptarget",   { { "" }, ASVAL_STRING } }, //String [read-only]
@@ -475,7 +475,7 @@ ASMember g_button_members[] =
 {
     // properties
     { "_alpha",        { { .d_int = 1.0 }, ASVAL_DOUBLE } }, //: Number
-    { "blendMode",     { { "" }, ASVAL_STRING } }, //: Object
+    { "blendMode",     { { "normal" }, ASVAL_STRING } }, //: Object
     { "cacheAsBitmap", { { "" }, ASVAL_STRING } }, //: Boolean
     { "enabled",       { { "" }, ASVAL_STRING } }, //: Boolean
     { "filters",       { { "" }, ASVAL_STRING } }, //: Array

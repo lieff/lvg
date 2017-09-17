@@ -274,7 +274,7 @@ int is_number(ASVal *v)
     return ASVAL_DOUBLE == v->type || ASVAL_FLOAT == v->type || ASVAL_INT == v->type || ASVAL_BOOL == v->type;
 }
 
-static int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2)
+int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2)
 {
     if (ctx->version >= 7)
         return strcmp(s1, s2);

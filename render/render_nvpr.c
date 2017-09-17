@@ -396,7 +396,7 @@ static void ImagePaint(struct NSVGshape *shape, LVGColorTransform *cxform, int i
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
 }
 
-static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform)
+static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
 {
     //render_ctx *ctx = render;
     GLuint pathObj = shape->cache;
@@ -407,7 +407,14 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform 
     glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);*/
 
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if (BLEND_overlay == blend_mode || BLEND_multiply == blend_mode)
+    {
+        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+    } if (BLEND_screen == blend_mode)
+    {
+        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
+    } else
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glStencilFunc(GL_NOTEQUAL, 0, 0x1F);
     glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
@@ -467,7 +474,6 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform 
 
         glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
     }
-    //glDeletePathsNV(pathObj, 1);
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_BLEND);
 }

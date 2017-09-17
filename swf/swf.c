@@ -941,6 +941,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             assert(INVALID_ID != p.id);
             target->id = p.id;
             target->depth = p.depth;
+            target->blendmode = p.blendmode;
             if (flags & PF_MATRIX) target->matrix = p.matrix;
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;
@@ -1027,6 +1028,7 @@ do_show_frame:
                 o->type = c->type;
                 o->depth = p->depth;
                 o->ratio = p->ratio;
+                o->blend_mode = p->blendmode ? p->blendmode - 1 : 0;
                 o->t[0] = m->sx/65536.0f;
                 o->t[1] = m->r0/65536.0f;
                 o->t[2] = m->r1/65536.0f;

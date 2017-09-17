@@ -31,7 +31,7 @@ typedef struct LVGObjectLabel
 
 typedef struct LVGObject
 {
-    int id, type, depth, ratio, flags;
+    int id, type, depth, ratio, flags, blend_mode;
     float t[6];
     LVGColorTransform cxform;
 } LVGObject;

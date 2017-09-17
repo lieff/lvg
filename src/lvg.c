@@ -328,9 +328,9 @@ fail:
     return clip;
 }
 
-void lvgDrawShape(NSVGshape *shape, LVGColorTransform *cxform)
+void lvgDrawShape(NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
 {
-    g_render->render_shape(g_render_obj, shape, cxform);
+    g_render->render_shape(g_render_obj, shape, cxform, blend_mode);
 }
 
 void lvgDrawSVG(NSVGimage *image)
@@ -340,7 +340,7 @@ void lvgDrawSVG(NSVGimage *image)
     {
         if (!(shape->flags & NSVG_FLAGS_VISIBLE))
             continue;
-        lvgDrawShape(shape, 0);
+        lvgDrawShape(shape, 0, BLEND_REPLACE);
     }
 }
 
@@ -350,7 +350,7 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
     newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3]*alpha;
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, int next_frame)
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, int next_frame, int blend_mode)
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
@@ -453,6 +453,22 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         }
         val = find_class_member(clip->vm, THIS, "_visible"); visible = to_int(val);
         val = find_class_member(clip->vm, THIS, "_alpha"); alpha = to_double(clip->vm, val);
+        /*val = find_class_member(clip->vm, THIS, "blendMode");
+        if (val && ASVAL_STRING == val->type)
+        {
+
+            static const char *g_blendModes[] =
+            {
+                "normal", "layer", "multiply", "screen", "lighten", "darken", "difference",
+                "add", "subtract", "invert", "alpha", "erase", "overlay", "hardlight"
+            };
+            for (i = 0; i < sizeof(g_blendModes)/sizeof(g_blendModes[0]); i++)
+                if (0 == strcmp_identifier(clip->vm, val->str, g_blendModes[i]))
+                {
+                    blend_mode = i;
+                    break;
+                }
+        }*/
     }
 
     float save_transform[6];
@@ -469,7 +485,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
             for (j = 0; j < clip->shapes[o->id].num_shapes; j++)
-                lvgDrawShape(&clip->shapes[o->id].shapes[j], &newcxform);
+                lvgDrawShape(&clip->shapes[o->id].shapes[j], &newcxform, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -537,7 +553,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, next_frame);
+            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, next_frame, o->blend_mode);
             THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
@@ -620,7 +636,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     if (LVG_OBJ_SHAPE != ob->type)
                         continue;
                     for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
-                        lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform);
+                        lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform, blend_mode);
                     ob++;
                 }
         }
@@ -675,7 +691,7 @@ void lvgDrawClip(LVGMovieClip *clip)
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
     //printf_frames(clip, clip->groupstates); printf("\n"); fflush(stdout);
-    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, next_frame);
+    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, next_frame, BLEND_REPLACE);
 }
 
 static void deletePaint(NSVGpaint* paint)

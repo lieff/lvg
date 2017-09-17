@@ -8,6 +8,22 @@
 #define GRADIENT_SAMPLES_L 256
 #define GRADIENT_SAMPLES_R 256
 
+#define BLEND_REPLACE    0
+#define BLEND_layer      1
+#define BLEND_multiply   2
+#define BLEND_screen     3
+#define BLEND_lighten    4
+#define BLEND_darken     5
+#define BLEND_difference 6
+#define BLEND_add        7
+#define BLEND_subtract   8
+#define BLEND_invert     9
+#define BLEND_alpha      10
+#define BLEND_erase      11
+#define BLEND_overlay    12
+#define BLEND_hardlight  13
+
+
 typedef struct render
 {
     int (*init)(void **render);
@@ -19,7 +35,7 @@ typedef struct render
     int (*cache_gradient)(NSVGpaint *fill);
     void (*free_image)(int image);
     void (*update_image)(void *render, int image, const void *rgba);
-    void (*render_shape)(void *render, NSVGshape *shape, LVGColorTransform *cxform);
+    void (*render_shape)(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode);
     void (*render_image)(void *render, int image);
     void (*set_transform)(void *render, float *t, int reset);
     void (*get_transform)(void *render, float *t);

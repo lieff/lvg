@@ -273,7 +273,7 @@ static void nvg_update_image(void *render, int image, const void *rgba)
     nvgUpdateImage(vg, image, rgba);
 }
 
-static void nvg_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform)
+static void nvg_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
 {
     NVGcontext *vg = render;
     nvgDrawShape(vg, shape, cxform);
