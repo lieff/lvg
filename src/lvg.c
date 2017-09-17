@@ -631,7 +631,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     }
 }
 
-static void printf_frames(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate)
+/*static void printf_frames(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate)
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
@@ -646,7 +646,7 @@ static void printf_frames(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate
             printf_frames(clip, clip->groupstates + o->id);
         }
     }
-}
+}*/
 
 void lvgDrawClip(LVGMovieClip *clip)
 {
