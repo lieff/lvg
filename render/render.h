@@ -38,4 +38,5 @@ void mul(Transform3x2 dst, Transform3x2 a, Transform3x2 b);
 void translate(Transform3x2 dst, float x, float y);
 void scale(Transform3x2 dst, float x, float y);
 void rotate(Transform3x2 dst, float angle);
+void xform(float dst[2], Transform3x2 a, const float v[2]);
 void inverse(Transform3x2 dst, Transform3x2 data);

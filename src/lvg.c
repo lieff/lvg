@@ -526,6 +526,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             int mouse_hit = 0;
             float t[6];
             g_render->get_transform(g_render_obj, t);
+            Transform3x2 tr;
+            tr[0][0] = t[0]; tr[1][0] = t[1];
+            tr[0][1] = t[2]; tr[1][1] = t[3];
+            tr[0][2] = t[4]; tr[1][2] = t[5];
+            inverse(tr, tr);
+            float m[2] = { mx, my };
+            xform(m, tr, m);
             for (j = 0; j < b->num_hit_shapes; j++)
             {
                 LVGShapeCollection *col = &clip->shapes[b->hit_shapes->id];
@@ -534,11 +541,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                     NSVGshape *s = col->shapes + k;
                     float x  = s->bounds[0], y  = s->bounds[1];
                     float x1 = s->bounds[2], y1 = s->bounds[3];
-                    x  = t[0]*x  + t[2]*y  + t[4];
-                    y  = t[1]*x  + t[3]*y  + t[5];
-                    x1 = t[0]*x1 + t[2]*y1 + t[4];
-                    y1 = t[1]*x1 + t[3]*y1 + t[5];
-                    if (mx >= x && mx <=x1 && my >= y && my <=y1)
+                    if (m[0] >= x && m[0] <=x1 && m[1] >= y && m[1] <= y1)
                     {
                         mouse_hit = 1;
                         break;
