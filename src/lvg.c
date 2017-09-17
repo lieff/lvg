@@ -509,10 +509,10 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
             lvgDrawClipGroup(clip, clip->groups + o->id, &newcxform, next_frame);
+            THIS = group->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
         {
-            THIS = group->movieclip; // restore this if changed in other groups
             LVGButton *b = clip->buttons + o->id;
             double btn_alpha = 1.0;
             int btn_visible = 1;
