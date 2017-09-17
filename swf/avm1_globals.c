@@ -312,30 +312,31 @@ static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     assert(1 == nargs);
     ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se_frame->type || ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_STRING == se_frame->type);
-    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
+    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    LVGMovieClipGroup *group = g_clip->groups + groupstate->group_num;
     if (ASVAL_STRING == se_frame->type)
     {
         LVGFrameLabel *l = group->labels;
         for (int i = 0; i < group->num_labels; i++)
             if (0 == strcasecmp(l[i].name, se_frame->str))
             {
-                group->cur_frame = l[i].frame_num % group->num_frames;
-                group->play_state = LVG_PLAYING;
+                groupstate->cur_frame = l[i].frame_num % group->num_frames;
+                groupstate->play_state = LVG_PLAYING;
                 return;
             }
     }
     uint32_t frame = to_int(se_frame);
-    group->cur_frame = frame % group->num_frames;
-    group->play_state = LVG_PLAYING;
-    ASVal *_currentframe = find_class_member(ctx, group->movieclip, "_currentframe");
-    SET_INT(_currentframe, group->cur_frame + 1);
+    groupstate->cur_frame = frame % group->num_frames;
+    groupstate->play_state = LVG_PLAYING;
+    ASVal *_currentframe = find_class_member(ctx, groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, groupstate->cur_frame + 1);
 }
 
 static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     gotoAndPlay(ctx, cls, a, nargs);
-    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
-    group->play_state = LVG_STOPPED;
+    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    groupstate->play_state = LVG_STOPPED;
 }
 
 static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -343,8 +344,8 @@ static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
-    group->play_state = LVG_PLAYING;
+    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    groupstate->play_state = LVG_PLAYING;
 }
 
 static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -352,8 +353,8 @@ static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    LVGMovieClipGroup *group = g_clip->groups + (size_t)cls->priv;
-    group->play_state = LVG_STOPPED;
+    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    groupstate->play_state = LVG_STOPPED;
 }
 
 ASMember g_movieclip_members[] =
@@ -532,13 +533,13 @@ static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     assert(ASVAL_FUNCTION == se_func->type);
     assert(ASVAL_INT == se_timeout->type || ASVAL_DOUBLE == se_timeout->type || ASVAL_FLOAT == se_timeout->type);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    if (ctx->group->num_timers > 10)
+    if (ctx->groupstate->num_timers > 10)
     {
         SET_INT(res, 0);
         return;
     }
-    ctx->group->timers = realloc(ctx->group->timers, (ctx->group->num_timers + 1)*sizeof(ctx->group->timers[0]));
-    LVGTimer *t = ctx->group->timers + ctx->group->num_timers++;
+    ctx->groupstate->timers = realloc(ctx->groupstate->timers, (ctx->groupstate->num_timers + 1)*sizeof(ctx->groupstate->timers[0]));
+    LVGTimer *t = ctx->groupstate->timers + ctx->groupstate->num_timers++;
     t->func = (uint8_t *)se_func->str;
     t->last_time = g_time;
     t->timeout = to_double(ctx, se_timeout);
@@ -553,11 +554,11 @@ static void clearInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t 
     ASVal *se_id = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se_id->type || ASVAL_DOUBLE == se_id->type || ASVAL_FLOAT == se_id->type);
     int id = to_int(se_id);
-    for (int i = 0; i < ctx->group->num_timers; i++)
-        if (ctx->group->timers[i].id == id)
+    for (int i = 0; i < ctx->groupstate->num_timers; i++)
+        if (ctx->groupstate->timers[i].id == id)
         {
-            memmove(&ctx->group->timers[i], &ctx->group->timers[i + 1], (ctx->group->num_timers - i - 1)*sizeof(ctx->group->timers[0]));
-            ctx->group->num_timers--;
+            memmove(&ctx->groupstate->timers[i], &ctx->groupstate->timers[i + 1], (ctx->groupstate->num_timers - i - 1)*sizeof(ctx->groupstate->timers[0]));
+            ctx->groupstate->num_timers--;
             return;
         }
     assert(0);

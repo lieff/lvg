@@ -350,21 +350,21 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
     newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3]*alpha;
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGColorTransform *cxform, int next_frame)
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, int next_frame)
 {
-    int i, j, nframe = group->cur_frame, visible = 1;
+    LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
+    LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
+    int i, j, nframe = groupstate->cur_frame, cur_frame = groupstate->cur_frame, visible = 1;
     double alpha = 1.0;
-    LVGMovieClipFrame *frame = group->frames + nframe;
-    int cur_frame = group->cur_frame;
     if (!b_no_actionscript)
     {
-        if (!group->vm)
+        if (!clip->vm)
         {
-            group->vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(group->vm, clip, group);
-            for (i = 0; i < clip->num_groups; i++)
+            clip->vm = malloc(sizeof(LVGActionCtx));
+            lvgInitVM(clip->vm, clip, groupstate);
+            for (i = 0; i < clip->num_groupstates; i++)
             {
-                LVGMovieClipGroup *g = clip->groups + i;
+                LVGMovieClipGroupState *g = clip->groupstates + i;
                 if (!g->movieclip)
                 {
                     ASClass *cls = create_instance(&g_movieclip);
@@ -373,22 +373,22 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
             }
         }
-        g_properties[0].val.cls = group->movieclip;        // this
-        g_properties[1].val.cls = clip->groups->movieclip; // _root
-        g_properties[2].val.cls = clip->groups->movieclip; // _level0
-        ASVal *val = find_class_member(group->vm, THIS, "_totalframes"); SET_INT(val, group->num_frames);
-        val = find_class_member(group->vm, THIS, "_framesloaded"); SET_INT(val, group->num_frames);
-        val = find_class_member(group->vm, THIS, "_visible"); visible = to_int(val);
-        val = find_class_member(group->vm, THIS, "_alpha"); alpha = to_double(group->vm, val);
+        g_properties[0].val.cls = groupstate->movieclip;        // this
+        g_properties[1].val.cls = clip->groupstates->movieclip; // _root
+        g_properties[2].val.cls = clip->groupstates->movieclip; // _level0
+        ASVal *val = find_class_member(clip->vm, THIS, "_totalframes"); SET_INT(val, group->num_frames);
+        val = find_class_member(clip->vm, THIS, "_framesloaded"); SET_INT(val, group->num_frames);
+        val = find_class_member(clip->vm, THIS, "_visible"); visible = to_int(val);
+        val = find_class_member(clip->vm, THIS, "_alpha"); alpha = to_double(clip->vm, val);
 
         if (frame->obj_labels)
         {
             for (i = 0; i < frame->num_labels; i++)
             {
                 LVGObjectLabel *l = frame->obj_labels + i;
-                ASVal *v = create_local(group->vm, THIS, l->name);
+                ASVal *v = create_local(clip->vm, THIS, l->name);
                 if (LVG_OBJ_GROUP == l->type)
-                    SET_CLASS(v, (clip->groups + l->id)->movieclip)
+                    SET_CLASS(v, (clip->groupstates + l->id)->movieclip)
                 else if (LVG_OBJ_BUTTON == l->type)
                 {
                     LVGButton *b = clip->buttons + l->id;
@@ -405,22 +405,22 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                 }
             }
         }
-        if ((group->cur_frame + 1) != group->last_acton_frame)
+        if ((groupstate->cur_frame + 1) != groupstate->last_acton_frame)
         {   // call frame actions only once
-            group->last_acton_frame = group->cur_frame + 1;
-            lvgExecuteActions(group->vm, frame->actions, 0);
+            groupstate->last_acton_frame = groupstate->cur_frame + 1;
+            lvgExecuteActions(clip->vm, frame->actions, 0);
         }
-        ASVal *onEnterFrame = find_class_member(group->vm, THIS, "onEnterFrame");
+        ASVal *onEnterFrame = find_class_member(clip->vm, THIS, "onEnterFrame");
         if (onEnterFrame && onEnterFrame->str)
-            lvgExecuteActions(group->vm, (uint8_t*)onEnterFrame->str, 1);
-        for (i = 0; i < group->num_timers; i++)
+            lvgExecuteActions(clip->vm, (uint8_t*)onEnterFrame->str, 1);
+        for (i = 0; i < groupstate->num_timers; i++)
         {
-            LVGTimer *t = group->timers + i;
+            LVGTimer *t = groupstate->timers + i;
             double time = g_time - t->last_time;
             if (time > t->timeout/1000.0)
             {
                 t->last_time = g_time;
-                lvgExecuteActions(group->vm, t->func, 1);
+                lvgExecuteActions(clip->vm, t->func, 1);
             }
         }
     }
@@ -508,8 +508,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawClipGroup(clip, clip->groups + o->id, &newcxform, next_frame);
-            THIS = group->movieclip; // restore this if changed in other groups
+            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, next_frame);
+            THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
         {
@@ -518,9 +518,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             int btn_visible = 1;
             if (b->button_obj)
             {
-                ASVal *val = find_class_member(group->vm, b->button_obj, "_alpha");
-                btn_alpha = to_double(group->vm, val);
-                val = find_class_member(group->vm, b->button_obj, "_visible");
+                ASVal *val = find_class_member(clip->vm, b->button_obj, "_alpha");
+                btn_alpha = to_double(clip->vm, val);
+                val = find_class_member(clip->vm, b->button_obj, "_visible");
                 btn_visible = to_int(val);
             }
             int mouse_hit = 0;
@@ -573,13 +573,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
             for (j = 0; j < b->num_btnactions; j++)
             {
                 LVGButtonAction *ba = b->btnactions + j;
-                if ((ba->flags & flags) && group->vm)
+                if ((ba->flags & flags) && clip->vm)
                 {
                     /*printf("button %d events=%x ", o->id, flags);
                     for (int k = 0; k < b->num_btnactions; k++)
                         printf("%x ", b->btnactions[k].flags);
                     printf("\n"); fflush(stdout);*/
-                    lvgExecuteActions(group->vm, ba->actions, 0);
+                    lvgExecuteActions(clip->vm, ba->actions, 0);
                 }
             }
             b->prev_mousehit = mouse_hit;
@@ -598,20 +598,20 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
     if (!group->num_frames)
-        group->cur_frame = 0; else
-    if (next_frame && LVG_PLAYING == group->play_state && cur_frame == group->cur_frame/*not changed by as*/)
-        group->cur_frame = (group->cur_frame + 1) % group->num_frames;
+        groupstate->cur_frame = 0; else
+    if (next_frame && LVG_PLAYING == groupstate->play_state && cur_frame == groupstate->cur_frame/*not changed by as*/)
+        groupstate->cur_frame = (groupstate->cur_frame + 1) % group->num_frames;
     if (!b_no_actionscript)
     {   // execute sprite events after frame advance
-        ASVal *_currentframe = find_class_member(group->vm, group->movieclip, "_currentframe");
-        SET_INT(_currentframe, group->cur_frame + 1);
-        if (!group->events_initialized && group->events[0])
+        ASVal *_currentframe = find_class_member(clip->vm, groupstate->movieclip, "_currentframe");
+        SET_INT(_currentframe, groupstate->cur_frame + 1);
+        if (!groupstate->events_initialized && group->events[0])
         {
-            group->events_initialized = 1;
-            lvgExecuteActions(group->vm, group->events[0], 0);
+            groupstate->events_initialized = 1;
+            lvgExecuteActions(clip->vm, group->events[0], 0);
         }
         if (group->events[1])
-            lvgExecuteActions(group->vm, group->events[1], 0);
+            lvgExecuteActions(clip->vm, group->events[1], 0);
     }
 }
 
@@ -630,7 +630,7 @@ void lvgDrawClip(LVGMovieClip *clip)
     LVGColorTransform startcxform;
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
-    lvgDrawClipGroup(clip, clip->groups, &startcxform, next_frame);
+    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, next_frame);
 }
 
 static void deletePaint(NSVGpaint* paint)
@@ -696,15 +696,14 @@ void lvgCloseClip(LVGMovieClip *clip)
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);
-        if (group->vm)
-        {
-            lvgFreeVM(group->vm);
-            free(group->vm);
-        }
-        if (group->movieclip)
-            free_instance(group->movieclip);
-        if (group->timers)
-            free(group->timers);
+    }
+    for (i = 0; i < clip->num_groupstates; i++)
+    {
+        LVGMovieClipGroupState *groupstate = clip->groupstates + i;
+        if (groupstate->movieclip)
+            free_instance(groupstate->movieclip);
+        if (groupstate->timers)
+            free(groupstate->timers);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {
@@ -723,6 +722,11 @@ void lvgCloseClip(LVGMovieClip *clip)
         free(video->frames);
         if (video->image)
             g_render->free_image(video->image);
+    }
+    if (clip->vm)
+    {
+        lvgFreeVM(clip->vm);
+        free(clip->vm);
     }
     free(clip->shapes);
     free(clip->images);

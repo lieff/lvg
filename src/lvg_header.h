@@ -63,12 +63,16 @@ typedef struct LVGMovieClipGroup
     LVGMovieClipFrame *frames;
     LVGFrameLabel *labels;
     // action script
-    uint8_t *events[19];     // swf events
-    LVGActionCtx *vm;        // action script vm for frames and timer
-    LVGTimer *timers;
-    void *movieclip;         // MovieClip class instance
-    int num_frames, num_labels, num_timers, cur_frame, last_acton_frame, play_state, events_initialized;
+    uint8_t *events[19];  // sprite swf events
+    int num_frames, num_labels;
 } LVGMovieClipGroup;
+
+typedef struct LVGMovieClipGroupState
+{
+    LVGTimer *timers;     // action script timers
+    void *movieclip;      // MovieClip class instance
+    int group_num, cur_frame, last_acton_frame, play_state, num_timers, events_initialized;
+} LVGMovieClipGroupState;
 
 typedef struct LVGShapeCollection
 {
@@ -130,12 +134,14 @@ typedef struct LVGMovieClip
     LVGShapeCollection *shapes;
     int *images;
     LVGMovieClipGroup *groups;
+    LVGMovieClipGroupState *groupstates;
     LVGSound *sounds;
     LVGVideo *videos;
     LVGButton *buttons;
+    LVGActionCtx *vm;        // action script vm
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups, num_sounds, num_videos, num_buttons, as_version;
+    int num_shapes, num_images, num_groups, num_groupstates, num_sounds, num_videos, num_buttons, as_version;
     float fps;
     double last_time;
 } LVGMovieClip;
@@ -158,7 +164,7 @@ void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
 // action block begins with 32bit size, functions begins with 16bit size
 void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function);
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group);
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroupState *groupstate);
 void lvgFreeVM(LVGActionCtx *ctx);
 
 #ifdef __TINYC__

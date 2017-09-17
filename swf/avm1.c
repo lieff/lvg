@@ -375,27 +375,27 @@ static void action_end(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_next_frame(LVGActionCtx *ctx, uint8_t *a)
 {
-    ctx->group->cur_frame = (ctx->group->cur_frame + 1) % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame + 1);
+    ctx->groupstate->cur_frame = (ctx->groupstate->cur_frame + 1) % ctx->group->num_frames;
+    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
 }
 
 static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
 {
-    if (ctx->group->cur_frame)
-        ctx->group->cur_frame--;
-    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame + 1);
+    if (ctx->groupstate->cur_frame)
+        ctx->groupstate->cur_frame--;
+    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
 }
 
 static void action_play(LVGActionCtx *ctx, uint8_t *a)
 {
-    ctx->group->play_state = LVG_PLAYING;
+    ctx->groupstate->play_state = LVG_PLAYING;
 }
 
 static void action_stop(LVGActionCtx *ctx, uint8_t *a)
 {
-    ctx->group->play_state = LVG_STOPPED;
+    ctx->groupstate->play_state = LVG_STOPPED;
 }
 
 static void action_quality(LVGActionCtx *ctx, uint8_t *a)
@@ -639,7 +639,7 @@ static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
     if (idx > 21)
         return;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    ASClass *c = ctx->group->movieclip;
+    ASClass *c = ctx->groupstate->movieclip;
     const char *prop = props[idx];
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, c->members[i].name, prop))
@@ -662,7 +662,7 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
     uint32_t idx = to_int(se_idx);
     if (idx > 21)
         return;
-    ASClass *c = ctx->group->movieclip;
+    ASClass *c = ctx->groupstate->movieclip;
     const char *prop = props[idx];
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, c->members[i].name, prop))
@@ -848,6 +848,7 @@ static void action_to_string(LVGActionCtx *ctx, uint8_t *a)
         // TODO: support toString()
     }
     assert(0);
+    SET_STRING(se, "string");
 }
 
 static void action_push_duplicate(LVGActionCtx *ctx, uint8_t *a)
@@ -1117,9 +1118,9 @@ static void action_extends(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     int frame = *(uint16_t*)(a + 2);
-    ctx->group->cur_frame = frame % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame + 1);
+    ctx->groupstate->cur_frame = frame % ctx->group->num_frames;
+    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
 }
 
 static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
@@ -1176,10 +1177,10 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
     for (int i = 0; i < ctx->group->num_labels; i++)
         if (0 == strcmp_identifier(ctx, name, l[i].name))
         {
-            ctx->group->cur_frame = l[i].frame_num % ctx->group->num_frames;
-            ctx->group->play_state = LVG_STOPPED;
-            ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
-            SET_INT(_currentframe, ctx->group->cur_frame + 1);
+            ctx->groupstate->cur_frame = l[i].frame_num % ctx->group->num_frames;
+            ctx->groupstate->play_state = LVG_STOPPED; // where this documented?
+            ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
+            SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
             return;
         }
     assert(0);
@@ -1330,24 +1331,24 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr++;
     assert(ASVAL_INT == se->type || ASVAL_STRING == se->type);
     int add = 0, flags = *(uint8_t*)(a + 2);
-    ctx->group->play_state = (flags & 1) ? LVG_PLAYING : LVG_STOPPED;
+    ctx->groupstate->play_state = (flags & 1) ? LVG_PLAYING : LVG_STOPPED;
     if (flags & 2)
         add = *(uint16_t*)(a + 3);
     if (ASVAL_INT == se->type)
     {
-        ctx->group->cur_frame = (se->ui32 + add) % ctx->group->num_frames;
+        ctx->groupstate->cur_frame = (se->ui32 + add) % ctx->group->num_frames;
     } else if (ASVAL_STRING == se->type)
     {
         LVGFrameLabel *l = ctx->group->labels;
         for (int i = 0; i < ctx->group->num_labels; i++)
             if (0 == strcmp_identifier(ctx, se->str, l[i].name))
             {
-                ctx->group->cur_frame = (l[i].frame_num + add) % ctx->group->num_frames;
+                ctx->groupstate->cur_frame = (l[i].frame_num + add) % ctx->group->num_frames;
                 break;
             }
     }
-    ASVal *_currentframe = find_class_member(ctx, ctx->group->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->group->cur_frame + 1);
+    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
 }
 
 static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
@@ -1498,12 +1499,13 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_PLAY_LVG_SOUND]    = { action_play_lvg_sound,    DBG("PlayLVGSound", 0,    0, 0) },
 };
 
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroup *group)
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroupState *groupstate)
 {
     memset(ctx, 0, sizeof(*ctx));
     ctx->clip   = clip;
-    ctx->group  = group;
-    ctx->frame  = ctx->group->frames + ctx->group->cur_frame;
+    ctx->group  = clip->groups + groupstate->group_num;
+    ctx->groupstate = groupstate;
+    ctx->frame  = ctx->group->frames + ctx->groupstate->cur_frame;
     ctx->stack_ptr = sizeof(ctx->stack)/sizeof(ctx->stack[0]) - 1;
     ctx->version = clip->as_version;
 }

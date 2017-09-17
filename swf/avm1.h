@@ -165,6 +165,7 @@ typedef struct LVGActionCtx
 {
     LVGMovieClip *clip;
     LVGMovieClipGroup *group;
+    LVGMovieClipGroupState *groupstate;
     LVGMovieClipFrame *frame;
     ASVal stack[STACK_SIZE];
     ASVal regs[256];
