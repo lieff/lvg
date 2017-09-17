@@ -18,7 +18,7 @@ typedef struct
 {
     TAG *tag;
     SRECT bbox;
-    int lvg_id;
+    int lvg_id, reset_frame;
     enum CHARACTER_TYPE type;
 } character_t;
 
@@ -929,6 +929,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 p.id = 65536 + clip->num_groupstates;
                 idtable[p.id].lvg_id = clip->num_groupstates;
                 idtable[p.id].type = sprite_type;
+                idtable[p.id].reset_frame = group->num_frames;
                 clip->groupstates = realloc(clip->groupstates, (clip->num_groupstates + 1)*sizeof(clip->groupstates[0]));
                 LVGMovieClipGroupState *groupstate = clip->groupstates + clip->num_groupstates++;
                 memset(groupstate, 0, sizeof(LVGMovieClipGroupState));
@@ -1040,6 +1041,8 @@ do_show_frame:
                 o->cxform.add[1] = cx->g1/256.0f;
                 o->cxform.add[2] = cx->b1/256.0f;
                 o->cxform.add[3] = cx->a1/256.0f;
+                if (c->reset_frame == group->num_frames)
+                    o->flags |= 1;
                 if (p->name)
                 {
                     frame->obj_labels = realloc(frame->obj_labels, (frame->num_labels + 1)*sizeof(frame->obj_labels[0]));

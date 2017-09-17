@@ -31,7 +31,7 @@ typedef struct LVGObjectLabel
 
 typedef struct LVGObject
 {
-    int id, type, depth, ratio;
+    int id, type, depth, ratio, flags;
     float t[6];
     LVGColorTransform cxform;
 } LVGObject;
@@ -163,8 +163,8 @@ short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channel
 void lvgPlaySound(LVGSound *sound);
 void lvgStopAudio();
 // action block begins with 32bit size, functions begins with 16bit size
-void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function);
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroupState *groupstate);
+void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupState *groupstate, int is_function);
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);
 
 #ifdef __TINYC__

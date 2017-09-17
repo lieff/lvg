@@ -1499,13 +1499,10 @@ const ActionEntry g_avm1_actions[256] =
     [ACTION_PLAY_LVG_SOUND]    = { action_play_lvg_sound,    DBG("PlayLVGSound", 0,    0, 0) },
 };
 
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip, LVGMovieClipGroupState *groupstate)
+void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip)
 {
     memset(ctx, 0, sizeof(*ctx));
     ctx->clip   = clip;
-    ctx->group  = clip->groups + groupstate->group_num;
-    ctx->groupstate = groupstate;
-    ctx->frame  = ctx->group->frames + ctx->groupstate->cur_frame;
     ctx->stack_ptr = sizeof(ctx->stack)/sizeof(ctx->stack[0]) - 1;
     ctx->version = clip->as_version;
 }
@@ -1517,10 +1514,13 @@ void lvgFreeVM(LVGActionCtx *ctx)
     ctx->cpool  = NULL;
 }
 
-void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, int is_function)
+void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupState *groupstate, int is_function)
 {
     if (!actions)
         return;
+    ctx->groupstate = groupstate;
+    ctx->group  = ctx->clip->groups + groupstate->group_num;
+    ctx->frame  = ctx->group->frames + groupstate->cur_frame;
     if (is_function)
     {
         ctx->size = *(uint16_t*)actions;

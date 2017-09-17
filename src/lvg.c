@@ -355,13 +355,16 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
     int i, j, nframe = groupstate->cur_frame, cur_frame = groupstate->cur_frame, visible = 1;
+    int do_action = (groupstate->cur_frame + 1) != groupstate->last_acton_frame;
+    if (do_action)
+        groupstate->last_acton_frame = groupstate->cur_frame + 1;
     double alpha = 1.0;
     if (!b_no_actionscript)
     {
         if (!clip->vm)
         {
             clip->vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(clip->vm, clip, groupstate);
+            lvgInitVM(clip->vm, clip);
             for (i = 0; i < clip->num_groupstates; i++)
             {
                 LVGMovieClipGroupState *g = clip->groupstates + i;
@@ -405,14 +408,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 }
             }
         }
-        if ((groupstate->cur_frame + 1) != groupstate->last_acton_frame)
+        if (do_action)
         {   // call frame actions only once
-            groupstate->last_acton_frame = groupstate->cur_frame + 1;
-            lvgExecuteActions(clip->vm, frame->actions, 0);
+            lvgExecuteActions(clip->vm, frame->actions, groupstate, 0);
         }
         ASVal *onEnterFrame = find_class_member(clip->vm, THIS, "onEnterFrame");
         if (onEnterFrame && onEnterFrame->str)
-            lvgExecuteActions(clip->vm, (uint8_t*)onEnterFrame->str, 1);
+            lvgExecuteActions(clip->vm, (uint8_t*)onEnterFrame->str, groupstate, 1);
         for (i = 0; i < groupstate->num_timers; i++)
         {
             LVGTimer *t = groupstate->timers + i;
@@ -420,7 +422,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             if (time > t->timeout/1000.0)
             {
                 t->last_time = g_time;
-                lvgExecuteActions(clip->vm, t->func, 1);
+                lvgExecuteActions(clip->vm, t->func, groupstate, 1);
             }
         }
     }
@@ -508,6 +510,20 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
+            if ((o->flags & 1) && do_action)
+            {   // sprite place position - reset sprite
+                LVGMovieClipGroupState *gs = clip->groupstates + o->id;
+                if (gs->movieclip)
+                    free_instance(gs->movieclip);
+                if (gs->timers)
+                    free(gs->timers);
+                int group_num = gs->group_num;
+                memset(gs, 0, sizeof(LVGMovieClipGroupState));
+                ASClass *cls = create_instance(&g_movieclip);
+                gs->movieclip = cls;
+                gs->group_num = group_num;
+                cls->priv = (void*)(size_t)o->id;
+            }
             lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, next_frame);
             THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
@@ -579,7 +595,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     for (int k = 0; k < b->num_btnactions; k++)
                         printf("%x ", b->btnactions[k].flags);
                     printf("\n"); fflush(stdout);*/
-                    lvgExecuteActions(clip->vm, ba->actions, 0);
+                    lvgExecuteActions(clip->vm, ba->actions, groupstate, 0);
                 }
             }
             b->prev_mousehit = mouse_hit;
@@ -608,10 +624,27 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         if (!groupstate->events_initialized && group->events[0])
         {
             groupstate->events_initialized = 1;
-            lvgExecuteActions(clip->vm, group->events[0], 0);
+            lvgExecuteActions(clip->vm, group->events[0], groupstate, 0);
         }
         if (group->events[1])
-            lvgExecuteActions(clip->vm, group->events[1], 0);
+            lvgExecuteActions(clip->vm, group->events[1], groupstate, 0);
+    }
+}
+
+static void printf_frames(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate)
+{
+    LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
+    LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
+    printf("%d=%3d ", groupstate->group_num, groupstate->cur_frame);
+    if (groupstate->cur_frame >= group->num_frames)
+        return;
+    for (int i = 0; i < frame->num_objects; i++)
+    {
+        LVGObject *o = &frame->objects[i];
+        if (LVG_OBJ_GROUP == o->type)
+        {
+            printf_frames(clip, clip->groupstates + o->id);
+        }
     }
 }
 
@@ -630,6 +663,7 @@ void lvgDrawClip(LVGMovieClip *clip)
     LVGColorTransform startcxform;
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
+    //printf_frames(clip, clip->groupstates); printf("\n"); fflush(stdout);
     lvgDrawClipGroup(clip, clip->groupstates, &startcxform, next_frame);
 }
 
