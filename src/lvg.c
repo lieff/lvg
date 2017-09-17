@@ -400,7 +400,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
                     SET_CLASS(v, b->button_obj);
                 } else
                 {
-                    assert(0);
+                    assert(LVG_OBJ_EMPTY == l->type);
+                    SET_UNDEF(v);
                 }
             }
         }
@@ -511,6 +512,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroup *group, LVGCo
         } else
         if (LVG_OBJ_BUTTON == o->type)
         {
+            THIS = group->movieclip; // restore this if changed in other groups
             LVGButton *b = clip->buttons + o->id;
             double btn_alpha = 1.0;
             int btn_visible = 1;
