@@ -354,10 +354,38 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
+    if (!group->num_frames)
+        return;
     int i, j, nframe = groupstate->cur_frame, cur_frame = groupstate->cur_frame, visible = 1;
     int do_action = (groupstate->cur_frame + 1) != groupstate->last_acton_frame;
     if (do_action)
+    {
         groupstate->last_acton_frame = groupstate->cur_frame + 1;
+        for (i = 0; i < frame->num_objects; i++)
+        {
+            LVGObject *o = frame->objects + i;
+            if (LVG_OBJ_GROUP == o->type && (o->flags & 1))
+            {   // sprite place position - reset sprite
+                LVGMovieClipGroupState *gs = clip->groupstates + o->id;
+                int group_num = gs->group_num;
+                if (!b_no_actionscript)
+                {
+                    if (gs->movieclip)
+                        free_instance(gs->movieclip);
+                    if (gs->timers)
+                        free(gs->timers);
+                }
+                memset(gs, 0, sizeof(LVGMovieClipGroupState));
+                if (!b_no_actionscript)
+                {
+                    ASClass *cls = create_instance(&g_movieclip);
+                    gs->movieclip = cls;
+                    cls->priv = (void*)(size_t)o->id;
+                }
+                gs->group_num = group_num;
+            }
+        }
+    }
     double alpha = 1.0;
     if (!b_no_actionscript)
     {
@@ -382,25 +410,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         ASVal *val = find_class_member(clip->vm, THIS, "_totalframes"); SET_INT(val, group->num_frames);
         val = find_class_member(clip->vm, THIS, "_framesloaded"); SET_INT(val, group->num_frames);
 
-        if (nframe < group->num_frames && do_action)
-            for (i = 0; i < group->frames[nframe].num_objects; i++)
-            {
-                LVGObject *o = frame->objects + i;
-                if (LVG_OBJ_GROUP == o->type && (o->flags & 1))
-                {   // sprite place position - reset sprite
-                    LVGMovieClipGroupState *gs = clip->groupstates + o->id;
-                    if (gs->movieclip)
-                        free_instance(gs->movieclip);
-                    if (gs->timers)
-                        free(gs->timers);
-                    int group_num = gs->group_num;
-                    memset(gs, 0, sizeof(LVGMovieClipGroupState));
-                    ASClass *cls = create_instance(&g_movieclip);
-                    gs->movieclip = cls;
-                    gs->group_num = group_num;
-                    cls->priv = (void*)(size_t)o->id;
-                }
-            }
         if (frame->obj_labels)
         {
             for (i = 0; i < frame->num_labels; i++)
@@ -450,7 +459,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
 #ifndef _TEST
     assert(nframe < group->num_frames);
 #endif
-    if (nframe < group->num_frames)
     for (i = 0; i < frame->num_objects; i++)
     {
         LVGObject *o = frame->objects + i;
@@ -618,8 +626,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
-    if (!group->num_frames)
-        groupstate->cur_frame = 0; else
     if (next_frame && LVG_PLAYING == groupstate->play_state && cur_frame == groupstate->cur_frame/*not changed by as*/)
         groupstate->cur_frame = (groupstate->cur_frame + 1) % group->num_frames;
     if (!b_no_actionscript)
