@@ -356,7 +356,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
     if (!group->num_frames)
         return;
-    int i, j, nframe = groupstate->cur_frame, cur_frame = groupstate->cur_frame, visible = 1;
+    double alpha = 1.0;
+    int i, j, cur_frame = groupstate->cur_frame, visible = 1;
     int do_action = (groupstate->cur_frame + 1) != groupstate->last_acton_frame;
     if (do_action)
     {
@@ -386,7 +387,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             }
         }
     }
-    double alpha = 1.0;
     if (!b_no_actionscript)
     {
         if (!clip->vm)
@@ -472,9 +472,6 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     }
 
     float save_transform[6];
-#ifndef _TEST
-    assert(nframe < group->num_frames);
-#endif
     for (i = 0; i < frame->num_objects; i++)
     {
         LVGObject *o = frame->objects + i;
