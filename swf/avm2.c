@@ -204,7 +204,6 @@ void lvgExecuteActions2(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupSt
     {
         ctx->size = *(uint16_t*)actions;
         actions += 2;
-        // TODO: use DEFINEFUNCTION2 flags
         ctx->regs[1] = *search_var(ctx, "_root");
     } else
     {

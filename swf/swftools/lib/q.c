@@ -1036,24 +1036,24 @@ void stringstruct_free(void*o)
 };*/
 
 type_t ptr_type = {
-    equals: ptr_equals,
-    hash: ptr_hash,
-    dup: ptr_dup,
-    free: ptr_free,
+    .equals = ptr_equals,
+    .hash = ptr_hash,
+    .dup = ptr_dup,
+    .free = ptr_free,
 };
 
 type_t charptr_type = {
-    equals: charptr_equals,
-    hash: charptr_hash,
-    dup: charptr_dup,
-    free: charptr_free,
+    .equals = charptr_equals,
+    .hash = charptr_hash,
+    .dup = charptr_dup,
+    .free = charptr_free,
 };
 
 type_t stringstruct_type = {
-    equals: stringstruct_equals,
-    hash: stringstruct_hash,
-    dup: (dup_func)string_dup3,
-    free: stringstruct_free,
+    .equals = stringstruct_equals,
+    .hash = stringstruct_hash,
+    .dup = (dup_func)string_dup3,
+    .free = stringstruct_free,
 };
 
 // ------------------------------- dictionary_t -------------------------------

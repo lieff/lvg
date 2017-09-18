@@ -62,10 +62,10 @@ char float_equals(const void*_v1, const void*_v2) {
 }
 
 type_t float_type = {
-    dup: float_clone,
-    hash: float_hash,
-    free: float_destroy,
-    equals: float_equals
+    .dup = float_clone,
+    .hash = float_hash,
+    .free = float_destroy,
+    .equals = float_equals
 };
 
 // ----------------------------- uint ----------------------------------
@@ -100,10 +100,10 @@ char uint_equals(const void*_v1, const void*_v2) {
 }
 
 type_t uint_type = {
-    dup: (dup_func)uint_clone,
-    hash: (hash_func)uint_hash,
-    free: (free_func)uint_destroy,
-    equals: (equals_func)uint_equals
+    .dup = (dup_func)uint_clone,
+    .hash = (hash_func)uint_hash,
+    .free = (free_func)uint_destroy,
+    .equals = (equals_func)uint_equals
 };
 
 // ----------------------------- namespace ----------------------------------
@@ -282,10 +282,10 @@ void namespace_destroy(namespace_t*n)
 }
 
 type_t namespace_type = {
-    dup: (dup_func)namespace_clone,
-    hash: (hash_func)namespace_hash,
-    free: (free_func)namespace_destroy,
-    equals: (equals_func)namespace_equals
+    .dup = (dup_func)namespace_clone,
+    .hash = (hash_func)namespace_hash,
+    .free = (free_func)namespace_destroy,
+    .equals = (equals_func)namespace_equals
 };
 
 // ---------------------------namespace sets --------------------------------
@@ -391,10 +391,10 @@ void namespace_set_destroy(namespace_set_t*set)
 }
 
 type_t namespace_set_type = {
-    dup: (dup_func)namespace_set_clone,
-    hash: (hash_func)namespace_set_hash,
-    free: (free_func)namespace_set_destroy,
-    equals: (equals_func)namespace_set_equals
+    .dup = (dup_func)namespace_set_clone,
+    .hash = (hash_func)namespace_set_hash,
+    .free = (free_func)namespace_set_destroy,
+    .equals = (equals_func)namespace_set_equals
 };
 
 // ----------------------------- multiname ----------------------------------
@@ -516,7 +516,7 @@ char* multiname_tostring(multiname_t*m)
     char*mname = 0;
     if(!m)
         return strdup("NULL");
-    if(m->type==0xff)
+    if((unsigned)m->type == 0xff)
         return strdup("--<MULTINAME 0xff>--");
 
     char*name = m->name?escape_string(m->name):strdup("*");
@@ -629,10 +629,10 @@ void multiname_destroy(multiname_t*m)
 }
 
 type_t multiname_type = {
-    dup: (dup_func)multiname_clone,
-    hash: (hash_func)multiname_hash,
-    free: (free_func)multiname_destroy,
-    equals: (equals_func)multiname_equals
+    .dup = (dup_func)multiname_clone,
+    .hash = (hash_func)multiname_hash,
+    .free = (free_func)multiname_destroy,
+    .equals = (equals_func)multiname_equals
 };
 
 
