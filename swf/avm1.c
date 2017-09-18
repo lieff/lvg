@@ -282,7 +282,7 @@ int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2)
         return strcasecmp(s1, s2);
 }
 
-static ASVal *search_var(LVGActionCtx *ctx, const char *name)
+ASVal *search_var(LVGActionCtx *ctx, const char *name)
 {
     int i;
     for (i = 0; i < g_num_properties; i++)
@@ -1368,7 +1368,7 @@ typedef struct
 #endif
 } ActionEntry;
 
-const ActionEntry g_avm1_actions[256] =
+static const ActionEntry g_avm1_actions[256] =
 {
     /* version 1 */
     [ACTION_END]               = { action_end,               DBG("End", 1,             0, 0) },

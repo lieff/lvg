@@ -187,6 +187,7 @@ double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
 ASClass *to_object(ASVal *v);
 int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2);
+ASVal *search_var(LVGActionCtx *ctx, const char *name);
 ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);
