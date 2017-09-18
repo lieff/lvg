@@ -840,6 +840,14 @@ void swf_Shape2Free(SHAPE2 * s)
         free(line);
         line = next;
     }
+    line = s->lines2;
+    s->lines2 = 0;
+    while(line) {
+        SHAPELINE*next = line->next;
+        line->next = 0;
+        free(line);
+        line = next;
+    }
 
     if(s->linestyles) {
         free(s->linestyles);
@@ -914,96 +922,6 @@ SHAPE2* swf_ShapeToShape2(SHAPE*shape) {
     return shape2;
 };
 
-void swf_ShapeSetBitmapRect(TAG*tag, U16 gfxid, int width, int height)
-{
-    SHAPE*shape;
-    MATRIX m;
-    RGBA rgb;
-    SRECT r;
-    int lines = 0;
-    int ls=0,fs;
-    swf_ShapeNew(&shape);
-    rgb.b = rgb.g = rgb.r = 0xff;
-    if(lines)
-        ls = swf_ShapeAddLineStyle(shape,20,&rgb);
-    swf_GetMatrix(NULL,&m);
-    m.sx = 20*65536;
-    m.sy = 20*65536;
-
-    fs = swf_ShapeAddBitmapFillStyle(shape,&m,gfxid,0);
-    r.xmin = 0;
-    r.ymin = 0;
-    r.xmax = width*20;
-    r.ymax = height*20;
-    swf_SetRect(tag,&r);
-
-    swf_SetShapeStyles(tag,shape);
-    swf_ShapeCountBits(shape,NULL,NULL);
-    swf_SetShapeBits(tag,shape);
-
-    swf_ShapeSetAll(tag,shape,0,0,lines?ls:0,fs,0);
-
-    swf_ShapeSetLine(tag,shape,width*20,0);
-    swf_ShapeSetLine(tag,shape,0,height*20);
-    swf_ShapeSetLine(tag,shape,-width*20,0);
-    swf_ShapeSetLine(tag,shape,0,-height*20);
-    swf_ShapeSetEnd(tag);
-    swf_ShapeFree(shape);
-}
-
-void swf_ShapeSetRectangle(TAG*tag, U16 shapeid, int width, int height, RGBA*rgba)
-{
-    RGBA white={255,255,255,255};
-    if(!rgba) {
-        rgba = &white;
-    }
-    SHAPE* s;
-    swf_ShapeNew(&s);
-    int fs = swf_ShapeAddSolidFillStyle(s, rgba);
-    swf_SetU16(tag,shapeid);
-    SRECT r;
-    r.xmin = 0;
-    r.xmax = 0;
-    r.ymin = width;
-    r.ymax = height;
-    swf_SetRect(tag,&r);
-    swf_SetShapeHeader(tag,s);
-    swf_ShapeSetAll(tag,s,0,0,0,fs,0);
-    swf_ShapeSetLine(tag,s,width,0);
-    swf_ShapeSetLine(tag,s,0,height);
-    swf_ShapeSetLine(tag,s,-width,0);
-    swf_ShapeSetLine(tag,s,0,-height);
-    swf_ShapeSetEnd(tag);
-    swf_ShapeFree(s);
-}
-
-void swf_ShapeSetRectangleWithBorder(TAG*tag, U16 shapeid, int width, int height, RGBA*rgba, int linewidth, RGBA*linecolor)
-{
-    RGBA white={255,255,255,255};
-    if(!rgba) {
-        rgba = &white;
-    }
-    SHAPE* s;
-    swf_ShapeNew(&s);
-    int fs = swf_ShapeAddSolidFillStyle(s, rgba);
-    int ls = swf_ShapeAddLineStyle(s, linewidth, linecolor);
-    swf_SetU16(tag,shapeid);
-    SRECT r;
-    r.xmin = 0;
-    r.xmax = 0;
-    r.ymin = width;
-    r.ymax = height;
-    swf_SetRect(tag,&r);
-    swf_SetShapeHeader(tag,s);
-    swf_ShapeSetAll(tag,s,0,0,ls,fs,0);
-    swf_ShapeSetLine(tag,s,width,0);
-    swf_ShapeSetLine(tag,s,0,height);
-    swf_ShapeSetLine(tag,s,-width,0);
-    swf_ShapeSetLine(tag,s,0,-height);
-    swf_ShapeSetEnd(tag);
-    swf_ShapeFree(s);
-}
-
 void swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape)
 {
     TAG*tag = swf_InsertTag(0,0);
@@ -1057,19 +975,6 @@ void swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape)
     shape->data = tag->data;
     shape->bitlen = tag->len*8;
     free(tag);
-}
-
-void swf_SetShape2(TAG*tag, SHAPE2*shape2)
-{
-    SHAPE shape;
-    swf_Shape2ToShape(shape2, &shape);
-
-    swf_SetRect(tag,shape2->bbox);
-    swf_SetShapeStyles(tag, &shape);
-    //swf_ShapeCountBits(&shape,NULL,NULL); // done in swf_Shape2ToShape()
-    swf_SetShapeBits(tag,&shape);
-
-    swf_SetBlock(tag, shape.data, (shape.bitlen+7)/8);
 }
 
 void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
@@ -1135,8 +1040,10 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
     }
 
     shape->lines = swf_ParseShapeData(&tag->data[tag->pos], (tag->len - tag->pos)*8, fill, line, num, shape);
-
-    //l = shape->lines;
+    if (tag->id == ST_DEFINEMORPHSHAPE || tag->id == ST_DEFINEMORPHSHAPE2)
+    {
+        shape->lines2 = swf_ParseShapeData(&tag->data[tag->pos], (tag->len - tag->pos)*8, fill, line, num, shape);
+    }
 }
 
 static void free_lines(SHAPELINE* lines)

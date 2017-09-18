@@ -17,6 +17,7 @@ render/render_nanovg.c
 render/render_null.c
 render/render_nvpr.c
 render/render_nvpr_apple.h
+scripting/tcc/script_tcc.c
 src/lunzip.c
 src/lunzip.h
 src/lvg.c
@@ -68,6 +69,8 @@ swf/adpcm.h
 swf/avm1.c
 swf/avm1.h
 swf/avm1_globals.c
+swf/avm2.c
+swf/avm2.h
 swf/swf.c
 video/ffmpeg/ffmpeg_dec.c
 video/video.h

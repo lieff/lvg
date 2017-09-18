@@ -434,19 +434,20 @@ typedef struct _SHAPE2
     FILLSTYLE* fillstyles;
     int numfillstyles;
     struct _SHAPELINE * lines;
+    struct _SHAPELINE * lines2;
     SRECT* bbox; // may be NULL
 } SHAPE2;
 
 enum SHAPELINETYPE {moveTo, lineTo, splineTo};
 typedef struct _SHAPELINE
 {
-    enum SHAPELINETYPE type;
-    SCOORD x,y;
-    SCOORD sx,sy; //only if type==splineTo
+    struct _SHAPELINE * next;
+    SCOORD x, y;
+    SCOORD sx, sy; //only if type==splineTo
     int fillstyle0;
     int fillstyle1;
     int linestyle;
-    struct _SHAPELINE * next;
+    enum SHAPELINETYPE type;
 } SHAPELINE;
 
 // Shapes
@@ -483,16 +484,10 @@ int   swf_SetFillStyle(TAG * t,FILLSTYLE * f);
 int   swf_SetLineStyle(TAG * t,LINESTYLE * l);
 
 
-void swf_ShapeSetRectangle(TAG*tag, U16 shapeid, int width, int height, RGBA*rgba);
-void swf_ShapeSetRectangleWithBorder(TAG*tag, U16 shapeid, int width, int height, RGBA*rgba, int linewidth, RGBA*linecolor);
-void  swf_ShapeSetBitmapRect(TAG * t, U16 gfxid, int width, int height);
-
 //SHAPELINE* swf_ParseShapeData(U8*data, int bits, int fillbits, int linebits);
 SHAPE2*	   swf_ShapeToShape2(SHAPE*shape);
 void	   swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape);
 SRECT	   swf_GetShapeBoundingBox(SHAPE2*shape);
-void	    swf_SetShape2(TAG*tag, SHAPE2*shape);
-SHAPE2*    swf_Shape2Clone(SHAPE2 * s);
 void	   swf_Shape2Free(SHAPE2 * s);
 void	swf_DumpShape(SHAPE2*shape2);
 
