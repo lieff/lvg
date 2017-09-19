@@ -384,9 +384,23 @@ SRECT swf_TurnRect(SRECT r, MATRIX* m);
 
 // swfshape.c
 
+typedef struct
+{
+    int x, y, sx, sy, type;
+} LINE;
+
+typedef struct
+{
+    LINE *subpath;
+    int num_lines, path_used;
+} SUBPATH;
+
 typedef struct _LINESTYLE
-{ U16           width;
-  RGBA          color;
+{
+    SUBPATH  *subpaths;  // for shape conversion
+    int       num_subpaths;
+    RGBA      color;
+    U16       width;
 } LINESTYLE;
 
 #define FILL_SOLID      0x00
@@ -396,11 +410,14 @@ typedef struct _LINESTYLE
 #define FILL_CLIPPED    0x41
 
 typedef struct _FILLSTYLE
-{ U8	    type;
-  RGBA	    color;
-  MATRIX    m;
-  U16	    id_bitmap;
-  GRADIENT  gradient;
+{
+    SUBPATH  *subpaths;
+    int       num_subpaths;
+    MATRIX    m;
+    GRADIENT  gradient;
+    RGBA      color;
+    U16	      id_bitmap;
+    U8	      type;
 } FILLSTYLE;
 
 typedef struct _SHAPE           // NEVER access a Shape-Struct directly !

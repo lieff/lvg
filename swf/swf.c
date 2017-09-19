@@ -83,53 +83,6 @@ static inline uint32_t RGBA2U32(RGBA *c)
     return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
 }
 
-typedef struct SHAPE_PARTS
-{
-    SHAPELINE *start;
-    SHAPELINE *end;
-    SHAPELINE *prev;
-    int num_lines, fill_style[2], fill_style_used[2];
-} SHAPE_PARTS;
-
-static int findConnectingPart(SHAPE_PARTS *parts, int num_parts, int x, int y, int from_move, int from_start, int fill_style, int idx, int *at_start)
-{
-    for (int i = 0; i < num_parts; i++)
-    {
-        if ((from_move && moveTo != parts[i].start->type) || (!from_move && moveTo == parts[i].start->type))
-            continue;
-        SHAPELINE *start = parts[i].prev ? parts[i].prev : parts[i].start;
-        SHAPELINE *end = parts[i].end;
-#ifdef DEBUG
-        end = parts[i].start;
-        for (int j = 0; j < (parts[i].num_lines - 1); j++)
-            end = end->next;
-        assert(end == parts[i].end);
-#endif
-        assert(start != end);
-        if (parts[i].fill_style_used[idx] || parts[i].fill_style[idx] != fill_style)
-            continue;
-        if ((INT_MAX == x) || (from_start && start->x == x && start->y == y) || (!from_start && end->x == x && end->y == y))
-        {
-            if (at_start)
-                *at_start = (start->x == x && start->y == y);
-            parts[i].fill_style_used[idx] = 1;
-            return i;
-        }
-    }
-    return -1;
-}
-
-static int haveIntersect(SHAPELINE *lines, SHAPELINE *point)
-{
-    while (lines)
-    {
-        if (lines != point && lines->x == point->x && lines->y == point->y)
-            return 1;
-        lines = lines->next;
-    }
-    return 0;
-}
-
 static void expandBBox(float *bounds, float x, float y)
 {
     if (bounds[0] > x)
@@ -152,53 +105,50 @@ int compareStops(const void *a, const void *b)
     return 0;
 }
 
-static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, SHAPE_PARTS *parts, int num_parts, SHAPE_PARTS *part, FILLSTYLE *fills, LINESTYLE *lineStyles, int idx)
+static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
 {
-    assert(part->num_lines > 0);
-    assert(!part->prev || part->prev->next == part->start);
-    assert(part->prev || moveTo == part->start->type);
-    int fillStyle = part->fill_style[idx];
-    int lineStyle = part->start->linestyle;
-    part->fill_style_used[idx] = 1;
+    if (fs && !fs->num_subpaths)
+        return 0;
+    if (ls && !ls->num_subpaths)
+        return 0;
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->fillRule = NSVG_FILLRULE_EVENODD;
-    if (fillStyle)
+    if (fs)
     {
-        FILLSTYLE *f = fills + fillStyle - 1;
-        if (FILL_SOLID == f->type)
+        if (FILL_SOLID == fs->type)
         {
             shape->fill.type = NSVG_PAINT_COLOR;
-            shape->fill.color = RGBA2U32(&f->color);
-        } else if (f->type == FILL_TILED || f->type == FILL_CLIPPED || f->type == (FILL_TILED|2) || f->type == (FILL_CLIPPED|2))
+            shape->fill.color = RGBA2U32(&fs->color);
+        } else if (fs->type == FILL_TILED || fs->type == FILL_CLIPPED || fs->type == (FILL_TILED|2) || fs->type == (FILL_CLIPPED|2))
         {
             shape->fill.type = NSVG_PAINT_IMAGE;
-            shape->fill.spread = ((f->type & ~2) == FILL_CLIPPED) ? NSVG_SPREAD_PAD : NSVG_SPREAD_REPEAT;
-            shape->fill.filtered = (f->type & 2) ? 0 : 1;
-            if (f->id_bitmap != 65535)
-                shape->fill.color = clip->images[idtable[f->id_bitmap].lvg_id];
+            shape->fill.spread = ((fs->type & ~2) == FILL_CLIPPED) ? NSVG_SPREAD_PAD : NSVG_SPREAD_REPEAT;
+            shape->fill.filtered = (fs->type & 2) ? 0 : 1;
+            if (fs->id_bitmap != 65535)
+                shape->fill.color = clip->images[idtable[fs->id_bitmap].lvg_id];
             float *xf = shape->fill.xform;
-            MATRIX *m = &f->m;
+            MATRIX *m = &fs->m;
             xf[0] = m->sx/65536.0f;
             xf[1] = m->r0/65536.0f;
             xf[2] = m->r1/65536.0f;
             xf[3] = m->sy/65536.0f;
             xf[4] = m->tx/20.0f;
             xf[5] = m->ty/20.0f;
-        } else if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
+        } else if (FILL_LINEAR == fs->type || FILL_RADIAL == fs->type)
         {
-            assert(f->gradient.num >= 2);
-            assert(f->gradient.num < 16);
-            shape->fill.type = (FILL_LINEAR == f->type) ? NSVG_PAINT_LINEAR_GRADIENT : NSVG_PAINT_RADIAL_GRADIENT;
-            shape->fill.gradient = (NSVGgradient*)calloc(1, sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*(f->gradient.num - 1));
-            shape->fill.gradient->nstops = f->gradient.num;
-            for (int i = 0; i < f->gradient.num; i++)
+            assert(fs->gradient.num >= 2);
+            assert(fs->gradient.num < 16);
+            shape->fill.type = (FILL_LINEAR == fs->type) ? NSVG_PAINT_LINEAR_GRADIENT : NSVG_PAINT_RADIAL_GRADIENT;
+            shape->fill.gradient = (NSVGgradient*)calloc(1, sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*(fs->gradient.num - 1));
+            shape->fill.gradient->nstops = fs->gradient.num;
+            for (int i = 0; i < fs->gradient.num; i++)
             {
-                shape->fill.gradient->stops[i].color = RGBA2U32(&f->gradient.rgba[i]);
-                shape->fill.gradient->stops[i].offset = f->gradient.ratios[i]/255.0f;
+                shape->fill.gradient->stops[i].color = RGBA2U32(&fs->gradient.rgba[i]);
+                shape->fill.gradient->stops[i].offset = fs->gradient.ratios[i]/255.0f;
             }
             qsort(shape->fill.gradient->stops, shape->fill.gradient->nstops, sizeof(shape->fill.gradient->stops[0]), compareStops);
             float *xf = shape->fill.gradient->xform;
-            MATRIX *m = &f->m;
+            MATRIX *m = &fs->m;
             xf[0] = m->sx/65536.0f;
             xf[1] = m->r0/65536.0f;
             xf[2] = m->r1/65536.0f;
@@ -207,163 +157,96 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
             xf[5] = m->ty/20.0f;
             g_render->cache_gradient(&shape->fill);
         }
+        assert(0 == ls);
     }
-    if (lineStyle)
+    if (ls)
     {
-        lineStyles += lineStyle - 1;
         shape->stroke.type = NSVG_PAINT_COLOR;
-        shape->stroke.color = RGBA2U32(&lineStyles->color);
-        shape->strokeWidth = lineStyles->width/20.0f;
+        shape->stroke.color = RGBA2U32(&ls->color);
+        shape->strokeWidth = ls->width/20.0f;
+        assert(0 == fs);
+        fs = (FILLSTYLE*)ls;
     }
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
     NSVGpath *path = shape->paths;
-add_shape:
-    path->closed = shape->fill.type != NSVG_PAINT_NONE;
-    int alloc_pts = 1 + ((moveTo == part->start->type) ? 3*(part->num_lines - 1) : 3*part->num_lines);
-    path->pts = (float*)malloc(sizeof(path->pts[0])*alloc_pts*2);
-    path->npts = 0;
-
-    SHAPELINE *lines = part->start;
-    int x, y, /*prev_x = INT_MAX, prev_y = INT_MAX, */num_lines = part->num_lines;
-    if (moveTo == part->start->type)
+    int i, alloc_pts = 0, append = 0;
+    int start_x = fs->subpaths[0].subpath->x;
+    int start_y = fs->subpaths[0].subpath->y;
+    for (;;)
     {
-        x = part->start->x, y = part->start->y;
-        lines = lines->next;
-        num_lines--;
-    } else
-    {
-        x = part->prev->x, y = part->prev->y;
-    }
-    expandBBox(shape->bounds, x/20.0f, y/20.0f);
-    path_moveTo(path, x/20.0f, y/20.0f);
-    for (int i = 0; i < num_lines; i++)
-    {
-        assert(moveTo != lines->type);
-        expandBBox(shape->bounds, lines->x/20.0f, lines->y/20.0f);
-        if (lineTo == lines->type)
-            path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
-        else if (splineTo == lines->type)
-            path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
-        if (i != (num_lines - 1))
+        SUBPATH *subpath = 0;
+        for (i = 0; i < fs->num_subpaths; i++)
         {
-            assert(x != lines->x || y != lines->y);
-            //prev_x = lines->x, prev_y = lines->y;
-            lines = lines->next;
-        }
-    }
-    int end_x = lines->x, end_y = lines->y;
-    assert(path->npts == alloc_pts);
-    while (x != end_x || y != end_y)
-    {   // not full path, try connect parts
-        int at_start = 0, search_idx = idx;
-        int p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 1, fillStyle, search_idx, &at_start);
-        if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 1, fillStyle, search_idx, &at_start);
-        if (p < 0)
-        {
-            search_idx = 1 - idx;
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 0, 0, fillStyle, search_idx, &at_start);
-        }
-        if (p < 0)
-            p = findConnectingPart(parts, num_parts, end_x, end_y, 1, 0, fillStyle, search_idx, &at_start);
-        //assert(p >= 0);
-        if (p < 0)
+            if (fs->subpaths[i].path_used || start_x != fs->subpaths[i].subpath->x || start_y != fs->subpaths[i].subpath->y)
+                continue;
+            subpath = fs->subpaths + i;
+            subpath->path_used = 1;
             break;
-        SHAPE_PARTS *cpart = parts + p;
-        /*SHAPELINE *start = cpart->prev ? cpart->prev : cpart->start;
-        if (at_start)
-        {
-            assert(start->x == end_x && start->y == end_y);
-            start = start->next;
-            if (start->x == prev_x && start->y == prev_y)
-            {
-                //assert(0);
-                cpart->fill_style_used[search_idx] = 0;
-                break;
-            }
-        } else
-        {
-            assert(cpart->end->x == end_x && cpart->end->y == end_y);
-            //SHAPELINE *end = cpart->end;
-            SHAPELINE *end = start;
-            int to = cpart->prev ? (cpart->num_lines - 1) : (cpart->num_lines - 2);
-            for (int j = 0; j < to; j++)
-                end = end->next;
-            if (end->x == prev_x && end->y == prev_y)
-            {
-                //assert(0);
-                cpart->fill_style_used[search_idx] = 0;
-                break;
-            }
-        }*/
-        //assert(moveTo != cpart->start->type);
-        lines = cpart->start;
-        num_lines = cpart->num_lines;
-        if (moveTo == cpart->start->type)
-        {
-            lines = lines->next;
-            num_lines--;
         }
-        alloc_pts += 3*num_lines;
+        if (!subpath && shape->fill.type != NSVG_PAINT_NONE)
+        {   // can't find path end - try start new
+            //assert(0);
+start_new:
+            for (i = 0; i < fs->num_subpaths; i++)
+            {
+                if (fs->subpaths[i].path_used)
+                    continue;
+                subpath = fs->subpaths + i;
+                subpath->path_used = 1;
+                break;
+            }
+            if (subpath)
+            {
+                path->next = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+                path = path->next;
+                alloc_pts = 0;
+                append = 0;
+                start_x = subpath->subpath->x;
+                start_y = subpath->subpath->y;
+            }
+        }
+        if (!subpath)
+            break;
+        LINE *lines = subpath->subpath;
+        assert(subpath->num_lines > 1);
+        assert(moveTo == lines->type);
+        assert(moveTo != lines[1].type);
+        assert(moveTo != lines[subpath->num_lines - 1].type);
+
+        path->closed = shape->fill.type != NSVG_PAINT_NONE;
+        alloc_pts += (append ? 0 : 1) + 3*(subpath->num_lines - 1);
         path->pts = (float*)realloc(path->pts, sizeof(path->pts[0])*alloc_pts*2);
-        SHAPELINE *new_lines = 0;
-        if (!at_start)
-        {   // connect from end of part - reverse part path
-            new_lines = (SHAPELINE *)malloc(sizeof(SHAPELINE)*num_lines);
-            lines = cpart->prev ? cpart->prev : cpart->start;
-            for (int i = 0; i < num_lines; i++)
-            {
-                SHAPELINE *new_line = &new_lines[num_lines - 1 - i];
-                *new_line = *lines;
-                lines = lines->next;
-                assert(moveTo != lines->type);
-                new_line->type = lines->type;
-                new_line->sx = lines->sx;
-                new_line->sy = lines->sy;
-            }
-            for (int i = 0; i < num_lines; i++)
-            {
-                if (i != (num_lines - 1))
-                    new_lines[i].next = &new_lines[i + 1];
-                else
-                    new_lines[i].next = 0;
-            }
-            lines = new_lines;
-        }
-        for (int i = 0; i < num_lines; i++)
+
+        int x = lines->x, y = lines->y, num_lines = subpath->num_lines;
+        lines++;
+        num_lines--;
+        assert(num_lines);
+        expandBBox(shape->bounds, x/20.0f, y/20.0f);
+        if (!append)
+            path_moveTo(path, x/20.0f, y/20.0f);
+        for (i = 0; i < num_lines; i++)
         {
-            assert(moveTo != lines->type);
-            expandBBox(shape->bounds, lines->x/20.0f, lines->y/20.0f);
-            if (lineTo == lines->type)
-                path_lineTo(path, lines->x/20.0f, lines->y/20.0f);
-            else if (splineTo == lines->type)
-                path_quadBezTo(path, lines->sx/20.0f, lines->sy/20.0f, lines->x/20.0f, lines->y/20.0f);
-            if (i != (num_lines - 1))
+            assert(moveTo != lines[i].type);
+            expandBBox(shape->bounds, lines[i].x/20.0f, lines[i].y/20.0f);
+            if (lineTo == lines[i].type)
+                path_lineTo(path, lines[i].x/20.0f, lines[i].y/20.0f);
+            else if (splineTo == lines[i].type)
+                path_quadBezTo(path, lines[i].sx/20.0f, lines[i].sy/20.0f, lines[i].x/20.0f, lines[i].y/20.0f);
+            else
             {
-                assert(x != lines->x || y != lines->y);
-                //prev_x = lines->x, prev_y = lines->y;
-                lines = lines->next;
+                assert(0);
             }
         }
         assert(path->npts == alloc_pts);
-        end_x = lines->x, end_y = lines->y;
-        if (new_lines)
-            free(new_lines);
-    }
-    int p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, 0, fillStyle, idx, 0);
-    if (p < 0)
-    {
-        idx = 1 - idx;
-        p = findConnectingPart(parts, num_parts, INT_MAX, INT_MAX, 1, 0, fillStyle, idx, 0);
-    }
-    if (p >= 0)
-    {
-        part = parts + p;
-        path->next = (NSVGpath*)calloc(1, sizeof(NSVGpath));
-        path = path->next;
-        goto add_shape;
+        if (start_x == lines[num_lines - 1].x && start_y == lines[num_lines - 1].y)
+        {   // path finished - start new
+            subpath = 0;
+            goto start_new;
+        }
+        append = 1;
     }
     g_render->cache_shape(g_render_obj, shape);
+    return 1;
 }
 
 static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
@@ -509,112 +392,162 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     continue;
                 }
 
-                SHAPELINE tmp_line = { 0 };
                 SHAPELINE *lines = swf_shape->lines;
-                SHAPELINE *startLine = lines;
-                SHAPELINE *startPrevLine = 0;
-                SHAPELINE *prevLine = lines;
-                SHAPE_PARTS *parts = (SHAPE_PARTS*)calloc(1, sizeof(SHAPE_PARTS)*65536);
-                LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
-                int fillStyle0 = lines->fillstyle0, fillStyle1 = lines->fillstyle1, numParts = 0, numLines = 0;
-                if (lines)
-                {
-                    if (moveTo != lines->type)
-                    {
-                        tmp_line.fillstyle0 = fillStyle0;
-                        tmp_line.fillstyle1 = fillStyle1;
-                        tmp_line.linestyle  = lines->linestyle;
-                        tmp_line.next = lines;
-                        lines = &tmp_line;
-                        prevLine = startPrevLine = lines;
-                    } else
-                        numLines++;
-                    lines = lines->next;
-                }
+                int i, nlines = 0;
                 while (lines)
                 {
-                    while (lines && lines->next && moveTo == lines->type && moveTo == lines->next->type)
-                    {
-                        SHAPELINE *l = lines->next;
-                        free(prevLine->next);
-                        prevLine->next = l;
-                        lines = prevLine->next;
-                    }
-                    if (!lines->next && moveTo == lines->type)
-                        break;
-                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || moveTo == lines->type || (moveTo != prevLine->type && haveIntersect(swf_shape->lines, prevLine)))
-                    {
-                        assert(numLines > 1 || (moveTo != startLine->type));
-                        parts[numParts].start = startLine;
-                        parts[numParts].end = prevLine;
-                        parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
-                        parts[numParts].num_lines = numLines;
-                        parts[numParts].fill_style[0] = fillStyle0;
-                        parts[numParts].fill_style[1] = fillStyle1;
+                    lines = lines->next;
+                    nlines++;
+                }
+                lines = swf_shape->lines;
+                LINE *path = (LINE*)calloc(1, sizeof(LINE)*nlines);
+                LINE *ppath = path;
+                int fillStyle0 = lines->fillstyle0, fillStyle1 = lines->fillstyle1, lineStyle = lines->linestyle;
+                int x = 0, y = 0;
+                while (lines)
+                {
+                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || lineStyle != lines->linestyle || moveTo == lines->type)
+                    {   // flush path
+                        int subpath_size = ppath - path;
+                        LINE *p = path;
+                        while (subpath_size > 1 && moveTo == p->type && moveTo == p[1].type)
+                        {
+                            subpath_size--;
+                            p++;
+                        }
+                        if (!subpath_size || (1 == subpath_size && moveTo == p->type))
+                            goto done;
+                        if (moveTo == p->type)
+                        {
+                            x = p->x;
+                            y = p->y;
+                            p++;
+                            subpath_size--;
+                        }
+                        assert(subpath_size);
+                        if (fillStyle0)
+                        {
+                            FILLSTYLE *fs = &swf_shape->fillstyles[fillStyle0 - 1];
+                            fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                            SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                            subpath->num_lines = subpath_size + 1;
+                            subpath->path_used = 0;
+                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                            subpath->subpath[0].type = moveTo;
+                            subpath->subpath[0].x = x;
+                            subpath->subpath[0].y = y;
+                            subpath->subpath[0].sx = 0;
+                            subpath->subpath[0].sy = 0;
+                            memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
+                            assert(moveTo == subpath->subpath->type);
+                            assert(moveTo != subpath->subpath[1].type);
+                            assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                        }
+                        if (fillStyle1)
+                        {
+                            ppath = p;
+                            FILLSTYLE *fs = &swf_shape->fillstyles[fillStyle1 - 1];
+                            // CCW used for normal shapes - add with reverse order
+                            fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                            SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                            subpath->num_lines = subpath_size + 1;
+                            subpath->path_used = 0;
+                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                            LINE *pline = subpath->subpath + subpath_size;
+                            subpath->subpath[0].type = moveTo;
+                            subpath->subpath[0].x = ppath[subpath_size - 1].x;
+                            subpath->subpath[0].y = ppath[subpath_size - 1].y;
+                            subpath->subpath[0].sx = 0;
+                            subpath->subpath[0].sy = 0;
+                            for (i = 0; i < subpath_size; i++)
+                            {
+                                if (lineTo == ppath->type || splineTo == ppath->type)
+                                {
+                                    pline[-i].x = x;
+                                    pline[-i].y = y;
+                                    pline[-i].sx = 0;
+                                    pline[-i].sy = 0;
+                                    pline[-i].type = ppath->type;
+                                } else if (splineTo == ppath->type)
+                                {
+                                    pline[-i].x = x;
+                                    pline[-i].y = y;
+                                    pline[-i].sx = ppath->sx;
+                                    pline[-i].sy = ppath->sy;
+                                    pline[-i].type = ppath->type;
+                                } else
+                                {
+                                    assert(0);
+                                }
+                                x = ppath->x;
+                                y = ppath->y;
+                                ppath++;
+                            }
+                            assert(moveTo == subpath->subpath[0].type);
+                            assert(moveTo != subpath->subpath[1].type);
+                            assert(moveTo != subpath->subpath[subpath_size].type);
+                        }
+                        if (lineStyle)
+                        {
+                            LINESTYLE *ls = &swf_shape->linestyles[lineStyle - 1];
+                            ls->subpaths = realloc(ls->subpaths, (ls->num_subpaths + 1)*sizeof(SUBPATH));
+                            SUBPATH *subpath = ls->subpaths + ls->num_subpaths++;
+                            subpath->num_lines = subpath_size + 1;
+                            subpath->path_used = 0;
+                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                            subpath->subpath[0].type = moveTo;
+                            subpath->subpath[0].x = x;
+                            subpath->subpath[0].y = y;
+                            subpath->subpath[0].sx = 0;
+                            subpath->subpath[0].sy = 0;
+                            memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
+                            assert(moveTo == subpath->subpath->type);
+                            assert(moveTo != subpath->subpath[1].type);
+                            assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                        }
+                        x = p[subpath_size - 1].x;
+                        y = p[subpath_size - 1].y;
+                        ppath      = path;
+done:
                         fillStyle0 = lines->fillstyle0;
                         fillStyle1 = lines->fillstyle1;
-                        startPrevLine = prevLine;
-                        startLine = lines;
-                        numLines = 0;
-                        numParts++;
+                        lineStyle  = lines->linestyle;
                     }
-                    numLines++;
-                    prevLine = lines;
+                    ppath->x    = lines->x;
+                    ppath->y    = lines->y;
+                    ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
+                    ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
+                    ppath->type = lines->type;
+                    ppath++;
                     lines = lines->next;
                 }
-                if (numLines)
-                {
-                    parts[numParts].start = startLine;
-                    parts[numParts].end = prevLine;
-                    parts[numParts].prev = (moveTo != startLine->type) ? startPrevLine : 0;
-                    parts[numParts].num_lines = numLines;
-                    parts[numParts].fill_style[0] = fillStyle0;
-                    parts[numParts].fill_style[1] = fillStyle1;
-                    numParts++;
-                }
 
-                shape->shapes = (NSVGshape*)calloc(1, numParts*2*sizeof(NSVGshape));
+                LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
+                shape->shapes = (NSVGshape*)calloc(1, (swf_shape->numfillstyles + swf_shape->numlinestyles)*sizeof(NSVGshape));
                 shape->bounds[2] = idtable[id].bbox.xmin/20.0f;
                 shape->bounds[3] = idtable[id].bbox.ymin/20.0f;
                 shape->bounds[0] = idtable[id].bbox.xmax/20.0f;
                 shape->bounds[1] = idtable[id].bbox.ymax/20.0f;
 
                 lines = swf_shape->lines;
-                for (;;)
+                for (i = 0; i < swf_shape->numfillstyles; i++)
                 {
-                    int i = 0, idx = 0;
-                    for (; i < numParts; i++)
-                    {
-                        if (moveTo == parts[i].start->type && parts[i].fill_style[0] && !parts[i].fill_style_used[0])
-                            break;
-                        if (moveTo == parts[i].start->type && parts[i].fill_style[1] && !parts[i].fill_style_used[1])
-                        {
-                            idx = 1;
-                            break;
-                        }
-                    }
-                    if (i == numParts)
-                    {
-                        for (i = 0; i < numParts; i++)
-                        {
-                            if (parts[i].fill_style[0] && !parts[i].fill_style_used[0])
-                                break;
-                            if (parts[i].fill_style[1] && !parts[i].fill_style_used[1])
-                            {
-                                idx = 1;
-                                break;
-                            }
-                        }
-                        if (i == numParts)
-                            break;
-                    }
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    parseShape(idtable, clip, shape->shapes + shape->num_shapes++, parts, numParts, parts + i, swf_shape->fillstyles, swf_shape->linestyles, idx);
+                    int res = parseShape(idtable, clip, shape->shapes + shape->num_shapes, swf_shape->fillstyles + i, 0);
+                    if (res)
+                        shape->num_shapes++;
+                }
+                for (i = 0; i < swf_shape->numlinestyles; i++)
+                {
+                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
+                    int res = parseShape(idtable, clip, shape->shapes + shape->num_shapes, 0, swf_shape->linestyles + i);
+                    if (res)
+                        shape->num_shapes++;
                 }
                 shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
-                free(parts);
                 swf_Shape2Free(swf_shape);
                 free(swf_shape);
+                free(path);
                 idtable[id].type = shape_type;
                 idtable[id].lvg_id = clip->num_shapes++;
             } else if (swf_isImageTag(tag))

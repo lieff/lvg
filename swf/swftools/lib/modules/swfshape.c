@@ -594,6 +594,7 @@ static int parseFillStyleArray(TAG*tag, SHAPE2*shape)
     shape->numfillstyles += count;
     if(shape->numfillstyles) {
         shape->fillstyles = (FILLSTYLE*)realloc(shape->fillstyles, sizeof(FILLSTYLE)*shape->numfillstyles);
+        memset(shape->fillstyles + fillstylestart, 0, (shape->numfillstyles - fillstylestart)*sizeof(FILLSTYLE));
 
         for(t=fillstylestart;t<shape->numfillstyles;t++)
             parseFillStyle(&shape->fillstyles[t], tag, num);
@@ -607,11 +608,12 @@ static int parseFillStyleArray(TAG*tag, SHAPE2*shape)
     shape->numlinestyles += count;
     if(count) {
         shape->linestyles = (LINESTYLE*)realloc(shape->linestyles, sizeof(LINESTYLE)*shape->numlinestyles);
+        memset(shape->linestyles + linestylestart, 0, (shape->numlinestyles - linestylestart)*sizeof(LINESTYLE));
         /* TODO: should we start with 1 and insert a correct definition of the
          "built in" linestyle 0? */
         for(t=linestylestart;t<shape->numlinestyles;t++)
         {
-            char fill = 0;
+            int fill = 0;
             shape->linestyles[t].width = swf_GetU16(tag);
             if (morph)
                 swf_GetU16(tag);
@@ -832,9 +834,10 @@ SRECT swf_GetShapeBoundingBox(SHAPE2*shape2)
 
 void swf_Shape2Free(SHAPE2 * s)
 {
-    SHAPELINE*line = s->lines;
+    SHAPELINE *line = s->lines;
     s->lines = 0;
-    while(line) {
+    while (line)
+    {
         SHAPELINE*next = line->next;
         line->next = 0;
         free(line);
@@ -842,19 +845,33 @@ void swf_Shape2Free(SHAPE2 * s)
     }
     line = s->lines2;
     s->lines2 = 0;
-    while(line) {
+    while (line)
+    {
         SHAPELINE*next = line->next;
         line->next = 0;
         free(line);
         line = next;
     }
 
-    if(s->linestyles) {
+    if (s->linestyles)
+    {
+        for (int i = 0; i < s->numlinestyles; i++)
+        {
+            LINESTYLE *ls = &s->linestyles[i];
+            if (ls->subpaths)
+            {
+                for(int j = 0; j < ls->num_subpaths; j++)
+                    if (ls->subpaths[j].subpath)
+                        free(ls->subpaths[j].subpath);
+                free(ls->subpaths);
+            }
+        }
         free(s->linestyles);
         s->linestyles = 0;
     }
-    if(s->fillstyles) {
-        for(int i = 0; i < s->numfillstyles; i++)
+    if (s->fillstyles)
+    {
+        for (int i = 0; i < s->numfillstyles; i++)
         {
             FILLSTYLE *f = &s->fillstyles[i];
             if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
@@ -862,11 +879,19 @@ void swf_Shape2Free(SHAPE2 * s)
                 free(f->gradient.rgba);
                 free(f->gradient.ratios);
             }
+            if (f->subpaths)
+            {
+                for(int j = 0; j < f->num_subpaths; j++)
+                    if (f->subpaths[j].subpath)
+                        free(f->subpaths[j].subpath);
+                free(f->subpaths);
+            }
         }
         free(s->fillstyles);
         s->fillstyles = 0;
     }
-    if(s->bbox) {
+    if (s->bbox)
+    {
         free(s->bbox);
         s->bbox = 0;
     }
