@@ -406,27 +406,26 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int x = 0, y = 0;
                 while (lines)
                 {
-                    nlines--;
-                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || lineStyle != lines->linestyle || moveTo == lines->type || !nlines)
+                    SHAPELINE *next = lines->next;
+                    ppath->x    = lines->x;
+                    ppath->y    = lines->y;
+                    ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
+                    ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
+                    ppath->type = lines->type;
+                    ppath++;
+                    if (!next || fillStyle0 != next->fillstyle0 || fillStyle1 != next->fillstyle1 || lineStyle != next->linestyle || moveTo == next->type)
                     {   // flush path
-                        if (!nlines && moveTo != lines->type)
-                        {
-                            ppath->x    = lines->x;
-                            ppath->y    = lines->y;
-                            ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
-                            ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
-                            ppath->type = lines->type;
-                            ppath++;
-                        }
                         int subpath_size = ppath - path;
                         LINE *p = path;
-                        while (subpath_size > 1 && moveTo == p->type && moveTo == p[1].type)
+                        /*while (subpath_size > 1 && moveTo == p->type && moveTo == p[1].type)
                         {
                             subpath_size--;
                             p++;
-                        }
-                        if (!subpath_size || (1 == subpath_size && moveTo == p->type))
+                        }*/
+                        if (!subpath_size)
                             goto done;
+                        if (1 == subpath_size && moveTo == p->type && moveTo == next->type)
+                            goto done_flush;
                         if (moveTo == p->type)
                         {
                             x = p->x;
@@ -494,6 +493,15 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                                 _y = ppath->y;
                                 ppath++;
                             }
+                            /*if (fillStyle1 == 2)
+                            {
+                                for (i = 0; i < subpath->num_lines; i++)
+                                {
+                                    LINE *l = subpath->subpath + i;
+                                    printf("{ %d, %.2f, %.2f }", l->type, l->x/20.0, l->y/20.0);
+                                }
+                                printf("\n"); fflush(stdout);
+                            }*/
                             assert(moveTo == subpath->subpath[0].type);
                             assert(moveTo != subpath->subpath[1].type);
                             assert(moveTo != subpath->subpath[subpath_size].type);
@@ -516,21 +524,19 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             assert(moveTo != subpath->subpath[1].type);
                             assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
                         }
+done_flush:
                         x = p[subpath_size - 1].x;
                         y = p[subpath_size - 1].y;
-                        ppath      = path;
+                        ppath = path;
 done:
-                        fillStyle0 = lines->fillstyle0;
-                        fillStyle1 = lines->fillstyle1;
-                        lineStyle  = lines->linestyle;
+                        if (next)
+                        {
+                            fillStyle0 = next->fillstyle0;
+                            fillStyle1 = next->fillstyle1;
+                            lineStyle  = next->linestyle;
+                        }
                     }
-                    ppath->x    = lines->x;
-                    ppath->y    = lines->y;
-                    ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
-                    ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
-                    ppath->type = lines->type;
-                    ppath++;
-                    lines = lines->next;
+                    lines = next;
                 }
 
                 LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
