@@ -406,8 +406,18 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 int x = 0, y = 0;
                 while (lines)
                 {
-                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || lineStyle != lines->linestyle || moveTo == lines->type)
+                    nlines--;
+                    if (fillStyle0 != lines->fillstyle0 || fillStyle1 != lines->fillstyle1 || lineStyle != lines->linestyle || moveTo == lines->type || !nlines)
                     {   // flush path
+                        if (!nlines && moveTo != lines->type)
+                        {
+                            ppath->x    = lines->x;
+                            ppath->y    = lines->y;
+                            ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
+                            ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
+                            ppath->type = lines->type;
+                            ppath++;
+                        }
                         int subpath_size = ppath - path;
                         LINE *p = path;
                         while (subpath_size > 1 && moveTo == p->type && moveTo == p[1].type)
