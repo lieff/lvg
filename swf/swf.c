@@ -439,15 +439,17 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
                 swf_DeleteFilter(f);
             }
         }
+        int blendmode = 0;
         if (state & 32)
         {   // ButtonHasBlendMode
-            swf_GetU8(tag);
+            blendmode = swf_GetU8(tag);
         }
         if (o)
         {
             o->id    = idtable[cid].lvg_id;
             o->type  = idtable[cid].type;
             o->depth = depth;
+            o->blend_mode = blendmode;
             o->t[0] = m.sx/65536.0f;
             o->t[1] = m.r0/65536.0f;
             o->t[2] = m.r1/65536.0f;
