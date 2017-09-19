@@ -183,7 +183,7 @@ static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape
             subpath->path_used = 1;
             break;
         }
-        if (!subpath && shape->fill.type != NSVG_PAINT_NONE)
+        if (!subpath)
         {   // can't find path end - try start new
             //assert(0);
 start_new:
@@ -201,8 +201,6 @@ start_new:
                 path = path->next;
                 alloc_pts = 0;
                 append = 0;
-                start_x = subpath->subpath->x;
-                start_y = subpath->subpath->y;
             }
         }
         if (!subpath)
@@ -243,6 +241,8 @@ start_new:
             subpath = 0;
             goto start_new;
         }
+        start_x = lines[num_lines - 1].x;
+        start_y = lines[num_lines - 1].y;
         append = 1;
     }
     g_render->cache_shape(g_render_obj, shape);
@@ -469,19 +469,20 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             subpath->subpath[0].y = ppath[subpath_size - 1].y;
                             subpath->subpath[0].sx = 0;
                             subpath->subpath[0].sy = 0;
+                            int _x = x, _y = y;
                             for (i = 0; i < subpath_size; i++)
                             {
-                                if (lineTo == ppath->type || splineTo == ppath->type)
+                                if (lineTo == ppath->type)
                                 {
-                                    pline[-i].x = x;
-                                    pline[-i].y = y;
+                                    pline[-i].x = _x;
+                                    pline[-i].y = _y;
                                     pline[-i].sx = 0;
                                     pline[-i].sy = 0;
                                     pline[-i].type = ppath->type;
                                 } else if (splineTo == ppath->type)
                                 {
-                                    pline[-i].x = x;
-                                    pline[-i].y = y;
+                                    pline[-i].x = _x;
+                                    pline[-i].y = _y;
                                     pline[-i].sx = ppath->sx;
                                     pline[-i].sy = ppath->sy;
                                     pline[-i].type = ppath->type;
@@ -489,8 +490,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                                 {
                                     assert(0);
                                 }
-                                x = ppath->x;
-                                y = ppath->y;
+                                _x = ppath->x;
+                                _y = ppath->y;
                                 ppath++;
                             }
                             assert(moveTo == subpath->subpath[0].type);
