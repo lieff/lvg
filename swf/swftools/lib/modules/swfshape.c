@@ -837,6 +837,42 @@ SRECT swf_GetShapeBoundingBox(SHAPE2*shape2)
     return r;
 }
 
+void swf_ShapeFreeSubpaths(SHAPE2 *s)
+{
+    if (s->linestyles)
+    {
+        for (int i = 0; i < s->numlinestyles; i++)
+        {
+            LINESTYLE *ls = &s->linestyles[i];
+            if (ls->subpaths)
+            {
+                for(int j = 0; j < ls->num_subpaths; j++)
+                    if (ls->subpaths[j].subpath)
+                        free(ls->subpaths[j].subpath);
+                free(ls->subpaths);
+            }
+            ls->subpaths = 0;
+            ls->num_subpaths = 0;
+        }
+    }
+    if (s->fillstyles)
+    {
+        for (int i = 0; i < s->numfillstyles; i++)
+        {
+            FILLSTYLE *fs = &s->fillstyles[i];
+            if (fs->subpaths)
+            {
+                for(int j = 0; j < fs->num_subpaths; j++)
+                    if (fs->subpaths[j].subpath)
+                        free(fs->subpaths[j].subpath);
+                free(fs->subpaths);
+            }
+            fs->subpaths = 0;
+            fs->num_subpaths = 0;
+        }
+    }
+}
+
 void swf_Shape2Free(SHAPE2 * s)
 {
     SHAPELINE *line = s->lines;

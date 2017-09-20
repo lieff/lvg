@@ -105,12 +105,8 @@ int compareStops(const void *a, const void *b)
     return 0;
 }
 
-static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
+static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
 {
-    if (fs && !fs->num_subpaths)
-        return 0;
-    if (ls && !ls->num_subpaths)
-        return 0;
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->fillRule = NSVG_FILLRULE_EVENODD;
     if (fs)
@@ -265,7 +261,6 @@ start_new:
         append = 1;
     }
     g_render->cache_shape(g_render_obj, shape);
-    return 1;
 }
 
 static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
@@ -411,6 +406,13 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     continue;
                 }
 
+                LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
+                shape->shapes = (NSVGshape*)calloc(1, (swf_shape->numfillstyles + swf_shape->numlinestyles)*sizeof(NSVGshape));
+                shape->bounds[2] = idtable[id].bbox.xmin/20.0f;
+                shape->bounds[3] = idtable[id].bbox.ymin/20.0f;
+                shape->bounds[0] = idtable[id].bbox.xmax/20.0f;
+                shape->bounds[1] = idtable[id].bbox.ymax/20.0f;
+
                 SHAPELINE *lines = swf_shape->lines;
                 int i, nlines = 0;
                 while (lines)
@@ -553,28 +555,23 @@ done:
                     lines = next;
                 }
 
-                LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
-                shape->shapes = (NSVGshape*)calloc(1, (swf_shape->numfillstyles + swf_shape->numlinestyles)*sizeof(NSVGshape));
-                shape->bounds[2] = idtable[id].bbox.xmin/20.0f;
-                shape->bounds[3] = idtable[id].bbox.ymin/20.0f;
-                shape->bounds[0] = idtable[id].bbox.xmax/20.0f;
-                shape->bounds[1] = idtable[id].bbox.ymax/20.0f;
-
-                lines = swf_shape->lines;
                 for (i = 0; i < swf_shape->numfillstyles; i++)
                 {
+                    FILLSTYLE *fs = swf_shape->fillstyles + i;
+                    if (!fs->num_subpaths)
+                        continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    int res = parseShape(idtable, clip, shape->shapes + shape->num_shapes, swf_shape->fillstyles + i, 0);
-                    if (res)
-                        shape->num_shapes++;
+                    parseShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
+                    LINESTYLE *ls = swf_shape->linestyles + i;
+                    if (!ls->num_subpaths)
+                        continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    int res = parseShape(idtable, clip, shape->shapes + shape->num_shapes, 0, swf_shape->linestyles + i);
-                    if (res)
-                        shape->num_shapes++;
+                    parseShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
                 }
+                //swf_ShapeFreeSubpaths(swf_shape);
                 shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
                 swf_Shape2Free(swf_shape);
                 free(swf_shape);

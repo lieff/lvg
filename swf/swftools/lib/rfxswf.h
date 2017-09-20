@@ -504,10 +504,11 @@ int   swf_SetLineStyle(TAG * t,LINESTYLE * l);
 
 
 //SHAPELINE* swf_ParseShapeData(U8*data, int bits, int fillbits, int linebits);
-SHAPE2*	   swf_ShapeToShape2(SHAPE*shape);
-void	   swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape);
-SRECT	   swf_GetShapeBoundingBox(SHAPE2*shape);
-void	   swf_Shape2Free(SHAPE2 * s);
+SHAPE2*	swf_ShapeToShape2(SHAPE*shape);
+void	swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape);
+SRECT	swf_GetShapeBoundingBox(SHAPE2*shape);
+void    swf_ShapeFreeSubpaths(SHAPE2 *s);
+void	swf_Shape2Free(SHAPE2 *s);
 void	swf_DumpShape(SHAPE2*shape2);
 
 void swf_ParseDefineShape(TAG*tag, SHAPE2*shape);
