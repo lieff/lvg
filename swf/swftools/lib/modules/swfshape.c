@@ -611,29 +611,34 @@ static int parseFillStyleArray(TAG*tag, SHAPE2*shape)
         memset(shape->linestyles + linestylestart, 0, (shape->numlinestyles - linestylestart)*sizeof(LINESTYLE));
         /* TODO: should we start with 1 and insert a correct definition of the
          "built in" linestyle 0? */
-        for(t=linestylestart;t<shape->numlinestyles;t++)
+        for (t = linestylestart; t < shape->numlinestyles; t++)
         {
             int fill = 0;
             shape->linestyles[t].width = swf_GetU16(tag);
             if (morph)
                 swf_GetU16(tag);
 
-            if(num >= 4) {
+            if (num >= 4)
+            {
                 U16 flags = swf_GetU16(tag);
-                if((flags & 0x30) == 0x20)
-                    swf_GetU16(tag); // miter limit
-                if(flags & 0x08) {
+                shape->linestyles[t].flags = flags;
+                if ((flags & 0x30) == 0x20)
+                    shape->linestyles[t].mitterLimit = swf_GetFixed8(tag); // miter limit
+                if (flags & 0x08)
+                {
                     fprintf(stderr, "Warning: Filled strokes parsing not yet fully supported\n");
                     fill = 1;
                 }
             }
 
-            if(fill) {
+            if (fill)
+            {
                 FILLSTYLE f;
                 parseFillStyle(&f, tag, num);
                 shape->linestyles[t].color = f.color;
-            } else {
-                if(num >= 3)
+            } else
+            {
+                if (num >= 3)
                     { swf_GetRGBA(tag, &shape->linestyles[t].color); if (morph) swf_GetRGBA(tag, NULL); }
                 else
                     { swf_GetRGB(tag, &shape->linestyles[t].color);  if (morph) swf_GetRGB(tag, NULL); }

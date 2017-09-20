@@ -400,6 +400,8 @@ typedef struct _LINESTYLE
     SUBPATH  *subpaths;  // for shape conversion
     int       num_subpaths;
     RGBA      color;
+    float     mitterLimit;
+    int       flags;
     U16       width;
 } LINESTYLE;
 

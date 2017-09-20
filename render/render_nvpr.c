@@ -470,6 +470,19 @@ static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform 
             glColor4f(c.r, c.g, c.b, c.a);
         }
         glPathParameterfNV(pathObj, GL_PATH_STROKE_WIDTH_NV, shape->strokeWidth);
+        if (NSVG_JOIN_ROUND == shape->strokeLineJoin)
+            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_ROUND_NV);
+        else if (NSVG_JOIN_BEVEL == shape->strokeLineJoin)
+            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_BEVEL_NV);
+        else if (NSVG_JOIN_MITER == shape->strokeLineJoin)
+            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_MITER_TRUNCATE_NV);
+        glPathParameterfNV(pathObj, GL_PATH_MITER_LIMIT_NV, shape->miterLimit);
+        if (NSVG_CAP_ROUND == shape->strokeLineCap)
+            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_ROUND_NV);
+        else if (NSVG_CAP_BUTT == shape->strokeLineCap)
+            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_FLAT);
+        else if (NSVG_CAP_SQUARE == shape->strokeLineCap)
+            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_SQUARE_NV);
         GLint reference = 0x1;
         glStencilStrokePathNV(pathObj, reference, 0x1F);
         glCoverStrokePathNV(pathObj, GL_BOUNDING_BOX_NV);

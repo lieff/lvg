@@ -161,9 +161,26 @@ static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape
     }
     if (ls)
     {
-        shape->stroke.type = NSVG_PAINT_COLOR;
+        shape->stroke.type  = NSVG_PAINT_COLOR;
         shape->stroke.color = RGBA2U32(&ls->color);
-        shape->strokeWidth = ls->width/20.0f;
+        shape->strokeWidth  = ls->width/20.0f;
+        shape->miterLimit   = ls->mitterLimit/20.0f;
+        int joinStyle = (ls->flags >> 4) & 3;
+        if (0 == joinStyle)
+            shape->strokeLineJoin = NSVG_JOIN_ROUND;
+        else if (1 == joinStyle)
+            shape->strokeLineJoin = NSVG_JOIN_BEVEL;
+        else if (2 == joinStyle)
+            shape->strokeLineJoin = NSVG_JOIN_MITER;
+        int startLinecap = ((ls->flags >> 6) & 3);
+        //int endLinecap = ((ls->flags >> 8) & 3);
+        if (0 == startLinecap)
+            shape->strokeLineCap = NSVG_CAP_ROUND;
+        else if (1 == startLinecap)
+            shape->strokeLineCap = NSVG_CAP_BUTT;
+        else if (2 == startLinecap)
+            shape->strokeLineCap = NSVG_CAP_SQUARE;
+        //int noClose = ls->flags & 4;
         assert(0 == fs);
         fs = (FILLSTYLE*)ls;
     }
@@ -186,7 +203,7 @@ static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape
         }
         if (!subpath)
         {   // can't find path end - try start new
-            assert(0);
+            //assert(0);
 start_new:
             for (i = 0; i < fs->num_subpaths; i++)
             {
