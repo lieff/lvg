@@ -417,11 +417,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     {   // flush path
                         int subpath_size = ppath - path;
                         LINE *p = path;
-                        /*while (subpath_size > 1 && moveTo == p->type && moveTo == p[1].type)
-                        {
-                            subpath_size--;
-                            p++;
-                        }*/
                         if (!subpath_size)
                             goto done;
                         if (1 == subpath_size && moveTo == p->type && moveTo == next->type)
@@ -464,8 +459,8 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
                             LINE *pline = subpath->subpath + subpath_size;
                             subpath->subpath[0].type = moveTo;
-                            subpath->subpath[0].x = ppath[subpath_size - 1].x;
-                            subpath->subpath[0].y = ppath[subpath_size - 1].y;
+                            subpath->subpath[0].x = p[subpath_size - 1].x;
+                            subpath->subpath[0].y = p[subpath_size - 1].y;
                             subpath->subpath[0].sx = 0;
                             subpath->subpath[0].sy = 0;
                             int _x = x, _y = y;
@@ -815,11 +810,13 @@ done:
             swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {
+#ifndef EMSCRIPTEN
             void*abccode = swf_ReadABC(tag);
 #ifndef _TEST
             swf_DumpABC(stdout, abccode, "");
 #endif
             swf_FreeABC(abccode);
+#endif
         } else if (ST_SHOWFRAME == tag->id)
             nframe++;
         else if (ST_END == tag->id)

@@ -54,7 +54,7 @@ Nuklear GUI demo:
 
 [![Nuklear Screenshot](images/nuklear.png?raw=true)](https://lieff.github.io/lvg_player.html?file=test_nuklear_gles2.lvg)
 
-Flash swf demo (long load):
+Flash swf demo:
 
 [![Flash Screenshot](images/kitty.png?raw=true)](https://lieff.github.io/lvg_player2.html?file=npc_kitty_chicken.swf)
 
