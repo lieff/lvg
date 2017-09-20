@@ -294,7 +294,7 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
         int cid   = swf_GetU16(tag);
         int depth = swf_GetU16(tag);
 #ifndef _TEST
-        printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
+        //printf("  state(0x%x) id=%d depth=%d\n", state, cid, depth);
 #endif
         LVGObject *o = 0;
         assert(state < 64); // bits 5-6 unsupported ButtonHasFilterList and ButtonHasBlendMode
@@ -405,6 +405,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     tag = tag->next;
                     continue;
                 }
+                //printf("id=%d\n", id);
 
                 LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
                 shape->shapes = (NSVGshape*)calloc(1, (swf_shape->numfillstyles + swf_shape->numlinestyles)*sizeof(NSVGshape));
@@ -450,6 +451,15 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             subpath_size--;
                         }
                         assert(subpath_size);
+                        /*printf("{ %.2f, %.2f }", x/20.0, y/20.0);
+                        for (i = 0; i < subpath_size; i++)
+                        {
+                            if (splineTo == p[i].type)
+                                printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
+                            else
+                                printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
+                        }
+                        printf("\n"); fflush(stdout);*/
                         if (fillStyle0)
                         {
                             FILLSTYLE *fs = &swf_shape->fillstyles[fillStyle0 - 1];
@@ -671,7 +681,7 @@ done:
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
 #ifndef _TEST
-                printf("button(%d) actions:\n", id);
+                //printf("button(%d) actions:\n", id);
 #endif
                 idtable[id].type = button_type;
                 idtable[id].lvg_id = clip->num_buttons;
@@ -691,7 +701,7 @@ done:
                 ba->flags = CondOverDownToOverUp;
                 assert(0 == ba->actions[4 + size - 1]);
 #ifndef _TEST
-                swf_DumpActions(actions, 0);
+                //swf_DumpActions(actions, 0);
 #endif
                 swf_ActionFree(actions);
                 swf_SetTagPos(tag, oldTagPos);
@@ -700,7 +710,7 @@ done:
                 U32 oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
 #ifndef _TEST
-                printf("button2(%d) actions:\n", id);
+                //printf("button2(%d) actions:\n", id);
 #endif
                 idtable[id].type = button_type;
                 idtable[id].lvg_id = clip->num_buttons;
@@ -729,8 +739,8 @@ done:
                     ba->flags = condition;
                     assert(0 == ba->actions[4 + size - 1]);
 #ifndef _TEST
-                    printf("  condition %04x\n", condition);
-                    swf_DumpActions(actions, "  ");
+                    //printf("  condition %04x\n", condition);
+                    //swf_DumpActions(actions, "  ");
 #endif
                     swf_ActionFree(actions);
                 }
@@ -820,8 +830,8 @@ done:
             memcpy(frame->actions + 4, tag->data + pos, size);
             assert(0 == frame->actions[4 + size - 1]);
 #ifndef _TEST
-            printf("frame %d actions:\n", nframe);
-            swf_DumpActions(actions, 0);
+            //printf("frame %d actions:\n", nframe);
+            //swf_DumpActions(actions, 0);
 #endif
             swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
@@ -924,7 +934,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                     assert(sprite_type == idtable[p.id].type);
                     LVGMovieClipGroup *g = &clip->groups[idtable[p.id].lvg_id];
 #ifndef _TEST
-                    printf("place id=%d have action in event %i\n", p.id, i);
+                    //printf("place id=%d have action in event %i\n", p.id, i);
 #endif
                     if (g->events[i])
                         free(g->events[i]);
@@ -1092,7 +1102,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     free(idtable);
 #ifndef _TEST
     assert(clip->groups->num_frames == swf->frameCount);
-    assert(clip->num_groups <= clip->num_groupstates);
+    //assert(clip->num_groups <= clip->num_groupstates);
 #endif
     clip->last_time = g_time;
     clip->as_version = swf->fileVersion;
