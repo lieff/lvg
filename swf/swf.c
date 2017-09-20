@@ -172,12 +172,13 @@ static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape
     int i, alloc_pts = 0, append = 0;
     int start_x = fs->subpaths[0].subpath->x;
     int start_y = fs->subpaths[0].subpath->y;
+    int x = start_x, y = start_y;
     for (;;)
     {
         SUBPATH *subpath = 0;
         for (i = 0; i < fs->num_subpaths; i++)
         {
-            if (fs->subpaths[i].path_used || start_x != fs->subpaths[i].subpath->x || start_y != fs->subpaths[i].subpath->y)
+            if (fs->subpaths[i].path_used || x != fs->subpaths[i].subpath->x || y != fs->subpaths[i].subpath->y)
                 continue;
             subpath = fs->subpaths + i;
             subpath->path_used = 1;
@@ -185,7 +186,7 @@ static int parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape
         }
         if (!subpath)
         {   // can't find path end - try start new
-            //assert(0);
+            assert(0);
 start_new:
             for (i = 0; i < fs->num_subpaths; i++)
             {
@@ -201,6 +202,8 @@ start_new:
                 path = path->next;
                 alloc_pts = 0;
                 append = 0;
+                start_x = subpath->subpath->x;
+                start_y = subpath->subpath->y;
             }
         }
         if (!subpath)
@@ -211,17 +214,15 @@ start_new:
         assert(moveTo != lines[1].type);
         assert(moveTo != lines[subpath->num_lines - 1].type);
 
-        path->closed = shape->fill.type != NSVG_PAINT_NONE;
-        alloc_pts += (append ? 0 : 1) + 3*(subpath->num_lines - 1);
+        int num_lines = subpath->num_lines - 1;
+        alloc_pts += (append ? 0 : 1) + 3*num_lines;
         path->pts = (float*)realloc(path->pts, sizeof(path->pts[0])*alloc_pts*2);
 
-        int x = lines->x, y = lines->y, num_lines = subpath->num_lines;
-        lines++;
-        num_lines--;
         assert(num_lines);
-        expandBBox(shape->bounds, x/20.0f, y/20.0f);
+        expandBBox(shape->bounds, lines->x/20.0f, lines->y/20.0f);
         if (!append)
-            path_moveTo(path, x/20.0f, y/20.0f);
+            path_moveTo(path, lines->x/20.0f, lines->y/20.0f);
+        lines++;
         for (i = 0; i < num_lines; i++)
         {
             assert(moveTo != lines[i].type);
@@ -236,13 +237,14 @@ start_new:
             }
         }
         assert(path->npts == alloc_pts);
-        if (start_x == lines[num_lines - 1].x && start_y == lines[num_lines - 1].y)
+        x = lines[num_lines - 1].x;
+        y = lines[num_lines - 1].y;
+        if (start_x == x && start_y == y)
         {   // path finished - start new
+            path->closed = shape->fill.type != NSVG_PAINT_NONE;
             subpath = 0;
             goto start_new;
         }
-        start_x = lines[num_lines - 1].x;
-        start_y = lines[num_lines - 1].y;
         append = 1;
     }
     g_render->cache_shape(g_render_obj, shape);

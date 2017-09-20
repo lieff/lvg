@@ -156,6 +156,8 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGColorTransform *cx
     nvgBeginPath(vg);
     for (path = shape->paths; path != NULL; path = path->next)
     {
+        if (NSVG_PAINT_NONE != shape->fill.type && !path->closed)
+            continue;
         nvgMoveTo(vg, path->pts[0], path->pts[1]);
         int l = path->npts - 1;
         //l = (int)(l*g_time*0.4) % l;
