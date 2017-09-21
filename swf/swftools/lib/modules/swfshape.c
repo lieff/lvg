@@ -564,7 +564,7 @@ static void parseFillStyle(FILLSTYLE*dest, TAG*tag, int num)
         fprintf(stderr, "rfxswf:swfshape.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
     }
 }
-static int parseFillStyleArray(TAG*tag, SHAPE2*shape)
+int parseFillStyleArray(TAG*tag, SHAPE2*shape)
 {
     U16 count;
     int t;
@@ -1043,10 +1043,10 @@ void swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape)
     free(tag);
 }
 
-void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
+void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
 {
     int num = 0, morph = 0/*, numshapes = 1, id*/;
-    U16 fill,line;
+    //U16 fill,line;
     //SHAPELINE*l;
     if(tag->id == ST_DEFINESHAPE)
         num = 1;
@@ -1084,7 +1084,8 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
             swf_GetRect(tag, &edge_bounds); // edge bounds1
         }
     }
-    if(num>=4) {
+    if (num>=4)
+    {
         SRECT r2;
         swf_ResetReadBits(tag);
         swf_GetRect(tag, &r2); // edge bounds
@@ -1094,11 +1095,10 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
     if (morph)
         swf_GetU32(tag); //offset to endedges
 
-    if(!parseFillStyleArray(tag, shape)) {
+    if (!parseFillStyleArray(tag, shape))
         return;
-    }
 
-    swf_ResetReadBits(tag);
+    /*swf_ResetReadBits(tag);
     fill = (U16)swf_GetBits(tag,4);
     line = (U16)swf_GetBits(tag,4);
     if(!fill && !line) {
@@ -1109,7 +1109,7 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape)
     if (tag->id == ST_DEFINEMORPHSHAPE || tag->id == ST_DEFINEMORPHSHAPE2)
     {
         shape->lines2 = swf_ParseShapeData(&tag->data[tag->pos], (tag->len - tag->pos)*8, fill, line, num, shape);
-    }
+    }*/
 }
 
 static void free_lines(SHAPELINE* lines)

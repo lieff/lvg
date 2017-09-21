@@ -398,190 +398,229 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 
             if (swf_isShapeTag(tag))
             {
+                //printf("id=%d\n", id);
                 SHAPE2 *swf_shape = (SHAPE2*)calloc(1, sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
-                if (!swf_shape->lines)
-                {   // empty shape
-                    tag = tag->next;
-                    continue;
-                }
-                //printf("id=%d\n", id);
 
                 LVGShapeCollection *shape = clip->shapes + clip->num_shapes;
-                shape->shapes = (NSVGshape*)calloc(1, (swf_shape->numfillstyles + swf_shape->numlinestyles)*sizeof(NSVGshape));
+                shape->shapes = (NSVGshape*)calloc(1, /*(swf_shape->numfillstyles + swf_shape->numlinestyles)*/65536*sizeof(NSVGshape));
                 shape->bounds[2] = idtable[id].bbox.xmin/20.0f;
                 shape->bounds[3] = idtable[id].bbox.ymin/20.0f;
                 shape->bounds[0] = idtable[id].bbox.xmax/20.0f;
                 shape->bounds[1] = idtable[id].bbox.ymax/20.0f;
 
-                SHAPELINE *lines = swf_shape->lines;
-                int i, nlines = 0;
-                while (lines)
+                swf_ResetReadBits(tag);
+                int fillbits = swf_GetBits(tag, 4);
+                int linebits = swf_GetBits(tag, 4);
+                if (!fillbits && !linebits)
                 {
-                    lines = lines->next;
-                    nlines++;
-                }
-                lines = swf_shape->lines;
-                LINE *path = (LINE*)calloc(1, sizeof(LINE)*nlines);
-                LINE *ppath = path;
-                int fillStyle0 = lines->fillstyle0, fillStyle1 = lines->fillstyle1, lineStyle = lines->linestyle;
-                int x = 0, y = 0;
-                while (lines)
-                {
-                    SHAPELINE *next = lines->next;
-                    ppath->x    = lines->x;
-                    ppath->y    = lines->y;
-                    ppath->sx   = (splineTo == lines->type) ? lines->sx : 0;
-                    ppath->sy   = (splineTo == lines->type) ? lines->sy : 0;
-                    ppath->type = lines->type;
-                    ppath++;
-                    if (!next || fillStyle0 != next->fillstyle0 || fillStyle1 != next->fillstyle1 || lineStyle != next->linestyle || moveTo == next->type)
-                    {   // flush path
-                        int subpath_size = ppath - path;
-                        LINE *p = path;
-                        if (!subpath_size)
-                            goto done;
-                        if (1 == subpath_size && moveTo == p->type && moveTo == next->type)
-                            goto done_flush;
-                        if (moveTo == p->type)
-                        {
-                            x = p->x;
-                            y = p->y;
-                            p++;
-                            subpath_size--;
-                        }
-                        assert(subpath_size);
-                        /*printf("{ %.2f, %.2f }", x/20.0, y/20.0);
-                        for (i = 0; i < subpath_size; i++)
-                        {
-                            if (splineTo == p[i].type)
-                                printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
-                            else
-                                printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
-                        }
-                        printf("\n"); fflush(stdout);*/
-                        if (fillStyle0)
-                        {
-                            FILLSTYLE *fs = &swf_shape->fillstyles[fillStyle0 - 1];
-                            fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
-                            SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
-                            subpath->num_lines = subpath_size + 1;
-                            subpath->path_used = 0;
-                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
-                            subpath->subpath[0].type = moveTo;
-                            subpath->subpath[0].x = x;
-                            subpath->subpath[0].y = y;
-                            subpath->subpath[0].sx = 0;
-                            subpath->subpath[0].sy = 0;
-                            memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
-                            assert(moveTo == subpath->subpath->type);
-                            assert(moveTo != subpath->subpath[1].type);
-                            assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
-                        }
-                        if (fillStyle1)
-                        {
-                            ppath = p;
-                            FILLSTYLE *fs = &swf_shape->fillstyles[fillStyle1 - 1];
-                            // CCW used for normal shapes - add with reverse order
-                            fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
-                            SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
-                            subpath->num_lines = subpath_size + 1;
-                            subpath->path_used = 0;
-                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
-                            LINE *pline = subpath->subpath + subpath_size;
-                            subpath->subpath[0].type = moveTo;
-                            subpath->subpath[0].x = p[subpath_size - 1].x;
-                            subpath->subpath[0].y = p[subpath_size - 1].y;
-                            subpath->subpath[0].sx = 0;
-                            subpath->subpath[0].sy = 0;
-                            int _x = x, _y = y;
-                            for (i = 0; i < subpath_size; i++)
-                            {
-                                if (lineTo == ppath->type)
-                                {
-                                    pline[-i].x = _x;
-                                    pline[-i].y = _y;
-                                    pline[-i].sx = 0;
-                                    pline[-i].sy = 0;
-                                    pline[-i].type = ppath->type;
-                                } else if (splineTo == ppath->type)
-                                {
-                                    pline[-i].x = _x;
-                                    pline[-i].y = _y;
-                                    pline[-i].sx = ppath->sx;
-                                    pline[-i].sy = ppath->sy;
-                                    pline[-i].type = ppath->type;
-                                } else
-                                {
-                                    assert(0);
-                                }
-                                _x = ppath->x;
-                                _y = ppath->y;
-                                ppath++;
-                            }
-                            /*if (fillStyle1 == 2)
-                            {
-                                for (i = 0; i < subpath->num_lines; i++)
-                                {
-                                    LINE *l = subpath->subpath + i;
-                                    printf("{ %d, %.2f, %.2f }", l->type, l->x/20.0, l->y/20.0);
-                                }
-                                printf("\n"); fflush(stdout);
-                            }*/
-                            assert(moveTo == subpath->subpath[0].type);
-                            assert(moveTo != subpath->subpath[1].type);
-                            assert(moveTo != subpath->subpath[subpath_size].type);
-                        }
-                        if (lineStyle)
-                        {
-                            LINESTYLE *ls = &swf_shape->linestyles[lineStyle - 1];
-                            ls->subpaths = realloc(ls->subpaths, (ls->num_subpaths + 1)*sizeof(SUBPATH));
-                            SUBPATH *subpath = ls->subpaths + ls->num_subpaths++;
-                            subpath->num_lines = subpath_size + 1;
-                            subpath->path_used = 0;
-                            subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
-                            subpath->subpath[0].type = moveTo;
-                            subpath->subpath[0].x = x;
-                            subpath->subpath[0].y = y;
-                            subpath->subpath[0].sx = 0;
-                            subpath->subpath[0].sy = 0;
-                            memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
-                            assert(moveTo == subpath->subpath->type);
-                            assert(moveTo != subpath->subpath[1].type);
-                            assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
-                        }
-done_flush:
-                        x = p[subpath_size - 1].x;
-                        y = p[subpath_size - 1].y;
-                        ppath = path;
-done:
-                        if (next)
-                        {
-                            fillStyle0 = next->fillstyle0;
-                            fillStyle1 = next->fillstyle1;
-                            lineStyle  = next->linestyle;
-                        }
-                    }
-                    lines = next;
+                    tag = tag->next;
+                    continue;
                 }
 
-                for (i = 0; i < swf_shape->numfillstyles; i++)
+                LINE *path = (LINE*)calloc(1, sizeof(LINE)*/*nlines*/65536);
+                LINE *ppath = path;
+                int i, fill0 = 0, fill1 = 0, line = 0, start_x = 0, start_y = 0, x = 0, y = 0;
+                int linestyleadd = 0, fillstyleadd = 0;
+
+                while(1)
                 {
-                    FILLSTYLE *fs = swf_shape->fillstyles + i;
-                    if (!fs->num_subpaths)
-                        continue;
-                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    parseShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
+                    int flags = swf_GetBits(tag, 1);
+                    if (!flags)
+                    {   // style change
+                        flags = swf_GetBits(tag, 5);
+
+                        int subpath_size = ppath - path;
+                        if (subpath_size)
+                        {
+                            LINE *p = path;
+                            /*printf("{ %.2f, %.2f }", start_x/20.0, start_y/20.0);
+                            for (i = 0; i < subpath_size; i++)
+                            {
+                                if (splineTo == p[i].type)
+                                    printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
+                                else
+                                    printf("{ %d %.2f, %.2f }", p[i].type, p[i].x/20.0, p[i].y/20.0);
+                            }
+                            printf("\n"); fflush(stdout);*/
+                            if (fill0)
+                            {
+                                FILLSTYLE *fs = &swf_shape->fillstyles[fill0 - 1];
+                                fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                                SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                                subpath->num_lines = subpath_size + 1;
+                                subpath->path_used = 0;
+                                subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                                subpath->subpath[0].type = moveTo;
+                                subpath->subpath[0].x = start_x;
+                                subpath->subpath[0].y = start_y;
+                                subpath->subpath[0].sx = 0;
+                                subpath->subpath[0].sy = 0;
+                                memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
+                                assert(moveTo == subpath->subpath->type);
+                                assert(moveTo != subpath->subpath[1].type);
+                                assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                            }
+                            if (fill1)
+                            {
+                                ppath = p;
+                                FILLSTYLE *fs = &swf_shape->fillstyles[fill1 - 1];
+                                // CCW used for normal shapes - add with reverse order
+                                fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                                SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                                subpath->num_lines = subpath_size + 1;
+                                subpath->path_used = 0;
+                                subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                                LINE *pline = subpath->subpath + subpath_size;
+                                subpath->subpath[0].type = moveTo;
+                                subpath->subpath[0].x = p[subpath_size - 1].x;
+                                subpath->subpath[0].y = p[subpath_size - 1].y;
+                                subpath->subpath[0].sx = 0;
+                                subpath->subpath[0].sy = 0;
+                                int _x = start_x, _y = start_y;
+                                for (i = 0; i < subpath_size; i++)
+                                {
+                                    if (lineTo == ppath->type)
+                                    {
+                                        pline[-i].x = _x;
+                                        pline[-i].y = _y;
+                                        pline[-i].sx = 0;
+                                        pline[-i].sy = 0;
+                                        pline[-i].type = ppath->type;
+                                    } else if (splineTo == ppath->type)
+                                    {
+                                        pline[-i].x = _x;
+                                        pline[-i].y = _y;
+                                        pline[-i].sx = ppath->sx;
+                                        pline[-i].sy = ppath->sy;
+                                        pline[-i].type = ppath->type;
+                                    } else
+                                    {
+                                        assert(0);
+                                    }
+                                    _x = ppath->x;
+                                    _y = ppath->y;
+                                    ppath++;
+                                }
+                                /*if (fillStyle1 == 2)
+                                {
+                                    for (i = 0; i < subpath->num_lines; i++)
+                                    {
+                                        LINE *l = subpath->subpath + i;
+                                        printf("{ %d, %.2f, %.2f }", l->type, l->x/20.0, l->y/20.0);
+                                    }
+                                    printf("\n"); fflush(stdout);
+                                }*/
+                                assert(moveTo == subpath->subpath[0].type);
+                                assert(moveTo != subpath->subpath[1].type);
+                                assert(moveTo != subpath->subpath[subpath_size].type);
+                            }
+                            if (line)
+                            {
+                                LINESTYLE *ls = &swf_shape->linestyles[line - 1];
+                                ls->subpaths = realloc(ls->subpaths, (ls->num_subpaths + 1)*sizeof(SUBPATH));
+                                SUBPATH *subpath = ls->subpaths + ls->num_subpaths++;
+                                subpath->num_lines = subpath_size + 1;
+                                subpath->path_used = 0;
+                                subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                                subpath->subpath[0].type = moveTo;
+                                subpath->subpath[0].x = start_x;
+                                subpath->subpath[0].y = start_y;
+                                subpath->subpath[0].sx = 0;
+                                subpath->subpath[0].sy = 0;
+                                memcpy(subpath->subpath + 1, p, subpath_size*sizeof(LINE));
+                                assert(moveTo == subpath->subpath->type);
+                                assert(moveTo != subpath->subpath[1].type);
+                                assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                            }
+                            ppath = path;
+                        }
+                        if (!flags || (flags & 16))
+                        {   // new styles or end, we must flush all shape parts here, all filled shapes must be closed
+                            //printf("flush\n"); fflush(stdout);
+                            for (i = 0; i < swf_shape->numfillstyles; i++)
+                            {
+                                FILLSTYLE *fs = swf_shape->fillstyles + i;
+                                if (!fs->num_subpaths)
+                                    continue;
+                                memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
+                                parseShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
+                            }
+                            for (i = 0; i < swf_shape->numlinestyles; i++)
+                            {
+                                LINESTYLE *ls = swf_shape->linestyles + i;
+                                if (!ls->num_subpaths)
+                                    continue;
+                                memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
+                                parseShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
+                            }
+                            swf_ShapeFreeSubpaths(swf_shape);
+                        }
+
+                        if (!flags)
+                            break;
+                        if (flags & 1)
+                        {   // move
+                            int n = swf_GetBits(tag, 5);
+                            x = swf_GetSBits(tag, n);
+                            y = swf_GetSBits(tag, n);
+                        }
+                        if (flags & 2)
+                            fill0 = swf_GetBits(tag, fillbits) + fillstyleadd;
+                        if (flags & 4)
+                            fill1 = swf_GetBits(tag, fillbits) + fillstyleadd;
+                        if (flags & 8)
+                            line  = swf_GetBits(tag, linebits) + linestyleadd;
+                        if (flags & 16)
+                        {
+                            linestyleadd = swf_shape->numlinestyles;
+                            fillstyleadd = swf_shape->numfillstyles;
+                            if (!parseFillStyleArray(tag, swf_shape))
+                                break;
+                            fillbits = swf_GetBits(tag, 4);
+                            linebits = swf_GetBits(tag, 4);
+                        }
+                        start_x = x;
+                        start_y = y;
+                    } else
+                    {
+                        flags = swf_GetBits(tag, 1);
+                        if (flags)
+                        {   // straight edge
+                            int n = swf_GetBits(tag, 4) + 2;
+                            if (swf_GetBits(tag, 1))
+                            {   // line flag
+                                x += swf_GetSBits(tag, n); //delta x
+                                y += swf_GetSBits(tag, n); //delta y
+                            } else
+                            {
+                                int v = swf_GetBits(tag, 1);
+                                int d = swf_GetSBits(tag, n); //vert/horz
+                                if (v)
+                                    y += d;
+                                else
+                                    x += d;
+                            }
+                            ppath->sx = 0;
+                            ppath->sy = 0;
+                            ppath->type = lineTo;
+                        } else
+                        {   // curved edge
+                            int n = swf_GetBits(tag, 4) + 2;
+                            x += swf_GetSBits(tag, n);
+                            y += swf_GetSBits(tag, n);
+                            ppath->sx = x;
+                            ppath->sy = y;
+                            x += swf_GetSBits(tag, n);
+                            y += swf_GetSBits(tag, n);
+                            ppath->type = splineTo;
+                        }
+                        ppath->x = x;
+                        ppath->y = y;
+                        ppath++;
+                    }
                 }
-                for (i = 0; i < swf_shape->numlinestyles; i++)
-                {
-                    LINESTYLE *ls = swf_shape->linestyles + i;
-                    if (!ls->num_subpaths)
-                        continue;
-                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    parseShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
-                }
-                //swf_ShapeFreeSubpaths(swf_shape);
+
                 shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
                 swf_Shape2Free(swf_shape);
                 free(swf_shape);
