@@ -197,6 +197,9 @@ static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGColorTransform *cx
         else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
             nvgSVGRadialGrad(vg, shape, cxform, 0);
         nvgStrokeWidth(vg, shape->strokeWidth);
+        nvgLineJoin(vg, shape->strokeLineJoin);
+        nvgLineCap(vg, shape->strokeLineCap);
+        nvgMiterLimit(vg, shape->miterLimit);
         nvgStroke(vg);
     }
 }
