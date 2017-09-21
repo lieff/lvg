@@ -275,11 +275,77 @@ ASClass g_number =
     "Number", &g_number_members[0], 0, sizeof(g_number_members)/sizeof(g_number_members[0]), 0
 };
 
+ASMember g_key_members[] =
+{
+    // properties
+    { "BACKSPACE",  { { .ui32 = 8 }, ASVAL_INT } }, //: Number
+    { "CAPSLOCK",   { { .ui32 = 20 }, ASVAL_INT } }, //: Number
+    { "CONTROL",    { { .ui32 = 17 }, ASVAL_INT } }, //: Number
+    { "DELETEKEY",  { { .ui32 = 46 }, ASVAL_INT } }, //: Number
+    { "DOWN",       { { .ui32 = 40 }, ASVAL_INT } }, //: Number
+    { "END",        { { .ui32 = 35 }, ASVAL_INT } }, //: Number
+    { "ENTER",      { { .ui32 = 13 }, ASVAL_INT } }, //: Number
+    { "ESCAPE",     { { .ui32 = 27 }, ASVAL_INT } }, //: Number
+    { "HOME",       { { .ui32 = 36 }, ASVAL_INT } }, //: Number
+    { "INSERT",     { { .ui32 = 45 }, ASVAL_INT } }, //: Number
+    { "LEFT",       { { .ui32 = 37 }, ASVAL_INT } }, //: Number
+    { "_listeners", { { .ui32 = 0 }, ASVAL_INT } }, //: Array [read-only]
+    { "PGDN",       { { .ui32 = 34 }, ASVAL_INT } }, //: Number
+    { "PGUP",       { { .ui32 = 33 }, ASVAL_INT } }, //: Number
+    { "RIGHT",      { { .ui32 = 39 }, ASVAL_INT } }, //: Number
+    { "SHIFT",      { { .ui32 = 16 }, ASVAL_INT } }, //: Number
+    { "SPACE",      { { .ui32 = 32 }, ASVAL_INT } }, //: Number
+    { "TAB",        { { .ui32 = 9 }, ASVAL_INT } }, //: Number
+    { "UP",         { { .ui32 = 38 }, ASVAL_INT } }, //: Number
+    // methods
+    { "addListener",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(listener: Object) : Void
+    { "getAscii",       { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : Number
+    { "getCode",        { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : Number
+    { "isAccessible",   { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : Boolean
+    { "isDown",         { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(code: Number) : Boolean
+    { "isToggled",      { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(code: Number) : Boolean
+    { "removeListener", { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(listener: Object) : Boolean
+    // events
+    { "onKeyDown", { { .fn = 0 }, ASVAL_FUNCTION } }, // = function() {}
+    { "onKeyUp",   { { .fn = 0 }, ASVAL_FUNCTION } }  // = function() {}
+};
+
+ASClass g_key =
+{
+    "Key", &g_key_members[0], 0, sizeof(g_key_members)/sizeof(g_key_members[0]), 0
+};
+
+ASMember g_object_members[] =
+{
+    // properties
+    { "constructor",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //: Object
+    { "__proto__",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //: Object
+    { "prototype",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //: Object
+    { "__resolve",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //: Object
+    // methods
+    { "addProperty",    { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String, getter: Function, setter: Function) : Boolean
+    { "hasOwnProperty", { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String) : Boolean
+    { "isPropertyEnumerable", { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String) : Boolean
+    { "isPrototypeOf",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(theClass: Object) : Boolean
+    { "registerClass",  { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String, theClass: Function) : Boolean
+    { "toString",       { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : String
+    { "unwatch",        { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String) : Boolean
+    { "valueOf",        { { .fn = 0 }, ASVAL_NATIVE_FN } }, //() : Object
+    { "watch",          { { .fn = 0 }, ASVAL_NATIVE_FN } }, //(name: String, callback: Function, [userData: Object]) : Boolean
+};
+
+ASClass g_object =
+{
+    "Object", &g_object_members[0], 0, sizeof(g_object_members)/sizeof(g_object_members[0]), 0
+};
+
 ASVal g_classes[] =
 {
+    { { .cls = &g_object }, ASVAL_CLASS },
     { { .cls = &g_stage }, ASVAL_CLASS },
     { { .cls = &g_math }, ASVAL_CLASS },
-    { { .cls = &g_number }, ASVAL_CLASS }
+    { { .cls = &g_number }, ASVAL_CLASS },
+    { { .cls = &g_key }, ASVAL_CLASS }
 };
 
 int g_num_classes = sizeof(g_classes)/sizeof(g_classes[0]);
