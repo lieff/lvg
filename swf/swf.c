@@ -199,7 +199,10 @@ static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shap
         }
         if (!subpath)
         {   // can't find path end - try start new
-            //assert(0);
+            if (NSVG_PAINT_NONE != shape->fill.type)
+            {
+                assert(0);
+            }
 start_new:
             for (i = 0; i < fs->num_subpaths; i++)
             {
@@ -421,7 +424,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 LINE *path = (LINE*)calloc(1, sizeof(LINE)*/*nlines*/65536);
                 LINE *ppath = path;
                 int i, fill0 = 0, fill1 = 0, line = 0, start_x = 0, start_y = 0, x = 0, y = 0;
-                int linestyleadd = 0, fillstyleadd = 0;
 
                 while(1)
                 {
@@ -566,15 +568,21 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                             y = swf_GetSBits(tag, n);
                         }
                         if (flags & 2)
-                            fill0 = swf_GetBits(tag, fillbits) + fillstyleadd;
+                            fill0 = swf_GetBits(tag, fillbits);
                         if (flags & 4)
-                            fill1 = swf_GetBits(tag, fillbits) + fillstyleadd;
+                            fill1 = swf_GetBits(tag, fillbits);
                         if (flags & 8)
-                            line  = swf_GetBits(tag, linebits) + linestyleadd;
+                            line  = swf_GetBits(tag, linebits);
                         if (flags & 16)
                         {
-                            linestyleadd = swf_shape->numlinestyles;
-                            fillstyleadd = swf_shape->numfillstyles;
+                            swf_shape->numlinestyles = 0;
+                            swf_shape->numfillstyles = 0;
+                            if (swf_shape->fillstyles)
+                                free(swf_shape->fillstyles);
+                            if (swf_shape->linestyles)
+                                free(swf_shape->linestyles);
+                            swf_shape->fillstyles = 0;
+                            swf_shape->linestyles = 0;
                             if (!parseFillStyleArray(tag, swf_shape))
                                 break;
                             fillbits = swf_GetBits(tag, 4);
