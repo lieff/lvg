@@ -775,7 +775,31 @@ static void action_return(LVGActionCtx *ctx, uint8_t *a)
 }
 
 static void action_modulo(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_new_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_new_object(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_name = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_nargs = se_name + 1;
+    assert(ASVAL_STRING == se_name->type);
+    assert(ASVAL_INT == se_nargs->type || ASVAL_DOUBLE == se_nargs->type || ASVAL_FLOAT == se_nargs->type);
+    uint32_t nargs = to_int(se_nargs);
+    ctx->stack_ptr += nargs + 2 - 1;
+    ASVal *pcls = 0;
+    for (int i = 0; i < g_num_classes; i++)
+        if (0 == strcmp_identifier(ctx, g_classes[i].cls->name, se_name->str))
+        {
+            pcls = &g_classes[i];
+            break;
+        }
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (!pcls)
+    {
+        SET_UNDEF(res);
+        return;
+    }
+    ASClass *cls = create_instance(pcls->cls);
+    SET_CLASS(res, cls);
+}
+
 static void action_define_local2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_init_array(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_init_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
