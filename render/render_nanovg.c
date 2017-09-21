@@ -231,9 +231,9 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
 static int nvg_init(void **render)
 {
 #ifdef EMSCRIPTEN
-    *render = nvgCreateGLES2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0);
+    *render = nvgCreateGLES2(0);
 #else
-    *render = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES
+    *render = nvgCreateGL2(/*NVG_ANTIALIAS | NVG_STENCIL_STROKES*/0
 #ifdef DEBUG
         | NVG_DEBUG
 #endif
