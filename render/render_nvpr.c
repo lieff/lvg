@@ -260,6 +260,47 @@ static int nvpr_cache_shape(void *render, NSVGshape *shape)
     return pathObj;
 }
 
+static int morph_shape(NSVGshape *shape, NSVGshape *shape2, float ratio)
+{
+    //render_ctx *ctx = render;
+    int cmds = 0, coords = 0;
+    float om_ratio = 1.0f - ratio;
+    NSVGpath *path, *path2;
+    for (path = shape->paths; path != NULL; path = path->next)
+    {
+        if (path->npts > 2)
+        {
+            int ncubic = (path->npts - 1)/3;
+            cmds += 1 + ncubic;
+            coords += 2 + ncubic*6;
+            if (path->closed)
+                cmds++;
+        }
+    }
+    GLubyte *cmd = (GLubyte *)alloca(cmds*sizeof(GLubyte));
+    GLfloat *coord = alloca(coords*sizeof(GLfloat));
+    cmds = 0, coords = 0;
+    path2 = shape2->paths;
+    for (path = shape->paths; path != NULL; path = path->next, path2 = path2->next)
+    {
+        if (path->npts > 2)
+        {
+            cmd[cmds] = GL_MOVE_TO_NV;
+            int ncubic = (path->npts - 1)/3;
+            memset(cmd + cmds + 1, GL_CUBIC_CURVE_TO_NV, ncubic);
+            cmds += 1 + ncubic;
+            for (int i = 0; i < (2 + ncubic*6); i++)
+                coord[coords + i] = path->pts[i]*om_ratio + path2->pts[i]*ratio;
+            coords += 2 + ncubic*6;
+            if (path->closed)
+                cmd[cmds++] = GL_CLOSE_PATH_NV;
+        }
+    }
+    GLuint pathObj = glGenPathsNV(1);
+    glPathCommandsNV(pathObj, cmds, cmd, coords, GL_FLOAT, coord);
+    return pathObj;
+}
+
 static int nvpr_cache_image(void *render, int width, int height, int flags, const void *rgba)
 {
     //render_ctx *ctx = render;
@@ -404,7 +445,10 @@ static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGCol
     for (int j = 0; j < shapecol->num_shapes; j++)
     {
         NSVGshape *shape = shapecol->shapes + j;
+        NSVGshape *shape2 = shapecol->morph ? shapecol->morph->shapes + j : 0;
         GLuint pathObj = shape->cache;
+        if (shape2)
+            pathObj = morph_shape(shape, shape2, ratio);
 
         /*GLfloat object_bbox[4], fill_bbox[4], stroke_bbox[4];
         glGetPathParameterfvNV(pathObj, GL_PATH_OBJECT_BOUNDING_BOX_NV, object_bbox);
@@ -482,6 +526,8 @@ static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGCol
         }
         glDisable(GL_STENCIL_TEST);
         glDisable(GL_BLEND);
+        if (shape2)
+            glDeletePathsNV(pathObj, 1);
     }
 }
 
