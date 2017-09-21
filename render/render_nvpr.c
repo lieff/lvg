@@ -398,99 +398,91 @@ static void ImagePaint(struct NSVGshape *shape, LVGColorTransform *cxform, int i
     glPathTexGenNV(GL_TEXTURE0, GL_OBJECT_LINEAR, 2, &data[0][0]);
 }
 
-static void nvpr_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
+static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
     //render_ctx *ctx = render;
-    GLuint pathObj = shape->cache;
-
-    /*GLfloat object_bbox[4], fill_bbox[4], stroke_bbox[4];
-    glGetPathParameterfvNV(pathObj, GL_PATH_OBJECT_BOUNDING_BOX_NV, object_bbox);
-    glGetPathParameterfvNV(pathObj, GL_PATH_FILL_BOUNDING_BOX_NV, fill_bbox);
-    glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);*/
-
-    glEnable(GL_BLEND);
-    if (BLEND_overlay == blend_mode || BLEND_multiply == blend_mode)
+    for (int j = 0; j < shapecol->num_shapes; j++)
     {
-        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
-    } if (BLEND_screen == blend_mode)
-    {
-        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
-    } else
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        NSVGshape *shape = shapecol->shapes + j;
+        GLuint pathObj = shape->cache;
 
-    glStencilFunc(GL_NOTEQUAL, 0, 0x1F);
-    glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
-    glEnable(GL_STENCIL_TEST);
-    if (NSVG_PAINT_NONE != shape->fill.type)
-    {
-        if (NSVG_PAINT_COLOR == shape->fill.type)
-        {
-            NVGcolor c = transformColor(nvgColorU32(shape->fill.color), cxform);
-            glColor4f(c.r, c.g, c.b, c.a);
-        } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-        {
-            LinearGrad(shape, cxform, 1);
-        }
-        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-        {
-            RadialGrad(shape, cxform, 1);
-        }
-        else if (NSVG_PAINT_IMAGE == shape->fill.type)
-        {
-            /*glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, shape->fill.color);
-            GLfloat data[2][3] = { { 1, 0, 0 },
-                                   { 0, 1, 0 } };
-            glColor4f(1, 1, 1, 1);
-            glPathTexGenNV(GL_TEXTURE0, GL_PATH_OBJECT_BOUNDING_BOX_NV, 2, &data[0][0]);*/
-            ImagePaint(shape, cxform, 1);
-        }
-        glStencilFillPathNV(pathObj, (NSVG_FILLRULE_EVENODD == shape->fillRule) ? GL_INVERT : GL_COUNT_UP_NV, 0x1F);
-        glCoverFillPathNV(pathObj, GL_BOUNDING_BOX_NV);
+        /*GLfloat object_bbox[4], fill_bbox[4], stroke_bbox[4];
+        glGetPathParameterfvNV(pathObj, GL_PATH_OBJECT_BOUNDING_BOX_NV, object_bbox);
+        glGetPathParameterfvNV(pathObj, GL_PATH_FILL_BOUNDING_BOX_NV, fill_bbox);
+        glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);*/
 
-        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-        glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
-        glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
-        glDisable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        if (BLEND_overlay == blend_mode || BLEND_multiply == blend_mode)
+        {
+            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+        } if (BLEND_screen == blend_mode)
+        {
+            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
+        } else
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glStencilFunc(GL_NOTEQUAL, 0, 0x1F);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+        glEnable(GL_STENCIL_TEST);
+        if (NSVG_PAINT_NONE != shape->fill.type)
+        {
+            if (NSVG_PAINT_COLOR == shape->fill.type)
+            {
+                NVGcolor c = transformColor(nvgColorU32(shape->fill.color), cxform);
+                glColor4f(c.r, c.g, c.b, c.a);
+            } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+                LinearGrad(shape, cxform, 1);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+                RadialGrad(shape, cxform, 1);
+            else if (NSVG_PAINT_IMAGE == shape->fill.type)
+                ImagePaint(shape, cxform, 1);
+            glStencilFillPathNV(pathObj, (NSVG_FILLRULE_EVENODD == shape->fillRule) ? GL_INVERT : GL_COUNT_UP_NV, 0x1F);
+            glCoverFillPathNV(pathObj, GL_BOUNDING_BOX_NV);
+
+            glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+            glPathTexGenNV(GL_TEXTURE0, GL_NONE, 0, NULL);
+            glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
+            glDisable(GL_TEXTURE_2D);
+        }
+        if (NSVG_PAINT_NONE != shape->stroke.type)
+        {
+            if (NSVG_PAINT_COLOR == shape->stroke.type)
+            {
+                NVGcolor c = transformColor(nvgColorU32(shape->stroke.color), cxform);
+                glColor4f(c.r, c.g, c.b, c.a);
+            } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
+            {
+                //LinearGrad(shape, o, 0);
+                NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
+                glColor4f(c.r, c.g, c.b, c.a);
+            } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
+            {
+                NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
+                glColor4f(c.r, c.g, c.b, c.a);
+            }
+            glPathParameterfNV(pathObj, GL_PATH_STROKE_WIDTH_NV, shape->strokeWidth);
+            if (NSVG_JOIN_ROUND == shape->strokeLineJoin)
+                glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_ROUND_NV);
+            else if (NSVG_JOIN_BEVEL == shape->strokeLineJoin)
+                glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_BEVEL_NV);
+            else if (NSVG_JOIN_MITER == shape->strokeLineJoin)
+                glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_MITER_TRUNCATE_NV);
+            glPathParameterfNV(pathObj, GL_PATH_MITER_LIMIT_NV, shape->miterLimit);
+            if (NSVG_CAP_ROUND == shape->strokeLineCap)
+                glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_ROUND_NV);
+            else if (NSVG_CAP_BUTT == shape->strokeLineCap)
+                glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_FLAT);
+            else if (NSVG_CAP_SQUARE == shape->strokeLineCap)
+                glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_SQUARE_NV);
+            GLint reference = 0x1;
+            glStencilStrokePathNV(pathObj, reference, 0x1F);
+            glCoverStrokePathNV(pathObj, GL_BOUNDING_BOX_NV);
+
+            glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
+        }
+        glDisable(GL_STENCIL_TEST);
+        glDisable(GL_BLEND);
     }
-    if (NSVG_PAINT_NONE != shape->stroke.type)
-    {
-        if (NSVG_PAINT_COLOR == shape->stroke.type)
-        {
-            NVGcolor c = transformColor(nvgColorU32(shape->stroke.color), cxform);
-            glColor4f(c.r, c.g, c.b, c.a);
-        } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
-        {
-            //LinearGrad(shape, o, 0);
-            NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
-            glColor4f(c.r, c.g, c.b, c.a);
-        } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
-        {
-            NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
-            glColor4f(c.r, c.g, c.b, c.a);
-        }
-        glPathParameterfNV(pathObj, GL_PATH_STROKE_WIDTH_NV, shape->strokeWidth);
-        if (NSVG_JOIN_ROUND == shape->strokeLineJoin)
-            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_ROUND_NV);
-        else if (NSVG_JOIN_BEVEL == shape->strokeLineJoin)
-            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_BEVEL_NV);
-        else if (NSVG_JOIN_MITER == shape->strokeLineJoin)
-            glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_MITER_TRUNCATE_NV);
-        glPathParameterfNV(pathObj, GL_PATH_MITER_LIMIT_NV, shape->miterLimit);
-        if (NSVG_CAP_ROUND == shape->strokeLineCap)
-            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_ROUND_NV);
-        else if (NSVG_CAP_BUTT == shape->strokeLineCap)
-            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_FLAT);
-        else if (NSVG_CAP_SQUARE == shape->strokeLineCap)
-            glPathParameteriNV(pathObj, GL_PATH_END_CAPS_NV, GL_SQUARE_NV);
-        GLint reference = 0x1;
-        glStencilStrokePathNV(pathObj, reference, 0x1F);
-        glCoverStrokePathNV(pathObj, GL_BOUNDING_BOX_NV);
-
-        glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
-    }
-    glDisable(GL_STENCIL_TEST);
-    glDisable(GL_BLEND);
 }
 
 static void nvpr_render_image(void *render, int image)

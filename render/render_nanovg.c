@@ -149,58 +149,79 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorT
         nvgStrokePaint(vg, p);
 }
 
-static void nvgDrawShape(NVGcontext *vg, NSVGshape *shape, LVGColorTransform *cxform)
+static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
-    int i;
-    NSVGpath *path;
-    nvgBeginPath(vg);
-    for (path = shape->paths; path != NULL; path = path->next)
+    int i, j;
+    NSVGpath *path, *path2;
+    for (j = 0; j < shapecol->num_shapes; j++)
     {
-        if (NSVG_PAINT_NONE != shape->fill.type && !path->closed)
-            continue;
-        nvgMoveTo(vg, path->pts[0], path->pts[1]);
-        int l = path->npts - 1;
-        //l = (int)(l*g_time*0.4) % l;
-        for (i = 0; i < l; i += 3)
+        NSVGshape *shape = shapecol->shapes + j;
+        NSVGshape *shape2 = shapecol->morph ? shapecol->morph->shapes + j : 0;
+        nvgBeginPath(vg);
+        path2 = shape2 ? shape2->paths : 0;
+        for (path = shape->paths; path != NULL; path = path->next)
         {
-            float *p = &path->pts[i*2];
-            nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
+            if (NSVG_PAINT_NONE != shape->fill.type && !path->closed)
+                continue;
+            int l = path->npts - 1;
+            //l = (int)(l*g_time*0.4) % l;
+            if (path2)
+            {
+                nvgMoveTo(vg, path->pts[0] + path2->pts[0], path->pts[1] + path2->pts[1]);
+                for (i = 0; i < l; i += 3)
+                {
+                    float *p  = &path->pts[i*2];
+                    float *p2 = &path2->pts[i*2];
+                    nvgBezierTo(vg, p[2] + p2[2], p[3] + p2[3], p[4] + p2[4], p[5] + p2[5], p[6] + p2[6], p[7] + p2[7]);
+                }
+                if (path->closed)
+                    nvgLineTo(vg, path->pts[0] + path2->pts[0], path->pts[1] + path2->pts[1]);
+                path2 = path2->next;
+            } else
+            {
+                nvgMoveTo(vg, path->pts[0], path->pts[1]);
+                for (i = 0; i < l; i += 3)
+                {
+                    float *p = &path->pts[i*2];
+                    nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
+                }
+                if (path->closed)
+                    nvgLineTo(vg, path->pts[0], path->pts[1]);
+            }
         }
-        if (path->closed)
-            nvgLineTo(vg, path->pts[0], path->pts[1]);
-    }
-    if (NSVG_PAINT_NONE != shape->fill.type)
-    {
-        if (NSVG_PAINT_COLOR == shape->fill.type)
-            nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), cxform));
-        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
-            nvgSVGLinearGrad(vg, shape, cxform, 1);
-        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
-            nvgSVGRadialGrad(vg, shape, cxform, 1);
-        else if (NSVG_PAINT_IMAGE == shape->fill.type)
+        if (NSVG_PAINT_NONE != shape->fill.type)
         {
-            /*int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
+            if (NSVG_PAINT_COLOR == shape->fill.type)
+                nvgFillColor(vg, transformColor(nvgColorU32(shape->fill.color), cxform));
+            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->fill.type)
+                nvgSVGLinearGrad(vg, shape, cxform, 1);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
+                nvgSVGRadialGrad(vg, shape, cxform, 1);
+            else if (NSVG_PAINT_IMAGE == shape->fill.type)
+            {
+                /*int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
             NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
             nvgFillPaint(vg, imgPaint);*/
-            ImagePaint(vg, shape, cxform, 1);
+                ImagePaint(vg, shape, cxform, 1);
+            }
+            if (NSVG_FILLRULE_EVENODD == shape->fillRule)
+                nvgPathWinding(vg, NVG_HOLE);
+            nvgFill(vg);
         }
-        if (NSVG_FILLRULE_EVENODD == shape->fillRule)
-            nvgPathWinding(vg, NVG_HOLE);
-        nvgFill(vg);
-    }
-    if (NSVG_PAINT_NONE != shape->stroke.type)
-    {
-        if (NSVG_PAINT_COLOR == shape->stroke.type)
-            nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), cxform));
-        else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
-            nvgSVGLinearGrad(vg, shape, cxform, 0);
-        else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
-            nvgSVGRadialGrad(vg, shape, cxform, 0);
-        nvgStrokeWidth(vg, shape->strokeWidth);
-        nvgLineJoin(vg, shape->strokeLineJoin);
-        nvgLineCap(vg, shape->strokeLineCap);
-        nvgMiterLimit(vg, shape->miterLimit);
-        nvgStroke(vg);
+        if (NSVG_PAINT_NONE != shape->stroke.type)
+        {
+            if (NSVG_PAINT_COLOR == shape->stroke.type)
+                nvgStrokeColor(vg, transformColor(nvgColorU32(shape->stroke.color), cxform));
+            else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
+                nvgSVGLinearGrad(vg, shape, cxform, 0);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
+                nvgSVGRadialGrad(vg, shape, cxform, 0);
+            nvgStrokeWidth(vg, shape->strokeWidth);
+            nvgLineJoin(vg, shape->strokeLineJoin);
+            nvgLineCap(vg, shape->strokeLineCap);
+            nvgMiterLimit(vg, shape->miterLimit);
+            nvgStroke(vg);
+        }
     }
 }
 
@@ -278,10 +299,10 @@ static void nvg_update_image(void *render, int image, const void *rgba)
     nvgUpdateImage(vg, image, rgba);
 }
 
-static void nvg_render_shape(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
+static void nvg_render_shape(void *render, LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
     NVGcontext *vg = render;
-    nvgDrawShape(vg, shape, cxform);
+    nvgDrawShape(vg, shapecol, cxform, ratio, blend_mode);
 }
 
 static void nvg_render_image(void *render, int image)

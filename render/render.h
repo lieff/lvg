@@ -35,7 +35,7 @@ typedef struct render
     int (*cache_gradient)(NSVGpaint *fill);
     void (*free_image)(int image);
     void (*update_image)(void *render, int image, const void *rgba);
-    void (*render_shape)(void *render, NSVGshape *shape, LVGColorTransform *cxform, int blend_mode);
+    void (*render_shape)(void *render, LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode);
     void (*render_image)(void *render, int image);
     void (*set_transform)(void *render, float *t, int reset);
     void (*get_transform)(void *render, float *t);

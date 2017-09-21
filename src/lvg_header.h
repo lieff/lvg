@@ -74,9 +74,12 @@ typedef struct LVGMovieClipGroupState
     int group_num, cur_frame, last_acton_frame, play_state, num_timers, events_initialized;
 } LVGMovieClipGroupState;
 
+typedef struct LVGShapeCollection LVGShapeCollection;
+
 typedef struct LVGShapeCollection
 {
     NSVGshape *shapes;
+    LVGShapeCollection *morph;
     float bounds[4];
     int num_shapes;
 } LVGShapeCollection;

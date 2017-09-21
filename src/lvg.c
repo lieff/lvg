@@ -328,20 +328,18 @@ fail:
     return clip;
 }
 
-void lvgDrawShape(NSVGshape *shape, LVGColorTransform *cxform, int blend_mode)
+void lvgDrawShape(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
-    g_render->render_shape(g_render_obj, shape, cxform, blend_mode);
+    g_render->render_shape(g_render_obj, shapecol, cxform, ratio, blend_mode);
 }
 
 void lvgDrawSVG(NSVGimage *image)
 {
-    NSVGshape *shape;
-    for (shape = image->shapes; shape != NULL; shape = shape->next)
-    {
-        if (!(shape->flags & NSVG_FLAGS_VISIBLE))
-            continue;
-        lvgDrawShape(shape, 0, BLEND_REPLACE);
-    }
+    LVGShapeCollection col;
+    memset(&col, 0, sizeof(col));
+    col.shapes = image->shapes;
+    col.num_shapes = 1;
+    lvgDrawShape(&col, 0, 0.0f, BLEND_REPLACE);
 }
 
 static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxform, double alpha)
@@ -481,8 +479,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            for (j = 0; j < clip->shapes[o->id].num_shapes; j++)
-                lvgDrawShape(&clip->shapes[o->id].shapes[j], &newcxform, blend_mode ? blend_mode : o->blend_mode);
+            lvgDrawShape(&clip->shapes[o->id], &newcxform, o->ratio/32767.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -632,8 +629,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     combine_cxform(&newcxform, &ob->cxform, alpha*btn_alpha);
                     if (LVG_OBJ_SHAPE != ob->type)
                         continue;
-                    for (int k = 0; k < clip->shapes[ob->id].num_shapes; k++)
-                        lvgDrawShape(&clip->shapes[ob->id].shapes[k], &newcxform, blend_mode);
+                    lvgDrawShape(&clip->shapes[ob->id], &newcxform, ob->ratio/32767.0f, blend_mode);
                     ob++;
                 }
         }

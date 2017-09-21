@@ -33,7 +33,6 @@ Works:
 
 Not works:
 
- * SWF: morph shapes (only first shape showed).
  * SWF: clip layers
  * SWF: interpret action script 3
  * SWF: bitmap filters
