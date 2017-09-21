@@ -479,7 +479,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawShape(&clip->shapes[o->id], &newcxform, o->ratio/32767.0f, blend_mode ? blend_mode : o->blend_mode);
+            lvgDrawShape(&clip->shapes[o->id], &newcxform, o->ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -629,7 +629,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     combine_cxform(&newcxform, &ob->cxform, alpha*btn_alpha);
                     if (LVG_OBJ_SHAPE != ob->type)
                         continue;
-                    lvgDrawShape(&clip->shapes[ob->id], &newcxform, ob->ratio/32767.0f, blend_mode);
+                    lvgDrawShape(&clip->shapes[ob->id], &newcxform, ob->ratio/65535.0f, blend_mode);
                     ob++;
                 }
         }

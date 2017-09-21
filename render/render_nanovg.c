@@ -153,6 +153,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
 {
     int i, j;
     NSVGpath *path, *path2;
+    float om_ratio = 1.0f - ratio;
     for (j = 0; j < shapecol->num_shapes; j++)
     {
         NSVGshape *shape = shapecol->shapes + j;
@@ -167,15 +168,16 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
             //l = (int)(l*g_time*0.4) % l;
             if (path2)
             {
-                nvgMoveTo(vg, path->pts[0] + path2->pts[0], path->pts[1] + path2->pts[1]);
+                nvgMoveTo(vg, path->pts[0]*om_ratio + path2->pts[0]*ratio, path->pts[1]*om_ratio + path2->pts[1]*ratio);
                 for (i = 0; i < l; i += 3)
                 {
                     float *p  = &path->pts[i*2];
                     float *p2 = &path2->pts[i*2];
-                    nvgBezierTo(vg, p[2] + p2[2], p[3] + p2[3], p[4] + p2[4], p[5] + p2[5], p[6] + p2[6], p[7] + p2[7]);
+                    nvgBezierTo(vg, p[2]*om_ratio + p2[2]*ratio, p[3]*om_ratio + p2[3]*ratio, p[4]*om_ratio + p2[4]*ratio,
+                            p[5]*om_ratio + p2[5]*ratio, p[6]*om_ratio + p2[6]*ratio, p[7]*om_ratio + p2[7]*ratio);
                 }
                 if (path->closed)
-                    nvgLineTo(vg, path->pts[0] + path2->pts[0], path->pts[1] + path2->pts[1]);
+                    nvgLineTo(vg, path->pts[0]*om_ratio + path2->pts[0]*ratio, path->pts[1]*om_ratio + path2->pts[1]*ratio);
                 path2 = path2->next;
             } else
             {
