@@ -720,6 +720,12 @@ void lvgCloseClip(LVGMovieClip *clip)
         for (j = 0; j < shape->num_shapes; j++)
             lvgFreeShape(shape->shapes + j);
         free(shape->shapes);
+        if (shape->morph)
+        {
+            for (j = 0; j < shape->morph->num_shapes; j++)
+                lvgFreeShape(shape->morph->shapes + j);
+            free(shape->morph->shapes);
+        }
     }
     for (i = 0; i < clip->num_images; i++)
     {
