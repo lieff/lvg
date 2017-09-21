@@ -392,6 +392,7 @@ typedef struct
 typedef struct
 {
     LINE *subpath;
+    LINE *subpath2; // for morph shape
     int num_lines, path_used;
 } SUBPATH;
 
@@ -448,13 +449,13 @@ typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
 struct _SHAPELINE;
 typedef struct _SHAPE2
 {
-    LINESTYLE * linestyles;
-    int numlinestyles;
-    FILLSTYLE* fillstyles;
-    int numfillstyles;
+    LINESTYLE *linestyles;
+    FILLSTYLE *fillstyles;
     struct _SHAPELINE * lines;
-    struct _SHAPELINE * lines2;
     SRECT* bbox; // may be NULL
+    int numlinestyles;
+    int numfillstyles;
+    int endEdgesOffset;
 } SHAPE2;
 
 enum SHAPELINETYPE {moveTo, lineTo, splineTo};

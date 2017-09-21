@@ -13,6 +13,7 @@
 #endif
 #include "render.h"
 #include "nanovg_gl.h"
+#include <assert.h>
 
 static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
@@ -163,11 +164,15 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
         for (path = shape->paths; path != NULL; path = path->next)
         {
             if (NSVG_PAINT_NONE != shape->fill.type && !path->closed)
+            {
+                path2 = path2->next;
                 continue;
+            }
             int l = path->npts - 1;
             //l = (int)(l*g_time*0.4) % l;
             if (path2)
             {
+                assert(path->npts == path2->npts);
                 nvgMoveTo(vg, path->pts[0]*om_ratio + path2->pts[0]*ratio, path->pts[1]*om_ratio + path2->pts[1]*ratio);
                 for (i = 0; i < l; i += 3)
                 {

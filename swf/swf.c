@@ -105,7 +105,7 @@ int compareStops(const void *a, const void *b)
     return 0;
 }
 
-static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
+static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, NSVGshape *shape2, FILLSTYLE *fs, LINESTYLE *ls)
 {
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->fillRule = NSVG_FILLRULE_EVENODD;
@@ -181,7 +181,9 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
         fs = (FILLSTYLE*)ls;
     }
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
-    NSVGpath *path = shape->paths;
+    if (shape2)
+        shape2->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+    NSVGpath *path = shape->paths, *path2 = shape2 ? shape2->paths : 0;
     int i, alloc_pts = 0, append = 0;
     int start_x = fs->subpaths[0].subpath->x;
     int start_y = fs->subpaths[0].subpath->y;
@@ -216,6 +218,11 @@ start_new:
             {
                 path->next = (NSVGpath*)calloc(1, sizeof(NSVGpath));
                 path = path->next;
+                if (path2)
+                {
+                    path2->next = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+                    path2 = path2->next;
+                }
                 alloc_pts = 0;
                 append = 0;
                 start_x = subpath->subpath->x;
@@ -247,14 +254,29 @@ start_new:
                 path_lineTo(path, lines[i].x/20.0f, lines[i].y/20.0f);
             else if (splineTo == lines[i].type)
                 path_quadBezTo(path, lines[i].sx/20.0f, lines[i].sy/20.0f, lines[i].x/20.0f, lines[i].y/20.0f);
-            else
-            {
-                assert(0);
-            }
+            else { assert(0); }
         }
         assert(path->npts == alloc_pts);
         x = lines[num_lines - 1].x;
         y = lines[num_lines - 1].y;
+        if (path2)
+        {
+            path2->pts = (float*)realloc(path2->pts, sizeof(path2->pts[0])*alloc_pts*2);
+            lines = subpath->subpath2;
+            if (!append)
+                path_moveTo(path2, lines->x/20.0f, lines->y/20.0f);
+            lines++;
+            for (i = 0; i < num_lines; i++)
+            {
+                assert(moveTo != lines[i].type);
+                expandBBox(shape2->bounds, lines[i].x/20.0f, lines[i].y/20.0f);
+                if (lineTo == lines[i].type)
+                    path_lineTo(path2, lines[i].x/20.0f, lines[i].y/20.0f);
+                else if (splineTo == lines[i].type)
+                    path_quadBezTo(path2, lines[i].sx/20.0f, lines[i].sy/20.0f, lines[i].x/20.0f, lines[i].y/20.0f);
+                else { assert(0); }
+            }
+        }
         if (start_x == x && start_y == y)
         {   // path finished - start new
             path->closed = shape->fill.type != NSVG_PAINT_NONE;
@@ -503,7 +525,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     if (!fs->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
+                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, fs, 0);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
@@ -511,7 +533,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     if (!ls->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
+                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, 0, ls);
                 }
                 swf_ShapeFreeSubpaths(swf_shape);
             }
@@ -590,6 +612,327 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
     free(path);
 }
 
+static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE2 *swf_shape, LVGShapeCollection *shape)
+{
+    shape->shapes = (NSVGshape*)calloc(1, 65536*sizeof(NSVGshape));
+    shape->morph = calloc(1, sizeof(LVGShapeCollection));
+    shape->morph->shapes = (NSVGshape*)calloc(1, 65536*sizeof(NSVGshape));
+    LVGShapeCollection *morph_shape = shape->morph;
+
+    swf_ResetReadBits(tag);
+    int fillbits = swf_GetBits(tag, 4);
+    int linebits = swf_GetBits(tag, 4);
+    if (!fillbits && !linebits)
+        return;
+
+    TAG tag2 = *tag;
+    tag2.pos = swf_shape->endEdgesOffset;
+    int fillbits2 = swf_GetBits(&tag2, 4);
+    int linebits2 = swf_GetBits(&tag2, 4);
+    assert(!fillbits2 && !linebits2);
+
+    LINE *path  = (LINE*)calloc(1, sizeof(LINE)*65536);
+    LINE *path2 = (LINE*)calloc(1, sizeof(LINE)*65536);
+    LINE *ppath = path, *ppath2 = path2;
+    int i, fill0 = 0, fill1 = 0, line = 0, start_x = 0, start_y = 0, x = 0, y = 0;
+    int start_x2 = 0, start_y2 = 0, x2 = 0, y2 = 0;
+
+    while(1)
+    {
+        int flags = swf_GetBits(tag, 1);
+        if (!flags)
+        {   // style change
+            flags = swf_GetBits(tag, 5);
+
+            int subpath_size = ppath - path;
+            assert(subpath_size == (ppath2 - path2));
+            if (subpath_size)
+            {
+                if (fill0)
+                {
+                    FILLSTYLE *fs = &swf_shape->fillstyles[fill0 - 1];
+                    fs->subpaths  = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                    SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                    subpath->num_lines = subpath_size + 1;
+                    subpath->path_used = 0;
+                    subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath[0].type = moveTo;
+                    subpath->subpath[0].x = start_x;
+                    subpath->subpath[0].y = start_y;
+                    subpath->subpath[0].sx = 0;
+                    subpath->subpath[0].sy = 0;
+                    subpath->subpath2[0].type = moveTo;
+                    subpath->subpath2[0].x = start_x2;
+                    subpath->subpath2[0].y = start_y2;
+                    subpath->subpath2[0].sx = 0;
+                    subpath->subpath2[0].sy = 0;
+                    memcpy(subpath->subpath + 1, path, subpath_size*sizeof(LINE));
+                    memcpy(subpath->subpath2 + 1, path2, subpath_size*sizeof(LINE));
+                    assert(moveTo == subpath->subpath->type);
+                    assert(moveTo != subpath->subpath[1].type);
+                    assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                }
+                if (fill1)
+                {
+                    ppath  = path;
+                    ppath2 = path2;
+                    FILLSTYLE *fs = &swf_shape->fillstyles[fill1 - 1];
+                    // CCW used for normal shapes - add with reverse order
+                    fs->subpaths = realloc(fs->subpaths, (fs->num_subpaths + 1)*sizeof(SUBPATH));
+                    SUBPATH *subpath = fs->subpaths + fs->num_subpaths++;
+                    subpath->num_lines = subpath_size + 1;
+                    subpath->path_used = 0;
+                    subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = malloc((subpath_size + 1)*sizeof(LINE));
+                    LINE *pline  = subpath->subpath + subpath_size;
+                    LINE *pline2 = subpath->subpath2 + subpath_size;
+                    subpath->subpath[0].type = moveTo;
+                    subpath->subpath[0].x = path[subpath_size - 1].x;
+                    subpath->subpath[0].y = path[subpath_size - 1].y;
+                    subpath->subpath[0].sx = 0;
+                    subpath->subpath[0].sy = 0;
+                    subpath->subpath2[0].type = moveTo;
+                    subpath->subpath2[0].x = path2[subpath_size - 1].x;
+                    subpath->subpath2[0].y = path2[subpath_size - 1].y;
+                    subpath->subpath2[0].sx = 0;
+                    subpath->subpath2[0].sy = 0;
+                    int _x = start_x, _y = start_y, _x2 = start_x2, _y2 = start_y2;
+                    for (i = 0; i < subpath_size; i++)
+                    {
+                        if (lineTo == ppath->type)
+                        {
+                            pline[-i].x = _x;
+                            pline[-i].y = _y;
+                            pline[-i].sx = 0;
+                            pline[-i].sy = 0;
+                            pline[-i].type = ppath->type;
+                        } else if (splineTo == ppath->type)
+                        {
+                            pline[-i].x = _x;
+                            pline[-i].y = _y;
+                            pline[-i].sx = ppath->sx;
+                            pline[-i].sy = ppath->sy;
+                            pline[-i].type = ppath->type;
+                        } else
+                        {
+                            assert(0);
+                        }
+                        if (lineTo == ppath2->type)
+                        {
+                            pline2[-i].x = _x2;
+                            pline2[-i].y = _y2;
+                            pline2[-i].sx = 0;
+                            pline2[-i].sy = 0;
+                            pline2[-i].type = ppath2->type;
+                        } else if (splineTo == ppath2->type)
+                        {
+                            pline2[-i].x = _x2;
+                            pline2[-i].y = _y2;
+                            pline2[-i].sx = ppath2->sx;
+                            pline2[-i].sy = ppath2->sy;
+                            pline2[-i].type = ppath2->type;
+                        } else
+                        {
+                            assert(0);
+                        }
+                        _x = ppath->x;
+                        _y = ppath->y;
+                        _x2 = ppath2->x;
+                        _y2 = ppath2->y;
+                        ppath++;
+                        ppath2++;
+                    }
+                    assert(moveTo == subpath->subpath[0].type);
+                    assert(moveTo != subpath->subpath[1].type);
+                    assert(moveTo != subpath->subpath[subpath_size].type);
+                }
+                if (line)
+                {
+                    LINESTYLE *ls = &swf_shape->linestyles[line - 1];
+                    ls->subpaths = realloc(ls->subpaths, (ls->num_subpaths + 1)*sizeof(SUBPATH));
+                    SUBPATH *subpath = ls->subpaths + ls->num_subpaths++;
+                    subpath->num_lines = subpath_size + 1;
+                    subpath->path_used = 0;
+                    subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath[0].type = moveTo;
+                    subpath->subpath[0].x = start_x;
+                    subpath->subpath[0].y = start_y;
+                    subpath->subpath[0].sx = 0;
+                    subpath->subpath[0].sy = 0;
+                    subpath->subpath2[0].type = moveTo;
+                    subpath->subpath2[0].x = start_x2;
+                    subpath->subpath2[0].y = start_y2;
+                    subpath->subpath2[0].sx = 0;
+                    subpath->subpath2[0].sy = 0;
+                    memcpy(subpath->subpath + 1, path, subpath_size*sizeof(LINE));
+                    memcpy(subpath->subpath2 + 1, path2, subpath_size*sizeof(LINE));
+                    assert(moveTo == subpath->subpath->type);
+                    assert(moveTo != subpath->subpath[1].type);
+                    assert(moveTo != subpath->subpath[subpath->num_lines - 1].type);
+                }
+                ppath  = path;
+                ppath2 = path2;
+            }
+            if (!flags || (flags & 16))
+            {   // new styles or end, we must flush all shape parts here, all filled shapes must be closed
+                for (i = 0; i < swf_shape->numfillstyles; i++)
+                {
+                    FILLSTYLE *fs = swf_shape->fillstyles + i;
+                    if (!fs->num_subpaths)
+                        continue;
+                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
+                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, fs, 0);
+                }
+                for (i = 0; i < swf_shape->numlinestyles; i++)
+                {
+                    LINESTYLE *ls = swf_shape->linestyles + i;
+                    if (!ls->num_subpaths)
+                        continue;
+                    memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
+                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, 0, ls);
+                }
+                swf_ShapeFreeSubpaths(swf_shape);
+            }
+
+            if (!flags)
+                break;
+            if (flags & 1)
+            {   // move
+                int n = swf_GetBits(tag, 5);
+                x = swf_GetSBits(tag, n);
+                y = swf_GetSBits(tag, n);
+            }
+            if (flags & 2)
+                fill0 = swf_GetBits(tag, fillbits);
+            if (flags & 4)
+                fill1 = swf_GetBits(tag, fillbits);
+            if (flags & 8)
+                line  = swf_GetBits(tag, linebits);
+            if (flags & 16)
+            {
+                swf_shape->numlinestyles = 0;
+                swf_shape->numfillstyles = 0;
+                if (swf_shape->fillstyles)
+                    free(swf_shape->fillstyles);
+                if (swf_shape->linestyles)
+                    free(swf_shape->linestyles);
+                swf_shape->fillstyles = 0;
+                swf_shape->linestyles = 0;
+                if (!parseFillStyleArray(tag, swf_shape))
+                    break;
+                fillbits = swf_GetBits(tag, 4);
+                linebits = swf_GetBits(tag, 4);
+            }
+            start_x = x;
+            start_y = y;
+        } else
+        {
+            flags = swf_GetBits(tag, 1);
+            if (flags)
+            {   // straight edge
+                int n = swf_GetBits(tag, 4) + 2;
+                if (swf_GetBits(tag, 1))
+                {   // line flag
+                    x += swf_GetSBits(tag, n); //delta x
+                    y += swf_GetSBits(tag, n); //delta y
+                } else
+                {
+                    int v = swf_GetBits(tag, 1);
+                    int d = swf_GetSBits(tag, n); //vert/horz
+                    if (v)
+                        y += d;
+                    else
+                        x += d;
+                }
+                ppath->sx = 0;
+                ppath->sy = 0;
+                ppath->type = lineTo;
+            } else
+            {   // curved edge
+                int n = swf_GetBits(tag, 4) + 2;
+                x += swf_GetSBits(tag, n);
+                y += swf_GetSBits(tag, n);
+                ppath->sx = x;
+                ppath->sy = y;
+                x += swf_GetSBits(tag, n);
+                y += swf_GetSBits(tag, n);
+                ppath->type = splineTo;
+            }
+            ppath->x = x;
+            ppath->y = y;
+            ppath++;
+        }
+        // now parse morph part
+        flags = swf_GetBits(&tag2, 1);
+        if (!flags)
+        {   // style change
+            flags = swf_GetBits(&tag2, 5);
+
+            if (flags & 1)
+            {   // move
+                int n = swf_GetBits(&tag2, 5);
+                x2 = swf_GetSBits(&tag2, n);
+                y2 = swf_GetSBits(&tag2, n);
+            }
+            if ((flags & 2) && fillbits2)
+                swf_GetBits(&tag2, fillbits2);
+            if ((flags & 4) && fillbits2)
+                swf_GetBits(&tag2, fillbits2);
+            if ((flags & 8) && linebits2)
+                swf_GetBits(&tag2, linebits2);
+            if (flags & 16)
+            {
+                assert(0);
+            }
+            start_x2 = x2;
+            start_y2 = y2;
+        } else
+        {
+            flags = swf_GetBits(&tag2, 1);
+            if (flags)
+            {   // straight edge
+                int n = swf_GetBits(&tag2, 4) + 2;
+                if (swf_GetBits(&tag2, 1))
+                {   // line flag
+                    x2 += swf_GetSBits(&tag2, n); //delta x
+                    y2 += swf_GetSBits(&tag2, n); //delta y
+                } else
+                {
+                    int v = swf_GetBits(&tag2, 1);
+                    int d = swf_GetSBits(&tag2, n); //vert/horz
+                    if (v)
+                        y2 += d;
+                    else
+                        x2 += d;
+                }
+                ppath2->sx = 0;
+                ppath2->sy = 0;
+                ppath2->type = lineTo;
+            } else
+            {   // curved edge
+                int n = swf_GetBits(&tag2, 4) + 2;
+                x2 += swf_GetSBits(&tag2, n);
+                y2 += swf_GetSBits(&tag2, n);
+                ppath2->sx = x2;
+                ppath2->sy = y2;
+                x2 += swf_GetSBits(&tag2, n);
+                y2 += swf_GetSBits(&tag2, n);
+                ppath2->type = splineTo;
+            }
+            ppath2->x = x2;
+            ppath2->y = y2;
+            ppath2++;
+        }
+    }
+    shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
+    shape->morph->shapes = (NSVGshape*)realloc(shape->morph->shapes, shape->morph->num_shapes*sizeof(NSVGshape));
+    assert(shape->num_shapes);
+    assert(shape->morph->num_shapes == shape->num_shapes);
+    free(path);
+}
+
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
@@ -631,13 +974,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 shapecol->bounds[3] = idtable[id].bbox.ymin/20.0f;
                 shapecol->bounds[0] = idtable[id].bbox.xmax/20.0f;
                 shapecol->bounds[1] = idtable[id].bbox.ymax/20.0f;
-                parseShape(tag, idtable, clip, swf_shape, shapecol);
                 if (ST_DEFINEMORPHSHAPE == tag->id || ST_DEFINEMORPHSHAPE2 == tag->id)
                 {
-                    shapecol->morph = calloc(1, sizeof(LVGShapeCollection));
-                    parseShape(tag, idtable, clip, swf_shape, shapecol->morph);
-                    assert(shapecol->morph->num_shapes == shapecol->num_shapes);
-                }
+                    parseMorphShape(tag, idtable, clip, swf_shape, shapecol);
+                } else
+                    parseShape(tag, idtable, clip, swf_shape, shapecol);
 
                 swf_Shape2Free(swf_shape);
                 free(swf_shape);

@@ -884,15 +884,6 @@ void swf_Shape2Free(SHAPE2 * s)
         free(line);
         line = next;
     }
-    line = s->lines2;
-    s->lines2 = 0;
-    while (line)
-    {
-        SHAPELINE*next = line->next;
-        line->next = 0;
-        free(line);
-        line = next;
-    }
 
     if (s->linestyles)
     {
@@ -1093,7 +1084,10 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
         swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
     }
     if (morph)
-        swf_GetU32(tag); //offset to endedges
+    {
+        shape->endEdgesOffset = swf_GetU32(tag); //offset to endedges
+        shape->endEdgesOffset += tag->pos;
+    }
 
     if (!parseFillStyleArray(tag, shape))
         return;
