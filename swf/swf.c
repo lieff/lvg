@@ -105,7 +105,7 @@ int compareStops(const void *a, const void *b)
     return 0;
 }
 
-static void parseShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
+static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, FILLSTYLE *fs, LINESTYLE *ls)
 {
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->fillRule = NSVG_FILLRULE_EVENODD;
@@ -546,7 +546,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                                 if (!fs->num_subpaths)
                                     continue;
                                 memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                                parseShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
+                                flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, fs, 0);
                             }
                             for (i = 0; i < swf_shape->numlinestyles; i++)
                             {
@@ -554,7 +554,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                                 if (!ls->num_subpaths)
                                     continue;
                                 memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                                parseShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
+                                flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, ls);
                             }
                             swf_ShapeFreeSubpaths(swf_shape);
                         }
