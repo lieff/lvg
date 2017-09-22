@@ -742,7 +742,13 @@ static void action_random_number(LVGActionCtx *ctx, uint8_t *a)
 static void action_mb_string_length(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_get_time(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_get_time(LVGActionCtx *ctx, uint8_t *a)
+{
+    ctx->stack_ptr--;
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, (uint32_t)(g_time*1000));
+}
+
 static void action_mb_string_extract(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_mb_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_mb_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
