@@ -491,9 +491,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
 #if ENABLE_VIDEO && VIDEO_FFMPEG
             if ((!o->ratio || o->ratio != video->cur_frame) && o->ratio < video->num_frames)
             {
-                static void *vdec;
-                if (!vdec)
-                    ff_decoder.init(&vdec, video->codec);
+                if (!video->vdec)
+                    ff_decoder.init(&video->vdec, video->codec);
                 video_frame out;
                 out.planes[0] = NULL;
                 if (!o->ratio)
@@ -502,7 +501,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 {
                     video->cur_frame++;
                     LVGVideoFrame *frame = video->frames + video->cur_frame;
-                    ff_decoder.decode(vdec, frame->data, frame->len, &out);
+                    ff_decoder.decode(video->vdec, frame->data, frame->len, &out);
                 };
                 if (out.planes[0])
                 {
@@ -782,6 +781,8 @@ void lvgCloseClip(LVGMovieClip *clip)
         free(video->frames);
         if (video->image)
             g_render->free_image(video->image);
+        if (video->vdec)
+            ff_decoder.release(video->vdec);
     }
     if (clip->vm)
     {

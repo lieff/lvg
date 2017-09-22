@@ -99,6 +99,7 @@ typedef struct LVGVideoFrame
 typedef struct LVGVideo
 {
     LVGVideoFrame *frames;
+    void *vdec; // video decoder instance
     int codec, width, height, num_frames;
     int cur_frame, image;
 } LVGVideo;
