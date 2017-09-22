@@ -27,9 +27,7 @@ Render can be done using following backends:
 Works:
 
  * SVG, image, mp3 resources with tcc scripting.
- * limited SWF support.
- * SWF: shapes, images, video, audio (mp3, adpcm, pcm) loading and rendering (some errors in converting to SVG shape fornat).
- * SWF: load action script
+ * SWF: shapes, images, video, audio (mp3, adpcm, pcm), limited action script 2 support, limited morph shapes support.
 
 Not works:
 
