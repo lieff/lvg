@@ -730,7 +730,15 @@ static void action_string_compare_le(LVGActionCtx *ctx, uint8_t *a)
 static void action_throw(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_cast(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_implements(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_random_number(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_random_number(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    assert(ASVAL_INT == se_a->type || ASVAL_DOUBLE == se_a->type || ASVAL_FLOAT == se_a->type);
+    uint32_t max = to_int(se_a);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    SET_INT(res, (uint64_t)rand()*max/RAND_MAX);
+}
+
 static void action_mb_string_length(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
