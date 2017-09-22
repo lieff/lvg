@@ -853,7 +853,31 @@ static void action_new_object(LVGActionCtx *ctx, uint8_t *a)
 static void action_define_local2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_init_array(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_init_object(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_type_of(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_type_of(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se = &ctx->stack[ctx->stack_ptr];
+    if (ASVAL_CLASS == se->type)
+    {
+        ASClass *cls = se->cls;
+        if (0 == strcmp(cls->name, "MovieClip"))
+            SET_STRING(se, "movieclip")
+        else
+            SET_STRING(se, "object")
+    } else if (ASVAL_STRING == se->type)
+        SET_STRING(se, "string")
+    else if (ASVAL_FUNCTION == se->type || ASVAL_NATIVE_FN == se->type)
+        SET_STRING(se, "function")
+    else if (ASVAL_INT == se->type || ASVAL_DOUBLE == se->type || ASVAL_FLOAT == se->type)
+        SET_STRING(se, "number")
+    else if (ASVAL_BOOL == se->type)
+        SET_STRING(se, "boolean")
+    else if (ASVAL_NULL == se->type)
+        SET_STRING(se, "null")
+    else if (ASVAL_UNDEFINED == se->type)
+        SET_STRING(se, "undefined")
+    assert(0);
+}
+
 static void action_target_path(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_enumerate(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_add2(LVGActionCtx *ctx, uint8_t *a)
