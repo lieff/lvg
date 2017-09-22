@@ -551,7 +551,7 @@ static void action_string_length(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_a = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_STRING == se_a->type);
     int len = strlen(se_a->str);
-    SET_DOUBLE(se_a, len);
+    SET_INT(se_a, len);
 }
 
 static void action_string_extract(LVGActionCtx *ctx, uint8_t *a)
@@ -739,8 +739,21 @@ static void action_random_number(LVGActionCtx *ctx, uint8_t *a)
     SET_INT(res, (uint64_t)rand()*max/RAND_MAX);
 }
 
-static void action_mb_string_length(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_mb_string_length(LVGActionCtx *ctx, uint8_t *a)
+{
+    action_string_length(ctx, a);
+}
+
+static void action_char_to_ascii(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    if (ASVAL_STRING == se_a->type)
+    {
+        uint8_t *str = (uint8_t *)se_a->str;
+        SET_INT(se_a, *str);
+    }
+}
+
 static void action_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_get_time(LVGActionCtx *ctx, uint8_t *a)
 {
@@ -750,7 +763,11 @@ static void action_get_time(LVGActionCtx *ctx, uint8_t *a)
 }
 
 static void action_mb_string_extract(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_mb_char_to_ascii(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_mb_char_to_ascii(LVGActionCtx *ctx, uint8_t *a)
+{
+    action_char_to_ascii(ctx, a);
+}
+
 static void action_mb_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_delete(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_delete2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -1607,7 +1624,7 @@ restart:
         if (ctx->do_exit)
             break;
         if (!--execution_budget)
-            break;
+            return;
     }
     if (ctx->call_depth && !ctx->do_exit)
     {
