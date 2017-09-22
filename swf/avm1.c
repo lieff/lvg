@@ -36,6 +36,8 @@ static float read_float(const uint8_t *p)
         } c;
     } u;
 
+    _Static_assert(sizeof(u) == sizeof(u.i), "float must be 4 bytes");
+
     u.f = 1.0;
     switch (u.s.s0)
     {
@@ -774,7 +776,24 @@ static void action_return(LVGActionCtx *ctx, uint8_t *a)
     ctx->pc = ctx->size;
 }
 
-static void action_modulo(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_modulo(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_a = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_b = se_a + 1;
+    ctx->stack_ptr += 1;
+    assert(ASVAL_INT == se_a->type || ASVAL_DOUBLE == se_a->type || ASVAL_FLOAT == se_a->type);
+    assert(ASVAL_INT == se_b->type || ASVAL_DOUBLE == se_b->type || ASVAL_FLOAT == se_b->type);
+    double va = to_double(ctx, se_a);
+    double vb = to_double(ctx, se_b);
+    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    if (0.0 == vb)
+    {
+        SET_DOUBLE(res, NAN);
+        return;
+    }
+    SET_DOUBLE(res, fmod(va, vb));
+}
+
 static void action_new_object(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_name = &ctx->stack[ctx->stack_ptr];

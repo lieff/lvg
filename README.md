@@ -115,4 +115,4 @@ ninja
  * AMF v3 reference http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/amf/pdf/amf-file-format-spec.pdf
  * AS2 reference http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html
 
-LVG System is developed and maintained by https://github.com/lieff
+LVG is developed and maintained by https://github.com/lieff
