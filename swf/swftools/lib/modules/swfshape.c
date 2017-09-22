@@ -846,9 +846,13 @@ void swf_ShapeFreeSubpaths(SHAPE2 *s)
             LINESTYLE *ls = &s->linestyles[i];
             if (ls->subpaths)
             {
-                for(int j = 0; j < ls->num_subpaths; j++)
+                for (int j = 0; j < ls->num_subpaths; j++)
+                {
                     if (ls->subpaths[j].subpath)
                         free(ls->subpaths[j].subpath);
+                    if (ls->subpaths[j].subpath2)
+                        free(ls->subpaths[j].subpath2);
+                }
                 free(ls->subpaths);
             }
             ls->subpaths = 0;
@@ -863,8 +867,12 @@ void swf_ShapeFreeSubpaths(SHAPE2 *s)
             if (fs->subpaths)
             {
                 for(int j = 0; j < fs->num_subpaths; j++)
+                {
                     if (fs->subpaths[j].subpath)
                         free(fs->subpaths[j].subpath);
+                    if (fs->subpaths[j].subpath2)
+                        free(fs->subpaths[j].subpath2);
+                }
                 free(fs->subpaths);
             }
             fs->subpaths = 0;
@@ -873,7 +881,7 @@ void swf_ShapeFreeSubpaths(SHAPE2 *s)
     }
 }
 
-void swf_Shape2Free(SHAPE2 * s)
+void swf_Shape2Free(SHAPE2 *s)
 {
     SHAPELINE *line = s->lines;
     s->lines = 0;
@@ -885,19 +893,10 @@ void swf_Shape2Free(SHAPE2 * s)
         line = next;
     }
 
+    swf_ShapeFreeSubpaths(s);
+
     if (s->linestyles)
     {
-        for (int i = 0; i < s->numlinestyles; i++)
-        {
-            LINESTYLE *ls = &s->linestyles[i];
-            if (ls->subpaths)
-            {
-                for(int j = 0; j < ls->num_subpaths; j++)
-                    if (ls->subpaths[j].subpath)
-                        free(ls->subpaths[j].subpath);
-                free(ls->subpaths);
-            }
-        }
         free(s->linestyles);
         s->linestyles = 0;
     }
@@ -910,13 +909,6 @@ void swf_Shape2Free(SHAPE2 * s)
             {
                 free(f->gradient.rgba);
                 free(f->gradient.ratios);
-            }
-            if (f->subpaths)
-            {
-                for(int j = 0; j < f->num_subpaths; j++)
-                    if (f->subpaths[j].subpath)
-                        free(f->subpaths[j].subpath);
-                free(f->subpaths);
             }
         }
         free(s->fillstyles);

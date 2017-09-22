@@ -432,6 +432,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     subpath->num_lines = subpath_size + 1;
                     subpath->path_used = 0;
                     subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = 0;
                     subpath->subpath[0].type = moveTo;
                     subpath->subpath[0].x = start_x;
                     subpath->subpath[0].y = start_y;
@@ -452,6 +453,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     subpath->num_lines = subpath_size + 1;
                     subpath->path_used = 0;
                     subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = 0;
                     LINE *pline = subpath->subpath + subpath_size;
                     subpath->subpath[0].type = moveTo;
                     subpath->subpath[0].x = p[subpath_size - 1].x;
@@ -504,6 +506,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     subpath->num_lines = subpath_size + 1;
                     subpath->path_used = 0;
                     subpath->subpath   = malloc((subpath_size + 1)*sizeof(LINE));
+                    subpath->subpath2  = 0;
                     subpath->subpath[0].type = moveTo;
                     subpath->subpath[0].x = start_x;
                     subpath->subpath[0].y = start_y;
