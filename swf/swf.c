@@ -1063,6 +1063,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 idtable[id].lvg_id = clip->num_videos++;
                 clip->videos = realloc(clip->videos, clip->num_videos*sizeof(LVGVideo));
                 LVGVideo *video = clip->videos + idtable[id].lvg_id;
+                video->vdec = 0;
                 video->num_frames = swf_GetU16(tag);
                 video->width  = swf_GetU16(tag);
                 video->height = swf_GetU16(tag);
