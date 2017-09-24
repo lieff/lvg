@@ -562,18 +562,24 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 btn_visible = to_int(val);
             }
             int mouse_hit = 0;
-            float t[6];
-            g_render->get_transform(g_render_obj, t);
-            Transform3x2 tr;
-            tr[0][0] = t[0]; tr[1][0] = t[1];
-            tr[0][1] = t[2]; tr[1][1] = t[3];
-            tr[0][2] = t[4]; tr[1][2] = t[5];
-            inverse(tr, tr);
-            float m[2] = { mx, my };
-            xform(m, tr, m);
-            for (j = 0; j < b->num_hit_shapes; j++)
+            float save_t[6];
+            g_render->get_transform(g_render_obj, save_t);
+            for (j = 0; j < b->num_btn_shapes; j++)
             {
-                LVGShapeCollection *col = &clip->shapes[b->hit_shapes->id];
+                LVGButtonState *bs = b->btn_shapes + j;
+                if (!(bs->flags & HIT_SHAPE))
+                    continue;
+                float t[6];
+                g_render->set_transform(g_render_obj, bs->obj.t, 0);
+                g_render->get_transform(g_render_obj, t);
+                Transform3x2 tr;
+                tr[0][0] = t[0]; tr[1][0] = t[1];
+                tr[0][1] = t[2]; tr[1][1] = t[3];
+                tr[0][2] = t[4]; tr[1][2] = t[5];
+                inverse(tr, tr);
+                float m[2] = { mx, my };
+                xform(m, tr, m);
+                LVGShapeCollection *col = &clip->shapes[bs->obj.id];
                 for (int k = 0; k < col->num_shapes; k++)
                 {
                     NSVGshape *s = col->shapes + k;
@@ -585,19 +591,13 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                         break;
                     }
                 }
+                g_render->set_transform(g_render_obj, save_t, 1);
             }
-            LVGObject *ob = b->up_shapes;
-            int nshapes = b->num_up_shapes;
-            if (mouse_hit && b->num_over_shapes)
-            {
-                ob = b->over_shapes;
-                nshapes = b->num_over_shapes;
-            }
-            if (mouse_hit && (mkeys & 1) && b->num_down_shapes)
-            {
-                ob = b->down_shapes;
-                nshapes = b->num_down_shapes;
-            }
+            int state_flags = UP_SHAPE;
+            if (mouse_hit)
+                state_flags = OVER_SHAPE;
+            if (mouse_hit && (mkeys & 1))
+                state_flags = DOWN_SHAPE;
             int flags = 0, keypressed = (mkeys & 1), waspressed = (last_mkeys & 1);
             flags |= (!b->prev_mousehit && mouse_hit) ? CondIdleToOverUp : 0;
             flags |= (b->prev_mousehit && !mouse_hit) ? CondOverUpToIdle : 0;
@@ -622,14 +622,19 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             }
             b->prev_mousehit = mouse_hit;
             if (visible && btn_visible)
-                for (j = 0; j < nshapes; j++)
+                for (j = 0; j < b->num_btn_shapes; j++)
                 {
-                    LVGColorTransform newcxform = *cxform;
-                    combine_cxform(&newcxform, &ob->cxform, alpha*btn_alpha);
-                    if (LVG_OBJ_SHAPE != ob->type)
+                    LVGButtonState *bs = b->btn_shapes + j;
+                    if (!(bs->flags & state_flags))
                         continue;
-                    lvgDrawShape(&clip->shapes[ob->id], &newcxform, ob->ratio/65535.0f, blend_mode);
-                    ob++;
+                    assert(LVG_OBJ_SHAPE == bs->obj.type);
+                    if (LVG_OBJ_SHAPE != bs->obj.type)
+                        continue;
+                    g_render->set_transform(g_render_obj, bs->obj.t, 0);
+                    LVGColorTransform newcxform = *cxform;
+                    combine_cxform(&newcxform, &bs->obj.cxform, alpha*btn_alpha);
+                    lvgDrawShape(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
+                    g_render->set_transform(g_render_obj, save_t, 1);
                 }
         }
         g_render->set_transform(g_render_obj, save_transform, 1);

@@ -121,15 +121,23 @@ typedef struct LVGButtonAction
     uint16_t flags;
 } LVGButtonAction;
 
+#define UP_SHAPE    1
+#define OVER_SHAPE  2
+#define DOWN_SHAPE  4
+#define HIT_SHAPE   8
+
+typedef struct LVGButtonState
+{
+    LVGObject obj;
+    uint16_t flags;
+} LVGButtonState;
+
 typedef struct LVGButton
 {
-    LVGObject *up_shapes;
-    LVGObject *over_shapes;
-    LVGObject *down_shapes;
-    LVGObject *hit_shapes;
+    LVGButtonState *btn_shapes;
     LVGButtonAction *btnactions;
     void *button_obj;  // Button class instance
-    int num_up_shapes, num_over_shapes, num_down_shapes, num_hit_shapes, num_btnactions;
+    int num_btn_shapes, num_btnactions;
     int prev_mousehit;
 } LVGButton;
 

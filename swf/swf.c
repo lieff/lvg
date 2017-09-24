@@ -326,26 +326,10 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
         //assert(state < 16);
         if (state & 15)
         {
-            if (state & 1)
-            {
-                b->up_shapes = realloc(b->up_shapes, (b->num_up_shapes + 1)*sizeof(LVGObject));
-                o = b->up_shapes + b->num_up_shapes++;
-            }
-            if (state & 2)
-            {
-                b->over_shapes = realloc(b->over_shapes, (b->num_over_shapes + 1)*sizeof(LVGObject));
-                o = b->over_shapes + b->num_over_shapes++;
-            }
-            if (state & 4)
-            {
-                b->down_shapes = realloc(b->down_shapes, (b->num_down_shapes + 1)*sizeof(LVGObject));
-                o = b->down_shapes + b->num_down_shapes++;
-            }
-            if (state & 8)
-            {
-                b->hit_shapes = realloc(b->hit_shapes, (b->num_hit_shapes + 1)*sizeof(LVGObject));
-                o = b->hit_shapes + b->num_hit_shapes++;
-            }
+            b->btn_shapes = realloc(b->btn_shapes, (b->num_btn_shapes + 1)*sizeof(LVGButtonState));
+            LVGButtonState *bs = b->btn_shapes + b->num_btn_shapes++;
+            bs->flags = state & 15;
+            o = &bs->obj;
             memset(o, 0, sizeof(LVGObject));
         }
         MATRIX m;
