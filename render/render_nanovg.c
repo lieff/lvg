@@ -163,7 +163,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
         path2 = shape2 ? shape2->paths : 0;
         for (path = shape->paths; path != NULL; path = path->next)
         {
-            if (NSVG_PAINT_NONE != shape->fill.type && !path->closed)
+            if (NSVG_PAINT_NONE == shape->stroke.type && (NSVG_PAINT_NONE == shape->fill.type || (NSVG_PAINT_NONE != shape->fill.type && !path->closed)))
             {
                 path2 = path2->next;
                 continue;
@@ -182,7 +182,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
                             p[5]*om_ratio + p2[5]*ratio, p[6]*om_ratio + p2[6]*ratio, p[7]*om_ratio + p2[7]*ratio);
                 }
                 if (path->closed)
-                    nvgLineTo(vg, path->pts[0]*om_ratio + path2->pts[0]*ratio, path->pts[1]*om_ratio + path2->pts[1]*ratio);
+                    nvgClosePath(vg);
                 path2 = path2->next;
             } else
             {
@@ -193,7 +193,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
                     nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
                 }
                 if (path->closed)
-                    nvgLineTo(vg, path->pts[0], path->pts[1]);
+                    nvgClosePath(vg);
             }
         }
         if (NSVG_PAINT_NONE != shape->fill.type)
@@ -207,8 +207,8 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
             else if (NSVG_PAINT_IMAGE == shape->fill.type)
             {
                 /*int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
-            NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
-            nvgFillPaint(vg, imgPaint);*/
+                NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
+                nvgFillPaint(vg, imgPaint);*/
                 ImagePaint(vg, shape, cxform, 1);
             }
             if (NSVG_FILLRULE_EVENODD == shape->fillRule)
