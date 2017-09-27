@@ -541,14 +541,25 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                 line  = swf_GetBits(tag, linebits);
             if (flags & 16)
             {
-                swf_shape->numlinestyles = 0;
-                swf_shape->numfillstyles = 0;
                 if (swf_shape->fillstyles)
+                {
+                    for (i = 0; i < swf_shape->numfillstyles; i++)
+                    {
+                        FILLSTYLE *f = &swf_shape->fillstyles[i];
+                        if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
+                        {
+                            free(f->gradient.rgba);
+                            free(f->gradient.ratios);
+                        }
+                    }
                     free(swf_shape->fillstyles);
+                }
                 if (swf_shape->linestyles)
                     free(swf_shape->linestyles);
                 swf_shape->fillstyles = 0;
                 swf_shape->linestyles = 0;
+                swf_shape->numlinestyles = 0;
+                swf_shape->numfillstyles = 0;
                 if (!parseFillStyleArray(tag, swf_shape))
                     break;
                 fillbits = swf_GetBits(tag, 4);
@@ -799,14 +810,25 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
                 line  = swf_GetBits(tag, linebits);
             if (flags & 16)
             {
-                swf_shape->numlinestyles = 0;
-                swf_shape->numfillstyles = 0;
                 if (swf_shape->fillstyles)
+                {
+                    for (i = 0; i < swf_shape->numfillstyles; i++)
+                    {
+                        FILLSTYLE *f = &swf_shape->fillstyles[i];
+                        if (FILL_LINEAR == f->type || FILL_RADIAL == f->type)
+                        {
+                            free(f->gradient.rgba);
+                            free(f->gradient.ratios);
+                        }
+                    }
                     free(swf_shape->fillstyles);
+                }
                 if (swf_shape->linestyles)
                     free(swf_shape->linestyles);
                 swf_shape->fillstyles = 0;
                 swf_shape->linestyles = 0;
+                swf_shape->numlinestyles = 0;
+                swf_shape->numfillstyles = 0;
                 if (!parseFillStyleArray(tag, swf_shape))
                     break;
                 fillbits = swf_GetBits(tag, 4);
