@@ -39,6 +39,7 @@ typedef struct render
     void (*render_image)(void *render, int image);
     void (*set_transform)(void *render, float *t, int reset);
     void (*get_transform)(void *render, float *t);
+    int (*inside_shape)(void *render, NSVGshape *shape, float x, float y);
 } render;
 
 NVGcolor nvgColorU32(uint32_t c);

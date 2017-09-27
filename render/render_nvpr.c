@@ -570,6 +570,12 @@ static void nvpr_get_transform(void *render, float *t)
     t[4] = ctx->transform[0][2]; t[5] = ctx->transform[1][2];
 }
 
+int nvpr_inside_shape(void *render, NSVGshape *shape, float x, float y)
+{
+    GLuint pathObj = shape->cache;
+    return glIsPointInFillPathNV(pathObj, 0xFF, x, y);
+}
+
 const render nvpr_render =
 {
     nvpr_init,
@@ -584,5 +590,6 @@ const render nvpr_render =
     nvpr_render_shape,
     nvpr_render_image,
     nvpr_set_transform,
-    nvpr_get_transform
+    nvpr_get_transform,
+    nvpr_inside_shape
 };

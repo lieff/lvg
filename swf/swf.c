@@ -940,6 +940,7 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
     assert(shape->num_shapes);
     assert(shape->morph->num_shapes == shape->num_shapes);
     free(path);
+    free(path2);
 }
 
 static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)

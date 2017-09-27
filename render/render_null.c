@@ -71,5 +71,6 @@ const render null_render =
     null_render_shape,
     null_render_image,
     null_set_transform,
-    null_get_transform
+    null_get_transform,
+    0
 };

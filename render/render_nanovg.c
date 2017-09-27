@@ -352,5 +352,6 @@ const render nvg_render =
     nvg_render_shape,
     nvg_render_image,
     nvg_set_transform,
-    nvg_get_transform
+    nvg_get_transform,
+    0
 };

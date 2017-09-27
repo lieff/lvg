@@ -569,6 +569,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 LVGButtonState *bs = b->btn_shapes + j;
                 if (!(bs->flags & HIT_SHAPE))
                     continue;
+                assert(LVG_OBJ_SHAPE == bs->obj.type);
+                if (LVG_OBJ_SHAPE != bs->obj.type)
+                    continue;
                 float t[6];
                 g_render->set_transform(g_render_obj, bs->obj.t, 0);
                 g_render->get_transform(g_render_obj, t);
@@ -587,8 +590,12 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     float x1 = s->bounds[2], y1 = s->bounds[3];
                     if (m[0] >= x && m[0] <=x1 && m[1] >= y && m[1] <= y1)
                     {
-                        mouse_hit = 1;
-                        break;
+                        if (g_render->inside_shape)
+                            mouse_hit = g_render->inside_shape(0, s, m[0], m[1]);
+                        else
+                            mouse_hit = 1;
+                        if (mouse_hit)
+                            break;
                     }
                 }
                 g_render->set_transform(g_render_obj, save_t, 1);
@@ -627,7 +634,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGButtonState *bs = b->btn_shapes + j;
                     if (!(bs->flags & state_flags))
                         continue;
-                    assert(LVG_OBJ_SHAPE == bs->obj.type);
+                    assert(LVG_OBJ_SHAPE == bs->obj.type || LVG_OBJ_GROUP == bs->obj.type || LVG_OBJ_BUTTON == bs->obj.type);
                     if (LVG_OBJ_SHAPE != bs->obj.type)
                         continue;
                     g_render->set_transform(g_render_obj, bs->obj.t, 0);
