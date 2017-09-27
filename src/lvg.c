@@ -639,6 +639,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                         continue;
                     g_render->set_transform(g_render_obj, bs->obj.t, 0);
                     LVGColorTransform newcxform = *cxform;
+                    combine_cxform(&newcxform, &o->cxform, 1.0);
                     combine_cxform(&newcxform, &bs->obj.cxform, alpha*btn_alpha);
                     lvgDrawShape(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
                     g_render->set_transform(g_render_obj, save_t, 1);
