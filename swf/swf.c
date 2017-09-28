@@ -1458,7 +1458,6 @@ do_show_frame:
 
 LVGMovieClip *swf_ReadObjects(SWF *swf)
 {
-    swf_OptimizeTagOrder(swf);
     swf_FoldAll(swf);
     swf_RemoveJPEGTables(swf);
 
