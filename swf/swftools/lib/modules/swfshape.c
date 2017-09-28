@@ -983,6 +983,7 @@ void swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape)
 void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
 {
     int num = 0, morph = 0/*, numshapes = 1, id*/;
+    SRECT bbox2, edge_bounds, edge_bounds2;
     //U16 fill,line;
     //SHAPELINE*l;
     if(tag->id == ST_DEFINESHAPE)
@@ -1010,20 +1011,25 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
     memset(shape, 0, sizeof(SHAPE2));
     shape->bbox = (SRECT*)malloc(sizeof(SRECT));
     swf_GetRect(tag, shape->bbox);
+    if (num >= 4)
+    {
+        swf_ResetReadBits(tag);
+        swf_GetRect(tag, &edge_bounds); // edge bounds
+    }
     if (morph)
     {
-        SRECT bbox2, edge_bounds, edge_bounds2;
         swf_ResetReadBits(tag);
-        swf_GetRect(tag, &bbox2); // shape bounds2
+        swf_GetRect(tag, &bbox2); // end bounds
         if (num >= 4)
         {
             swf_ResetReadBits(tag);
-            swf_GetRect(tag, &edge_bounds); // edge bounds1
-            swf_ResetReadBits(tag);
-            swf_GetRect(tag, &edge_bounds2); // edge bounds2
-            //	U8 flags =
-            swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
+            swf_GetRect(tag, &edge_bounds2); // end edge bounds
         }
+    }
+    if (num >= 4)
+    {
+        //U8 flags =
+        swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
     }
     if (morph)
     {
