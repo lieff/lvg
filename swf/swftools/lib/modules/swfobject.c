@@ -24,11 +24,6 @@
 #include "../rfxswf.h"
 #include <assert.h>
 
-char*blendModeNames[] = {"normal","normal2","layer","multiply",
-                         "screen","lighten", "darken","add",
-                         "substract","difference","invert","alpha",
-                         "erase","overlay","hardlight",0};
-
 int isUnitMatrix(MATRIX* m)
 {
     /* a matrix with all zeros is also considered

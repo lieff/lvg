@@ -956,8 +956,6 @@ void action_fixjump(ActionMarker m1, ActionMarker m2);
 
 // The following 3 routines only use placeobject2:
 
-extern char*blendModeNames[];
-
 int swf_ObjectPlace(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name);
 int swf_ObjectPlaceClip(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name, U16 clipaction);
 int swf_ObjectPlaceBlend(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name, U8 blendmode);
