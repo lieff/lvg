@@ -426,18 +426,21 @@ typedef struct _FILLSTYLE
 typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
 {
   struct
-  { LINESTYLE * data;
-    U16         n;
+  {
+      LINESTYLE * data;
+      U16         n;
   } linestyle;
 
   struct
-  { FILLSTYLE * data;
-    U16         n;
+  {
+      FILLSTYLE * data;
+      U16         n;
   } fillstyle;
 
   struct
-  { U16         fill;
-    U16         line;
+  {
+      U16         fill;
+      U16         line;
   } bits;
                 // used by Get/SetSimpleShape and glyph handling
   U8 *          data;
@@ -648,7 +651,7 @@ typedef struct _EditTextLayout
 int swf_FontEnumerate(SWF * swf,void (*FontCallback) (void*,U16,U8*), void*self);
 // -> void fontcallback(U16 id,U8 * name); returns number of defined fonts
 
-int swf_FontExtract(SWF * swf,int id,SWFFONT ** f);
+int swf_FontExtract(TAG *firstTag, int id, SWFFONT * *font);
 // Fetches all available information from DefineFont, DefineFontInfo, DefineText, ...
 // id = FontID, id=0 -> Extract first Font
 int swf_FontExtract_DefineFont2(int id, SWFFONT * font, TAG * tag);

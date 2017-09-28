@@ -777,6 +777,12 @@ void lvgCloseClip(LVGMovieClip *clip)
         if (groupstate->timers)
             free(groupstate->timers);
     }
+    for (i = 0; i < clip->num_fonts; i++)
+    {
+        LVGFont *font = clip->fonts + i;
+        if (font->glyphs)
+            free(font->glyphs);
+    }
     for (i = 0; i < clip->num_sounds; i++)
     {
         LVGSound *sound = clip->sounds + i;
@@ -805,6 +811,7 @@ void lvgCloseClip(LVGMovieClip *clip)
     free(clip->shapes);
     free(clip->images);
     free(clip->groups);
+    free(clip->fonts);
     free(clip->sounds);
     free(clip->videos);
 }

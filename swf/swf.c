@@ -13,7 +13,7 @@
 extern render *g_render;
 extern void *g_render_obj;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, sound_type, text_type, edittext_type, font_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, sound_type, font_type, text_type, edittext_type};
 typedef struct
 {
     TAG *tag;
@@ -1007,13 +1007,47 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
-            } else if (tag->id == ST_DEFINESPRITE)
+            } else if (ST_DEFINESPRITE == tag->id)
             {
                 swf_UnFoldSprite(tag);
                 parseGroup(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
                 swf_FoldSprite(tag);
                 idtable[id].type = sprite_type;
                 idtable[id].lvg_id = clip->num_groups++;
+            } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
+            {
+                int t;
+                LVGFont *font = clip->fonts + clip->num_fonts;
+                font->version = (tag->id == ST_DEFINEFONT3) ? 3 : 2;
+                SWFFONT *swffont = (SWFFONT *) calloc(1, sizeof(SWFFONT));
+                if (ST_DEFINEFONT == tag->id)
+                    swf_FontExtract_DefineFont(0, swffont, tag);
+                else
+                    swf_FontExtract_DefineFont2(0, swffont, tag);
+                font->num_chars = swffont->numchars;
+                font->glyphs = (int*)calloc(1, sizeof(font->glyphs[0])*font->num_chars);
+                for (t = 0; t < font->num_chars; t++)
+                {
+                    static const RGBA color_white = { 255, 255, 255, 255 };
+                    if (!swffont->glyph[t].shape->fillstyle.n)
+                        swf_ShapeAddSolidFillStyle(swffont->glyph[t].shape, (RGBA*)&color_white);
+                    SHAPE2 *swf_shape = swf_ShapeToShape2(swffont->glyph[t].shape);
+                    LVGShapeCollection *shapecol = clip->shapes + clip->num_shapes;
+                    shapecol->bounds[2] = idtable[id].bbox.xmin/20.0f;
+                    shapecol->bounds[3] = idtable[id].bbox.ymin/20.0f;
+                    shapecol->bounds[0] = idtable[id].bbox.xmax/20.0f;
+                    shapecol->bounds[1] = idtable[id].bbox.ymax/20.0f;
+                    //parseShape(tag, idtable, clip, swf_shape, shapecol);
+                    font->glyphs[t] = clip->num_shapes++;
+                    swf_Shape2Free(swf_shape);
+                    free(swf_shape);
+                }
+                swf_FontFree(swffont);
+                idtable[id].type = font_type;
+                idtable[id].lvg_id = clip->num_fonts++;
+            } else if (ST_DEFINETEXT == tag->id || ST_DEFINETEXT2 == tag->id)
+            {
+
             } else if (ST_DEFINESOUND == tag->id)
             {
                 LVGSound *sound = clip->sounds + clip->num_sounds;
@@ -1487,6 +1521,16 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             {
                 clip->num_groups++;
                 clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
+            } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
+            {
+                SWFFONT *swffont = (SWFFONT *) calloc(1, sizeof(SWFFONT));
+                if (ST_DEFINEFONT == tag->id)
+                    swf_FontExtract_DefineFont(0, swffont, tag);
+                else
+                    swf_FontExtract_DefineFont2(0, swffont, tag);
+                clip->num_shapes += swffont->numchars;
+                clip->num_fonts++;
+                swf_FontFree(swffont);
             } else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
         } else if ((ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id || ST_SOUNDSTREAMBLOCK == tag->id) && !sound_stream_found)
@@ -1499,11 +1543,13 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
     clip->images = calloc(1, sizeof(int)*clip->num_images);
     clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
+    clip->fonts  = calloc(1, sizeof(LVGFont)*clip->num_fonts);
     clip->sounds = calloc(1, sizeof(LVGSound)*clip->num_sounds);
 
     clip->num_shapes = 0;
     clip->num_images = 0;
     clip->num_groups = 1;
+    clip->num_fonts  = 0;
     clip->num_sounds = 0;
     parseGroup(swf->firstTag, idtable, clip, clip->groups);
     clip->num_groups = 1;

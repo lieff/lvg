@@ -54,7 +54,7 @@ int swf_ShapeNew(SHAPE * * s)
     return 0;
 }
 
-int swf_GetSimpleShape(TAG * t,SHAPE * * s) // without Linestyle/Fillstyle Record
+int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
 {
     SHAPE * sh;
     int bitl, len;
@@ -77,17 +77,17 @@ int swf_GetSimpleShape(TAG * t,SHAPE * * s) // without Linestyle/Fillstyle Recor
         if (edge)
         {
             bitl += 1;
-            if (swf_GetBits(t, 1))                 // Line
+            if (swf_GetBits(t, 1))              // Line
             {
                 U16 nbits = swf_GetBits(t,4)+2;
                 bitl += 5;
 
-                if (swf_GetBits(t,1))               // x/y Line
+                if (swf_GetBits(t,1))           // x/y Line
                 {
                     swf_GetBits(t,nbits);
                     swf_GetBits(t,nbits);
                     bitl+=nbits*2;
-                } else                            // hline/vline
+                } else                          // hline/vline
                 {
                     swf_GetBits(t,nbits+1);
                     bitl+=nbits+1;
@@ -215,7 +215,7 @@ int swf_ShapeAddFillStyle(SHAPE *s, U8 type, MATRIX *m, RGBA *color,U16 id_bitma
     if (!m)
     {
         m = &def_m;
-        swf_GetMatrix(NULL,m);
+        swf_GetMatrix(NULL, m);
     }
     if (!gradient)
     {
@@ -226,13 +226,14 @@ int swf_ShapeAddFillStyle(SHAPE *s, U8 type, MATRIX *m, RGBA *color,U16 id_bitma
     // handle memory
     if (s->fillstyle.data)
     {
-        FILLSTYLE * xnew = (FILLSTYLE *)realloc(s->fillstyle.data,(s->fillstyle.n+1)*sizeof(FILLSTYLE));
+        FILLSTYLE *xnew = (FILLSTYLE *)realloc(s->fillstyle.data, (s->fillstyle.n + 1)*sizeof(FILLSTYLE));
         if (!xnew)
             return -1;
         s->fillstyle.data = xnew;
+        memset(s->fillstyle.data + s->fillstyle.n, 0, sizeof(FILLSTYLE));
     } else
     {
-        s->fillstyle.data = (FILLSTYLE *)malloc(sizeof(FILLSTYLE));
+        s->fillstyle.data = (FILLSTYLE *)calloc(1, sizeof(FILLSTYLE));
         s->fillstyle.n = 0;
         if (!s->fillstyle.data)
             return -1;
@@ -896,9 +897,9 @@ void swf_Shape2Free(SHAPE2 *s)
     }
 }
 
-SHAPE2* swf_ShapeToShape2(SHAPE*shape)
+SHAPE2 *swf_ShapeToShape2(SHAPE *shape)
 {
-    SHAPE2*shape2 = (SHAPE2*)calloc(1, sizeof(SHAPE2));
+    SHAPE2 *shape2 = (SHAPE2*)calloc(1, sizeof(SHAPE2));
 
     shape2->numlinestyles = shape->linestyle.n;
     if (shape2->numlinestyles)
