@@ -24,6 +24,7 @@
 // Matrix & Math tools for SWF files
 
 #include "../rfxswf.h"
+#include <assert.h>
 
 #define S64 long long
 SFIXED RFXSWF_SP(SFIXED a1,SFIXED a2,SFIXED b1,SFIXED b2)
@@ -90,7 +91,8 @@ void swf_SetDefineID(TAG * tag, U16 newid)
 
 U16 swf_GetDefineID(TAG * t)
 // up to SWF 4.0
-{ U32 oldTagPos;
+{
+    U32 oldTagPos;
     U16 id = 0;
 
     oldTagPos = swf_GetTagPos(t);
@@ -137,7 +139,8 @@ U16 swf_GetDefineID(TAG * t)
         id = swf_GetU16(t);
         break;
     default:
-        fprintf(stderr, "rfxswf: Error: tag %d (%s) has no id\n", t->id, swf_TagGetName(t));
+        fprintf(stderr, "rfxswf: Error: tag %d has no id\n", t->id);
+        assert(0);
     }
 
     swf_SetTagPos(t,oldTagPos);
@@ -1162,7 +1165,8 @@ void swf_SetDefineBBox(TAG * tag, SRECT newbbox)
 
     } break;
     default:
-        fprintf(stderr, "rfxswf: Tag %d (%s) has no bbox\n", tag->id, swf_TagGetName(tag));
+        fprintf(stderr, "rfxswf: Tag %d has no bbox\n", tag->id);
+        assert(0);
     }
 }
 

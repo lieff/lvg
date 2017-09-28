@@ -42,7 +42,6 @@ sources = [
     'swf/swftools/lib/modules/swfalignzones.c',
     'swf/swftools/lib/modules/swfbits.c',
     'swf/swftools/lib/modules/swfdraw.c',
-    'swf/swftools/lib/modules/swfdump.c',
     'swf/swftools/lib/modules/swffilter.c',
     'swf/swftools/lib/modules/swffont.c',
     'swf/swftools/lib/modules/swfobject.c',

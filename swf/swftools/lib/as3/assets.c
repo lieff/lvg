@@ -100,7 +100,7 @@ static void dump_asset(FILE*fo, abc_asset_t*a, const char*prefix)
     asset_tag_list_t*t = a->tags;
     while(t) {
         TAG*tag = t->asset_tag->tag;
-        fprintf(fo, "%s[tag] %s defines ID %d\n", prefix, swf_TagGetName(tag), swf_GetDefineID(tag));
+        fprintf(fo, "%s[tag] %d defines ID %d\n", prefix, tag->id, swf_GetDefineID(tag));
         char*prefix2 = allocprintf("%s    ", prefix);
         int i;
         for(i=0;i<t->asset_tag->num_deps;i++) {
