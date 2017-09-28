@@ -1435,26 +1435,6 @@ int swf_ReadSWF2(reader_t*reader, SWF * swf)   // Reads SWF to memory (malloc'ed
   return reader->pos;
 }
 
-SWF* swf_OpenSWF(char*filename)
-{
-  int fi = open(filename, O_RDONLY|O_BINARY);
-  if(fi<0) {
-      fprintf(stderr, "Failed to open %s\n", filename);
-      return 0;
-  }
-  SWF* swf = malloc(sizeof(SWF));
-  swf_ReadSWF(fi, swf);
-  close(fi);
-  return swf;
-}
-
-int swf_ReadSWF(int handle, SWF * swf)
-{
-  reader_t reader;
-  reader_init_filereader(&reader, handle);
-  return swf_ReadSWF2(&reader, swf);
-}
-
 void swf_FreeTags(SWF * swf)                 // Frees all malloc'ed memory for tags
 { TAG * t = swf->firstTag;
 
@@ -1466,21 +1446,3 @@ void swf_FreeTags(SWF * swf)                 // Frees all malloc'ed memory for t
   }
   swf->firstTag = 0;
 }
-
-// include advanced functions
-
-//#include "modules/swfdump.c"
-//#include "modules/swfshape.c"
-//#include "modules/swftext.c"
-//#include "modules/swffont.c"
-//#include "modules/swfobject.c"
-//#include "modules/swfbutton.c"
-//#include "modules/swftools.c"
-//#include "modules/swfcgi.c"
-//#include "modules/swfbits.c"
-//#include "modules/swfaction.c"
-//#include "modules/swfabc.c"
-//#include "modules/swfsound.c"
-//#include "modules/swfdraw.c"
-//#include "modules/swfrender.c"
-//#include "modules/swffilter.c"

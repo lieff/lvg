@@ -41,80 +41,6 @@
 #endif
 #include "./bitio.h"
 
-/* ---------------------------- null reader ------------------------------- */
-
-static int reader_nullread(reader_t*r, void* data, int len)
-{
-    memset(data, 0, len);
-    return len;
-}
-static void reader_nullread_dealloc(reader_t*r)
-{
-    memset(r, 0, sizeof(reader_t));
-}
-static int reader_nullseek(reader_t*r, int pos)
-{
-    return pos;
-}
-void reader_init_nullreader(reader_t*r)
-{
-    r->read = reader_nullread;
-    r->seek = reader_nullseek;
-    r->dealloc = reader_nullread_dealloc;
-    r->internal = 0;
-    r->type = READER_TYPE_NULL;
-    r->mybyte = 0;
-    r->bitpos = 8;
-    r->pos = 0;
-}
-/* ---------------------------- file reader ------------------------------- */
-
-static int reader_fileread(reader_t*reader, void* data, int len)
-{
-    int ret = read((int)(intptr_t)reader->internal, data, len);
-    if(ret>=0)
-        reader->pos += ret;
-    return ret;
-}
-static void reader_fileread_dealloc(reader_t*r)
-{
-    if(r->type == READER_TYPE_FILE2) {
-        close((ptroff_t)r->internal);
-    }
-    memset(r, 0, sizeof(reader_t));
-}
-static int reader_fileread_seek(reader_t*r, int pos)
-{
-    return lseek((ptroff_t)r->internal, pos, SEEK_SET);
-}
-void reader_init_filereader(reader_t*r, int handle)
-{
-    r->read = reader_fileread;
-    r->seek = reader_fileread_seek;
-    r->dealloc = reader_fileread_dealloc;
-    r->internal = (void*)(intptr_t)handle;
-    r->type = READER_TYPE_FILE;
-    r->mybyte = 0;
-    r->bitpos = 8;
-    r->pos = 0;
-}
-int reader_init_filereader2(reader_t*r, const char*filename)
-{
-#ifdef HAVE_OPEN64
-    int fi = open64
-#else
-    int fi = open
-#endif
-            (filename,
-#ifdef O_BINARY
-             O_BINARY|
-#endif
-             O_RDONLY);
-    reader_init_filereader(r, fi);
-    r->type = READER_TYPE_FILE2;
-    return fi;
-}
-
 /* ---------------------------- mem reader ------------------------------- */
 
 typedef struct _memread
@@ -165,33 +91,6 @@ void reader_init_memreader(reader_t*r, void*newdata, int newlength)
     r->bitpos = 8;
     r->pos = 0;
 }
-
-/* ---------------------------- zzip reader ------------------------------ */
-#ifdef HAVE_ZZIP
-static int reader_zzip_read(reader_t*reader, void* data, int len)
-{
-    return zzip_file_read((ZZIP_FILE*)reader->internal, data, len);
-}
-static void reader_zzip_dealloc(reader_t*reader)
-{
-    memset(reader, 0, sizeof(reader_t));
-}
-static int reader_zzip_seek(reader_t*reader, int pos)
-{
-    return zzip_seek((ZZIP_FILE*)reader->internal, pos, SEEK_SET);
-}
-void reader_init_zzipreader(reader_t*r,ZZIP_FILE*z)
-{
-    r->read = reader_zzip_read;
-    r->seek = reader_zzip_seek;
-    r->dealloc = reader_zzip_dealloc;
-    r->internal = z;
-    r->type = READER_TYPE_ZZIP;
-    r->mybyte = 0;
-    r->bitpos = 8;
-    r->pos = 0;
-}
-#endif
 
 /* ---------------------------- mem writer ------------------------------- */
 

@@ -101,8 +101,6 @@ int swf_FontIsBold(SWFFONT * f)
     return f->style & FONT_STYLE_BOLD;
 }
 
-static const int WRITEFONTID = 0x4e46;	// font id for WriteFont and ReadFont
-
 int swf_FontEnumerate(SWF * swf, void (*FontCallback) (void*, U16, U8 *), void*self)
 {
     int n;
@@ -1538,28 +1536,6 @@ SRECT swf_TextCalculateBBoxUTF8(SWFFONT * font, U8 * s, int scale)
     return r;
 }
 
-
-SWFFONT *swf_ReadFont(const char *filename)
-{
-    int f;
-    SWF swf;
-    if (!filename)
-        return 0;
-    f = open(filename, O_RDONLY|O_BINARY);
-
-    if (f < 0 || swf_ReadSWF(f, &swf) < 0) {
-        fprintf(stderr, "%s is not a valid SWF font file or contains errors.\n", filename);
-        close(f);
-        return 0;
-    } else {
-        SWFFONT *font;
-        close(f);
-        if (swf_FontExtract(&swf, WRITEFONTID, &font) < 0)
-            return 0;
-        swf_FreeTags(&swf);
-        return font;
-    }
-}
 
 void swf_SetEditText(TAG * tag, U16 flags, SRECT r, const char *text, RGBA * color, int maxlength, U16 font, U16 height, EditTextLayout * layout, const char *variable)
 {
