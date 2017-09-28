@@ -832,101 +832,44 @@ SRECT swf_TurnRect(SRECT r, MATRIX* m)
 }
 
 
-int swf_GetMatrix(TAG * t,MATRIX * m)
-{ MATRIX dummy;
-  int nbits;
+int swf_GetMatrix(TAG *t, MATRIX *m)
+{
+    MATRIX dummy;
+    int nbits;
 
-  if (!m) m = &dummy;
+    if (!m)
+        m = &dummy;
 
-  if (!t)
-  { m->sx = m->sy = 0x10000;
-    m->r0 = m->r1 = 0;
-    m->tx = m->ty = 0;
-    return -1;
-  }
-
-  swf_ResetReadBits(t);
-
-  if (swf_GetBits(t,1))
-  { nbits = swf_GetBits(t,5);
-    m->sx = swf_GetSBits(t,nbits);
-    m->sy = swf_GetSBits(t,nbits);
-  }
-  else m->sx = m->sy = 0x10000;
-
-  if (swf_GetBits(t,1))
-  { nbits = swf_GetBits(t,5);
-    m->r0 = swf_GetSBits(t,nbits);
-    m->r1 = swf_GetSBits(t,nbits);
-  }
-  else m->r0 = m->r1 = 0x0;
-
-  nbits = swf_GetBits(t,5);
-  m->tx = swf_GetSBits(t,nbits);
-  m->ty = swf_GetSBits(t,nbits);
-
-  return 0;
-}
-
-int swf_SetMatrix(TAG * t,MATRIX * m)
-{ int nbits;
-  MATRIX ma;
-
-  if (!m)
-  { m = &ma;
-    ma.sx = ma.sy = 0x10000;
-    ma.r0 = ma.r1 = 0;
-    ma.tx = ma.ty = 0;
-  }
-
-  swf_ResetWriteBits(t);
-
-  if ((m->sx==0x10000)&&(m->sy==0x10000)) swf_SetBits(t,0,1);
-  else
-  { swf_SetBits(t,1,1);
-    nbits = swf_CountBits(m->sx,0);
-    nbits = swf_CountBits(m->sy,nbits);
-    if(nbits>=32) {
-        /* TODO: happens on AMD64 systems for normal values? */
-        #ifdef DEBUG_RFXSWF
-        fprintf(stderr,"rfxswf: Error: matrix values too large\n");
-        #endif
-        nbits = 31;
+    if (!t)
+    {
+        m->sx = m->sy = 0x10000;
+        m->r0 = m->r1 = 0;
+        m->tx = m->ty = 0;
+        return -1;
     }
-    swf_SetBits(t,nbits,5);
-    swf_SetBits(t,m->sx,nbits);
-    swf_SetBits(t,m->sy,nbits);
-  }
 
-  if ((!m->r0)&&(!m->r1)) swf_SetBits(t,0,1);
-  else
-  { swf_SetBits(t,1,1);
-    nbits = swf_CountBits(m->r0,0);
-    nbits = swf_CountBits(m->r1,nbits);
-    if(nbits>=32) {
-        #ifdef DEBUG_RFXSWF
-        fprintf(stderr,"rfxswf: Error: matrix values too large\n");
-        #endif
-        nbits = 31;
-    }
-    swf_SetBits(t,nbits,5);
-    swf_SetBits(t,m->r0,nbits);
-    swf_SetBits(t,m->r1,nbits);
-  }
+    swf_ResetReadBits(t);
 
-  nbits = swf_CountBits(m->tx,0);
-  nbits = swf_CountBits(m->ty,nbits);
-  if(nbits>=32) {
-      #ifdef DEBUG_RFXSWF
-      fprintf(stderr,"rfxswf: Error: matrix values too large\n");
-      #endif
-      nbits = 31;
-  }
-  swf_SetBits(t,nbits,5);
-  swf_SetBits(t,m->tx,nbits);
-  swf_SetBits(t,m->ty,nbits);
+    if (swf_GetBits(t, 1))
+    {
+        nbits = swf_GetBits(t, 5);
+        m->sx = swf_GetSBits(t, nbits);
+        m->sy = swf_GetSBits(t, nbits);
+    } else
+        m->sx = m->sy = 0x10000;
 
-  return 0;
+    if (swf_GetBits(t, 1))
+    {
+        nbits = swf_GetBits(t, 5);
+        m->r0 = swf_GetSBits(t, nbits);
+        m->r1 = swf_GetSBits(t, nbits);
+    } else
+        m->r0 = m->r1 = 0x0;
+
+    nbits = swf_GetBits(t, 5);
+    m->tx = swf_GetSBits(t, nbits);
+    m->ty = swf_GetSBits(t, nbits);
+    return 0;
 }
 
 int swf_GetCXForm(TAG * t,CXFORM * cx,U8 alpha)
