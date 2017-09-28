@@ -263,6 +263,7 @@ start_new:
         {
             path2->pts = (float*)realloc(path2->pts, sizeof(path2->pts[0])*alloc_pts*2);
             lines = subpath->subpath2;
+            assert(moveTo == lines->type);
             if (!append)
                 path_moveTo(path2, lines->x/20.0f, lines->y/20.0f);
             lines++;
@@ -643,9 +644,9 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
             flags = swf_GetBits(tag, 5);
 
             int subpath_size = ppath - path;
-            assert(subpath_size == (ppath2 - path2));
             if (subpath_size)
             {
+                assert(subpath_size == (ppath2 - path2));
                 if (fill0)
                 {
                     FILLSTYLE *fs = &swf_shape->fillstyles[fill0 - 1];
@@ -874,65 +875,69 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
             ppath++;
         }
         // now parse morph part
-        flags = swf_GetBits(&tag2, 1);
-        if (!flags)
-        {   // style change
-            flags = swf_GetBits(&tag2, 5);
-
-            if (flags & 1)
-            {   // move
-                int n = swf_GetBits(&tag2, 5);
-                x2 = swf_GetSBits(&tag2, n);
-                y2 = swf_GetSBits(&tag2, n);
-            }
-            if ((flags & 2) && fillbits2)
-                swf_GetBits(&tag2, fillbits2);
-            if ((flags & 4) && fillbits2)
-                swf_GetBits(&tag2, fillbits2);
-            if ((flags & 8) && linebits2)
-                swf_GetBits(&tag2, linebits2);
-            if (flags & 16)
-            {
-                assert(0);
-            }
-            start_x2 = x2;
-            start_y2 = y2;
-        } else
+        ptrdiff_t subpath_size = ppath - path;
+        while ((ppath2 - path2) < subpath_size)
         {
             flags = swf_GetBits(&tag2, 1);
-            if (flags)
-            {   // straight edge
-                int n = swf_GetBits(&tag2, 4) + 2;
-                if (swf_GetBits(&tag2, 1))
-                {   // line flag
-                    x2 += swf_GetSBits(&tag2, n); //delta x
-                    y2 += swf_GetSBits(&tag2, n); //delta y
-                } else
-                {
-                    int v = swf_GetBits(&tag2, 1);
-                    int d = swf_GetSBits(&tag2, n); //vert/horz
-                    if (v)
-                        y2 += d;
-                    else
-                        x2 += d;
+            if (!flags)
+            {   // style change
+                flags = swf_GetBits(&tag2, 5);
+
+                if (flags & 1)
+                {   // move
+                    int n = swf_GetBits(&tag2, 5);
+                    x2 = swf_GetSBits(&tag2, n);
+                    y2 = swf_GetSBits(&tag2, n);
                 }
-                ppath2->sx = 0;
-                ppath2->sy = 0;
-                ppath2->type = lineTo;
+                if ((flags & 2) && fillbits2)
+                    swf_GetBits(&tag2, fillbits2);
+                if ((flags & 4) && fillbits2)
+                    swf_GetBits(&tag2, fillbits2);
+                if ((flags & 8) && linebits2)
+                    swf_GetBits(&tag2, linebits2);
+                if (flags & 16)
+                {
+                    assert(0);
+                }
+                start_x2 = x2;
+                start_y2 = y2;
             } else
-            {   // curved edge
-                int n = swf_GetBits(&tag2, 4) + 2;
-                x2 += swf_GetSBits(&tag2, n);
-                y2 += swf_GetSBits(&tag2, n);
-                ppath2->sx = x2;
-                ppath2->sy = y2;
-                x2 += swf_GetSBits(&tag2, n);
-                y2 += swf_GetSBits(&tag2, n);
-                ppath2->type = splineTo;
+            {
+                flags = swf_GetBits(&tag2, 1);
+                if (flags)
+                {   // straight edge
+                    int n = swf_GetBits(&tag2, 4) + 2;
+                    if (swf_GetBits(&tag2, 1))
+                    {   // line flag
+                        x2 += swf_GetSBits(&tag2, n); //delta x
+                        y2 += swf_GetSBits(&tag2, n); //delta y
+                    } else
+                    {
+                        int v = swf_GetBits(&tag2, 1);
+                        int d = swf_GetSBits(&tag2, n); //vert/horz
+                        if (v)
+                            y2 += d;
+                        else
+                            x2 += d;
+                    }
+                    ppath2->sx = 0;
+                    ppath2->sy = 0;
+                    ppath2->type = lineTo;
+                } else
+                {   // curved edge
+                    int n = swf_GetBits(&tag2, 4) + 2;
+                    x2 += swf_GetSBits(&tag2, n);
+                    y2 += swf_GetSBits(&tag2, n);
+                    ppath2->sx = x2;
+                    ppath2->sy = y2;
+                    x2 += swf_GetSBits(&tag2, n);
+                    y2 += swf_GetSBits(&tag2, n);
+                    ppath2->type = splineTo;
+                }
+                ppath2->x = x2;
+                ppath2->y = y2;
+                ppath2++;
             }
-            ppath2->x = x2;
-            ppath2->y = y2;
-            ppath2++;
         }
     }
     shape->shapes = (NSVGshape*)realloc(shape->shapes, shape->num_shapes*sizeof(NSVGshape));
