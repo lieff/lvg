@@ -326,7 +326,7 @@ int RadialGradientStops(NSVGgradient *gradient, LVGColorTransform *cxform)
     return img;
 }
 
-void gl_free_image(int image)
+void gl_free_image(void *render, int image)
 {
     GLuint img = image;
     glDeleteTextures(1, &img);

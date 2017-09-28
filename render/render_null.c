@@ -28,12 +28,12 @@ static int null_cache_image(void *render, int width, int height, int flags, cons
     return 1;
 }
 
-static int null_cache_gradient(NSVGpaint *fill)
+static int null_cache_gradient(void *render, NSVGpaint *fill)
 {
     return 1;
 }
 
-static void null_free_image(int image)
+static void null_free_image(void *render, int image)
 {
 }
 

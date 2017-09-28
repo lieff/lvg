@@ -151,7 +151,7 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
             xf[3] = m->sy/65536.0f;
             xf[4] = m->tx/20.0f;
             xf[5] = m->ty/20.0f;
-            g_render->cache_gradient(&shape->fill);
+            g_render->cache_gradient(g_render_obj, &shape->fill);
         }
         assert(0 == ls);
     }

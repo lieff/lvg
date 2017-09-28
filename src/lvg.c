@@ -591,7 +591,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     if (m[0] >= x && m[0] <=x1 && m[1] >= y && m[1] <= y1)
                     {
                         if (g_render->inside_shape)
-                            mouse_hit = g_render->inside_shape(0, s, m[0], m[1]);
+                            mouse_hit = g_render->inside_shape(g_render_obj, s, m[0], m[1]);
                         else
                             mouse_hit = 1;
                         if (mouse_hit)
@@ -703,7 +703,7 @@ static void deletePaint(NSVGpaint* paint)
 {
     if (paint->type == NSVG_PAINT_LINEAR_GRADIENT || paint->type == NSVG_PAINT_RADIAL_GRADIENT)
     {
-        g_render->free_image(paint->gradient->cache);
+        g_render->free_image(g_render_obj, paint->gradient->cache);
         free(paint->gradient);
     }
 }
@@ -741,7 +741,7 @@ void lvgCloseClip(LVGMovieClip *clip)
     }
     for (i = 0; i < clip->num_images; i++)
     {
-        g_render->free_image(clip->images[i]);
+        g_render->free_image(g_render_obj, clip->images[i]);
     }
     for (i = 0; i < clip->num_groups; i++)
     {
@@ -793,7 +793,7 @@ void lvgCloseClip(LVGMovieClip *clip)
         }
         free(video->frames);
         if (video->image)
-            g_render->free_image(video->image);
+            g_render->free_image(g_render_obj, video->image);
         if (video->vdec)
             ff_decoder.release(video->vdec);
     }

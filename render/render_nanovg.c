@@ -293,7 +293,7 @@ static int nvg_cache_image(void *render, int width, int height, int flags, const
         ((flags & IMAGE_REPEAT) ? (NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY) : 0), (const unsigned char *)rgba);
 }
 
-static int nvg_cache_gradient(NSVGpaint *fill)
+static int nvg_cache_gradient(void *render, NSVGpaint *fill)
 {
     int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ? LinearGradientStops(fill->gradient, 0) : RadialGradientStops(fill->gradient, 0);
     fill->gradient->cache = img;

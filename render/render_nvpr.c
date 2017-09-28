@@ -325,7 +325,7 @@ static int nvpr_cache_image(void *render, int width, int height, int flags, cons
     return (int)tex;
 }
 
-static int nvpr_cache_gradient(NSVGpaint *fill)
+static int nvpr_cache_gradient(void *render, NSVGpaint *fill)
 {
     int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ? LinearGradientStops(fill->gradient, 0) : RadialGradientStops(fill->gradient, 0);
     fill->gradient->cache = img;
