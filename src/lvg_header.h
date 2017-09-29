@@ -92,7 +92,7 @@ typedef struct LVGFont
 
 typedef struct LVGChar
 {
-    unsigned char idx, x_advance;
+    unsigned int idx, x_advance;
 } LVGChar;
 
 typedef struct LVGString

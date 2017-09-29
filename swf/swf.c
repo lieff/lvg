@@ -642,7 +642,7 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
     int i, fill0 = 0, fill1 = 0, line = 0, start_x = 0, start_y = 0, x = 0, y = 0;
     int start_x2 = 0, start_y2 = 0, x2 = 0, y2 = 0;
 
-    while(1)
+    while (1)
     {
         int flags = swf_GetBits(tag, 1);
         if (!flags)

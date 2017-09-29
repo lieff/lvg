@@ -657,17 +657,18 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 g_render->set_transform(g_render_obj, save_transform, 1);
                 g_render->set_transform(g_render_obj, o->t, 0);
                 g_render->set_transform(g_render_obj, text->t, 0);
-                float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, str->x, str->y };
+                float scale = str->height/50.0f;
+                float t[6] = { scale, 0.0f, 0.0f, scale, str->x, str->y };
                 g_render->set_transform(g_render_obj, t, 0);
                 for (int k = 0; k < str->num_chars; k++)
                 {
                     LVGChar *c = str->chars + k;
                     LVGShapeCollection *shapecol = &clip->shapes[f->glyphs[c->idx]];
-                    float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, (shapecol->bounds[2] - shapecol->bounds[0]) + c->x_advance/20.f, 0.0f };
-                    g_render->set_transform(g_render_obj, t, 0);
                     LVGColorTransform newcxform = *cxform;
                     combine_cxform(&newcxform, &o->cxform, alpha);
                     lvgDrawShape(shapecol, &newcxform, 0.0f, blend_mode);
+                    float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, c->x_advance/20.0f/scale, 0.0f };
+                    g_render->set_transform(g_render_obj, t, 0);
                 }
             }
         }
