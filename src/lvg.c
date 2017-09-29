@@ -645,7 +645,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     g_render->set_transform(g_render_obj, save_t, 1);
                 }
         } else
-        if (LVG_OBJ_TEXT == o->type)
+        if (LVG_OBJ_TEXT == o->type && visible)
         {
             LVGText *text = clip->texts + o->id;
             for (j = 0; j < text->num_strings; j++)
