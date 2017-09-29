@@ -1109,8 +1109,7 @@ void swf_Optimize(SWF*swf)
                 while(hashmap[hash%hash_size]) hash++;
                 hashmap[hash%hash_size] = tag;
             } else {
-                /* we found two identical tags- remap one
-           of them */
+                /* we found two identical tags- remap one of them */
                 remap[id] = swf_GetDefineID(tag2);
                 swf_DeleteTag(swf, tag);
             }

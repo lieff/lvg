@@ -1026,22 +1026,31 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_FontExtract_DefineFont2(0, swffont, tag);
                 font->num_chars = swffont->numchars;
                 font->glyphs = (int*)calloc(1, sizeof(font->glyphs[0])*font->num_chars);
+                font->utf2glyph  = swffont->ascii2glyph;
                 for (t = 0; t < font->num_chars; t++)
                 {
                     static const RGBA color_white = { 255, 255, 255, 255 };
-                    if (!swffont->glyph[t].shape->fillstyle.n)
-                        swf_ShapeAddSolidFillStyle(swffont->glyph[t].shape, (RGBA*)&color_white);
-                    SHAPE2 *swf_shape = swf_ShapeToShape2(swffont->glyph[t].shape);
+                    SHAPE *shape = swffont->glyph[t].shape;
+                    if (!shape->fillstyle.n)
+                        swf_ShapeAddSolidFillStyle(shape, (RGBA*)&color_white);
+                    SHAPE2 *swf_shape = swf_ShapeToShape2(shape);
                     LVGShapeCollection *shapecol = clip->shapes + clip->num_shapes;
-                    shapecol->bounds[2] = idtable[id].bbox.xmin/20.0f;
-                    shapecol->bounds[3] = idtable[id].bbox.ymin/20.0f;
-                    shapecol->bounds[0] = idtable[id].bbox.xmax/20.0f;
-                    shapecol->bounds[1] = idtable[id].bbox.ymax/20.0f;
-                    //parseShape(tag, idtable, clip, swf_shape, shapecol);
+                    shapecol->bounds[0] = 1e6f;
+                    shapecol->bounds[1] = 1e6f;
+                    shapecol->bounds[2] = -1e6f;
+                    shapecol->bounds[3] = -1e6f;
+                    TAG _tag;
+                    TAG* tag2 = &_tag;
+                    memset(tag2, 0, sizeof(TAG));
+                    tag2->data = shape->data;
+                    tag2->len = tag2->memsize = (shape->bitlen + 7)/8;
+                    if (tag2->len > 14)
+                        parseShape(tag2, idtable, clip, swf_shape, shapecol);
                     font->glyphs[t] = clip->num_shapes++;
                     swf_Shape2Free(swf_shape);
                     free(swf_shape);
                 }
+                swffont->ascii2glyph = 0;
                 swf_FontFree(swffont);
                 idtable[id].type = font_type;
                 idtable[id].lvg_id = clip->num_fonts++;

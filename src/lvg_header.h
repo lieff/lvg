@@ -87,6 +87,7 @@ typedef struct LVGShapeCollection
 typedef struct LVGFont
 {
     int *glyphs; // shape ids
+    int *utf2glyph;
     int num_chars, version;
 } LVGFont;
 

@@ -24,45 +24,45 @@
 
 #include "../rfxswf.h"
 
-U32 readUTF8char(U8 ** text)
+U32 readUTF8char(U8 **text)
 {
     U32 c = 0;
     if (!(*(*text) & 0x80))
         return *((*text)++);
 
     /* 0000 0080-0000 07FF   110xxxxx 10xxxxxx */
-    if (((*text)[0] & 0xe0) == 0xc0 && (*text)[1]) {
+    if (((*text)[0] & 0xe0) == 0xc0 && (*text)[1])
+    {
         c = ((*text)[0] & 0x1f) << 6 | ((*text)[1] & 0x3f);
         (*text) += 2;
         return c;
     }
     /* 0000 0800-0000 FFFF   1110xxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xf0) == 0xe0 && (*text)[1] && (*text)[2]) {
+    if (((*text)[0] & 0xf0) == 0xe0 && (*text)[1] && (*text)[2])
+    {
         c = ((*text)[0] & 0x0f) << 12 | ((*text)[1] & 0x3f) << 6 | ((*text)[2] & 0x3f);
         (*text) += 3;
         return c;
     }
     /* 0001 0000-001F FFFF   11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xf8) == 0xf0 && (*text)[1] && (*text)[2]
-            && (*text)[3]) {
+    if (((*text)[0] & 0xf8) == 0xf0 && (*text)[1] && (*text)[2] && (*text)[3])
+    {
         c = ((*text)[0] & 0x07) << 18 | ((*text)[1] & 0x3f) << 12 | ((*text)[2] & 0x3f) << 6 | ((*text)[3] & 0x3f);
         (*text) += 4;
         return c;
     }
     /* 0020 0000-03FF FFFF   111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xfc) == 0xf8 && (*text)[1] && (*text)[2]
-            && (*text)[3]
-            && (*text)[4]) {
+    if (((*text)[0] & 0xfc) == 0xf8 && (*text)[1] && (*text)[2] && (*text)[3] && (*text)[4])
+    {
         c = ((*text)[0] & 0x03) << 24 | ((*text)[1] & 0x3f) << 18 | ((*text)[2] & 0x3f) << 12 | ((*text)[3] & 0x3f) << 6 | ((*text)[4] & 0x3f);
         (*text) += 5;
         return c;
     }
     /* 0400 0000-7FFF FFFF   1111110x 10xxxxxx ... 10xxxxxx */
-    if (((*text)[0] & 0xfe) == 0xfc && (*text)[1] && (*text)[2]
-            && (*text)[3]
-            && (*text)[4] && (*text)[5]) {
+    if (((*text)[0] & 0xfe) == 0xfc && (*text)[1] && (*text)[2] && (*text)[3] && (*text)[4] && (*text)[5])
+    {
         c = ((*text)[0] & 0x01) << 30 | ((*text)[1] & 0x3f) << 24 |
-                                                               ((*text)[2] & 0x3f) << 18 | ((*text)[3] & 0x3f) << 12 | ((*text)[4] & 0x3f) << 6 | ((*text)[5] & 0x3f) << 6;
+            ((*text)[2] & 0x3f) << 18 | ((*text)[3] & 0x3f) << 12 | ((*text)[4] & 0x3f) << 6 | ((*text)[5] & 0x3f) << 6;
         (*text) += 6;
         return c;
     }
@@ -110,10 +110,13 @@ int swf_FontEnumerate(SWF * swf, void (*FontCallback) (void*, U16, U8 *), void*s
     t = swf->firstTag;
     n = 0;
 
-    while (t) {
-        if (swf_isFontTag(t)) {
+    while (t)
+    {
+        if (swf_isFontTag(t))
+        {
             n++;
-            if (FontCallback) {
+            if (FontCallback)
+            {
                 U16 id;
                 int l;
                 U8 s[257];
@@ -121,7 +124,8 @@ int swf_FontEnumerate(SWF * swf, void (*FontCallback) (void*, U16, U8 *), void*s
                 swf_SetTagPos(t, 0);
 
                 id = swf_GetU16(t);
-                if (swf_GetTagID(t) == ST_DEFINEFONT2 || swf_GetTagID(t) == ST_DEFINEFONTINFO || swf_GetTagID(t) == ST_DEFINEFONTINFO2) {
+                if (swf_GetTagID(t) == ST_DEFINEFONT2 || swf_GetTagID(t) == ST_DEFINEFONTINFO || swf_GetTagID(t) == ST_DEFINEFONTINFO2)
+                {
                     swf_GetU16(t);
                     l = swf_GetU8(t);
                     swf_GetBlock(t, s, l);
@@ -237,19 +241,20 @@ int swf_FontExtract_GlyphNames(int id, SWFFONT * f, TAG * tag)
 
     fid = swf_GetU16(tag);
 
-    if (fid == id) {
+    if (fid == id)
+    {
         int num = swf_GetU16(tag);
         int t;
         f->glyphnames = (char**)malloc(sizeof(char *) * num);
-        for (t = 0; t < num; t++) {
+        for (t = 0; t < num; t++)
+        {
             f->glyphnames[t] = strdup(swf_GetString(tag));
         }
     }
     return id;
 }
 
-
-int swf_FontExtract_DefineFont2(int id, SWFFONT * font, TAG * tag)
+int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
 {
     int t, glyphcount;
     int maxcode;
@@ -727,140 +732,6 @@ static void font_freename(SWFFONT*f)
     }
 }
 
-int swf_FontReduce_old(SWFFONT * f)
-{
-    int i, j;
-    int max_unicode = 0;
-    if ((!f) || (!f->use) || f->use->is_reduced)
-        return -1;
-
-    j = 0;
-
-    for (i = 0; i < f->numchars; i++) {
-        if (f->glyph[i].shape && f->use->chars[i]) {
-            f->glyph2ascii[j] = f->glyph2ascii[i];
-            f->glyph[j] = f->glyph[i];
-            f->use->chars[i] = j;
-            j++;
-        } else {
-            f->glyph2ascii[i] = 0;
-            if(f->glyph[i].shape) {
-                swf_ShapeFree(f->glyph[i].shape);
-                f->glyph[i].shape = 0;
-                f->glyph[i].advance = 0;
-            }
-            f->use->chars[i] = -1;
-            j++; //TODO: remove
-        }
-    }
-    for (i = 0; i < f->maxascii; i++) {
-        if(f->use->chars[f->ascii2glyph[i]]<0) {
-            f->ascii2glyph[i] = -1;
-        } else {
-            f->ascii2glyph[i] = f->use->chars[f->ascii2glyph[i]];
-            max_unicode = i;
-        }
-    }
-    f->maxascii = max_unicode;
-    f->use->is_reduced = 1;
-    f->numchars = j;
-    font_freelayout(f);
-    font_freeglyphnames(f);
-    font_freename(f);
-    return j;
-}
-
-int swf_FontReduce_swfc(SWFFONT * f)
-{
-    int i, j;
-    int max_unicode = 0;
-    if ((!f) || (!f->use) || f->use->is_reduced)
-        return -1;
-
-    font_freeglyphnames(f);
-
-    j = 0;
-    for (i = 0; i < f->numchars; i++) {
-        if (f->glyph[i].shape && f->use->chars[i]) {
-            f->glyph2ascii[j] = f->glyph2ascii[i];
-            if (f->layout)
-                f->layout->bounds[j] = f->layout->bounds[i];
-            f->glyph[j] = f->glyph[i];
-            f->use->chars[i] = j;
-            j++;
-        } else {
-            f->glyph2ascii[i] = 0;
-            if(f->glyph[i].shape) {
-                swf_ShapeFree(f->glyph[i].shape);
-                f->glyph[i].shape = 0;
-                f->glyph[i].advance = 0;
-            }
-            f->use->chars[i] = -1;
-        }
-    }
-    f->use->used_glyphs = j;
-    for (i = 0; i < f->maxascii; i++) {
-        if(f->ascii2glyph[i] > -1) {
-            if (f->use->chars[f->ascii2glyph[i]]<0) {
-                f->use->chars[f->ascii2glyph[i]] = 0;
-                f->ascii2glyph[i] = -1;
-            } else {
-                f->ascii2glyph[i] = f->use->chars[f->ascii2glyph[i]];
-                f->use->chars[f->ascii2glyph[i]] = 1;
-                max_unicode = i + 1;
-            }
-        }
-    }
-    f->maxascii = max_unicode;
-    f->use->is_reduced = 1;
-    f->numchars = j;
-    font_freename(f);
-    return j;
-}
-
-int swf_FontReduce(SWFFONT * f)
-{
-    int i;
-    int max_unicode = 0;
-    int max_glyph = 0;
-    if ((!f) || (!f->use) || f->use->is_reduced)
-        return -1;
-
-    font_freelayout(f);
-    font_freeglyphnames(f);
-
-    f->use->used_glyphs= 0;
-    for (i = 0; i < f->numchars; i++) {
-        if(!f->use->chars[i]) {
-            if(f->glyph2ascii) {
-                f->glyph2ascii[i] = 0;
-            }
-            if(f->glyph[i].shape) {
-                swf_ShapeFree(f->glyph[i].shape);
-                f->glyph[i].shape = 0;
-                f->glyph[i].advance = 0;
-            }
-            //	    f->use->used_glyphs++;
-        } else {
-            f->use->used_glyphs++;
-            max_glyph = i+1;
-        }
-    }
-    for (i = 0; i < f->maxascii; i++) {
-        if(f->ascii2glyph[i] > -1 && !f->use->chars[f->ascii2glyph[i]]) {
-            if(f->ascii2glyph) {
-                f->ascii2glyph[i] = -1;
-            }
-        } else {
-            max_unicode = i+1;
-        }
-    }
-    f->maxascii = max_unicode;
-    f->numchars = max_glyph;
-    font_freename(f);
-    return 0;
-}
-
 //static SWFFONT* font_to_sort;
 int cmp_chars(const void*a, const void*b)
 {
@@ -1134,124 +1005,6 @@ static inline int fontSize(SWFFONT * font)
     return size + (font->numchars + 1) * 2;
 }
 
-int swf_FontSetDefine2(TAG * tag, SWFFONT * f)
-{
-    U8 flags = 0;
-    int t;
-    int pos;
-    swf_SetU16(tag, f->id);
-
-    if (f->layout) flags |= 128;		// haslayout
-    if (f->numchars > 256)
-        flags |= 4;		// widecodes
-    if (f->style & FONT_STYLE_BOLD)
-        flags |= 1;		// bold
-    if (f->style & FONT_STYLE_ITALIC)
-        flags |= 2;		// italic
-    if (f->maxascii >= 256)
-        flags |= 4;		//wide codecs
-    if (fontSize(f) > 65535)
-        flags |= 8;		//wide offsets
-    flags |= 8 | 4;		//FIXME: the above check doesn't work
-
-    if (f->encoding & FONT_ENCODING_ANSI)
-        flags |= 16;		// ansi
-    if (f->encoding & FONT_ENCODING_UNICODE)
-        flags |= 32;		// unicode
-    if (f->encoding & FONT_ENCODING_SHIFTJIS)
-        flags |= 64;		// shiftjis
-
-    swf_SetU8(tag, flags);
-    swf_SetU8(tag, 0);		//reserved flags
-    if (f->name) {
-        /* font name */
-        swf_SetU8(tag, strlen((const char*)f->name)+1);
-        swf_SetBlock(tag, f->name, strlen((const char*)f->name)+1);
-    } else {
-        /* font name (="") */
-        swf_SetU8(tag, 1);
-        swf_SetU8(tag, 0);
-    }
-    /* number of glyphs */
-    swf_SetU16(tag, f->numchars);
-    /* font offset table */
-    pos = tag->len;
-    for (t = 0; t <= f->numchars; t++) {
-        if (flags & 8)
-            swf_SetU32(tag, /* fontoffset */ 0);	/*placeholder */
-        else
-            swf_SetU16(tag, /* fontoffset */ 0);	/*placeholder */
-    }
-
-    for (t = 0; t <= f->numchars; t++) {
-        if (flags & 8) {
-            tag->data[pos + t * 4] = (tag->len - pos);
-            tag->data[pos + t * 4 + 1] = (tag->len - pos) >> 8;
-            tag->data[pos + t * 4 + 2] = (tag->len - pos) >> 16;
-            tag->data[pos + t * 4 + 3] = (tag->len - pos) >> 24;
-        } else {
-            if (tag->len - pos > 65535) {
-                fprintf(stderr, "Internal error: Font too big and WideOffsets flag not set\n");
-                exit(1);
-            }
-            tag->data[pos + t * 2] = (tag->len - pos);
-            tag->data[pos + t * 2 + 1] = (tag->len - pos) >> 8;
-        }
-        if (t < f->numchars) {
-            if(f->glyph[t].shape) {
-                swf_SetSimpleShape(tag, f->glyph[t].shape);
-            } else {
-                swf_SetU8(tag, 0); //non-edge(1) + edge flags(5)
-            }
-        }
-    }
-
-
-    /* font code table */
-    for (t = 0; t < f->numchars; t++) {
-        if (flags & 4) {		/* wide codes */
-            if(f->glyph2ascii[t]) {
-                swf_SetU16(tag, f->glyph2ascii[t]);
-            } else {
-                swf_SetU16(tag, 0);
-            }
-        } else {
-            if(f->glyph2ascii[t]) {
-                swf_SetU8(tag, f->glyph2ascii[t]);
-            } else {
-                swf_SetU8(tag, 0);
-            }
-        }
-    }
-
-    if (f->layout) {
-        swf_SetU16(tag, f->layout->ascent);
-        swf_SetU16(tag, f->layout->descent);
-        swf_SetU16(tag, 0); // flash ignores leading
-
-        for (t = 0; t < f->numchars; t++)
-            swf_SetU16(tag, f->glyph[t].advance);
-        for (t = 0; t < f->numchars; t++) {
-            swf_ResetWriteBits(tag);
-            /* not used by flash, so leave this empty */
-            SRECT b = {0,0,0,0};
-            swf_SetRect(tag, &b);
-        }
-        swf_SetU16(tag, f->layout->kerningcount);
-        for (t = 0; t < f->layout->kerningcount; t++) {
-            if (flags & 4) {	/* wide codes */
-                swf_SetU16(tag, f->layout->kerning[t].char1);
-                swf_SetU16(tag, f->layout->kerning[t].char2);
-            } else {
-                swf_SetU8(tag, f->layout->kerning[t].char1);
-                swf_SetU8(tag, f->layout->kerning[t].char2);
-            }
-            swf_SetU16(tag, f->layout->kerning[t].adjustment);
-        }
-    }
-    return 0;
-}
-
 void swf_FontAddLayout(SWFFONT * f, int ascent, int descent, int leading)
 {
     f->layout = (SWFLAYOUT *) malloc(sizeof(SWFLAYOUT));
@@ -1261,57 +1014,6 @@ void swf_FontAddLayout(SWFFONT * f, int ascent, int descent, int leading)
     f->layout->kerningcount = 0;
     f->layout->kerning = 0;
     f->layout->bounds = (SRECT *) calloc(1, sizeof(SRECT) * f->numchars);
-}
-
-int swf_FontSetInfo(TAG * t, SWFFONT * f)
-{
-    int l, i;
-    U8 wide = 0;
-    U8 flags = 0;
-    if ((!t) || (!f))
-        return -1;
-    swf_ResetWriteBits(t);
-    swf_SetU16(t, f->id);
-    l = f->name ? strlen((const char *)f->name) : 0;
-    if (l > 255)
-        l = 255;
-    swf_SetU8(t, l);
-    if (l)
-        swf_SetBlock(t, f->name, l);
-    if (f->numchars >= 256)
-        wide = 1;
-
-    if (f->style & FONT_STYLE_BOLD)
-        flags |= 2;
-    if (f->style & FONT_STYLE_ITALIC)
-        flags |= 4;
-    if (f->style & FONT_ENCODING_ANSI)
-        flags |= 8;
-    if (f->style & FONT_ENCODING_SHIFTJIS)
-        flags |= 16;
-    if (f->style & FONT_ENCODING_UNICODE)
-        flags |= 32;
-
-    swf_SetU8(t, (flags & 0xfe) | wide);
-
-    for (i = 0; i < f->numchars; i++) {
-        if (f->glyph[i].shape) {
-            int g2a = f->glyph2ascii?f->glyph2ascii[i]:0;
-            wide ? swf_SetU16(t, g2a) : swf_SetU8(t, g2a);
-        }
-    }
-
-    return 0;
-}
-
-int swf_TextPrintDefineText(TAG * t, SWFFONT * f)
-{
-    int id = swf_GetTagID(t);
-    if ((id == ST_DEFINETEXT) || (id == ST_DEFINETEXT2))
-        swf_FontExtract_DefineText(f->id, f, t, FEDTJ_PRINT);
-    else
-        return -1;
-    return 0;
 }
 
 static void font_freealignzones(SWFFONT * f)
@@ -1361,48 +1063,6 @@ void swf_FontFree(SWFFONT * f)
     free(f);
 }
 
-int swf_TextSetInfoRecord(TAG * t, SWFFONT * font, U16 size, RGBA * color, int x, int y)
-{
-    U8 flags;
-    if (!t)
-        return -1;
-
-    flags = TF_TEXTCONTROL | (font ? TF_HASFONT : 0) | (color ? TF_HASCOLOR : 0) | (x ? TF_HASXOFFSET : 0)
-            | (y ? TF_HASYOFFSET : 0);
-
-    swf_SetU8(t, flags);
-    if (font)
-        swf_SetU16(t, font->id);
-    if (color) {
-        if (swf_GetTagID(t) == ST_DEFINETEXT2)
-            swf_SetRGBA(t, color);
-        else
-            swf_SetRGB(t, color);
-    }
-    if (x) {
-        if(x != SET_TO_ZERO) {
-            if(x>32767 || x<-32768)
-                fprintf(stderr, "Warning: Horizontal char position overflow: %d\n", x);
-            swf_SetS16(t, x);
-        } else {
-            swf_SetS16(t, 0);
-        }
-    }
-    if (y) {
-        if(y != SET_TO_ZERO) {
-            if(y>32767 || y<-32768)
-                fprintf(stderr, "Warning: Vertical char position overflow: %d\n", y);
-            swf_SetS16(t, y);
-        } else {
-            swf_SetS16(t, 0);
-        }
-    }
-    if (font)
-        swf_SetU16(t, size);
-
-    return 0;
-}
-
 static int swf_TextCountBits2(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits, char *encoding)
 {
     U16 g, a;
@@ -1441,72 +1101,14 @@ static int swf_TextCountBits2(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 
     return 0;
 }
 
-static int swf_TextSetCharRecord2(TAG * t, SWFFONT * font, U8 * s, int scale, U8 gbits, U8 abits, char *encoding)
-{
-    int l = 0, pos;
-    char utf8 = 0;
-
-    if ((!t) || (!font) || (!s) || (!font->ascii2glyph))
-        return -1;
-
-    if (!strcmp(encoding, "UTF8"))
-        utf8 = 1;
-    else if (!strcmp(encoding, "iso-8859-1"))
-        utf8 = 0;
-    else
-        fprintf(stderr, "Unknown encoding: %s", encoding);
-
-    pos = t->len;
-    swf_SetU8(t, l);		//placeholder
-
-    while (*s) {
-        int g = -1, c;
-
-        if (!utf8)
-            c = *s++;
-        else
-            c = readUTF8char(&s);
-
-        if (c < font->maxascii)
-            g = font->ascii2glyph[c];
-        if (g >= 0) {
-            swf_SetBits(t, g, gbits);
-            swf_SetBits(t, ((((U32) font->glyph[g].advance) * scale) / 20) / 100, abits);
-            l++;
-            /* We split into 127 characters per text field.
-           We could do 255, by the (formerly wrong) flash specification,
-           but some SWF parsing code out there still assumes that char blocks
-           are at max 127 characters, and it would save only a few bits.
-        */
-            if (l == 0x7f)
-                break;
-        }
-    }
-
-    PUT8(&t->data[pos], l);
-
-    swf_ResetWriteBits(t);
-    return 0;
-}
-
 int swf_TextCountBits(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits)
 {
     return swf_TextCountBits2(font, s, scale, gbits, abits, "iso-8859-1");
 }
 
-int swf_TextSetCharRecord(TAG * t, SWFFONT * font, U8 * s, int scale, U8 gbits, U8 abits)
-{
-    return swf_TextSetCharRecord2(t, font, s, scale, gbits, abits, "iso-8859-1");
-}
-
 int swf_TextCountBitsUTF8(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits)
 {
     return swf_TextCountBits2(font, s, scale, gbits, abits, "UTF8");
-}
-
-int swf_TextSetCharRecordUTF8(TAG * t, SWFFONT * font, U8 * s, int scale, U8 gbits, U8 abits)
-{
-    return swf_TextSetCharRecord2(t, font, s, scale, gbits, abits, "UTF8");
 }
 
 U32 swf_TextGetWidth(SWFFONT * font, U8 * s, int scale)
@@ -1558,48 +1160,6 @@ SRECT swf_TextCalculateBBoxUTF8(SWFFONT * font, U8 * s, int scale)
         }
     }
     return r;
-}
-
-
-void swf_SetEditText(TAG * tag, U16 flags, SRECT r, const char *text, RGBA * color, int maxlength, U16 font, U16 height, EditTextLayout * layout, const char *variable)
-{
-    swf_SetRect(tag, &r);
-    swf_ResetWriteBits(tag);
-
-    flags &= ~(ET_HASTEXT | ET_HASTEXTCOLOR | ET_HASMAXLENGTH | ET_HASFONT | ET_HASLAYOUT);
-    if (text)
-        flags |= ET_HASTEXT;
-    if (color)
-        flags |= ET_HASTEXTCOLOR;
-    if (maxlength)
-        flags |= ET_HASMAXLENGTH;
-    if (font)
-        flags |= ET_HASFONT;
-    if (layout)
-        flags |= ET_HASLAYOUT;
-
-    swf_SetBits(tag, flags, 16);
-
-    if (flags & ET_HASFONT) {
-        swf_SetU16(tag, font);	//font
-        swf_SetU16(tag, height);	//fontheight
-    }
-    if (flags & ET_HASTEXTCOLOR) {
-        swf_SetRGBA(tag, color);
-    }
-    if (flags & ET_HASMAXLENGTH) {
-        swf_SetU16(tag, maxlength);	//maxlength
-    }
-    if (flags & ET_HASLAYOUT) {
-        swf_SetU8(tag, layout->align);	//align
-        swf_SetU16(tag, layout->leftmargin);	//left margin
-        swf_SetU16(tag, layout->rightmargin);	//right margin
-        swf_SetU16(tag, layout->indent);	//indent
-        swf_SetU16(tag, layout->leading);	//leading
-    }
-    swf_SetString(tag, variable);
-    if (flags & ET_HASTEXT)
-        swf_SetString(tag, text);
 }
 
 void swf_FontCreateLayout(SWFFONT * f)

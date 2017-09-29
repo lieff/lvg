@@ -66,9 +66,9 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
     sh = s[0];
 
     swf_ResetReadBits(t);
+    bitl = 8; end = 0; pos = swf_GetTagPos(t);
     sh->bits.fill = (U16)swf_GetBits(t, 4);
     sh->bits.line = (U16)swf_GetBits(t, 4);
-    bitl = 0; end = 0; pos = swf_GetTagPos(t);
 
     while (!end)
     {
@@ -915,7 +915,7 @@ SHAPE2 *swf_ShapeToShape2(SHAPE *shape)
         memcpy(shape2->fillstyles, shape->fillstyle.data, sizeof(FILLSTYLE)*shape->fillstyle.n);
     }
 
-    shape2->lines = swf_ParseShapeData(shape->data, shape->bitlen, shape->bits.fill, shape->bits.line, 1, 0);
+    //shape2->lines = swf_ParseShapeData(shape->data, shape->bitlen, shape->bits.fill, shape->bits.line, 1, 0);
     shape2->bbox = 0;
     return shape2;
 };

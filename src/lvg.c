@@ -782,6 +782,8 @@ void lvgCloseClip(LVGMovieClip *clip)
         LVGFont *font = clip->fonts + i;
         if (font->glyphs)
             free(font->glyphs);
+        if (font->utf2glyph)
+            free(font->utf2glyph);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {
