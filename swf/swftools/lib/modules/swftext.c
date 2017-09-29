@@ -101,45 +101,6 @@ int swf_FontIsBold(SWFFONT * f)
     return f->style & FONT_STYLE_BOLD;
 }
 
-int swf_FontEnumerate(SWF * swf, void (*FontCallback) (void*, U16, U8 *), void*self)
-{
-    int n;
-    TAG *t;
-    if (!swf)
-        return -1;
-    t = swf->firstTag;
-    n = 0;
-
-    while (t)
-    {
-        if (swf_isFontTag(t))
-        {
-            n++;
-            if (FontCallback)
-            {
-                U16 id;
-                int l;
-                U8 s[257];
-                s[0] = 0;
-                swf_SetTagPos(t, 0);
-
-                id = swf_GetU16(t);
-                if (swf_GetTagID(t) == ST_DEFINEFONT2 || swf_GetTagID(t) == ST_DEFINEFONTINFO || swf_GetTagID(t) == ST_DEFINEFONTINFO2)
-                {
-                    swf_GetU16(t);
-                    l = swf_GetU8(t);
-                    swf_GetBlock(t, s, l);
-                    s[l] = 0;
-                }
-
-                (FontCallback) (self, id, s);
-            }
-        }
-        t = swf_NextTag(t);
-    }
-    return n;
-}
-
 int swf_FontExtract_DefineFont(int id, SWFFONT * f, TAG * t)
 {
     U16 fid;
@@ -448,221 +409,6 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
     return id;
 }
 
-
-#define FEDTJ_PRINT  0x01
-#define FEDTJ_MODIFY 0x02
-#define FEDTJ_CALLBACK 0x04
-
-static int
-swf_FontExtract_DefineTextCallback(int id, SWFFONT * f, TAG * t, int jobs,
-    void (*callback) (void *self, int *chars, int *xpos, int nr, int fontid, int fontsize, int xstart, int ystart, RGBA * color), void *self)
-{
-    //U16 cid;
-    SRECT r;
-    MATRIX m;
-    U8 gbits, abits;
-    int fid = -1;
-    RGBA color;
-    int x = 0, y = 0;
-    int fontsize = 0;
-
-    memset(&color, 0, sizeof(color));
-
-    swf_SetTagPos(t, 0);
-
-    /*cid = */swf_GetU16(t);
-    swf_GetRect(t, &r);
-    swf_GetMatrix(t, &m);
-    gbits = swf_GetU8(t);
-    abits = swf_GetU8(t);
-
-    while (1) {
-        int flags, num;
-        flags = swf_GetU8(t);
-        if (!flags)
-            break;
-
-        if (flags & TF_TEXTCONTROL)
-        {
-            if (flags & TF_HASFONT)
-                fid = swf_GetU16(t);
-            if (flags & TF_HASCOLOR) {
-                color.r = swf_GetU8(t);	// rgb
-                color.g = swf_GetU8(t);
-                color.b = swf_GetU8(t);
-                if (swf_GetTagID(t) == ST_DEFINETEXT2)
-                    color.a = swf_GetU8(t);
-                else
-                    color.a = 255;
-            }
-            if (flags & TF_HASXOFFSET)
-                x = swf_GetS16(t);
-            if (flags & TF_HASYOFFSET)
-                y = swf_GetS16(t);
-            if (flags & TF_HASFONT)
-                fontsize = swf_GetU16(t);
-        }
-
-        num = swf_GetU8(t);
-        if (!num)
-            break;
-
-        {
-            int i;
-            int buf[256];
-            int advance[256];
-            int xpos = 0;
-            for (i = 0; i < num; i++)
-            {
-                int glyph;
-                int adv = 0;
-                advance[i] = xpos;
-                glyph = swf_GetBits(t, gbits);
-                adv = swf_GetBits(t, abits);
-                xpos += adv;
-
-                if (id == fid)
-                {
-                    if (jobs & FEDTJ_PRINT)
-                    {
-                        int code = f->glyph2ascii[glyph];
-                        printf("%lc", code);
-                    }
-                    if (jobs & FEDTJ_MODIFY)
-                        f->glyph[glyph].advance = adv * 20;	//?
-                }
-
-                buf[i] = glyph;
-            }
-            if ((id == fid) && (jobs & FEDTJ_PRINT))
-                printf("\n");
-            if (jobs & FEDTJ_CALLBACK)
-                callback(self, buf, advance, num, fid, fontsize, x, y, &color);
-            x += xpos;
-        }
-    }
-
-    return id;
-}
-
-int swf_ParseDefineText(TAG * tag,
-                        void (*callback) (void *self, int *chars, int *xpos, int nr, int fontid, int fontsize, int xstart, int ystart, RGBA * color), void *self)
-{
-    return swf_FontExtract_DefineTextCallback(-1, 0, tag, FEDTJ_CALLBACK, callback, self);
-}
-
-int swf_FontExtract_DefineText(int id, SWFFONT * f, TAG * t, int jobs)
-{
-    return swf_FontExtract_DefineTextCallback(id, f, t, jobs, 0, 0);
-}
-
-typedef struct _usagetmp {
-    SWFFONT*font;
-    int lastx,lasty;
-    int last;
-} usagetmp_t;
-static void updateusage(void *self, int *chars, int *xpos, int nr,
-                        int fontid, int fontsize, int xstart, int ystart, RGBA * color)
-{
-    usagetmp_t*u = (usagetmp_t*)self;
-    if (!u->font->use)
-    {
-        swf_FontInitUsage(u->font);
-    }
-    if (fontid!=u->font->id)
-        return;
-
-    int t;
-    for (t = 0; t < nr; t++)
-    {
-        int x=xpos[t];
-        int y=ystart;
-        int c = chars[t];
-        if (c < 0 || c > u->font->numchars)
-            continue;
-        swf_FontUseGlyph(u->font, c, fontsize);
-        if (u->lasty == y && x>=u->lastx-200 && abs(u->lastx-x)<200 &&
-            u->last!=c && !swf_ShapeIsEmpty(u->font->glyph[u->last].shape) &&
-            !swf_ShapeIsEmpty(u->font->glyph[c].shape))
-        {
-            swf_FontUsePair(u->font, u->last, c);
-        }
-        u->lasty = y;
-        /* FIXME: do we still need to divide advance by 20 for definefont3? */
-        u->lastx = x + (u->font->glyph[c].advance*fontsize/20480);
-        u->last = c;
-    }
-}
-
-void swf_FontUpdateUsage(SWFFONT*f, TAG* tag)
-{
-    usagetmp_t u;
-    u.font = f;
-    u.lastx = -0x80000000;
-    u.lasty = -0x80000000;
-    u.last = 0;
-    swf_ParseDefineText(tag, updateusage, &u);
-}
-
-int swf_FontExtract(TAG *firstTag, int id, SWFFONT * *font)
-{
-    TAG *t = firstTag;
-    SWFFONT *f;
-
-    if ((!t) || (!font))
-        return -1;
-
-    f = (SWFFONT *) calloc(1, sizeof(SWFFONT));
-
-    while (t)
-    {
-        int nid = 0;
-        switch (swf_GetTagID(t))
-        {
-        case ST_DEFINEFONT:
-            nid = swf_FontExtract_DefineFont(id, f, t);
-            break;
-
-        case ST_DEFINEFONT2:
-        case ST_DEFINEFONT3:
-            nid = swf_FontExtract_DefineFont2(id, f, t);
-            break;
-
-        case ST_DEFINEFONTALIGNZONES:
-            nid = swf_FontExtract_DefineFontAlignZones(id, f, t);
-            break;
-
-        case ST_DEFINEFONTINFO:
-        case ST_DEFINEFONTINFO2:
-            nid = swf_FontExtract_DefineFontInfo(id, f, t);
-            break;
-
-        case ST_DEFINETEXT:
-        case ST_DEFINETEXT2:
-            if (!f->layout)
-            {
-                nid = swf_FontExtract_DefineText(id, f, t, FEDTJ_MODIFY);
-            }
-            if (f->version >= 3 && f->layout)
-                swf_FontUpdateUsage(f, t);
-            break;
-        case ST_GLYPHNAMES:
-            nid = swf_FontExtract_GlyphNames(id, f, t);
-            break;
-        }
-        if (nid > 0)
-            id = nid;
-        t = swf_NextTag(t);
-    }
-    if (f->id != id)
-    {
-        free(f);
-        f = 0;
-    }
-    font[0] = f;
-    return 0;
-}
-
 int swf_FontSetID(SWFFONT *f, U16 id)
 {
     if (!f)
@@ -683,7 +429,6 @@ void swf_LayoutFree(SWFLAYOUT * l)
     }
     free(l);
 }
-
 
 static void font_freeglyphnames(SWFFONT*f)
 {
@@ -808,66 +553,6 @@ void swf_FontPrepareForEditText(SWFFONT * font)
     swf_FontSort(font);
 }
 
-int swf_FontInitUsage(SWFFONT * f)
-{
-    if (!f)
-        return -1;
-    if(f->use) {
-        fprintf(stderr, "Usage initialized twice");
-        return -1;
-    }
-    f->use = (FONTUSAGE*)calloc(1, sizeof(FONTUSAGE));
-    f->use->smallest_size = 0xffff;
-    f->use->chars = (int*)calloc(1, sizeof(f->use->chars[0]) * f->numchars);
-    return 0;
-}
-
-void swf_FontClearUsage(SWFFONT * f)
-{
-    if (!f || !f->use)
-        return;
-    free(f->use->chars); f->use->chars = 0;
-    free(f->use); f->use = 0;
-}
-
-int swf_FontUse(SWFFONT * f, U8 * s)
-{
-    if( (!s))
-        return -1;
-    while (*s) {
-        if(*s < f->maxascii && f->ascii2glyph[*s]>=0)
-            swf_FontUseGlyph(f, f->ascii2glyph[*s], /*FIXME*/0xffff);
-        s++;
-    }
-    return 0;
-}
-
-int swf_FontUseUTF8(SWFFONT * f, const U8 * s, U16 size)
-{
-    if( (!s))
-        return -1;
-    int ascii;
-    while (*s)
-    {
-        ascii = readUTF8char((U8**)&s);
-        if(ascii < f->maxascii && f->ascii2glyph[ascii]>=0)
-            swf_FontUseGlyph(f, f->ascii2glyph[ascii], size);
-    }
-    return 0;
-}
-
-int swf_FontUseAll(SWFFONT* f)
-{
-    int i;
-
-    if (!f->use)
-        swf_FontInitUsage(f);
-    for (i = 0; i < f->numchars; i++)
-        f->use->chars[i] = 1;
-    f->use->used_glyphs = f->numchars;
-    return 0;
-}
-
 static unsigned hash2(int char1, int char2)
 {
     unsigned hash = char1^(char2<<8);
@@ -876,18 +561,7 @@ static unsigned hash2(int char1, int char2)
     hash += (hash << 15);
     return hash;
 }
-static void hashadd(FONTUSAGE*u, int char1, int char2, int nr)
-{
-    unsigned hash = hash2(char1, char2);
-    while(1) {
-        hash = hash%u->neighbors_hash_size;
-        if(!u->neighbors_hash[hash]) {
-            u->neighbors_hash[hash] = nr+1;
-            return;
-        }
-        hash++;
-    }
-}
+
 int swf_FontUseGetPair(SWFFONT * f, int char1, int char2)
 {
     FONTUSAGE*u = f->use;
@@ -907,53 +581,6 @@ int swf_FontUseGetPair(SWFFONT * f, int char1, int char2)
         hash++;
     }
 
-}
-void swf_FontUsePair(SWFFONT * f, int char1, int char2)
-{
-    if (!f->use)
-        swf_FontInitUsage(f);
-    FONTUSAGE*u = f->use;
-
-    if(u->num_neighbors*3 >= u->neighbors_hash_size*2) {
-        if(u->neighbors_hash) {
-            free(u->neighbors_hash);
-        }
-        u->neighbors_hash_size = u->neighbors_hash_size?u->neighbors_hash_size*2:1024;
-        u->neighbors_hash = calloc(1, u->neighbors_hash_size*sizeof(int));
-        int t;
-        for(t=0;t<u->num_neighbors;t++) {
-            hashadd(u, u->neighbors[t].char1, u->neighbors[t].char2, t);
-        }
-    }
-
-    int nr = swf_FontUseGetPair(f, char1, char2);
-    if(!nr) {
-        if(u->num_neighbors == u->neighbors_size) {
-            u->neighbors_size += 4096;
-            u->neighbors = realloc(u->neighbors, sizeof(SWFGLYPHPAIR)*u->neighbors_size);
-        }
-        u->neighbors[u->num_neighbors].char1 = char1;
-        u->neighbors[u->num_neighbors].char2 = char2;
-        u->neighbors[u->num_neighbors].num = 1;
-        hashadd(u, char1, char2, u->num_neighbors);
-        u->num_neighbors++;
-    } else {
-        u->neighbors[nr-1].num++;
-    }
-}
-
-int swf_FontUseGlyph(SWFFONT * f, int glyph, U16 size)
-{
-    if (!f->use)
-        swf_FontInitUsage(f);
-    if(glyph < 0 || glyph >= f->numchars)
-        return -1;
-    if(!f->use->chars[glyph])
-        f->use->used_glyphs++;
-    f->use->chars[glyph] = 1;
-    if(size && size < f->use->smallest_size)
-        f->use->smallest_size = size;
-    return 0;
 }
 
 static inline int fontSize(SWFFONT * font)

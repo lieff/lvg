@@ -365,29 +365,6 @@ void swf_FontCreateAlignZones(SWFFONT * f)
     }
 }
 
-void swf_FontPostprocess(SWF*swf)
-{
-    TAG *tag = swf->firstTag;
-    while(tag)
-    {
-        TAG *next = tag->next;
-        if (tag->id == ST_DEFINEFONT3)
-        {
-            U16 id = swf_GetDefineID(tag);
-            SWFFONT*font = 0;
-            swf_FontExtract(swf->firstTag, id, &font);
-            if(!font->alignzones)
-            {
-                swf_FontCreateAlignZones(font);
-                tag = swf_InsertTag(tag, ST_DEFINEFONTALIGNZONES);
-                swf_FontSetAlignZones(tag, font);
-            }
-            swf_FontFree(font);
-        }
-        tag = next;
-    }
-}
-
 void swf_FontSetAlignZones(TAG*t, SWFFONT *f)
 {
     swf_SetU16(t, f->id);
