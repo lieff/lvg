@@ -43,7 +43,6 @@ sources = [
     'swf/swftools/lib/modules/swfbits.c',
     'swf/swftools/lib/modules/swfdraw.c',
     'swf/swftools/lib/modules/swffilter.c',
-    'swf/swftools/lib/modules/swffont.c',
     'swf/swftools/lib/modules/swfobject.c',
     'swf/swftools/lib/modules/swfshape.c',
     'swf/swftools/lib/modules/swftext.c',

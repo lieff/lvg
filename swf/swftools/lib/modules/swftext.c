@@ -504,14 +504,17 @@ void swf_FontSort(SWFFONT * font)
 
     newplace = (int*)malloc(sizeof(int) * font->numchars);
 
-    for (i = 0; i < font->numchars; i++) {
+    for (i = 0; i < font->numchars; i++)
+    {
         newplace[i] = i;
     }
     //qsort(newplace, sizeof(newplace[0]), font->numchars, cmp_chars);
 
     for (i = 0; i < font->numchars; i++)
-        for (j = 0; j < i; j++) {
-            if (font->glyph2ascii[i] < font->glyph2ascii[j]) {
+        for (j = 0; j < i; j++)
+        {
+            if (font->glyph2ascii[i] < font->glyph2ascii[j])
+            {
                 int n1, n2;
                 char *c1, *c2;
                 SWFGLYPH g1, g2;
@@ -528,13 +531,15 @@ void swf_FontSort(SWFFONT * font)
                 g2 = font->glyph[j];
                 font->glyph[j] = g1;
                 font->glyph[i] = g2;
-                if (font->glyphnames) {
+                if (font->glyphnames)
+                {
                     c1 = font->glyphnames[i];
                     c2 = font->glyphnames[j];
                     font->glyphnames[j] = c1;
                     font->glyphnames[i] = c2;
                 }
-                if (font->layout) {
+                if (font->layout)
+                {
                     r1 = font->layout->bounds[i];
                     r2 = font->layout->bounds[j];
                     font->layout->bounds[j] = r1;
@@ -543,10 +548,12 @@ void swf_FontSort(SWFFONT * font)
             }
         }
     newpos = (int*)malloc(sizeof(int) * font->numchars);
-    for (i = 0; i < font->numchars; i++) {
+    for (i = 0; i < font->numchars; i++)
+    {
         newpos[newplace[i]] = i;
     }
-    for (i = 0; i < font->maxascii; i++) {
+    for (i = 0; i < font->maxascii; i++)
+    {
         if (font->ascii2glyph[i] >= 0)
             font->ascii2glyph[i] = newpos[font->ascii2glyph[i]];
     }
