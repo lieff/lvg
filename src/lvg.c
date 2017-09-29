@@ -658,6 +658,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 g_render->set_transform(g_render_obj, o->t, 0);
                 g_render->set_transform(g_render_obj, text->t, 0);
                 float scale = str->height/50.0f;
+                if (3 == f->version)
+                    scale /= 20.0f;
                 float t[6] = { scale, 0.0f, 0.0f, scale, str->x, str->y };
                 g_render->set_transform(g_render_obj, t, 0);
                 for (int k = 0; k < str->num_chars; k++)
