@@ -809,6 +809,17 @@ void lvgCloseClip(LVGMovieClip *clip)
         if (font->glyphs)
             free(font->glyphs);
     }
+    for (i = 0; i < clip->num_texts; i++)
+    {
+        LVGText *text = clip->texts + i;
+        for (j = 0; j < text->num_strings; j++)
+        {
+            LVGString *str = text->strings + j;
+            if (str->chars)
+                free(str->chars);
+        }
+        free(text->strings);
+    }
     for (i = 0; i < clip->num_sounds; i++)
     {
         LVGSound *sound = clip->sounds + i;
@@ -838,6 +849,7 @@ void lvgCloseClip(LVGMovieClip *clip)
     free(clip->images);
     free(clip->groups);
     free(clip->fonts);
+    free(clip->texts);
     free(clip->sounds);
     free(clip->videos);
 }
