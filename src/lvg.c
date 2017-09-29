@@ -644,6 +644,32 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     lvgDrawShape(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
                     g_render->set_transform(g_render_obj, save_t, 1);
                 }
+        } else
+        if (LVG_OBJ_TEXT == o->type)
+        {
+            LVGText *text = clip->texts + o->id;
+            for (j = 0; j < text->num_strings; j++)
+            {
+                LVGString *str = text->strings + j;
+                if (str->font_id < 0)
+                    continue;
+                LVGFont *f = clip->fonts + str->font_id;
+                g_render->set_transform(g_render_obj, save_transform, 1);
+                g_render->set_transform(g_render_obj, o->t, 0);
+                g_render->set_transform(g_render_obj, text->t, 0);
+                float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, str->x, str->y };
+                g_render->set_transform(g_render_obj, t, 0);
+                for (int k = 0; k < str->num_chars; k++)
+                {
+                    LVGChar *c = str->chars + k;
+                    LVGShapeCollection *shapecol = &clip->shapes[f->glyphs[c->idx]];
+                    float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, (shapecol->bounds[2] - shapecol->bounds[0]) + c->x_advance/20.f, 0.0f };
+                    g_render->set_transform(g_render_obj, t, 0);
+                    LVGColorTransform newcxform = *cxform;
+                    combine_cxform(&newcxform, &o->cxform, alpha);
+                    lvgDrawShape(shapecol, &newcxform, 0.0f, blend_mode);
+                }
+            }
         }
         g_render->set_transform(g_render_obj, save_transform, 1);
     }
@@ -782,8 +808,6 @@ void lvgCloseClip(LVGMovieClip *clip)
         LVGFont *font = clip->fonts + i;
         if (font->glyphs)
             free(font->glyphs);
-        if (font->utf2glyph)
-            free(font->utf2glyph);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {

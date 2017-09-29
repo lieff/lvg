@@ -13,7 +13,7 @@
 extern render *g_render;
 extern void *g_render_obj;
 
-enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, sound_type, font_type, text_type, edittext_type};
+enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, font_type, text_type, edittext_type, sound_type};
 typedef struct
 {
     TAG *tag;
@@ -513,7 +513,10 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     if (!fs->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, fs, 0);
+                    NSVGshape *s = shape->shapes + shape->num_shapes++;
+                    flushStyleToShape(idtable, clip, s, 0, fs, 0);
+                    expandBBox(shape->bounds, s->bounds[0], s->bounds[1]);
+                    expandBBox(shape->bounds, s->bounds[2], s->bounds[3]);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
@@ -521,7 +524,10 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     if (!ls->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, 0, 0, ls);
+                    NSVGshape *s = shape->shapes + shape->num_shapes++;
+                    flushStyleToShape(idtable, clip, s, 0, 0, ls);
+                    expandBBox(shape->bounds, s->bounds[0], s->bounds[1]);
+                    expandBBox(shape->bounds, s->bounds[2], s->bounds[3]);
                 }
                 swf_ShapeFreeSubpaths(swf_shape);
             }
@@ -1026,7 +1032,6 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_FontExtract_DefineFont2(0, swffont, tag);
                 font->num_chars = swffont->numchars;
                 font->glyphs = (int*)calloc(1, sizeof(font->glyphs[0])*font->num_chars);
-                font->utf2glyph  = swffont->ascii2glyph;
                 for (t = 0; t < font->num_chars; t++)
                 {
                     static const RGBA color_white = { 255, 255, 255, 255 };
@@ -1050,13 +1055,93 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                     swf_Shape2Free(swf_shape);
                     free(swf_shape);
                 }
-                swffont->ascii2glyph = 0;
                 swf_FontFree(swffont);
                 idtable[id].type = font_type;
                 idtable[id].lvg_id = clip->num_fonts++;
             } else if (ST_DEFINETEXT == tag->id || ST_DEFINETEXT2 == tag->id)
             {
+                SRECT r;
+                MATRIX m;
+                int fid = -1;
+                RGBA color;
+                int x = 0, y = 0, fontsize = 0;
+                memset(&color, 0, sizeof(color));
+                swf_SetTagPos(tag, 0);
 
+#define TF_TEXTCONTROL  0x80
+#define TF_HASFONT      0x08
+#define TF_HASCOLOR     0x04
+#define TF_HASYOFFSET   0x02
+#define TF_HASXOFFSET   0x01
+                /*cid = */swf_GetU16(tag);
+                swf_GetRect(tag, &r);
+                swf_GetMatrix(tag, &m);
+                int gbits = swf_GetU8(tag);
+                int abits = swf_GetU8(tag);
+                idtable[id].type = text_type;
+                idtable[id].lvg_id = clip->num_texts;
+                clip->texts = realloc(clip->texts, (clip->num_texts + 1)*sizeof(clip->texts[0]));
+                LVGText *text = clip->texts + clip->num_texts++;
+                memset(text, 0, sizeof(LVGText));
+                text->t[0] = m.sx/65536.0f;
+                text->t[1] = m.r0/65536.0f;
+                text->t[2] = m.r1/65536.0f;
+                text->t[3] = m.sy/65536.0f;
+                text->t[4] = m.tx/20.0f;
+                text->t[5] = m.ty/20.0f;
+                text->bounds[0] = r.xmin/20.0f;
+                text->bounds[1] = r.ymin/20.0f;
+                text->bounds[2] = r.xmax/20.0f;
+                text->bounds[3] = r.ymax/20.0f;
+
+                while (1)
+                {
+                    int flags = swf_GetU8(tag);
+                    if (!flags)
+                        break;
+                    if (flags & TF_TEXTCONTROL)
+                    {
+                        if (flags & TF_HASFONT)
+                            fid = swf_GetU16(tag);
+                        if (flags & TF_HASCOLOR)
+                        {
+                            color.r = swf_GetU8(tag);
+                            color.g = swf_GetU8(tag);
+                            color.b = swf_GetU8(tag);
+                            if (ST_DEFINETEXT2 == tag->id)
+                                color.a = swf_GetU8(tag);
+                            else
+                                color.a = 255;
+                        }
+                        if (flags & TF_HASXOFFSET)
+                            x = swf_GetS16(tag);
+                        if (flags & TF_HASYOFFSET)
+                            y = swf_GetS16(tag);
+                        if (flags & TF_HASFONT)
+                            fontsize = swf_GetU16(tag);
+                    }
+
+                    int num = swf_GetU8(tag);
+                    if (!num)
+                        break;
+                    text->strings = realloc(text->strings, (text->num_strings + 1)*sizeof(text->strings[0]));
+                    LVGString *str = text->strings + text->num_strings++;
+                    str->num_chars = num;
+                    str->color = RGBA2U32(&color);
+                    str->font_id = (fid < 0) ? fid : idtable[fid].lvg_id;
+                    str->height = fontsize/20.0f;
+                    str->x = x/20.0f;
+                    str->y = y/20.0f;
+                    str->chars = calloc(1, num*sizeof(LVGChar));
+
+                    for (int i = 0; i < num; i++)
+                    {
+                        LVGChar *c = str->chars + i;
+                        c->idx = swf_GetBits(tag, gbits);
+                        c->x_advance = swf_GetBits(tag, abits);
+                        x += c->x_advance;
+                    }
+                }
             } else if (ST_DEFINESOUND == tag->id)
             {
                 LVGSound *sound = clip->sounds + clip->num_sounds;
@@ -1381,7 +1466,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 if (target->name)
                     free(target->name);
                 target->name = p.name;
-                assert(sprite_type == idtable[p.id].type || button_type == idtable[p.id].type || none_type == idtable[p.id].type/*text*/);
+                assert(sprite_type == idtable[p.id].type || button_type == idtable[p.id].type || text_type == idtable[p.id].type);
             }
             for (i = 0; i < 19; i++)
                 if (p.actions[i])

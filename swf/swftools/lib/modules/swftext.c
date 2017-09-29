@@ -956,40 +956,6 @@ int swf_FontUseGlyph(SWFFONT * f, int glyph, U16 size)
     return 0;
 }
 
-int swf_FontSetDefine(TAG * t, SWFFONT * f)
-{
-    U16 *ofs = (U16 *) malloc(f->numchars * 2);
-    int p, i, j;
-
-    if ((!t) || (!f))
-        return -1;
-    swf_ResetWriteBits(t);
-    swf_SetU16(t, f->id);
-
-    p = 0;
-    j = 0;
-    for (i = 0; i < f->numchars; i++)
-        if (f->glyph[i].shape) {
-            ofs[j++] = p;
-            p += swf_SetSimpleShape(NULL, f->glyph[i].shape);
-        }
-
-    for (i = 0; i < j; i++)
-        swf_SetU16(t, ofs[i] + j * 2);
-    if (!j) {
-        fprintf(stderr, "rfxswf: warning: Font is empty\n");
-        swf_SetU16(t, 0);
-    }
-
-    for (i = 0; i < f->numchars; i++)
-        if (f->glyph[i].shape)
-            swf_SetSimpleShape(t, f->glyph[i].shape);
-
-    swf_ResetWriteBits(t);
-    free(ofs);
-    return 0;
-}
-
 static inline int fontSize(SWFFONT * font)
 {
     int t;

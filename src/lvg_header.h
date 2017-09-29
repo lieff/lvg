@@ -12,7 +12,7 @@
 #include <assert.h>
 #endif
 
-enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP, LVG_OBJ_BUTTON, LVG_OBJ_FONT };
+enum LVG_OBJECT_TYPE { LVG_OBJ_EMPTY = 0, LVG_OBJ_SHAPE, LVG_OBJ_IMAGE, LVG_OBJ_VIDEO, LVG_OBJ_GROUP, LVG_OBJ_BUTTON, LVG_OBJ_FONT, LVG_OBJ_TEXT };
 enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
 typedef struct LVGActionCtx LVGActionCtx;
@@ -87,9 +87,28 @@ typedef struct LVGShapeCollection
 typedef struct LVGFont
 {
     int *glyphs; // shape ids
-    int *utf2glyph;
     int num_chars, version;
 } LVGFont;
+
+typedef struct LVGChar
+{
+    unsigned char idx, x_advance;
+} LVGChar;
+
+typedef struct LVGString
+{
+    LVGChar *chars;
+    int num_chars, color, font_id;
+    float x, y, height;
+} LVGString;
+
+typedef struct LVGText
+{
+    LVGString *strings;
+    float bounds[4];
+    float t[6];
+    int num_strings;
+} LVGText;
 
 typedef struct LVGSound
 {
@@ -155,13 +174,14 @@ typedef struct LVGMovieClip
     LVGMovieClipGroup *groups;
     LVGMovieClipGroupState *groupstates;
     LVGFont *fonts;
+    LVGText *texts;
     LVGSound *sounds;
     LVGVideo *videos;
     LVGButton *buttons;
     LVGActionCtx *vm;        // action script vm
     float bounds[4];
     NVGcolor bgColor;
-    int num_shapes, num_images, num_groups, num_groupstates, num_fonts, num_sounds, num_videos, num_buttons, as_version;
+    int num_shapes, num_images, num_groups, num_groupstates, num_fonts, num_texts, num_sounds, num_videos, num_buttons, as_version;
     float fps;
     double last_time;
 } LVGMovieClip;

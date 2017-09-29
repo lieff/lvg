@@ -74,10 +74,11 @@ typedef struct _YUV
 } YUV;
 
 typedef struct _SRECT
-{ SCOORD        xmin;
-  SCOORD        ymin;
-  SCOORD        xmax;
-  SCOORD        ymax;
+{
+    SCOORD        xmin;
+    SCOORD        ymin;
+    SCOORD        xmax;
+    SCOORD        ymax;
 } SRECT;
 
 typedef struct _MATRIX
