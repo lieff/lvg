@@ -666,6 +666,8 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGShapeCollection *shapecol = &clip->shapes[f->glyphs[c->idx]];
                     LVGColorTransform newcxform = *cxform;
                     combine_cxform(&newcxform, &o->cxform, alpha);
+                    for (int l = 0; l < shapecol->num_shapes; l++)
+                        shapecol->shapes[l].fill.color = str->color;
                     lvgDrawShape(shapecol, &newcxform, 0.0f, blend_mode);
                     float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, c->x_advance/20.0f/scale, 0.0f };
                     g_render->set_transform(g_render_obj, t, 0);
