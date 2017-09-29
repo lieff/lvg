@@ -5,7 +5,7 @@ static inline double sqr(double x) {return x*x;}
 
 static void draw_line(float*row, float x1, float x2, float y1, float y2, int min, int max, double weight)
 {
-    if (x2<x1)
+    if (x2 < x1)
     {
         int x = x1;
         x1 = x2;
@@ -13,24 +13,26 @@ static void draw_line(float*row, float x1, float x2, float y1, float y2, int min
     }
     if (x1 < min || x2 > max)
     {
+#ifdef _DEBUG
         fprintf(stderr, "error: glyph x stroke out of bounds\n");
+#endif
         return;
     }
     x1 -= min;
     x2 -= min;
 
-    double d = sqrt(sqr(y2-y1)+sqr(x2-x1));
+    double d = sqrt(sqr(y2 - y1) + sqr(x2 - x1));
     if (floor(x1) == floor(x2))
     {
         row[(int)floor(x1)] += d*weight;
     } else
     {
-        double i = d/(x2-x1);
+        double i = d/(x2 - x1);
         int x;
         int xx1 = ceil(x1);
         int xx2 = floor(x2);
-        row[xx1] += i*(xx1-x1)*weight;
-        row[xx2] += i*(x2-xx2)*weight;
+        row[xx1] += i*(xx1 - x1)*weight;
+        row[xx2] += i*(x2 - xx2)*weight;
         for (x = xx1; x < xx2; x++)
         {
             row[x] += i*weight;
@@ -75,7 +77,7 @@ static void find_best(float*_row, int width, int*_x1, int*_x2, int min_size, int
 
     //filter[0]=1;filter_size=0;
 
-    for(t=0;t<=width;t++)
+    for (t = 0; t <= width; t++)
     {
         int s;
         double sum = 0;
@@ -169,12 +171,12 @@ static void negate_y(SRECT* b)
     b->ymax = -by1;
 }
 
-static void draw_char(SWFFONT * f, int nr, float*row, float*column, SRECT b, double weight)
+static void draw_char(SWFFONT *f, int nr, float *row, float *column, SRECT b, double weight)
 {
-    SWFGLYPH*g = &f->glyph[nr];
+    SWFGLYPH *g = &f->glyph[nr];
 
-    SHAPE2*s = swf_ShapeToShape2(g->shape);
-    SHAPELINE*l = s->lines;
+    SHAPE2 *s = swf_ShapeToShape2(g->shape);
+    SHAPELINE *l = s->lines;
     int x=0,y=0;
     while (l)
     {
@@ -206,31 +208,33 @@ static void draw_char(SWFFONT * f, int nr, float*row, float*column, SRECT b, dou
     free(s);
 }
 
-static ALIGNZONE detect_for_char(SWFFONT * f, float*row, float*column, SRECT font_bbox, SRECT char_bbox)
+static ALIGNZONE detect_for_char(SWFFONT *f, float *row, float *column, SRECT font_bbox, SRECT char_bbox)
 {
-    ALIGNZONE a = {0xffff,0xffff,0xffff,0xffff};
+    ALIGNZONE a = { 0xffff, 0xffff, 0xffff, 0xffff };
     int width = font_bbox.xmax - font_bbox.xmin;
     int height = font_bbox.ymax - font_bbox.ymin;
     if(!width || !height)
         return a;
 
     /* find two best x values */
-    int x1=-1,y1=-1,x2=-1,y2=-1;
+    int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
 
     int nr_x = 0;
     find_best(row, width, &x1, &x2, f->use->smallest_size,
-              char_bbox.xmin - font_bbox.xmin,
-              char_bbox.xmax - font_bbox.xmin, nr_x,
-              0);
-    if(nr_x>0 && x1>=0) a.x  = floatToF16((x1+font_bbox.xmin) / 20480.0);
-    if(nr_x>1 && x2>=0) a.dx = floatToF16((x2-x1) / 20480.0);
+              char_bbox.xmin - font_bbox.xmin, char_bbox.xmax - font_bbox.xmin, nr_x, 0);
+    if (nr_x > 0 && x1 >= 0)
+        a.x  = floatToF16((x1 + font_bbox.xmin) / 20480.0);
+    if (nr_x > 1 && x2 >= 0)
+        a.dx = floatToF16((x2 - x1) / 20480.0);
 
     find_best(column, height, &y1, &y2, f->use->smallest_size,
               char_bbox.ymin - font_bbox.ymin,
               char_bbox.ymax - font_bbox.ymin, 2,
               0);
-    if(y1>=0) a.y  = floatToF16((y1+font_bbox.ymin) / 20480.0);
-    if(y2>=0) a.dy = floatToF16((y2-y1) / 20480.0);
+    if (y1 >= 0)
+        a.y  = floatToF16((y1 + font_bbox.ymin) / 20480.0);
+    if (y2 >= 0)
+        a.dy = floatToF16((y2 - y1) / 20480.0);
     return a;
 }
 
@@ -279,7 +283,9 @@ void swf_FontCreateAlignZones(SWFFONT * f)
 
     if (!f->layout)
     {
+#ifdef _DEBUG
         fprintf(stderr, "Error: font needs a layout for alignzones to be detected.");
+#endif
         return;
     }
 
@@ -302,10 +308,11 @@ void swf_FontCreateAlignZones(SWFFONT * f)
         graph_t *g = make_graph(f);
 
         int num_components = graph_find_components(g);
+#ifdef _DEBUG
         printf("<notice> Building font alignzone information for font %d (%d characters, %d components, %d pairs)\n",
                f->id, f->numchars, num_components, f->use->num_neighbors);
-
-        SRECT bounds = {0,0,0,0};
+#endif
+        SRECT bounds = { 0, 0, 0, 0 };
         int t;
         for (t = 0; t < f->numchars; t++)
         {
@@ -316,9 +323,9 @@ void swf_FontCreateAlignZones(SWFFONT * f)
 
         int width = bounds.xmax - bounds.xmin;
         int height = bounds.ymax - bounds.ymin;
-        float*row = calloc(1, sizeof(float)*(width+1));
-        float*global_column = calloc(1, sizeof(float)*(height+1));
-        float*column = calloc(1, sizeof(float)*(height+1));
+        float *row = calloc(1, sizeof(float)*(width+1));
+        float *global_column = calloc(1, sizeof(float)*(height+1));
+        float *column = calloc(1, sizeof(float)*(height+1));
 
         const double SELF_WEIGHT = 0.00; // ignore own char
 
@@ -332,7 +339,7 @@ void swf_FontCreateAlignZones(SWFFONT * f)
             {
                 if (g->nodes[t].tmp == c)
                 {
-                    draw_char(f, t, row, global_column, bounds, 1.0-SELF_WEIGHT);
+                    draw_char(f, t, row, global_column, bounds, 1.0 - SELF_WEIGHT);
                     SRECT b = f->layout->bounds[t];
                     negate_y(&b);
                     swf_ExpandRect2(&local_bounds, &b);
@@ -362,45 +369,5 @@ void swf_FontCreateAlignZones(SWFFONT * f)
         free(global_column);
 
         graph_delete(g);
-    }
-}
-
-void swf_FontSetAlignZones(TAG*t, SWFFONT *f)
-{
-    swf_SetU16(t, f->id);
-    swf_SetU8(t, f->alignzone_flags);
-    int i;
-    for (i = 0; i < f->numchars; i++)
-    {
-        ALIGNZONE*a = &f->alignzones[i];
-        U8 flags = 0;
-        if ((a->x & a->dx)!=0xffff)
-            flags |= 1;
-        if ((a->y & a->dy)!=0xffff)
-            flags |= 2;
-        int num = 1;
-        if (a->dx != 0xffff || a->dy != 0xffff)
-            num++;
-        swf_SetU8(t, num);
-        if (flags & 1)
-            swf_SetU16(t, a->x);
-        else
-            swf_SetU16(t, 0);
-        if (flags & 2)
-            swf_SetU16(t, a->y);
-        else
-            swf_SetU16(t, 0);
-        if (num == 2)
-        {
-            if ((flags & 1) && a->dx != 0xffff)
-                swf_SetU16(t, a->dx);
-            else
-                swf_SetU16(t, 0);
-            if ((flags & 2) && a->dy != 0xffff)
-                swf_SetU16(t, a->dy);
-            else
-                swf_SetU16(t, 0);
-        }
-        swf_SetU8(t, flags);
     }
 }
