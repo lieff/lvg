@@ -447,31 +447,40 @@ static void font_freeglyphnames(SWFFONT*f)
         f->glyphnames = 0;
     }
 }
+
 static void font_freeusage(SWFFONT*f)
 {
-    if (f->use) {
-        if(f->use->chars) {
+    if (f->use)
+    {
+        if (f->use->chars)
+        {
             free(f->use->chars);f->use->chars = 0;
         }
-        if(f->use->neighbors) {
+        if (f->use->neighbors)
+        {
             free(f->use->neighbors);f->use->neighbors = 0;
         }
-        if(f->use->neighbors_hash) {
+        if (f->use->neighbors_hash)
+        {
             free(f->use->neighbors_hash);f->use->neighbors_hash = 0;
         }
         free(f->use); f->use = 0;
     }
 }
+
 static void font_freelayout(SWFFONT*f)
 {
-    if (f->layout) {
+    if (f->layout)
+    {
         swf_LayoutFree(f->layout);
         f->layout = 0;
     }
 }
+
 static void font_freename(SWFFONT*f)
 {
-    if (f->name) {
+    if (f->name)
+    {
         free(f->name);
         f->name = 0;
     }
@@ -546,13 +555,6 @@ void swf_FontSort(SWFFONT * font)
     font->glyph2glyph = newpos;
 }
 
-void swf_FontPrepareForEditText(SWFFONT * font)
-{
-    if (!font->layout)
-        swf_FontCreateLayout(font);
-    swf_FontSort(font);
-}
-
 static unsigned hash2(int char1, int char2)
 {
     unsigned hash = char1^(char2<<8);
@@ -565,37 +567,20 @@ static unsigned hash2(int char1, int char2)
 int swf_FontUseGetPair(SWFFONT * f, int char1, int char2)
 {
     FONTUSAGE*u = f->use;
-    if(!u || !u->neighbors_hash_size)
+    if (!u || !u->neighbors_hash_size)
         return 0;
     unsigned hash = hash2(char1, char2);
-    while(1) {
+    while (1)
+    {
         hash = hash%u->neighbors_hash_size;
         int pos = u->neighbors_hash[hash];
-        if(!pos)
+        if (!pos)
             return 0;
-        if(pos &&
-                u->neighbors[pos-1].char1 == char1 &&
-                u->neighbors[pos-1].char2 == char2) {
+        if (pos && u->neighbors[pos-1].char1 == char1 && u->neighbors[pos-1].char2 == char2)
             return pos;
-        }
         hash++;
     }
 
-}
-
-static inline int fontSize(SWFFONT * font)
-{
-    int t;
-    int size = 0;
-    for (t = 0; t < font->numchars; t++) {
-        int l = 0;
-        if(font->glyph[t].shape)
-            l = (font->glyph[t].shape->bitlen + 7) / 8;
-        else
-            l = 8;
-        size += l + 1;
-    }
-    return size + (font->numchars + 1) * 2;
 }
 
 void swf_FontAddLayout(SWFFONT * f, int ascent, int descent, int leading)
@@ -654,189 +639,4 @@ void swf_FontFree(SWFFONT * f)
     font_freealignzones(f);
 
     free(f);
-}
-
-static int swf_TextCountBits2(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits, char *encoding)
-{
-    U16 g, a;
-    char utf8 = 0;
-    if ((!s) || (!font) || ((!gbits) && (!abits)) || (!font->ascii2glyph))
-        return -1;
-    g = a = 0;
-
-    if (!strcmp(encoding, "UTF8"))
-        utf8 = 1;
-    else if (!strcmp(encoding, "iso-8859-1"))
-        utf8 = 0;
-    else
-        fprintf(stderr, "Unknown encoding: %s", encoding);
-
-    while (*s) {
-        int glyph = -1, c;
-
-        if (!utf8)
-            c = *s++;
-        else
-            c = readUTF8char(&s);
-
-        if (c < font->maxascii)
-            glyph = font->ascii2glyph[c];
-        if (glyph >= 0) {
-            g = swf_CountUBits(glyph, g);
-            a = swf_CountBits(((((U32) font->glyph[glyph].advance) * scale) / 20) / 100, a);
-        }
-    }
-
-    if (gbits)
-        gbits[0] = (U8) g;
-    if (abits)
-        abits[0] = (U8) a;
-    return 0;
-}
-
-int swf_TextCountBits(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits)
-{
-    return swf_TextCountBits2(font, s, scale, gbits, abits, "iso-8859-1");
-}
-
-int swf_TextCountBitsUTF8(SWFFONT * font, U8 * s, int scale, U8 * gbits, U8 * abits)
-{
-    return swf_TextCountBits2(font, s, scale, gbits, abits, "UTF8");
-}
-
-U32 swf_TextGetWidth(SWFFONT * font, U8 * s, int scale)
-{
-    U32 res = 0;
-
-    if (font && s) {
-        while (s[0]) {
-            int g = -1;
-            if (*s < font->maxascii)
-                g = font->ascii2glyph[*s];
-            if (g >= 0)
-                res += font->glyph[g].advance / 20;
-            s++;
-        }
-        if (scale)
-            res = (res * scale) / 100;
-    }
-    return res;
-}
-
-SRECT swf_TextCalculateBBoxUTF8(SWFFONT * font, U8 * s, int scale)
-{
-    int xpos = 0;
-    int ypos = 0;
-    SRECT r;
-    swf_GetRect(0, &r);
-    while (*s) {
-        int c = readUTF8char(&s);
-        if(c==13 || c==10) {
-            if(s[0] == 10) {
-                s++;
-            }
-            xpos=0;
-            ypos+=font->layout->leading;
-            continue;
-        }
-        if (c < font->maxascii) {
-            int g = font->ascii2glyph[c];
-            if (g >= 0) {
-                SRECT rn = font->layout->bounds[g];
-                rn.xmin = (rn.xmin * scale) / 20 / 100 + xpos;
-                rn.xmax = (rn.xmax * scale) / 20 / 100 + xpos;
-                rn.ymin = (rn.ymin * scale) / 20 / 100 + ypos;
-                rn.ymax = (rn.ymax * scale) / 20 / 100 + ypos;
-                swf_ExpandRect2(&r, &rn);
-                xpos += (font->glyph[g].advance * scale) / 20 / 100;
-            }
-        }
-    }
-    return r;
-}
-
-void swf_FontCreateLayout(SWFFONT * f)
-{
-    //    S16 leading = 0;
-    int t;
-    if (f->layout)
-        return;
-    if (!f->numchars)
-        return;
-
-    f->layout = (SWFLAYOUT *) calloc(1, sizeof(SWFLAYOUT));
-    f->layout->bounds = (SRECT *) malloc(f->numchars * sizeof(SRECT));
-    f->layout->ascent = 0;
-    f->layout->descent = 0;
-
-    for (t = 0; t < f->numchars; t++) {
-        SHAPE2 *shape2;
-        SRECT bbox;
-        int width;
-        shape2 = swf_ShapeToShape2(f->glyph[t].shape);
-        if (!shape2) {
-            fprintf(stderr, "Shape parse error\n");
-            exit(1);
-        }
-        bbox = swf_GetShapeBoundingBox(shape2);
-        swf_Shape2Free(shape2);
-        f->layout->bounds[t] = bbox;
-
-        width = (bbox.xmax);
-
-        /* The following is a heuristic- it may be that extractfont_DefineText
-       has already found out some widths for individual characters (from the way
-       they are used)- we now have to guess whether that width might be possible,
-       which is the case if it isn't either much too big or much too small */
-        if (width > f->glyph[t].advance * 3 / 2 || width < f->glyph[t].advance / 2)
-            f->glyph[t].advance = width;
-
-        if (-bbox.ymin > f->layout->ascent)
-            f->layout->ascent = -bbox.ymin;
-        if (bbox.ymax > f->layout->descent)
-            f->layout->descent = bbox.ymax;
-    }
-}
-
-void swf_DrawText(drawer_t * draw, SWFFONT * font, int size, const char *text)
-{
-    U8 *s = (U8 *) text;
-    int advance = 0;
-    while (*s) {
-        SHAPE *shape;
-        SHAPE2 *shape2;
-        SHAPELINE *l;
-        U32 c = readUTF8char(&s);
-        int g = font->ascii2glyph[c];
-        shape = font->glyph[g].shape;
-        if (((int) g) < 0) {
-            fprintf(stderr, "No char %d in font %s\n", c, font->name ? (char *) font->name : "?");
-            continue;
-        }
-        shape2 = swf_ShapeToShape2(shape);
-        l = shape2->lines;
-        while (l) {
-            if (l->type == moveTo) {
-                FPOINT to;
-                to.x = l->x * size / 100.0 / 20.0 + advance;
-                to.y = l->y * size / 100.0 / 20.0;
-                draw->moveTo(draw, &to);
-            } else if (l->type == lineTo) {
-                FPOINT to;
-                to.x = l->x * size / 100.0 / 20.0 + advance;
-                to.y = l->y * size / 100.0 / 20.0;
-                draw->lineTo(draw, &to);
-            } else if (l->type == splineTo) {
-                FPOINT mid, to;
-                mid.x = l->sx * size / 100.0 / 20.0 + advance;
-                mid.y = l->sy * size / 100.0 / 20.0;
-                to.x = l->x * size / 100.0 / 20.0 + advance;
-                to.y = l->y * size / 100.0 / 20.0;
-                draw->splineTo(draw, &mid, &to);
-            }
-            l = l->next;
-        }
-        swf_Shape2Free(shape2);
-        advance += font->glyph[g].advance * size / 100.0 / 20.0;
-    }
 }
