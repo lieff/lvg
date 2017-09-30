@@ -160,6 +160,8 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
         shape->stroke.type  = NSVG_PAINT_COLOR;
         shape->stroke.color = RGBA2U32(&ls->color);
         shape->strokeWidth  = ls->width/20.0f;
+        if (shape->strokeWidth < 0.8f)
+            shape->strokeWidth = 0.8f; // why thin strokes showed as ~1px?
         shape->miterLimit   = ls->mitterLimit/20.0f;
         int joinStyle = (ls->flags >> 4) & 3;
         if (0 == joinStyle)
