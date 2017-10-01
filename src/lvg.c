@@ -28,6 +28,7 @@
 #include "stb_image.h"
 #include <SDL2/SDL.h>
 #include <video/video.h>
+#include <audio/audio.h>
 #include <render/render.h>
 #include "lvg.h"
 #include "swf/avm1.h"
@@ -56,6 +57,10 @@ extern const render nvpr_render;
 extern const render null_render;
 const render *g_render;
 void *g_render_obj;
+
+extern const audio_render sdl_audio_render;
+const audio_render *g_audio_render;
+void *g_audio_render_obj;
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
@@ -1087,6 +1092,9 @@ int main(int argc, char **argv)
         }
     }
 
+    g_audio_render = &sdl_audio_render;
+    g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0);
+
     if (is_swf && open_swf(file_name))
     {
         printf("error: could not open swf file\n");
@@ -1113,7 +1121,7 @@ int main(int argc, char **argv)
         drawframe();
     }
 #endif
-    lvgStopAudio();
+    g_audio_render->release(g_audio_render_obj);
     if (g_clip)
         lvgCloseClip(g_clip);
     g_render->release(g_render_obj);

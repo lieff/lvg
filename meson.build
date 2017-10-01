@@ -13,6 +13,7 @@ conf.set('ENABLE_SCRIPT', get_option('ENABLE_SCRIPT') ? 1 : 0)
 configure_file(input : 'config.h.in', output : 'config.h', configuration : conf)
 
 sources = [
+    'audio/common.c',
     'audio/sdl/lvg_audio.c',
     'src/lunzip.c',
     'src/lvg.c',

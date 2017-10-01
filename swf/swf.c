@@ -1164,7 +1164,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 {
                     int dec_samples = adpcm_decode(tag, buf_size, stereo + 1, sound->samples, num_samples);
                     assert(dec_samples == num_samples*sound->channels);
-                    sound->num_samples = dec_samples;
+                    sound->num_samples = dec_samples/sound->channels;
                 } else
                 if (2 == format)
                 {
@@ -1333,7 +1333,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 stream_buf_size += dec_samples*2;
                 stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
                 memcpy(stream_buffer + old_size, buf, dec_samples*2);
-                sound->num_samples += dec_samples;
+                sound->num_samples += dec_samples/stream_channels;
                 free(buf);
             } else
             {

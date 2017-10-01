@@ -35,7 +35,6 @@ Not works:
  * SWF: interpret action script 3
  * SWF: bitmap filters
  * SWF: network access
- * SWF: audio mixer
 
 ## Demos
 

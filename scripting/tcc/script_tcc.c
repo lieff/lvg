@@ -101,7 +101,7 @@ const struct SYM g_syms[] = {
     { "lvgLoadClip", lvgLoadClip },
     { "lvgGetFileContents", lvgGetFileContents },
     { "lvgFree", lvgFree },
-    { "lvgStartAudio", lvgStartAudio },
+    //{ "lvgStartAudio", lvgStartAudio },
     { "lvgPlaySound", lvgPlaySound },
     { "lvgLoadMP3", lvgLoadMP3 },
     { "lvgLoadMP3Buf", lvgLoadMP3Buf },

@@ -1,4 +1,6 @@
 audio/sdl/lvg_audio.c
+audio/audio.h
+audio/common.c
 mp3/libc.h
 mp3/minimp3.c
 mp3/minimp3.h

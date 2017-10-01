@@ -113,7 +113,7 @@ typedef struct LVGText
 typedef struct LVGSound
 {
     short *samples;
-    int num_samples, rate, channels, cur_play_byte;
+    int num_samples, rate, channels;
 } LVGSound;
 
 typedef struct LVGVideoFrame
