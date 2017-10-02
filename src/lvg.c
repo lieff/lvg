@@ -59,6 +59,7 @@ const render *g_render;
 void *g_render_obj;
 
 extern const audio_render sdl_audio_render;
+extern const audio_render null_audio_render;
 const audio_render *g_audio_render;
 void *g_audio_render_obj;
 
@@ -1004,6 +1005,7 @@ int main(int argc, char **argv)
     }
 #ifdef _TEST
     g_render = &null_render;
+    g_audio_render = &null_audio_render;
     if (open_swf(file_name))
     {
         printf("error: could not open swf file\n");
@@ -1093,7 +1095,8 @@ int main(int argc, char **argv)
     }
 
     g_audio_render = &sdl_audio_render;
-    g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0);
+    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
+        g_audio_render = &null_audio_render;
 
     if (is_swf && open_swf(file_name))
     {

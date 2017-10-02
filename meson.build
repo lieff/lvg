@@ -14,7 +14,8 @@ configure_file(input : 'config.h.in', output : 'config.h', configuration : conf)
 
 sources = [
     'audio/common.c',
-    'audio/sdl/lvg_audio.c',
+    'audio/audio_sdl.c',
+    'audio/audio_null.c',
     'src/lunzip.c',
     'src/lvg.c',
     'src/svgb.c',

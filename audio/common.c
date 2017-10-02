@@ -1,6 +1,6 @@
 #include <config.h>
-#if ENABLE_AUDIO && !defined(_TEST)
 #include <audio/audio.h>
+#if ENABLE_AUDIO && !defined(_TEST)
 #include <stddef.h>
 #include <stdlib.h>
 #include <sys/param.h>

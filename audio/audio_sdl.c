@@ -1,5 +1,5 @@
 #include <config.h>
-#if ENABLE_AUDIO && AUDIO_SDL && !defined(_TEST)
+#if ENABLE_AUDIO && AUDIO_SDL
 #include <audio/audio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -151,7 +151,7 @@ int sdl_audio_init(void **audio_render, int samplerate, int channels, int format
     if (dev <= 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
-        return -1;
+        return 0;
     }
     if (is_capture)
         ctx->dev_record = dev;
@@ -161,7 +161,7 @@ int sdl_audio_init(void **audio_render, int samplerate, int channels, int format
     if (SDL_OpenAudio(&wanted, &ctx->outputSpec) < 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
-        return -1;
+        return 0;
     }
 #endif
     /*SDL_AudioCVT *cvt = is_capture ? &ctx->cvt_record : &ctx->cvt;
@@ -179,7 +179,7 @@ int sdl_audio_init(void **audio_render, int samplerate, int channels, int format
     SDL_PauseAudio(0);
 #endif
     *audio_render = ctx;
-    return 0;
+    return 1;
 }
 
 void sdl_audio_release(void *audio_render)
