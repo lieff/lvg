@@ -233,10 +233,19 @@ void sdl_audio_play(void *audio_render, LVGSound *sound, int flags, int start_sa
     audio_ctx *ctx = (audio_ctx *)audio_render;
     SDL_LockAudioDevice(ctx->dev);
     int i;
-    if ((flags & PLAY_SyncNoMultiple) || (flags & PLAY_SyncStop))
-        sdl_audio_stop(ctx, sound);
     if (flags & PLAY_SyncStop)
+    {
+        sdl_audio_stop(ctx, sound);
         goto done;
+    }
+    if (flags & PLAY_SyncNoMultiple)
+    {
+        for (i = 0; i < sizeof(ctx->channels)/sizeof(ctx->channels[0]); i++)
+        {
+            if (ctx->channels[i].sound == sound)
+                goto done;
+        }
+    }
     for (i = 0; i < sizeof(ctx->channels)/sizeof(ctx->channels[0]); i++)
     {
         if (!ctx->channels[i].sound)
