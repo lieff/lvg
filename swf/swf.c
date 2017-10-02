@@ -1479,7 +1479,8 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 if (p.actions[i])
                 {
                     assert(sprite_type == idtable[p.id].type);
-                    LVGMovieClipGroup *g = &clip->groups[idtable[p.id].lvg_id];
+                    LVGMovieClipGroupState *groupstate = clip->groupstates + idtable[p.id].lvg_id;
+                    LVGMovieClipGroup *g = clip->groups + groupstate->group_num;
 #ifndef _TEST
                     //printf("place id=%d have action in event %i\n", p.id, i);
 #endif
