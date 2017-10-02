@@ -200,7 +200,7 @@ LVGMovieClip *lvgLoadClip(const char *file);
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
 short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
-void lvgPlaySound(LVGSound *sound);
+void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);
 void lvgStopAudio();
 // action block begins with 32bit size, functions begins with 16bit size
 void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupState *groupstate, int is_function);

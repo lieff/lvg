@@ -22,7 +22,7 @@ typedef struct audio_channel
     LVGSound *sound;
     //struct rs_data *g_resample;
     SDL_AudioCVT cvt;
-    int cur_play_byte, flags;
+    int cur_play_byte, start_byte, end_byte, flags, loops;
 } audio_channel;
 
 typedef struct audio_ctx
@@ -47,7 +47,7 @@ static void sound_drain(LVGSound *sound, audio_channel *channel, Uint8 *stream, 
         memset(stream, 0, len);
         return;
     }
-    int rest = sound->num_samples*sound->channels*2 - channel->cur_play_byte;
+    int rest = channel->end_byte - channel->cur_play_byte;
     char *buf = (char *)sound->samples + channel->cur_play_byte;
     int to_copy = MIN(len, rest);
     memcpy(stream, buf, to_copy);
@@ -58,9 +58,20 @@ static void sound_drain(LVGSound *sound, audio_channel *channel, Uint8 *stream, 
     if (!rest)
     {
         memset(stream, 0, len);
-        if (channel->cvt.buf)
-            free(channel->cvt.buf);
-        memset(channel, 0, sizeof(*channel));
+        if (channel->flags & PLAY_HasLoops)
+        {
+            if (32767 != channel->loops && channel->loops)
+                channel->loops--;
+            if (!channel->loops)
+                goto stop;
+            channel->cur_play_byte = channel->start_byte;
+        } else
+        {
+stop:
+            if (channel->cvt.buf)
+                free(channel->cvt.buf);
+            memset(channel, 0, sizeof(*channel));
+        }
     }
 }
 
@@ -203,12 +214,30 @@ void sdl_audio_release(void *audio_render)
     free(ctx);
 }
 
-void sdl_audio_play(void *audio_render, LVGSound *sound, int flags)
+static void sdl_audio_stop(audio_ctx *ctx, LVGSound *sound)
+{
+    int i;
+    for (i = 0; i < sizeof(ctx->channels)/sizeof(ctx->channels[0]); i++)
+    {
+        if (ctx->channels[i].sound == sound)
+        {
+            if (ctx->channels[i].cvt.buf)
+                free(ctx->channels[i].cvt.buf);
+            memset(&ctx->channels[i], 0, sizeof(ctx->channels[i]));
+        }
+    }
+}
+
+void sdl_audio_play(void *audio_render, LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
     audio_ctx *ctx = (audio_ctx *)audio_render;
     SDL_LockAudioDevice(ctx->dev);
     int i;
-    for (i = 0; i < AUDIO_NUM_CHANNELS; i++)
+    if ((flags & PLAY_SyncNoMultiple) || (flags & PLAY_SyncStop))
+        sdl_audio_stop(ctx, sound);
+    if (flags & PLAY_SyncStop)
+        goto done;
+    for (i = 0; i < sizeof(ctx->channels)/sizeof(ctx->channels[0]); i++)
     {
         if (!ctx->channels[i].sound)
             break;
@@ -219,30 +248,22 @@ void sdl_audio_play(void *audio_render, LVGSound *sound, int flags)
     if (SDL_BuildAudioCVT(cvt, AUDIO_S16, sound->channels, sound->rate, ctx->outputSpec.format, ctx->outputSpec.channels, ctx->outputSpec.freq) < 0)
     {
         printf("error: couldn't open converter: %s\n", SDL_GetError());
-        goto fail;
+        goto done;
     }
-    ctx->channels[i].cur_play_byte = 0;
+    int bytes = sound->num_samples*sound->channels*2;
+    ctx->channels[i].start_byte = start_sample*sound->channels*2;
+    ctx->channels[i].end_byte   = end_sample*sound->channels*2;
+    if (ctx->channels[i].start_byte > bytes)
+        ctx->channels[i].start_byte = bytes;
+    if (ctx->channels[i].end_byte > bytes)
+        ctx->channels[i].end_byte = bytes;
+    if (ctx->channels[i].start_byte == ctx->channels[i].end_byte)
+        goto done;
+    ctx->channels[i].cur_play_byte = ctx->channels[i].start_byte;
     ctx->channels[i].flags = flags;
+    ctx->channels[i].loops = loops;
     ctx->channels[i].sound = sound;
-fail:
-    SDL_UnlockAudioDevice(ctx->dev);
-}
-
-void sdl_audio_stop(void *audio_render, LVGSound *sound)
-{
-    audio_ctx *ctx = (audio_ctx *)audio_render;
-    SDL_LockAudioDevice(ctx->dev);
-    int i;
-    for (i = 0; i < AUDIO_NUM_CHANNELS; i++)
-    {
-        if (ctx->channels[i].sound == sound)
-            break;
-    }
-    if (AUDIO_NUM_CHANNELS == i)
-        return;
-    if (ctx->channels[i].cvt.buf)
-        free(ctx->channels[i].cvt.buf);
-    memset(&ctx->channels[i], 0, sizeof(ctx->channels[i]));
+done:
     SDL_UnlockAudioDevice(ctx->dev);
 }
 
@@ -250,7 +271,7 @@ void sdl_audio_stop_all(void *audio_render)
 {
     audio_ctx *ctx = (audio_ctx *)audio_render;
     SDL_LockAudioDevice(ctx->dev);
-    for (int i = 0; i < AUDIO_NUM_CHANNELS; i++)
+    for (int i = 0; i < sizeof(ctx->channels)/sizeof(ctx->channels[0]); i++)
         if (ctx->channels[i].cvt.buf)
             free(ctx->channels[i].cvt.buf);
     memset(ctx->channels, 0, sizeof(ctx->channels));
@@ -262,7 +283,6 @@ const audio_render sdl_audio_render =
     sdl_audio_init,
     sdl_audio_release,
     sdl_audio_play,
-    sdl_audio_stop,
     sdl_audio_stop_all
 };
 #endif

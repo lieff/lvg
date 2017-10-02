@@ -65,9 +65,9 @@ short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samp
     return 0;
 }
 
-void lvgPlaySound(LVGSound *sound)
+void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
-    g_audio_render->play(g_audio_render_obj, sound, 0);
+    g_audio_render->play(g_audio_render_obj, sound, flags, start_sample, end_sample, loops);
 }
 
 void lvgStopAudio()
@@ -87,7 +87,7 @@ short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samp
     return 0;
 }
 
-void lvgPlaySound(LVGSound *sound)
+void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
 }
 

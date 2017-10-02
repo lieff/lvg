@@ -1452,7 +1452,11 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
 static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
 {
     int sound = *(uint16_t*)(a + 2);
-    lvgPlaySound(ctx->clip->sounds + sound);
+    int flags = *(uint8_t*)(a + 4);
+    int start_sample = *(uint32_t*)(a + 5);
+    int end_sample = *(uint32_t*)(a + 9);
+    int loops = *(uint16_t*)(a + 13);
+    lvgPlaySound(ctx->clip->sounds + sound, flags, start_sample, end_sample, loops);
 }
 
 typedef struct

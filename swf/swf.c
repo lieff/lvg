@@ -6,6 +6,7 @@
 //#include "stb_image_write.h"
 #include "lunzip.h"
 #include "render/render.h"
+#include "audio/audio.h"
 #include "minimp3.h"
 #include "adpcm.h"
 #include "avm1.h"
@@ -291,26 +292,30 @@ start_new:
     g_render->cache_shape(g_render_obj, shape);
 }
 
-static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id)
+static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id, int flags, int start_sample, int end_sample, int loops)
 {
     assert(frame_num >= 0);
     LVGMovieClipFrame *frame = group->frames + frame_num;
     uint8_t buf[5];
     buf[0] = ACTION_PLAY_LVG_SOUND;
-    *(uint16_t*)(buf + 1) = 2;
+    *(uint16_t*)(buf + 1) = 13;
     *(uint16_t*)(buf + 3) = sound_id;
+    *(uint8_t*)(buf + 5) = flags;
+    *(uint32_t*)(buf + 6) = start_sample;
+    *(uint32_t*)(buf + 10) = end_sample;
+    *(uint16_t*)(buf + 14) = loops;
     if (!frame->actions)
     {
-        frame->actions = realloc(frame->actions, 4 + 5);
-        *(uint32_t*)frame->actions = 5;
-        memcpy(frame->actions + 4, buf, 5);
+        frame->actions = realloc(frame->actions, 4 + 16);
+        *(uint32_t*)frame->actions = 16;
+        memcpy(frame->actions + 4, buf, 16);
     } else
     {
         uint32_t size = *(uint32_t*)frame->actions;
-        frame->actions = realloc(frame->actions, 4 + size + 5);
-        memmove(frame->actions + 4 + 5, frame->actions + 4, size);
-        memcpy(frame->actions + 4, buf, 5);
-        *(uint32_t*)frame->actions += 5;
+        frame->actions = realloc(frame->actions, 4 + size + 16);
+        memmove(frame->actions + 4 + 16, frame->actions + 4, size);
+        memcpy(frame->actions + 4, buf, 16);
+        *(uint32_t*)frame->actions += 16;
     }
 }
 
@@ -1416,7 +1421,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         if (!((0 == stream_format && stream_bits) || 1 == stream_format))
             free(stream_buffer);
         // add action to start stream sound
-        add_playsound_action(group, stream_frame, stream_sound);
+        add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
     }
 }
 
@@ -1488,10 +1493,20 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups], version);
             swf_FoldSprite(tag);
             clip->num_groups++;
-        } else if (ST_STARTSOUND == tag->id || ST_STARTSOUND2 == tag->id)
+        } else if (ST_STARTSOUND == tag->id/* || ST_STARTSOUND2 == tag->id*/)
         {
             int id = swf_GetU16(tag);
-            add_playsound_action(group, group->num_frames, idtable[id].lvg_id);
+            int flags = swf_GetU8(tag);
+            assert(sound_type == idtable[id].type);
+            LVGSound *sound = clip->sounds + idtable[id].lvg_id;
+            int start_sample = 0, end_sample = sound->num_samples, loops = 0;
+            if (flags & PLAY_HasInPoint)
+                start_sample = swf_GetU32(tag);
+            if (flags & PLAY_HasOutPoint)
+                end_sample = swf_GetU32(tag);
+            if (flags & PLAY_HasLoops)
+                loops = swf_GetU16(tag);
+            add_playsound_action(group, group->num_frames, idtable[id].lvg_id, flags, start_sample, end_sample, loops);
         } else if (ST_REMOVEOBJECT == tag->id || ST_REMOVEOBJECT2 == tag->id)
         {
             U32 oldTagPos = swf_GetTagPos(tag);
