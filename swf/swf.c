@@ -296,7 +296,8 @@ static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int so
 {
     assert(frame_num >= 0);
     LVGMovieClipFrame *frame = group->frames + frame_num;
-    uint8_t buf[5];
+#define SND_CMD_SIZE 16
+    uint8_t buf[SND_CMD_SIZE];
     buf[0] = ACTION_PLAY_LVG_SOUND;
     *(uint16_t*)(buf + 1) = 13;
     *(uint16_t*)(buf + 3) = sound_id;
@@ -306,16 +307,16 @@ static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int so
     *(uint16_t*)(buf + 14) = loops;
     if (!frame->actions)
     {
-        frame->actions = realloc(frame->actions, 4 + 16);
-        *(uint32_t*)frame->actions = 16;
-        memcpy(frame->actions + 4, buf, 16);
+        frame->actions = realloc(frame->actions, 4 + SND_CMD_SIZE);
+        *(uint32_t*)frame->actions = SND_CMD_SIZE;
+        memcpy(frame->actions + 4, buf, SND_CMD_SIZE);
     } else
     {
         uint32_t size = *(uint32_t*)frame->actions;
-        frame->actions = realloc(frame->actions, 4 + size + 16);
-        memmove(frame->actions + 4 + 16, frame->actions + 4, size);
-        memcpy(frame->actions + 4, buf, 16);
-        *(uint32_t*)frame->actions += 16;
+        frame->actions = realloc(frame->actions, 4 + size + SND_CMD_SIZE);
+        memmove(frame->actions + 4 + SND_CMD_SIZE, frame->actions + 4, size);
+        memcpy(frame->actions + 4, buf, SND_CMD_SIZE);
+        *(uint32_t*)frame->actions += SND_CMD_SIZE;
     }
 }
 
