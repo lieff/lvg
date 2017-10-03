@@ -17,4 +17,5 @@ typedef struct audio_render
     void (*release)(void *audio_render);
     void (*play)(void *audio_render, LVGSound *sound, int flags, int start_sample, int end_sample, int loops);
     void (*stop_all)(void *audio_render);
+    void (*resample)(void *audio_render, LVGSound *sound);
 } audio_render;

@@ -1094,15 +1094,18 @@ int main(int argc, char **argv)
         }
     }
 
-    g_audio_render = &sdl_audio_render;
-    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
-        g_audio_render = &null_audio_render;
-
     if (is_swf && open_swf(file_name))
     {
         printf("error: could not open swf file\n");
         return -1;
     }
+
+    g_audio_render = &sdl_audio_render;
+    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
+        g_audio_render = &null_audio_render;
+    for (i = 0; i < g_clip->num_sounds; i++)
+        g_audio_render->resample(g_audio_render_obj, g_clip->sounds + i);
+
 #ifdef EMSCRIPTEN
     if (g_main_script)
     {

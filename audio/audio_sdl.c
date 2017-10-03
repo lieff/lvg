@@ -165,6 +165,7 @@ static int sdl_audio_init(void **audio_render, int samplerate, int channels, int
     if (dev <= 0)
     {
         printf("error: couldn't open audio: %s\n", SDL_GetError());
+        free(ctx);
         return 0;
     }
     if (is_capture)
@@ -275,8 +276,8 @@ static void sdl_audio_play(void *audio_render, LVGSound *sound, int flags, int s
         goto done;
     }
     int bytes = sound->num_samples*sound->channels*2;
-    ctx->channels[i].start_byte = start_sample*sound->channels*2;
-    ctx->channels[i].end_byte   = end_sample*sound->channels*2;
+    ctx->channels[i].start_byte = (uint64_t)start_sample*sound->rate/sound->orig_rate*sound->channels*2;
+    ctx->channels[i].end_byte   = (uint64_t)end_sample*sound->rate/sound->orig_rate*sound->channels*2;
     if (ctx->channels[i].start_byte > bytes)
         ctx->channels[i].start_byte = bytes;
     if (ctx->channels[i].end_byte > bytes)
@@ -291,11 +292,29 @@ done:
     SDL_UnlockAudioDevice(ctx->dev);
 }
 
+static void sdl_resample(void *audio_render, LVGSound *sound)
+{
+    audio_ctx *ctx = (audio_ctx *)audio_render;
+    SDL_AudioCVT cvt;
+    if (SDL_BuildAudioCVT(&cvt, AUDIO_S16, sound->channels, sound->rate, AUDIO_S16, sound->channels, ctx->outputSpec.freq) < 0)
+        return;
+    cvt.len = sound->num_samples*sound->channels*2;
+    cvt.buf = (Uint8 *)malloc(cvt.len*cvt.len_mult);
+    memcpy(cvt.buf, sound->samples, cvt.len);
+    SDL_ConvertAudio(&cvt);
+    free(sound->samples);
+    sound->samples = (short *)cvt.buf;
+    sound->num_samples = cvt.len_cvt/(sound->channels*2);
+    sound->orig_rate = sound->rate;
+    sound->rate = ctx->outputSpec.freq;
+}
+
 const audio_render sdl_audio_render =
 {
     sdl_audio_init,
     sdl_audio_release,
     sdl_audio_play,
-    sdl_audio_stop_all
+    sdl_audio_stop_all,
+    sdl_resample
 };
 #endif
