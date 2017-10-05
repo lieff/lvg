@@ -1,6 +1,7 @@
 #include <config.h>
 #if PLATFORM_SDL || (ENABLE_AUDIO && AUDIO_SDL)
 #include <platform/platform.h>
+#include <stdio.h>
 #include <SDL2/SDL.h>
 
 void drawframe();
@@ -13,7 +14,7 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
     int flags = audio_only ? SDL_INIT_AUDIO : SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC);
     if (SDL_Init(flags) < 0)
     {
-        fprintf(stderr, "error: sdl2 init failed: %s\n", SDL_GetError());
+        printf("error: sdl2 init failed: %s\n", SDL_GetError());
         return 0;
     }
     return 1;
