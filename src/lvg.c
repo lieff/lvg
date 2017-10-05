@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/stat.h>
-#include <alloca.h>
+#include <malloc.h>
 #ifdef __MINGW32__
 #include <windows/mman.h>
 #else
