@@ -25,6 +25,8 @@ sources = [
     'render/render_nanovg.c',
     'render/render_nvpr.c',
     'render/render_null.c',
+    'platform/platform_glfw.c',
+    'platform/platform_sdl.c',
     'swf/adpcm.c',
     'swf/avm1.c',
     'swf/avm1_globals.c',

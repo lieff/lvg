@@ -14,6 +14,9 @@ nanovg/nanovg.c
 nanovg/nanovg.h
 nanovg/nanovg_gl.h
 nanovg/nanovg_gl_utils.h
+platform/platform.h
+platform/platform_glfw.c
+platform/platform_sdl.c
 render/common.c
 render/render.h
 render/render_nanovg.c

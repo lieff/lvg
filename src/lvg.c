@@ -8,43 +8,29 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/stat.h>
+#include <alloca.h>
 #ifdef __MINGW32__
 #include <windows/mman.h>
 #else
 #include <sys/mman.h>
 #endif
-#define GL_GLEXT_PROTOTYPES
-#ifdef EMSCRIPTEN
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#define GLFW_INCLUDE_ES2
-#endif
-#ifdef __MINGW32__
-#include <glad/glad.h>
-#endif
-#include <GLFW/glfw3.h>
 
 #include "lunzip.h"
 #include "stb_image.h"
-#include <SDL2/SDL.h>
 #include <video/video.h>
 #include <audio/audio.h>
 #include <render/render.h>
+#include <platform/platform.h>
+#include <GL/gl.h>
 #include "lvg.h"
 #include "swf/avm1.h"
 
 LVGMovieClip *g_clip;
 static zip_t g_zip;
-static GLFWwindow *window;
 NVGcolor g_bgColor;
-int winWidth, winHeight;
-int width = 0, height = 0;
-double mx = 0, my = 0;
-double g_time;
-int mkeys = 0;
-int last_mkeys;
+platform_params g_params;
 static const char *g_main_script;
-static int is_swf, b_no_actionscript;
+static int is_swf, b_no_actionscript, b_fullscreen;
 #ifdef EMSCRIPTEN
 static int is_gles3;
 #endif
@@ -52,16 +38,31 @@ static int is_gles3;
 #if ENABLE_VIDEO && VIDEO_FFMPEG
 extern const video_dec ff_decoder;
 #endif
+#if RENDER_NANOVG
 extern const render nvg_render;
+#endif
+#if RENDER_NVPR
 extern const render nvpr_render;
+#endif
 extern const render null_render;
 const render *g_render;
 void *g_render_obj;
 
+#if AUDIO_SDL
 extern const audio_render sdl_audio_render;
+#endif
 extern const audio_render null_audio_render;
 const audio_render *g_audio_render;
 void *g_audio_render_obj;
+
+#if PLATFORM_GLFW
+extern const platform glfw_platform;
+#endif
+#if PLATFORM_SDL || (ENABLE_AUDIO && AUDIO_SDL)
+extern const platform sdl_platform;
+#endif
+const platform *g_platform;
+void *g_platform_obj;
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
@@ -125,17 +126,17 @@ void lvgFree(void *buf)
 NSVGimage *lvgLoadSVG(const char *file)
 {
     char *buf;
-    double time = glfwGetTime();
+    double time = g_platform->get_time(g_platform_obj);
     if (!(buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open SVG image.\n");
         return 0;
     }
-    double time2 = glfwGetTime();
+    double time2 = g_platform->get_time(g_platform_obj);
     printf("zip time: %fs\n", time2 - time);
     NSVGimage *image = nsvgParse(buf, "px", 96.0f);
     free(buf);
-    time = glfwGetTime();
+    time = g_platform->get_time(g_platform_obj);
     printf("svg load time: %fs\n", time - time2);
 #if !defined(EMSCRIPTEN) && defined(DEBUG)
     if (0)
@@ -209,13 +210,13 @@ char *load_shape(char *buf, NSVGshape *shape)
 NSVGimage *lvgLoadSVGB(const char *file)
 {
     char *buf, *save_buf;
-    double time = glfwGetTime();
+    double time = g_platform->get_time(g_platform_obj);
     if (!(buf = save_buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open SVG image.\n");
         return 0;
     }
-    double time2 = glfwGetTime();
+    double time2 = g_platform->get_time(g_platform_obj);
     printf("zip time: %fs\n", time2 - time);
 
     NSVGimage *image = (NSVGimage*)calloc(1, sizeof(NSVGimage));
@@ -235,7 +236,7 @@ NSVGimage *lvgLoadSVGB(const char *file)
     }
 
     free(save_buf);
-    time = glfwGetTime();
+    time = g_platform->get_time(g_platform_obj);
     printf("svg load time: %fs\n", time - time2);
     return image;
 }
@@ -295,13 +296,13 @@ static char *loadGroup(char *buf, LVGMovieClipGroup *group)
 LVGMovieClip *lvgLoadClip(const char *file)
 {
     char *buf, *save_buf;
-    double time = glfwGetTime();
+    double time = g_platform->get_time(g_platform_obj);
     if (!(buf = save_buf = lvgGetFileContents(file, 0)))
     {
         printf("error: could not open movie clip.\n");
         return 0;
     }
-    double time2 = glfwGetTime();
+    double time2 = g_platform->get_time(g_platform_obj);
     printf("zip time: %fs\n", time2 - time);
 
     LVGMovieClip *clip = 0;
@@ -328,9 +329,9 @@ LVGMovieClip *lvgLoadClip(const char *file)
         buf = loadGroup(buf, clip->groups + i);
 fail:
     free(save_buf);
-    time = glfwGetTime();
+    time = g_platform->get_time(g_platform_obj);
     printf("movie clip load time: %fs\n", time - time2);
-    clip->last_time = g_time;
+    clip->last_time = time;
     return clip;
 }
 
@@ -448,10 +449,10 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         for (i = 0; i < groupstate->num_timers; i++)
         {
             LVGTimer *t = groupstate->timers + i;
-            double time = g_time - t->last_time;
+            double time = g_params.frame_time - t->last_time;
             if (time > t->timeout/1000.0)
             {
-                t->last_time = g_time;
+                t->last_time = g_params.frame_time;
                 lvgExecuteActions(clip->vm, t->func, groupstate, 1);
             }
         }
@@ -586,7 +587,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 tr[0][1] = t[2]; tr[1][1] = t[3];
                 tr[0][2] = t[4]; tr[1][2] = t[5];
                 inverse(tr, tr);
-                float m[2] = { mx, my };
+                float m[2] = { g_params.mx, g_params.my };
                 xform(m, tr, m);
                 LVGShapeCollection *col = &clip->shapes[bs->obj.id];
                 for (int k = 0; k < col->num_shapes; k++)
@@ -609,9 +610,9 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             int state_flags = UP_SHAPE;
             if (mouse_hit)
                 state_flags = OVER_SHAPE;
-            if (mouse_hit && (mkeys & 1))
+            if (mouse_hit && (g_params.mkeys & 1))
                 state_flags = DOWN_SHAPE;
-            int flags = 0, keypressed = (mkeys & 1), waspressed = (last_mkeys & 1);
+            int flags = 0, keypressed = (g_params.mkeys & MOUSE_BUTTON_LEFT), waspressed = (g_params.last_mkeys & MOUSE_BUTTON_LEFT);
             flags |= (!b->prev_mousehit && mouse_hit) ? CondIdleToOverUp : 0;
             flags |= (b->prev_mousehit && !mouse_hit) ? CondOverUpToIdle : 0;
             flags |= (mouse_hit && !waspressed && keypressed) ? CondOverUpToOverDown : 0;
@@ -721,7 +722,7 @@ void lvgDrawClip(LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
-    if ((g_time - clip->last_time) > (1.0/clip->fps))
+    if ((g_params.frame_time - clip->last_time) > (1.0/clip->fps))
     {
         next_frame = 1;
         clip->last_time += (1.0/clip->fps);
@@ -872,25 +873,12 @@ void swfOnFrame()
 
 void drawframe()
 {
-    //SDL_Event event;
-    //SDL_PollEvent(&event);
-    glfwPollEvents();
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    glfwGetWindowSize(window, &winWidth, &winHeight);
-    glfwGetFramebufferSize(window, &width, &height);
-    glfwGetCursorPos(window, &mx, &my);
-    mkeys = 0;
-    mkeys |= glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ? 1 : 0;
-    mkeys |= glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS ? 2 : 0;
-    mkeys |= glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS ? 4 : 0;
-
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, g_params.width, g_params.height);
     glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    g_render->begin_frame(g_render_obj, g_clip, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+    g_platform->pull_events(g_platform_obj);
 
-    g_render->begin_frame(g_render_obj, g_clip, winWidth, winHeight, width, height);
-
-    g_time = glfwGetTime();
 #ifdef EMSCRIPTEN
     if (is_swf)
         swfOnFrame();
@@ -901,8 +889,8 @@ void drawframe()
         onFrame();
 
     g_render->end_frame(g_render_obj);
-    glfwSwapBuffers(window);
-    last_mkeys = mkeys;
+    g_platform->swap_buffers(g_platform_obj);
+    g_params.last_mkeys = g_params.mkeys;
 }
 
 int open_swf(const char *file_name)
@@ -979,6 +967,7 @@ int main(int argc, char **argv)
         switch (argv[i][1])
         {
         case 'n': b_no_actionscript = 1; break;
+        case 'f': b_fullscreen = 1; break;
         default:
             printf("error: unrecognized option\n");
             return 1;
@@ -1016,7 +1005,7 @@ int main(int argc, char **argv)
     lvgCloseClip(g_clip);
     lvgZipClose(&g_zip);
     return 0;
-#endif
+#else
 #if defined(EMSCRIPTEN)
     if (is_gles3)
     {
@@ -1034,52 +1023,20 @@ int main(int argc, char **argv)
         emscripten_webgl_make_context_current(context);
     }
 #endif
-#ifdef __MINGW32__
-    putenv("SDL_AUDIODRIVER=winmm");
-#endif
 
-    if (!glfwInit())
-    {
-        printf("error: glfw init failed\n");
-        return -1;
-    }
-    if (SDL_Init(/*SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)*/SDL_INIT_AUDIO) < 0)
-    {
-        fprintf(stderr, "error: sdl2 init failed: %s\n", SDL_GetError());
-        return -1;
-    }
-
-    glfwWindowHint(GLFW_RESIZABLE, 1);
-    glfwWindowHint(GLFW_SAMPLES, 8);
-#ifdef EMSCRIPTEN
-    width = 1024, height = 800;
-#else
-    const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-    width = mode->width - 40, height = mode->height - 80;
-    if (width > 1024)
-        width = 1024;
-    if (height > 800)
-        height = 800;
+#if PLATFORM_GLFW
+    g_platform = &glfw_platform;
 #endif
-    window = glfwCreateWindow(width, height, "LVG Player", NULL, NULL);
-    if (!window)
-    {
-        printf("error: could not open window\n");
-        return -1;
-    }
-
-#ifndef EMSCRIPTEN
-    glfwSwapInterval(1);
+#if PLATFORM_SDL
+    g_platform = &sdl_platform;
 #endif
-    glfwMakeContextCurrent(window);
-    glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
-#ifdef __MINGW32__
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        printf("error: glad init failed\n");
-        return -1;
-    }
+#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
+    void *audio_platform_obj;
+    sdl_platform.init(&audio_platform_obj, 0, 1);
 #endif
+    g_platform->init(&g_platform_obj, &g_params, 0);
+    if (b_fullscreen)
+        g_platform->fullscreen(g_platform_obj, b_fullscreen);
 
 #ifndef EMSCRIPTEN
     g_render = &nvpr_render;
@@ -1100,11 +1057,15 @@ int main(int argc, char **argv)
         return -1;
     }
 
+#if ENABLE_AUDIO && AUDIO_SDL
     g_audio_render = &sdl_audio_render;
     if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
         g_audio_render = &null_audio_render;
     for (i = 0; i < g_clip->num_sounds; i++)
         g_audio_render->resample(g_audio_render_obj, g_clip->sounds + i);
+#else
+    g_audio_render = &null_audio_render;
+#endif
 
 #ifdef EMSCRIPTEN
     if (g_main_script)
@@ -1114,25 +1075,21 @@ int main(int argc, char **argv)
             Runtime.loadDynamicLibrarySrc(src);
         }, g_main_script);
     }
-    if (g_main_script)
-        onInit();
-    glfwSetTime(0);
-    emscripten_set_main_loop(drawframe, 0, 1);
 #else
     if (onInit)
         onInit();
-    glfwSetTime(0);
-    while (!glfwWindowShouldClose(window))
-    {
-        drawframe();
-    }
 #endif
+    g_platform->main_loop(g_platform_obj);
+
     g_audio_render->release(g_audio_render_obj);
     if (g_clip)
         lvgCloseClip(g_clip);
     g_render->release(g_render_obj);
     lvgZipClose(&g_zip);
-    glfwTerminate();
-    SDL_Quit();
+    g_platform->release(g_platform_obj);
+#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
+    sdl_platform.release(audio_platform_obj);
+#endif
+#endif
     return 0;
 }

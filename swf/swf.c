@@ -478,15 +478,6 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                         _y = ppath->y;
                         ppath++;
                     }
-                    /*if (fillStyle1 == 2)
-                    {
-                        for (i = 0; i < subpath->num_lines; i++)
-                        {
-                            LINE *l = subpath->subpath + i;
-                            printf("{ %d, %.2f, %.2f }", l->type, l->x/20.0, l->y/20.0);
-                        }
-                        printf("\n"); fflush(stdout);
-                    }*/
                     assert(moveTo == subpath->subpath[0].type);
                     assert(moveTo != subpath->subpath[1].type);
                     assert(moveTo != subpath->subpath[subpath_size].type);
@@ -1674,7 +1665,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     assert(clip->groups->num_frames == swf->frameCount);
     //assert(clip->num_groups <= clip->num_groupstates);
 #endif
-    clip->last_time = g_time;
+    //clip->last_time = 0.0;
     clip->as_version = swf->fileVersion;
     return clip;
 }

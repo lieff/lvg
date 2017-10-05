@@ -16,7 +16,10 @@
 #include <glad/glad.h>
 #endif
 #include <GLFW/glfw3.h>
-#include "render/render.h"
+#include <render/render.h>
+#include <platform/platform.h>
+
+extern platform_params g_params;
 
 static int tcc_buf_pos;
 static size_t tcc_buf_size;
@@ -274,14 +277,14 @@ const struct SYM g_syms[] = {
 
     //{ "vg", &vg },
     { "g_bgColor", &g_bgColor },
-    { "winWidth", &winWidth },
-    { "winHeight", &winHeight },
-    { "width", &width },
-    { "height", &height },
-    { "mkeys", &mkeys },
-    { "mx", &mx },
-    { "my", &my },
-    { "g_time", &g_time }
+    { "winWidth", &g_params.winWidth },
+    { "winHeight", &g_params.winHeight },
+    { "width", &g_params.width },
+    { "height", &g_params.height },
+    { "mkeys", &g_params.mkeys },
+    { "mx", &g_params.mx },
+    { "my", &g_params.my },
+    { "g_time", &g_params.frame_time }
 };
 
 void (tcc_error_func)(void *opaque, const char *msg)

@@ -3,9 +3,10 @@ set -e
 . ~/Public/emsdk_portable/emsdk_set_env.sh
 emcc -O3 nanovg/nanovg.c src/lvg.c src/svgb.c src/lunzip.c \
 audio/*.c \
+platform/*.c \
+render/common.c render/render_nanovg.c \
 scripting/tcc/script_tcc.c \
 swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
-render/common.c render/render_nanovg.c \
 video/ffmpeg/ffmpeg_dec.c \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 \
 -Ivideo/ffmpeg/FFmpeg -Lvideo/ffmpeg/web -lavcodec -lavutil \

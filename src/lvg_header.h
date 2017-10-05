@@ -207,10 +207,9 @@ void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupSta
 void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);
 
+extern NVGcolor g_bgColor;
 #ifdef __TINYC__
 extern NVGcontext *vg;
-#endif
-extern NVGcolor g_bgColor;
 extern int winWidth;
 extern int winHeight;
 extern int width;
@@ -220,6 +219,7 @@ extern int last_mkeys;
 extern double mx;
 extern double my;
 extern double g_time;
+#endif
 
 void *malloc(size_t);
 void *calloc(size_t, size_t);
