@@ -140,7 +140,7 @@ static void glfw_fullscreen(void *ctx, int b_fullscreen)
         params->winWidth  = platform->defWidth;
         params->winHeight = platform->defHeight;
     }
-    glfwSetWindowMonitor(platform->window, monitor, 0, 0, params->winWidth, params->winHeight, mode->refreshRate);
+    glfwSetWindowMonitor(platform->window, b_fullscreen ? monitor : 0, 0, 0, params->winWidth, params->winHeight, b_fullscreen ? mode->refreshRate : 0);
 }
 
 static double glfw_get_time(void *ctx)
@@ -151,7 +151,7 @@ static double glfw_get_time(void *ctx)
 static int glfw_get_key(void *ctx, int key)
 {
     platform_ctx *platform = (platform_ctx *)ctx;
-    return platform->keys[key];
+    return glfwGetKey(platform->window, key);
 }
 
 const platform glfw_platform =

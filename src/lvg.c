@@ -775,6 +775,7 @@ void lvgCloseClip(LVGMovieClip *clip)
             for (j = 0; j < shape->morph->num_shapes; j++)
                 lvgFreeShape(shape->morph->shapes + j);
             free(shape->morph->shapes);
+            free(shape->morph);
         }
     }
     for (i = 0; i < clip->num_images; i++)
@@ -878,6 +879,27 @@ void drawframe()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     g_render->begin_frame(g_render_obj, g_clip, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
     g_platform->pull_events(g_platform_obj);
+    int pressed = (g_params.mkeys & MOUSE_BUTTON_LEFT) && !(g_params.last_mkeys & MOUSE_BUTTON_LEFT);
+    if (pressed)
+    {
+        static double last_click;
+        if (g_params.frame_time - last_click < 0.2)
+            goto change_fullscreen;
+        last_click = g_params.frame_time;
+    }
+    if (g_platform->get_key(g_platform_obj, 342) || g_platform->get_key(g_platform_obj, 346))
+    {
+        static int last_enter;
+        int enter_state = g_platform->get_key(g_platform_obj, 257);
+        if (enter_state && !last_enter)
+        {
+change_fullscreen:
+            b_fullscreen = !b_fullscreen;
+            g_platform->fullscreen(g_platform_obj, b_fullscreen);
+        }
+        last_enter = enter_state;
+    }
+
 
 #ifdef EMSCRIPTEN
     if (is_swf)
