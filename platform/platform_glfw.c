@@ -128,6 +128,7 @@ static void glfw_swap_buffers(void *ctx)
 
 static void glfw_fullscreen(void *ctx, int b_fullscreen)
 {
+#ifndef EMSCRIPTEN
     platform_ctx *platform = (platform_ctx *)ctx;
     platform_params *params = platform->params;
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
@@ -144,6 +145,7 @@ static void glfw_fullscreen(void *ctx, int b_fullscreen)
     }
     glfwSetWindowMonitor(platform->window, b_fullscreen ? monitor : 0, b_fullscreen ? 0 : platform->winX,
         b_fullscreen ? 0 : platform->winY, params->winWidth, params->winHeight, b_fullscreen ? mode->refreshRate : 0);
+#endif
 }
 
 static double glfw_get_time(void *ctx)

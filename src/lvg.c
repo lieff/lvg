@@ -14,6 +14,10 @@
 #else
 #include <sys/mman.h>
 #endif
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
 
 #include "lunzip.h"
 #include "stb_image.h"
