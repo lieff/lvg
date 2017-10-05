@@ -2,6 +2,7 @@
 #if PLATFORM_SDL || (ENABLE_AUDIO && AUDIO_SDL)
 #include <platform/platform.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 
 void drawframe();
