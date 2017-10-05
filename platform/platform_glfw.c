@@ -20,6 +20,7 @@ typedef struct platform_ctx
 {
     GLFWwindow *window;
     platform_params *params;
+    int winX, winY;
     int defWidth, defHeight;
     char keys[256];
 } platform_ctx;
@@ -133,6 +134,7 @@ static void glfw_fullscreen(void *ctx, int b_fullscreen)
     const GLFWvidmode *mode = glfwGetVideoMode(monitor);
     if (b_fullscreen)
     {
+        glfwGetWindowPos(platform->window, &platform->winX, &platform->winY);
         params->winWidth  = mode->width;
         params->winHeight = mode->height;
     } else
@@ -140,7 +142,8 @@ static void glfw_fullscreen(void *ctx, int b_fullscreen)
         params->winWidth  = platform->defWidth;
         params->winHeight = platform->defHeight;
     }
-    glfwSetWindowMonitor(platform->window, b_fullscreen ? monitor : 0, 0, 0, params->winWidth, params->winHeight, b_fullscreen ? mode->refreshRate : 0);
+    glfwSetWindowMonitor(platform->window, b_fullscreen ? monitor : 0, b_fullscreen ? 0 : platform->winX,
+        b_fullscreen ? 0 : platform->winY, params->winWidth, params->winHeight, b_fullscreen ? mode->refreshRate : 0);
 }
 
 static double glfw_get_time(void *ctx)
