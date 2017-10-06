@@ -456,34 +456,3 @@ double reader_readDouble(reader_t*r)
     return *(double*)&w;
 #endif
 }
-unsigned int read_compressed_uint(reader_t*r)
-{
-    unsigned int u = 0;
-    unsigned int b;
-    do {
-        b = reader_readU8(r);
-        u = u<<7|(b&0x7f);//u = u<<7|b&0x7f;
-    } while(b&0x80);
-    return u;
-}
-int read_compressed_int(reader_t*r)
-{
-    int i = 0;
-    int b;
-
-    b = reader_readS8(r);
-    i = b&0x7f;
-
-    if(b&0x40)
-        i|=0xffffff80; //sign extension
-
-    if(!(b&0x80))
-        return i;
-
-    do {
-        b = reader_readS8(r);
-        i = i<<7|(b&0x7f);//i = i<<7|b&0x7f;
-    } while(b&0x80);
-
-    return i;
-}

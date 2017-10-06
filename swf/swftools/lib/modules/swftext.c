@@ -224,7 +224,7 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
     U32 *offset;
     U8 flags1, /*langcode, */namelen;
     swf_SetTagPos(tag, 0);
-    font->version = tag->id==ST_DEFINEFONT3?3:2;
+    font->version = tag->id == ST_DEFINEFONT3 ? 3 : 2;
     fid = swf_GetU16(tag);
     if (id && id != fid)
         return id;
@@ -361,21 +361,24 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
     return font->id;
 }
 
-int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
+int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
 {
     U16 fid;
     swf_SetTagPos(tag, 0);
     fid = swf_GetU16(tag);
 
-    if (fid == id) {
+    if (fid == id)
+    {
         font->alignzone_flags = swf_GetU8(tag);
         font->alignzones = calloc(1, sizeof(ALIGNZONE)*font->numchars);
-        int i=0;
-        while(tag->pos < tag->len) {
-            if(i>=font->numchars)
+        int i = 0;
+        while (tag->pos < tag->len)
+        {
+            if (i >= font->numchars)
                 break;
             int nr = swf_GetU8(tag); // should be 2
-            if(nr!=1 && nr!=2) {
+            if (nr != 1 && nr != 2)
+            {
 #ifdef _DEBUG
                 printf("rfxswf: Can't parse alignzone tags with %d zones", nr);
 #endif
@@ -383,22 +386,24 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
             }
             U16 x = swf_GetU16(tag);
             U16 y = swf_GetU16(tag);
-            U16 dx = (nr==2)?swf_GetU16(tag):0xffff;
-            U16 dy = (nr==2)?swf_GetU16(tag):0xffff;
+            U16 dx = (nr == 2) ? swf_GetU16(tag) : 0xffff;
+            U16 dy = (nr == 2) ? swf_GetU16(tag) : 0xffff;
             U8 xy = swf_GetU8(tag);
 
 #ifdef _DEBUG
-            if((!(xy&1) && (x!=0 || (dx!=0 && dx!=0xffff))) ||
-               (!(xy&2) && (y!=0 || (dy!=0 && dy!=0xffff))))
+            if ((!(xy & 1) && (x != 0 || (dx != 0 && dx != 0xffff))) ||
+                (!(xy & 2) && (y != 0 || (dy != 0 && dy != 0xffff))))
             {
-                printf("Warning: weird combination of alignzone bits and values (%d x:%04x-%04x y:%04x-%04x)\n", xy, x,dx,y,dy);
+                printf("Warning: weird combination of alignzone bits and values (%d x:%04x-%04x y:%04x-%04x)\n", xy, x, dx, y, dy);
             }
 #endif
-            if(!(xy&1)) {
-                x = 0xffff;
+            if (!(xy & 1))
+            {
+                x  = 0xffff;
                 dx = 0xffff;
-            } else if(!(xy&2)) {
-                y = 0xffff;
+            } else if (!(xy & 2))
+            {
+                y  = 0xffff;
                 dy = 0xffff;
             }
             font->alignzones[i].x = x;

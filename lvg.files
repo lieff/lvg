@@ -19,6 +19,8 @@ platform/platform_glfw.c
 platform/platform_sdl.c
 render/common.c
 render/gl.h
+render/glad.c
+render/glad.h
 render/render.h
 render/render_nanovg.c
 render/render_null.c
@@ -48,9 +50,7 @@ swf/swftools/lib/as3/pool.c
 swf/swftools/lib/as3/pool.h
 swf/swftools/lib/as3/registry.h
 swf/swftools/lib/modules/swfaction.c
-swf/swftools/lib/modules/swfalignzones.c
 swf/swftools/lib/modules/swfbits.c
-swf/swftools/lib/modules/swfdraw.c
 swf/swftools/lib/modules/swffilter.c
 swf/swftools/lib/modules/swfobject.c
 swf/swftools/lib/modules/swfshape.c
@@ -58,10 +58,6 @@ swf/swftools/lib/modules/swftext.c
 swf/swftools/lib/modules/swftools.c
 swf/swftools/lib/bitio.c
 swf/swftools/lib/bitio.h
-swf/swftools/lib/drawer.c
-swf/swftools/lib/drawer.h
-swf/swftools/lib/graphcut.c
-swf/swftools/lib/graphcut.h
 swf/swftools/lib/q.c
 swf/swftools/lib/q.h
 swf/swftools/lib/rfxswf.c

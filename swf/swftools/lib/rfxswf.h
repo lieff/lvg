@@ -35,7 +35,6 @@
 #include <ctype.h>
 #include "../config.h"
 #include "./bitio.h"
-#include "./drawer.h"
 #include "./types.h"
 
 #ifdef __cplusplus
@@ -522,16 +521,6 @@ void swf_SetShape2(TAG*tag, SHAPE2*shape2);
 void swf_RecodeShapeData(U8*data, int bitlen, int in_bits_fill, int in_bits_line,
                          U8**destdata, U32*destbitlen, int out_bits_fill, int out_bits_line);
 
-// swfdraw.c
-
-void swf_Shape10DrawerInit(drawer_t*draw, TAG*tag);
-void swf_Shape01DrawerInit(drawer_t*draw, TAG*tag);
-void swf_Shape11DrawerInit(drawer_t*draw, TAG*tag);
-SHAPE* swf_ShapeDrawerToShape(drawer_t*draw);
-SRECT swf_ShapeDrawerGetBBox(drawer_t*draw);
-
-void swf_DrawString(drawer_t*draw, const char*source);
-
 // swftext.c
 
 typedef struct _KERNING
@@ -711,8 +700,6 @@ void swf_SetEditText(TAG*tag, U16 flags, SRECT r, const char*text, RGBA*color,
     int maxlength, U16 font, U16 height, EditTextLayout*layout, const char*variable);
 
 SRECT swf_SetDefineText(TAG*tag, SWFFONT*font, RGBA*rgb, const char*text, int scale);
-
-void swf_DrawText(drawer_t*draw, SWFFONT*font, int size, const char*text);
 
 // swffont.c
 

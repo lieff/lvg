@@ -84,9 +84,6 @@ float reader_readFloat(reader_t*r);
 double reader_readDouble(reader_t*r);
 char*reader_readString(reader_t*r);
 
-unsigned int read_compressed_uint(reader_t*r);
-int read_compressed_int(reader_t*r);
-
 void writer_resetbits(writer_t*w);
 void writer_writebit(writer_t*w, int bit);
 void writer_writebits(writer_t*w, unsigned int data, int bits);
