@@ -226,7 +226,9 @@ namespace_t* namespace_fromstring(const char*name)
             else if(!strcmp(a, "staticprotected")) access=0x1a;
             else if(!strcmp(a, "private")) access=0x05;
             else {
-                fprintf(stderr, "Undefined access level: [%s]\n", a);
+#ifdef _DEBUG
+                printf("Undefined access level: [%s]\n", a);
+#endif
                 free(n);
                 return 0;
             }
@@ -489,7 +491,9 @@ char* access2str(int type)
     else if(type==0x05) return "private";
     else if(type==0x00) return "any";
     else {
-        fprintf(stderr, "Undefined access type %02x\n", type);
+#ifdef _DEBUG
+        printf("Undefined access type %02x\n", type);
+#endif
         return "undefined";
     }
 }
@@ -585,7 +589,9 @@ multiname_t* multiname_fromstring(const char*name2)
     char*namespace=0,*name=0;
     if(!p) {
         if(strchr(n, ':')) {
-            fprintf(stderr, "Error: single ':' in name\n");
+#ifdef _DEBUG
+            printf("Error: single ':' in name\n");
+#endif
         }
         namespace = "";
         name = n;
@@ -593,12 +599,14 @@ multiname_t* multiname_fromstring(const char*name2)
         *p = 0;
         namespace = n;
         name = p+2;
+#ifdef _DEBUG
         if(strchr(namespace, ':')) {
-            fprintf(stderr, "Error: single ':' in namespace\n");
+            printf("Error: single ':' in namespace\n");
         }
         if(strchr(name, ':')) {
-            fprintf(stderr, "Error: single ':' in qualified name\n");
+            printf("Error: single ':' in qualified name\n");
         }
+#endif
     }
 
     multiname_t*m = malloc(sizeof(multiname_t));
@@ -742,7 +750,9 @@ constant_t* constant_fromindex(pool_t*pool, int index, int type)
     } else if(UNIQUE_CONSTANT(c->type)) {
         // ok
     } else {
-        fprintf(stderr, "invalid constant type %02x\n", c->type);
+#ifdef _DEBUG
+        printf("invalid constant type %02x\n", c->type);
+#endif
     }
     return c;
 }
@@ -775,7 +785,9 @@ char* constant_tostring(constant_t*c)
     } else if(c->type == CONSTANT_UNDEFINED) {
         return strdup("undefined");
     } else {
-        fprintf(stderr, "invalid constant type %02x\n", c->type);
+#ifdef _DEBUG
+        printf("invalid constant type %02x\n", c->type);
+#endif
         return 0;
     }
 }
@@ -811,7 +823,9 @@ int constant_get_index(pool_t*pool, constant_t*c)
     } else if(!constant_has_index(c)) {
         return 1;
     } else {
-        fprintf(stderr, "invalid constant type %02x\n", c->type);
+#ifdef _DEBUG
+        printf("invalid constant type %02x\n", c->type);
+#endif
         return 0;
     }
 }
@@ -881,7 +895,10 @@ int pool_register_int(pool_t*p, int i)
 int pool_register_float(pool_t*p, double d)
 {
     int pos = array_append_or_increase(p->x_floats, &d);
-    fprintf(stderr, "putting %f at %d\n", d, pos);fflush(stderr);
+#ifdef _DEBUG
+    printf("putting %f at %d\n", d, pos);
+    fflush(stdout);
+#endif
     assert(pos!=0);
     return pos;
 }
@@ -936,7 +953,9 @@ int pool_find_uint(pool_t*pool, unsigned int x)
 {
     int i = array_find(pool->x_uints, &x);
     if(i<=0) {
-        fprintf(stderr, "Couldn't find uint \"%d\" in constant pool\n", x);
+#ifdef _DEBUG
+        printf("Couldn't find uint \"%d\" in constant pool\n", x);
+#endif
         return 0;
     }
     return i;
@@ -945,7 +964,9 @@ int pool_find_int(pool_t*pool, int x)
 {
     int i = array_find(pool->x_ints, &x);
     if(i<=0) {
-        fprintf(stderr, "Couldn't find int \"%d\" in constant pool\n", x);
+#ifdef _DEBUG
+        printf("Couldn't find int \"%d\" in constant pool\n", x);
+#endif
         return 0;
     }
     return i;
@@ -954,7 +975,9 @@ int pool_find_float(pool_t*pool, double x)
 {
     int i = array_find(pool->x_ints, &x);
     if(i<=0) {
-        fprintf(stderr, "Couldn't find int \"%f\" in constant pool\n", x);
+#ifdef _DEBUG
+        printf("Couldn't find int \"%f\" in constant pool\n", x);
+#endif
         return 0;
     }
     return i;
@@ -966,7 +989,9 @@ int pool_find_namespace(pool_t*pool, namespace_t*ns)
     int i = array_find(pool->x_namespaces, ns);
     if(i<0) {
         char*s = namespace_tostring(ns);
-        fprintf(stderr, "Couldn't find namespace \"%s\" %p in constant pool\n", s, ns);
+#ifdef _DEBUG
+        printf("Couldn't find namespace \"%s\" %p in constant pool\n", s, ns);
+#endif
         free(s);
         return 0;
     }
@@ -979,7 +1004,9 @@ int pool_find_namespace_set(pool_t*pool, namespace_set_t*set)
     int i = array_find(pool->x_namespace_sets, set);
     if(i<=0) {
         char*s = namespace_set_tostring(set);
-        fprintf(stderr, "Couldn't find namespace_set \"%s\" in constant pool\n", s);
+#ifdef _DEBUG
+        printf("Couldn't find namespace_set \"%s\" in constant pool\n", s);
+#endif
         free(s);
         return 0;
     }
@@ -992,7 +1019,9 @@ int pool_find_string(pool_t*pool, const char*str)
     string_t s = string_new2(str);
     int i = array_find(pool->x_strings, &s);
     if(i<=0) {
-        fprintf(stderr, "Couldn't find string \"%s\" in constant pool\n", str);
+#ifdef _DEBUG
+        printf("Couldn't find string \"%s\" in constant pool\n", str);
+#endif
         return 0;
     }
     return i;
@@ -1004,7 +1033,9 @@ int pool_find_multiname(pool_t*pool, multiname_t*name)
     int i = array_find(pool->x_multinames, name);
     if(i<=0) {
         char*s = multiname_tostring(name);
-        fprintf(stderr, "Couldn't find multiname \"%s\" in constant pool\n", s);
+#ifdef _DEBUG
+        printf("Couldn't find multiname \"%s\" in constant pool\n", s);
+#endif
         free(s);
         return 0;
     }
@@ -1152,8 +1183,10 @@ void pool_read(pool_t*pool, TAG*tag)
         NEW(namespace_set_t, nsset);
         for(s=0;s<count;s++) {
             int nsnr = swf_GetU30(tag);
+#ifdef _DEBUG
             if(!nsnr)
-                fprintf(stderr, "Zero entry in namespace set\n");
+                printf("Zero entry in namespace set\n");
+#endif
             namespace_t*ns = (namespace_t*)array_getkey(pool->x_namespaces, nsnr);
             list_append(nsset->namespaces, namespace_clone(ns));
         }
@@ -1178,7 +1211,9 @@ void pool_read(pool_t*pool, TAG*tag)
             int namespace_index = swf_GetU30(tag);
             m.ns = (namespace_t*)array_getkey(pool->x_namespaces, namespace_index);
             if(!m.ns) {
-                fprintf(stderr, "Error: Illegal reference to namespace #%d in constant pool.\n", namespace_index);
+#ifdef _DEBUG
+                printf("Error: Illegal reference to namespace #%d in constant pool.\n", namespace_index);
+#endif
             }
             int name_index = swf_GetU30(tag);
             if(name_index) // 0 = '*' (any)

@@ -136,7 +136,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
                 if (flags & SF_NEWSTYLE)
                 {
 #ifdef _DEBUG
-                    fprintf(stderr, "RFXSWF: Can't process extended styles in shape.\n");
+                    printf("RFXSWF: Can't process extended styles in shape.\n");
 #endif
                 }
             } else
@@ -284,7 +284,7 @@ int swf_ShapeSetMove(TAG * t,SHAPE * s,S32 x,S32 y)
     if(b > 31)
     {
 #ifdef _DEBUG
-        fprintf(stderr, "Warning: bad moveTo (%f,%f)\n", x/20.0, y/20.0);
+        printf("Warning: bad moveTo (%f,%f)\n", x/20.0, y/20.0);
 #endif
         b = 31;
     }
@@ -373,7 +373,7 @@ int swf_ShapeSetLine(TAG *t, SHAPE *s, S32 x, S32 y)
         {
             /* do not split into more than 64 segments. If the line is *that* long, something's broken */
 #ifdef _DEBUG
-            fprintf(stderr, "Warning: Line to %.2f,%.2f is too long (%d bits)\n", (double)x,(double)y, b);
+            printf("Warning: Line to %.2f,%.2f is too long (%d bits)\n", (double)x,(double)y, b);
 #endif
             return -1;
         } else
@@ -425,7 +425,7 @@ int swf_ShapeSetCurve(TAG * t,SHAPE * s,S32 x,S32 y,S32 ax,S32 ay)
 
     if(b >= 18) {
 #ifdef _DEBUG
-        fprintf(stderr, "Bit overflow in swf_ShapeSetCurve- %d (%d,%d,%d,%d)\n", b, ax,ay,x,y);
+        printf("Bit overflow in swf_ShapeSetCurve- %d (%d,%d,%d,%d)\n", b, ax,ay,x,y);
 #endif
         return swf_ShapeSetLine(t, s, x+ax, y+ay);
     }
@@ -483,7 +483,7 @@ static void parseFillStyle(FILLSTYLE *dest, TAG *tag, int num)
     } else
     {
 #ifdef _DEBUG
-        fprintf(stderr, "rfxswf:swfshape.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
+        printf("rfxswf:swfshape.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
 #endif
         assert(0);
     }
@@ -553,7 +553,7 @@ int parseFillStyleArray(TAG *tag, SHAPE2 *shape)
                 if (flags & 0x08)
                 {
 #ifdef _DEBUG
-                    fprintf(stderr, "Warning: Filled strokes parsing not yet fully supported\n");
+                    printf("Warning: Filled strokes parsing not yet fully supported\n");
 #endif
                     fill = 1;
                 }
@@ -827,7 +827,7 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
     fill = (U16)swf_GetBits(tag,4);
     line = (U16)swf_GetBits(tag,4);
     if(!fill && !line) {
-        fprintf(stderr, "fill/line bits are both zero\n");
+        printf("fill/line bits are both zero\n");
     }
 
     shape->lines = swf_ParseShapeData(&tag->data[tag->pos], (tag->len - tag->pos)*8, fill, line, num, shape);

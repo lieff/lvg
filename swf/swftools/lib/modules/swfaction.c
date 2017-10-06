@@ -187,7 +187,9 @@ void swf_ActionFree(ActionTAG*action)
     }
     action = action->parent;
     if(!action) {
-        fprintf(stderr, "Warning: freeing zero action (no parent)");
+#ifdef _DEBUG
+        printf("Warning: freeing zero action (no parent)");
+#endif
         return;
     }
 

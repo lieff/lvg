@@ -30,8 +30,10 @@
 SFIXED RFXSWF_SP(SFIXED a1,SFIXED a2,SFIXED b1,SFIXED b2)
 { S64 a = ((S64)a1*(S64)b1+(S64)a2*(S64)b2)>>16;
     SFIXED result = (SFIXED)(a);
-    if(a!=result)
-        fprintf(stderr, "Warning: overflow in matrix multiplication\n");
+#ifdef _DEBUG
+    if(a != result)
+        printf("Warning: overflow in matrix multiplication\n");
+#endif
     return result;
 }
 SFIXED RFXSWF_QFIX(int zaehler,int nenner) // bildet Quotient von zwei INTs in SFIXED
@@ -139,7 +141,9 @@ U16 swf_GetDefineID(TAG * t)
         id = swf_GetU16(t);
         break;
     default:
-        fprintf(stderr, "rfxswf: Error: tag %d has no id\n", t->id);
+#ifdef _DEBUG
+        printf("rfxswf: Error: tag %d has no id\n", t->id);
+#endif
         assert(0);
     }
 
@@ -395,7 +399,9 @@ void swf_SetDepth(TAG * t, U16 depth)
         PUT16(t->data, depth);
         break;
     default:
-        fprintf(stderr, "rfxswf: Error: tag %d has no depth\n", t->id);
+#ifdef _DEBUG
+        printf("rfxswf: Error: tag %d has no depth\n", t->id);
+#endif
     }
 }
 
@@ -533,7 +539,9 @@ void enumerateUsedIDs_fillstyle(TAG * tag, int t, void (*callback)(TAG*, int, vo
             swf_GetMatrix(tag, NULL);
     }
     else {
-        fprintf(stderr, "rfxswf:swftools.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
+#ifdef _DEBUG
+        printf("rfxswf:swftools.c Unknown fillstyle:0x%02x in tag %02d\n",type, tag->id);
+#endif
     }
 }
 
@@ -1164,7 +1172,9 @@ void swf_SetDefineBBox(TAG * tag, SRECT newbbox)
 
     } break;
     default:
-        fprintf(stderr, "rfxswf: Tag %d has no bbox\n", tag->id);
+#ifdef _DEBUG
+        printf("rfxswf: Tag %d has no bbox\n", tag->id);
+#endif
         assert(0);
     }
 }

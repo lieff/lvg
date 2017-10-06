@@ -376,7 +376,9 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
                 break;
             int nr = swf_GetU8(tag); // should be 2
             if(nr!=1 && nr!=2) {
-                fprintf(stderr, "rfxswf: Can't parse alignzone tags with %d zones", nr);
+#ifdef _DEBUG
+                printf("rfxswf: Can't parse alignzone tags with %d zones", nr);
+#endif
                 break;
             }
             U16 x = swf_GetU16(tag);
@@ -385,11 +387,11 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag)
             U16 dy = (nr==2)?swf_GetU16(tag):0xffff;
             U8 xy = swf_GetU8(tag);
 
-#ifdef DEBUG_RFXSWF
+#ifdef _DEBUG
             if((!(xy&1) && (x!=0 || (dx!=0 && dx!=0xffff))) ||
-                    (!(xy&2) && (y!=0 || (dy!=0 && dy!=0xffff)))) {
-                fprintf(stderr, "Warning: weird combination of alignzone bits and values (%d x:%04x-%04x y:%04x-%04x)\n", xy,
-                        x,dx,y,dy);
+               (!(xy&2) && (y!=0 || (dy!=0 && dy!=0xffff))))
+            {
+                printf("Warning: weird combination of alignzone bits and values (%d x:%04x-%04x y:%04x-%04x)\n", xy, x,dx,y,dy);
             }
 #endif
             if(!(xy&1)) {

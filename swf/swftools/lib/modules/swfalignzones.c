@@ -14,7 +14,7 @@ static void draw_line(float*row, float x1, float x2, float y1, float y2, int min
     if (x1 < min || x2 > max)
     {
 #ifdef _DEBUG
-        fprintf(stderr, "error: glyph x stroke out of bounds\n");
+        printf("error: glyph x stroke out of bounds\n");
 #endif
         return;
     }
@@ -284,7 +284,7 @@ void swf_FontCreateAlignZones(SWFFONT * f)
     if (!f->layout)
     {
 #ifdef _DEBUG
-        fprintf(stderr, "Error: font needs a layout for alignzones to be detected.");
+        printf("Error: font needs a layout for alignzones to be detected.");
 #endif
         return;
     }

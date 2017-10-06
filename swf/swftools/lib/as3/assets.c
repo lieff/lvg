@@ -17,7 +17,9 @@ static void add_dependencies(asset_resolver_t*assets, abc_asset_t*asset, asset_t
         U16 id = GET16(&tag->data[positions[t]]);
         d->asset = assets->id2asset[id];
         if(!d->asset) {
-            fprintf(stderr, "Error: ID %d referenced, but not defined\n", id);
+#ifdef _DEBUG
+            printf("Error: ID %d referenced, but not defined\n", id);
+#endif
         }
     }
     free(positions);
@@ -66,7 +68,9 @@ asset_resolver_t* swf_ParseAssets(SWF*swf)
                 } else {
                     abc_asset_t*asset = assets->id2asset[id];
                     if(!asset) {
-                        fprintf(stderr, "Error: ID %d referenced, but not defined.\n", id);
+#ifdef _DEBUG
+                        printf("Error: ID %d referenced, but not defined.\n", id);
+#endif
                     } else {
                         char*name = swf_GetString(tag);
                         dict_put(assets->name2asset, name, asset);

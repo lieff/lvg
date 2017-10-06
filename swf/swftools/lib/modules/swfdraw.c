@@ -210,7 +210,9 @@ SHAPE* swf_ShapeDrawerToShape(drawer_t*draw)
     SWFSHAPEDRAWER*sdraw = (SWFSHAPEDRAWER*)draw->internal;
     SHAPE* shape = (SHAPE*)malloc(sizeof(SHAPE));
     if(!sdraw->isfinished) {
-        fprintf(stderr, "Warning: you should Finish() your drawer before calling DrawerToShape");
+#ifdef _DEBUG
+        printf("Warning: you should Finish() your drawer before calling DrawerToShape");
+#endif
         swf_ShapeDrawerFinish(draw);
     }
     memcpy(shape, sdraw->shape, sizeof(SHAPE));

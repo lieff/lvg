@@ -256,7 +256,11 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         }
         return flags;
     } else
-        fprintf(stderr, "rfxswf: Bad Tag: %d not a placeobject\n", tag->id);
+    {
+#ifdef _DEBUG
+        printf("rfxswf: Bad Tag: %d not a placeobject\n", tag->id);
+#endif
+    }
     return 0;
 }
 

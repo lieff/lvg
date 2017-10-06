@@ -42,7 +42,6 @@
 extern "C" {
 #endif
 
-#define DEBUG_RFXSWF
 #ifdef RFXSWF_DISABLESOUND
 #define NO_MP3
 #endif

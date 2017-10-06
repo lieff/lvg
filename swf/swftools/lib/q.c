@@ -528,7 +528,9 @@ void trie_rollback(trie_t*t)
 {
     trierollback_t*rollback = (trierollback_t*)t->rollback;
     if(!rollback) {
-        fprintf(stderr, "Internal error: can't roll back this trie any further\n");
+#ifdef _DEBUG
+        printf("Internal error: can't roll back this trie any further\n");
+#endif
         return;
     }
     t->rollback = ((trierollback_t*)t->rollback)->prev;
@@ -538,11 +540,15 @@ void trie_rollback(trie_t*t)
         triememory_t*next = op->next;
         if(op->del) {
             if(!_trie_remove(t->start, op->key)) {
-                fprintf(stderr, "Internal error: can't delete key %s in trie during rollback\n", op->key);
+#ifdef _DEBUG
+                printf("Internal error: can't delete key %s in trie during rollback\n", op->key);
+#endif
             }
         } else {
             if(_trie_put(&t->start, op->key, op->data)) {
-                fprintf(stderr, "Internal error: overwrote key %s in trie during rollback\n", op->key);
+#ifdef _DEBUG
+                printf("Internal error: overwrote key %s in trie during rollback\n", op->key);
+#endif
             }
         }
         free(op);
@@ -877,7 +883,9 @@ static stringlist_t* stringlist_del(stringarray_t*sa, stringlist_t*l, int index)
         old = l;
         l = l->next;
     }
-    fprintf(stderr, "Internal error: did not find string %d in hash\n", index);
+#ifdef _DEBUG
+    printf("Internal error: did not find string %d in hash\n", index);
+#endif
     return ll;
 }
 
@@ -1497,14 +1505,18 @@ array_t* array_new2(type_t*type) {
 }
 void*array_getkey(array_t*array, int nr) {
     if(nr >= array->num || nr<0) {
-        fprintf(stderr, "error: reference to element %d in array[%d]\n", nr, array->num);
+#ifdef _DEBUG
+        printf("error: reference to element %d in array[%d]\n", nr, array->num);
+#endif
         return 0;
     }
     return array->d[nr].name;
 }
 void*array_getvalue(array_t*array, int nr) {
     if(nr >= array->num || nr<0) {
-        fprintf(stderr, "error: reference to element %d in array[%d]\n", nr, array->num);
+#ifdef _DEBUG
+        printf("error: reference to element %d in array[%d]\n", nr, array->num);
+#endif
         return 0;
     }
     return array->d[nr].data;

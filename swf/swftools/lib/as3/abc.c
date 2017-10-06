@@ -473,7 +473,9 @@ static trait_list_t* traits_parse(TAG*tag, pool_t*pool, abc_file_t*file)
             }
             DEBUG printf("  slot %s %d %s (%s)\n", name, trait->slot_id, trait->type_name->name, constant_tostring(trait->value));
         } else {
-            fprintf(stderr, "Can't parse trait type %d\n", kind);
+#ifdef _DEBUG
+            printf("Can't parse trait type %d\n", kind);
+#endif
         }
         if(attributes&0x40) {
             int num = swf_GetU30(tag);
@@ -500,7 +502,9 @@ void traits_skip(TAG*tag)
         if(kind == TRAIT_SLOT || kind == TRAIT_CONST) {
             if(swf_GetU30(tag)) swf_GetU8(tag);
         } else if(kind>TRAIT_CONST) {
-            fprintf(stderr, "Can't parse trait type %d\n", kind);
+#ifdef _DEBUG
+            printf("Can't parse trait type %d\n", kind);
+#endif
         }
         if(attributes&0x40) {
             int s, num = swf_GetU30(tag);
@@ -687,7 +691,9 @@ void* swf_ReadABC(TAG*tag)
     }
     U32 version = swf_GetU32(tag);
     if(version!=0x002e0010) {
-        fprintf(stderr, "Warning: unknown AVM2 version %08x\n", version);
+#ifdef _DEBUG
+        printf("Warning: unknown AVM2 version %08x\n", version);
+#endif
     }
 
     pool_read(pool, tag);
@@ -847,7 +853,9 @@ void* swf_ReadABC(TAG*tag)
         array_append(file->method_bodies, NO_KEY, c);
     }
     if(tag->len - tag->pos) {
-        fprintf(stderr, "ERROR: %d unparsed bytes remaining in ABC block\n", tag->len - tag->pos);
+#ifdef _DEBUG
+        printf("ERROR: %d unparsed bytes remaining in ABC block\n", tag->len - tag->pos);
+#endif
         return 0;
     }
 

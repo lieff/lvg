@@ -239,26 +239,27 @@ static inline opcode_t* opcode_get(U8 op)
 
 static code_t*pos2code(code_t**bytepos, code_t*c, int pos, int len)
 {
-    if(c) {
-        pos+=c->pos;
-    }
-    if(pos < 0 ||
-            pos > len ||
-            (pos!=len && !bytepos[pos])) {
+    if (c)
+        pos += c->pos;
+    if (pos < 0 || pos > len || (pos!=len && !bytepos[pos]))
+    {
         /* flex likes to generate these. yuck. */
-        if(c) {
+#ifdef _DEBUG
+        if (c) {
             opcode_t*op = opcode_get(c->opcode);
-            fprintf(stderr, "Warning: Invalid jump instruction \"%s\" from %d to %d (%d)\n", op->name, c->pos, pos, len);
-        } else {
-            fprintf(stderr, "Warning: Invalid jump to %d (%d)\n", pos, len);
-        }
+            printf("Warning: Invalid jump instruction \"%s\" from %d to %d (%d)\n", op->name, c->pos, pos, len);
+        } else
+            printf("Warning: Invalid jump to %d (%d)\n", pos, len);
+#endif
         return 0;
     } else {
-        if(pos==len) {
+        if(pos == len)
+        {
             //opcode_t*op = opcode_get(c->opcode);
-            //fprintf(stderr, "Warning: jump beyond end of code in instruction %s at position %d\n", op->name, c->pos);
+            //printf("Warning: jump beyond end of code in instruction %s at position %d\n", op->name, c->pos);
             return 0;
-        } else {
+        } else
+        {
             return bytepos[pos];
         }
     }
@@ -293,7 +294,9 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
         U8 opcode = swf_GetU8(tag);
         opcode_t*op = opcode_get(opcode);
         if(!op) {
-            fprintf(stderr, "Can't parse opcode %02x\n", opcode);
+#ifdef _DEBUG
+            printf("Can't parse opcode %02x\n", opcode);
+#endif
             continue;
         }
         //printf("%s\n", op->name);fflush(stdout);
@@ -351,8 +354,10 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
             } else if(*p == 'D') { // debug
                 /*type, usually 1*/
                 U8 type = swf_GetU8(tag);
+#ifdef _DEBUG
                 if(type!=1)
-                    fprintf(stderr, "Unknown debug type: %02x\n", type);
+                    printf("Unknown debug type: %02x\n", type);
+#endif
                 /*register name*/
                 code->data[0] = strdup((char*)pool_lookup_string(pool, swf_GetU30(tag)));
                 /*register index*/
@@ -482,7 +487,9 @@ static int stack_minus(code_t*c)
 {
     opcode_t*op = opcode_get(c->opcode);
     if(op->stack_minus>0) {
-        fprintf(stderr, "Invalid opcode entry %02x %s\n", c->opcode, op->name);
+#ifdef _DEBUG
+        printf("Invalid opcode entry %02x %s\n", c->opcode, op->name);
+#endif
     }
     int stack = op->stack_minus;
     if(op->flags&OP_STACK_NS) {
@@ -544,10 +551,11 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
                     stats->stack[pos].scopepos != scope) {
                 //dumpstack(stats);
                 stats->stack[pos].flags |= FLAG_ERROR;
-                fprintf(stderr, "Stack mismatch at pos %d\n", pos);
-                fprintf(stderr, "Should be: %d:%d, is: %d:%d\n", stack, scope,
+#ifdef _DEBUG
+                printf("Stack mismatch at pos %d\n", pos);
+                printf("Should be: %d:%d, is: %d:%d\n", stack, scope,
                         stats->stack[pos].stackpos, stats->stack[pos].scopepos);
-
+#endif
                 /* return error here if we do verification */
                 //return 0;
             }
@@ -567,8 +575,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
 
         if(stack<0) {
             stats->stack[pos].flags |= FLAG_ERROR;
-            fprintf(stderr, "error: stack underflow at %d (%s)\n", pos, op->name);
-
+#ifdef _DEBUG
+            printf("error: stack underflow at %d (%s)\n", pos, op->name);
+#endif
             /* if we would do true verification (if we would be a vm), this is
                where we would return the error
                return 0;
@@ -618,12 +627,16 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
             if(OP_RETURN==0x48/*returnvalue*/) {
                 if(stack!=1) {
                     stats->stack[pos].flags |= FLAG_ERROR;
-                    fprintf(stderr, "return(value) with stackposition %d\n", stack);
+#ifdef _DEBUG
+                    printf("return(value) with stackposition %d\n", stack);
+#endif
                 }
             } else if(OP_RETURN==0x47) {
                 if(stack!=0) {
                     stats->stack[pos].flags |= FLAG_ERROR;
-                    fprintf(stderr, "return(void) with stackposition %d\n", stack);
+#ifdef _DEBUG
+                    printf("return(void) with stackposition %d\n", stack);
+#endif
                 }
             }
         }
@@ -632,7 +645,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
         if(op->flags & OP_JUMP) {
             if(!c->branch) {
                 stats->stack[pos].flags |= FLAG_ERROR;
-                fprintf(stderr, "Error: Invalid jump target in instruction %s at position %d.\n", op->name, pos);
+#ifdef _DEBUG
+                printf("Error: Invalid jump target in instruction %s at position %d.\n", op->name, pos);
+#endif
                 return 0;
             }
             c = c->branch;
@@ -642,7 +657,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
         if(op->flags & OP_BRANCH) {
             if(!c->branch) {
                 stats->stack[pos].flags |= FLAG_ERROR;
-                fprintf(stderr, "Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#ifdef _DEBUG
+                printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#endif
                 return 0;
             }
             int newpos = c->branch->pos;
@@ -653,7 +670,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
             lookupswitch_t*l = c->data[0];
             if(!l->def) {
                 stats->stack[pos].flags |= FLAG_ERROR;
-                fprintf(stderr, "Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#ifdef _DEBUG
+                printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#endif
                 return 0;
             }
             if(!callcode(stats, l->def->pos, stack, scope))
@@ -662,7 +681,9 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
             while(t) {
                 if(!t->code) {
                     stats->stack[pos].flags |= FLAG_ERROR;
-                    fprintf(stderr, "Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#ifdef _DEBUG
+                    printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
+#endif
                     return 0;
                 }
                 if(!callcode(stats, t->code->pos, stack, scope))
@@ -785,7 +806,9 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
         }
 
         if(!op) {
-            fprintf(stderr, "Can't parse opcode %02x.\n", opcode);
+#ifdef _DEBUG
+            printf("Can't parse opcode %02x.\n", opcode);
+#endif
             return 0;
         } else {
             char*p = op->params;
@@ -872,7 +895,9 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
                     }
                     fprintf(fo, "]");
                 } else {
-                    fprintf(stderr, "Can't parse opcode param type \"%c\"\n", *p);
+#ifdef _DEBUG
+                    printf("Can't parse opcode param type \"%c\"\n", *p);
+#endif
                     return 0;
                 }
                 p++;
@@ -984,7 +1009,9 @@ code_t* code_append(code_t*code, code_t*toappend)
 lookupswitch_t*lookupswitch_dup(lookupswitch_t*l)
 {
     lookupswitch_t*n = malloc(sizeof(lookupswitch_t));
-    fprintf(stderr, "Error: lookupswitch dupping not supported yet\n");
+#ifdef _DEBUG
+    printf("Error: lookupswitch dupping not supported yet\n");
+#endif
     n->targets = list_clone(l->targets);
     return 0;
 }
@@ -1049,7 +1076,7 @@ code_t*code_dup(code_t*c)
             if(c->branch) {
                 code_t*target = dict_lookup(pos2pos, c->branch);
                 if(!target) {
-                    fprintf(stderr, "Error: Can't find branch target in code_dup\n");
+                    printf("Error: Can't find branch target in code_dup\n");
                     return 0;
                 }
                 c->branch = target;

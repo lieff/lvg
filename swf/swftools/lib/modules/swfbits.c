@@ -143,7 +143,9 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
 
     if (tag->id == ST_DEFINEBITSJPEG)
     {
-        fprintf(stderr, "rfxswf: extracting from definebitsjpeg not yet supported\n");
+#ifdef _DEBUG
+        printf("rfxswf: extracting from definebitsjpeg not yet supported\n");
+#endif
         assert(0);
         return 0;
     }
@@ -209,7 +211,9 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
         int error = uncompress(alphadata, &datalen, &tag->data[tag->pos], tag->len - tag->pos);
         if (error != Z_OK)
         {
-            fprintf(stderr, "rfxswf: Zlib error %d while extracting definejpeg3\n", error);
+#ifdef _DEBUG
+            printf("rfxswf: Zlib error %d while extracting definejpeg3\n", error);
+#endif
             assert(0);
             return 0;
         }
@@ -260,10 +264,12 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
         bpp = 32;
     if (format != 3 && format != 5)
     {
+#ifdef _DEBUG
         if (format == 4)
-            fprintf(stderr, "rfxswf: Can't handle 16-bit palette images yet (image %d)\n", id);
+            printf("rfxswf: Can't handle 16-bit palette images yet (image %d)\n", id);
         else
-            fprintf(stderr, "rfxswf: Unknown image type %d in image %d\n", format, id);
+            printf("rfxswf: Unknown image type %d in image %d\n", format, id);
+#endif
         assert(0);
         return 0;
     }
@@ -289,7 +295,9 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
     } while (error == Z_BUF_ERROR);
     if (error != Z_OK)
     {
-        fprintf(stderr, "rfxswf: Zlib error %d (image %d)\n", error, id);
+#ifdef _DEBUG
+        printf("rfxswf: Zlib error %d (image %d)\n", error, id);
+#endif
         assert(0);
         return 0;
     }

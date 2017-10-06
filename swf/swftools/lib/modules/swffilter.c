@@ -152,7 +152,9 @@ FILTER *swf_GetFilter(TAG *tag)
         return (FILTER *)f;
     } else
     {
-        fprintf(stderr, "Reading of filter type %02x not supported yet\n", type);
+#ifdef _DEBUG
+        printf("Reading of filter type %02x not supported yet\n", type);
+#endif
     }
 
     return NULL;
@@ -187,7 +189,9 @@ FILTER *swf_NewFilter(U8 type)
         f = (FILTER *)calloc(1, sizeof(FILTER_COLORMATRIX));
         memset(f, 0, sizeof (FILTER_COLORMATRIX));
     } else {
-        fprintf(stderr, "Creation of filter type %02x not supported yet\n", type);
+#ifdef _DEBUG
+        printf("Creation of filter type %02x not supported yet\n", type);
+#endif
     }
 
     if (f)

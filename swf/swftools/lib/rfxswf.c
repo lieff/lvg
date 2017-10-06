@@ -59,8 +59,8 @@ void swf_SetTagPos(TAG * t,U32 pos)
         t->pos = pos;
     else
     {
-#ifdef DEBUG_RFXSWF
-        fprintf(stderr,"SetTagPos(%d) out of bounds: TagID = %i\n",pos, t->id);
+#ifdef _DEBUG
+        printf("SetTagPos(%d) out of bounds: TagID = %i\n",pos, t->id);
 #endif
     }
 }
@@ -86,10 +86,10 @@ char *swf_GetString(TAG *t)
 U8 swf_GetU8(TAG *t)
 {
     swf_ResetReadBits(t);
-#ifdef DEBUG_RFXSWF
+#ifdef _DEBUG
     if ((int)t->pos >= (int)t->len)
     {
-        fprintf(stderr, "GetU8() out of bounds: TagID = %i\n", t->id);
+        printf("GetU8() out of bounds: TagID = %i\n", t->id);
         return 0;
     }
 #endif
@@ -100,10 +100,10 @@ U16 swf_GetU16(TAG *t)
 {
     U16 res;
     swf_ResetReadBits(t);
-#ifdef DEBUG_RFXSWF
+#ifdef _DEBUG
     if ((int)t->pos > ((int)t->len - 2))
     {
-        fprintf(stderr,"GetU16() out of bounds: TagID = %i\n", t->id);
+        printf("GetU16() out of bounds: TagID = %i\n", t->id);
         return 0;
     }
 #endif
@@ -116,10 +116,10 @@ U32 swf_GetU32(TAG * t)
 {
     U32 res;
     swf_ResetReadBits(t);
-#ifdef DEBUG_RFXSWF
+#ifdef _DEBUG
     if ((int)t->pos > ((int)t->len - 4))
     {
-        fprintf(stderr, "GetU32() out of bounds: TagID = %i\n", t->id);
+        printf("GetU32() out of bounds: TagID = %i\n", t->id);
         return 0;
     }
 #endif
@@ -189,8 +189,8 @@ void swf_SetS16(TAG * t,int v)
 {
     if (v>32767 || v<-32768)
     {
-#ifdef DEBUG_RFXSWF
-        fprintf(stderr, "Warning: S16 overflow: %d\n", v);
+#ifdef _DEBUG
+        printf("Warning: S16 overflow: %d\n", v);
 #endif
     }
     swf_SetU16(t, (S16)v);
@@ -224,16 +224,16 @@ U32 swf_GetBits(TAG * t,int nbits)
     while (nbits)
     {
         res <<= 1;
-#ifdef DEBUG_RFXSWF
-        if (t->pos>=t->len)
+#ifdef _DEBUG
+        if (t->pos >= t->len)
         {
-            fprintf(stderr,"GetBits() out of bounds: TagID = %i, pos=%d, len=%d\n",t->id, t->pos, t->len);
+            printf("GetBits() out of bounds: TagID = %i, pos=%d, len=%d\n", t->id, t->pos, t->len);
             int i, m = t->len > 10 ? 10 : t->len;
-            for(i = -1; i < m; i++)
+            for (i = -1; i < m; i++)
             {
-                fprintf(stderr, "(%d)%02x ", i, t->data[i]);
+                printf("(%d)%02x ", i, t->data[i]);
             }
-            fprintf(stderr, "\n");
+            printf("\n");
             return res;
         }
 #endif
@@ -409,13 +409,14 @@ int swf_GetS30(TAG*tag)
         U8 b = swf_GetU8(tag);
         nr++;
         nt i,m=t->len>10?10:t->len;
-                for(i=0;i<m;i++) {
-                            fprintf(stderr, "%02x ", t->data[i]);
-                                    }
-                        fprintf(stderr, "\n");
-                        s|=(b&127)<<shift;
+        for(i=0;i<m;i++) {
+            printf("%02x ", t->data[i]);
+        }
+        printf("\n");
+        s|=(b&127)<<shift;
         shift+=7;
-        if(!(b&128) || shift>=32) {
+        if(!(b&128) || shift>=32)
+        {
             if(b&64) {
                 if(shift<32)
                   s|=0xffffffff<<shift;
@@ -486,7 +487,7 @@ void swf_SetF16(TAG *t, float f)
     U16 result = (v.u >> 16) & 0x8000; //sign
     int exp = ((v.u >> 23) & 0xff) -0x7f + 0x10;
     U16 m = (v.u >> 13) & 0x3ff;
-    //fprintf(stderr, "%f: %04x sign, %d exp, %04x mantissa\n", f, result, exp, m);
+    //printf("%f: %04x sign, %d exp, %04x mantissa\n", f, result, exp, m);
     if (exp < -10)
     {
         // underflow (clamp to 0.0)
@@ -501,7 +502,9 @@ void swf_SetF16(TAG *t, float f)
     {
         exp = 31;
         m = 0x3ff;
-        fprintf(stderr, "Exponent overflow in FLOAT16 encoding\n");
+#ifdef _DEBUG
+        printf("Exponent overflow in FLOAT16 encoding\n");
+#endif
     } else
     {
         exp++;
@@ -586,8 +589,10 @@ int swf_SetU24(TAG*tag, U32 v)
 {
     if (tag)
     {
+#ifdef _DEBUG
         if (v & 0xff000000)
-          fprintf(stderr, "Error: Overflow in swf_SetU24()\n");
+            printf("Error: Overflow in swf_SetU24()\n");
+#endif
         swf_SetU8(tag, v);
         swf_SetU8(tag, v>>8);
         swf_SetU8(tag, v>>16);
@@ -601,10 +606,12 @@ int swf_SetS24(TAG*tag, U32 v)
     {
         if (!(v & 0xff000000))
             return swf_SetU24(tag, v);
+#ifdef _DEBUG
         if ((v & 0xff000000) != 0xff000000)
         {
-            fprintf(stderr, "Error: Overflow in swf_SetS24()\n");
+            printf("Error: Overflow in swf_SetS24()\n");
         }
+#endif
         swf_SetU8(tag, v);
         swf_SetU8(tag, v>>8);
         swf_SetU8(tag, v>>16);
@@ -782,8 +789,8 @@ int swf_SetRect(TAG * t,SRECT * r)
     nbits = swf_CountBits(r->ymax, nbits);
     if (nbits >= 32)
     {
-#ifdef DEBUG_RFXSWF
-        fprintf(stderr, "rfxswf: Warning: num_bits overflow in swf_SetRect\n");
+#ifdef _DEBUG
+        printf("rfxswf: Warning: num_bits overflow in swf_SetRect\n");
 #endif
         nbits = 31;
     }
@@ -1015,7 +1022,7 @@ TAG *swf_CopyTag(TAG *tag, TAG *to_copy)
     return tag;
 }
 
-TAG *swf_DeleteTag(SWF*swf, TAG *t)
+TAG *swf_DeleteTag(SWF *swf, TAG *t)
 {
     TAG *next = t->next;
 
@@ -1051,8 +1058,8 @@ TAG * swf_ReadTag(reader_t *reader, TAG *prev)
         len = reader_readU32(reader);
     }
 
-    if (id==ST_DEFINESPRITE) len = 2*sizeof(U16);
-    // Sprite handling fix: Flatten sprite tree
+    if (id == ST_DEFINESPRITE)
+        len = 2*sizeof(U16); // Sprite handling fix: Flatten sprite tree
 
     t = (TAG *)calloc(1, sizeof(TAG));
 
@@ -1065,10 +1072,10 @@ TAG * swf_ReadTag(reader_t *reader, TAG *prev)
         t->memsize = t->len;
         if (reader->read(reader, t->data, t->len) != t->len)
         {
-#ifdef DEBUG_RFXSWF
-            fprintf(stderr, "rfxswf: Warning: Short read (tagid %d). File truncated?\n", t->id);
+#ifdef _DEBUG
+            printf("rfxswf: Warning: Short read (tagid %d). File truncated?\n", t->id);
 #endif
-            free(t->data); t->data = 0;
+            free(t->data);
             free(t);
             return NULL;
         }
@@ -1145,8 +1152,8 @@ void swf_FoldSprite(TAG * t)
         return;
     if (!t->len)
     {
-#ifdef DEBUG_RFXSWF
-        fprintf(stderr, "Error: Sprite has no ID!");
+#ifdef _DEBUG
+        printf("error: Sprite has no ID!");
 #endif
         return;
     }
@@ -1177,8 +1184,10 @@ void swf_FoldSprite(TAG * t)
             level--;
         t = swf_NextTag(t);
     } while(t && level);
+#ifdef _DEBUG
     if (level)
-        fprintf(stderr, "rfxswf error: sprite doesn't end(1)\n");
+        printf("rfxswf error: sprite doesn't end(1)\n");
+#endif
 
     swf_SetU16(sprtag, id);
     swf_SetU16(sprtag, frames);
@@ -1208,10 +1217,11 @@ void swf_FoldSprite(TAG * t)
             level--;
         t = swf_NextTag(t);
         swf_DeleteTag(0, tmp);
-    }
-    while (t && level);
+    } while (t && level);
+#ifdef _DEBUG
     if (level)
-        fprintf(stderr, "rfxswf error: sprite doesn't end(2)\n");
+        printf("rfxswf error: sprite doesn't end(2)\n");
+#endif
 }
 
 int swf_IsFolded(TAG * t)
