@@ -11,11 +11,7 @@
 #include "all.h"
 #include "all_lib.h"
 
-#define GL_GLEXT_PROTOTYPES
-#ifdef __MINGW32__
-#include <glad/glad.h>
-#endif
-#include <GLFW/glfw3.h>
+#include "render/gl.h"
 #include <render/render.h>
 #include <platform/platform.h>
 
@@ -222,7 +218,7 @@ const struct SYM g_syms[] = {
     { "nvgResetScissor", nvgResetScissor },
     { "nvgIntersectScissor", nvgIntersectScissor },
 
-    { "glCreateProgram", glCreateProgram },
+    /*{ "glCreateProgram", glCreateProgram },
     { "glCreateShader", glCreateShader },
     { "glShaderSource", glShaderSource },
     { "glCompileShader", glCompileShader },
@@ -273,7 +269,7 @@ const struct SYM g_syms[] = {
     { "glPushMatrix", glPushMatrix },
     { "glLoadIdentity", glLoadIdentity },
     { "glOrtho", glOrtho },
-    { "glEnableClientState", glEnableClientState },
+    { "glEnableClientState", glEnableClientState },*/
 
     //{ "vg", &vg },
     { "g_bgColor", &g_bgColor },
