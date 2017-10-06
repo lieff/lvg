@@ -1121,6 +1121,7 @@ int main(int argc, char **argv)
 #endif
 
 #ifdef EMSCRIPTEN
+    //b_interpolate = 1;
     if (g_main_script)
     {
         EM_ASM_({

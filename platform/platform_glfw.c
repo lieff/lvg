@@ -9,9 +9,6 @@
 #include <emscripten/html5.h>
 #define GLFW_INCLUDE_ES2
 #endif
-#ifdef __MINGW32__
-#include <glad/glad.h>
-#endif
 #include <GLFW/glfw3.h>
 
 typedef void* (* GLADloadproc)(const char *name);
