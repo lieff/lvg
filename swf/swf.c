@@ -1579,6 +1579,20 @@ do_show_frame:
                     l->id   = o->id;
                     p->name = 0;
                 }
+#ifdef LVG_INTERPOLATE
+                if (group->num_frames)
+                {
+                    LVGMovieClipFrame *prev = group->frames + group->num_frames - 1;
+                    for (int k = 0; k < prev->num_objects; k++)
+                    {
+                        LVGObject *prev_o = prev->objects + k;
+                        if (prev_o->depth == o->depth && prev_o->id == o->id && (prev_o->ratio != o->ratio || memcmp(prev_o->t, o->t, sizeof(o->t))))
+                        {   // have previous object and it's moving
+                            prev_o->interpolate_obj = o;
+                        }
+                    }
+                }
+#endif
             }
             group->num_frames++;
             if (ST_END == tag->id)

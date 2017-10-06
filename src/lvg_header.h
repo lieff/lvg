@@ -31,6 +31,9 @@ typedef struct LVGObjectLabel
 
 typedef struct LVGObject
 {
+#ifdef LVG_INTERPOLATE
+    struct LVGObject *interpolate_obj;
+#endif
     int id, type, depth, ratio, flags, blend_mode;
     float t[6];
     LVGColorTransform cxform;

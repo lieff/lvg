@@ -9,6 +9,7 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <math.h>
 #ifdef __MINGW32__
 #include <windows/mman.h>
 #else
@@ -34,7 +35,7 @@ static zip_t g_zip;
 NVGcolor g_bgColor;
 platform_params g_params;
 static const char *g_main_script;
-static int is_swf, b_no_actionscript, b_fullscreen;
+static int is_swf, b_no_actionscript, b_fullscreen, b_interpolate;
 #ifdef EMSCRIPTEN
 static int is_gles3;
 #endif
@@ -359,7 +360,7 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
     newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3]*alpha;
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, int next_frame, int blend_mode)
+static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, double r, int next_frame, int blend_mode)
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
@@ -485,12 +486,25 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     {
         LVGObject *o = frame->objects + i;
         g_render->get_transform(g_render_obj, save_transform);
+        int ratio = o->ratio;
+#ifdef LVG_INTERPOLATE
+        float o_t[6];
+        if (b_interpolate && o->interpolate_obj)
+        {
+            LVGObject *inter = o->interpolate_obj;
+            double omr = 1.0 - r;
+            ratio = round((double)ratio*omr + (double)inter->ratio*r);
+            for (int idx = 0; idx < 6; idx++)
+                o_t[idx] = o->t[idx]*omr + inter->t[idx]*r;
+            g_render->set_transform(g_render_obj, o_t, 0);
+        } else
+#endif
         g_render->set_transform(g_render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type && visible)
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawShape(&clip->shapes[o->id], &newcxform, o->ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
+            lvgDrawShape(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -557,7 +571,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, next_frame, o->blend_mode);
+            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, r, next_frame, o->blend_mode);
             THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
@@ -666,6 +680,11 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     continue;
                 LVGFont *f = clip->fonts + str->font_id;
                 g_render->set_transform(g_render_obj, save_transform, 1);
+#ifdef LVG_INTERPOLATE
+                if (b_interpolate && o->interpolate_obj)
+                    g_render->set_transform(g_render_obj, o_t, 0);
+                else
+#endif
                 g_render->set_transform(g_render_obj, o->t, 0);
                 g_render->set_transform(g_render_obj, text->t, 0);
                 float scale = str->height/50.0f;
@@ -726,19 +745,26 @@ void lvgDrawClip(LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
-    if ((g_params.frame_time - clip->last_time) > (1.0/clip->fps))
+    double r, diff = g_params.frame_time - clip->last_time;
+    if (diff > 1.0/clip->fps)
     {
         next_frame = 1;
-        clip->last_time += (1.0/clip->fps);
-    }
+        clip->last_time += 1.0/clip->fps;
+        if ((g_params.frame_time - clip->last_time) > 1.0/clip->fps)
+            r = 0.0;
+        else
+            r = 1.0;
+    } else
+        r = diff/(1.0/clip->fps);
 #else
+    double r = 1;
     int next_frame = 1;
 #endif
     LVGColorTransform startcxform;
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
     //printf_frames(clip, clip->groupstates); printf("\n"); fflush(stdout);
-    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, next_frame, BLEND_REPLACE);
+    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, r, next_frame, BLEND_REPLACE);
 }
 
 static void deletePaint(NSVGpaint* paint)
@@ -994,6 +1020,7 @@ int main(int argc, char **argv)
         {
         case 'n': b_no_actionscript = 1; break;
         case 'f': b_fullscreen = 1; break;
+        case 'i': b_interpolate = 1; break;
         default:
             printf("error: unrecognized option\n");
             return 1;

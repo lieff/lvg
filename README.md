@@ -85,7 +85,7 @@ ninja
  * Shaders and 3D support.
  * Parallel shape\image decoding and use file compression with parallel decoding support (like pbzip2).
  * More audio\video\codec backends.
- * SWF frame interpolation to get more fps than encoded in file.
+ * ~~SWF frame interpolation to get more fps than encoded in file.~~ [Done]
  * Better than swf storage format using [draco](https://github.com/google/draco)-like compression based on [ANS](https://en.wikipedia.org/wiki/Asymmetric_numeral_systems).
 
 ## Interesting graphics libraries
