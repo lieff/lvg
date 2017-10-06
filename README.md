@@ -4,11 +4,11 @@ LVG (Lion Vector Graphics)
 [![Build Status](https://travis-ci.org/lieff/lvg.svg)](https://travis-ci.org/lieff/lvg)
 [![Build Status](https://ci.appveyor.com/api/projects/status/69br8ic9dwlfeu48?svg=true)](https://ci.appveyor.com/project/lieff/lvg)
 
-LVG is lightweight replacement for flash. Basic idea: we have some assets in package and sctipt that renders them.
-It's designed to use very small runtime (around 200kb without video codecs) for player and can run on android, ios, web and more.
-It's uses C scripts natively and javascript for web.
+LVG is a lightweight flash player replacement. Basic idea: we have some assets in a package and sctipts that renders them.
+It's designed to use a very small runtime (around 200kb without video codecs) for player and runs on android, ios, web and more.
+It's uses C scripts natively and javascripts for web.
 
-Why C scripts? Because C compiler is small, and runtime written in C, so no other lagnuage needed and script can be compiled in to save the space.
+Why C scripts? Because C compiler is small, and runtime written in C, so no other language is needed and script can be compiled in to a save the space.
 
 Following assets currently supported:
 
