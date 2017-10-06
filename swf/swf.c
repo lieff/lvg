@@ -1586,9 +1586,17 @@ do_show_frame:
                     for (int k = 0; k < prev->num_objects; k++)
                     {
                         LVGObject *prev_o = prev->objects + k;
-                        if (prev_o->depth == o->depth && prev_o->id == o->id && (prev_o->ratio != o->ratio || memcmp(prev_o->t, o->t, sizeof(o->t))))
-                        {   // have previous object and it's moving
-                            prev_o->interpolate_obj = o;
+                        if (prev_o->depth == o->depth && prev_o->id == o->id)
+                        {
+                            if (prev_o->ratio != o->ratio || memcmp(prev_o->t, o->t, sizeof(o->t)))
+                            {   // have previous object and it's moving
+                                if (fabs(prev_o->ratio - o->ratio) > 16384 ||
+                                   (fabs(prev_o->t[4] - o->t[4]) > 200) || (fabs(prev_o->t[5] - o->t[5]) > 200) ||
+                                   (fabs(prev_o->t[0] - o->t[0]) > 0.3) || (fabs(prev_o->t[3] - o->t[3]) > 0.3))
+                                    break;
+                                prev_o->interpolate_obj = o;
+                            }
+                            break;
                         }
                     }
                 }
