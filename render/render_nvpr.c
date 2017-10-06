@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define FUNC(x) x
+/*#define FUNC(x) x
 
 PFNGLGENPATHSNVPROC FUNC(glGenPathsNV) = NULL;
 PFNGLDELETEPATHSNVPROC FUNC(glDeletePathsNV) = NULL;
@@ -53,7 +53,7 @@ PFNGLISPOINTINFILLPATHNVPROC FUNC(glIsPointInFillPathNV) = NULL;
 PFNGLISPOINTINSTROKEPATHNVPROC FUNC(glIsPointInStrokePathNV) = NULL;
 PFNGLGETPATHLENGTHNVPROC FUNC(glGetPathLengthNV) = NULL;
 PFNGLPOINTALONGPATHNVPROC FUNC(glPointAlongPathNV) = NULL;
-PFNGLPATHSTENCILFUNCNVPROC FUNC(glPathStencilFuncNV) = NULL;
+PFNGLPATHSTENCILFUNCNVPROC FUNC(glPathStencilFuncNV) = NULL;*/
 
 typedef void (APIENTRYP PFNGLMATRIXLOADIDENTITYEXTPROC) (GLenum mode);
 typedef void (APIENTRYP PFNGLMATRIXORTHOEXTPROC) (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
@@ -63,10 +63,9 @@ PFNGLMATRIXORTHOEXTPROC glMatrixOrthoEXT = NULL;
 PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
 
 #define LOAD_PROC(type, name) \
-  FUNC(name) = (type) platform->get_proc_address(#name); \
-  if (!FUNC(name)) { \
-    fail = 1; \
-  }
+    name = (type) platform->get_proc_address(#name); \
+    if (!name) \
+        fail = 1;
 
 typedef struct render_ctx
 {
@@ -110,7 +109,7 @@ static int nvpr_init(void **render, const platform *platform)
     LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
     LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
 
-    LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
+    /*LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
     LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
     LOAD_PROC(PFNGLISPATHNVPROC, glIsPathNV);
     LOAD_PROC(PFNGLPATHCOMMANDSNVPROC, glPathCommandsNV);
@@ -158,7 +157,7 @@ static int nvpr_init(void **render, const platform *platform)
     LOAD_PROC(PFNGLPOINTALONGPATHNVPROC, glPointAlongPathNV);
     LOAD_PROC(PFNGLPATHSTENCILFUNCNVPROC, glPathStencilFuncNV);
     LOAD_PROC(PFNGLPATHSTENCILDEPTHOFFSETNVPROC, glPathStencilDepthOffsetNV);
-    LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);
+    LOAD_PROC(PFNGLPATHCOVERDEPTHFUNCNVPROC,  glPathCoverDepthFuncNV);*/
     if (fail)
         goto error;
     return 1;
