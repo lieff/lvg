@@ -1,1 +1,1 @@
-python -m glad --generator=c --extensions=GL_NV_path_rendering --out-path=.
+python -m glad --generator=c --api gl=2.0 --extensions=GL_NV_path_rendering --out-path=.
