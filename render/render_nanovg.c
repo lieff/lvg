@@ -4,7 +4,6 @@
 #else
 #define NANOVG_GL2_IMPLEMENTATION
 #endif
-#define GL_GLEXT_PROTOTYPES
 #include "gl.h"
 #include "render.h"
 #include "nanovg_gl.h"

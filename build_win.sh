@@ -41,7 +41,6 @@ scripting/tcc/script_tcc.c \
 swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
 render/*.c \
 windows/mman.c \
-glfw/deps/glad.c \
 video/ffmpeg/ffmpeg_dec.c \
 -Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 \

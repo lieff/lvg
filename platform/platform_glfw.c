@@ -14,6 +14,8 @@
 #endif
 #include <GLFW/glfw3.h>
 
+typedef void* (* GLADloadproc)(const char *name);
+int gladLoadGLLoader(GLADloadproc);
 void drawframe();
 
 typedef struct platform_ctx
@@ -72,7 +74,7 @@ static int glfw_init(void **ctx, platform_params *params, int audio_only)
     glfwSetInputMode(platform->window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     //glfwSetWindowUserPointer(platform->window, (void*)platform);
     //glfwSetKeyCallback(platform->window, key_callback);
-#ifdef __MINGW32__
+#ifndef EMSCRIPTEN
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         printf("error: glad init failed\n");
