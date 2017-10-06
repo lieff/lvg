@@ -24,6 +24,8 @@ typedef struct platform
     void (*fullscreen)(void *ctx, int b_fullscreen);
     double (*get_time)(void *ctx);
     int (*get_key)(void *ctx, int key);
+    void *(*get_proc_address)(const char *procname);
+    int (*extension_supported)(const char *ext);
 } platform;
 
 extern platform_params g_params;

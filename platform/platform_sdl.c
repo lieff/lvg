@@ -54,6 +54,14 @@ static double sdl_get_time(void *ctx)
 static int sdl_get_key(void *ctx, int key)
 {
 }
+
+static void *sdl_get_proc_address(const char *procname)
+{
+}
+
+static int sdl_extension_supported(const char *ext)
+{
+}
 #endif
 
 const platform sdl_platform =
@@ -66,9 +74,11 @@ const platform sdl_platform =
     sdl_swap_buffers,
     sdl_fullscreen,
     sdl_get_time,
-    sdl_get_key
+    sdl_get_key,
+    sdl_get_proc_address,
+    sdl_extension_supported
 #else
-    0, 0, 0, 0, 0, 0
+    0, 0, 0, 0, 0, 0, 0, 0
 #endif
 };
 #endif

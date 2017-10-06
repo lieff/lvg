@@ -1,16 +1,11 @@
-#ifdef __MINGW32__
-#include <glad/glad.h>
-#else
-#define GL_GLEXT_PROTOTYPES
-#define GLFW_INCLUDE_GLEXT
-#endif
-#include <GLFW/glfw3.h>
 #define NANOSVG_IMPLEMENTATION
 #ifdef EMSCRIPTEN
 #define NANOVG_GLES2_IMPLEMENTATION
 #else
 #define NANOVG_GL2_IMPLEMENTATION
 #endif
+#define GL_GLEXT_PROTOTYPES
+#include "gl.h"
 #include "render.h"
 #include "nanovg_gl.h"
 #include <assert.h>
@@ -233,7 +228,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
 }
 
 
-static int nvg_init(void **render)
+static int nvg_init(void **render, const platform *platform)
 {
 #ifdef EMSCRIPTEN
     *render = nvgCreateGLES2(0);

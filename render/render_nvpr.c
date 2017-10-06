@@ -1,19 +1,8 @@
-//#define GL_GLEXT_PROTOTYPES
-#define GLFW_INCLUDE_GLEXT
-#include <GLFW/glfw3.h>
-#ifdef __MINGW32__
-#include <windows.h>
-#elif __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#include "render_nvpr_apple.h"
-#else
-#include <GL/glx.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "gl.h"
 #include "render.h"
 
 #define FUNC(x) x
@@ -75,16 +64,8 @@ PFNGLMATRIXLOADIDENTITYEXTPROC glMatrixLoadIdentityEXT = NULL;
 PFNGLMATRIXORTHOEXTPROC glMatrixOrthoEXT = NULL;
 PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
 
-#ifdef __MINGW32__
-#define GET_PROC_ADDRESS(name) wglGetProcAddress(#name)
-#elif __APPLE__
-#define GET_PROC_ADDRESS(name) glfwGetProcAddress(#name)
-#else
-#define GET_PROC_ADDRESS(name) glXGetProcAddress((const GLubyte *) #name)
-#endif
-
 #define LOAD_PROC(type, name) \
-  FUNC(name) = (type) GET_PROC_ADDRESS(name); \
+  FUNC(name) = (type) platform->get_proc_address(#name); \
   if (!FUNC(name)) { \
     fail = 1; \
   }
@@ -117,14 +98,14 @@ void MatrixLoadToGL(Transform3x2 m)
     glMatrixLoadfEXT(GL_MODELVIEW, &mm[0]);
 }
 
-static int nvpr_init(void **render)
+static int nvpr_init(void **render, const platform *platform)
 {
     render_ctx *ctx = calloc(1, sizeof(render_ctx));
     *render = ctx;
     if (!ctx)
         return 0;
     int fail = 0;
-    if (!glfwExtensionSupported("GL_NV_path_rendering"))
+    if (!platform->extension_supported || !platform->extension_supported("GL_NV_path_rendering"))
         goto error;
 
     LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);

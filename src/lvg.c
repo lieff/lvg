@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/stat.h>
-#include <malloc.h>
+#include <stdlib.h>
 #ifdef __MINGW32__
 #include <windows/mman.h>
 #else
@@ -21,11 +21,11 @@
 
 #include "lunzip.h"
 #include "stb_image.h"
+#include <render/gl.h>
 #include <video/video.h>
 #include <audio/audio.h>
 #include <render/render.h>
 #include <platform/platform.h>
-#include <GL/gl.h>
 #include "lvg.h"
 #include "swf/avm1.h"
 
@@ -1066,11 +1066,11 @@ int main(int argc, char **argv)
 
 #ifndef EMSCRIPTEN
     g_render = &nvpr_render;
-    if (!g_render->init(&g_render_obj))
+    if (!g_render->init(&g_render_obj, g_platform))
 #endif
     {
         g_render = &nvg_render;
-        if (!g_render->init(&g_render_obj))
+        if (!g_render->init(&g_render_obj, g_platform))
         {
             printf("error: could not open render\n");
             return -1;

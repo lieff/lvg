@@ -1,6 +1,6 @@
 #include "render.h"
 
-static int null_init(void **render)
+static int null_init(void **render, const platform *platform)
 {
     *render = 0;
     return 1;

@@ -159,6 +159,16 @@ static int glfw_get_key(void *ctx, int key)
     return glfwGetKey(platform->window, key);
 }
 
+static void *glfw_get_proc_address(const char *procname)
+{
+    return glfwGetProcAddress(procname);
+}
+
+static int glfw_extension_supported(const char *ext)
+{
+    return glfwExtensionSupported(ext);
+}
+
 const platform glfw_platform =
 {
     glfw_init,
@@ -168,6 +178,8 @@ const platform glfw_platform =
     glfw_swap_buffers,
     glfw_fullscreen,
     glfw_get_time,
-    glfw_get_key
+    glfw_get_key,
+    glfw_get_proc_address,
+    glfw_extension_supported
 };
 #endif

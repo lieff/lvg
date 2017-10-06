@@ -3,6 +3,7 @@
 #include "../nanovg/nanosvg.h"
 #include "../nanovg/nanovg.h"
 #include "lvg_header.h"
+#include <platform/platform.h>
 
 #define IMAGE_REPEAT 1
 #define GRADIENT_SAMPLES_L 256
@@ -26,7 +27,7 @@
 
 typedef struct render
 {
-    int (*init)(void **render);
+    int (*init)(void **render, const platform *platform);
     void (*release)(void *render);
     void (*begin_frame)(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height);
     void (*end_frame)(void *render);

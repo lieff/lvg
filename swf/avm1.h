@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-#include <../render/render.h>
+#include <render/render.h>
 
 #define STACK_SIZE 4096
 #define SET_STRING(se, string) { (se)->type = ASVAL_STRING; (se)->str = string; }
