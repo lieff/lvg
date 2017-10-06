@@ -18,6 +18,7 @@ platform/platform.h
 platform/platform_glfw.c
 platform/platform_sdl.c
 render/common.c
+render/gl.h
 render/render.h
 render/render_nanovg.c
 render/render_null.c
