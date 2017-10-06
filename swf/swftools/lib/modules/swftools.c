@@ -398,8 +398,8 @@ void swf_SetDepth(TAG * t, U16 depth)
     case ST_SETTABINDEX:
         PUT16(t->data, depth);
         break;
-    default:
 #ifdef _DEBUG
+    default:
         printf("rfxswf: Error: tag %d has no depth\n", t->id);
 #endif
     }
