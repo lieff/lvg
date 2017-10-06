@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
 #include "gl.h"
 #include "render.h"
+#include <stdlib.h>
+#include <string.h>
 
 #define FUNC(x) x
 
