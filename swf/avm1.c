@@ -8,6 +8,7 @@
 #include <math.h>
 #include <inttypes.h>
 #include <platform/platform.h>
+#include <audio/audio.h>
 
 #ifdef _TEST
 #define DBG(n, m, l, k) n, m, l, k,
@@ -372,6 +373,28 @@ static void do_call(LVGActionCtx *ctx, ASClass *c, ASVal *var, uint8_t *a, uint3
     }
 }
 
+void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate)
+{
+    ASVal *_currentframe = find_class_member(ctx, groupstate->movieclip, "_currentframe");
+    SET_INT(_currentframe, groupstate->cur_frame + 1);
+    LVGMovieClipGroup *group = ctx->clip->groups + groupstate->group_num;
+    for (int i = 0; i < group->num_ssounds; i++)
+    {
+        LVGStreamSound *ssound = group->ssounds + i;
+        if (groupstate->cur_frame > ssound->start_frame && groupstate->cur_frame <= ssound->end_frame)
+        {
+            LVGSound *sound = ctx->clip->sounds + ssound->sound_id;
+            double time = (double)(ssound->start_frame - groupstate->cur_frame)/ctx->clip->fps;
+            int start_sample = sound->rate*time;
+            if (start_sample >= sound->num_samples)
+                return;
+            lvgPlaySound(sound, PLAY_SyncStop, 0, 0, 0);
+            lvgPlaySound(sound, 0, start_sample, sound->num_samples, 0);
+            return;
+        }
+    }
+}
+
 static void action_end(LVGActionCtx *ctx, uint8_t *a)
 {
 }
@@ -379,16 +402,14 @@ static void action_end(LVGActionCtx *ctx, uint8_t *a)
 static void action_next_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->groupstate->cur_frame = (ctx->groupstate->cur_frame + 1) % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     if (ctx->groupstate->cur_frame)
         ctx->groupstate->cur_frame--;
-    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_play(LVGActionCtx *ctx, uint8_t *a)
@@ -1218,8 +1239,7 @@ static void action_goto_frame(LVGActionCtx *ctx, uint8_t *a)
 {
     int frame = *(uint16_t*)(a + 2);
     ctx->groupstate->cur_frame = frame % ctx->group->num_frames;
-    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_get_url(LVGActionCtx *ctx, uint8_t *a)
@@ -1278,8 +1298,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
         {
             ctx->groupstate->cur_frame = l[i].frame_num % ctx->group->num_frames;
             ctx->groupstate->play_state = LVG_STOPPED; // where this documented?
-            ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
-            SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
+            handle_frame_change(ctx, ctx->groupstate);
             return;
         }
     assert(0);
@@ -1446,8 +1465,7 @@ static void action_goto_frame2(LVGActionCtx *ctx, uint8_t *a)
                 break;
             }
     }
-    ASVal *_currentframe = find_class_member(ctx, ctx->groupstate->movieclip, "_currentframe");
-    SET_INT(_currentframe, ctx->groupstate->cur_frame + 1);
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)

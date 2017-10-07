@@ -380,7 +380,7 @@ static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se_frame->type || ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_STRING == se_frame->type);
     LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
-    LVGMovieClipGroup *group = g_clip->groups + groupstate->group_num;
+    LVGMovieClipGroup *group = ctx->clip->groups + groupstate->group_num;
     if (ASVAL_STRING == se_frame->type)
     {
         LVGFrameLabel *l = group->labels;
@@ -395,8 +395,7 @@ static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     uint32_t frame = to_int(se_frame);
     groupstate->cur_frame = frame % group->num_frames;
     groupstate->play_state = LVG_PLAYING;
-    ASVal *_currentframe = find_class_member(ctx, groupstate->movieclip, "_currentframe");
-    SET_INT(_currentframe, groupstate->cur_frame + 1);
+    handle_frame_change(ctx, groupstate);
 }
 
 static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)

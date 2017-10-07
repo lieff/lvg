@@ -192,3 +192,4 @@ ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASClass *create_instance(ASClass *base);
 void free_instance(ASClass *cls);
+void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate);
