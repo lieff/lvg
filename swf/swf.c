@@ -1428,7 +1428,7 @@ done:
             {
                 flush_stream_sound(clip, group, stream_buffer, stream_buf_size, stream_sound, stream_format, stream_bits, stream_frame, nframe);
                 stream_buffer = NULL;
-                stream_samples = stream_buf_size = stream_format = stream_bits = 0;
+                stream_samples = stream_buf_size = 0;
                 stream_sound = stream_frame = -1;
             }
             sound_block_frame = 0;

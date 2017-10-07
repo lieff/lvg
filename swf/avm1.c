@@ -389,6 +389,8 @@ void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate)
             if (start_sample >= sound->num_samples)
                 return;
             lvgPlaySound(sound, PLAY_SyncStop, 0, 0, 0);
+            if (LVG_STOPPED == groupstate->play_state)
+                return
             lvgPlaySound(sound, 0, start_sample, sound->num_samples, 0);
             return;
         }
@@ -415,11 +417,13 @@ static void action_previous_frame(LVGActionCtx *ctx, uint8_t *a)
 static void action_play(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->groupstate->play_state = LVG_PLAYING;
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_stop(LVGActionCtx *ctx, uint8_t *a)
 {
     ctx->groupstate->play_state = LVG_STOPPED;
+    handle_frame_change(ctx, ctx->groupstate);
 }
 
 static void action_quality(LVGActionCtx *ctx, uint8_t *a)

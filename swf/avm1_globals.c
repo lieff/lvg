@@ -372,37 +372,42 @@ static void getBytesLoaded(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t
     SET_DOUBLE(res, 100.0);
 }
 
-extern LVGMovieClip *g_clip;
-
-static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
+static void do_gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     assert(1 == nargs);
     ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
     assert(ASVAL_INT == se_frame->type || ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_STRING == se_frame->type);
-    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     LVGMovieClipGroup *group = ctx->clip->groups + groupstate->group_num;
+    uint32_t frame;
     if (ASVAL_STRING == se_frame->type)
     {
         LVGFrameLabel *l = group->labels;
         for (int i = 0; i < group->num_labels; i++)
             if (0 == strcasecmp(l[i].name, se_frame->str))
             {
-                groupstate->cur_frame = l[i].frame_num % group->num_frames;
-                groupstate->play_state = LVG_PLAYING;
-                return;
+                frame = l[i].frame_num;
+                break;
             }
-    }
-    uint32_t frame = to_int(se_frame);
+    } else
+        frame = to_int(se_frame);
     groupstate->cur_frame = frame % group->num_frames;
+}
+
+static void gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
+{
+    do_gotoAndPlay(ctx, cls, a, nargs);
+    LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_PLAYING;
     handle_frame_change(ctx, groupstate);
 }
 
 static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
-    gotoAndPlay(ctx, cls, a, nargs);
-    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    do_gotoAndPlay(ctx, cls, a, nargs);
+    LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_STOPPED;
+    handle_frame_change(ctx, groupstate);
 }
 
 static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -410,8 +415,9 @@ static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_PLAYING;
+    handle_frame_change(ctx, groupstate);
 }
 
 static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
@@ -419,8 +425,9 @@ static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
     ctx->stack_ptr--;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_UNDEF(res);
-    LVGMovieClipGroupState *groupstate = g_clip->groupstates + (size_t)cls->priv;
+    LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_STOPPED;
+    handle_frame_change(ctx, groupstate);
 }
 
 ASMember g_movieclip_members[] =
