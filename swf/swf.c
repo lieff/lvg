@@ -1642,6 +1642,9 @@ do_show_frame:
         }
         tag = tag->next;
     }
+    for (i = 0; i < 65536; i++)
+        if (placements[i].name)
+            free(placements[i].name);
     free(placements);
     assert(tag && ST_END == tag->id);
     return tag;

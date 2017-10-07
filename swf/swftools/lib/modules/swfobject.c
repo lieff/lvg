@@ -72,9 +72,9 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         {
             swf_ResetReadBits(tag);
             int t = 0, l = strlen((const char *)&tag->data[tag->pos]);
-            U8 *data = (U8*)malloc(l+1);
+            U8 *data = (U8*)malloc(l + 1);
             obj->name = (char*)data;
-            while((data[t++] = swf_GetU8(tag)));
+            while ((data[t++] = swf_GetU8(tag)));
         }
         if (flags & PF_CLIPDEPTH)
             obj->clipdepth = swf_GetU16(tag);

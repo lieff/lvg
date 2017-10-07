@@ -659,7 +659,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGButtonState *bs = b->btn_shapes + j;
                     if (!(bs->flags & state_flags))
                         continue;
-                    assert(LVG_OBJ_SHAPE == bs->obj.type || LVG_OBJ_GROUP == bs->obj.type || LVG_OBJ_BUTTON == bs->obj.type);
+                    assert(LVG_OBJ_SHAPE == bs->obj.type || LVG_OBJ_GROUP == bs->obj.type || LVG_OBJ_BUTTON == bs->obj.type || LVG_OBJ_TEXT == bs->obj.type);
                     if (LVG_OBJ_SHAPE != bs->obj.type)
                         continue;
                     g_render->set_transform(g_render_obj, bs->obj.t, 0);
@@ -832,8 +832,12 @@ void lvgCloseClip(LVGMovieClip *clip)
         }
         for (j = 0; j < group->num_labels; j++)
             free((void*)group->labels[j].name);
-        free(group->frames);
-        free(group->labels);
+        if (group->frames)
+            free(group->frames);
+        if (group->labels)
+            free(group->labels);
+        if (group->ssounds)
+            free(group->ssounds);
         for (j = 0; j < sizeof(group->events)/sizeof(group->events[0]); j++)
             if (group->events[j])
                 free(group->events[j]);
