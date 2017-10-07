@@ -384,13 +384,13 @@ void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate)
         if (groupstate->cur_frame > ssound->start_frame && groupstate->cur_frame <= ssound->end_frame)
         {
             LVGSound *sound = ctx->clip->sounds + ssound->sound_id;
-            double time = (double)(ssound->start_frame - groupstate->cur_frame)/ctx->clip->fps;
+            double time = (double)(groupstate->cur_frame - ssound->start_frame)/ctx->clip->fps;
             int start_sample = sound->rate*time;
             if (start_sample >= sound->num_samples)
                 return;
             lvgPlaySound(sound, PLAY_SyncStop, 0, 0, 0);
             if (LVG_STOPPED == groupstate->play_state)
-                return
+                return;
             lvgPlaySound(sound, 0, start_sample, sound->num_samples, 0);
             return;
         }
