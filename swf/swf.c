@@ -950,7 +950,15 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
     free(path2);
 }
 
-static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
+TAG *skip_sprite(TAG *tag)
+{
+    do {
+        tag = tag->next;
+    } while (tag && ST_END != tag->id);
+    return tag;
+}
+
+static TAG *parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
     int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1;
@@ -961,10 +969,16 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
     {
         if (ST_END == tag->id)
             break;
+        if (ST_DEFINESPRITE == tag->id)
+        {
+            if (!(tag = skip_sprite(tag)))
+                goto done;
+        } else
         if (ST_SHOWFRAME == tag->id)
             group->num_frames++;
         tag = tag->next;
     }
+done:
     if (!group->num_frames) // no SHOWFRAME tag at end of the sprite
         group->num_frames++;
     group->frames = calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
@@ -1011,9 +1025,7 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
                 free(data);
             } else if (ST_DEFINESPRITE == tag->id)
             {
-                swf_UnFoldSprite(tag);
-                parseGroup(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
-                swf_FoldSprite(tag);
+                tag = parseGroup(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
                 idtable[id].type = sprite_type;
                 idtable[id].lvg_id = clip->num_groups++;
             } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
@@ -1412,9 +1424,11 @@ static void parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
         // add action to start stream sound
         add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
     }
+    assert(tag && ST_END == tag->id);
+    return tag;
 }
 
-static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group, int version)
+static TAG *parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group, int version)
 {
     group->num_frames = 0;
     SWFPLACEOBJECT *placements = (SWFPLACEOBJECT*)calloc(1, sizeof(SWFPLACEOBJECT)*65536);
@@ -1479,9 +1493,7 @@ static void parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
                 }
         } else if (ST_DEFINESPRITE == tag->id)
         {
-            swf_UnFoldSprite(tag);
-            parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups], version);
-            swf_FoldSprite(tag);
+            tag = parsePlacements(tag->next, idtable, clip, &clip->groups[clip->num_groups], version);
             clip->num_groups++;
         } else if (ST_STARTSOUND == tag->id/* || ST_STARTSOUND2 == tag->id*/)
         {
@@ -1611,11 +1623,12 @@ do_show_frame:
         tag = tag->next;
     }
     free(placements);
+    assert(tag && ST_END == tag->id);
+    return tag;
 }
 
 LVGMovieClip *swf_ReadObjects(SWF *swf)
 {
-    swf_FoldAll(swf);
     swf_RemoveJPEGTables(swf);
 
     character_t *idtable = (character_t*)calloc(1, sizeof(character_t)*65536*2);
@@ -1627,8 +1640,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     clip->num_groups = 1;
     clip->fps = swf->frameRate/256.0;
 
-    RGBA bg = swf_GetSWFBackgroundColor(swf);
-    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
+    RGBA bg;
+    bg.r = bg.b = bg.g = bg.a = 255;
 
     TAG *tag = swf->firstTag;
     int sound_stream_found = 0;
@@ -1644,6 +1657,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             {
                 clip->num_groups++;
                 clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
+                if (!(tag = skip_sprite(tag)))
+                    goto done;
             } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
             {
                 SWFFONT *swffont = (SWFFONT *) calloc(1, sizeof(SWFFONT));
@@ -1660,9 +1675,17 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
         {
             sound_stream_found = 1;
             clip->num_sounds++;
+        } else if (ST_SETBACKGROUNDCOLOR == tag->id)
+        {
+            swf_SetTagPos(tag, 0);
+            bg.r = swf_GetU8(tag);
+            bg.g = swf_GetU8(tag);
+            bg.b = swf_GetU8(tag);
         }
         tag = tag->next;
     }
+done:
+    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
     clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
     clip->images = calloc(1, sizeof(int)*clip->num_images);
     clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
