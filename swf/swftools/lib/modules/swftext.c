@@ -46,17 +46,17 @@
 #define FF2_SHIFTJIS     0x40
 #define FF2_LAYOUT	 0x80
 
-int swf_FontIsItalic(SWFFONT * f)
+int swf_FontIsItalic(SWFFONT *f)
 {
     return f->style & FONT_STYLE_ITALIC;
 }
 
-int swf_FontIsBold(SWFFONT * f)
+int swf_FontIsBold(SWFFONT *f)
 {
     return f->style & FONT_STYLE_BOLD;
 }
 
-int swf_FontExtract_DefineFont(int id, SWFFONT * f, TAG * t)
+int swf_FontExtract_DefineFont(int id, SWFFONT *f, TAG *t)
 {
     U16 fid;
     swf_SetTagPos(t, 0);
@@ -141,7 +141,7 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
         if (maxcode < 256)
             maxcode = 256;
         f->maxascii = maxcode;
-        f->ascii2glyph = (int *) malloc(sizeof(int) * maxcode);
+        f->ascii2glyph = (int *)malloc(sizeof(int) * maxcode);
         memset(f->ascii2glyph, -1, sizeof(int) * maxcode);
 
         for (i = 0; i < f->numchars; i++)
@@ -150,7 +150,7 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
     return id;
 }
 
-int swf_FontExtract_GlyphNames(int id, SWFFONT * f, TAG * tag)
+int swf_FontExtract_GlyphNames(int id, SWFFONT *f, TAG *tag)
 {
     U16 fid;
     swf_SetTagPos(tag, 0);
@@ -208,7 +208,7 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
     font->glyph = (SWFGLYPH *) calloc(1, sizeof(SWFGLYPH) * glyphcount);
     font->glyph2ascii = (U16 *) calloc(1, sizeof(U16) * glyphcount);
 
-    offset = (U32*)calloc(1, sizeof(U32)*(glyphcount+1));
+    offset = (U32*)calloc(1, sizeof(U32)*(glyphcount + 1));
     offset_start = tag->pos;
 
     if (flags1 & 8)
@@ -268,7 +268,7 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
     {   // has layout
         U16 kerningcount;
         font->layout = (SWFLAYOUT *) malloc(sizeof(SWFLAYOUT));
-        font->layout->ascent = swf_GetU16(tag);
+        font->layout->ascent  = swf_GetU16(tag);
         font->layout->descent = swf_GetU16(tag);
         font->layout->leading = swf_GetU16(tag);
         for (t = 0; t < glyphcount; t++)
@@ -282,7 +282,7 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
             swf_ResetReadBits(tag);
             swf_GetRect(tag, &font->layout->bounds[t]);
             SRECT b = font->layout->bounds[t];
-            if ((b.xmin|b.xmax|b.ymin|b.ymax) == 0)
+            if ((b.xmin | b.xmax | b.ymin | b.ymax) == 0)
             {
                 // recalculate bounding box
                 SHAPE2 *shape2 = swf_ShapeToShape2(font->glyph[t].shape);
@@ -361,8 +361,8 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
                 y  = 0xffff;
                 dy = 0xffff;
             }
-            font->alignzones[i].x = x;
-            font->alignzones[i].y = y;
+            font->alignzones[i].x  = x;
+            font->alignzones[i].y  = y;
             font->alignzones[i].dx = dx;
             font->alignzones[i].dy = dy;
             i++;
@@ -371,9 +371,10 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
     return id;
 }
 
-void swf_LayoutFree(SWFLAYOUT * l)
+void swf_LayoutFree(SWFLAYOUT *l)
 {
-    if (l) {
+    if (l)
+    {
         if (l->kerning)
             free(l->kerning);
         l->kerning = NULL;
@@ -384,7 +385,7 @@ void swf_LayoutFree(SWFLAYOUT * l)
     free(l);
 }
 
-static void font_freeglyphnames(SWFFONT*f)
+static void font_freeglyphnames(SWFFONT *f)
 {
     if (f->glyphnames)
     {
@@ -402,7 +403,7 @@ static void font_freeglyphnames(SWFFONT*f)
     }
 }
 
-static void font_freelayout(SWFFONT*f)
+static void font_freelayout(SWFFONT *f)
 {
     if (f->layout)
     {
@@ -411,7 +412,7 @@ static void font_freelayout(SWFFONT*f)
     }
 }
 
-static void font_freename(SWFFONT*f)
+static void font_freename(SWFFONT *f)
 {
     if (f->name)
     {
@@ -420,15 +421,7 @@ static void font_freename(SWFFONT*f)
     }
 }
 
-//static SWFFONT* font_to_sort;
-int cmp_chars(const void*a, const void*b)
-{
-    //    int x = *(const int*)a;
-    //    int y = *(const int*)b;
-    return 0;
-}
-
-void swf_FontSort(SWFFONT * font)
+void swf_FontSort(SWFFONT *font)
 {
     int i, j;
     int *newplace;
@@ -496,14 +489,14 @@ void swf_FontSort(SWFFONT * font)
     font->glyph2glyph = newpos;
 }
 
-static void font_freealignzones(SWFFONT * f)
+static void font_freealignzones(SWFFONT *f)
 {
-    if(f->alignzones)
+    if (f->alignzones)
         free(f->alignzones);
     f->alignzones = 0;
 }
 
-void swf_FontFree(SWFFONT * f)
+void swf_FontFree(SWFFONT *f)
 {
     int i;
     if (!f)
@@ -530,7 +523,8 @@ void swf_FontFree(SWFFONT * f)
         free(f->glyph2ascii);
         f->glyph2ascii = NULL;
     }
-    if (f->glyph2glyph) {
+    if (f->glyph2glyph)
+    {
         free(f->glyph2glyph);
         f->glyph2glyph = NULL;
     }

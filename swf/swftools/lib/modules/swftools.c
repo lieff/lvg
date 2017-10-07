@@ -26,57 +26,6 @@
 #include "../rfxswf.h"
 #include <assert.h>
 
-#define S64 long long
-SFIXED RFXSWF_SP(SFIXED a1, SFIXED a2, SFIXED b1, SFIXED b2)
-{
-    S64 a = ((S64)a1*(S64)b1+(S64)a2*(S64)b2) >> 16;
-    SFIXED result = (SFIXED)(a);
-#ifdef _DEBUG
-    if (a != result)
-        printf("Warning: overflow in matrix multiplication\n");
-#endif
-    return result;
-}
-
-SFIXED RFXSWF_QFIX(int zaehler,int nenner) // bildet Quotient von zwei INTs in SFIXED
-{
-    S64 z = zaehler << 16;
-    S64 a = z/(S64)nenner;
-    return (SFIXED)a;
-}
-#undef S64
-
-MATRIX * swf_MatrixJoin(MATRIX *d, MATRIX *s1, MATRIX *s2)
-{
-    if (!d)
-        return NULL;
-    if (!s1)
-        return (s2) ? (MATRIX *)memcpy(d, s2, sizeof(MATRIX)) : NULL;
-    if (!s2)
-        return (MATRIX *)memcpy(d, s1, sizeof(MATRIX));
-
-    d->tx = s1->tx + RFXSWF_SP(s1->sx,s1->r1,s2->tx,s2->ty);
-    d->ty = s1->ty + RFXSWF_SP(s1->r0,s1->sy,s2->tx,s2->ty);
-
-    d->sx = RFXSWF_SP(s1->sx,s1->r1,s2->sx,s2->r0);
-    d->r0 = RFXSWF_SP(s1->r0,s1->sy,s2->sx,s2->r0);
-
-    d->r1 = RFXSWF_SP(s1->sx,s1->r1,s2->r1,s2->sy);
-    d->sy = RFXSWF_SP(s1->r0,s1->sy,s2->r1,s2->sy);
-
-    //DumpMatrix(NULL,d);
-
-    return d;
-}
-
-void swf_SetDefineID(TAG * tag, U16 newid)
-{
-    int oldlen = tag->len;
-    tag->len = 0;
-    swf_SetU16(tag, newid); /* set defining ID */
-    tag->len = oldlen;
-}
-
 U16 swf_GetDefineID(TAG * t)
 // up to SWF 4.0
 {
@@ -188,7 +137,7 @@ U16 swf_GetPlaceID(TAG * t)
     U16 id = 0;
 
     oldTagPos = swf_GetTagPos(t);
-    swf_SetTagPos(t,0);
+    swf_SetTagPos(t, 0);
 
     switch (swf_GetTagID(t))
     {
@@ -204,7 +153,7 @@ U16 swf_GetPlaceID(TAG * t)
         U8 flags = swf_GetU8(t);
         //      U16 d =
         swf_GetU16(t);
-        id = (flags&PF_CHAR)?swf_GetU16(t):id;
+        id = (flags & PF_CHAR) ? swf_GetU16(t) : id;
     } break;
     case ST_PLACEOBJECT3:
     {
@@ -213,13 +162,12 @@ U16 swf_GetPlaceID(TAG * t)
         swf_GetU8(t);
         //      U16 d =
         swf_GetU16(t);
-        id = (flags&PF_CHAR)?swf_GetU16(t):id;
+        id = (flags & PF_CHAR) ? swf_GetU16(t) : id;
     } break;
 
     }
 
-    swf_SetTagPos(t,oldTagPos);
-
+    swf_SetTagPos(t, oldTagPos);
     return id;
 }
 
@@ -371,7 +319,7 @@ int swf_GetDepth(TAG *t)
 
 char *swf_GetName(TAG *t)
 {
-    char* name = 0;
+    char *name = 0;
     U32 oldTagPos;
     MATRIX m;
     CXFORM c;
@@ -455,7 +403,7 @@ void swf_GetMorphGradient(TAG *tag, GRADIENT *gradient1, GRADIENT *gradient2)
     }
 }
 
-U8 swf_isShapeTag(TAG*tag)
+U8 swf_isShapeTag(TAG *tag)
 {
     if (tag->id == ST_DEFINESHAPE ||
         tag->id == ST_DEFINESHAPE2 ||
@@ -467,20 +415,21 @@ U8 swf_isShapeTag(TAG*tag)
     return 0;
 }
 
-U8 swf_isPlaceTag(TAG*tag)
+U8 swf_isPlaceTag(TAG *tag)
 {
     if (tag->id == ST_PLACEOBJECT || tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3)
         return 1;
     return 0;
 }
-U8 swf_isTextTag(TAG*tag)
+
+U8 swf_isTextTag(TAG *tag)
 {
     if(tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
         return 1;
     return 0;
 }
 
-U8 swf_isFontTag(TAG*tag)
+U8 swf_isFontTag(TAG *tag)
 {
     if (tag->id == ST_DEFINEFONT ||
         tag->id == ST_DEFINEFONT2 ||
@@ -490,7 +439,7 @@ U8 swf_isFontTag(TAG*tag)
     return 0;
 }
 
-U8  swf_isImageTag(TAG*tag)
+U8  swf_isImageTag(TAG *tag)
 {
     if (tag->id == ST_DEFINEBITSJPEG ||
         tag->id == ST_DEFINEBITSJPEG2 ||
