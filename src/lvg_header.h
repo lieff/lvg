@@ -61,13 +61,19 @@ typedef struct LVGTimer
     int id;
 } LVGTimer;
 
+typedef struct LVGStreamSound
+{
+    int sound_id, start_frame, end_frame;
+} LVGStreamSound;
+
 typedef struct LVGMovieClipGroup
 {
     LVGMovieClipFrame *frames;
     LVGFrameLabel *labels;
+    LVGStreamSound *ssounds;
     // action script
     uint8_t *events[19];  // sprite swf events
-    int num_frames, num_labels;
+    int num_frames, num_labels, num_ssounds;
 } LVGMovieClipGroup;
 
 typedef struct LVGMovieClipGroupState

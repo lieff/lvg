@@ -958,10 +958,40 @@ TAG *skip_sprite(TAG *tag)
     return tag;
 }
 
+void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, char *stream_buffer, int stream_buf_size, int stream_sound, int stream_format, int stream_bits, int stream_frame, int end_frame)
+{
+    group->ssounds = realloc(group->ssounds, (group->num_ssounds + 1)*sizeof(group->ssounds[0]));
+    LVGStreamSound *ssound = group->ssounds + group->num_ssounds++;
+    ssound->sound_id = stream_sound;
+    ssound->start_frame = stream_frame;
+    ssound->end_frame = end_frame;
+    LVGSound *sound = clip->sounds + stream_sound;
+    if (0 == stream_format || 1 == stream_format)
+    {
+        if (stream_bits || 1 == stream_format)
+        {
+            sound->samples = (short*)stream_buffer;
+        } else
+        {
+            sound->samples = (short*)malloc(stream_buf_size*2);
+            for (int i = 0; i < stream_buf_size; i++)
+                sound->samples[i] = stream_buffer[i];
+        }
+    } else
+    if (2 == stream_format)
+    {
+        sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
+    }
+    if (!((0 == stream_format && stream_bits) || 1 == stream_format))
+        free(stream_buffer);
+    // add action to start stream sound
+    add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
+}
+
 static TAG *parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
-    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1;
+    int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1, sound_block_frame = 0;
     char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
@@ -1347,6 +1377,7 @@ done:
                 stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
                 memcpy(stream_buffer + old_size, &tag->data[tag->pos], size);
             }
+            sound_block_frame = 1;
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_VIDEOFRAME == tag->id)
         {
@@ -1392,37 +1423,26 @@ done:
             swf_FreeABC(abccode);
 #endif
         } else if (ST_SHOWFRAME == tag->id)
+        {
+            if (stream_buffer && !sound_block_frame)
+            {
+                flush_stream_sound(clip, group, stream_buffer, stream_buf_size, stream_sound, stream_format, stream_bits, stream_frame, nframe);
+                stream_buffer = NULL;
+                stream_buf_size = stream_format = stream_bits = 0;
+                stream_sound = stream_frame = -1;
+            }
+            sound_block_frame = 0;
             nframe++;
-        else if (ST_END == tag->id)
+        } else if (ST_END == tag->id)
             break;
         tag = tag->next;
     }
     if (stream_buffer)
     {
-        LVGSound *sound = clip->sounds + stream_sound;
-        if (0 == stream_format || 1 == stream_format)
-        {
-            if (stream_bits || 1 == stream_format)
-            {
-                sound->samples = (short*)stream_buffer;
-            } else
-            {
-                sound->samples = (short*)malloc(stream_buf_size*2);
-                for (int i = 0; i < stream_buf_size; i++)
-                    sound->samples[i] = stream_buffer[i];
-            }
-        } else
-        if (2 == stream_format)
-        {
-            sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
+        flush_stream_sound(clip, group, stream_buffer, stream_buf_size, stream_sound, stream_format, stream_bits, stream_frame, nframe);
 #ifndef _TEST
-            assert(stream_samples == sound->num_samples);
+        assert(stream_samples == clip->sounds[stream_sound].num_samples);
 #endif
-        }
-        if (!((0 == stream_format && stream_bits) || 1 == stream_format))
-            free(stream_buffer);
-        // add action to start stream sound
-        add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
     }
     assert(tag && ST_END == tag->id);
     return tag;
@@ -1644,7 +1664,7 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
     bg.r = bg.b = bg.g = bg.a = 255;
 
     TAG *tag = swf->firstTag;
-    int sound_stream_found = 0;
+    int sound_block_found = 0, sound_block_frame = 0;
     while (tag)
     {
         if (swf_isDefiningTag(tag))
@@ -1656,9 +1676,27 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
             else if (ST_DEFINESPRITE == tag->id)
             {
                 clip->num_groups++;
-                clip->num_sounds++; // hack: reserve sound for sprite (can contain ST_SOUNDSTREAMBLOCK)
-                if (!(tag = skip_sprite(tag)))
-                    goto done;
+                int s_sound_block_found = 0, s_sound_block_frame = 0;
+                do {
+                    tag = tag->next;
+                    if (ST_SOUNDSTREAMBLOCK == tag->id)
+                    {
+                        s_sound_block_found = 1;
+                        s_sound_block_frame = 1;
+                    } else if (ST_SHOWFRAME == tag->id)
+                    {
+                        if (s_sound_block_found && !s_sound_block_frame)
+                        {   // stream sound finished
+                            clip->num_sounds++;
+                            s_sound_block_found = 0;
+                        }
+                        s_sound_block_frame = 0;
+                    }
+                    if (!tag)
+                        goto done;
+                } while (ST_END != tag->id);
+                if (s_sound_block_found)
+                    clip->num_sounds++;
             } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
             {
                 SWFFONT *swffont = (SWFFONT *) calloc(1, sizeof(SWFFONT));
@@ -1671,22 +1709,32 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 swf_FontFree(swffont);
             } else if (ST_DEFINESOUND == tag->id)
                 clip->num_sounds++;
-        } else if ((ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id || ST_SOUNDSTREAMBLOCK == tag->id) && !sound_stream_found)
+        } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
-            sound_stream_found = 1;
-            clip->num_sounds++;
+            sound_block_found = 1;
+            sound_block_frame = 1;
         } else if (ST_SETBACKGROUNDCOLOR == tag->id)
         {
             swf_SetTagPos(tag, 0);
             bg.r = swf_GetU8(tag);
             bg.g = swf_GetU8(tag);
             bg.b = swf_GetU8(tag);
+        } else if (ST_SHOWFRAME == tag->id)
+        {
+            if (sound_block_found && !sound_block_frame)
+            {   // stream sound finished
+                clip->num_sounds++;
+                sound_block_found = 0;
+            }
+            sound_block_frame = 0;
         }
         tag = tag->next;
     }
 done:
+    if (sound_block_found)
+        clip->num_sounds++;
     clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
-    clip->shapes = calloc(1, sizeof(NSVGshape)*clip->num_shapes);
+    clip->shapes = calloc(1, sizeof(LVGShapeCollection)*clip->num_shapes);
     clip->images = calloc(1, sizeof(int)*clip->num_images);
     clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
     clip->fonts  = calloc(1, sizeof(LVGFont)*clip->num_fonts);
