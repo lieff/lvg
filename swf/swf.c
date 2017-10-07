@@ -2,8 +2,6 @@
 #include <limits.h>
 #include <rfxswf.h>
 #include "stb_image.h"
-//#define STB_IMAGE_WRITE_IMPLEMENTATION
-//#include "stb_image_write.h"
 #include "lunzip.h"
 #include "render/render.h"
 #include "audio/audio.h"
@@ -332,7 +330,6 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
 #endif
         LVGObject *o = 0;
         assert(state < 64); // bits 5-6 unsupported ButtonHasFilterList and ButtonHasBlendMode
-        //assert(state < 16);
         if (state & 15)
         {
             b->btn_shapes = realloc(b->btn_shapes, (b->num_btn_shapes + 1)*sizeof(LVGButtonState));

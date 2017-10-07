@@ -32,15 +32,18 @@
 
 void swf_ShapeFree(SHAPE * s)
 {
-    if(!s)
+    if (!s)
         return;
-    if (s->linestyle.data) free(s->linestyle.data);
+    if (s->linestyle.data)
+        free(s->linestyle.data);
     s->linestyle.data = NULL;
     s->linestyle.n    = 0;
-    if (s->fillstyle.data) free(s->fillstyle.data);
+    if (s->fillstyle.data)
+        free(s->fillstyle.data);
     s->fillstyle.data = NULL;
     s->fillstyle.n    = 0;
-    if (s->data) free(s->data);
+    if (s->data)
+        free(s->data);
     s->data = NULL;
     free(s);
 }
@@ -460,8 +463,8 @@ static void parseFillStyle(FILLSTYLE *dest, TAG *tag, int num)
         swf_ResetReadBits(tag);
         if (morph)
         {
-            GRADIENT gradient2;
-            swf_GetMorphGradient(tag, &dest->gradient, &gradient2);
+            //GRADIENT gradient2;
+            swf_GetMorphGradient(tag, &dest->gradient, /*&gradient2*/0);
             if (type == 0x13)
             {
                 swf_GetU16(tag);
