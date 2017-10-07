@@ -24,34 +24,6 @@
 #include "../rfxswf.h"
 #include <assert.h>
 
-int isUnitMatrix(MATRIX* m)
-{
-    /* a matrix with all zeros is also considered
-       "unit matrix", as a zeroed out MATRIX structure
-       usually means that the caller doesn't want to
-       set the matrix */
-    if((   (m->sx == 0x10000 && m->sy == 0x10000)
-           || (m->sx == 0 && m->sy == 0))
-            && ((m->r0|m->r1|m->tx|m->ty) == 0)
-            )
-        return 1;
-    return 0;
-}
-
-int isUnitCXForm(CXFORM* cx)
-{
-    if((cx->a0==256 && cx->r0==256 && cx->g0==256 && cx->b0==256) &&
-            (cx->a1==0 && cx->r1==0 && cx->g1==0 && cx->b1==0))
-        return 1;
-    /* A CXForm of all zeros is, unfortunately, not as unlikely
-       as a matrix of all zeros. However, we still treat it
-       as non-existent/uniform transform */
-    if((cx->a0==0 && cx->r0==0 && cx->g0==0 && cx->b0==0) &&
-            (cx->a1==0 && cx->r1==0 && cx->g1==0 && cx->b1==0))
-        return 1;
-    return 0;
-}
-
 int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
 {
     if (obj)

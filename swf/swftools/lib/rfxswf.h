@@ -601,8 +601,6 @@ typedef struct _SWFFONT
   U8		language;
   char **	glyphnames;
 
-  FONTUSAGE *   use;
-
 } SWFFONT;
 
 

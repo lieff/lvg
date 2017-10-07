@@ -520,9 +520,11 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
         }
         printf("\n");
 
-        for(t=0;t<countpos;t++) {
+        for (t = 0; t < countpos; t++)
+        {
             counter[t].count -= ATAG_FULLLENGTH(atag);
-            if(counter[t].count < 0) {
+            if (counter[t].count < 0)
+            {
                 printf("===== Error: Oplength errors =====\n");
                 countpos = 0;
                 break;
@@ -541,121 +543,7 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
     }
 
 #ifdef MAX_LOOKUP
-    for (t=0;t<MAX_LOOKUP;t++) if (lookup[t]) free(lookup[t]);
+    for (t = 0; t < MAX_LOOKUP; t++)
+        if (lookup[t]) free(lookup[t]);
 #endif
-}
-
-static const char TYPE_URL = 1;
-static const char TYPE_TARGET = 2;
-static const char TYPE_STRING = 4;
-
-int swf_ActionEnumerate(ActionTAG*atag, char*(*callback)(char*), int type)
-{
-    int t;
-    U8*data;
-    char* cp;
-    int count = 0;
-    while(atag)
-    {
-        U16 poollen = 0;
-        for(t=0;t<definedactions;t++)
-            if(actions[t].op == atag->op)
-                break;
-
-        if(t==definedactions) {
-            // unknown actiontag
-            atag = atag->next;
-            count++;
-            continue;
-        }
-        cp = actions[t].flags;
-        data = atag->data;
-        if(atag->len) {
-            while(*cp) {
-                U8 * replacepos = 0;
-                int replacelen = 0;
-                U8 * replacement = 0;
-                switch(*cp)
-                {
-                case 'u': {
-                    if(type&TYPE_URL)
-                    {
-                        replacelen = strlen((const char*)data);
-                        replacepos = data;
-                        replacement = (U8*)callback((char*)data); // may be null
-                    }
-                } break;
-                case 't': {
-                    if(type&TYPE_TARGET)
-                    {
-                        replacelen = strlen((const char*)data);
-                        replacepos = data;
-                        replacement = (U8*)callback((char*)data); // may be null
-                    }
-                } break;
-                case 'c': {
-                    if(type&TYPE_STRING)
-                    {
-                        replacelen = strlen((const char*)data);
-                        replacepos = data;
-                        replacement = (U8*)callback((char*)data); // may be null
-                    }
-                } break;
-                case 'C': {
-                    poollen = (data[0]+256*data[1]);
-                } break;
-                case 'o': {
-                } break;
-                case 'p': {
-                    U8 datatype = *data;
-                    char*value = (char*)&data[1];
-                    if(datatype == 0) { //string
-                        if(type&TYPE_STRING)
-                        {
-                            replacelen = strlen(value);
-                            replacepos = (U8*)value;
-                            replacement = (U8*)callback(value); // may be null
-                        }
-                    } else if (datatype == 8) { //lookup
-                    }
-                } break;
-                }
-                data += OpAdvance(atag, *cp, data);
-                if(*cp!='c' || !poollen)
-                    cp++;
-                if(poollen)
-                    poollen--;
-
-                if(replacement)
-                {
-                    int newlen = strlen((const char *)replacement);
-                    char * newdata = (char*)malloc(atag->len - replacelen + newlen);
-                    int rpos = replacepos - atag->data;
-                    memcpy(newdata, atag->data, rpos);
-                    memcpy(&newdata[rpos], replacement, newlen);
-                    memcpy(&newdata[rpos+newlen], &replacepos[replacelen],
-                            &data[atag->len] - &replacepos[replacelen]);
-                    free(atag->data);
-                    atag->data = (U8*)newdata;
-                    data = &atag->data[rpos+newlen+1];
-                }
-            }
-        }
-        atag = atag->next;
-        count ++;
-    }
-    return count;
-}
-
-void swf_ActionEnumerateTargets(ActionTAG*atag, char*(*callback)(char*))
-{
-    swf_ActionEnumerate(atag, callback, TYPE_TARGET);
-}
-void swf_ActionEnumerateStrings(ActionTAG*atag, char*(*callback)(char*))
-{
-    swf_ActionEnumerate(atag, callback, TYPE_STRING);
-}
-void swf_ActionEnumerateURLs(ActionTAG*atag, char*(*callback)(char*))
-{
-    swf_ActionEnumerate(atag, callback, TYPE_URL);
 }

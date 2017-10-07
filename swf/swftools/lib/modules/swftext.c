@@ -24,51 +24,6 @@
 
 #include "../rfxswf.h"
 
-U32 readUTF8char(U8 **text)
-{
-    U32 c = 0;
-    if (!(*(*text) & 0x80))
-        return *((*text)++);
-
-    /* 0000 0080-0000 07FF   110xxxxx 10xxxxxx */
-    if (((*text)[0] & 0xe0) == 0xc0 && (*text)[1])
-    {
-        c = ((*text)[0] & 0x1f) << 6 | ((*text)[1] & 0x3f);
-        (*text) += 2;
-        return c;
-    }
-    /* 0000 0800-0000 FFFF   1110xxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xf0) == 0xe0 && (*text)[1] && (*text)[2])
-    {
-        c = ((*text)[0] & 0x0f) << 12 | ((*text)[1] & 0x3f) << 6 | ((*text)[2] & 0x3f);
-        (*text) += 3;
-        return c;
-    }
-    /* 0001 0000-001F FFFF   11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xf8) == 0xf0 && (*text)[1] && (*text)[2] && (*text)[3])
-    {
-        c = ((*text)[0] & 0x07) << 18 | ((*text)[1] & 0x3f) << 12 | ((*text)[2] & 0x3f) << 6 | ((*text)[3] & 0x3f);
-        (*text) += 4;
-        return c;
-    }
-    /* 0020 0000-03FF FFFF   111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-    if (((*text)[0] & 0xfc) == 0xf8 && (*text)[1] && (*text)[2] && (*text)[3] && (*text)[4])
-    {
-        c = ((*text)[0] & 0x03) << 24 | ((*text)[1] & 0x3f) << 18 | ((*text)[2] & 0x3f) << 12 | ((*text)[3] & 0x3f) << 6 | ((*text)[4] & 0x3f);
-        (*text) += 5;
-        return c;
-    }
-    /* 0400 0000-7FFF FFFF   1111110x 10xxxxxx ... 10xxxxxx */
-    if (((*text)[0] & 0xfe) == 0xfc && (*text)[1] && (*text)[2] && (*text)[3] && (*text)[4] && (*text)[5])
-    {
-        c = ((*text)[0] & 0x01) << 30 | ((*text)[1] & 0x3f) << 24 |
-            ((*text)[2] & 0x3f) << 18 | ((*text)[3] & 0x3f) << 12 | ((*text)[4] & 0x3f) << 6 | ((*text)[5] & 0x3f) << 6;
-        (*text) += 6;
-        return c;
-    }
-    return *((*text)++);
-}
-
 #define TF_TEXTCONTROL  0x80
 #define TF_HASFONT      0x08
 #define TF_HASCOLOR     0x04
@@ -416,14 +371,6 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
     return id;
 }
 
-int swf_FontSetID(SWFFONT *f, U16 id)
-{
-    if (!f)
-        return -1;
-    f->id = id;
-    return 0;
-}
-
 void swf_LayoutFree(SWFLAYOUT * l)
 {
     if (l) {
@@ -452,26 +399,6 @@ static void font_freeglyphnames(SWFFONT*f)
         }
         free(f->glyphnames);
         f->glyphnames = 0;
-    }
-}
-
-static void font_freeusage(SWFFONT*f)
-{
-    if (f->use)
-    {
-        if (f->use->chars)
-        {
-            free(f->use->chars);f->use->chars = 0;
-        }
-        if (f->use->neighbors)
-        {
-            free(f->use->neighbors);f->use->neighbors = 0;
-        }
-        if (f->use->neighbors_hash)
-        {
-            free(f->use->neighbors_hash);f->use->neighbors_hash = 0;
-        }
-        free(f->use); f->use = 0;
     }
 }
 
@@ -569,45 +496,6 @@ void swf_FontSort(SWFFONT * font)
     font->glyph2glyph = newpos;
 }
 
-static unsigned hash2(int char1, int char2)
-{
-    unsigned hash = char1^(char2<<8);
-    hash += (hash << 3);
-    hash ^= (hash >> 11);
-    hash += (hash << 15);
-    return hash;
-}
-
-int swf_FontUseGetPair(SWFFONT * f, int char1, int char2)
-{
-    FONTUSAGE*u = f->use;
-    if (!u || !u->neighbors_hash_size)
-        return 0;
-    unsigned hash = hash2(char1, char2);
-    while (1)
-    {
-        hash = hash%u->neighbors_hash_size;
-        int pos = u->neighbors_hash[hash];
-        if (!pos)
-            return 0;
-        if (pos && u->neighbors[pos-1].char1 == char1 && u->neighbors[pos-1].char2 == char2)
-            return pos;
-        hash++;
-    }
-
-}
-
-void swf_FontAddLayout(SWFFONT * f, int ascent, int descent, int leading)
-{
-    f->layout = (SWFLAYOUT *) malloc(sizeof(SWFLAYOUT));
-    f->layout->ascent = ascent;
-    f->layout->descent = descent;
-    f->layout->leading = leading;
-    f->layout->kerningcount = 0;
-    f->layout->kerning = 0;
-    f->layout->bounds = (SRECT *) calloc(1, sizeof(SRECT) * f->numchars);
-}
-
 static void font_freealignzones(SWFFONT * f)
 {
     if(f->alignzones)
@@ -649,7 +537,6 @@ void swf_FontFree(SWFFONT * f)
     font_freename(f);
     font_freelayout(f);
     font_freeglyphnames(f);
-    font_freeusage(f);
     font_freealignzones(f);
 
     free(f);
