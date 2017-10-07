@@ -208,24 +208,6 @@ void swf_ActionFree(ActionTAG*action)
     }
 }
 
-void swf_ActionSet(TAG*tag, ActionTAG*action)
-{
-    if(!action) {
-        return;
-    }
-    action=action->parent;
-    while(action)
-    {
-        swf_SetU8(tag, action->op);
-        if(action->op & 128)
-            swf_SetU16(tag, action->len);
-
-        swf_SetBlock(tag, action->data, action->len);
-
-        action = action->next;
-    }
-}
-
 int OpAdvance(ActionTAG *atag, char c, U8*data)
 {
     switch (c)

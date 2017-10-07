@@ -25,34 +25,26 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA */
 
 #include "rfxswf.h"
-
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
-
-#ifdef HAVE_IO_H
-#include <io.h>
-#endif
+#include <assert.h>
 
 #include "./bitio.h"
 
 // internal constants
 
 #define MALLOC_SIZE     128
-#define INSERT_RFX_TAG
 
 #define MEMSIZE(l) (((l/MALLOC_SIZE) + 1)*MALLOC_SIZE)
 
 // inline wrapper functions
 
-TAG * swf_NextTag(TAG * t) { return t->next; }
-TAG * swf_PrevTag(TAG * t) { return t->prev; }
-U16   swf_GetTagID(TAG * t)    { return t->id; }
-U32   swf_GetTagLen(TAG * t) { return t->len; }
-U8*   swf_GetTagLenPtr(TAG * t) { return &(t->data[t->len]); }
-U32   swf_GetTagPos(TAG * t)   { return t->pos; }
+TAG *swf_NextTag(TAG *t)   { return t->next; }
+TAG *swf_PrevTag(TAG *t)   { return t->prev; }
+U16  swf_GetTagID(TAG *t)  { return t->id; }
+U32  swf_GetTagLen(TAG *t) { return t->len; }
+U8  *swf_GetTagLenPtr(TAG *t) { return &(t->data[t->len]); }
+U32  swf_GetTagPos(TAG *t) { return t->pos; }
 
-void swf_SetTagPos(TAG * t,U32 pos)
+void swf_SetTagPos(TAG *t, U32 pos)
 {
     swf_ResetReadBits(t);
     if (pos <= t->len)
@@ -74,9 +66,7 @@ char *swf_GetString(TAG *t)
     {
         if (t->len == t->memsize)
         {
-            swf_ResetWriteBits(t);
-            swf_SetU8(t, 0);
-            t->len = t->pos;
+            assert(0);
         }
         t->data[t->len] = 0;
     }
@@ -112,7 +102,7 @@ U16 swf_GetU16(TAG *t)
     return res;
 }
 
-U32 swf_GetU32(TAG * t)
+U32 swf_GetU32(TAG *t)
 {
     U32 res;
     swf_ResetReadBits(t);
@@ -123,9 +113,9 @@ U32 swf_GetU32(TAG * t)
 #endif
         return 0;
     }
-    res = t->data[t->pos]        | (t->data[t->pos+1]<<8) |
-            (t->data[t->pos+2]<<16) | (t->data[t->pos+3]<<24);
-    t->pos+=4;
+    res = t->data[t->pos] | (t->data[t->pos + 1] << 8) |
+        (t->data[t->pos + 2] << 16) | (t->data[t->pos + 3] << 24);
+    t->pos += 4;
     return res;
 }
 
@@ -142,7 +132,7 @@ int swf_GetBlock(TAG *t, U8 *b, int l)
     return l;
 }
 
-int swf_SetBlock(TAG * t,const U8 * b,int l)
+int swf_SetBlock(TAG *t, const U8 *b, int l)
 // Appends Block to the end of Tagdata, returns size
 {
     U32 newlen = t->len + l;
@@ -162,48 +152,7 @@ int swf_SetBlock(TAG * t,const U8 * b,int l)
     return l;
 }
 
-int swf_SetU8(TAG * t,U8 v)
-{
-    swf_ResetWriteBits(t);
-    if ((t->len + 1) > t->memsize)
-        return (swf_SetBlock(t, &v, 1) == 1) ? 0 : -1;
-    t->data[t->len++] = v;
-    return 0;
-}
-
-int swf_SetU16(TAG * t,U16 v)
-{
-    U8 a[2];
-    a[0] = v & 0xff;
-    a[1] = v >> 8;
-
-    swf_ResetWriteBits(t);
-    if ((t->len + 2) > t->memsize)
-        return (swf_SetBlock(t, a, 2) == 2) ? 0 : -1;
-    t->data[t->len++] = a[0];
-    t->data[t->len++] = a[1];
-    return 0;
-}
-
-int swf_SetU32(TAG *t, U32 v)
-{
-    U8 a[4];
-    a[0] = v & 0xff;        // to ensure correct handling of non-intel byteorder
-    a[1] = (v >> 8) & 0xff;
-    a[2] = (v >> 16) & 0xff;
-    a[3] = (v >> 24) & 0xff;
-
-    swf_ResetWriteBits(t);
-    if ((t->len + 4) > t->memsize)
-        return (swf_SetBlock(t,a,4)==4)?0:-1;
-    t->data[t->len++] = a[0];
-    t->data[t->len++] = a[1];
-    t->data[t->len++] = a[2];
-    t->data[t->len++] = a[3];
-    return 0;
-}
-
-U32 swf_GetBits(TAG * t, int nbits)
+U32 swf_GetBits(TAG *t, int nbits)
 {
     U32 res = 0;
     if (!nbits)
@@ -228,7 +177,7 @@ U32 swf_GetBits(TAG * t, int nbits)
         }
         if (t->data[t->pos] & t->readBit)
             res |= 1;
-        t->readBit>>=1;
+        t->readBit >>= 1;
         nbits--;
         if (!t->readBit)
         {
@@ -390,7 +339,7 @@ float swf_GetF16(TAG * t)
         m <<= 1;
         h++;
     }
-    m&=0x3ff;
+    m &= 0x3ff;
     e -= h;
     e += 0x6f;
 
@@ -420,7 +369,7 @@ float swf_GetFloat(TAG *tag)
     return f.float_bits;
 }
 
-double swf_GetD64(TAG*tag)
+double swf_GetD64(TAG *tag)
 {
     /* FIXME: this is not big-endian compatible */
     double value = *(double*)&tag->data[tag->pos];
@@ -429,7 +378,7 @@ double swf_GetD64(TAG*tag)
     return value;
 }
 
-int swf_GetU24(TAG*tag)
+int swf_GetU24(TAG *tag)
 {
     int b1 = swf_GetU8(tag);
     int b2 = swf_GetU8(tag);
@@ -437,18 +386,18 @@ int swf_GetU24(TAG*tag)
     return b3 << 16 | b2 << 8 | b1;
 }
 
-int swf_GetS24(TAG*tag)
+int swf_GetS24(TAG *tag)
 {
     int b1 = swf_GetU8(tag);
     int b2 = swf_GetU8(tag);
     int b3 = swf_GetU8(tag);
     if (b3 & 0x80)
-        return -1-((b3<<16|b2<<8|b1)^0xffffff);
+        return -1 - ((b3 << 16 | b2 << 8 | b1) ^ 0xffffff);
     else
-        return b3<<16|b2<<8|b1;
+        return b3 << 16 | b2 << 8 | b1;
 }
 
-void swf_GetRGB(TAG * t, RGBA * col)
+void swf_GetRGB(TAG *t, RGBA * col)
 {
     RGBA dummy;
     if(!col)
@@ -459,7 +408,7 @@ void swf_GetRGB(TAG * t, RGBA * col)
     col->a = 255;
 }
 
-void swf_GetRGBA(TAG * t, RGBA * col)
+void swf_GetRGBA(TAG *t, RGBA * col)
 {
     RGBA dummy;
     if (!col)
@@ -501,7 +450,7 @@ void swf_GetGradient(TAG *tag, GRADIENT *gradient, char alpha)
     }
 }
 
-void swf_FreeGradient(GRADIENT* gradient)
+void swf_FreeGradient(GRADIENT *gradient)
 {
     if (gradient->ratios)
         free(gradient->ratios);
@@ -529,7 +478,7 @@ int swf_GetRect(TAG *t, SRECT *r)
     return 0;
 }
 
-int reader_GetRect(reader_t*reader, SRECT *r)
+int reader_GetRect(reader_t *reader, SRECT *r)
 {
     int nbits;
     SRECT dummy;
@@ -586,7 +535,8 @@ void swf_ExpandRect(SRECT *src, SPOINT add)
     if (add.y > src->ymax)
         src->ymax = add.y;
 }
-void swf_ExpandRect2(SRECT*src, SRECT*add)
+
+void swf_ExpandRect2(SRECT *src, SRECT *add)
 {
     if ((add->xmin | add->ymin | add->xmax | add->ymax) == 0)
         return;
@@ -601,7 +551,8 @@ void swf_ExpandRect2(SRECT*src, SRECT*add)
     if (add->ymax > src->ymax)
         src->ymax = add->ymax;
 }
-void swf_ExpandRect3(SRECT*src, SPOINT center, int radius)
+
+void swf_ExpandRect3(SRECT *src, SPOINT center, int radius)
 {
     if ((src->xmin | src->ymin | src->xmax | src->ymax) == 0)
     {
@@ -663,7 +614,7 @@ int swf_GetMatrix(TAG *t, MATRIX *m)
     return 0;
 }
 
-int swf_GetCXForm(TAG * t,CXFORM * cx,U8 alpha)
+int swf_GetCXForm(TAG *t, CXFORM *cx,U8 alpha)
 {
     CXFORM cxf;
     int hasadd, hasmul, nbits;
@@ -703,64 +654,10 @@ int swf_GetCXForm(TAG * t,CXFORM * cx,U8 alpha)
 
 // Tag List Manipulating Functions
 
-TAG *swf_InsertTag(TAG *after, U16 id)
-{
-    TAG *t = (TAG *)calloc(1, sizeof(TAG));
-    t->id = id;
-
-    if (after)
-    {
-        t->prev  = after;
-        t->next  = after->next;
-        after->next = t;
-        if (t->next)
-            t->next->prev = t;
-    }
-    return t;
-}
-
-TAG *swf_InsertTagBefore(SWF *swf, TAG *before, U16 id)
-{
-    TAG *t = (TAG *)calloc(1, sizeof(TAG));
-    t->id = id;
-
-    if (before)
-    {
-        t->next  = before;
-        t->prev  = before->prev;
-        before->prev = t;
-        if (t->prev) t->prev->next = t;
-    }
-    if (swf && swf->firstTag == before)
-    {
-        swf->firstTag = t;
-    }
-    return t;
-}
-
-void swf_ClearTag(TAG * t)
-{
-    if (t->data)
-        free(t->data);
-    t->data = 0;
-    t->pos = 0;
-    t->len = 0;
-    t->readBit = 0;
-    t->writeBit = 0;
-    t->memsize = 0;
-}
-
 void swf_ResetTag(TAG *tag, U16 id)
 {
     tag->len = tag->pos = tag->readBit = tag->writeBit = 0;
     tag->id = id;
-}
-
-TAG *swf_CopyTag(TAG *tag, TAG *to_copy)
-{
-    tag = swf_InsertTag(tag, to_copy->id);
-    swf_SetBlock(tag, to_copy->data, to_copy->len);
-    return tag;
 }
 
 TAG *swf_DeleteTag(SWF *swf, TAG *t)
@@ -830,7 +727,7 @@ TAG *swf_ReadTag(reader_t *reader, TAG *prev)
     return t;
 }
 
-int swf_ReadSWF2(reader_t*reader, SWF *swf)   // Reads SWF to memory (malloc'ed), returns length or <0 if fails
+int swf_ReadSWF2(reader_t *reader, SWF *swf)   // Reads SWF to memory (malloc'ed), returns length or <0 if fails
 {
     if (!swf)
         return -1;
