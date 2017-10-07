@@ -446,40 +446,46 @@ char* swf_GetName(TAG * t)
 }
 
 /* used in enumerateUsedIDs */
-void swf_GetMorphGradient(TAG * tag, GRADIENT * gradient1, GRADIENT * gradient2)
+void swf_GetMorphGradient(TAG *tag, GRADIENT *gradient1, GRADIENT *gradient2)
 {
     int t;
     int num = swf_GetU8(tag) & 15;
-    if(gradient1) gradient1->num = num;
-    if(gradient2) gradient2->num = num;
+    if (gradient1)
+        gradient1->num = num;
+    if (gradient2)
+        gradient2->num = num;
 
-    if(gradient1) {
+    if (gradient1)
+    {
         gradient1->num = num;
         gradient1->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient1->num);
         gradient1->ratios = (U8*)calloc(1, sizeof(gradient1->ratios[0])*gradient1->num);
     }
-    if(gradient2) {
+    if (gradient2)
+    {
         gradient2->num = num;
         gradient2->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient2->num);
         gradient2->ratios = (U8*)calloc(1, sizeof(gradient2->ratios[0])*gradient2->num);
     }
-    for(t=0;t<num;t++)
+    for (t = 0; t < num; t++)
     {
         U8 ratio;
         RGBA color;
 
         ratio = swf_GetU8(tag);
         swf_GetRGBA(tag, &color);
-        if(gradient1) {
+        if (gradient1)
+        {
             gradient1->ratios[t] = ratio;
-            gradient1->rgba[t] = color;
+            gradient1->rgba[t]   = color;
         }
 
         ratio = swf_GetU8(tag);
         swf_GetRGBA(tag, &color);
-        if(gradient2) {
+        if (gradient2)
+        {
             gradient2->ratios[t] = ratio;
-            gradient2->rgba[t] = color;
+            gradient2->rgba[t]   = color;
         }
     }
 }
@@ -1138,45 +1144,6 @@ void swf_Optimize(SWF*swf)
     free(remap);
     free(id2tag);
     free(hashmap);
-}
-
-void swf_SetDefineBBox(TAG * tag, SRECT newbbox)
-{
-    SRECT b1;
-    swf_SetTagPos(tag,0);
-
-    switch (swf_GetTagID(tag))
-    {
-    case ST_DEFINESHAPE:
-    case ST_DEFINESHAPE2:
-    case ST_DEFINESHAPE3:
-    case ST_DEFINEEDITTEXT:
-    case ST_DEFINETEXT:
-    case ST_DEFINETEXT2:
-    case ST_DEFINEVIDEOSTREAM: {
-        U32 after_bbox_offset = 0, len;
-        U8*data;
-        /*U16 id = */swf_GetU16(tag);
-        swf_GetRect(tag, &b1);
-        swf_ResetReadBits(tag);
-        after_bbox_offset = tag->pos;
-        len = tag->len - after_bbox_offset;
-        data = (U8*)malloc(len);
-        memcpy(data, &tag->data[after_bbox_offset], len);
-        tag->writeBit = 0;
-        tag->len = 2;
-        swf_SetRect(tag, &newbbox);
-        swf_SetBlock(tag, data, len);
-        free(data);
-        tag->pos = tag->readBit = 0;
-
-    } break;
-    default:
-#ifdef _DEBUG
-        printf("rfxswf: Tag %d has no bbox\n", tag->id);
-#endif
-        assert(0);
-    }
 }
 
 RGBA swf_GetSWFBackgroundColor(SWF*swf)

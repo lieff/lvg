@@ -41,7 +41,7 @@
 #define MALLOC_SIZE     128
 #define INSERT_RFX_TAG
 
-#define MEMSIZE(l) (((l/MALLOC_SIZE)+1)*MALLOC_SIZE)
+#define MEMSIZE(l) (((l/MALLOC_SIZE) + 1)*MALLOC_SIZE)
 
 // inline wrapper functions
 
@@ -55,14 +55,14 @@ U32   swf_GetTagPos(TAG * t)   { return t->pos; }
 void swf_SetTagPos(TAG * t,U32 pos)
 {
     swf_ResetReadBits(t);
-    if (pos<=t->len)
+    if (pos <= t->len)
         t->pos = pos;
+#ifdef _DEBUG
     else
     {
-#ifdef _DEBUG
-        printf("SetTagPos(%d) out of bounds: TagID = %i\n",pos, t->id);
-#endif
+        printf("SetTagPos(%d) out of bounds: TagID = %i\n",pos, t->id); fflush(stdout);
     }
+#endif
 }
 
 char *swf_GetString(TAG *t)
@@ -86,13 +86,13 @@ char *swf_GetString(TAG *t)
 U8 swf_GetU8(TAG *t)
 {
     swf_ResetReadBits(t);
-#ifdef _DEBUG
     if ((int)t->pos >= (int)t->len)
     {
-        printf("GetU8() out of bounds: TagID = %i\n", t->id);
+#ifdef _DEBUG
+        printf("GetU8() out of bounds: TagID = %i\n", t->id); fflush(stdout);
+#endif
         return 0;
     }
-#endif
     return t->data[t->pos++];
 }
 
@@ -100,13 +100,13 @@ U16 swf_GetU16(TAG *t)
 {
     U16 res;
     swf_ResetReadBits(t);
-#ifdef _DEBUG
     if ((int)t->pos > ((int)t->len - 2))
     {
-        printf("GetU16() out of bounds: TagID = %i\n", t->id);
+#ifdef _DEBUG
+        printf("GetU16() out of bounds: TagID = %i\n", t->id); fflush(stdout);
+#endif
         return 0;
     }
-#endif
     res = t->data[t->pos] | (t->data[t->pos+1]<<8);
     t->pos+=2;
     return res;
@@ -116,13 +116,13 @@ U32 swf_GetU32(TAG * t)
 {
     U32 res;
     swf_ResetReadBits(t);
-#ifdef _DEBUG
     if ((int)t->pos > ((int)t->len - 4))
     {
-        printf("GetU32() out of bounds: TagID = %i\n", t->id);
+#ifdef _DEBUG
+        printf("GetU32() out of bounds: TagID = %i\n", t->id); fflush(stdout);
+#endif
         return 0;
     }
-#endif
     res = t->data[t->pos]        | (t->data[t->pos+1]<<8) |
             (t->data[t->pos+2]<<16) | (t->data[t->pos+3]<<24);
     t->pos+=4;
@@ -185,17 +185,6 @@ int swf_SetU16(TAG * t,U16 v)
     return 0;
 }
 
-void swf_SetS16(TAG * t,int v)
-{
-    if (v>32767 || v<-32768)
-    {
-#ifdef _DEBUG
-        printf("Warning: S16 overflow: %d\n", v);
-#endif
-    }
-    swf_SetU16(t, (S16)v);
-}
-
 int swf_SetU32(TAG *t, U32 v)
 {
     U8 a[4];
@@ -214,7 +203,7 @@ int swf_SetU32(TAG *t, U32 v)
     return 0;
 }
 
-U32 swf_GetBits(TAG * t,int nbits)
+U32 swf_GetBits(TAG * t, int nbits)
 {
     U32 res = 0;
     if (!nbits)
@@ -224,19 +213,19 @@ U32 swf_GetBits(TAG * t,int nbits)
     while (nbits)
     {
         res <<= 1;
-#ifdef _DEBUG
         if (t->pos >= t->len)
         {
+#ifdef _DEBUG
             printf("GetBits() out of bounds: TagID = %i, pos=%d, len=%d\n", t->id, t->pos, t->len);
             int i, m = t->len > 10 ? 10 : t->len;
             for (i = -1; i < m; i++)
             {
                 printf("(%d)%02x ", i, t->data[i]);
             }
-            printf("\n");
+            printf("\n"); fflush(stdout);
+#endif
             return res;
         }
-#endif
         if (t->data[t->pos] & t->readBit)
             res |= 1;
         t->readBit>>=1;
@@ -272,26 +261,6 @@ S32 reader_GetSBits(reader_t *reader, int nbits)
     return (S32)res;
 }
 
-int swf_SetBits(TAG *t, U32 v, int nbits)
-{
-    U32 bm = 1 << (nbits - 1);
-    while (nbits)
-    {
-        if (!t->writeBit)
-        {
-            if (FAILED(swf_SetU8(t, 0)))
-                return -1;
-            t->writeBit = 0x80;
-        }
-        if (v&bm)
-            t->data[t->len - 1] |= t->writeBit;
-        bm >>= 1;
-        t->writeBit >>= 1;
-        nbits--;
-    }
-    return 0;
-}
-
 // Advanced Data Access Functions
 
 double swf_GetFixed(TAG *t)
@@ -300,23 +269,12 @@ double swf_GetFixed(TAG *t)
     U16 high = swf_GetU16(t);
     return high + low*(1/65536.0);
 }
-void swf_SetFixed(TAG *t, double f)
-{
-    U16 fr = (U16)((f - (int)f)*65536);
-    swf_SetU16(t, fr);
-    swf_SetU16(t, (U16)f - (f < 0 && fr != 0));
-}
+
 float swf_GetFixed8(TAG *t)
 {
     U8 low =  swf_GetU8(t);
     U8 high = swf_GetU8(t);
     return (float)(high + low*(1/256.0));
-}
-void swf_SetFixed8(TAG *t, float f)
-{
-    U8 fr = (U8)((f - (int)f)*256);
-    swf_SetU8(t, fr);
-    swf_SetU8(t, (U8)f - (f < 0 && fr != 0));
 }
 
 U32 swf_GetU30(TAG *tag)
@@ -336,34 +294,9 @@ U32 swf_GetU30(TAG *tag)
     return s;
 }
 
-int swf_SetU30(TAG*tag, U32 u)
-{
-    int nr = 0;
-    do {
-        if (tag)
-          swf_SetU8(tag, (u & ~0x7f ? 0x80 : 0) | (u & 0x7F));
-        u >>= 7;
-        nr++;
-    } while (u);
-    return nr;
-}
-
-void swf_SetABCU32(TAG*tag, U32 u)
-{
-    do {
-        swf_SetU8(tag, (u & ~0x7f ? 0x80 : 0) | (u & 0x7F));
-        u >>= 7;
-    } while (u);
-}
-
 U32 swf_GetABCU32(TAG*tag)
 {
     return swf_GetU30(tag);
-}
-
-void swf_SetABCS32(TAG*tag, S32 v)
-{
-    swf_SetABCU32(tag, v);
 }
 
 S32 swf_GetABCS32(TAG*tag)
@@ -434,15 +367,6 @@ int swf_GetS30(TAG*tag)
 }
 #endif
 
-int swf_SetU30String(TAG*tag, const char*str, int l)
-{
-    int len=0;
-    len+=swf_SetU30(tag, l);
-    len+=l;
-    swf_SetBlock(tag, (void*)str, l);
-    return len;
-}
-
 float swf_GetF16(TAG * t)
 {
     U16 f1 = swf_GetU16(t);
@@ -476,45 +400,6 @@ float swf_GetF16(TAG * t)
     return *(float*)&f2;
 }
 
-void swf_SetF16(TAG *t, float f)
-{
-    union {
-        U32 u;
-        float f;
-    } v;
-    v.f = f;
-
-    U16 result = (v.u >> 16) & 0x8000; //sign
-    int exp = ((v.u >> 23) & 0xff) -0x7f + 0x10;
-    U16 m = (v.u >> 13) & 0x3ff;
-    //printf("%f: %04x sign, %d exp, %04x mantissa\n", f, result, exp, m);
-    if (exp < -10)
-    {
-        // underflow (clamp to 0.0)
-        exp = 0;
-        m = 0;
-    } else if(exp < 0)
-    {
-        // partial underflow- strip some bits
-        m = (m | 0x400) >> -exp;
-        exp = 0;
-    } else if (exp >= 32)
-    {
-        exp = 31;
-        m = 0x3ff;
-#ifdef _DEBUG
-        printf("Exponent overflow in FLOAT16 encoding\n");
-#endif
-    } else
-    {
-        exp++;
-        m = (m >> 1) | 0x200;
-    }
-    result |= exp << 10;
-    result |= m;
-    swf_SetU16(t, result);
-}
-
 float F16toFloat(U16 x)
 {
     TAG t;
@@ -525,18 +410,6 @@ float F16toFloat(U16 x)
     return swf_GetF16(&t);
 }
 
-float floatToF16(float f)
-{
-    U16 u = 0;
-    TAG t;
-    t.data = (void*)&u;
-    t.len = 0;
-    t.memsize = 2;
-    t.writeBit = 0;
-    swf_SetF16(&t, f);
-    return u;
-}
-
 float swf_GetFloat(TAG *tag)
 {
     union {
@@ -545,16 +418,6 @@ float swf_GetFloat(TAG *tag)
     } f;
     f.uint_bits = swf_GetU32(tag);
     return f.float_bits;
-}
-
-void swf_SetFloat(TAG *tag, float v)
-{
-    union {
-        U32 uint_bits;
-        float float_bits;
-    } f;
-    f.float_bits = v;
-    swf_SetU32(tag, f.uint_bits);
 }
 
 double swf_GetD64(TAG*tag)
@@ -585,54 +448,6 @@ int swf_GetS24(TAG*tag)
         return b3<<16|b2<<8|b1;
 }
 
-int swf_SetU24(TAG*tag, U32 v)
-{
-    if (tag)
-    {
-#ifdef _DEBUG
-        if (v & 0xff000000)
-            printf("Error: Overflow in swf_SetU24()\n");
-#endif
-        swf_SetU8(tag, v);
-        swf_SetU8(tag, v>>8);
-        swf_SetU8(tag, v>>16);
-    }
-    return 3;
-}
-
-int swf_SetS24(TAG*tag, U32 v)
-{
-    if (tag)
-    {
-        if (!(v & 0xff000000))
-            return swf_SetU24(tag, v);
-#ifdef _DEBUG
-        if ((v & 0xff000000) != 0xff000000)
-        {
-            printf("Error: Overflow in swf_SetS24()\n");
-        }
-#endif
-        swf_SetU8(tag, v);
-        swf_SetU8(tag, v>>8);
-        swf_SetU8(tag, v>>16);
-    }
-    return 3;
-}
-
-int swf_SetRGB(TAG * t,RGBA * col)
-{
-    if (!t)
-        return -1;
-    if (col)
-    {
-        swf_SetU8(t,col->r);
-        swf_SetU8(t,col->g);
-        swf_SetU8(t,col->b);
-    } else
-        swf_SetBlock(t, NULL, 3);
-    return 0;
-}
-
 void swf_GetRGB(TAG * t, RGBA * col)
 {
     RGBA dummy;
@@ -644,21 +459,10 @@ void swf_GetRGB(TAG * t, RGBA * col)
     col->a = 255;
 }
 
-int swf_SetRGBA(TAG * t,RGBA * col)
-{ if (!t) return -1;
-  if (col)
-  { swf_SetU8(t,col->r);
-    swf_SetU8(t,col->g);
-    swf_SetU8(t,col->b);
-    swf_SetU8(t,col->a);
-  } else swf_SetBlock(t,NULL,4);
-  return 0;
-}
-
 void swf_GetRGBA(TAG * t, RGBA * col)
 {
     RGBA dummy;
-    if(!col)
+    if (!col)
         col = &dummy;
     col->r = swf_GetU8(t);
     col->g = swf_GetU8(t);
@@ -666,30 +470,33 @@ void swf_GetRGBA(TAG * t, RGBA * col)
     col->a = swf_GetU8(t);
 }
 
-void swf_GetGradient(TAG * tag, GRADIENT * gradient, char alpha)
+void swf_GetGradient(TAG *tag, GRADIENT *gradient, char alpha)
 {
     int t;
-    if(!tag) {
-      memset(gradient, 0, sizeof(GRADIENT));
-      return;
+    if (!tag)
+    {
+        memset(gradient, 0, sizeof(GRADIENT));
+        return;
     }
     U8 num = swf_GetU8(tag) & 15;
-    if(gradient) {
+    if (gradient)
+    {
         gradient->num = num;
         gradient->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient->num);
         gradient->ratios = (U8*)calloc(1, sizeof(gradient->ratios[0])*gradient->num);
     }
-    for(t=0;t<num;t++)
+    for (t = 0; t < num; t++)
     {
         U8 ratio = swf_GetU8(tag);
         RGBA color;
-        if(!alpha)
+        if (!alpha)
             swf_GetRGB(tag, &color);
         else
             swf_GetRGBA(tag, &color);
-        if(gradient) {
-          gradient->ratios[t] = ratio;
-          gradient->rgba[t] = color;
+        if (gradient)
+        {
+            gradient->ratios[t] = ratio;
+            gradient->rgba[t]   = color;
         }
     }
 }
@@ -701,49 +508,6 @@ void swf_FreeGradient(GRADIENT* gradient)
     if (gradient->rgba)
         free(gradient->rgba);
     memset(gradient, 0, sizeof(GRADIENT));
-}
-
-int swf_CountUBits(U32 v, int nbits)
-{
-    int n = 32;
-    U32 m = 0x80000000;
-    if (v == 0x00000000)
-        n = 0;
-    else
-        while (!(v & m))
-        {
-            n--;
-            m>>=1;
-        }
-    return (n > nbits) ? n : nbits;
-}
-
-int swf_CountBits(U32 v, int nbits)
-{
-    int n = 33;
-    U32 m = 0x80000000;
-    if (v & m)
-    {
-        if (v == 0xffffffff)
-            n = 1;
-        else
-            while (v&m)
-            {
-                n--;
-                m >>= 1;
-            }
-    } else
-    {
-        if (v == 0x00000000)
-            n = 0;
-        else
-            while (!(v & m))
-            {
-                n--;
-                m >>= 1;
-            }
-    }
-    return (n > nbits) ? n : nbits;
 }
 
 int swf_GetRect(TAG *t, SRECT *r)
@@ -779,77 +543,62 @@ int reader_GetRect(reader_t*reader, SRECT *r)
     return 0;
 }
 
-int swf_SetRect(TAG * t,SRECT * r)
-{
-    int nbits;
-
-    nbits = swf_CountBits(r->xmin, 0);
-    nbits = swf_CountBits(r->xmax, nbits);
-    nbits = swf_CountBits(r->ymin, nbits);
-    nbits = swf_CountBits(r->ymax, nbits);
-    if (nbits >= 32)
-    {
-#ifdef _DEBUG
-        printf("rfxswf: Warning: num_bits overflow in swf_SetRect\n");
-#endif
-        nbits = 31;
-    }
-
-    swf_SetBits(t, nbits, 5);
-    swf_SetBits(t, r->xmin, nbits);
-    swf_SetBits(t, r->xmax, nbits);
-    swf_SetBits(t, r->ymin, nbits);
-    swf_SetBits(t, r->ymax, nbits);
-
-    return 0;
-}
-
 SRECT swf_ClipRect(SRECT border, SRECT r)
 {
-    if(r.xmax > border.xmax) r.xmax = border.xmax;
-    if(r.ymax > border.ymax) r.ymax = border.ymax;
-    if(r.xmax < border.xmin) r.xmax = border.xmin;
-    if(r.ymax < border.ymin) r.ymax = border.ymin;
+    if (r.xmax > border.xmax)
+        r.xmax = border.xmax;
+    if (r.ymax > border.ymax)
+        r.ymax = border.ymax;
+    if (r.xmax < border.xmin)
+        r.xmax = border.xmin;
+    if (r.ymax < border.ymin)
+        r.ymax = border.ymin;
 
-    if(r.xmin > border.xmax) r.xmin = border.xmax;
-    if(r.ymin > border.ymax) r.ymin = border.ymax;
-    if(r.xmin < border.xmin) r.xmin = border.xmin;
-    if(r.ymin < border.ymin) r.ymin = border.ymin;
+    if (r.xmin > border.xmax)
+        r.xmin = border.xmax;
+    if (r.ymin > border.ymax)
+        r.ymin = border.ymax;
+    if (r.xmin < border.xmin)
+        r.xmin = border.xmin;
+    if (r.ymin < border.ymin)
+        r.ymin = border.ymin;
     return r;
 }
 
-void swf_ExpandRect(SRECT*src, SPOINT add)
+void swf_ExpandRect(SRECT *src, SPOINT add)
 {
-    if((src->xmin | src->ymin | src->xmax | src->ymax)==0) {
+    if ((src->xmin | src->ymin | src->xmax | src->ymax) == 0)
+    {
         src->xmin = add.x;
         src->ymin = add.y;
         src->xmax = add.x;
         src->ymax = add.y;
-        if((add.x|add.y) == 0) src->xmax++; //make sure the bbox is not NULL anymore
+        if ((add.x | add.y) == 0)
+            src->xmax++; //make sure the bbox is not NULL anymore
         return;
     }
-    if(add.x < src->xmin)
+    if (add.x < src->xmin)
         src->xmin = add.x;
-    if(add.x > src->xmax)
+    if (add.x > src->xmax)
         src->xmax = add.x;
-    if(add.y < src->ymin)
+    if (add.y < src->ymin)
         src->ymin = add.y;
-    if(add.y > src->ymax)
+    if (add.y > src->ymax)
         src->ymax = add.y;
 }
 void swf_ExpandRect2(SRECT*src, SRECT*add)
 {
-    if((add->xmin | add->ymin | add->xmax | add->ymax)==0)
+    if ((add->xmin | add->ymin | add->xmax | add->ymax) == 0)
         return;
-    if((src->xmin | src->ymin | src->xmax | src->ymax)==0)
+    if ((src->xmin | src->ymin | src->xmax | src->ymax) == 0)
         *src = *add;
-    if(add->xmin < src->xmin)
+    if (add->xmin < src->xmin)
         src->xmin = add->xmin;
-    if(add->ymin < src->ymin)
+    if (add->ymin < src->ymin)
         src->ymin = add->ymin;
-    if(add->xmax > src->xmax)
+    if (add->xmax > src->xmax)
         src->xmax = add->xmax;
-    if(add->ymax > src->ymax)
+    if (add->ymax > src->ymax)
         src->ymax = add->ymax;
 }
 void swf_ExpandRect3(SRECT*src, SPOINT center, int radius)
@@ -864,13 +613,13 @@ void swf_ExpandRect3(SRECT*src, SPOINT center, int radius)
             src->xmax++; //make sure the bbox is not NULL anymore
         return;
     }
-    if(center.x - radius < src->xmin)
+    if (center.x - radius < src->xmin)
         src->xmin = center.x - radius;
-    if(center.x + radius > src->xmax)
+    if (center.x + radius > src->xmax)
         src->xmax = center.x + radius;
-    if(center.y - radius < src->ymin)
+    if (center.y - radius < src->ymin)
         src->ymin = center.y - radius;
-    if(center.y + radius > src->ymax)
+    if (center.y + radius > src->ymax)
         src->ymax = center.y + radius;
 }
 
@@ -952,14 +701,6 @@ int swf_GetCXForm(TAG * t,CXFORM * cx,U8 alpha)
     return 0;
 }
 
-void swf_SetString(TAG*t, const char* s)
-{
-    if (!s)
-        swf_SetU8(t, 0);
-    else
-        swf_SetBlock(t, (U8*)s, strlen(s) + 1);
-}
-
 // Tag List Manipulating Functions
 
 TAG *swf_InsertTag(TAG *after, U16 id)
@@ -1039,7 +780,7 @@ TAG *swf_DeleteTag(SWF *swf, TAG *t)
     return next;
 }
 
-TAG * swf_ReadTag(reader_t *reader, TAG *prev)
+TAG *swf_ReadTag(reader_t *reader, TAG *prev)
 {
     TAG * t;
     U16 raw;
@@ -1073,7 +814,7 @@ TAG * swf_ReadTag(reader_t *reader, TAG *prev)
         if (reader->read(reader, t->data, t->len) != t->len)
         {
 #ifdef _DEBUG
-            printf("rfxswf: Warning: Short read (tagid %d). File truncated?\n", t->id);
+            printf("rfxswf: Warning: Short read (tagid %d). File truncated?\n", t->id); fflush(stdout);
 #endif
             free(t->data);
             free(t);
@@ -1153,7 +894,7 @@ void swf_FoldSprite(TAG * t)
     if (!t->len)
     {
 #ifdef _DEBUG
-        printf("error: Sprite has no ID!");
+        printf("error: Sprite has no ID!"); fflush(stdout);
 #endif
         return;
     }
@@ -1186,7 +927,9 @@ void swf_FoldSprite(TAG * t)
     } while(t && level);
 #ifdef _DEBUG
     if (level)
-        printf("rfxswf error: sprite doesn't end(1)\n");
+    {
+        printf("rfxswf error: sprite doesn't end(1)\n"); fflush(stdout);
+    }
 #endif
 
     swf_SetU16(sprtag, id);
@@ -1220,13 +963,15 @@ void swf_FoldSprite(TAG * t)
     } while (t && level);
 #ifdef _DEBUG
     if (level)
-        printf("rfxswf error: sprite doesn't end(2)\n");
+    {
+        printf("rfxswf error: sprite doesn't end(2)\n"); fflush(stdout);
+    }
 #endif
 }
 
 int swf_IsFolded(TAG * t)
 {
-    return (t->id == ST_DEFINESPRITE && t->len>4);
+    return (t->id == ST_DEFINESPRITE && t->len > 4);
 }
 
 void swf_FoldAll(SWF*swf)
