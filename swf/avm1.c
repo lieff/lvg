@@ -381,7 +381,7 @@ void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate)
     for (int i = 0; i < group->num_ssounds; i++)
     {
         LVGStreamSound *ssound = group->ssounds + i;
-        if (groupstate->cur_frame > ssound->start_frame && groupstate->cur_frame <= ssound->end_frame)
+        if (groupstate->cur_frame >= ssound->start_frame && groupstate->cur_frame <= ssound->end_frame)
         {
             LVGSound *sound = ctx->clip->sounds + ssound->sound_id;
             int rate = sound->orig_rate ? sound->orig_rate : sound->rate;
