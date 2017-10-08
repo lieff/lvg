@@ -387,8 +387,8 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
     swf_ResetReadBits(tag);
     int fillbits = swf_GetBits(tag, 4);
     int linebits = swf_GetBits(tag, 4);
-    if (!fillbits && !linebits)
-        return;
+    //if (!fillbits && !linebits)
+    //    return;
 
     LINE *path = (LINE*)calloc(1, sizeof(LINE)*/*nlines*/65536);
     LINE *ppath = path;
@@ -623,8 +623,8 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
     swf_ResetReadBits(tag);
     int fillbits = swf_GetBits(tag, 4);
     int linebits = swf_GetBits(tag, 4);
-    if (!fillbits && !linebits)
-        return;
+    //if (!fillbits && !linebits)
+    //    return;
 
     TAG tag2 = *tag;
     tag2.pos = swf_shape->endEdgesOffset;
