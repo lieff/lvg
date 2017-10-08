@@ -661,10 +661,10 @@ static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_idx = &ctx->stack[ctx->stack_ptr];
     ASVal *se_target = se_idx + 1;
     ctx->stack_ptr += 1;
-    assert(ASVAL_INT == se_idx->type);
+    assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
-    assert(se_idx->ui32 <= 21);
     uint32_t idx = to_int(se_idx);
+    assert(idx <= 21);
     if (idx > 21)
         return;
     ASVal *res = &ctx->stack[ctx->stack_ptr];
@@ -685,10 +685,10 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_idx = se_val + 1;
     ASVal *se_target = se_val + 2;
     ctx->stack_ptr += 3;
-    assert(ASVAL_INT == se_idx->type);
+    assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
-    assert(se_idx->ui32 <= 21);
     uint32_t idx = to_int(se_idx);
+    assert(idx <= 21);
     if (idx > 21)
         return;
     ASClass *c = ctx->groupstate->movieclip;
