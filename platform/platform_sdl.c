@@ -7,8 +7,18 @@
 
 void drawframe();
 
+typedef struct platform_ctx
+{
+    SDL_Window *window;
+    platform_params *params;
+    int winX, winY;
+    int defWidth, defHeight;
+    char keys[256];
+} platform_ctx;
+
 static int sdl_init(void **ctx, platform_params *params, int audio_only)
 {
+    *ctx = 0;
 #ifdef __MINGW32__
     putenv("SDL_AUDIODRIVER=winmm");
 #endif
@@ -18,28 +28,48 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
         printf("error: sdl2 init failed: %s\n", SDL_GetError());
         return 0;
     }
+#if PLATFORM_SDL
+    platform_ctx *platform = (platform_ctx *)calloc(1, sizeof(platform_ctx));
+    platform->params = params;
+    platform->window = SDL_CreateWindow(title, 0, 0, state->window_w, state->window_h, state->window_flags);
+#ifndef EMSCRIPTEN
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        printf("error: glad init failed\n");
+        return 0;
+    }
+#endif
+    *ctx = platform;
+#endif
     return 1;
 }
 
 static void sdl_release(void *ctx)
 {
+#if PLATFORM_SDL
+    platform_ctx *platform = (platform_ctx *)ctx;
+    free(platform);
+#endif
     SDL_Quit();
 }
 
 #if PLATFORM_SDL
 static void sdl_pull_events(void *ctx, platform_params *params)
 {
+    platform_ctx *platform = (platform_ctx *)ctx;
     //SDL_Event event;
     //SDL_PollEvent(&event);
 }
 
 static void sdl_main_loop(void *ctx)
 {
+    platform_ctx *platform = (platform_ctx *)ctx;
 }
 
 static void sdl_swap_buffers(void *ctx)
 {
-    glfwSwapBuffers(window);
+    platform_ctx *platform = (platform_ctx *)ctx;
+    SDL_GL_SwapWindow(platform->window);
 }
 
 static void sdl_fullscreen(void *ctx, int b_fullscreen)
