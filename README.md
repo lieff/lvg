@@ -9,6 +9,13 @@ It's designed to use a very small runtime (around 200kb without video codecs) fo
 It's uses C scripts natively and javascripts for web.
 
 Why C scripts? Because C compiler is small, and runtime written in C, so no other language is needed and script can be compiled in to a save the space.
+Usually author prefer C++, but there also some reasons to use pure C for whole project:
+
+ * We do not need to include libstdc++ for Android shared objects, which saves some .apk space (shared objects libs also usually duplicated for each supported architectue in .apk).
+ * This reduces size of emscripten compiled javascript code (it's already relatively heavy).
+ * Native C++ builds needs some attention for small code too. It's definetly possible to write small code woth C++, but we need something like minicrt for each platform/compiler. See farbrauch code for example or something similar.
+ * C++ code produces much more noisy .map files which makes profile/map file alaysis bit more complicated. Projects like chromium also uses objects analysis tools (like dump-static-initializers.py), there also less noise with such tools.
+ * Code can be ported to specific OS'es more easily.
 
 Following assets currently supported:
 
