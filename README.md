@@ -13,7 +13,7 @@ Usually author prefer C++, but there also some reasons to use pure C for whole p
 
  * We do not need to include libstdc++ for Android shared objects, which saves some .apk space (shared objects libs also usually duplicated for each supported architectue in .apk).
  * This reduces size of emscripten compiled javascript code (it's already relatively heavy).
- * Native C++ builds needs some attention for small code too. It's definetly possible to write small code woth C++, but we need something like minicrt for each platform/compiler. See [farbrauch](https://github.com/farbrausch/fr_public) code for example or something similar.
+ * Native C++ builds needs some attention for small code too. It's definetly possible to write small code with C++, but we need something like minicrt for each platform/compiler. See [farbrauch](https://github.com/farbrausch/fr_public) code for example or something similar.
  * C++ code produces much more noisy .map files which makes profile/map file alaysis bit more complicated. Projects like chromium also uses objects analysis tools (like dump-static-initializers.py), there also less noise with such tools.
  * Code can be ported to specific OS'es more easily.
 

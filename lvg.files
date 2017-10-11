@@ -76,3 +76,4 @@ video/ffmpeg/ffmpeg_dec.c
 video/video.h
 windows/mman.c
 windows/mman.h
+config.h
