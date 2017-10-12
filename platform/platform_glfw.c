@@ -21,7 +21,7 @@ typedef struct platform_ctx
     platform_params *params;
     int winX, winY;
     int defWidth, defHeight;
-    char keys[256];
+    //char keys[256];
 } platform_ctx;
 
 /*void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -155,6 +155,44 @@ static double glfw_get_time(void *ctx)
 static int glfw_get_key(void *ctx, int key)
 {
     static const int key_lookup[] = {
+        [KEY_A] = GLFW_KEY_A,
+        [KEY_B] = GLFW_KEY_B,
+        [KEY_C] = GLFW_KEY_C,
+        [KEY_D] = GLFW_KEY_D,
+        [KEY_E] = GLFW_KEY_E,
+        [KEY_F] = GLFW_KEY_F,
+        [KEY_G] = GLFW_KEY_G,
+        [KEY_H] = GLFW_KEY_H,
+        [KEY_I] = GLFW_KEY_I,
+        [KEY_J] = GLFW_KEY_J,
+        [KEY_K] = GLFW_KEY_K,
+        [KEY_L] = GLFW_KEY_L,
+        [KEY_M] = GLFW_KEY_M,
+        [KEY_N] = GLFW_KEY_N,
+        [KEY_O] = GLFW_KEY_O,
+        [KEY_P] = GLFW_KEY_P,
+        [KEY_Q] = GLFW_KEY_Q,
+        [KEY_R] = GLFW_KEY_R,
+        [KEY_S] = GLFW_KEY_S,
+        [KEY_T] = GLFW_KEY_T,
+        [KEY_U] = GLFW_KEY_U,
+        [KEY_V] = GLFW_KEY_V,
+        [KEY_W] = GLFW_KEY_W,
+        [KEY_X] = GLFW_KEY_X,
+        [KEY_Y] = GLFW_KEY_Y,
+        [KEY_Z] = GLFW_KEY_X,
+
+        [KEY_1] = GLFW_KEY_1,
+        [KEY_2] = GLFW_KEY_2,
+        [KEY_3] = GLFW_KEY_3,
+        [KEY_4] = GLFW_KEY_4,
+        [KEY_5] = GLFW_KEY_5,
+        [KEY_6] = GLFW_KEY_6,
+        [KEY_7] = GLFW_KEY_7,
+        [KEY_8] = GLFW_KEY_8,
+        [KEY_9] = GLFW_KEY_9,
+        [KEY_0] = GLFW_KEY_0,
+
         [KEY_ENTER] =      GLFW_KEY_ENTER,
         [KEY_ESC] =        GLFW_KEY_ESCAPE,
         [KEY_BACKSPACE] =  GLFW_KEY_BACKSPACE,
@@ -173,6 +211,33 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_DOT] =        GLFW_KEY_PERIOD,
         [KEY_SLASH] =      GLFW_KEY_SLASH,
         [KEY_CAPSLOCK] =   GLFW_KEY_CAPS_LOCK,
+
+        [KEY_F1] =  GLFW_KEY_F1,
+        [KEY_F2] =  GLFW_KEY_F2,
+        [KEY_F3] =  GLFW_KEY_F3,
+        [KEY_F4] =  GLFW_KEY_F4,
+        [KEY_F5] =  GLFW_KEY_F5,
+        [KEY_F6] =  GLFW_KEY_F6,
+        [KEY_F7] =  GLFW_KEY_F7,
+        [KEY_F8] =  GLFW_KEY_F8,
+        [KEY_F9] =  GLFW_KEY_F9,
+        [KEY_F10] = GLFW_KEY_F10,
+        [KEY_F11] = GLFW_KEY_F11,
+        [KEY_F12] = GLFW_KEY_F12,
+
+        [KEY_SYSRQ] =      GLFW_KEY_PRINT_SCREEN,
+        [KEY_SCROLLLOCK] = GLFW_KEY_SCROLL_LOCK,
+        [KEY_PAUSE] =      GLFW_KEY_PAUSE,
+        [KEY_INSERT] =     GLFW_KEY_INSERT,
+        [KEY_HOME] =       GLFW_KEY_HOME,
+        [KEY_PAGEUP] =     GLFW_KEY_PAGE_UP,
+        [KEY_DELETE] =     GLFW_KEY_DELETE,
+        [KEY_END] =        GLFW_KEY_END,
+        [KEY_PAGEDOWN] =   GLFW_KEY_PAGE_DOWN,
+        [KEY_RIGHT] =      GLFW_KEY_RIGHT,
+        [KEY_LEFT] =       GLFW_KEY_LEFT,
+        [KEY_DOWN] =       GLFW_KEY_DOWN,
+        [KEY_UP] =         GLFW_KEY_UP,
 
         [KEY_LEFTCTRL] = GLFW_KEY_LEFT_CONTROL,
         [KEY_LEFTSHIFT] = GLFW_KEY_LEFT_SHIFT,
