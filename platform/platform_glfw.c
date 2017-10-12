@@ -255,7 +255,7 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_KP8] =   GLFW_KEY_KP_8,
         [KEY_KP9] =   GLFW_KEY_KP_9,
         [KEY_KP0] =   GLFW_KEY_KP_0,
-        [KEY_KPDOT] = GLFW_KEY_KP_DECIMAL,
+        //[KEY_KPDOT] = GLFW_KEY_KP_DECIMAL,
 
         //[KEY_102ND] =   0x64,
         //[KEY_COMPOSE] = 0x65,
@@ -275,14 +275,16 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_F23] = GLFW_KEY_F23,
         [KEY_F24] = GLFW_KEY_F24,
 
-        [KEY_LEFTCTRL] = GLFW_KEY_LEFT_CONTROL,
-        [KEY_LEFTSHIFT] = GLFW_KEY_LEFT_SHIFT,
-        [KEY_LEFTALT] = GLFW_KEY_LEFT_ALT,
-        [KEY_LEFTMETA] = GLFW_KEY_LEFT_SUPER,
-        [KEY_RIGHTCTRL] = GLFW_KEY_RIGHT_CONTROL,
+        [KEY_KPCOMMA] = GLFW_KEY_KP_DECIMAL,
+
+        [KEY_LEFTCTRL] =   GLFW_KEY_LEFT_CONTROL,
+        [KEY_LEFTSHIFT] =  GLFW_KEY_LEFT_SHIFT,
+        [KEY_LEFTALT] =    GLFW_KEY_LEFT_ALT,
+        [KEY_LEFTMETA] =   GLFW_KEY_LEFT_SUPER,
+        [KEY_RIGHTCTRL] =  GLFW_KEY_RIGHT_CONTROL,
         [KEY_RIGHTSHIFT] = GLFW_KEY_RIGHT_SHIFT,
-        [KEY_RIGHTALT] = GLFW_KEY_RIGHT_ALT,
-        [KEY_RIGHTMETA] = GLFW_KEY_RIGHT_SUPER
+        [KEY_RIGHTALT] =   GLFW_KEY_RIGHT_ALT,
+        [KEY_RIGHTMETA] =  GLFW_KEY_RIGHT_SUPER
     };
     platform_ctx *platform = (platform_ctx *)ctx;
     if (key < 0 || key > sizeof(key_lookup)/sizeof(key_lookup[0]))
