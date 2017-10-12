@@ -154,8 +154,39 @@ static double glfw_get_time(void *ctx)
 
 static int glfw_get_key(void *ctx, int key)
 {
+    static const int key_lookup[] = {
+        [KEY_ENTER] =      GLFW_KEY_ENTER,
+        [KEY_ESC] =        GLFW_KEY_ESCAPE,
+        [KEY_BACKSPACE] =  GLFW_KEY_BACKSPACE,
+        [KEY_TAB] =        GLFW_KEY_TAB,
+        [KEY_SPACE] =      GLFW_KEY_SPACE,
+        [KEY_MINUS] =      GLFW_KEY_MINUS,
+        [KEY_EQUAL] =      GLFW_KEY_EQUAL,
+        [KEY_LEFTBRACE] =  GLFW_KEY_LEFT_BRACKET,
+        [KEY_RIGHTBRACE] = GLFW_KEY_RIGHT_BRACKET,
+        [KEY_BACKSLASH] =  GLFW_KEY_BACKSLASH,
+        //[KEY_HASHTILDE] =  0x32,
+        [KEY_SEMICOLON] =  GLFW_KEY_SEMICOLON,
+        [KEY_APOSTROPHE] = GLFW_KEY_APOSTROPHE,
+        [KEY_GRAVE] =      GLFW_KEY_GRAVE_ACCENT,
+        [KEY_COMMA] =      GLFW_KEY_COMMA,
+        [KEY_DOT] =        GLFW_KEY_PERIOD,
+        [KEY_SLASH] =      GLFW_KEY_SLASH,
+        [KEY_CAPSLOCK] =   GLFW_KEY_CAPS_LOCK,
+
+        [KEY_LEFTCTRL] = GLFW_KEY_LEFT_CONTROL,
+        [KEY_LEFTSHIFT] = GLFW_KEY_LEFT_SHIFT,
+        [KEY_LEFTALT] = GLFW_KEY_LEFT_ALT,
+        [KEY_LEFTMETA] = GLFW_KEY_LEFT_SUPER,
+        [KEY_RIGHTCTRL] = GLFW_KEY_RIGHT_CONTROL,
+        [KEY_RIGHTSHIFT] = GLFW_KEY_RIGHT_SHIFT,
+        [KEY_RIGHTALT] = GLFW_KEY_RIGHT_ALT,
+        [KEY_RIGHTMETA] = GLFW_KEY_RIGHT_SUPER
+    };
     platform_ctx *platform = (platform_ctx *)ctx;
-    return glfwGetKey(platform->window, key);
+    if (key < 0 || key > sizeof(key_lookup)/sizeof(key_lookup[0]))
+        return 0;
+    return glfwGetKey(platform->window, key_lookup[key]);
 }
 
 static void *glfw_get_proc_address(const char *procname)
