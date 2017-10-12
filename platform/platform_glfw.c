@@ -154,7 +154,7 @@ static double glfw_get_time(void *ctx)
 
 static int glfw_get_key(void *ctx, int key)
 {
-    static const int key_lookup[] = {
+    static const short key_lookup[] = {
         [KEY_A] = GLFW_KEY_A,
         [KEY_B] = GLFW_KEY_B,
         [KEY_C] = GLFW_KEY_C,
@@ -203,7 +203,7 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_LEFTBRACE] =  GLFW_KEY_LEFT_BRACKET,
         [KEY_RIGHTBRACE] = GLFW_KEY_RIGHT_BRACKET,
         [KEY_BACKSLASH] =  GLFW_KEY_BACKSLASH,
-        //[KEY_HASHTILDE] =  0x32,
+        [KEY_HASHTILDE] =  GLFW_KEY_GRAVE_ACCENT,
         [KEY_SEMICOLON] =  GLFW_KEY_SEMICOLON,
         [KEY_APOSTROPHE] = GLFW_KEY_APOSTROPHE,
         [KEY_GRAVE] =      GLFW_KEY_GRAVE_ACCENT,
@@ -238,6 +238,42 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_LEFT] =       GLFW_KEY_LEFT,
         [KEY_DOWN] =       GLFW_KEY_DOWN,
         [KEY_UP] =         GLFW_KEY_UP,
+
+        [KEY_NUMLOCK] =    GLFW_KEY_NUM_LOCK,
+        [KEY_KPSLASH] =    GLFW_KEY_KP_DIVIDE,
+        [KEY_KPASTERISK] = GLFW_KEY_KP_MULTIPLY,
+        [KEY_KPMINUS] =    GLFW_KEY_KP_SUBTRACT,
+        [KEY_KPPLUS] =     GLFW_KEY_KP_ADD,
+        [KEY_KPENTER] =    GLFW_KEY_KP_ENTER,
+        [KEY_KP1] =   GLFW_KEY_KP_1,
+        [KEY_KP2] =   GLFW_KEY_KP_2,
+        [KEY_KP3] =   GLFW_KEY_KP_3,
+        [KEY_KP4] =   GLFW_KEY_KP_4,
+        [KEY_KP5] =   GLFW_KEY_KP_5,
+        [KEY_KP6] =   GLFW_KEY_KP_6,
+        [KEY_KP7] =   GLFW_KEY_KP_7,
+        [KEY_KP8] =   GLFW_KEY_KP_8,
+        [KEY_KP9] =   GLFW_KEY_KP_9,
+        [KEY_KP0] =   GLFW_KEY_KP_0,
+        [KEY_KPDOT] = GLFW_KEY_KP_DECIMAL,
+
+        //[KEY_102ND] =   0x64,
+        //[KEY_COMPOSE] = 0x65,
+        //[KEY_POWER] =   0x66,
+        [KEY_KPEQUAL] = GLFW_KEY_KP_EQUAL,
+
+        [KEY_F13] = GLFW_KEY_F13,
+        [KEY_F14] = GLFW_KEY_F14,
+        [KEY_F15] = GLFW_KEY_F15,
+        [KEY_F16] = GLFW_KEY_F16,
+        [KEY_F17] = GLFW_KEY_F17,
+        [KEY_F18] = GLFW_KEY_F18,
+        [KEY_F19] = GLFW_KEY_F19,
+        [KEY_F20] = GLFW_KEY_F20,
+        [KEY_F21] = GLFW_KEY_F21,
+        [KEY_F22] = GLFW_KEY_F22,
+        [KEY_F23] = GLFW_KEY_F23,
+        [KEY_F24] = GLFW_KEY_F24,
 
         [KEY_LEFTCTRL] = GLFW_KEY_LEFT_CONTROL,
         [KEY_LEFTSHIFT] = GLFW_KEY_LEFT_SHIFT,
