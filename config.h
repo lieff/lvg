@@ -12,7 +12,7 @@
 #define SCRIPT_TCC 1
 #define ENABLE_SCRIPT 1
 #endif
-//#define PLATFORM_SDL 1
-#define PLATFORM_GLFW 1
+#define PLATFORM_SDL 1
+//#define PLATFORM_GLFW 1
 #define ENABLE_AUDIO 1
 #define ENABLE_VIDEO 1
