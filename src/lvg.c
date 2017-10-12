@@ -1091,7 +1091,11 @@ int main(int argc, char **argv)
     void *audio_platform_obj;
     sdl_platform.init(&audio_platform_obj, 0, 1);
 #endif
-    g_platform->init(&g_platform_obj, &g_params, 0);
+    if (!g_platform->init(&g_platform_obj, &g_params, 0))
+    {
+        printf("error: could not open platform\n");
+        return 1;
+    }
     if (b_fullscreen)
         g_platform->fullscreen(g_platform_obj, b_fullscreen);
 
