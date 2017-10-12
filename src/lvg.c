@@ -921,10 +921,10 @@ void drawframe()
             goto change_fullscreen;
         last_click = g_params.frame_time;
     }
-    if (g_platform->get_key(g_platform_obj, 342) || g_platform->get_key(g_platform_obj, 346))
+    if (g_platform->get_key(g_platform_obj, KEY_LEFTALT) || g_platform->get_key(g_platform_obj, KEY_LEFTALT))
     {
         static int last_enter;
-        int enter_state = g_platform->get_key(g_platform_obj, 257);
+        int enter_state = g_platform->get_key(g_platform_obj, KEY_ENTER);
         if (enter_state && !last_enter)
         {
 change_fullscreen:

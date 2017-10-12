@@ -16,7 +16,7 @@ typedef struct platform_ctx
     platform_params *params;
     int winX, winY, defWidth, defHeight, done;
     Uint32 startTime;
-    char keys[256];
+    char keys[SDL_NUM_SCANCODES];
 } platform_ctx;
 
 static int sdl_init(void **ctx, platform_params *params, int audio_only)
@@ -111,6 +111,10 @@ static void sdl_pull_events(void *ctx)
             else
                 params->mkeys &= ~(1 << (event.button.button - 1));
             break;
+        case SDL_KEYUP:
+        case SDL_KEYDOWN:
+            platform->keys[event.key.keysym.scancode] = event.key.state;
+            break;
         case SDL_QUIT:
             platform->done = 1;
             break;
@@ -145,7 +149,8 @@ static void sdl_fullscreen(void *ctx, int b_fullscreen)
 
 static int sdl_get_key(void *ctx, int key)
 {
-    return 0;
+    platform_ctx *platform = (platform_ctx *)ctx;
+    return platform->keys[key];
 }
 
 static void *sdl_get_proc_address(const char *procname)
