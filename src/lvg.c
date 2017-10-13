@@ -908,11 +908,11 @@ void swfOnFrame()
 
 void drawframe()
 {
+    g_platform->pull_events(g_platform_obj);
     glViewport(0, 0, g_params.width, g_params.height);
     glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     g_render->begin_frame(g_render_obj, g_clip, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
-    g_platform->pull_events(g_platform_obj);
     int pressed = (g_params.mkeys & MOUSE_BUTTON_LEFT) && !(g_params.last_mkeys & MOUSE_BUTTON_LEFT);
     if (pressed)
     {

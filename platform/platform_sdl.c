@@ -54,8 +54,15 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
         SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     if (!platform->window)
     {
-        printf("error: sdl2 init failed: %s\n", SDL_GetError()); fflush(stdout);
-        return 0;
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 0);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 0);
+        platform->window = SDL_CreateWindow("LVG Player", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 800,
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+        if (!platform->window)
+        {
+            printf("error: sdl2 init failed: %s\n", SDL_GetError()); fflush(stdout);
+            return 0;
+        }
     }
     platform->context = SDL_GL_CreateContext(platform->window);
     SDL_GL_MakeCurrent(platform->window, platform->context);
