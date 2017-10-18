@@ -205,8 +205,8 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
                 nvgFillPaint(vg, imgPaint);*/
                 ImagePaint(vg, shape, cxform, 1);
             }
-            if (NSVG_FILLRULE_EVENODD == shape->fillRule)
-                nvgPathWinding(vg, NVG_HOLE);
+            //if (NSVG_FILLRULE_EVENODD == shape->fillRule)
+            //    nvgPathWinding(vg, NVG_HOLE);
             nvgFill(vg);
         }
         if (NSVG_PAINT_NONE != shape->stroke.type)

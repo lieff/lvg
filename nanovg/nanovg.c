@@ -1495,13 +1495,13 @@ static void nvg__flattenPaths(NVGcontext* ctx)
 		}
 
 		// Enforce winding.
-		if (path->count > 2) {
+		/*if (path->count > 2) {
 			area = nvg__polyArea(pts, path->count);
 			if (path->winding == NVG_CCW && area < 0.0f)
 				nvg__polyReverse(pts, path->count);
 			if (path->winding == NVG_CW && area > 0.0f)
 				nvg__polyReverse(pts, path->count);
-		}
+		}*/
 
 		for(i = 0; i < path->count; i++) {
 			// Calculate segment direction and length
