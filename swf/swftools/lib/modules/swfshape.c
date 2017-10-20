@@ -244,14 +244,14 @@ static void parseFillStyle(FILLSTYLE *dest, TAG *tag, int num)
             swf_GetMorphGradient(tag, &dest->gradient, /*&gradient2*/0);
             if (type == 0x13)
             {
-                swf_GetU16(tag);
+                dest->gradient.focal = swf_GetFixed8(tag);
                 swf_GetU16(tag);
             }
         } else
         {
             swf_GetGradient(tag, &dest->gradient, num >= 3 ? 1 : 0);
             if (type == 0x13)
-                swf_GetU16(tag);
+                dest->gradient.focal = swf_GetFixed8(tag);
         }
     } else if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43)
     {   /* bitmap fill */

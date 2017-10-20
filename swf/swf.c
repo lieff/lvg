@@ -127,7 +127,7 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
             xf[3] = m->sy/65536.0f;
             xf[4] = m->tx/20.0f;
             xf[5] = m->ty/20.0f;
-        } else if (FILL_LINEAR == fs->type || FILL_RADIAL == fs->type)
+        } else if (FILL_LINEAR == fs->type || FILL_RADIAL == fs->type || FILL_RADIAL_FOCAL == fs->type)
         {
             assert(fs->gradient.num >= 2);
             assert(fs->gradient.num < 16);

@@ -1,11 +1,13 @@
+audio/mp3_keyj/LGPL.txt
+audio/mp3_keyj/libc.h
+audio/mp3_keyj/minimp3.c
+audio/mp3_keyj/minimp3.h
+audio/mp3_keyj/README.md
+audio/mp3_keyj/test.c
 audio/audio.h
 audio/audio_null.c
 audio/audio_sdl.c
 audio/common.c
-mp3/libc.h
-mp3/minimp3.c
-mp3/minimp3.h
-mp3/test.c
 nanovg/fontstash.h
 nanovg/LICENSE.txt
 nanovg/nanosvg.h
@@ -49,7 +51,6 @@ swf/swftools/lib/as3/opcodes.h
 swf/swftools/lib/as3/pool.c
 swf/swftools/lib/as3/pool.h
 swf/swftools/lib/as3/registry.h
-swf/swftools/lib/modules/swfaction.c
 swf/swftools/lib/modules/swfbits.c
 swf/swftools/lib/modules/swffilter.c
 swf/swftools/lib/modules/swfobject.c

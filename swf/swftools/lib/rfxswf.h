@@ -80,24 +80,25 @@ typedef struct _SRECT
 } SRECT;
 
 typedef struct _MATRIX
-{ SFIXED        sx,r1, tx;
-  SFIXED        r0,sy, ty;
+{
+    SFIXED        sx,r1, tx;
+    SFIXED        r0,sy, ty;
 } MATRIX;
 
 typedef struct _CXFORM
-{ int16_t           a0, a1; /* mult, add */
-  int16_t           r0, r1;
-  int16_t           g0, g1;
-  int16_t           b0, b1;
+{
+    int16_t       a0, a1; /* mult, add */
+    int16_t       r0, r1;
+    int16_t       g0, g1;
+    int16_t       b0, b1;
 } CXFORM;
 
-#define GRADIENT_LINEAR 0x10
-#define GRADIENT_RADIAL 0x12
 typedef struct _GRADIENT
 {
-    int num;
-    uint8_t* ratios;
-    RGBA* rgba;
+    uint8_t *ratios;
+    RGBA    *rgba;
+    int   num;
+    float focal;
 } GRADIENT;
 
 typedef struct _FILTER
@@ -108,22 +109,23 @@ typedef struct _FILTER
 typedef struct _FILTERLIST
 {
     int num;
-    FILTER*filter[8];
+    FILTER *filter[8];
 } FILTERLIST;
 
-typedef struct _TAG             // NEVER access a Tag-Struct directly !
-{ uint16_t           id;
-  uint8_t *          data;
-  uint32_t           memsize;        // to minimize realloc() calls
+typedef struct _TAG
+{
+    uint16_t  id;
+    uint8_t  *data;
+    uint32_t  memsize;        // to minimize realloc() calls
 
-  uint32_t         len;            // for Set-Access
-  uint32_t         pos;            // for Get-Access
+    uint32_t  len;            // for Set-Access
+    uint32_t  pos;            // for Get-Access
 
-  struct _TAG * next;
-  struct _TAG * prev;
+    struct _TAG * next;
+    struct _TAG * prev;
 
-  uint8_t            readBit;        // for Bit-Manipulating Functions [read]
-  uint8_t            writeBit;       // [write]
+    uint8_t   readBit;        // for Bit-Manipulating Functions [read]
+    uint8_t   writeBit;       // [write]
 
 } TAG;
 
@@ -408,6 +410,7 @@ typedef struct _LINESTYLE
 #define FILL_SOLID      0x00
 #define FILL_LINEAR     0x10  // Gradient
 #define FILL_RADIAL     0x12
+#define FILL_RADIAL_FOCAL 0x13
 #define FILL_TILED      0x40  // Bitmap
 #define FILL_CLIPPED    0x41
 
@@ -418,32 +421,32 @@ typedef struct _FILLSTYLE
     MATRIX    m;
     GRADIENT  gradient;
     RGBA      color;
-    uint16_t	      id_bitmap;
-    uint8_t	      type;
+    uint16_t  id_bitmap;
+    uint8_t	  type;
 } FILLSTYLE;
 
 typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
 {
-  struct
-  {
-      LINESTYLE * data;
-      uint16_t         n;
-  } linestyle;
+    struct
+    {
+        LINESTYLE *data;
+        uint16_t   n;
+    } linestyle;
 
-  struct
-  {
-      FILLSTYLE * data;
-      uint16_t         n;
-  } fillstyle;
+    struct
+    {
+        FILLSTYLE *data;
+        uint16_t   n;
+    } fillstyle;
 
-  struct
-  {
-      uint16_t         fill;
-      uint16_t         line;
-  } bits;
-                // used by Get/SetSimpleShape and glyph handling
-  uint8_t *          data;
-  uint32_t           bitlen;         // length of data in bits
+    struct
+    {
+        uint16_t   fill;
+        uint16_t   line;
+    } bits;
+    // used by Get/SetSimpleShape and glyph handling
+    uint8_t   *data;
+    uint32_t   bitlen;         // length of data in bits
 } SHAPE;
 
 /* SHAPE can be converted into SHAPE2: */

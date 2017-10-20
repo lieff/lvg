@@ -159,7 +159,8 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
         {
             if (NSVG_PAINT_NONE == shape->stroke.type && (NSVG_PAINT_NONE == shape->fill.type || (NSVG_PAINT_NONE != shape->fill.type && !path->closed)))
             {
-                path2 = path2->next;
+                if (path2)
+                    path2 = path2->next;
                 continue;
             }
             int l = path->npts - 1;
