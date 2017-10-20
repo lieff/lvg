@@ -39,12 +39,12 @@
 
 TAG *swf_NextTag(TAG *t)   { return t->next; }
 TAG *swf_PrevTag(TAG *t)   { return t->prev; }
-U16  swf_GetTagID(TAG *t)  { return t->id; }
-U32  swf_GetTagLen(TAG *t) { return t->len; }
-U8  *swf_GetTagLenPtr(TAG *t) { return &(t->data[t->len]); }
-U32  swf_GetTagPos(TAG *t) { return t->pos; }
+uint16_t  swf_GetTagID(TAG *t)  { return t->id; }
+uint32_t  swf_GetTagLen(TAG *t) { return t->len; }
+uint8_t  *swf_GetTagLenPtr(TAG *t) { return &(t->data[t->len]); }
+uint32_t  swf_GetTagPos(TAG *t) { return t->pos; }
 
-void swf_SetTagPos(TAG *t, U32 pos)
+void swf_SetTagPos(TAG *t, uint32_t pos)
 {
     swf_ResetReadBits(t);
     if (pos <= t->len)
@@ -73,7 +73,7 @@ char *swf_GetString(TAG *t)
     return (char*)&(t->data[pos]);
 }
 
-U8 swf_GetU8(TAG *t)
+uint8_t swf_GetU8(TAG *t)
 {
     swf_ResetReadBits(t);
     if ((int)t->pos >= (int)t->len)
@@ -86,9 +86,9 @@ U8 swf_GetU8(TAG *t)
     return t->data[t->pos++];
 }
 
-U16 swf_GetU16(TAG *t)
+uint16_t swf_GetU16(TAG *t)
 {
-    U16 res;
+    uint16_t res;
     swf_ResetReadBits(t);
     if ((int)t->pos > ((int)t->len - 2))
     {
@@ -102,9 +102,9 @@ U16 swf_GetU16(TAG *t)
     return res;
 }
 
-U32 swf_GetU32(TAG *t)
+uint32_t swf_GetU32(TAG *t)
 {
-    U32 res;
+    uint32_t res;
     swf_ResetReadBits(t);
     if ((int)t->pos > ((int)t->len - 4))
     {
@@ -119,7 +119,7 @@ U32 swf_GetU32(TAG *t)
     return res;
 }
 
-int swf_GetBlock(TAG *t, U8 *b, int l)
+int swf_GetBlock(TAG *t, uint8_t *b, int l)
 // returns number of bytes written (<=l)
 // b = NULL -> skip data
 {
@@ -132,15 +132,15 @@ int swf_GetBlock(TAG *t, U8 *b, int l)
     return l;
 }
 
-int swf_SetBlock(TAG *t, const U8 *b, int l)
+int swf_SetBlock(TAG *t, const uint8_t *b, int l)
 // Appends Block to the end of Tagdata, returns size
 {
-    U32 newlen = t->len + l;
+    uint32_t newlen = t->len + l;
     swf_ResetWriteBits(t);
     if (newlen > t->memsize)
     {
-        U32 newmem  = MEMSIZE(newlen);
-        U8 *newdata = (U8*)(realloc(t->data, newmem));
+        uint32_t newmem  = MEMSIZE(newlen);
+        uint8_t *newdata = (uint8_t*)(realloc(t->data, newmem));
         t->memsize = newmem;
         t->data    = newdata;
     }
@@ -152,9 +152,9 @@ int swf_SetBlock(TAG *t, const U8 *b, int l)
     return l;
 }
 
-U32 swf_GetBits(TAG *t, int nbits)
+uint32_t swf_GetBits(TAG *t, int nbits)
 {
-    U32 res = 0;
+    uint32_t res = 0;
     if (!nbits)
         return 0;
     if (!t->readBit)
@@ -189,51 +189,51 @@ U32 swf_GetBits(TAG *t, int nbits)
     return res;
 }
 
-S32 swf_GetSBits(TAG * t, int nbits)
+int32_t swf_GetSBits(TAG * t, int nbits)
 {
-    U32 res = swf_GetBits(t, nbits);
+    uint32_t res = swf_GetBits(t, nbits);
     if (res & (1 << (nbits - 1)))
         res |= (0xffffffff << nbits);
-    return (S32)res;
+    return (int32_t)res;
 }
 
-U32 reader_GetBits(reader_t *reader, int nbits)
+uint32_t reader_GetBits(reader_t *reader, int nbits)
 {
     return reader_readbits(reader, nbits);
 }
 
-S32 reader_GetSBits(reader_t *reader, int nbits)
+int32_t reader_GetSBits(reader_t *reader, int nbits)
 {
-    U32 res = reader_readbits(reader, nbits);
+    uint32_t res = reader_readbits(reader, nbits);
     if (res & (1 << (nbits - 1)))
         res |= (0xffffffff << nbits);
-    return (S32)res;
+    return (int32_t)res;
 }
 
 // Advanced Data Access Functions
 
 double swf_GetFixed(TAG *t)
 {
-    U16 low =  swf_GetU16(t);
-    U16 high = swf_GetU16(t);
+    uint16_t low =  swf_GetU16(t);
+    uint16_t high = swf_GetU16(t);
     return high + low*(1/65536.0);
 }
 
 float swf_GetFixed8(TAG *t)
 {
-    U8 low =  swf_GetU8(t);
-    U8 high = swf_GetU8(t);
+    uint8_t low =  swf_GetU8(t);
+    uint8_t high = swf_GetU8(t);
     return (float)(high + low*(1/256.0));
 }
 
-U32 swf_GetU30(TAG *tag)
+uint32_t swf_GetU30(TAG *tag)
 {
-    U32 shift = 0;
-    U32 s = 0;
+    uint32_t shift = 0;
+    uint32_t s = 0;
     int nr=0;
     while(1)
     {
-        U8 b = swf_GetU8(tag);
+        uint8_t b = swf_GetU8(tag);
         nr++;
         s |= (b & 127) << shift;
         shift += 7;
@@ -243,30 +243,30 @@ U32 swf_GetU30(TAG *tag)
     return s;
 }
 
-U32 swf_GetABCU32(TAG*tag)
+uint32_t swf_GetABCU32(TAG*tag)
 {
     return swf_GetU30(tag);
 }
 
-S32 swf_GetABCS32(TAG*tag)
+int32_t swf_GetABCS32(TAG*tag)
 {
     return swf_GetABCU32(tag);
 }
 
 #if 0
 
-/*The AVM2 spec is just plain wrong, claiming that S32 values are sign
+/*The AVM2 spec is just plain wrong, claiming that int32_t values are sign
 extended. They're not.
 This wastes up to 4 bytes for every negative value. */
 
-void swf_SetABCS32(TAG*tag, S32 s)
+void swf_SetABCS32(TAG*tag, int32_t s)
 {
-  printf("write S32: %d\n", s);
-    S32 neg = s<0?-1:0;
-    U8 sign = s<0?0x40:0;
+  printf("write int32_t: %d\n", s);
+    int32_t neg = s<0?-1:0;
+    uint8_t sign = s<0?0x40:0;
     while(1) {
-        U8 val = s&0x7f;
-        U8 vsign = s&0x40;
+        uint8_t val = s&0x7f;
+        uint8_t vsign = s&0x40;
         s>>=7;
         neg>>=7;
         if(s==neg && vsign==sign) {
@@ -284,11 +284,11 @@ void swf_SetABCS32(TAG*tag, S32 s)
 }
 int swf_GetS30(TAG*tag)
 {
-    U32 shift = 0;
-    U32 s = 0;
+    uint32_t shift = 0;
+    uint32_t s = 0;
     int nr=0;
     while(1) {
-        U8 b = swf_GetU8(tag);
+        uint8_t b = swf_GetU8(tag);
         nr++;
         nt i,m=t->len>10?10:t->len;
         for(i=0;i<m;i++) {
@@ -318,7 +318,7 @@ int swf_GetS30(TAG*tag)
 
 float swf_GetF16(TAG * t)
 {
-    U16 f1 = swf_GetU16(t);
+    uint16_t f1 = swf_GetU16(t);
     if (!(f1 & 0x3ff))
         return 0.0;
 
@@ -326,12 +326,12 @@ float swf_GetF16(TAG * t)
     // IEEE 32 is 1-8-23
     /* gcc 4.1.2 seems to require a union here. *(float*)u doesn't work */
     union {
-        U32 u;
+        uint32_t u;
         float f;
     } f2;
 
-    U16 e = (f1 >> 10) & 0x1f;
-    U16 m = f1 & 0x3ff;
+    uint16_t e = (f1 >> 10) & 0x1f;
+    uint16_t m = f1 & 0x3ff;
     /* find highest bit in mantissa */
     int h=0;
     while (!(m & 0x400))
@@ -349,7 +349,7 @@ float swf_GetF16(TAG * t)
     return *(float*)&f2;
 }
 
-float F16toFloat(U16 x)
+float F16toFloat(uint16_t x)
 {
     TAG t;
     t.data = (void*)&x;
@@ -362,7 +362,7 @@ float F16toFloat(U16 x)
 float swf_GetFloat(TAG *tag)
 {
     union {
-        U32 uint_bits;
+        uint32_t uint_bits;
         float float_bits;
     } f;
     f.uint_bits = swf_GetU32(tag);
@@ -427,16 +427,16 @@ void swf_GetGradient(TAG *tag, GRADIENT *gradient, char alpha)
         memset(gradient, 0, sizeof(GRADIENT));
         return;
     }
-    U8 num = swf_GetU8(tag) & 15;
+    uint8_t num = swf_GetU8(tag) & 15;
     if (gradient)
     {
         gradient->num = num;
         gradient->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient->num);
-        gradient->ratios = (U8*)calloc(1, sizeof(gradient->ratios[0])*gradient->num);
+        gradient->ratios = (uint8_t*)calloc(1, sizeof(gradient->ratios[0])*gradient->num);
     }
     for (t = 0; t < num; t++)
     {
-        U8 ratio = swf_GetU8(tag);
+        uint8_t ratio = swf_GetU8(tag);
         RGBA color;
         if (!alpha)
             swf_GetRGB(tag, &color);
@@ -614,7 +614,7 @@ int swf_GetMatrix(TAG *t, MATRIX *m)
     return 0;
 }
 
-int swf_GetCXForm(TAG *t, CXFORM *cx,U8 alpha)
+int swf_GetCXForm(TAG *t, CXFORM *cx,uint8_t alpha)
 {
     CXFORM cxf;
     int hasadd, hasmul, nbits;
@@ -635,26 +635,26 @@ int swf_GetCXForm(TAG *t, CXFORM *cx,U8 alpha)
 
     if (hasmul)
     {
-        cx->r0 = (S16)swf_GetSBits(t, nbits);
-        cx->g0 = (S16)swf_GetSBits(t, nbits);
-        cx->b0 = (S16)swf_GetSBits(t, nbits);
+        cx->r0 = (int16_t)swf_GetSBits(t, nbits);
+        cx->g0 = (int16_t)swf_GetSBits(t, nbits);
+        cx->b0 = (int16_t)swf_GetSBits(t, nbits);
         if (alpha)
-            cx->a0 = (S16)swf_GetSBits(t, nbits);
+            cx->a0 = (int16_t)swf_GetSBits(t, nbits);
     }
     if (hasadd)
     {
-        cx->r1 = (S16)swf_GetSBits(t, nbits);
-        cx->g1 = (S16)swf_GetSBits(t, nbits);
-        cx->b1 = (S16)swf_GetSBits(t, nbits);
+        cx->r1 = (int16_t)swf_GetSBits(t, nbits);
+        cx->g1 = (int16_t)swf_GetSBits(t, nbits);
+        cx->b1 = (int16_t)swf_GetSBits(t, nbits);
         if (alpha)
-            cx->a1 = (S16)swf_GetSBits(t, nbits);
+            cx->a1 = (int16_t)swf_GetSBits(t, nbits);
     }
     return 0;
 }
 
 // Tag List Manipulating Functions
 
-void swf_ResetTag(TAG *tag, U16 id)
+void swf_ResetTag(TAG *tag, uint16_t id)
 {
     tag->len = tag->pos = tag->readBit = tag->writeBit = 0;
     tag->id = id;
@@ -680,8 +680,8 @@ TAG *swf_DeleteTag(SWF *swf, TAG *t)
 TAG *swf_ReadTag(reader_t *reader, TAG *prev)
 {
     TAG * t;
-    U16 raw;
-    U32 len;
+    uint16_t raw;
+    uint32_t len;
     int id;
 
     if (reader->read(reader, &raw, 2) != 2)
@@ -697,7 +697,7 @@ TAG *swf_ReadTag(reader_t *reader, TAG *prev)
     }
 
     if (id == ST_DEFINESPRITE)
-        len = 2*sizeof(U16); // Sprite handling fix: Flatten sprite tree
+        len = 2*sizeof(uint16_t); // Sprite handling fix: Flatten sprite tree
 
     t = (TAG *)calloc(1, sizeof(TAG));
 
@@ -706,7 +706,7 @@ TAG *swf_ReadTag(reader_t *reader, TAG *prev)
 
     if (t->len)
     {
-        t->data = (U8*)malloc(t->len + 4); // pad for mp3 bitbuf
+        t->data = (uint8_t*)malloc(t->len + 4); // pad for mp3 bitbuf
         t->memsize = t->len;
         if (reader->read(reader, t->data, t->len) != t->len)
         {

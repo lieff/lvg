@@ -61,7 +61,7 @@ DECLARE_LIST(slotinfo);
 #define SUBTYPE_GETSET 3
 
 #define SLOTINFO_HEAD \
-    U8 kind,subtype,flags,access; \
+    uint8_t kind,subtype,flags,access; \
     const char*package; \
     const char*name; \
     int slot;
@@ -116,10 +116,10 @@ char slotinfo_equals(slotinfo_t*c1, slotinfo_t*c2);
 void registry_init();
         
 classinfo_t* classinfo_register(int access, const char*package, const char*name, int num_interfaces);
-methodinfo_t* methodinfo_register_onclass(classinfo_t*cls, U8 access, const char*ns, const char*name, char is_static);
-methodinfo_t* methodinfo_register_global(U8 access, const char*package, const char*name);
-varinfo_t* varinfo_register_onclass(classinfo_t*cls, U8 access,  const char*ns, const char*name, char is_static);
-varinfo_t* varinfo_register_global(U8 access, const char*package, const char*name);
+methodinfo_t* methodinfo_register_onclass(classinfo_t*cls, uint8_t access, const char*ns, const char*name, char is_static);
+methodinfo_t* methodinfo_register_global(uint8_t access, const char*package, const char*name);
+varinfo_t* varinfo_register_onclass(classinfo_t*cls, uint8_t access,  const char*ns, const char*name, char is_static);
+varinfo_t* varinfo_register_global(uint8_t access, const char*package, const char*name);
 
 slotinfo_t* registry_resolve(slotinfo_t*s);
 void registry_resolve_all();
@@ -144,7 +144,7 @@ char registry_isclassclass();
 classinfo_t* slotinfo_asclass(slotinfo_t*f);
 classinfo_t* slotinfo_gettype(slotinfo_t*);
 
-namespace_t access2namespace(U8 access, char*package);
+namespace_t access2namespace(uint8_t access, char*package);
 
 char registry_ispackage(const char*package);
 

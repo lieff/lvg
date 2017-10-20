@@ -60,15 +60,15 @@ typedef struct _SPOINT
 
 typedef struct _RGBA
 {
-  U8    r;
-  U8    g;
-  U8    b;
-  U8    a;
+  uint8_t    r;
+  uint8_t    g;
+  uint8_t    b;
+  uint8_t    a;
 } RGBA;
 
 typedef struct _YUV
 {
-  U8	y,u,v;
+  uint8_t	y,u,v;
 } YUV;
 
 typedef struct _SRECT
@@ -85,10 +85,10 @@ typedef struct _MATRIX
 } MATRIX;
 
 typedef struct _CXFORM
-{ S16           a0, a1; /* mult, add */
-  S16           r0, r1;
-  S16           g0, g1;
-  S16           b0, b1;
+{ int16_t           a0, a1; /* mult, add */
+  int16_t           r0, r1;
+  int16_t           g0, g1;
+  int16_t           b0, b1;
 } CXFORM;
 
 #define GRADIENT_LINEAR 0x10
@@ -96,13 +96,13 @@ typedef struct _CXFORM
 typedef struct _GRADIENT
 {
     int num;
-    U8* ratios;
+    uint8_t* ratios;
     RGBA* rgba;
 } GRADIENT;
 
 typedef struct _FILTER
 {
-    U8 type;
+    uint8_t type;
 } FILTER;
 
 typedef struct _FILTERLIST
@@ -112,18 +112,18 @@ typedef struct _FILTERLIST
 } FILTERLIST;
 
 typedef struct _TAG             // NEVER access a Tag-Struct directly !
-{ U16           id;
-  U8 *          data;
-  U32           memsize;        // to minimize realloc() calls
+{ uint16_t           id;
+  uint8_t *          data;
+  uint32_t           memsize;        // to minimize realloc() calls
 
-  U32         len;            // for Set-Access
-  U32         pos;            // for Get-Access
+  uint32_t         len;            // for Set-Access
+  uint32_t         pos;            // for Get-Access
 
   struct _TAG * next;
   struct _TAG * prev;
 
-  U8            readBit;        // for Bit-Manipulating Functions [read]
-  U8            writeBit;       // [write]
+  uint8_t            readBit;        // for Bit-Manipulating Functions [read]
+  uint8_t            writeBit;       // [write]
 
 } TAG;
 
@@ -132,19 +132,19 @@ typedef struct _TAG             // NEVER access a Tag-Struct directly !
 
 typedef struct _SOUNDINFO
 {
-    U8 stop;
-    U8 nomultiple; //continue playing if already started
+    uint8_t stop;
+    uint8_t nomultiple; //continue playing if already started
 
-    U32 inpoint;
-    U32 outpoint;
+    uint32_t inpoint;
+    uint32_t outpoint;
 
-    U16 loops;
-    U8 envelopes;
+    uint16_t loops;
+    uint8_t envelopes;
 
     //envelope:
-    U32* pos;
-    U32* left;
-    U32* right;
+    uint32_t* pos;
+    uint32_t* left;
+    uint32_t* right;
 } SOUNDINFO;
 
 #define FILEATTRIBUTE_USENETWORK 1
@@ -154,14 +154,14 @@ typedef struct _SOUNDINFO
 #define FILEATTRIBUTE_USEHARDWAREGPU 64
 
 typedef struct _SWF
-{ U8            fileVersion;
-  U8		compressed;     // SWF or SWC?
-  U32           fileSize;       // valid after load and save
+{ uint8_t            fileVersion;
+  uint8_t		compressed;     // SWF or SWC?
+  uint32_t           fileSize;       // valid after load and save
   SRECT         movieSize;
-  U16           frameRate;
-  U16           frameCount;     // valid after load and save
+  uint16_t           frameRate;
+  uint16_t           frameCount;     // valid after load and save
   TAG *         firstTag;
-  U32           fileAttributes; // for SWFs >= Flash9
+  uint32_t           fileAttributes; // for SWFs >= Flash9
 } SWF;
 
 // Basic Functions
@@ -198,37 +198,37 @@ void swf_OptimizeTagOrder(SWF*swf);
 
 // basic routines:
 
-TAG * swf_InsertTag(TAG * after,U16 id);    // updates frames, if necessary
-TAG * swf_InsertTagBefore(SWF*swf, TAG * before,U16 id);     // like InsertTag, but insert tag before argument
+TAG * swf_InsertTag(TAG * after,uint16_t id);    // updates frames, if necessary
+TAG * swf_InsertTagBefore(SWF*swf, TAG * before,uint16_t id);     // like InsertTag, but insert tag before argument
 TAG * swf_DeleteTag(SWF*swf, TAG * t);
 
 void  swf_ClearTag(TAG * t);                //frees tag data
-void  swf_ResetTag(TAG*tag, U16 id);        //set's tag position and length to 0, without freeing it
+void  swf_ResetTag(TAG*tag, uint16_t id);        //set's tag position and length to 0, without freeing it
 TAG*  swf_CopyTag(TAG*tag, TAG*to_copy);     //stores a copy of another tag into this taglist
 
-void  swf_SetTagPos(TAG * t,U32 pos);       // resets Bitcount
-U32   swf_GetTagPos(TAG * t);
+void  swf_SetTagPos(TAG * t,uint32_t pos);       // resets Bitcount
+uint32_t   swf_GetTagPos(TAG * t);
 
 TAG * swf_NextTag(TAG * t);
 TAG * swf_PrevTag(TAG * t);
 
-U16   swf_GetTagID(TAG * t);                // ... TagGetID
-U32   swf_GetTagLen(TAG * t);             // ... TagGetTagLen
-U8*   swf_GetTagLenPtr(TAG * t);
+uint16_t   swf_GetTagID(TAG * t);                // ... TagGetID
+uint32_t   swf_GetTagLen(TAG * t);             // ... TagGetTagLen
+uint8_t*   swf_GetTagLenPtr(TAG * t);
 
-U32   swf_GetBits(TAG * t,int nbits);
-S32   swf_GetSBits(TAG * t,int nbits);
-int   swf_SetBits(TAG * t,U32 v,int nbits);
-int   swf_CountUBits(U32 v,int nbits);
-int   swf_CountBits(U32 v,int nbits);
+uint32_t   swf_GetBits(TAG * t,int nbits);
+int32_t   swf_GetSBits(TAG * t,int nbits);
+int   swf_SetBits(TAG * t,uint32_t v,int nbits);
+int   swf_CountUBits(uint32_t v,int nbits);
+int   swf_CountBits(uint32_t v,int nbits);
 
-int   swf_GetBlock(TAG * t,U8 * b,int l);   // resets Bitcount
-int   swf_SetBlock(TAG * t,const U8 * b,int l);
+int   swf_GetBlock(TAG * t,uint8_t * b,int l);   // resets Bitcount
+int   swf_SetBlock(TAG * t,const uint8_t * b,int l);
 
-U8    swf_GetU8(TAG * t);                   // resets Bitcount
-U16   swf_GetU16(TAG * t);
-#define swf_GetS16(tag)     ((S16)swf_GetU16(tag))
-U32   swf_GetU32(TAG * t);
+uint8_t    swf_GetU8(TAG * t);                   // resets Bitcount
+uint16_t   swf_GetU16(TAG * t);
+#define swf_GetS16(tag) ((int16_t)swf_GetU16(tag))
+uint32_t   swf_GetU32(TAG * t);
 float swf_GetF16(TAG * t);
 void  swf_GetRGB(TAG * t, RGBA * col);
 void  swf_GetRGBA(TAG * t, RGBA * col);
@@ -237,38 +237,38 @@ void  swf_SetGradient(TAG * tag, GRADIENT * gradient, char alpha);
 void  swf_GetMorphGradient(TAG * tag, GRADIENT * gradient1, GRADIENT * gradient2);
 void  swf_FreeGradient(GRADIENT* gradient);
 char* swf_GetString(TAG*t);
-int   swf_SetU8(TAG * t,U8 v);              // resets Bitcount
-int   swf_SetU16(TAG * t,U16 v);
-void  swf_SetS16(TAG * t,int v);
-int   swf_SetU32(TAG * t,U32 v);
+int   swf_Setuint8_t(TAG * t,uint8_t v);              // resets Bitcount
+int   swf_SetU16(TAG * t,uint16_t v);
+void  swf_Setint16_t(TAG * t,int v);
+int   swf_SetU32(TAG * t,uint32_t v);
 void  swf_SetF16(TAG * t,float f);
 void  swf_SetString(TAG*t,const char*s);
 
 float floatToF16(float f);
-float F16toFloat(U16 x);
+float F16toFloat(uint16_t x);
 
 float swf_GetFloat(TAG *tag);
 void swf_SetFloat(TAG *tag, float v);
 
 /* abc datatypes */
-U32 swf_GetU30(TAG*tag);
-int swf_SetU30(TAG*tag, U32 u);
-void swf_SetABCU32(TAG*tag, U32 u);
-U32 swf_GetABCU32(TAG*tag);
-void swf_SetABCS32(TAG*tag, S32 v);
-S32 swf_GetABCS32(TAG*tag);
+uint32_t swf_GetU30(TAG*tag);
+int swf_SetU30(TAG*tag, uint32_t u);
+void swf_SetABCU32(TAG*tag, uint32_t u);
+uint32_t swf_GetABCU32(TAG*tag);
+void swf_SetABCS32(TAG*tag, int32_t v);
+int32_t swf_GetABCS32(TAG*tag);
 int    swf_SetU30String(TAG*tag, const char*str, int len);
 double swf_GetD64(TAG*tag);
 int    swf_SetD64(TAG*tag, double v);
 int    swf_GetU24(TAG*tag);
 int    swf_GetS24(TAG*tag);
-int    swf_SetU24(TAG*tag, U32 v);
-int    swf_SetS24(TAG*tag, U32 v);
+int    swf_SetU24(TAG*tag, uint32_t v);
+int    swf_SetS24(TAG*tag, uint32_t v);
 
 //int   swf_GetPoint(TAG * t,SPOINT * p);     // resets Bitcount
 int   swf_GetRect(TAG * t,SRECT * r);
 int   swf_GetMatrix(TAG * t,MATRIX * m);
-int   swf_GetCXForm(TAG * t,CXFORM * cx,U8 alpha);
+int   swf_GetCXForm(TAG * t,CXFORM * cx,uint8_t alpha);
 
 double swf_GetFixed(TAG * t);
 void swf_SetFixed(TAG * t, double f);
@@ -278,7 +278,7 @@ void swf_SetFixed8(TAG * t, float f);
 //int   swf_SetPoint(TAG * t,SPOINT * p);     // resets Bitcount
 int   swf_SetRect(TAG * t,SRECT * r);
 int   swf_SetMatrix(TAG * t,MATRIX * m);
-int   swf_SetCXForm(TAG * t,CXFORM * cx,U8 alpha);
+int   swf_SetCXForm(TAG * t,CXFORM * cx,uint8_t alpha);
 int   swf_SetRGB(TAG * t,RGBA * col);
 int   swf_SetRGBA(TAG * t,RGBA * col);
 void  swf_SetPassword(TAG * t, const char * password);
@@ -402,7 +402,7 @@ typedef struct _LINESTYLE
     RGBA      color;
     float     mitterLimit;
     int       flags;
-    U16       width;
+    uint16_t       width;
 } LINESTYLE;
 
 #define FILL_SOLID      0x00
@@ -418,8 +418,8 @@ typedef struct _FILLSTYLE
     MATRIX    m;
     GRADIENT  gradient;
     RGBA      color;
-    U16	      id_bitmap;
-    U8	      type;
+    uint16_t	      id_bitmap;
+    uint8_t	      type;
 } FILLSTYLE;
 
 typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
@@ -427,23 +427,23 @@ typedef struct _SHAPE           // NEVER access a Shape-Struct directly !
   struct
   {
       LINESTYLE * data;
-      U16         n;
+      uint16_t         n;
   } linestyle;
 
   struct
   {
       FILLSTYLE * data;
-      U16         n;
+      uint16_t         n;
   } fillstyle;
 
   struct
   {
-      U16         fill;
-      U16         line;
+      uint16_t         fill;
+      uint16_t         line;
   } bits;
                 // used by Get/SetSimpleShape and glyph handling
-  U8 *          data;
-  U32           bitlen;         // length of data in bits
+  uint8_t *          data;
+  uint32_t           bitlen;         // length of data in bits
 } SHAPE;
 
 /* SHAPE can be converted into SHAPE2: */
@@ -481,32 +481,32 @@ char  swf_ShapeIsEmpty(SHAPE*s);
 int   swf_GetSimpleShape(TAG * t,SHAPE ** s); // without Linestyle/Fillstyle Record
 int   swf_SetSimpleShape(TAG * t,SHAPE * s);   // without Linestyle/Fillstyle Record
 
-int   swf_ShapeAddLineStyle(SHAPE * s,U16 width,RGBA * color);
+int   swf_ShapeAddLineStyle(SHAPE * s,uint16_t width,RGBA * color);
 int   swf_ShapeAddSolidFillStyle(SHAPE * s,RGBA * color);
-int   swf_ShapeAddBitmapFillStyle(SHAPE * s,MATRIX * m,U16 id_bitmap,int clip);
+int   swf_ShapeAddBitmapFillStyle(SHAPE * s,MATRIX * m,uint16_t id_bitmap,int clip);
 int   swf_ShapeAddGradientFillStyle(SHAPE * s,MATRIX * m,GRADIENT* gradient,int radial);
 int   swf_ShapeAddFillStyle2(SHAPE * s,FILLSTYLE*fs);
 
 int   swf_SetShapeStyles(TAG * t,SHAPE * s);
-int   swf_ShapeCountBits(SHAPE * s,U8 * fbits,U8 * lbits);
+int   swf_ShapeCountBits(SHAPE * s,uint8_t * fbits,uint8_t * lbits);
 int   swf_SetShapeBits(TAG * t,SHAPE * s);
 int   swf_SetShapeHeader(TAG * t,SHAPE * s); // one call for upper three functions
 
-int   swf_ShapeSetMove(TAG * t,SHAPE * s,S32 x,S32 y);
+int   swf_ShapeSetMove(TAG * t,SHAPE * s,int32_t x,int32_t y);
 int   swf_ShapeSetStyle(TAG * t,SHAPE * s,int line,int fill0,int fill1);
 #define UNDEFINED_COORD 0x7fffffff
-int   swf_ShapeSetAll(TAG * t,SHAPE * s,S32 x,S32 y,int line,int fill0,int fill1);
+int   swf_ShapeSetAll(TAG * t,SHAPE * s,int32_t x,int32_t y,int line,int fill0,int fill1);
 
-int   swf_ShapeSetLine(TAG * t,SHAPE * s,S32 x,S32 y);
-int   swf_ShapeSetCurve(TAG * t,SHAPE * s,S32 x,S32 y,S32 ax,S32 ay);
-int   swf_ShapeSetCircle(TAG * t,SHAPE * s,S32 x,S32 y,S32 rx,S32 ry);
+int   swf_ShapeSetLine(TAG * t,SHAPE * s,int32_t x,int32_t y);
+int   swf_ShapeSetCurve(TAG * t,SHAPE * s,int32_t x,int32_t y,int32_t ax,int32_t ay);
+int   swf_ShapeSetCircle(TAG * t,SHAPE * s,int32_t x,int32_t y,int32_t rx,int32_t ry);
 int   swf_ShapeSetEnd(TAG * t);
-int   swf_SetShapeStyleCount(TAG * t,U16 n);
+int   swf_SetShapeStyleCount(TAG * t,uint16_t n);
 int   swf_SetFillStyle(TAG * t,FILLSTYLE * f);
 int   swf_SetLineStyle(TAG * t,LINESTYLE * l);
 
 
-//SHAPELINE* swf_ParseShapeData(U8*data, int bits, int fillbits, int linebits);
+//SHAPELINE* swf_ParseShapeData(uint8_t*data, int bits, int fillbits, int linebits);
 SHAPE2*	swf_ShapeToShape2(SHAPE*shape);
 void	swf_Shape2ToShape(SHAPE2*shape2, SHAPE*shape);
 SRECT	swf_GetShapeBoundingBox(SHAPE2*shape);
@@ -518,36 +518,36 @@ void swf_ParseDefineShape(TAG*tag, SHAPE2*shape);
 int parseFillStyleArray(TAG*tag, SHAPE2*shape);
 void swf_SetShape2(TAG*tag, SHAPE2*shape2);
 
-void swf_RecodeShapeData(U8*data, int bitlen, int in_bits_fill, int in_bits_line,
-                         U8**destdata, U32*destbitlen, int out_bits_fill, int out_bits_line);
+void swf_RecodeShapeData(uint8_t*data, int bitlen, int in_bits_fill, int in_bits_line,
+                         uint8_t**destdata, uint32_t*destbitlen, int out_bits_fill, int out_bits_line);
 
 // swftext.c
 
 typedef struct _KERNING
 {
-  U16	      char1;
-  U16	      char2;
-  U16	      adjustment;
+  uint16_t	      char1;
+  uint16_t	      char2;
+  uint16_t	      adjustment;
 } SWFKERNING;
 
 typedef struct _SWFLAYOUT
-{ U16          ascent;
-  U16          descent;
-  U16          leading;
+{ uint16_t          ascent;
+  uint16_t          descent;
+  uint16_t          leading;
   SRECT      * bounds;
-  U16	       kerningcount;
+  uint16_t	       kerningcount;
   SWFKERNING * kerning;
 } SWFLAYOUT;
 
 typedef struct
-{ S16         advance;
+{ int16_t         advance;
   SHAPE *     shape;
 } SWFGLYPH;
 
 typedef struct _SWFGLYPHPAIR
 {
-    U16 char1;
-    U16 char2;
+    uint16_t char1;
+    uint16_t char2;
     int num;
 } SWFGLYPHPAIR;
 
@@ -556,7 +556,7 @@ typedef struct _FONTUSAGE
   char is_reduced;
   int used_glyphs;
   int glyphs_specified;
-  U16 smallest_size;
+  uint16_t smallest_size;
 
   SWFGLYPHPAIR* neighbors;
   int num_neighbors;
@@ -577,28 +577,28 @@ typedef struct _FONTUSAGE
 
 typedef struct _ALIGNZONE
 {
-    U16 x,y;
-    U16 dx,dy;
+    uint16_t x,y;
+    uint16_t dx,dy;
 } ALIGNZONE;
 
 typedef struct _SWFFONT
 { int		id; // -1 = not set
-  U8		version; // 0 = not set, 1 = definefont, 2 = definefont2, 3 = definefont3
-  U8 *          name;
+  uint8_t		version; // 0 = not set, 1 = definefont, 2 = definefont2, 3 = definefont3
+  uint8_t *          name;
   SWFLAYOUT *   layout;
   int           numchars;
   int           maxascii; // highest mapped ascii/unicode value
 
-  U8		style;
-  U8		encoding;
+  uint8_t		style;
+  uint8_t		encoding;
 
-  U16	*	glyph2ascii;
+  uint16_t	*	glyph2ascii;
   int	*	ascii2glyph;
   int   *       glyph2glyph; // only if the font is resorted
   SWFGLYPH *	glyph;
   ALIGNZONE *	alignzones;
-  U8            alignzone_flags;
-  U8		language;
+  uint8_t            alignzone_flags;
+  uint8_t		language;
   char **	glyphnames;
 
 } SWFFONT;
@@ -628,15 +628,15 @@ typedef struct _SWFFONT
 
 typedef struct _EditTextLayout
 {
-    U8 align; // 0=left, 1=right, 2=center, 3=justify
-    U16 leftmargin;
-    U16 rightmargin;
-    U16 indent;
-    U16 leading;
+    uint8_t align; // 0=left, 1=right, 2=center, 3=justify
+    uint16_t leftmargin;
+    uint16_t rightmargin;
+    uint16_t indent;
+    uint16_t leading;
 } EditTextLayout;
 
-int swf_FontEnumerate(SWF * swf,void (*FontCallback) (void*,U16,U8*), void*self);
-// -> void fontcallback(U16 id,U8 * name); returns number of defined fonts
+int swf_FontEnumerate(SWF * swf,void (*FontCallback) (void*,uint16_t,uint8_t*), void*self);
+// -> void fontcallback(uint16_t id,uint8_t * name); returns number of defined fonts
 
 int swf_FontExtract(TAG *firstTag, int id, SWFFONT * *font);
 // Fetches all available information from DefineFont, DefineFontInfo, DefineText, ...
@@ -651,17 +651,17 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag);
 int swf_FontIsItalic(SWFFONT * f);
 int swf_FontIsBold(SWFFONT * f);
 
-int swf_FontSetID(SWFFONT * f,U16 id);
+int swf_FontSetID(SWFFONT * f,uint16_t id);
 int swf_FontReduce(SWFFONT * f);
 int swf_FontReduce_swfc(SWFFONT * f);
 
 int swf_FontInitUsage(SWFFONT * f);
-int swf_FontUseGlyph(SWFFONT * f, int glyph, U16 size);
+int swf_FontUseGlyph(SWFFONT * f, int glyph, uint16_t size);
 void swf_FontUsePair(SWFFONT * f, int char1, int char2);
 int swf_FontUseGetPair(SWFFONT * f, int char1, int char2);
 int swf_FontUseAll(SWFFONT* f);
-int swf_FontUseUTF8(SWFFONT * f, const U8 * s, U16 size);
-int swf_FontUse(SWFFONT* f,U8 * s);
+int swf_FontUseUTF8(SWFFONT * f, const uint8_t * s, uint16_t size);
+int swf_FontUse(SWFFONT* f,uint8_t * s);
 void swf_FontSort(SWFFONT * font);
 
 int swf_FontSetDefine(TAG * t,SWFFONT * f);
@@ -681,12 +681,12 @@ SWFFONT* swf_ReadFont(const char* filename);
 
 void swf_FontFree(SWFFONT * f);
 
-U32 swf_TextGetWidth(SWFFONT * font,U8 * s,int scale);
-int swf_TextCountBits(SWFFONT * font,U8 * s,int scale,U8 * gbits,U8 * abits);
+uint32_t swf_TextGetWidth(SWFFONT * font,uint8_t * s,int scale);
+int swf_TextCountBits(SWFFONT * font,uint8_t * s,int scale,uint8_t * gbits,uint8_t * abits);
 
 #define SET_TO_ZERO 0x80000000
-int swf_TextSetInfoRecord(TAG * t,SWFFONT * font,U16 size,RGBA * color,int dx,int dy);
-int swf_TextSetCharRecord(TAG * t,SWFFONT * font,U8 * s,int scale,U8 gbits,U8 abits);
+int swf_TextSetInfoRecord(TAG * t,SWFFONT * font,uint16_t size,RGBA * color,int dx,int dy);
+int swf_TextSetCharRecord(TAG * t,SWFFONT * font,uint8_t * s,int scale,uint8_t gbits,uint8_t abits);
 
 int swf_TextPrintDefineText(TAG * t,SWFFONT * f);
 // Prints text defined in tag t with font f to stdout
@@ -694,8 +694,8 @@ int swf_TextPrintDefineText(TAG * t,SWFFONT * f);
 void swf_FontPrepareForEditText(SWFFONT * f);
 
 /* notice: if you set the fontid, make sure you call swf_FontPrepareForEditText() for the font first */
-void swf_SetEditText(TAG*tag, U16 flags, SRECT r, const char*text, RGBA*color,
-    int maxlength, U16 font, U16 height, EditTextLayout*layout, const char*variable);
+void swf_SetEditText(TAG*tag, uint16_t flags, SRECT r, const char*text, RGBA*color,
+    int maxlength, uint16_t font, uint16_t height, EditTextLayout*layout, const char*variable);
 
 SRECT swf_SetDefineText(TAG*tag, SWFFONT*font, RGBA*rgb, const char*text, int scale);
 
@@ -724,15 +724,15 @@ int swf_ImageGetNumberOfPaletteEntries(RGBA*img, int width, int height, RGBA*pal
 
 typedef int JPEGBITS;
 JPEGBITS * swf_SetJPEGBitsStart(TAG * t,int width,int height,int quality); // deprecated
-int swf_SetJPEGBitsLines(JPEGBITS * jpegbits,U8 ** data,int n); // deprecated
-int swf_SetJPEGBitsLine(JPEGBITS * jpegbits,U8 * data); // deprecated
+int swf_SetJPEGBitsLines(JPEGBITS * jpegbits,uint8_t ** data,int n); // deprecated
+int swf_SetJPEGBitsLine(JPEGBITS * jpegbits,uint8_t * data); // deprecated
 int swf_SetJPEGBitsFinish(JPEGBITS * jpegbits); // deprecated
 
 void swf_GetJPEGSize(const char * fname, int*width, int*height);
 
 int swf_SetJPEGBits(TAG * t,const char * fname,int quality);
-void swf_SetJPEGBits2(TAG * t,U16 width,U16 height,RGBA * bitmap,int quality);
-int swf_SetJPEGBits3(TAG * tag,U16 width,U16 height,RGBA* bitmap, int quality);
+void swf_SetJPEGBits2(TAG * t,uint16_t width,uint16_t height,RGBA * bitmap,int quality);
+int swf_SetJPEGBits3(TAG * tag,uint16_t width,uint16_t height,RGBA* bitmap, int quality);
 RGBA* swf_JPEG2TagToImage(TAG*tag, int*width, int*height);
 void swf_RemoveJPEGTables(SWF*swf);
 
@@ -744,9 +744,9 @@ void swf_SaveJPEG(char*filename, RGBA*pixels, int width, int height, int quality
 #define BMF_16BIT       4
 #define BMF_32BIT       5
 
-int swf_SetLosslessBits(TAG * t,U16 width,U16 height,void * bitmap,U8 bitmap_flags);
-int swf_SetLosslessBitsIndexed(TAG * t,U16 width,U16 height,U8 * bitmap,RGBA * palette,U16 ncolors);
-int swf_SetLosslessBitsGrayscale(TAG * t,U16 width,U16 height,U8 * bitmap);
+int swf_SetLosslessBits(TAG * t,uint16_t width,uint16_t height,void * bitmap,uint8_t bitmap_flags);
+int swf_SetLosslessBitsIndexed(TAG * t,uint16_t width,uint16_t height,uint8_t * bitmap,RGBA * palette,uint16_t ncolors);
+int swf_SetLosslessBitsGrayscale(TAG * t,uint16_t width,uint16_t height,uint8_t * bitmap);
 void swf_SetLosslessImage(TAG*tag, RGBA*data, int width, int height); //WARNING: will change tag->id
 
 RGBA* swf_DefineLosslessBitsTagToImage(TAG*tag, int*width, int*height);
@@ -755,33 +755,33 @@ RGBA* swf_ExtractImage(TAG*tag, int*dwidth, int*dheight);
 TAG* swf_AddImage(TAG*tag, int bitid, RGBA*mem, int width, int height, int quality);
 
 // swfsound.c
-void swf_SetSoundStreamHead(TAG*tag, int avgnumsamples);
-void swf_SetSoundStreamBlock(TAG*tag, S16*samples, int seek, char first); /* expects 2304 samples */
-void swf_SetSoundDefine(TAG*tag, S16*samples, int num);
-void swf_SetSoundDefineMP3(TAG*tag, U8* data, unsigned length,
+void swf_SetSoundStreamHead(TAG *tag, int avgnumsamples);
+void swf_SetSoundStreamBlock(TAG *tag, int16_t *samples, int seek, char first); /* expects 2304 samples */
+void swf_SetSoundDefine(TAG *tag, int16_t *samples, int num);
+void swf_SetSoundDefineMP3(TAG *tag, uint8_t *data, unsigned length,
                            unsigned SampRate,
                            unsigned Channels,
                            unsigned NumFrames);
-void swf_SetSoundInfo(TAG*tag, SOUNDINFO*info);
+void swf_SetSoundInfo(TAG *tag, SOUNDINFO *info);
 
 // swftools.c
 
 void swf_Optimize(SWF*swf);
-U8 swf_isDefiningTag(TAG * t);
-U8 swf_isPseudoDefiningTag(TAG * t);
-U8 swf_isAllowedSpriteTag(TAG * t);
-U8 swf_isImageTag(TAG*tag);
-U8 swf_isShapeTag(TAG*tag);
-U8 swf_isTextTag(TAG*tag);
-U8 swf_isFontTag(TAG*tag);
-U8 swf_isPlaceTag(TAG*tag);
+uint8_t swf_isDefiningTag(TAG * t);
+uint8_t swf_isPseudoDefiningTag(TAG * t);
+uint8_t swf_isAllowedSpriteTag(TAG * t);
+uint8_t swf_isImageTag(TAG*tag);
+uint8_t swf_isShapeTag(TAG*tag);
+uint8_t swf_isTextTag(TAG*tag);
+uint8_t swf_isFontTag(TAG*tag);
+uint8_t swf_isPlaceTag(TAG*tag);
 
-U16 swf_GetDefineID(TAG * t);
+uint16_t swf_GetDefineID(TAG * t);
 SRECT swf_GetDefineBBox(TAG * t);
 void swf_SetDefineBBox(TAG * t, SRECT r);
 
-void swf_SetDefineID(TAG * t, U16 newid);
-U16 swf_GetPlaceID(TAG * t); //PLACEOBJECT, PLACEOBJECT2 (sometimes), REMOVEOBJECT
+void swf_SetDefineID(TAG * t, uint16_t newid);
+uint16_t swf_GetPlaceID(TAG * t); //PLACEOBJECT, PLACEOBJECT2 (sometimes), REMOVEOBJECT
 int swf_GetDepth(TAG * t); //PLACEOBJECT,PLACEOBJECT2,REMOVEOBJECT,REMOVEOBJECT2,SETTABINDEX
 char* swf_GetName(TAG * t); //PLACEOBJECT2, FRAMELABEL
 MATRIX * swf_MatrixJoin(MATRIX * d,MATRIX * s1,MATRIX * s2);
@@ -806,21 +806,21 @@ void*swf_DumpABC(FILE*fo, void*code, char*prefix);
 void swf_WriteABC(TAG*tag, void*code);
 void swf_FreeABC(void*code);
 void swf_AddButtonLinks(SWF*swf, char stop_each_frame, char events);
-TAG*swf_AddAS3FontDefine(TAG*tag, U16 id, char*fontname);
+TAG*swf_AddAS3FontDefine(TAG*tag, uint16_t id, char*fontname);
 #include "as3/compiler.h"
 
 // swfaction.c
 
 typedef struct _ActionTAG
-{ U8            op;
-  U16           len;
-  U8 *          data;
+{ uint8_t            op;
+  uint16_t           len;
+  uint8_t *          data;
 
   struct _ActionTAG * next;
   struct _ActionTAG * prev;
 
   struct _ActionTAG * parent;
-  U8 tmp[8]; // store small operands here.
+  uint8_t tmp[8]; // store small operands here.
 } ActionTAG;
 
 typedef struct _ActionMarker
@@ -914,29 +914,29 @@ ActionTAG* action_BitXor(ActionTAG*atag);
 ActionTAG* action_BitLShift(ActionTAG*atag);
 ActionTAG* action_BitRShift(ActionTAG*atag);
 ActionTAG* action_BitURShift(ActionTAG*atag);
-ActionTAG* action_GotoFrame(ActionTAG*atag, U16 frame);
+ActionTAG* action_GotoFrame(ActionTAG*atag, uint16_t frame);
 ActionTAG* action_GetUrl(ActionTAG*atag, const char* url, char* label);
-ActionTAG* action_StoreRegister(ActionTAG*atag, U8 reg);
+ActionTAG* action_StoreRegister(ActionTAG*atag, uint8_t reg);
 ActionTAG* action_Constantpool(ActionTAG*atag, char* constantpool);
-ActionTAG* action_WaitForFrame(ActionTAG*atag, U16 frame, U8 skip);
+ActionTAG* action_WaitForFrame(ActionTAG*atag, uint16_t frame, uint8_t skip);
 ActionTAG* action_SetTarget(ActionTAG*atag, const char* target);
 ActionTAG* action_GotoLabel(ActionTAG*atag, char* label);
-ActionTAG* action_WaitForFrame2(ActionTAG*atag, U8 skip);
+ActionTAG* action_WaitForFrame2(ActionTAG*atag, uint8_t skip);
 ActionTAG* action_With(ActionTAG*atag, char*object);
 ActionTAG* action_PushString(ActionTAG*atag, const char*str);
 ActionTAG* action_PushFloat(ActionTAG*atag, float f);
 ActionTAG* action_PushNULL(ActionTAG*atag);
-ActionTAG* action_PushRegister(ActionTAG*atag, U8 reg);
+ActionTAG* action_PushRegister(ActionTAG*atag, uint8_t reg);
 ActionTAG* action_PushBoolean(ActionTAG*atag, char c);
 ActionTAG* action_PushDouble(ActionTAG*atag, double d);
 ActionTAG* action_PushInt(ActionTAG*atag, int i);
-ActionTAG* action_PushLookup(ActionTAG*atag, U8 index);
-ActionTAG* action_Jump(ActionTAG*atag, U16 branch);
-ActionTAG* action_GetUrl2(ActionTAG*atag, U8 method);
-ActionTAG* action_DefineFunction(ActionTAG*atag, U8*data, int len);
-ActionTAG* action_If(ActionTAG*atag, U16 branch);
+ActionTAG* action_PushLookup(ActionTAG*atag, uint8_t index);
+ActionTAG* action_Jump(ActionTAG*atag, uint16_t branch);
+ActionTAG* action_GetUrl2(ActionTAG*atag, uint8_t method);
+ActionTAG* action_DefineFunction(ActionTAG*atag, uint8_t*data, int len);
+ActionTAG* action_If(ActionTAG*atag, uint16_t branch);
 ActionTAG* action_Call(ActionTAG*atag);
-ActionTAG* action_GotoFrame2(ActionTAG*atag, U8 method);
+ActionTAG* action_GotoFrame2(ActionTAG*atag, uint8_t method);
 ActionMarker action_setMarker(ActionTAG*atag);
 void action_fixjump(ActionMarker m1, ActionMarker m2);
 
@@ -944,10 +944,10 @@ void action_fixjump(ActionMarker m1, ActionMarker m2);
 
 // The following 3 routines only use placeobject2:
 
-int swf_ObjectPlace(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name);
-int swf_ObjectPlaceClip(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name, U16 clipaction);
-int swf_ObjectPlaceBlend(TAG * t,U16 id,U16 depth,MATRIX * m,CXFORM * cx,const char* name, U8 blendmode);
-int swf_ObjectMove(TAG * t,U16 depth,MATRIX * m,CXFORM * cx);
+int swf_ObjectPlace(TAG * t,uint16_t id,uint16_t depth,MATRIX * m,CXFORM * cx,const char* name);
+int swf_ObjectPlaceClip(TAG * t,uint16_t id,uint16_t depth,MATRIX * m,CXFORM * cx,const char* name, uint16_t clipaction);
+int swf_ObjectPlaceBlend(TAG * t,uint16_t id,uint16_t depth,MATRIX * m,CXFORM * cx,const char* name, uint8_t blendmode);
+int swf_ObjectMove(TAG * t,uint16_t depth,MATRIX * m,CXFORM * cx);
 
 #define PF_MOVE         0x01
 #define PF_CHAR         0x02
@@ -982,18 +982,18 @@ int swf_ObjectMove(TAG * t,U16 depth,MATRIX * m,CXFORM * cx);
 #define BLENDMODE_HARDLIGHT 14
 
 typedef struct _SWFPLACEOBJECT {
-    U8 flags;
-    U16 depth;
-    U32 id; // may be 0
+    uint8_t flags;
+    uint16_t depth;
+    uint32_t id; // may be 0
     char move; //true: move/replace character, false: set character
     MATRIX matrix;
     CXFORM cxform;
-    U16 ratio;
+    uint16_t ratio;
     char*name;
     char*class_name;
-    U16 clipdepth;
-    U8 *actions[32];
-    U8 blendmode;
+    uint16_t clipdepth;
+    uint8_t *actions[32];
+    uint8_t blendmode;
     FILTERLIST*filters;
 } SWFPLACEOBJECT;
 
@@ -1027,7 +1027,7 @@ typedef struct _VIDEOSTREAM
 
 } VIDEOSTREAM;
 
-void swf_SetVideoStreamDefine(TAG*tag, VIDEOSTREAM*stream, U16 frames, U16 width, U16 height);
+void swf_SetVideoStreamDefine(TAG*tag, VIDEOSTREAM*stream, uint16_t frames, uint16_t width, uint16_t height);
 void swf_SetVideoStreamIFrame(TAG*tag, VIDEOSTREAM*s, RGBA*pic, int quant/* 1-31, 1=best quality, 31=best compression*/);
 void swf_SetVideoStreamBlackFrame(TAG*tag, VIDEOSTREAM*s);
 void swf_SetVideoStreamPFrame(TAG*tag, VIDEOSTREAM*s, RGBA*pic, int quant/* 1-31, 1=best quality, 31=best compression*/);
@@ -1103,9 +1103,9 @@ void swf_VideoStreamClear(VIDEOSTREAM*stream);
 
 #define BF_TRACKMENU            0x01
 
-int swf_ButtonSetRecord(TAG * t,U8 state,U16 id,U16 layer,MATRIX * m,CXFORM * cx);
-int swf_ButtonSetCondition(TAG * t,U16 condition); // for DefineButton2
-int swf_ButtonSetFlags(TAG * t,U8 flags);  // necessary for DefineButton2
+int swf_ButtonSetRecord(TAG * t,uint8_t state,uint16_t id,uint16_t layer,MATRIX * m,CXFORM * cx);
+int swf_ButtonSetCondition(TAG * t,uint16_t condition); // for DefineButton2
+int swf_ButtonSetFlags(TAG * t,uint8_t flags);  // necessary for DefineButton2
 int swf_ButtonPostProcess(TAG * t,int anz_action); // Set all offsets in DefineButton2-Tags (how many conditions to process)
 ActionTAG* swf_ButtonGetAction(TAG*t);
 
@@ -1123,9 +1123,9 @@ void swf_Render_Init(RENDERBUF*buf, int posx, int posy, int width, int height, i
 void swf_Render_SetBackground(RENDERBUF*buf, RGBA*img, int width, int height);
 void swf_Render_SetBackgroundColor(RENDERBUF*buf, RGBA color);
 RGBA* swf_Render(RENDERBUF*dest);
-void swf_RenderShape(RENDERBUF*dest, SHAPE2*shape, MATRIX*m, CXFORM*c, U16 depth,U16 clipdepth);
+void swf_RenderShape(RENDERBUF*dest, SHAPE2*shape, MATRIX*m, CXFORM*c, uint16_t depth,uint16_t clipdepth);
 void swf_RenderSWF(RENDERBUF*buf, SWF*swf);
-void swf_Render_AddImage(RENDERBUF*buf, U16 id, RGBA*img, int width, int height); /* img is non-premultiplied */
+void swf_Render_AddImage(RENDERBUF*buf, uint16_t id, RGBA*img, int width, int height); /* img is non-premultiplied */
 void swf_Render_ClearCanvas(RENDERBUF*dest);
 void swf_Render_Delete(RENDERBUF*dest);
 
@@ -1143,7 +1143,7 @@ void swf_Render_Delete(RENDERBUF*dest);
 extern char*filtername[];
 
 typedef struct _FILTER_GRADIENTGLOW {
-    U8 type;
+    uint8_t type;
     GRADIENT*gradient;
     double blurx;
     double blury;
@@ -1158,7 +1158,7 @@ typedef struct _FILTER_GRADIENTGLOW {
 } FILTER_GRADIENTGLOW;
 
 typedef struct _FILTER_DROPSHADOW {
-    U8 type;
+    uint8_t type;
     RGBA color;
     double blurx;
     double blury;
@@ -1172,7 +1172,7 @@ typedef struct _FILTER_DROPSHADOW {
 } FILTER_DROPSHADOW;
 
 typedef struct _FILTER_BEVEL {
-    U8 type;
+    uint8_t type;
     RGBA shadow;
     RGBA highlight;
     double blurx;
@@ -1188,14 +1188,14 @@ typedef struct _FILTER_BEVEL {
 } FILTER_BEVEL;
 
 typedef struct _FILTER_BLUR {
-    U8 type;
+    uint8_t type;
     double blurx;
     double blury;
     int passes;
 } FILTER_BLUR;
 
 typedef struct _FILTER_GLOW {
-    U8 type;
+    uint8_t type;
     RGBA rgba;
     double blurx;
     double blury;
@@ -1207,7 +1207,7 @@ typedef struct _FILTER_GLOW {
 } FILTER_GLOW;
 
 typedef struct _FILTER_GRADIENTBEVEL {
-    U8 type;
+    uint8_t type;
     GRADIENT*gradient;
     double blurx;
     double blury;
@@ -1222,9 +1222,9 @@ typedef struct _FILTER_GRADIENTBEVEL {
 } FILTER_GRADIENTBEVEL;
 
 typedef struct _FILTER_CONVOLUTION {
-    U8 type;
-    U8 matrixx;
-    U8 matrixy;
+    uint8_t type;
+    uint8_t matrixx;
+    uint8_t matrixy;
     float divisor;
     float bias;
     float *matrix;
@@ -1234,14 +1234,14 @@ typedef struct _FILTER_CONVOLUTION {
 } FILTER_CONVOLUTION;
 
 typedef struct _FILTER_COLORMATRIX {
-    U8 type;
+    uint8_t type;
     float matrix[20];
 } FILTER_COLORMATRIX;
 
-void swf_SetFilter(TAG*tag, FILTER*f);
-FILTER*swf_GetFilter(TAG*tag);
-FILTER*swf_NewFilter(U8 type);
-void swf_DeleteFilter(FILTER*f);
+void swf_SetFilter(TAG *tag, FILTER *f);
+FILTER*swf_GetFilter(TAG *tag);
+FILTER*swf_NewFilter(uint8_t type);
+void swf_DeleteFilter(FILTER *f);
 
 #ifdef __cplusplus
 }

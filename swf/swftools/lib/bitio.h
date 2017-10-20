@@ -77,9 +77,9 @@ void reader_resetbits(reader_t*r);
 unsigned int reader_readbit(reader_t*r);
 unsigned int reader_readbits(reader_t*r, int num);
 
-U8 reader_readU8(reader_t*r);
-U16 reader_readU16(reader_t*r);
-U32 reader_readU32(reader_t*r);
+uint8_t reader_readU8(reader_t*r);
+uint16_t reader_readU16(reader_t*r);
+uint32_t reader_readU32(reader_t*r);
 float reader_readFloat(reader_t*r);
 double reader_readDouble(reader_t*r);
 char*reader_readString(reader_t*r);
@@ -100,24 +100,13 @@ void write_compressed_int(writer_t*w, int i);
 
 /* standard readers / writers */
 
-void reader_init_filereader(reader_t*r, int handle);
-int reader_init_filereader2(reader_t*r, const char*filename);
-void reader_init_zlibinflate(reader_t*r, reader_t*input);
-void reader_init_memreader(reader_t*r, void*data, int length);
-void reader_init_nullreader(reader_t*r);
+void reader_init_filereader(reader_t *r, int handle);
+int reader_init_filereader2(reader_t *r, const char *filename);
+void reader_init_zlibinflate(reader_t *r, reader_t *input);
+void reader_init_memreader(reader_t *r, void *data, int length);
+void reader_init_nullreader(reader_t *r);
 #ifdef HAVE_ZZIP
-void reader_init_zzipreader(reader_t*r,ZZIP_FILE*z);
+void reader_init_zzipreader(reader_t *r, ZZIP_FILE*z);
 #endif
-
-void writer_init_filewriter(writer_t*w, int handle);
-void writer_init_filewriter2(writer_t*w, char*filename);
-void writer_init_zlibdeflate(writer_t*w, writer_t*output);
-void writer_init_memwriter(writer_t*r, void*data, int length);
-void writer_init_nullwriter(writer_t*w);
-
-void writer_init_growingmemwriter(writer_t*r, U32 grow);
-void* writer_growmemwrite_memptr(writer_t*w, int*len);
-void* writer_growmemwrite_getmem(writer_t*w);
-void writer_growmemwrite_reset(writer_t*w);
 
 #endif //__rfxswf_bitio_h__

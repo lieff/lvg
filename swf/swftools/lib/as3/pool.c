@@ -180,7 +180,7 @@ char* namespace_tostring(namespace_t*ns)
     if(!ns)
         return strdup("NULL");
     char*access = 0;
-    U8 type = ns->access;
+    uint8_t type = ns->access;
     access = access2str(type);
     char*s = escape_string(ns->name);
     char*string = (char*)malloc(strlen(access)+strlen(s)+7);
@@ -209,7 +209,7 @@ namespace_t* namespace_fromstring(const char*name)
     namespace_t*ns = malloc(sizeof(namespace_t));
     memset(ns, 0, sizeof(namespace_t));
     if(name[0] == '[') {
-        U8 access = 0;
+        uint8_t access = 0;
         char*n = strdup(name);
         char*bracket = strchr(n, ']');
         if(bracket) {
@@ -244,7 +244,7 @@ namespace_t* namespace_fromstring(const char*name)
     }
 }
 
-namespace_t* namespace_new(U8 access, const char*name)
+namespace_t* namespace_new(uint8_t access, const char*name)
 {
     namespace_t*ns = malloc(sizeof(namespace_t));
     ns->access = access;
@@ -1131,7 +1131,7 @@ void pool_read(pool_t*pool, TAG*tag)
     DEBUG printf("%d ints\n", num_ints);
     int t;
     for(t=1;t<num_ints;t++) {
-        S32 v = swf_GetABCS32(tag);
+        int32_t v = swf_GetABCS32(tag);
         DEBUG printf("int %d) %d\n", t, v);
         array_append(pool->x_ints, &v, 0);
     }
@@ -1139,7 +1139,7 @@ void pool_read(pool_t*pool, TAG*tag)
     int num_uints = swf_GetU30(tag);
     DEBUG printf("%d uints\n", num_uints);
     for(t=1;t<num_uints;t++) {
-        U32 v = swf_GetABCU32(tag);
+        uint32_t v = swf_GetABCU32(tag);
         DEBUG printf("uint %d) %d\n", t, v);
         array_append(pool->x_uints, &v, 0);
     }
@@ -1164,7 +1164,7 @@ void pool_read(pool_t*pool, TAG*tag)
     int num_namespaces = swf_GetU30(tag);
     DEBUG printf("%d namespaces\n", num_namespaces);
     for(t=1;t<num_namespaces;t++) {
-        U8 type = swf_GetU8(tag);
+        uint8_t type = swf_GetU8(tag);
         int namenr = swf_GetU30(tag);
         const char*name = 0;
         if(namenr)
@@ -1250,14 +1250,14 @@ void pool_dump(pool_t*pool, FILE*fo, char flags)
 {
     int t;
     fprintf(fo, "%d integers\n", pool->x_ints->num);
-    for(t=1;t<pool->x_ints->num;t++) {
-        S32 val = *(int*)array_getkey(pool->x_ints, t);
+    for(t = 1; t < pool->x_ints->num; t++) {
+        int32_t val = *(int*)array_getkey(pool->x_ints, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_ints, t);
         if(flags&1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
     }
     fprintf(fo, "%d unsigned integers\n", pool->x_uints->num);
-    for(t=1;t<pool->x_uints->num;t++) {
-        U32 val = *(unsigned int*)array_getkey(pool->x_uints, t);
+    for(t = 1; t < pool->x_uints->num; t++) {
+        uint32_t val = *(unsigned int*)array_getkey(pool->x_uints, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_uints, t);
         if(flags&1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
     }

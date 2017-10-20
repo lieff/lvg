@@ -55,7 +55,7 @@ struct _code {
     code_t*branch;
     int pos; //used during code path evaluation
     
-    U8 opcode;
+    uint8_t opcode;
 };
 
 struct _lookupswitch {
@@ -79,7 +79,7 @@ struct _codelookup {
 
 code_t*code_dup(code_t*c);
 
-code_t*add_opcode(code_t*atag, U8 op);
+code_t*add_opcode(code_t*atag, uint8_t op);
 
 code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**codelookup);
 int        code_dump(code_t*c);

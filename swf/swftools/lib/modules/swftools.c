@@ -26,11 +26,11 @@
 #include "../rfxswf.h"
 #include <assert.h>
 
-U16 swf_GetDefineID(TAG * t)
+uint16_t swf_GetDefineID(TAG * t)
 // up to SWF 4.0
 {
-    U32 oldTagPos;
-    U16 id = 0;
+    uint32_t oldTagPos;
+    uint16_t id = 0;
 
     oldTagPos = swf_GetTagPos(t);
     swf_SetTagPos(t, 0);
@@ -88,8 +88,8 @@ U16 swf_GetDefineID(TAG * t)
 
 SRECT swf_GetDefineBBox(TAG *t)
 {
-    U32 oldTagPos;
-    //U16 id = 0;
+    uint32_t oldTagPos;
+    //uint16_t id = 0;
     SRECT b1,b2;
     memset(&b1, 0, sizeof(b1));
 
@@ -130,11 +130,11 @@ SRECT swf_GetDefineBBox(TAG *t)
     return b1;
 }
 
-U16 swf_GetPlaceID(TAG * t)
+uint16_t swf_GetPlaceID(TAG * t)
 // up to SWF 4.0
 {
-    U32 oldTagPos;
-    U16 id = 0;
+    uint32_t oldTagPos;
+    uint16_t id = 0;
 
     oldTagPos = swf_GetTagPos(t);
     swf_SetTagPos(t, 0);
@@ -150,17 +150,17 @@ U16 swf_GetPlaceID(TAG * t)
 
     case ST_PLACEOBJECT2:
     {
-        U8 flags = swf_GetU8(t);
-        //      U16 d =
+        uint8_t flags = swf_GetU8(t);
+        //      uint16_t d =
         swf_GetU16(t);
         id = (flags & PF_CHAR) ? swf_GetU16(t) : id;
     } break;
     case ST_PLACEOBJECT3:
     {
-        U8 flags = swf_GetU8(t);
-        //      U8 flags2 =
+        uint8_t flags = swf_GetU8(t);
+        //      uint8_t flags2 =
         swf_GetU8(t);
-        //      U16 d =
+        //      uint16_t d =
         swf_GetU16(t);
         id = (flags & PF_CHAR) ? swf_GetU16(t) : id;
     } break;
@@ -238,7 +238,7 @@ static int swf_pseudodefiningtagids[] =
     -1
 };
 
-U8 swf_isAllowedSpriteTag(TAG * tag)
+uint8_t swf_isAllowedSpriteTag(TAG * tag)
 {
     int id = tag->id;
     int t = 0;
@@ -251,7 +251,7 @@ U8 swf_isAllowedSpriteTag(TAG * tag)
     return 0;
 }
 
-U8 swf_isDefiningTag(TAG * tag)
+uint8_t swf_isDefiningTag(TAG * tag)
 {
     int id = tag->id;
     int t = 0;
@@ -264,7 +264,7 @@ U8 swf_isDefiningTag(TAG * tag)
     return 0;
 }
 
-U8 swf_isPseudoDefiningTag(TAG * tag)
+uint8_t swf_isPseudoDefiningTag(TAG * tag)
 {
     int id = tag->id;
     int t = 0;
@@ -280,7 +280,7 @@ U8 swf_isPseudoDefiningTag(TAG * tag)
 int swf_GetDepth(TAG *t)
 {
     int depth = -1;
-    U32 oldTagPos;
+    uint32_t oldTagPos;
     oldTagPos = swf_GetTagPos(t);
     swf_SetTagPos(t, 0);
 
@@ -296,15 +296,15 @@ int swf_GetDepth(TAG *t)
         break;
     case ST_PLACEOBJECT2:
     {
-        //        U8 flags =
+        //        uint8_t flags =
         swf_GetU8(t);
         depth = swf_GetU16(t);
     } break;
     case ST_PLACEOBJECT3:
     {
-        //        U8 flags =
+        //        uint8_t flags =
         swf_GetU8(t);
-        //        U8 flags2 =
+        //        uint8_t flags2 =
         swf_GetU8(t);
         depth = swf_GetU16(t);
     } break;
@@ -320,7 +320,7 @@ int swf_GetDepth(TAG *t)
 char *swf_GetName(TAG *t)
 {
     char *name = 0;
-    U32 oldTagPos;
+    uint32_t oldTagPos;
     MATRIX m;
     CXFORM c;
     oldTagPos = swf_GetTagPos(t);
@@ -333,7 +333,7 @@ char *swf_GetName(TAG *t)
     case ST_PLACEOBJECT3:
     case ST_PLACEOBJECT2:
     {
-        U8 flags = swf_GetU8(t);
+        uint8_t flags = swf_GetU8(t);
         if(t->id == ST_PLACEOBJECT3)
             swf_GetU8(t);
         swf_GetU16(t); //depth;
@@ -372,17 +372,17 @@ void swf_GetMorphGradient(TAG *tag, GRADIENT *gradient1, GRADIENT *gradient2)
     {
         gradient1->num = num;
         gradient1->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient1->num);
-        gradient1->ratios = (U8*)calloc(1, sizeof(gradient1->ratios[0])*gradient1->num);
+        gradient1->ratios = (uint8_t*)calloc(1, sizeof(gradient1->ratios[0])*gradient1->num);
     }
     if (gradient2)
     {
         gradient2->num = num;
         gradient2->rgba = (RGBA*)calloc(1, sizeof(RGBA)*gradient2->num);
-        gradient2->ratios = (U8*)calloc(1, sizeof(gradient2->ratios[0])*gradient2->num);
+        gradient2->ratios = (uint8_t*)calloc(1, sizeof(gradient2->ratios[0])*gradient2->num);
     }
     for (t = 0; t < num; t++)
     {
-        U8 ratio;
+        uint8_t ratio;
         RGBA color;
 
         ratio = swf_GetU8(tag);
@@ -403,7 +403,7 @@ void swf_GetMorphGradient(TAG *tag, GRADIENT *gradient1, GRADIENT *gradient2)
     }
 }
 
-U8 swf_isShapeTag(TAG *tag)
+uint8_t swf_isShapeTag(TAG *tag)
 {
     if (tag->id == ST_DEFINESHAPE ||
         tag->id == ST_DEFINESHAPE2 ||
@@ -415,21 +415,21 @@ U8 swf_isShapeTag(TAG *tag)
     return 0;
 }
 
-U8 swf_isPlaceTag(TAG *tag)
+uint8_t swf_isPlaceTag(TAG *tag)
 {
     if (tag->id == ST_PLACEOBJECT || tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3)
         return 1;
     return 0;
 }
 
-U8 swf_isTextTag(TAG *tag)
+uint8_t swf_isTextTag(TAG *tag)
 {
     if(tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
         return 1;
     return 0;
 }
 
-U8 swf_isFontTag(TAG *tag)
+uint8_t swf_isFontTag(TAG *tag)
 {
     if (tag->id == ST_DEFINEFONT ||
         tag->id == ST_DEFINEFONT2 ||
@@ -439,7 +439,7 @@ U8 swf_isFontTag(TAG *tag)
     return 0;
 }
 
-U8  swf_isImageTag(TAG *tag)
+uint8_t swf_isImageTag(TAG *tag)
 {
     if (tag->id == ST_DEFINEBITSJPEG ||
         tag->id == ST_DEFINEBITSJPEG2 ||

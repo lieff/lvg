@@ -9,7 +9,7 @@ char *filtername[] = {
 
 FILTER *swf_GetFilter(TAG *tag)
 {
-    U8 type = swf_GetU8(tag);
+    uint8_t type = swf_GetU8(tag);
 
     if (type == FILTERTYPE_BLUR)
     {
@@ -17,7 +17,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->type = type;
         f->blurx = swf_GetFixed(tag);
         f->blury = swf_GetFixed(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = (flags & 0xFF) >> 3;
         return (FILTER *)f;
     } else if (type == FILTERTYPE_GLOW)
@@ -28,7 +28,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->blurx = swf_GetFixed(tag);
         f->blury = swf_GetFixed(tag);
         f->strength = swf_GetFixed8(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = flags & 0x1F;
         f->innerglow = (flags >> 7) & 1;
         f->knockout = (flags >> 6) & 1;
@@ -44,7 +44,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->angle = swf_GetFixed(tag);
         f->distance = swf_GetFixed(tag);
         f->strength = swf_GetFixed8(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = flags & 0x1F;
         f->innershadow = (flags >> 7) & 1;
         f->knockout = (flags >> 6) & 1;
@@ -57,7 +57,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->gradient = (GRADIENT *)calloc(1, sizeof(GRADIENT));
         f->gradient->num = swf_GetU8(tag);
         f->gradient->rgba = (RGBA *)calloc(1, sizeof(RGBA) * f->gradient->num);
-        f->gradient->ratios = (U8 *)calloc(1, sizeof(U8) * f->gradient->num);
+        f->gradient->ratios = (uint8_t *)calloc(1, sizeof(uint8_t) * f->gradient->num);
 
         int s;
         for (s = 0; s < f->gradient->num; s++)
@@ -70,7 +70,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->angle = swf_GetFixed(tag);
         f->distance = swf_GetFixed(tag);
         f->strength = swf_GetFixed8(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = flags & 0x0F;
         f->innershadow = (flags >> 7) & 1;
         f->knockout = (flags >> 6) & 1;
@@ -88,7 +88,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->angle = swf_GetFixed(tag);
         f->distance = swf_GetFixed(tag);
         f->strength = swf_GetFixed8(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = flags & 0x0F;
         f->innershadow = (flags >> 7) & 1;
         f->knockout = (flags >> 6) & 1;
@@ -102,7 +102,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->gradient = (GRADIENT *)calloc(1, sizeof(GRADIENT));
         f->gradient->num = swf_GetU8(tag);
         f->gradient->rgba = (RGBA *)calloc(1, sizeof(RGBA) * f->gradient->num);
-        f->gradient->ratios = (U8 *)calloc(1, sizeof(U8) * f->gradient->num);
+        f->gradient->ratios = (uint8_t *)calloc(1, sizeof(uint8_t) * f->gradient->num);
 
         int s;
         for (s = 0; s < f->gradient->num; s++)
@@ -115,7 +115,7 @@ FILTER *swf_GetFilter(TAG *tag)
         f->angle = swf_GetFixed(tag);
         f->distance = swf_GetFixed(tag);
         f->strength = swf_GetFixed8(tag);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->passes = flags & 0x0F;
         f->innershadow = (flags >> 7) & 1;
         f->knockout = (flags >> 6) & 1;
@@ -137,7 +137,7 @@ FILTER *swf_GetFilter(TAG *tag)
             f->matrix[s] = swf_GetFloat(tag);
 
         swf_GetRGBA(tag, &f->defaultcolor);
-        U8 flags = swf_GetU8(tag);
+        uint8_t flags = swf_GetU8(tag);
         f->clampmode = (flags >> 1) & 1;
         f->preservealpha = flags & 1;
         return (FILTER *)f;
@@ -160,7 +160,7 @@ FILTER *swf_GetFilter(TAG *tag)
     return NULL;
 }
 
-FILTER *swf_NewFilter(U8 type)
+FILTER *swf_NewFilter(uint8_t type)
 {
     FILTER *f = 0;
 

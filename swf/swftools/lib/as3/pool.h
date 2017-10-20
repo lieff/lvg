@@ -131,7 +131,7 @@ typedef enum multiname_type
 char* access2str(int type);
 
 struct _namespace {
-    U8 access;
+    uint8_t access;
     const char*name;
 };
 struct _namespace_set {
@@ -182,7 +182,7 @@ int pool_register_multiname(pool_t*pool, multiname_t*n);
 int pool_register_multiname2(pool_t*pool, char*name);
 
 /* creation */
-namespace_t* namespace_new(U8 access, const char*name);
+namespace_t* namespace_new(uint8_t access, const char*name);
 namespace_t* namespace_new_namespace(const char*name);
 namespace_t* namespace_new_package(const char*name);
 namespace_t* namespace_new_packageinternal(const char*name);

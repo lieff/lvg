@@ -60,7 +60,7 @@ struct _abc_method {
     multiname_list_t*parameters;
     constant_list_t*optional_parameters;
     const char*name;
-    U8 flags;
+    uint8_t flags;
     abc_method_body_t*body;
 
     trait_t*trait;
@@ -73,7 +73,7 @@ struct _abc_file {
     // abc_file
 
     const char*name;
-    U32 flags;
+    uint32_t flags;
     array_t*metadata;
     array_t*methods;
     array_t*classes;
@@ -138,7 +138,7 @@ struct _abc_class {
     abc_method_t*static_constructor;
     trait_list_t*static_traits;
 
-    U8 flags;
+    uint8_t flags;
 
     abc_asset_t*asset; // swf tags needed for this class
 
@@ -217,7 +217,7 @@ struct _asset_tag {
 };
 struct _abc_asset {
     asset_tag_list_t*tags;
-    U16 id;
+    uint16_t id;
 };
 
 abc_method_t* abc_nullmethod(abc_file_t*file);

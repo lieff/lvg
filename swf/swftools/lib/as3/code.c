@@ -225,7 +225,7 @@ opcode_t opcodes[]={
 
 static opcode_t* op2op[256] = {0,0,0};
 
-static inline opcode_t* opcode_get(U8 op)
+static inline opcode_t* opcode_get(uint8_t op)
 {
     int t;
     if(!op2op[0x02]) {
@@ -291,7 +291,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
 
     while(tag->pos<end) {
         int codepos = tag->pos-start;
-        U8 opcode = swf_GetU8(tag);
+        uint8_t opcode = swf_GetU8(tag);
         opcode_t*op = opcode_get(opcode);
         if(!op) {
 #ifdef _DEBUG
@@ -353,7 +353,7 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
                 data = string_dup3(&s);
             } else if(*p == 'D') { // debug
                 /*type, usually 1*/
-                U8 type = swf_GetU8(tag);
+                uint8_t type = swf_GetU8(tag);
 #ifdef _DEBUG
                 if(type!=1)
                     printf("Unknown debug type: %02x\n", type);
@@ -787,7 +787,7 @@ int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*
 
     int pos = 0;
     while(c) {
-        U8 opcode = c->opcode;
+        uint8_t opcode = c->opcode;
         //char found = 0;
         opcode_t*op = opcode_get(opcode);
 
@@ -945,7 +945,7 @@ void codestats_free(codestats_t*s)
     free(s);
 }
 
-code_t* add_opcode(code_t*atag, U8 op)
+code_t* add_opcode(code_t*atag, uint8_t op)
 {
     code_t*tmp = (code_t*)calloc(1, sizeof(code_t));
     tmp->opcode = op;

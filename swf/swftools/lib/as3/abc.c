@@ -444,8 +444,8 @@ static trait_list_t* traits_parse(TAG*tag, pool_t*pool, abc_file_t*file)
 
         const char*name = 0;
         DEBUG name = multiname_tostring(trait->name);
-        U8 kind = swf_GetU8(tag);
-        U8 attributes = kind&0xf0;
+        uint8_t kind = swf_GetU8(tag);
+        uint8_t attributes = kind&0xf0;
         kind&=0x0f;
         trait->kind = kind;
         trait->attributes = attributes;
@@ -494,8 +494,8 @@ void traits_skip(TAG*tag)
     int t;
     for(t=0;t<num_traits;t++) {
         swf_GetU30(tag);
-        U8 kind = swf_GetU8(tag);
-        U8 attributes = kind&0xf0;
+        uint8_t kind = swf_GetU8(tag);
+        uint8_t attributes = kind&0xf0;
         kind&=0x0f;
         swf_GetU30(tag);
         swf_GetU30(tag);
@@ -518,8 +518,8 @@ static void traits_dump(FILE*fo, const char*prefix, trait_list_t*traits, abc_fil
     while(traits) {
         trait_t*trait = traits->trait;
         char*name = multiname_tostring(trait->name);
-        U8 kind = trait->kind;
-        U8 attributes = trait->attributes;
+        uint8_t kind = trait->kind;
+        uint8_t attributes = trait->attributes;
 
         char a = attributes & (TRAIT_ATTR_OVERRIDE|TRAIT_ATTR_FINAL);
         char* type = "";
@@ -684,12 +684,12 @@ void* swf_ReadABC(TAG*tag)
     swf_SetTagPos(tag, 0);
     int t;
     if(tag->id == ST_DOABC) {
-        U32 abcflags = swf_GetU32(tag);
+        uint32_t abcflags = swf_GetU32(tag);
         DEBUG printf("flags=%08x\n", abcflags);
         char*name= swf_GetString(tag);
         file->name = (name&&name[0])?strdup(name):0;
     }
-    U32 version = swf_GetU32(tag);
+    uint32_t version = swf_GetU32(tag);
     if(version!=0x002e0010) {
 #ifdef _DEBUG
         printf("Warning: unknown AVM2 version %08x\n", version);
@@ -736,7 +736,7 @@ void* swf_ReadABC(TAG*tag)
             int s;
             for(s=0;s<num;s++) {
                 int vindex = swf_GetU30(tag);
-                U8 vkind = swf_GetU8(tag); // specifies index type for "val"
+                uint8_t vkind = swf_GetU8(tag); // specifies index type for "val"
                 constant_t*c = constant_fromindex(pool, vindex, vkind);
                 list_append(m->optional_parameters, c);
 

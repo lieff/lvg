@@ -7,7 +7,7 @@ typedef struct _asset_resolver {
     SWF*swf;
     abc_asset_t**id2asset;
     dict_t*name2asset;
-    U16 mainclass_id;
+    uint16_t mainclass_id;
 } asset_resolver_t;
 
 asset_resolver_t* swf_ParseAssets(SWF*swf);

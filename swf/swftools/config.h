@@ -14,12 +14,6 @@
 /* Define to `unsigned' if <sys/types.h> doesn't define.  */
 /* #undef size_t */
 
-#define SIZEOF_SIGNED_CHAR 1
-#define SIZEOF_SIGNED_SHORT 2
-#define SIZEOF_SIGNED 4
-#define SIZEOF_SIGNED_LONG_LONG 8
-#define SIZEOF_VOIDP 8
-
 /* Define if you have the ANSI C header files.  */
 #define STDC_HEADERS 1
 

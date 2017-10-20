@@ -145,7 +145,7 @@ typedef struct _growmemwrite
 {
     unsigned char*data;
     int length;
-    U32 grow;
+    uint32_t grow;
 } growmemwrite_t;
 static int writer_growmemwrite_write(writer_t*w, void* data, int len)
 {
@@ -210,7 +210,7 @@ void writer_growmemwrite_reset(writer_t*w)
     w->bitpos = 0;
     w->mybyte = 0;
 }
-void writer_init_growingmemwriter(writer_t*w, U32 grow)
+void writer_init_growingmemwriter(writer_t*w, uint32_t grow)
 {
     growmemwrite_t *mw = (growmemwrite_t *)malloc(sizeof(growmemwrite_t));
     mw->length = 4096;
@@ -366,9 +366,9 @@ void reader_resetbits(reader_t*r)
 
 }
 
-U8 reader_readU8(reader_t*r)
+uint8_t reader_readU8(reader_t*r)
 {
-    U8 b = 0;
+    uint8_t b = 0;
     if(r->read(r, &b, 1)<1) {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU8: Read over end of memory region\n");
@@ -376,70 +376,68 @@ U8 reader_readU8(reader_t*r)
     }
     return b;
 }
-S8 reader_readS8(reader_t*r)
+
+uint16_t reader_readU16(reader_t *r)
 {
-    S8 b = 0;
-    if(r->read(r, &b, 1)<1) {
-#ifdef _DEBUG
-        printf("bitio.c:reader_readU8: Read over end of memory region\n");
-#endif
-    }
-    return b;
-}
-U16 reader_readU16(reader_t*r)
-{
-    U8 b1=0,b2=0;
-    if(r->read(r, &b1, 1)<1) {
+    uint8_t b1 = 0, b2 = 0;
+    if (r->read(r, &b1, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU16: Read over end of memory region\n");
 #endif
     }
-    if(r->read(r, &b2, 1)<1) {
+    if(r->read(r, &b2, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU16: Read over end of memory region\n");
 #endif
     }
     return b1|b2<<8;
 }
-U32 reader_readU32(reader_t*r)
+
+uint32_t reader_readU32(reader_t *r)
 {
-    U8 b1=0,b2=0,b3=0,b4=0;
-    if(r->read(r, &b1, 1)<1) {
+    uint8_t b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+    if (r->read(r, &b1, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU32: Read over end of memory region\n");
 #endif
     }
-    if(r->read(r, &b2, 1)<1) {
+    if (r->read(r, &b2, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU32: Read over end of memory region\n");
 #endif
     }
-    if(r->read(r, &b3, 1)<1) {
+    if (r->read(r, &b3, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU32: Read over end of memory region\n");
 #endif
     }
-    if(r->read(r, &b4, 1)<1) {
+    if (r->read(r, &b4, 1) < 1)
+    {
 #ifdef _DEBUG
         printf("bitio.c:reader_readU32: Read over end of memory region\n");
 #endif
     }
-    return b1|b2<<8|b3<<16|b4<<24;
+    return b1 | b2 << 8 | b3 << 16 | b4 << 24;
 }
 
-float reader_readFloat(reader_t*r)
+float reader_readFloat(reader_t *r)
 {
 #if 1
     float f;
     r->read(r, &f, 4);
     return f;
 #else
-    U8 b1=0,b2=0,b3=0,b4=0;
+    uint8_t b1=0,b2=0,b3=0,b4=0;
     r->read(r, &b1, 1);
     r->read(r, &b2, 1);
     r->read(r, &b3, 1);
     r->read(r, &b4, 1);
-    U32 w = (b1|b2<<8|b3<<16|b4<<24);
+    uint32_t w = (b1|b2<<8|b3<<16|b4<<24);
     return *(MAYALIAS float *)&w;
 #endif
 }
@@ -450,7 +448,7 @@ double reader_readDouble(reader_t*r)
     r->read(r, &f, 8);
     return f;
 #else
-    U8 b[8];
+    uint8_t b[8];
     r->read(r, b, 8);
     U64 w = ((U64)b[0]|(U64)b[1]<<8|(U64)b[2]<<16|(U64)b[3]<<24|(U64)b[4]<<32|(U64)b[5]<<40|(U64)b[6]<<48|(U64)b[7]<<56);
     return *(double*)&w;

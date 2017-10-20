@@ -1183,7 +1183,7 @@ done:
             } else if (ST_DEFINESOUND == tag->id)
             {
                 LVGSound *sound = clip->sounds + clip->num_sounds;
-                U32 oldTagPos = swf_GetTagPos(tag);
+                uint32_t oldTagPos = swf_GetTagPos(tag);
                 swf_SetTagPos(tag, 0);
                 id = swf_GetU16(tag);
                 int format = swf_GetBits(tag, 4);
@@ -1234,7 +1234,7 @@ done:
                 idtable[id].lvg_id = clip->num_sounds++;
             } else if (ST_DEFINEVIDEOSTREAM == tag->id)
             {
-                U32 oldTagPos = swf_GetTagPos(tag);
+                uint32_t oldTagPos = swf_GetTagPos(tag);
                 swf_SetTagPos(tag, 0);
                 id = swf_GetU16(tag);
                 idtable[id].type = video_type;
@@ -1256,7 +1256,7 @@ done:
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON == tag->id)
             {
-                U32 oldTagPos = swf_GetTagPos(tag);
+                uint32_t oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
 #ifndef _TEST
                 //printf("button(%d) actions:\n", id);
@@ -1285,7 +1285,7 @@ done:
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON2 == tag->id)
             {
-                U32 oldTagPos = swf_GetTagPos(tag);
+                uint32_t oldTagPos = swf_GetTagPos(tag);
                 id = swf_GetU16(tag);
 #ifndef _TEST
                 //printf("button2(%d) actions:\n", id);
@@ -1297,7 +1297,7 @@ done:
                 memset(b, 0, sizeof(LVGButton));
                 /*int flags = */swf_GetU8(tag);  // flags: 0 = track as normal button; 1 = track as menu button
 
-                U32 offsetpos = swf_GetU16(tag);
+                uint32_t offsetpos = swf_GetU16(tag);
 
                 parse_button_record(tag, b, idtable);
                 while (offsetpos)
@@ -1305,7 +1305,7 @@ done:
                     if (tag->pos >= tag->len)
                         break;
                     offsetpos = swf_GetU16(tag);
-                    U32 condition = swf_GetU16(tag);                // condition
+                    uint32_t condition = swf_GetU16(tag);                // condition
                     int pos = tag->pos;
                     ActionTAG *actions = swf_ActionGet(tag);
                     int size = tag->pos - pos;
@@ -1326,7 +1326,7 @@ done:
             }
         } else if (ST_SOUNDSTREAMHEAD == tag->id || ST_SOUNDSTREAMHEAD2 == tag->id)
         {
-            U32 oldTagPos = swf_GetTagPos(tag);
+            uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             /*int reserve = */swf_GetBits(tag, 4);
             /*stream_rate = rates[*/swf_GetBits(tag, 2)/*]*/;
@@ -1344,7 +1344,7 @@ done:
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_SOUNDSTREAMBLOCK == tag->id)
         {
-            U32 oldTagPos = swf_GetTagPos(tag);
+            uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             if (2 == stream_format)
             {
@@ -1381,7 +1381,7 @@ done:
             swf_SetTagPos(tag, oldTagPos);
         } else if (ST_VIDEOFRAME == tag->id)
         {
-            U32 oldTagPos = swf_GetTagPos(tag);
+            uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             int vid = swf_GetU16(tag);
             LVGVideo *video = clip->videos + idtable[vid].lvg_id;
@@ -1531,7 +1531,7 @@ static TAG *parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             add_playsound_action(group, group->num_frames, idtable[id].lvg_id, flags, start_sample, end_sample, loops);
         } else if (ST_REMOVEOBJECT == tag->id || ST_REMOVEOBJECT2 == tag->id)
         {
-            U32 oldTagPos = swf_GetTagPos(tag);
+            uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
 #ifndef NDEBUG
             int id;

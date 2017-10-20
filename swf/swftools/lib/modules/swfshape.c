@@ -62,7 +62,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
     SHAPE * sh;
     int bitl, len;
     int end;
-    U32 pos;
+    uint32_t pos;
 
     if (FAILED(swf_ShapeNew(s)))
         return -1;
@@ -70,8 +70,8 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
 
     swf_ResetReadBits(t);
     bitl = 8; end = 0; pos = swf_GetTagPos(t);
-    sh->bits.fill = (U16)swf_GetBits(t, 4);
-    sh->bits.line = (U16)swf_GetBits(t, 4);
+    sh->bits.fill = (uint16_t)swf_GetBits(t, 4);
+    sh->bits.line = (uint16_t)swf_GetBits(t, 4);
 
     while (!end)
     {
@@ -82,7 +82,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
             bitl += 1;
             if (swf_GetBits(t, 1))              // Line
             {
-                U16 nbits = swf_GetBits(t,4)+2;
+                uint16_t nbits = swf_GetBits(t,4)+2;
                 bitl += 5;
 
                 if (swf_GetBits(t,1))           // x/y Line
@@ -97,7 +97,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
                 }
             } else                              // Curve
             {
-                U16 nbits = swf_GetBits(t,4)+2;
+                uint16_t nbits = swf_GetBits(t,4)+2;
                 bitl += 4;
 
                 swf_GetBits(t, nbits);
@@ -109,13 +109,13 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
             }
         } else
         {
-            U16 flags = swf_GetBits(t, 5);
+            uint16_t flags = swf_GetBits(t, 5);
             bitl += 5;
             if (flags)
             {
                 if (flags & SF_MOVETO)
                 {
-                    U16 nbits = swf_GetBits(t, 5);
+                    uint16_t nbits = swf_GetBits(t, 5);
                     bitl += 5;
                     swf_GetBits(t, nbits);
                     swf_GetBits(t, nbits);
@@ -151,7 +151,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
 
     if (sh->data)
         free(sh->data);
-    sh->data = (U8*)malloc(len);
+    sh->data = (uint8_t*)malloc(len);
 
     if (sh->data)
     {
@@ -163,7 +163,7 @@ int swf_GetSimpleShape(TAG *t, SHAPE **s) // without Linestyle/Fillstyle Record
     return len;
 }
 
-int swf_ShapeAddFillStyle(SHAPE *s, U8 type, MATRIX *m, RGBA *color,U16 id_bitmap, GRADIENT *gradient)
+int swf_ShapeAddFillStyle(SHAPE *s, uint8_t type, MATRIX *m, RGBA *color,uint16_t id_bitmap, GRADIENT *gradient)
 {
     RGBA def_c;
     MATRIX def_m;
@@ -271,7 +271,7 @@ static void parseFillStyle(FILLSTYLE *dest, TAG *tag, int num)
 
 int parseFillStyleArray(TAG *tag, SHAPE2 *shape)
 {
-    U16 count;
+    uint16_t count;
     int t;
     int num=0, morph = 0;
     int fillstylestart = shape->numfillstyles;
@@ -326,7 +326,7 @@ int parseFillStyleArray(TAG *tag, SHAPE2 *shape)
 
             if (num >= 4)
             {
-                U16 flags = swf_GetU16(tag);
+                uint16_t flags = swf_GetU16(tag);
                 shape->linestyles[t].flags = flags;
                 if ((flags & 0x30) == 0x20)
                     shape->linestyles[t].mitterLimit = swf_GetFixed8(tag); // miter limit
@@ -523,7 +523,7 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
 {
     int num = 0, morph = 0/*, numshapes = 1, id*/;
     SRECT bbox2, edge_bounds, edge_bounds2;
-    //U16 fill,line;
+    //uint16_t fill,line;
     //SHAPELINE*l;
     if(tag->id == ST_DEFINESHAPE)
         num = 1;
@@ -565,7 +565,7 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
     }
     if (num >= 4)
     {
-        //U8 flags =
+        //uint8_t flags =
         swf_GetU8(tag); // flags, &1: contains scaling stroke, &2: contains non-scaling stroke
     }
     if (morph)
@@ -578,8 +578,8 @@ void swf_ParseDefineShape(TAG *tag, SHAPE2 *shape)
         return;
 
     /*swf_ResetReadBits(tag);
-    fill = (U16)swf_GetBits(tag,4);
-    line = (U16)swf_GetBits(tag,4);
+    fill = (uint16_t)swf_GetBits(tag,4);
+    line = (uint16_t)swf_GetBits(tag,4);
     if(!fill && !line) {
         printf("fill/line bits are both zero\n");
     }

@@ -46,7 +46,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         return PF_CHAR | PF_MATRIX | PF_CXFORM;
     } else if (tag->id == ST_PLACEOBJECT2 || tag->id == ST_PLACEOBJECT3)
     {
-        U8 flags, flags2 = 0;
+        uint8_t flags, flags2 = 0;
         flags = swf_GetU8(tag);
         if (tag->id == ST_PLACEOBJECT3)
             flags2 = swf_GetU8(tag);
@@ -59,7 +59,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         if ((flags2 & PF2_CLASS_NAME) || ((flags & PF_CHAR) && (flags2 & PF2_HAS_IMAGE)))
         {
             int t = 0, l = strlen((const char *)&tag->data[tag->pos]);
-            U8 *data = (U8*)malloc(l+1);
+            uint8_t *data = (uint8_t*)malloc(l+1);
             obj->class_name = (char*)data;
             while ((data[t++] = swf_GetU8(tag)));
         }
@@ -72,7 +72,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         {
             swf_ResetReadBits(tag);
             int t = 0, l = strlen((const char *)&tag->data[tag->pos]);
-            U8 *data = (U8*)malloc(l + 1);
+            uint8_t *data = (uint8_t*)malloc(l + 1);
             obj->name = (char*)data;
             while ((data[t++] = swf_GetU8(tag)));
         }
@@ -198,12 +198,12 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
 #endif
                     swf_GetU16(tag); // unused
             assert(!reserved);
-            U32 allevent_flags = swf_GetU16(tag);
+            uint32_t allevent_flags = swf_GetU16(tag);
             if (version >= 6)
                 allevent_flags |= swf_GetU16(tag) << 16;
             while (1)
             {
-                U32 event_flags = swf_GetU16(tag);
+                uint32_t event_flags = swf_GetU16(tag);
                 if (version >= 6)
                     event_flags |= swf_GetU16(tag) << 16;
                 if (!event_flags)

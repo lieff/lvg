@@ -58,13 +58,13 @@ int swf_FontIsBold(SWFFONT *f)
 
 int swf_FontExtract_DefineFont(int id, SWFFONT *f, TAG *t)
 {
-    U16 fid;
+    uint16_t fid;
     swf_SetTagPos(t, 0);
 
     fid = swf_GetU16(t);
     if ((!id) || (id == fid))
     {
-        U16 of;
+        uint16_t of;
         int n, i;
 
         id = fid;
@@ -86,15 +86,15 @@ int swf_FontExtract_DefineFont(int id, SWFFONT *f, TAG *t)
 
 int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
 {
-    U16 fid;
-    U16 maxcode;
-    U8 flags;
+    uint16_t fid;
+    uint16_t maxcode;
+    uint8_t flags;
     swf_SetTagPos(t, 0);
 
     fid = swf_GetU16(t);
     if (fid == id)
     {
-        U8 l = swf_GetU8(t);
+        uint8_t l = swf_GetU8(t);
         int i;
 
         if (f->version > 1)
@@ -108,7 +108,7 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
         if (f->name)
             free(f->name);
 
-        f->name = (U8 *) malloc(l + 1);
+        f->name = (uint8_t *) malloc(l + 1);
         swf_GetBlock(t, f->name, l);
         f->name[l] = 0;
 
@@ -129,7 +129,7 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
             f->language = swf_GetU8(t);
         }
 
-        f->glyph2ascii = (U16 *) malloc(sizeof(U16) * f->numchars);
+        f->glyph2ascii = (uint16_t *) malloc(sizeof(uint16_t) * f->numchars);
         maxcode = 0;
         for (i = 0; i < f->numchars; i++)
         {
@@ -152,7 +152,7 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
 
 int swf_FontExtract_GlyphNames(int id, SWFFONT *f, TAG *tag)
 {
-    U16 fid;
+    uint16_t fid;
     swf_SetTagPos(tag, 0);
 
     fid = swf_GetU16(tag);
@@ -175,9 +175,9 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
     int t, glyphcount;
     int maxcode;
     int fid;
-    U32 offset_start;
-    U32 *offset;
-    U8 flags1, /*langcode, */namelen;
+    uint32_t offset_start;
+    uint32_t *offset;
+    uint8_t flags1, /*langcode, */namelen;
     swf_SetTagPos(tag, 0);
     font->version = tag->id == ST_DEFINEFONT3 ? 3 : 2;
     fid = swf_GetU16(tag);
@@ -199,16 +199,16 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
         font->encoding |= FONT_ENCODING_SHIFTJIS;
 
     namelen = swf_GetU8(tag);
-    font->name = (U8 *) malloc(namelen + 1);
+    font->name = (uint8_t *) malloc(namelen + 1);
     font->name[namelen] = 0;
     swf_GetBlock(tag, font->name, namelen);
     glyphcount = swf_GetU16(tag);
     font->numchars = glyphcount;
 
     font->glyph = (SWFGLYPH *) calloc(1, sizeof(SWFGLYPH) * glyphcount);
-    font->glyph2ascii = (U16 *) calloc(1, sizeof(U16) * glyphcount);
+    font->glyph2ascii = (uint16_t *) calloc(1, sizeof(uint16_t) * glyphcount);
 
-    offset = (U32*)calloc(1, sizeof(U32)*(glyphcount + 1));
+    offset = (uint32_t*)calloc(1, sizeof(uint32_t)*(glyphcount + 1));
     offset_start = tag->pos;
 
     if (flags1 & 8)
@@ -266,14 +266,14 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
 
     if (flags1 & 128)
     {   // has layout
-        U16 kerningcount;
+        uint16_t kerningcount;
         font->layout = (SWFLAYOUT *) malloc(sizeof(SWFLAYOUT));
         font->layout->ascent  = swf_GetU16(tag);
         font->layout->descent = swf_GetU16(tag);
         font->layout->leading = swf_GetU16(tag);
         for (t = 0; t < glyphcount; t++)
         {
-            S16 advance = swf_GetS16(tag);
+            int16_t advance = swf_GetS16(tag);
             font->glyph[t].advance = advance;
         }
         font->layout->bounds = (SRECT*)malloc(glyphcount * sizeof(SRECT));
@@ -318,7 +318,7 @@ int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
 
 int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
 {
-    U16 fid;
+    uint16_t fid;
     swf_SetTagPos(tag, 0);
     fid = swf_GetU16(tag);
 
@@ -339,11 +339,11 @@ int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT *font, TAG *tag)
 #endif
                 break;
             }
-            U16 x = swf_GetU16(tag);
-            U16 y = swf_GetU16(tag);
-            U16 dx = (nr == 2) ? swf_GetU16(tag) : 0xffff;
-            U16 dy = (nr == 2) ? swf_GetU16(tag) : 0xffff;
-            U8 xy = swf_GetU8(tag);
+            uint16_t x = swf_GetU16(tag);
+            uint16_t y = swf_GetU16(tag);
+            uint16_t dx = (nr == 2) ? swf_GetU16(tag) : 0xffff;
+            uint16_t dy = (nr == 2) ? swf_GetU16(tag) : 0xffff;
+            uint8_t xy = swf_GetU8(tag);
 
 #ifdef _DEBUG
             if ((!(xy & 1) && (x != 0 || (dx != 0 && dx != 0xffff))) ||

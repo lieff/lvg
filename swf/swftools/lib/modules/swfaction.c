@@ -29,7 +29,7 @@ struct Action
 {
     int version;
     char*name;
-    U8 op;
+    uint8_t op;
     char*flags;
 } static actions[] =
 {
@@ -148,11 +148,11 @@ static int definedactions = sizeof(actions)/sizeof(struct Action);
 
 ActionTAG* swf_ActionGet(TAG*tag)
 {
-    U8 op = 1;
+    uint8_t op = 1;
     int length;
     ActionTAG tmp;
     ActionTAG*action = &tmp;
-    U8*data;
+    uint8_t*data;
     while(op)
     {
         action->next = (ActionTAG*)calloc(1, sizeof(ActionTAG));
@@ -168,7 +168,7 @@ ActionTAG* swf_ActionGet(TAG*tag)
             length = swf_GetU16(tag);
 
         if(length) {
-            data = (U8*)malloc(length);
+            data = (uint8_t*)malloc(length);
             swf_GetBlock(tag, data, length);
         } else {
             data = 0;
@@ -208,7 +208,7 @@ void swf_ActionFree(ActionTAG*action)
     }
 }
 
-int OpAdvance(ActionTAG *atag, char c, U8*data)
+int OpAdvance(ActionTAG *atag, char c, uint8_t*data)
 {
     switch (c)
     {
@@ -233,7 +233,7 @@ int OpAdvance(ActionTAG *atag, char c, U8*data)
     case 'r':
         return 1;
     case 'p': {
-        U8 type = *data++;
+        uint8_t type = *data++;
         if(type == 0) {
             return 1+strlen((const char*)data)+1; //string
         } else if (type == 1) {
@@ -261,9 +261,9 @@ int OpAdvance(ActionTAG *atag, char c, U8*data)
         return 2;
     }
     case '{': {
-        U16 num;
-        U16 codesize;
-        U8* odata = data;
+        uint16_t num;
+        uint16_t codesize;
+        uint8_t* odata = data;
         int t;
         while(*data++); //name
         num = (*data++); //num
@@ -290,7 +290,7 @@ int OpAdvance(ActionTAG *atag, char c, U8*data)
 void swf_DumpActions(ActionTAG*atag, char*prefix)
 {
     int t;
-    U8*data;
+    uint8_t*data;
     char* cp;
     int entry = 0;
     char spaces[MAX_LEVELS*4+1];
@@ -312,7 +312,7 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
     while(atag)
     {
         char*indent = &spaces[sizeof(spaces)-1-countpos*4];
-        U16 poollen = 0;
+        uint16_t poollen = 0;
         for(t=0;t<definedactions;t++)
             if(actions[t].op == atag->op)
                 break;
@@ -362,8 +362,8 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                     printf(" %d", *data);
                 } break;
                 case '{': {
-                    U16 num;
-                    U16 codesize;
+                    uint16_t num;
+                    uint16_t codesize;
                     int s = 0;
                     int t;
                     printf(" %s(", data);
@@ -396,7 +396,7 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                 } break;
                 case 'o': {
                     int t;
-                    U16 codesize = data[0]+256*data[1];
+                    uint16_t codesize = data[0]+256*data[1];
                     printf(" codesize:%d ", codesize);
 
                     /* the following tries to find the "string"
@@ -421,13 +421,13 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                     printf(" %d", data[0]);
                 } break;
                 case 'p': {
-                    U8 type = *data;
+                    uint8_t type = *data;
                     unsigned char*value = data+1;
                     if(type == 0) {
                         printf(" String:\"%s\"", value);
                     } else if (type == 1) {
                         union {
-                            U32 i;
+                            uint32_t i;
                             float f;
                         } u;
                         u.i = value[0] + (value[1] << 8)+
@@ -443,16 +443,16 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                         printf(" bool:%s", *value?"true":"false");
                     } else if (type == 6) {
                         union {
-                            U8 a[8];
+                            uint8_t a[8];
                             double d;
                         } u;
                         memcpy(&u.a[4], value, 4);
                         memcpy(u.a, &value[4], 4);
 #ifdef WORDS_BIGENDIAN
                         int t;
-                        for(t=0;t<4;t++) {
-                            U8 tmp = u.a[t];
-                            u.a[t] = u.a[7-t];
+                        for(t = 0; t < 4; t++) {
+                            uint8_t tmp = u.a[t];
+                            u.a[t] = u.a[7 - t];
                             u.a[7-t] = tmp;
                         }
 #endif
@@ -467,7 +467,7 @@ void swf_DumpActions(ActionTAG*atag, char*prefix)
                             printf(" (\"%s\")",lookup[*value]);
 #endif
                     } else if (type == 9) {
-                        U32 offset = value[0]+(value[1]<<8);
+                        uint32_t offset = value[0]+(value[1]<<8);
                         printf(" Lookup16:%d", offset);
 #ifdef MAX_LOOKUP
                         if (lookup[offset])

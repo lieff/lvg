@@ -69,23 +69,23 @@ int swf_ImageGetNumberOfPaletteEntries(RGBA*img, int width, int height, RGBA*pal
     int len = width*height;
     int t;
     int palsize = 0;
-    U32* pal;
+    uint32_t* pal;
     int size[256];
     int palette_overflow = 0;
-    U32 lastcol32 = 0;
+    uint32_t lastcol32 = 0;
 
-    pal = (U32*)malloc(65536*sizeof(U32));
+    pal = (uint32_t*)malloc(65536*sizeof(uint32_t));
     memset(size, 0, sizeof(size));
 
-    _Static_assert(sizeof(RGBA) == sizeof(U32), "sizeof(RGBA)!=sizeof(U32))");
+    _Static_assert(sizeof(RGBA) == sizeof(uint32_t), "sizeof(RGBA)!=sizeof(uint32_t))");
 
-    lastcol32 = (*(U32*)&img[0])^0xffffffff; // don't match
+    lastcol32 = (*(uint32_t*)&img[0])^0xffffffff; // don't match
 
     for (t = 0; t < len; t++)
     {
-        U32 hash, col32 = *(U32*)&img[t];
+        uint32_t hash, col32 = *(uint32_t*)&img[t];
         int i, csize;
-        U32* cpal;
+        uint32_t* cpal;
         if (col32 == lastcol32)
             continue;
         hash = (col32 >> 17) ^ col32;
@@ -123,7 +123,7 @@ int swf_ImageGetNumberOfPaletteEntries(RGBA*img, int width, int height, RGBA*pal
         {
             int s;
             int csize = size[t];
-            U32* cpal = &pal[t*256];
+            uint32_t* cpal = &pal[t*256];
             for (s = 0; s < csize; s++)
                 palette[i++] = *(RGBA*)(&cpal[s]);
         }
@@ -181,7 +181,7 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
     jpeg_start_decompress(&cinfo);
     for (y = 0; y < cinfo.output_height; y++) {
         RGBA *line = &dest[y * cinfo.image_width];
-        U8 *to = (U8 *) line;
+        uint8_t *to = (uint8_t *) line;
         int x;
         jpeg_read_scanlines(&cinfo, &to, 1);
         for (x = cinfo.output_width - 1; x >= 0; --x) {
@@ -204,7 +204,7 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
     if (offset)
     {
         size_t datalen = (*width)*(*height);
-        U8* alphadata = (U8*)malloc(datalen);
+        uint8_t* alphadata = (uint8_t*)malloc(datalen);
         tag->len = oldtaglen;
         swf_SetTagPos(tag, 6+offset);
 #ifdef HAVE_ZLIB
@@ -223,7 +223,7 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
         for (y = 0; y < (*height); y++)
         {
             RGBA *line = &dest[y*(*width)];
-            U8 *aline = &alphadata[y*(*width)];
+            uint8_t *aline = &alphadata[y*(*width)];
             int x;
             for (x = 0; x < (*width); x++)
             {
@@ -251,7 +251,7 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
     char alpha = tag->id == ST_DEFINEBITSLOSSLESS2;
     int t, x, y;
     RGBA *palette = 0;
-    U8 *data;//, *data2;
+    uint8_t *data;//, *data2;
     RGBA *dest;
     swf_SetTagPos(tag, 0);
     id = swf_GetU16(tag);
@@ -290,7 +290,7 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
         if (data)
             free(data);
         datalen += 4096;
-        data = (U8*)malloc(datalen);
+        data = (uint8_t*)malloc(datalen);
         error = uncompress(data, &datalen, &tag->data[tag->pos], tag->len - tag->pos);
     } while (error == Z_BUF_ERROR);
     if (error != Z_OK)
@@ -302,7 +302,7 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
         return 0;
     }
 #else
-    data = (U8*)malloc(datalen);
+    data = (uint8_t*)malloc(datalen);
     stbi_zlib_decode_buffer((char *)data, datalen, (char *)&tag->data[tag->pos], tag->len - tag->pos);
 #endif
     pos = 0;
@@ -408,11 +408,11 @@ void swf_RemoveJPEGTables(SWF *swf)
         {
             int len = tag->len;
             void *data = malloc(len);
-            swf_GetBlock(tag, (U8*)data, tag->len);
+            swf_GetBlock(tag, (uint8_t*)data, tag->len);
             swf_ResetTag(tag, ST_DEFINEBITSJPEG2);
-            swf_SetBlock(tag, &((U8*)data)[0], 2); //id
+            swf_SetBlock(tag, &((uint8_t*)data)[0], 2); //id
             swf_SetBlock(tag, tables_tag->data, tables_tag->len);
-            swf_SetBlock(tag, &((U8*)data)[2], len-2);
+            swf_SetBlock(tag, &((uint8_t*)data)[2], len-2);
             free(data);
         }
         tag = tag->next;
