@@ -424,7 +424,7 @@ uint8_t swf_isPlaceTag(TAG *tag)
 
 uint8_t swf_isTextTag(TAG *tag)
 {
-    if(tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
+    if (tag->id == ST_DEFINETEXT || tag->id == ST_DEFINETEXT2)
         return 1;
     return 0;
 }

@@ -97,7 +97,7 @@ uint16_t swf_GetU16(TAG *t)
 #endif
         return 0;
     }
-    res = t->data[t->pos] | (t->data[t->pos+1]<<8);
+    res = t->data[t->pos] | (t->data[t->pos + 1] << 8);
     t->pos+=2;
     return res;
 }
@@ -243,12 +243,12 @@ uint32_t swf_GetU30(TAG *tag)
     return s;
 }
 
-uint32_t swf_GetABCU32(TAG*tag)
+uint32_t swf_GetABCU32(TAG *tag)
 {
     return swf_GetU30(tag);
 }
 
-int32_t swf_GetABCS32(TAG*tag)
+int32_t swf_GetABCS32(TAG *tag)
 {
     return swf_GetABCU32(tag);
 }
@@ -735,19 +735,19 @@ int swf_ReadSWF2(reader_t *reader, SWF *swf)   // Reads SWF to memory (malloc'ed
 
     char b[32];                         // read Header
     int len;
-    TAG * t;
+    TAG *t;
     TAG t1;
     if ((len = reader->read(reader, b, 8)) < 8)
         return -1;
 
-    if (b[0]!='F' && b[0]!='C')
+    if (b[0] != 'F' && b[0] != 'C')
         return -1;
-    if (b[1]!='W')
+    if (b[1] != 'W')
         return -1;
-    if (b[2]!='S')
+    if (b[2] != 'S')
         return -1;
     swf->fileVersion = b[3];
-    swf->compressed  = (b[0]=='C')?1:0;
+    swf->compressed  = (b[0] == 'C') ? 1 : 0;
     swf->fileSize    = GET32(&b[4]);
 
     if (swf->compressed)

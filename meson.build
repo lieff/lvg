@@ -41,7 +41,6 @@ sources = [
     'swf/swftools/lib/as3/code.c',
     'swf/swftools/lib/as3/opcodes.c',
     'swf/swftools/lib/as3/pool.c',
-    'swf/swftools/lib/modules/swfaction.c',
     'swf/swftools/lib/modules/swfbits.c',
     'swf/swftools/lib/modules/swffilter.c',
     'swf/swftools/lib/modules/swfobject.c',
