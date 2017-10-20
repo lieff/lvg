@@ -51,7 +51,7 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
     p.xform[4] = data[0][2] + shape->bounds[0] + w*0.5;
     p.xform[5] = data[1][2] + shape->bounds[1] + h*0.5;
     p.image = gradient->cache;
-    p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
+    p.innerColor = p.outerColor = transformColor(nvgRGBAf(1,1,1,1), cxform);
     p.extent[0] = 256;
     p.extent[1] = 256;
     p.feather = 0;
@@ -87,7 +87,7 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
     p.xform[4] = data[0][2] + shape->bounds[0] + (xf[4] - shape->bounds[0]);
     p.xform[5] = data[1][2] + shape->bounds[1] + (xf[5] - shape->bounds[1]);
     p.image = gradient->cache;
-    p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
+    p.innerColor = p.outerColor = transformColor(nvgRGBAf(1,1,1,1), cxform);
     p.extent[0] = 256;
     p.extent[1] = 256;
     p.feather = 0;
@@ -133,7 +133,7 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorT
     p.xform[4] = data[0][2] + shape->bounds[0] + (xf[4] - shape->bounds[0]);
     p.xform[5] = data[1][2] + shape->bounds[1] + (xf[5] - shape->bounds[1]);
     p.image = sp->color;
-    p.innerColor = p.outerColor = nvgRGBAf(1,1,1,1);
+    p.innerColor = p.outerColor = transformColor(nvgRGBAf(1,1,1,1), cxform);
     p.extent[0] = 256;
     p.extent[1] = 256;
     p.feather = 0;

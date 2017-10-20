@@ -297,7 +297,10 @@ static void sdl_resample(void *audio_render, LVGSound *sound)
     audio_ctx *ctx = (audio_ctx *)audio_render;
     SDL_AudioCVT cvt;
     if (SDL_BuildAudioCVT(&cvt, AUDIO_S16, sound->channels, sound->rate, AUDIO_S16, sound->channels, ctx->outputSpec.freq) < 0)
+    {
+        printf("error: couldn't open converter: %s\n", SDL_GetError());
         return;
+    }
     cvt.len = sound->num_samples*sound->channels*2;
     cvt.buf = (Uint8 *)malloc(cvt.len*cvt.len_mult);
     memcpy(cvt.buf, sound->samples, cvt.len);
@@ -307,6 +310,7 @@ static void sdl_resample(void *audio_render, LVGSound *sound)
     sound->num_samples = cvt.len_cvt/(sound->channels*2);
     sound->orig_rate = sound->rate;
     sound->rate = ctx->outputSpec.freq;
+    //printf("converted: %d-%d\n", sound->orig_rate, sound->rate);
 }
 
 const audio_render sdl_audio_render =
