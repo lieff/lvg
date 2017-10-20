@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <sys/param.h>
 #include "lunzip.h"
-#include "minimp3.h"
 #include <SDL2/SDL.h>
 #include <assert.h>
 #include <stdio.h>

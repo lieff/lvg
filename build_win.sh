@@ -38,12 +38,12 @@ x86_64-w64-mingw32-gcc -s -Os -flto -std=gnu99 -fno-asynchronous-unwind-tables -
 audio/*.c \
 platform/*.c \
 scripting/tcc/script_tcc.c \
-swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
+swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c audio/mp3_keyj/minimp3.c \
 render/*.c \
 windows/mman.c \
 video/ffmpeg/ffmpeg_dec.c \
 -Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
--I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 \
+-I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
 -Iglfw/include -ISDL/include -Ivideo/ffmpeg/FFmpeg \
 -DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 scripts/compress.sh ./lvg_win.exe

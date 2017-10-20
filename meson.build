@@ -19,7 +19,7 @@ sources = [
     'src/lunzip.c',
     'src/lvg.c',
     'src/svgb.c',
-    'mp3/minimp3.c',
+    'audio/mp3_keyj/minimp3.c',
     'nanovg/nanovg.c',
     'render/common.c',
     'render/glad.c',
@@ -51,7 +51,7 @@ sources = [
     'video/ffmpeg/ffmpeg_dec.c'
 ]
 
-incdirs = ['.', 'src', 'nanovg', 'scripting/tcc', 'swf/swftools/lib', 'mp3']
+incdirs = ['.', 'src', 'nanovg', 'scripting/tcc', 'swf/swftools/lib']
 if get_option('buildtype') == 'debug'
     add_global_arguments('-D_GNU_SOURCE', '-D_DEBUG', language : 'c')
 else

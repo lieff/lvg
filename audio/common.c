@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <sys/param.h>
 #include "lunzip.h"
-#include "minimp3.h"
+#include "mp3_keyj/minimp3.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>

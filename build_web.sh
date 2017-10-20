@@ -6,9 +6,9 @@ audio/*.c \
 platform/*.c \
 render/common.c render/render_nanovg.c \
 scripting/tcc/script_tcc.c \
-swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c mp3/minimp3.c \
+swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c audio/mp3_keyj/minimp3.c \
 video/ffmpeg/ffmpeg_dec.c \
--I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib -Imp3 \
+-I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
 -Ivideo/ffmpeg/FFmpeg -Lvideo/ffmpeg/web -lavcodec -lavutil \
 -DNDEBUG -DLVG_INTERPOLATE -o lvg_player.html -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s NO_EXIT_RUNTIME=1 -s USE_GLFW=3 -s USE_SDL=2 -s FULL_ES3=1 -s TOTAL_MEMORY=268435456 -s MAIN_MODULE=1
 #emcc -Os test.c -o function.js -s EXPORTED_FUNCTIONS="['onFrame', 'onInit']" -s SIDE_MODULE=1

@@ -5,7 +5,7 @@
 #include "lunzip.h"
 #include "render/render.h"
 #include "audio/audio.h"
-#include "minimp3.h"
+#include "audio/mp3_keyj/minimp3.h"
 #include "adpcm.h"
 #include "avm1.h"
 
