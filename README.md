@@ -85,6 +85,35 @@ meson ..
 ninja
 ```
 
+## Configuring
+
+LVG can be configured to use different backends for platform, audio and video. You can see current configuration by executing mesonconf (or meson configure for newer meson versions) in build directory:
+
+```
+mesonconf
+...
+Project options:
+  Option        Description   Current Value Possible Values
+  ------        -----------   ------------- ---------------
+  AUDIO_SDL     AUDIO_SDL     true          [True, False]
+  ENABLE_AUDIO  ENABLE_AUDIO  true          [True, False]
+  ENABLE_SCRIPT ENABLE_SCRIPT true          [True, False]
+  ENABLE_VIDEO  ENABLE_VIDEO  true          [True, False]
+  PLATFORM_GLFW PLATFORM_GLFW true          [True, False]
+  PLATFORM_SDL  PLATFORM_SDL  false         [True, False]
+  RENDER_NANOVG RENDER_NANOVG true          [True, False]
+  RENDER_NVPR   RENDER_NVPR   true          [True, False]
+  SCRIPT_TCC    SCRIPT_TCC    true          [True, False]
+  VIDEO_FFMPEG  VIDEO_FFMPEG  true          [True, False]
+...
+```
+
+You can change configuration using meson commands. Example:
+
+```
+mesonconf -DENABLE_SCRIPT=False
+```
+
 ## Future
 
  * Use other scripting lanuages like [luajit](http://luajit.org/), [JerryScript](https://github.com/jerryscript-project/jerryscript), [muJS](http://artifex.com/mujs_/), [avian](https://readytalk.github.io/avian/), [ImpalaJIT](https://github.com/Manuel1605/ImpalaJIT) and [AngelScript](http://angelcode.com/angelscript/).
