@@ -22,8 +22,6 @@ typedef struct
 } character_t;
 
 
-int compare_placements(const void *v1, const void *v2);
-
 static void path_addPoint(NSVGpath *p, float x, float y)
 {
     p->pts[p->npts*2 + 0] = x;
@@ -94,7 +92,7 @@ static void expandBBox(float *bounds, float x, float y)
         bounds[3] = y;
 }
 
-int compareStops(const void *a, const void *b)
+static int compareStops(const void *a, const void *b)
 {
     NSVGgradientStop *sa = (NSVGgradientStop *)a, *sb = (NSVGgradientStop *)b;
     if (sa->offset < sb->offset)
@@ -950,7 +948,7 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
     free(path2);
 }
 
-TAG *skip_sprite(TAG *tag)
+static TAG *skip_sprite(TAG *tag)
 {
     do {
         tag = tag->next;
@@ -958,7 +956,7 @@ TAG *skip_sprite(TAG *tag)
     return tag;
 }
 
-void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, char *stream_buffer, int stream_buf_size, int stream_sound, int stream_format, int stream_bits, int stream_frame, int end_frame)
+static void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, char *stream_buffer, int stream_buf_size, int stream_sound, int stream_format, int stream_bits, int stream_frame, int end_frame)
 {
     group->ssounds = realloc(group->ssounds, (group->num_ssounds + 1)*sizeof(group->ssounds[0]));
     LVGStreamSound *ssound = group->ssounds + group->num_ssounds++;
@@ -986,6 +984,16 @@ void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, char *stre
         free(stream_buffer);
     // add action to start stream sound
     add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
+}
+
+static void skipActions(TAG *tag)
+{
+    int op;
+    do {
+        op = swf_GetU8(tag);
+        if (op >= 0x80)
+            tag->pos += swf_GetU16(tag);
+    } while (op);
 }
 
 static TAG *parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
@@ -1269,7 +1277,7 @@ done:
 
                 parse_button_record(tag, b, idtable);
                 int pos = tag->pos;
-                ActionTAG *actions = swf_ActionGet(tag);
+                skipActions(tag);
                 int size = tag->pos - pos;
                 b->btnactions = realloc(b->btnactions, (b->num_btnactions + 1)*sizeof(LVGButtonAction));
                 LVGButtonAction *ba = b->btnactions + b->num_btnactions++;
@@ -1278,10 +1286,6 @@ done:
                 memcpy(ba->actions + 4, tag->data + pos, size);
                 ba->flags = CondOverDownToOverUp;
                 assert(0 == ba->actions[4 + size - 1]);
-#ifndef _TEST
-                //swf_DumpActions(actions, 0);
-#endif
-                swf_ActionFree(actions);
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON2 == tag->id)
             {
@@ -1307,7 +1311,7 @@ done:
                     offsetpos = swf_GetU16(tag);
                     uint32_t condition = swf_GetU16(tag);                // condition
                     int pos = tag->pos;
-                    ActionTAG *actions = swf_ActionGet(tag);
+                    skipActions(tag);
                     int size = tag->pos - pos;
                     b->btnactions = realloc(b->btnactions, (b->num_btnactions + 1)*sizeof(LVGButtonAction));
                     LVGButtonAction *ba = b->btnactions + b->num_btnactions++;
@@ -1316,11 +1320,6 @@ done:
                     memcpy(ba->actions + 4, tag->data + pos, size);
                     ba->flags = condition;
                     assert(0 == ba->actions[4 + size - 1]);
-#ifndef _TEST
-                    //printf("  condition %04x\n", condition);
-                    //swf_DumpActions(actions, "  ");
-#endif
-                    swf_ActionFree(actions);
                 }
                 swf_SetTagPos(tag, oldTagPos);
             }
@@ -1402,17 +1401,12 @@ done:
         {
             LVGMovieClipFrame *frame = group->frames + nframe;
             int pos = tag->pos;
-            ActionTAG *actions = swf_ActionGet(tag);
+            skipActions(tag);
             int size = tag->pos - pos;
             frame->actions = realloc(frame->actions, size + 4);
             *(uint32_t*)frame->actions = size;
             memcpy(frame->actions + 4, tag->data + pos, size);
             assert(0 == frame->actions[4 + size - 1]);
-#ifndef _TEST
-            //printf("frame %d actions:\n", nframe);
-            //swf_DumpActions(actions, 0);
-#endif
-            swf_ActionFree(actions);
         } else if (ST_DOABC == tag->id)
         {
 #ifndef EMSCRIPTEN

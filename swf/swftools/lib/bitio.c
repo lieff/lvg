@@ -26,15 +26,8 @@
 //#define __USE_LARGEFILE64
 #include <fcntl.h>
 #include <errno.h>
-
 #include "../config.h"
-
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif
-#ifdef HAVE_IO_H
-#include <io.h>
-#endif
 #ifdef HAVE_ZLIB
 #include <zlib.h>
 #define ZLIB_BUFFER_SIZE 16384
@@ -227,63 +220,6 @@ void writer_init_growingmemwriter(writer_t*w, uint32_t grow)
     w->pos = 0;
 }
 
-/* ---------------------------- file writer ------------------------------- */
-
-typedef struct _filewrite
-{
-    int handle;
-    char free_handle;
-} filewrite_t;
-
-static int writer_filewrite_write(writer_t*w, void* data, int len)
-{
-    filewrite_t * fw= (filewrite_t*)w->internal;
-    w->pos += len;
-    int l = write(fw->handle, data, len);
-#ifdef _DEBUG
-    if(l < len)
-        printf("Error writing to file: %d/%d", l, len);
-#endif
-    return l;
-}
-static void writer_filewrite_finish(writer_t*w)
-{
-    filewrite_t *mr = (filewrite_t*)w->internal;
-    if(mr->free_handle)
-        close(mr->handle);
-    free(w->internal);
-    memset(w, 0, sizeof(writer_t));
-}
-void writer_init_filewriter(writer_t*w, int handle)
-{
-    filewrite_t *mr = (filewrite_t *)malloc(sizeof(filewrite_t));
-    mr->handle = handle;
-    mr->free_handle = 0;
-    memset(w, 0, sizeof(writer_t));
-    w->write = writer_filewrite_write;
-    w->finish = writer_filewrite_finish;
-    w->internal = mr;
-    w->type = WRITER_TYPE_FILE;
-    w->bitpos = 0;
-    w->mybyte = 0;
-    w->pos = 0;
-}
-void writer_init_filewriter2(writer_t*w, char*filename)
-{
-#ifdef HAVE_OPEN64
-    int fi = open64
-#else
-    int fi = open
-#endif
-            (filename,
-#ifdef O_BINARY
-             O_BINARY|
-#endif
-             O_WRONLY|O_CREAT|O_TRUNC, 0644);
-    writer_init_filewriter(w, fi);
-    ((filewrite_t*)w->internal)->free_handle = 1;
-}
-
 /* ---------------------------- null writer ------------------------------- */
 
 static int writer_nullwrite_write(writer_t*w, void* data, int len)
@@ -441,6 +377,7 @@ float reader_readFloat(reader_t *r)
     return *(MAYALIAS float *)&w;
 #endif
 }
+
 double reader_readDouble(reader_t*r)
 {
 #if 1
