@@ -932,7 +932,7 @@ static int glnvg__convertPaint(GLNVGcontext* gl, GLNVGfragUniforms* frag, NVGpai
 
 static GLNVGfragUniforms* nvg__fragUniformPtr(GLNVGcontext* gl, int i);
 
-static void glnvg__setUniforms(GLNVGcontext* gl, int uniformOffset, int image)
+static void glnvg__setUniforms(GLNVGcontext* gl, int uniformOffset, GLNVGcall* call)
 {
 #if NANOVG_GL_USE_UNIFORMBUFFER
 	glBindBufferRange(GL_UNIFORM_BUFFER, GLNVG_FRAG_BINDING, gl->fragBuf, uniformOffset, sizeof(GLNVGfragUniforms));
@@ -941,10 +941,31 @@ static void glnvg__setUniforms(GLNVGcontext* gl, int uniformOffset, int image)
 	glUniform4fv(gl->shader.loc[GLNVG_LOC_FRAG], NANOVG_GL_UNIFORMARRAY_SIZE, &(frag->uniformArray[0][0]));
 #endif
 
-	if (image != 0) {
-		GLNVGtexture* tex = glnvg__findTexture(gl, image);
+	if (call && call->image != 0) {
+		GLNVGtexture* tex = glnvg__findTexture(gl, call->image);
 		glnvg__bindTexture(gl, tex != NULL ? tex->tex : 0);
 		glnvg__checkError(gl, "tex paint tex");
+		if (call->image_flags & NVG_IMAGE_REPEATX)
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		if (call->image_flags & NVG_IMAGE_REPEATY)
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		if (/*call->image_flags & NVG_IMAGE_FILTERED*/1) // TODO
+		{
+#ifndef EMSCRIPTEN
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+#else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+#endif
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		} else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		}
 	} else {
 		glnvg__bindTexture(gl, 0);
 	}
@@ -982,32 +1003,8 @@ static void glnvg__fill(GLNVGcontext* gl, GLNVGcall* call)
 	// Draw anti-aliased pixels
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-	glnvg__setUniforms(gl, call->uniformOffset + gl->fragSize, call->image);
+	glnvg__setUniforms(gl, call->uniformOffset + gl->fragSize, call);
 	glnvg__checkError(gl, "fill fill");
-	if (call->image)
-	{
-		if (call->image_flags & NVG_IMAGE_REPEATX)
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		else
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		if (call->image_flags & NVG_IMAGE_REPEATY)
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		else
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		if (1) // TODO
-		{
-#ifndef EMSCRIPTEN
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-#else
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-#endif
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		} else
-		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		}
-	}
 
 	if (gl->flags & NVG_ANTIALIAS) {
 		glnvg__stencilFunc(gl, GL_EQUAL, 0x00, 0xff);
@@ -1030,7 +1027,7 @@ static void glnvg__convexFill(GLNVGcontext* gl, GLNVGcall* call)
 	GLNVGpath* paths = &gl->paths[call->pathOffset];
 	int i, npaths = call->pathCount;
 
-	glnvg__setUniforms(gl, call->uniformOffset, call->image);
+	glnvg__setUniforms(gl, call->uniformOffset, call);
 	glnvg__checkError(gl, "convex fill");
 
 	for (i = 0; i < npaths; i++)
@@ -1055,13 +1052,13 @@ static void glnvg__stroke(GLNVGcontext* gl, GLNVGcall* call)
 		// Fill the stroke base without overlap
 		glnvg__stencilFunc(gl, GL_EQUAL, 0x0, 0xff);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
-		glnvg__setUniforms(gl, call->uniformOffset + gl->fragSize, call->image);
+		glnvg__setUniforms(gl, call->uniformOffset + gl->fragSize, call);
 		glnvg__checkError(gl, "stroke fill 0");
 		for (i = 0; i < npaths; i++)
 			glDrawArrays(GL_TRIANGLE_STRIP, paths[i].strokeOffset, paths[i].strokeCount);
 
 		// Draw anti-aliased pixels.
-		glnvg__setUniforms(gl, call->uniformOffset, call->image);
+		glnvg__setUniforms(gl, call->uniformOffset, call);
 		glnvg__stencilFunc(gl, GL_EQUAL, 0x00, 0xff);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 		for (i = 0; i < npaths; i++)
@@ -1081,7 +1078,7 @@ static void glnvg__stroke(GLNVGcontext* gl, GLNVGcall* call)
 //		glnvg__convertPaint(gl, nvg__fragUniformPtr(gl, call->uniformOffset + gl->fragSize), paint, scissor, strokeWidth, fringe, 1.0f - 0.5f/255.0f);
 
 	} else {
-		glnvg__setUniforms(gl, call->uniformOffset, call->image);
+		glnvg__setUniforms(gl, call->uniformOffset, call);
 		glnvg__checkError(gl, "stroke fill");
 		// Draw Strokes
 		for (i = 0; i < npaths; i++)
@@ -1091,7 +1088,7 @@ static void glnvg__stroke(GLNVGcontext* gl, GLNVGcall* call)
 
 static void glnvg__triangles(GLNVGcontext* gl, GLNVGcall* call)
 {
-	glnvg__setUniforms(gl, call->uniformOffset, call->image);
+	glnvg__setUniforms(gl, call->uniformOffset, call);
 	glnvg__checkError(gl, "triangles fill");
 
 	glDrawArrays(GL_TRIANGLES, call->triangleOffset, call->triangleCount);

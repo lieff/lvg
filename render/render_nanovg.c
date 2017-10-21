@@ -12,12 +12,9 @@
 static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
-    float w = shape->bounds[2] - shape->bounds[0];
-    float h = shape->bounds[3] - shape->bounds[1];
-
     float *xf = gradient->xform;
-    Transform3x2 data = { { xf[0], xf[2], /*xf[4]*/0.f },
-                          { xf[1], xf[3], /*xf[5]*/0.f } };
+    Transform3x2 data = { { xf[0], xf[2], 0.f },
+                          { xf[1], xf[3], 0.f } };
     Transform3x2 tr;
     inverse(data, data);
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
@@ -34,8 +31,8 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
     p.xform[1] = data[1][0];
     p.xform[2] = data[0][1];
     p.xform[3] = data[1][1];
-    p.xform[4] = data[0][2]/* + shape->bounds[0] + w*0.5*/ + xf[4];
-    p.xform[5] = data[1][2]/* + shape->bounds[1] + h*0.5*/ + xf[5];
+    p.xform[4] = data[0][2] + xf[4];
+    p.xform[5] = data[1][2] + xf[5];
     p.image = gradient->cache;
     p.innerColor = p.outerColor = transformColor(nvgRGBAf(1,1,1,1), cxform);
     p.extent[0] = 256;
@@ -52,8 +49,8 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     float *xf = gradient->xform;
-    Transform3x2 data = { { xf[0], xf[2], /*xf[4]*/0.f },
-                          { xf[1], xf[3], /*xf[5]*/0.f } };
+    Transform3x2 data = { { xf[0], xf[2], 0.f },
+                          { xf[1], xf[3], 0.f } };
     Transform3x2 tr;
     inverse(data, data);
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
@@ -89,16 +86,16 @@ static void ImagePaint(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorT
     NSVGpaint *sp = is_fill ? &shape->fill : &shape->stroke;
     GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(vg)->userPtr;
     GLNVGtexture* tex = glnvg__findTexture(gl, sp->color);
-    glBindTexture(GL_TEXTURE_2D, tex->tex);
     if (NSVG_SPREAD_PAD == sp->spread)
         tex->flags &= ~(NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY);
     else
         tex->flags |= NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY;
     //if (sp->filtered) TODO
     int tw = tex->width, th = tex->height;
+    //glBindTexture(GL_TEXTURE_2D, tex->tex);
     //glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &tw);
     //glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &th);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    //glBindTexture(GL_TEXTURE_2D, 0);
     float *xf = sp->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
@@ -186,14 +183,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
             else if (NSVG_PAINT_RADIAL_GRADIENT == shape->fill.type)
                 nvgSVGRadialGrad(vg, shape, cxform, 1);
             else if (NSVG_PAINT_IMAGE == shape->fill.type)
-            {
-                /*int w = shape->bounds[2] - shape->bounds[0], h = shape->bounds[3] - shape->bounds[1];
-                NVGpaint imgPaint = nvgImagePattern(vg, shape->bounds[0], shape->bounds[1], w, h, 0, shape->fill.color, 1.0f);
-                nvgFillPaint(vg, imgPaint);*/
                 ImagePaint(vg, shape, cxform, 1);
-            }
-            //if (NSVG_FILLRULE_EVENODD == shape->fillRule)
-            //    nvgPathWinding(vg, NVG_HOLE);
             nvgFill(vg);
         }
         if (NSVG_PAINT_NONE != shape->stroke.type)
