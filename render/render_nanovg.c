@@ -12,32 +12,18 @@
 static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
-    /*float sx = shape->bounds[0];
-    float sy = shape->bounds[1];
-    float ex = shape->bounds[0];
-    float ey = shape->bounds[3];*/
     float w = shape->bounds[2] - shape->bounds[0];
     float h = shape->bounds[3] - shape->bounds[1];
-    /*NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
-    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
-
-    NVGpaint p = nvgLinearGradient(vg, sx, sy, ex, ey, cs, ce);*/
 
     float *xf = gradient->xform;
-    Transform3x2 data = { { xf[0], xf[2], xf[4] },
-                          { xf[1], xf[3], xf[5] } };
-    //float p1[2] = { shape->bounds[0], shape->bounds[1] };
-    //float p2[2] = { shape->bounds[2], shape->bounds[3] };
+    Transform3x2 data = { { xf[0], xf[2], /*xf[4]*/0.f },
+                          { xf[1], xf[3], /*xf[5]*/0.f } };
     Transform3x2 tr;
     inverse(data, data);
-    //rotate(tr, mx);
-    //mul(data, tr, data);
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
     mul(data, tr, data);
     translate(tr, 128, 128);
     mul(data, tr, data);
-    //xform(p1, data, p1);
-    //xform(p2, data, p2);
     inverse(data, data);
     scale(tr, 1.0/256, 1.0/256);
     mul(data, tr, data);
@@ -48,8 +34,8 @@ static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
     p.xform[1] = data[1][0];
     p.xform[2] = data[0][1];
     p.xform[3] = data[1][1];
-    p.xform[4] = data[0][2] + shape->bounds[0] + w*0.5;
-    p.xform[5] = data[1][2] + shape->bounds[1] + h*0.5;
+    p.xform[4] = data[0][2]/* + shape->bounds[0] + w*0.5*/ + xf[4];
+    p.xform[5] = data[1][2]/* + shape->bounds[1] + h*0.5*/ + xf[5];
     p.image = gradient->cache;
     p.innerColor = p.outerColor = transformColor(nvgRGBAf(1,1,1,1), cxform);
     p.extent[0] = 256;
@@ -66,8 +52,8 @@ static void nvgSVGRadialGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVG
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     float *xf = gradient->xform;
-    Transform3x2 data = { { xf[0], xf[2], xf[4] },
-                          { xf[1], xf[3], xf[5] } };
+    Transform3x2 data = { { xf[0], xf[2], /*xf[4]*/0.f },
+                          { xf[1], xf[3], /*xf[5]*/0.f } };
     Transform3x2 tr;
     inverse(data, data);
     scale(tr, 20.0/32768.0, 20.0/32768.0); // swf gradients -16384..16384 square in twips
