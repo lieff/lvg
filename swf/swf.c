@@ -385,9 +385,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
     swf_ResetReadBits(tag);
     int fillbits = swf_GetBits(tag, 4);
     int linebits = swf_GetBits(tag, 4);
-    //if (!fillbits && !linebits)
-    //    return;
-
+    // TODO: optimize
     LINE *path = (LINE*)calloc(1, sizeof(LINE)*/*nlines*/65536);
     LINE *ppath = path;
     int i, fill0 = 0, fill1 = 0, line = 0, start_x = 0, start_y = 0, x = 0, y = 0;
@@ -509,8 +507,6 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
                     NSVGshape *s = shape->shapes + shape->num_shapes++;
                     flushStyleToShape(idtable, clip, s, 0, fs, 0);
-                    expandBBox(shape->bounds, s->bounds[0], s->bounds[1]);
-                    expandBBox(shape->bounds, s->bounds[2], s->bounds[3]);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
@@ -520,8 +516,6 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
                     NSVGshape *s = shape->shapes + shape->num_shapes++;
                     flushStyleToShape(idtable, clip, s, 0, 0, ls);
-                    expandBBox(shape->bounds, s->bounds[0], s->bounds[1]);
-                    expandBBox(shape->bounds, s->bounds[2], s->bounds[3]);
                 }
                 swf_ShapeFreeSubpaths(swf_shape);
             }
@@ -1039,7 +1033,7 @@ done:
                 SHAPE2 *swf_shape = (SHAPE2*)calloc(1, sizeof(SHAPE2));
                 swf_ParseDefineShape(tag, swf_shape);
                 LVGShapeCollection *shapecol = clip->shapes + clip->num_shapes;
-                shapecol->bounds[2] = idtable[id].bbox.xmin/20.0f;
+                shapecol->bounds[2] = idtable[id].bbox.xmin/20.0f; // invert bbox for individual shape bbox calculation
                 shapecol->bounds[3] = idtable[id].bbox.ymin/20.0f;
                 shapecol->bounds[0] = idtable[id].bbox.xmax/20.0f;
                 shapecol->bounds[1] = idtable[id].bbox.ymax/20.0f;
@@ -1048,6 +1042,10 @@ done:
                     parseMorphShape(tag, idtable, clip, swf_shape, shapecol);
                 } else
                     parseShape(tag, idtable, clip, swf_shape, shapecol);
+                shapecol->bounds[0] = idtable[id].bbox.xmin/20.0f;
+                shapecol->bounds[1] = idtable[id].bbox.ymin/20.0f;
+                shapecol->bounds[2] = idtable[id].bbox.xmax/20.0f;
+                shapecol->bounds[3] = idtable[id].bbox.ymax/20.0f;
 
                 swf_Shape2Free(swf_shape);
                 free(swf_shape);
