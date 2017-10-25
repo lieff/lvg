@@ -322,23 +322,11 @@ static void nvpr_update_image(void *render, int image, const void *rgba)
 
 static void LinearGrad(struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
-    /*struct NSVGgradient *grad = shape->fill.gradient;
-    NVGcolor cs = transformColor(nvgColorU32(grad->stops[0].color), o);
-    NVGcolor ce = transformColor(nvgColorU32(grad->stops[grad->nstops - 1].color), o);
-    GLfloat rgbGen[4][3] = { { (ce.r - cs.r), 0, cs.r },
-                             { (ce.g - cs.g), 0, cs.g },
-                             { (ce.b - cs.b), 0, cs.b },
-                             { (ce.a - cs.a), 0, cs.a } };
-    glPathColorGenNV(GL_PRIMARY_COLOR, GL_PATH_OBJECT_BOUNDING_BOX_NV, GL_RGBA, &rgbGen[0][0]);*/
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
     float *xf = gradient->xform;
     GLfloat data[2][3] = { { xf[0], xf[2], xf[4] },
                            { xf[1], xf[3], xf[5] } };
     inverse(data, data);
-    /*float p1[2] = { shape->bounds[0], shape->bounds[1] };
-    float p2[2] = { shape->bounds[2], shape->bounds[3] };
-    xform(p1, data, p1);
-    xform(p2, data, p2);*/
     Transform3x2 tr;
     translate(tr, 16384.0/20.0, 16384.0/20.0);
     mul(data, tr, data);
@@ -466,22 +454,18 @@ static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGCol
             glPathColorGenNV(GL_PRIMARY_COLOR, GL_NONE, 0, NULL);
             glDisable(GL_TEXTURE_2D);
         }
-        if (NSVG_PAINT_NONE != shape->stroke.type)
+        if (/*NSVG_PAINT_NONE != shape->stroke.type*/NSVG_PAINT_COLOR == shape->stroke.type)
         {
             if (NSVG_PAINT_COLOR == shape->stroke.type)
             {
                 NVGcolor c = transformColor(nvgColorU32(shape->stroke.color), cxform);
                 glColor4f(c.r, c.g, c.b, c.a);
-            } else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
-            {
-                //LinearGrad(shape, o, 0);
-                NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
-                glColor4f(c.r, c.g, c.b, c.a);
-            } else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
-            {
-                NVGcolor c = nvgColorU32(shape->stroke.gradient->stops[0].color);
-                glColor4f(c.r, c.g, c.b, c.a);
-            }
+            }/* else if (NSVG_PAINT_LINEAR_GRADIENT == shape->stroke.type)
+                LinearGrad(shape, cxform, 0);
+            else if (NSVG_PAINT_RADIAL_GRADIENT == shape->stroke.type)
+                RadialGrad(shape, cxform, 0);
+            else if (NSVG_PAINT_IMAGE == shape->stroke.type)
+                ImagePaint(shape, cxform, 0);*/
             glPathParameterfNV(pathObj, GL_PATH_STROKE_WIDTH_NV, shape->strokeWidth);
             if (NSVG_JOIN_ROUND == shape->strokeLineJoin)
                 glPathParameteriNV(pathObj, GL_PATH_JOIN_STYLE_NV, GL_ROUND_NV);

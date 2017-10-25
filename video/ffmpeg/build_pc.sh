@@ -17,7 +17,6 @@ cd FFmpeg
 	--disable-d3d11va \
 	--disable-dxva2 \
 	--disable-vaapi \
-	--disable-vda \
 	--disable-vdpau \
 	--enable-decoder=flv,vp6a,vp6f,h264 \
 	--disable-bzlib \
