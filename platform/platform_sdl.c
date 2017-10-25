@@ -153,6 +153,77 @@ static void sdl_swap_buffers(void *ctx)
 static void sdl_fullscreen(void *ctx, int b_fullscreen)
 {
     platform_ctx *platform = (platform_ctx *)ctx;
+
+    /*SDL_Rect bounds, usablebounds;
+    float hdpi = 0;
+    float vdpi = 0;
+    SDL_DisplayMode mode;
+    uint32_t Rmask, Gmask, Bmask, Amask;
+    int bpp, i, j, m, n = SDL_GetNumVideoDisplays();
+    SDL_Log("Number of displays: %d\n", n);
+    for (i = 0; i < n; ++i)
+    {
+        SDL_Log("Display %d: %s\n", i, SDL_GetDisplayName(i));
+
+        SDL_zero(bounds);
+        SDL_GetDisplayBounds(i, &bounds);
+
+        SDL_zero(usablebounds);
+        //SDL_GetDisplayUsableBounds(i, &usablebounds);
+
+        SDL_GetDisplayDPI(i, NULL, &hdpi, &vdpi);
+
+        SDL_Log("Bounds: %dx%d at %d,%d\n", bounds.w, bounds.h, bounds.x, bounds.y);
+        //SDL_Log("Usable bounds: %dx%d at %d,%d\n", usablebounds.w, usablebounds.h, usablebounds.x, usablebounds.y);
+        SDL_Log("DPI: %fx%f\n", hdpi, vdpi);
+
+        SDL_GetDesktopDisplayMode(i, &mode);
+        SDL_PixelFormatEnumToMasks(mode.format, &bpp, &Rmask, &Gmask,
+                                   &Bmask, &Amask);
+        SDL_Log("  Current mode: %dx%d@%dHz, %d bits-per-pixel (%s)\n",
+                mode.w, mode.h, mode.refresh_rate, bpp,
+                SDL_GetPixelFormatName(mode.format));
+        if (Rmask || Gmask || Bmask)
+        {
+            SDL_Log("      Red Mask   = 0x%.8x\n", Rmask);
+            SDL_Log("      Green Mask = 0x%.8x\n", Gmask);
+            SDL_Log("      Blue Mask  = 0x%.8x\n", Bmask);
+            if (Amask)
+                SDL_Log("      Alpha Mask = 0x%.8x\n", Amask);
+        }
+
+        m = SDL_GetNumDisplayModes(i);
+        if (m == 0)
+        {
+            SDL_Log("No available fullscreen video modes\n");
+        } else
+        {
+            SDL_Log("  Fullscreen video modes:\n");
+            for (j = 0; j < m; ++j)
+            {
+                SDL_GetDisplayMode(i, j, &mode);
+                SDL_PixelFormatEnumToMasks(mode.format, &bpp, &Rmask,
+                                           &Gmask, &Bmask, &Amask);
+                SDL_Log("    Mode %d: %dx%d@%dHz, %d bits-per-pixel (%s)\n",
+                        j, mode.w, mode.h, mode.refresh_rate, bpp,
+                        SDL_GetPixelFormatName(mode.format));
+                if (Rmask || Gmask || Bmask) {
+                    SDL_Log("        Red Mask   = 0x%.8x\n", Rmask);
+                    SDL_Log("        Green Mask = 0x%.8x\n", Gmask);
+                    SDL_Log("        Blue Mask  = 0x%.8x\n", Bmask);
+                    if (Amask)
+                        SDL_Log("        Alpha Mask = 0x%.8x\n", Amask);
+                }
+                if (b_fullscreen && 1024 == mode.w && 32 == bpp)
+                {
+                    SDL_SetWindowDisplayMode(platform->window, &mode);
+                    SDL_SetWindowFullscreen(platform->window, SDL_WINDOW_FULLSCREEN);
+                    return;
+                }
+            }
+        }
+    }*/
+
     SDL_SetWindowFullscreen(platform->window, b_fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 }
 
