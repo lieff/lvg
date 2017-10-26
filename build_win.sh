@@ -9,16 +9,7 @@ if [ ! -d "glfw" ]; then
   cd ../../
 fi
 
-if [ ! -d "SDL" ]; then
-  hg clone http://hg.libsdl.org/SDL
-  mkdir SDL/build
-  cd SDL/build
-  cmake -DCMAKE_TOOLCHAIN_FILE=../../windows/mingw64.cmake -DVIDEO_OPENGLES=0 ..
-  make
-  cd ../../
-  mkdir SDL/include/SDL2
-  mv SDL/include/*.h SDL/include/SDL2
-fi
+. scripts/build-sdl.sh win
 
 if [ ! -d "video/ffmpeg/FFmpeg" ]; then
   cd video/ffmpeg
@@ -42,10 +33,10 @@ swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*
 render/*.c \
 windows/mman.c \
 video/ffmpeg/ffmpeg_dec.c \
--Lglfw/build/src -LSDL/build -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
+-Lglfw/build/src -LSDL/build-win -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
 -Iglfw/include -ISDL/include -Ivideo/ffmpeg/FFmpeg \
--DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2-static -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
+-DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2 -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 scripts/compress.sh ./lvg_win.exe
 if [ "$TRAVIS" = "true" ]; then
     zip -9 -u lvg_win.zip lvg_win.exe
