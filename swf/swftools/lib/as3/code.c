@@ -269,16 +269,6 @@ code_t* code_atposition(codelookup_t*l, int pos)
     return pos2code(l->bytepos, 0, pos, l->len);
 }
 
-void lookupswitch_print(lookupswitch_t*l)
-{
-    printf("default: %p\n", l->def);
-    code_list_t*t = l->targets;
-    while(t) {
-        printf("target: %p\n", t->code);
-        t = t->next;
-    }
-}
-
 code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**codelookup)
 {
     code_t*head=0;
@@ -374,7 +364,9 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
                     list_append(l->targets, (code_t*)(ptroff_t)swf_GetS24(tag));
                 data = l;
             } else {
+#ifdef _DEBUG
                 printf("Can't parse opcode param type \"%c\" (for op %02x %s).\n", *p, code->opcode, op->name);
+#endif
                 return 0;
             }
             code->data[pos++] = data;
@@ -962,13 +954,6 @@ code_t* add_opcode(code_t*atag, uint8_t op)
     return tmp;
 }
 
-void codestats_print(codestats_t*stats)
-{
-    printf("max_stack: %d\n", stats->max_stack);
-    printf("local_count: %d\n", stats->local_count);
-    printf("scope_depth: %d\n", stats->max_scope_depth);
-}
-
 code_t* code_end(code_t*code)
 {
     if(!code)
@@ -1076,7 +1061,10 @@ code_t*code_dup(code_t*c)
             if(c->branch) {
                 code_t*target = dict_lookup(pos2pos, c->branch);
                 if(!target) {
-                    printf("Error: Can't find branch target in code_dup\n");
+#ifdef _DEBUG
+                    printf("error: Can't find branch target in code_dup\n");
+#endif
+                    dict_destroy(pos2pos);
                     return 0;
                 }
                 c->branch = target;
