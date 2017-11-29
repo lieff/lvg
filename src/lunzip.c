@@ -17,8 +17,13 @@ int lvgZipOpen(const char *fname, zip_t *zip)
 {
     struct stat64 st;
     int fd = open(fname, O_RDONLY);
-    if (fd < 0 || fstat64(fd, &st) < 0)
+    if (fd < 0)
         return -1;
+    if (fstat64(fd, &st) < 0)
+    {
+        close(fd);
+        return -1;
+    }
     size_t size = st.st_size;
     char *m = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
     if (*(int32_t*)m != 0x04034B50)
