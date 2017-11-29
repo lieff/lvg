@@ -3,6 +3,10 @@ LVG (Lion Vector Graphics)
 
 [![Build Status](https://travis-ci.org/lieff/lvg.svg)](https://travis-ci.org/lieff/lvg)
 [![Build Status](https://ci.appveyor.com/api/projects/status/69br8ic9dwlfeu48?svg=true)](https://ci.appveyor.com/project/lieff/lvg)
+<a href="https://scan.coverity.com/projects/lieff-lvg">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/14454/badge.svg"/>
+</a>
 
 LVG is a lightweight flash player replacement. Basic idea: we have some assets in a package and sctipts that renders them.
 It's designed to use a very small runtime (around 200kb without video codecs) for player and runs on android, ios, web and more.
