@@ -953,8 +953,13 @@ int open_swf(const char *file_name)
 {
     struct stat64 st;
     int fd = open(file_name, O_RDONLY);
-    if (fd < 0 || fstat64(fd, &st) < 0)
+    if (fd < 0)
         return -1;
+    if (fstat64(fd, &st) < 0)
+    {
+        close(fd);
+        return -1;
+    }
     char *buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
     g_clip = lvgLoadSWFBuf(buf, st.st_size, 0);
     munmap(buf, st.st_size);
