@@ -2,6 +2,7 @@ LVG (Lion Vector Graphics)
 ==========
 
 [![Build Status](https://travis-ci.org/lieff/lvg.svg)](https://travis-ci.org/lieff/lvg)
+[![CircleCI](https://circleci.com/gh/lieff/lvg.svg?style=svg)](https://circleci.com/gh/lieff/lvg)
 [![Build Status](https://ci.appveyor.com/api/projects/status/69br8ic9dwlfeu48?svg=true)](https://ci.appveyor.com/project/lieff/lvg)
 <a href="https://scan.coverity.com/projects/lieff-lvg">
   <img alt="Coverity Scan Build Status"

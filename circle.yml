@@ -1,0 +1,11 @@
+dependencies:
+    pre:
+        - sudo apt-get install build-essential git mercurial cmake meson yasm libglfw3-dev libsdl2-dev libavcodec-dev mingw-w64 zip wget
+compile:
+  override:
+    - bash -c ./build.sh
+    - bash -c ./build_win.sh
+
+test:
+  override:
+    - tests/swf/test.sh
