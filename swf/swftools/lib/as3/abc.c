@@ -852,10 +852,12 @@ void* swf_ReadABC(TAG*tag)
 
         array_append(file->method_bodies, NO_KEY, c);
     }
-    if(tag->len - tag->pos) {
+    if (tag->len - tag->pos)
+    {
 #ifdef _DEBUG
         printf("ERROR: %d unparsed bytes remaining in ABC block\n", tag->len - tag->pos);
 #endif
+        pool_destroy(pool);
         return 0;
     }
 
