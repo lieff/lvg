@@ -1,3 +1,9 @@
+_FILENAME=${0##*/}
+CUR_DIR=${0/${_FILENAME}}
+CUR_DIR=$(cd $(dirname ${CUR_DIR}); pwd)/$(basename ${CUR_DIR})/
+
+pushd $CUR_DIR
+
 APP=../../build/lvg_test
 if [ ! -f "$APP" ]; then
     mkdir ../../build
@@ -37,3 +43,4 @@ fi
 done
 
 echo -ne "\nresults: passed tests: ${num_pass}, failed tests: ${num_fail}, exited with error: ${num_error}\n\n"
+popd
