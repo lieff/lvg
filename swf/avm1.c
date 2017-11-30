@@ -168,7 +168,7 @@ int32_t to_int(ASVal *v)
 
 ASClass *to_object(ASVal *v)
 {
-    ASClass *base, *res;
+    ASClass *base, *res = 0;
     if (ASVAL_STRING == v->type)
     {
         base = &g_string;

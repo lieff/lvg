@@ -156,13 +156,6 @@ unsigned int crc32_add_byte(unsigned int crc32, unsigned char b);
 unsigned int crc32_add_string(unsigned int crc32, const char*s);
 unsigned int crc32_add_bytes(unsigned int checksum, const void*s, int len);
 
-void mem_init(mem_t*mem);
-int mem_put(mem_t*m, void*data, int length);
-int mem_putstring(mem_t*m, string_t str);
-int mem_get(mem_t*m, void*data, int length);
-void mem_clear(mem_t*mem);
-void mem_destroy(mem_t*mem);
-
 void ringbuffer_init(ringbuffer_t*r);
 void ringbuffer_put(ringbuffer_t*r, void*buf, int size);
 int ringbuffer_read(ringbuffer_t*r, void*buf, int size);
@@ -190,15 +183,6 @@ int string_equals(string_t*str, const char*text);
 
 char* concat2(const char* t1, const char* t2);
 char* concat3(const char* t1, const char* t2, const char* t3);
-
-void stringarray_init(stringarray_t*sa, int hashsize);
-void stringarray_put(stringarray_t*sa, string_t str);
-
-char* stringarray_at(stringarray_t*sa, int pos);
-string_t stringarray_at2(stringarray_t*sa, int pos);
-int stringarray_find(stringarray_t*sa, string_t*str);
-void stringarray_clear(stringarray_t*sa);
-void stringarray_destroy(stringarray_t*sa);
 
 dict_t*dict_new();
 dict_t*dict_new2(type_t*type);

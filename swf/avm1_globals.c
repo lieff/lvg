@@ -379,7 +379,7 @@ static void do_gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t
     assert(ASVAL_INT == se_frame->type || ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_STRING == se_frame->type);
     LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     LVGMovieClipGroup *group = ctx->clip->groups + groupstate->group_num;
-    uint32_t frame;
+    uint32_t frame = -1;
     if (ASVAL_STRING == se_frame->type)
     {
         LVGFrameLabel *l = group->labels;
@@ -389,6 +389,8 @@ static void do_gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t
                 frame = l[i].frame_num;
                 break;
             }
+        if (frame < 0)
+            return;
     } else
         frame = to_int(se_frame);
     groupstate->cur_frame = frame % group->num_frames;

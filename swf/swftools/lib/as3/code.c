@@ -269,21 +269,23 @@ code_t* code_atposition(codelookup_t*l, int pos)
     return pos2code(l->bytepos, 0, pos, l->len);
 }
 
-code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**codelookup)
+code_t *code_parse(TAG *tag, int len, abc_file_t *file, pool_t *pool, codelookup_t **codelookup)
 {
-    code_t*head=0;
-    code_t*code=0;
-    int start=tag->pos;
-    int end=tag->pos+len;
+    code_t *head = 0;
+    code_t *code = 0;
+    int start = tag->pos;
+    int end = tag->pos + len;
     //printf("-->\n");fflush(stdout);
 
-    code_t**bytepos = calloc(1, sizeof(code_t*)*len);
+    code_t **bytepos = calloc(1, sizeof(code_t*)*len);
 
-    while(tag->pos<end) {
-        int codepos = tag->pos-start;
+    while (tag->pos < end)
+    {
+        int codepos = tag->pos - start;
         uint8_t opcode = swf_GetU8(tag);
-        opcode_t*op = opcode_get(opcode);
-        if(!op) {
+        opcode_t *op = opcode_get(opcode);
+        if (!op)
+        {
 #ifdef _DEBUG
             printf("Can't parse opcode %02x\n", opcode);
 #endif
@@ -295,9 +297,11 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
 
         bytepos[codepos] = c;
 
-        if(!head) {
+        if (!head)
+        {
             head = code = c;
-        } else {
+        } else
+        {
             code->next = c;
             c->prev = code;
             code = c;
@@ -305,10 +309,11 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
 
         c->opcode = opcode;
 
-        char*p = op->params;
+        char *p = op->params;
         int pos = 0;
-        while(*p) {
-            void*data = 0;
+        while (*p)
+        {
+            void *data = 0;
             if(*p == 'n') { // number
                 data = (void*)(ptroff_t)swf_GetU30(tag);
             } else if(*p == '2') { //multiname
@@ -377,8 +382,9 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
     //#define DEBUG_BYTES
 #ifdef DEBUG_BYTES
     int t;
-    for(t=0;t<len;t++) {
-        code_t*c = bytepos[t];
+    for (t = 0; t < len; t++)
+    {
+        code_t *c = bytepos[t];
         if(c) {
             opcode_t*op = opcode_get(c->opcode);
             if(op->flags & (OP_JUMP|OP_BRANCH)) {
@@ -393,30 +399,36 @@ code_t*code_parse(TAG*tag, int len, abc_file_t*file, pool_t*pool, codelookup_t**
     //printf("%05d) %02x\n", t, tag->data[start+t]);
 #endif
 
-    code_t*c = head;
-    while(c) {
-        opcode_t*op = opcode_get(c->opcode);
-        if(op->flags & (OP_JUMP|OP_BRANCH)) {
+    code_t *c = head;
+    while (c)
+    {
+        opcode_t *op = opcode_get(c->opcode);
+        if (op->flags & (OP_JUMP | OP_BRANCH))
+        {
             int j = ((int)(ptroff_t)c->data[0]);
-            c->branch = pos2code(bytepos,c,j+4,len);
-        } else if(op->flags & (OP_LOOKUPSWITCH)) {
-            lookupswitch_t*l = (lookupswitch_t*)c->data[0];
+            c->branch = pos2code(bytepos, c, j + 4, len);
+        } else if(op->flags & (OP_LOOKUPSWITCH))
+        {
+            lookupswitch_t *l = (lookupswitch_t*)c->data[0];
             int offset = 0;
-            l->def = pos2code(bytepos,c,(ptroff_t)l->def+offset,len);
-            code_list_t*t=l->targets;
-            while(t) {
-                t->code = pos2code(bytepos,c,(ptroff_t)t->code+offset,len);
+            l->def = pos2code(bytepos, c, (ptroff_t)l->def + offset, len);
+            code_list_t *t = l->targets;
+            while (t)
+            {
+                t->code = pos2code(bytepos, c, (ptroff_t)t->code + offset, len);
                 t = t->next;
             }
         }
         c = c->next;
     }
 
-    if(codelookup) {
+    if (codelookup)
+    {
         (*codelookup) = malloc(sizeof(codelookup_t));
         (*codelookup)->bytepos = bytepos;
         (*codelookup)->len = len;
-    } else {
+    } else
+    {
         free(bytepos);
     }
 
@@ -771,7 +783,8 @@ int code_dump(code_t*c)
 
     return code_dump2(c, 0, 0, "", stdout);
 }
-int code_dump2(code_t*c, abc_exception_list_t*exceptions, abc_file_t*file, char*prefix, FILE*fo)
+
+int code_dump2(code_t*c, abc_exception_list_t *exceptions, abc_file_t *file, char *prefix, FILE *fo)
 {
     abc_exception_list_t*e = exceptions;
     c = code_start(c);
@@ -962,11 +975,12 @@ code_t* code_end(code_t*code)
         code = code->next;
     return code;
 }
-code_t* code_start(code_t*code)
+
+code_t *code_start(code_t *code)
 {
-    if(!code)
+    if (!code)
         return 0;
-    while(code->prev)
+    while (code->prev)
         code = code->prev;
     return code;
 }
@@ -991,9 +1005,9 @@ code_t* code_append(code_t*code, code_t*toappend)
     return code_end(toappend);
 }
 
-lookupswitch_t*lookupswitch_dup(lookupswitch_t*l)
+lookupswitch_t *lookupswitch_dup(lookupswitch_t*l)
 {
-    lookupswitch_t*n = malloc(sizeof(lookupswitch_t));
+    lookupswitch_t *n = malloc(sizeof(lookupswitch_t));
 #ifdef _DEBUG
     printf("Error: lookupswitch dupping not supported yet\n");
 #endif
@@ -1001,111 +1015,43 @@ lookupswitch_t*lookupswitch_dup(lookupswitch_t*l)
     return 0;
 }
 
-code_t*code_dup(code_t*c)
+code_t *code_cut(code_t *c)
 {
-    if(!c) return 0;
-
-    dict_t*pos2pos = dict_new2(&ptr_type);
-
-    code_t*last = 0;
-    c = code_start(c);
-    code_t*start = 0;
-    char does_branch = 0;
-    while(c) {
-        NEW(code_t, n);
-        memcpy(n, c, sizeof(code_t));
-        if(!start)
-            start=n;
-
-        if(c->opcode == OPCODE_LABEL || c->opcode == OPCODE_NOP) {
-            dict_put(pos2pos, c, n);
-        }
-        if(c->branch) {
-            does_branch = 1;
-        }
-
-        opcode_t*op = opcode_get(c->opcode);
-
-        char*p = op?op->params:"";
-        int pos=0;
-        while(*p) {
-            if(*p == '2') { //multiname
-                c->data[pos] = multiname_clone(c->data[pos]);
-            } else if(*p == 'N') { //multiname
-                c->data[pos] = namespace_clone(c->data[pos]);
-            } else if(*p == 's') {
-                c->data[pos] = string_dup3(c->data[pos]);
-            } else if(*p == 'D') {
-                c->data[pos] = strdup(c->data[pos]);
-            } else if(*p == 'f') {
-                double old = *(double*)c->data[pos];
-                c->data[pos] = malloc(sizeof(double));
-                *(double*)c->data[pos] = old;
-            } else if(strchr("S", *p)) {
-                c->data[pos] = lookupswitch_dup(c->data[pos]);
-            }
-            p++;pos++;
-        }
-
-        n->prev = last;
-        if(last) {
-            last->next = n;
-        }
-        last = n;
-        c = c->next;
-    }
-
-    if(does_branch) {
-        c = start;
-        while(c) {
-            if(c->branch) {
-                code_t*target = dict_lookup(pos2pos, c->branch);
-                if(!target) {
-#ifdef _DEBUG
-                    printf("error: Can't find branch target in code_dup\n");
-#endif
-                    dict_destroy(pos2pos);
-                    return 0;
-                }
-                c->branch = target;
-            }
-            c = c->next;
-        }
-    }
-    dict_destroy(pos2pos);
-    return last;
-}
-
-code_t*code_cut(code_t*c)
-{
-    if(!c) return c;
-    code_t*prev = c->prev;
-    code_t*next = c->next;
+    if (!c)
+        return c;
+    code_t *prev = c->prev;
+    code_t *next = c->next;
     c->prev = 0;
     c->next = 0;
-    if(prev) prev->next=next;
-    if(next) next->prev=prev;
+    if (prev)
+        prev->next=next;
+    if (next)
+        next->prev=prev;
     code_free(c);
 
-    if(next) return code_end(next);
-    else     return prev;
+    if (next)
+        return code_end(next);
+    else
+        return prev;
 }
 
-code_t*code_cutlast(code_t*c)
+code_t *code_cutlast(code_t*c)
 {
     if(!c) return c;
     assert(!c->next);
     return code_cut(c);
 }
 
-char is_getlocal(code_t*c)
+char is_getlocal(code_t *c)
 {
-    if(!c) return 0;
-    if(c->opcode == OPCODE_GETLOCAL ||
-            c->opcode == OPCODE_GETLOCAL_0 ||
-            c->opcode == OPCODE_GETLOCAL_1 ||
-            c->opcode == OPCODE_GETLOCAL_2 ||
-            c->opcode == OPCODE_GETLOCAL_3) {
+    if (!c)
+        return 0;
+    if (c->opcode == OPCODE_GETLOCAL ||
+        c->opcode == OPCODE_GETLOCAL_0 ||
+        c->opcode == OPCODE_GETLOCAL_1 ||
+        c->opcode == OPCODE_GETLOCAL_2 ||
+        c->opcode == OPCODE_GETLOCAL_3)
+    {
         return 1;
     }
     return 0;

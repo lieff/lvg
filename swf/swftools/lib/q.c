@@ -63,55 +63,6 @@ char* allocprintf(const char*format, ...)
     return buf;
 }
 
-// ------------------------------- mem_t --------------------------------------
-
-void mem_init(mem_t*mem)
-{
-    memset(mem, 0, sizeof(mem_t));
-}
-void mem_clear(mem_t*mem)
-{
-    free(mem->buffer);mem->buffer = 0;
-}
-void mem_destroy(mem_t*mem)
-{
-    mem_clear(mem);
-    free(mem);
-}
-static int mem_put_(mem_t*m,const void*data, int length, int null)
-{
-    int n = m->pos;
-    m->pos += length + (null?1:0);
-    if(m->pos > m->len) {
-        int v1 = (m->pos+63)&~63;
-        int v2 = m->len + m->len / 2;
-        m->len = v1>v2?v1:v2;
-        m->buffer = m->buffer?(char*)realloc(m->buffer,m->len):(char*)malloc(m->len);
-    }
-    assert(n+length <= m->len);
-    memcpy(&m->buffer[n], data, length);
-    if(null)
-        m->buffer[n + length] = 0;
-    return n;
-}
-int mem_put(mem_t*m,void*data, int length)
-{
-    return mem_put_(m, data, length, 0);
-}
-int mem_putstring(mem_t*m,string_t str)
-{
-    return mem_put_(m, str.str, str.len, 1);
-}
-int mem_get(mem_t*m, void*data, int length)
-{
-    if(m->read_pos + length > m->pos) {
-        length = m->pos - m->read_pos;
-    }
-    memcpy(data, m->buffer+m->read_pos, length);
-    m->read_pos += length;
-    return length;
-}
-
 // ------------------------------- median -------------------------------------
 
 float medianf(float*a, int n)
@@ -662,34 +613,39 @@ void string_free(string_t*s)
         free(s);
     }
 }
+
 char* string_cstr(string_t*str)
 {
     return strdup_n(str->str, str->len);
 }
+
 char* string_escape(string_t*str)
 {
     int t;
     int len = 0;
-    for(t=0;t<str->len;t++) {
-        if(str->str[t]<0x20)
-            len+=3;
+    for (t = 0; t < str->len; t++)
+    {
+        if (str->str[t] < 0x20)
+            len += 3;
         else
             len++;
     }
-    char*s = malloc(len+1);
-    char*p=s;
-    for(t=0;t<str->len;t++) {
-        if(str->str[t]<0x20) {
+    char *s = malloc(len + 1);
+    char *p = s;
+    for (t = 0; t < str->len; t++)
+    {
+        if (str->str[t] < 0x20)
+        {
             *p++ ='\\';
             unsigned char c = str->str[t];
-            *p++ = "0123456789abcdef"[c>>4];
-            *p++ = "0123456789abcdef"[c&0x0f];
-        } else {
+            *p++ = "0123456789abcdef"[c >> 4];
+            *p++ = "0123456789abcdef"[c & 0x0f];
+        } else
+        {
             *p++ = str->str[t];
         }
     }
     *p++ = 0;
-    assert(p == &s[len+1]);
     return s;
 }
 
@@ -807,132 +763,6 @@ char* concat3(const char* t1, const char* t2, const char* t3)
     memcpy(text+l1+l2, t3, l3);
     text[l1+l2+l3] = 0;
     return text;
-}
-
-// ------------------------------- stringarray_t ------------------------------
-
-typedef struct _stringlist {
-    int index;
-    struct _stringlist*next;
-} stringlist_t;
-
-typedef struct _stringarray_internal_t
-{
-    mem_t pos;
-    stringlist_t**hash;
-    int num;
-    int hashsize;
-} stringarray_internal_t;
-
-void stringarray_init(stringarray_t*sa, int hashsize)
-{
-    stringarray_internal_t*s;
-    sa->internal = (stringarray_internal_t*)calloc(1, sizeof(stringarray_internal_t));
-    s = (stringarray_internal_t*)sa->internal;
-    mem_init(&s->pos);
-    s->hash = calloc(1, sizeof(stringlist_t*)*hashsize);
-    s->hashsize = hashsize;
-}
-void stringarray_put(stringarray_t*sa, string_t str)
-{
-    stringarray_internal_t*s = (stringarray_internal_t*)sa->internal;
-    int hash = string_hash(&str) % s->hashsize;
-
-    char*ss = string_cstr(&str);
-    mem_put(&s->pos, &ss, sizeof(char*));
-
-    stringlist_t*l = malloc(sizeof(stringlist_t));
-    l->index = s->num;
-    l->next = s->hash[hash];
-    s->hash[hash] = l;
-
-    s->num++;
-}
-char* stringarray_at(stringarray_t*sa, int pos)
-{
-    stringarray_internal_t*s = (stringarray_internal_t*)sa->internal;
-    char*p;
-    if(pos<0 || pos>=s->num)
-        return 0;
-    p = *(char**)&s->pos.buffer[pos*sizeof(char*)];
-    if(p<0)
-        return 0;
-    return p;
-}
-string_t stringarray_at2(stringarray_t*sa, int pos)
-{
-    string_t s;
-    s.str = stringarray_at(sa, pos);
-    s.len = s.str?strlen(s.str):0;
-    return s;
-}
-static stringlist_t* stringlist_del(stringarray_t*sa, stringlist_t*l, int index)
-{
-    stringlist_t*ll = l;
-    stringlist_t*old = l;
-    while(l) {
-        if(index==l->index) {
-            old->next = l->next;
-            memset(l, 0, sizeof(stringlist_t));
-            free(l);
-            if(old==l)
-                return 0;
-            else
-                return ll;
-        }
-        old = l;
-        l = l->next;
-    }
-#ifdef _DEBUG
-    printf("Internal error: did not find string %d in hash\n", index);
-#endif
-    return ll;
-}
-
-void stringarray_del(stringarray_t*sa, int pos)
-{
-    stringarray_internal_t*s = (stringarray_internal_t*)sa->internal;
-    string_t str = stringarray_at2(sa, pos);
-    int hash = string_hash(&str) % s->hashsize;
-    s->hash[hash] = stringlist_del(sa, s->hash[hash], pos);
-    *(char**)&s->pos.buffer[pos*sizeof(char*)] = 0;
-}
-int stringarray_find(stringarray_t*sa, string_t* str)
-{
-    stringarray_internal_t*s = (stringarray_internal_t*)sa->internal;
-    int hash = string_hash(str) % s->hashsize;
-    stringlist_t*l = s->hash[hash];
-    //TODO: statistics
-    while(l) {
-        string_t s = stringarray_at2(sa, l->index);
-        if(string_equals2(str, &s)) {
-            return l->index;
-        }
-        l = l->next;
-    }
-    return -1;
-}
-void stringarray_clear(stringarray_t*sa)
-{
-    stringarray_internal_t*s = (stringarray_internal_t*)sa->internal;
-    mem_clear(&s->pos);
-    int t;
-    for(t=0;t<s->hashsize;t++) {
-        stringlist_t*l = s->hash[t];
-        while(l) {
-            stringlist_t*next = l->next;
-            memset(l, 0, sizeof(stringlist_t));
-            free(l);
-            l = next;
-        }
-    }
-    free(s->hash);s->hash=0;
-    free(s);
-}
-void stringarray_destroy(stringarray_t*sa)
-{
-    stringarray_clear(sa);
-    free(sa);
 }
 
 // ------------------------------- type_t -------------------------------

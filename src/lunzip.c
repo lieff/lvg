@@ -44,6 +44,8 @@ int lvgZipOpen(const char *fname, zip_t *zip)
     zip->size = size;
     return 0;
 error:
+    if (m)
+        munmap(m, size);
     close(fd);
     return -1;
 }
@@ -90,7 +92,10 @@ char *lvgZipDecompress(zip_t *zip, uint32_t file_ofs, uint32_t *size)
     if (0 == fh->compressionMethod)
     {
         if ((fh->compressedSize != fh->uncompressedSize))
+        {
+            free(u_data);
             return 0;
+        }
         memcpy(u_data, c_data, fh->uncompressedSize);
     } else
         stbi_zlib_decode_noheader_buffer(u_data, fh->uncompressedSize, c_data, fh->compressedSize);

@@ -336,7 +336,8 @@ fail:
     free(save_buf);
     time = g_platform->get_time(g_platform_obj);
     printf("movie clip load time: %fs\n", time - time2);
-    clip->last_time = time;
+    if (clip)
+        clip->last_time = time;
     return clip;
 }
 
