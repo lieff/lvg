@@ -206,17 +206,19 @@ namespace_t* namespace_clone(namespace_t*other)
 
 namespace_t* namespace_fromstring(const char*name)
 {
-    namespace_t*ns = malloc(sizeof(namespace_t));
+    namespace_t *ns = malloc(sizeof(namespace_t));
     memset(ns, 0, sizeof(namespace_t));
-    if(name[0] == '[') {
+    if (name[0] == '[')
+    {
         uint8_t access = 0;
-        char*n = strdup(name);
-        char*bracket = strchr(n, ']');
-        if(bracket) {
+        char *n = strdup(name);
+        char *bracket = strchr(n, ']');
+        if (bracket)
+        {
             *bracket = 0;
-            char*a = n+1;
-            name += (bracket-n)+1;
-            if(!strcmp(a, "")) access=0x16;
+            char*a = n + 1;
+            name += (bracket - n) + 1;
+            if(!strcmp(a, "")) access = 0x16;
             else if(!strcmp(a, "undefined")) access=0x08; // public??
             else if(!strcmp(a, "package")) access=0x16;
             else if(!strcmp(a, "public")) access=0x16;
@@ -229,6 +231,7 @@ namespace_t* namespace_fromstring(const char*name)
 #ifdef _DEBUG
                 printf("Undefined access level: [%s]\n", a);
 #endif
+                free(ns);
                 free(n);
                 return 0;
             }

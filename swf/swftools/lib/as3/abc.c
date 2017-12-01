@@ -676,21 +676,25 @@ void* swf_DumpABC(FILE*fo, void*code, char*prefix)
     return file;
 }
 
-void* swf_ReadABC(TAG*tag)
+void abc_file_free(abc_file_t *file);
+
+void *swf_ReadABC(TAG *tag)
 {
-    abc_file_t* file = abc_file_new();
-    pool_t*pool = pool_new();
+    abc_file_t *file = abc_file_new();
+    pool_t *pool = pool_new();
 
     swf_SetTagPos(tag, 0);
     int t;
-    if(tag->id == ST_DOABC) {
+    if (tag->id == ST_DOABC)
+    {
         uint32_t abcflags = swf_GetU32(tag);
         DEBUG printf("flags=%08x\n", abcflags);
-        char*name= swf_GetString(tag);
-        file->name = (name&&name[0])?strdup(name):0;
+        char *name= swf_GetString(tag);
+        file->name = (name && name[0]) ? strdup(name) : 0;
     }
     uint32_t version = swf_GetU32(tag);
-    if(version!=0x002e0010) {
+    if (version != 0x002e0010)
+    {
 #ifdef _DEBUG
         printf("Warning: unknown AVM2 version %08x\n", version);
 #endif
@@ -700,17 +704,19 @@ void* swf_ReadABC(TAG*tag)
 
     int num_methods = swf_GetU30(tag);
     DEBUG printf("%d methods\n", num_methods);
-    for(t=0;t<num_methods;t++) {
-        NEW(abc_method_t,m);
+    for (t = 0; t < num_methods; t++)
+    {
+        NEW(abc_method_t, m);
         int param_count = swf_GetU30(tag);
         int return_type_index = swf_GetU30(tag);
-        if(return_type_index)
+        if (return_type_index)
             m->return_type = multiname_clone(pool_lookup_multiname(pool, return_type_index));
         else
             m->return_type = 0;
 
         int s;
-        for(s=0;s<param_count;s++) {
+        for (s = 0; s < param_count; s++)
+        {
             int type_index = swf_GetU30(tag);
 
             /* type_index might be 0 ("*") */
@@ -719,7 +725,7 @@ void* swf_ReadABC(TAG*tag)
         }
 
         int namenr = swf_GetU30(tag);
-        if(namenr)
+        if (namenr)
             m->name = strdup(pool_lookup_string(pool, namenr));
         else
             m->name = strdup("");
@@ -730,11 +736,13 @@ void* swf_ReadABC(TAG*tag)
         DEBUG params_dump(stdout, m->parameters, m->optional_parameters);
         DEBUG printf("flags=%02x\n", m->flags);
 
-        if(m->flags&0x08) {
+        if (m->flags & 0x08)
+        {
             m->optional_parameters = list_new();
             int num = swf_GetU30(tag);
             int s;
-            for(s=0;s<num;s++) {
+            for (s = 0; s < num; s++)
+            {
                 int vindex = swf_GetU30(tag);
                 uint8_t vkind = swf_GetU8(tag); // specifies index type for "val"
                 constant_t*c = constant_fromindex(pool, vindex, vkind);
@@ -742,10 +750,12 @@ void* swf_ReadABC(TAG*tag)
 
             }
         }
-        if(m->flags&0x80) {
+        if (m->flags & 0x80)
+        {
             /* debug information- not used by avm2 */
-            multiname_list_t*l = m->parameters;
-            while(l) {
+            multiname_list_t *l = m->parameters;
+            while(l)
+            {
                 const char*name = pool_lookup_string(pool, swf_GetU30(tag));
                 DEBUG printf("DEBUG: name=%s\n", name);
                 l = l->next;
@@ -761,8 +771,9 @@ void* swf_ReadABC(TAG*tag)
     int num_classes = swf_GetU30(tag);
     int classes_pos = tag->pos;
     DEBUG printf("%d classes\n", num_classes);
-    for(t=0;t<num_classes;t++) {
-        abc_class_t*cls = malloc(sizeof(abc_class_t));
+    for (t = 0; t < num_classes; t++)
+    {
+        abc_class_t *cls = malloc(sizeof(abc_class_t));
         memset(cls, 0, sizeof(abc_class_t));
 
         swf_GetU30(tag); //classname
@@ -777,7 +788,8 @@ void* swf_ReadABC(TAG*tag)
         int s;
         int inum = swf_GetU30(tag); //interface count
         cls->interfaces = 0;
-        for(s=0;s<inum;s++) {
+        for (s = 0; s < inum; s++)
+        {
             int interface_index = swf_GetU30(tag);
             multiname_t* m = multiname_clone(pool_lookup_multiname(pool, interface_index));
             list_append(cls->interfaces, m);
@@ -788,8 +800,9 @@ void* swf_ReadABC(TAG*tag)
         DEBUG printf("--iinit-->%d\n", iinit);
         traits_skip(tag);
     }
-    for(t=0;t<num_classes;t++) {
-        abc_class_t*cls = (abc_class_t*)array_getvalue(file->classes, t);
+    for (t = 0; t < num_classes; t++)
+    {
+        abc_class_t *cls = (abc_class_t*)array_getvalue(file->classes, t);
         int cinit = swf_GetU30(tag);
         DEBUG printf("--cinit(%d)-->%d\n", t, cinit);
         cls->static_constructor = (abc_method_t*)array_getvalue(file->methods, cinit);
@@ -797,17 +810,24 @@ void* swf_ReadABC(TAG*tag)
     }
     int num_scripts = swf_GetU30(tag);
     DEBUG printf("%d scripts\n", num_scripts);
-    for(t=0;t<num_scripts;t++) {
+    for (t = 0; t < num_scripts; t++)
+    {
         /*int init = */swf_GetU30(tag);
         traits_skip(tag);
     }
 
     int num_method_bodies = swf_GetU30(tag);
     DEBUG printf("%d method bodies\n", num_method_bodies);
-    for(t=0;t<num_method_bodies;t++) {
+    for (t = 0; t < num_method_bodies; t++)
+    {
         int methodnr = swf_GetU30(tag);
-        if(methodnr >= file->methods->num) {
+        if (methodnr >= file->methods->num)
+        {
+#ifdef _DEBUG
             printf("Invalid method number: %d\n", methodnr);
+#endif
+            pool_destroy(pool);
+            abc_file_free(file);
             return 0;
         }
         abc_method_t*m = (abc_method_t*)array_getvalue(file->methods, methodnr);
@@ -832,7 +852,8 @@ void* swf_ReadABC(TAG*tag)
         int exception_count = swf_GetU30(tag);
         int s;
         c->exceptions = list_new();
-        for(s=0;s<exception_count;s++) {
+        for (s = 0; s < exception_count; s++)
+        {
             abc_exception_t*e = malloc(sizeof(abc_exception_t));
 
             e->from = code_atposition(codelookup, swf_GetU30(tag));
@@ -858,11 +879,13 @@ void* swf_ReadABC(TAG*tag)
         printf("ERROR: %d unparsed bytes remaining in ABC block\n", tag->len - tag->pos);
 #endif
         pool_destroy(pool);
+        abc_file_free(file);
         return 0;
     }
 
     swf_SetTagPos(tag, classes_pos);
-    for(t=0;t<num_classes;t++) {
+    for (t = 0; t < num_classes; t++)
+    {
         abc_class_t*cls = (abc_class_t*)array_getvalue(file->classes, t);
 
         int classname_index = swf_GetU30(tag);
@@ -870,32 +893,36 @@ void* swf_ReadABC(TAG*tag)
         cls->classname = multiname_clone(pool_lookup_multiname(pool, classname_index));
         cls->superclass = multiname_clone(pool_lookup_multiname(pool, superclass_index));
         cls->flags = swf_GetU8(tag);
-        if(cls->flags&8) {
+        if (cls->flags & 8)
+        {
             int ns_index = swf_GetU30(tag);
             cls->protectedNS = namespace_clone(pool_lookup_namespace(pool, ns_index));
         }
 
         int num_interfaces = swf_GetU30(tag); //interface count
         int s;
-        for(s=0;s<num_interfaces;s++) {
+        for (s = 0; s < num_interfaces; s++)
+        {
             swf_GetU30(tag);
         }
         int iinit = swf_GetU30(tag);
         cls->constructor = (abc_method_t*)array_getvalue(file->methods, iinit);
         cls->traits = traits_parse(tag, pool, file);
     }
-    for(t=0;t<num_classes;t++) {
+    for (t = 0; t < num_classes; t++)
+    {
         abc_class_t*cls = (abc_class_t*)array_getvalue(file->classes, t);
         /* SKIP */
         swf_GetU30(tag); // cindex
         cls->static_traits = traits_parse(tag, pool, file);
     }
     int num_scripts2 = swf_GetU30(tag);
-    for(t=0;t<num_scripts2;t++) {
+    for (t = 0; t < num_scripts2; t++)
+    {
         int init = swf_GetU30(tag);
-        abc_method_t*m = (abc_method_t*)array_getvalue(file->methods, init);
+        abc_method_t *m = (abc_method_t*)array_getvalue(file->methods, init);
 
-        abc_script_t*s = malloc(sizeof(abc_script_t));
+        abc_script_t *s = malloc(sizeof(abc_script_t));
         memset(s, 0, sizeof(abc_script_t));
         s->method = m;
         s->traits = traits_parse(tag, pool, file);
@@ -906,7 +933,7 @@ void* swf_ReadABC(TAG*tag)
     return file;
 }
 
-void abc_file_free(abc_file_t*file)
+void abc_file_free(abc_file_t *file)
 {
     if(!file)
         return;

@@ -4783,6 +4783,7 @@ static int stbi__parse_png_file(stbi__png *z, int scan, int req_comp)
                p = (stbi_uc *) STBI_REALLOC_SIZED(z->idata, idata_limit_old, idata_limit); if (p == NULL) return stbi__err("outofmem", "Out of memory");
                z->idata = p;
             }
+            // coverity[overrun-local]
             if (!stbi__getn(s, z->idata+ioff,c.length)) return stbi__err("outofdata","Corrupt PNG");
             ioff += c.length;
             break;
@@ -6210,7 +6211,7 @@ static stbi_uc *stbi__process_gif_raster(stbi__context *s, stbi__gif *g)
             while ((len = stbi__get8(s)) > 0)
                stbi__skip(s,len);
             return g->out;
-         } else if (code <= avail) {
+         } else if (code < avail) {
             if (first) return stbi__errpuc("no clear code", "Corrupt GIF");
 
             if (oldcode >= 0) {

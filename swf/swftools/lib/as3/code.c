@@ -372,6 +372,7 @@ code_t *code_parse(TAG *tag, int len, abc_file_t *file, pool_t *pool, codelookup
 #ifdef _DEBUG
                 printf("Can't parse opcode param type \"%c\" (for op %02x %s).\n", *p, code->opcode, op->name);
 #endif
+                free(bytepos);
                 return 0;
             }
             code->data[pos++] = data;
@@ -1003,16 +1004,6 @@ code_t* code_append(code_t*code, code_t*toappend)
     code->next = start;
     start->prev = code;
     return code_end(toappend);
-}
-
-lookupswitch_t *lookupswitch_dup(lookupswitch_t*l)
-{
-    lookupswitch_t *n = malloc(sizeof(lookupswitch_t));
-#ifdef _DEBUG
-    printf("Error: lookupswitch dupping not supported yet\n");
-#endif
-    n->targets = list_clone(l->targets);
-    return 0;
 }
 
 code_t *code_cut(code_t *c)

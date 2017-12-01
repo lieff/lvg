@@ -75,7 +75,10 @@ static void ff_init(void **_dec, int type)
     dec->pkt = av_packet_alloc();
 #endif
     if (!dec->dec_ctx || !dec->frame || !dec->pkt)
+    {
+        ff_release((void*)dec);
         return;
+    }
     if (avcodec_open2(dec->dec_ctx, codec, NULL) < 0)
     {
 #ifdef _DEBUG
