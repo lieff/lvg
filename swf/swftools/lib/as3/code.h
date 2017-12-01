@@ -97,8 +97,6 @@ code_t* code_start(code_t*c);
 
 code_t* code_append(code_t*code, code_t*toappend);
 
-code_t* cut_last_push(code_t*_c);
-
 char is_getlocal(code_t*c);
 
 #define code_new() (0)

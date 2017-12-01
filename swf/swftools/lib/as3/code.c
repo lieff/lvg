@@ -709,8 +709,9 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
 {
     code = code_start(code);
     int num = 0;
-    code_t*c = code;
-    while(c) {
+    code_t *c = code;
+    while (c)
+    {
         num++;
         c = c->next;
     }
@@ -726,8 +727,9 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
 #ifdef DEBUG_BYTES
     int t;
     c = code;
-    for(t=0;t<num;t++) {
-        opcode_t*op = opcode_get(c->opcode);
+    for (t = 0; t < num; t++)
+    {
+        opcode_t *op = opcode_get(c->opcode);
         if(op->flags & (OP_JUMP|OP_BRANCH)) {
             printf("%05d) %s %p\n", t, op->name, c->branch);
         } else if(op->params[0]=='2') {
@@ -744,7 +746,8 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
 
     num = 0;
     c = code;
-    while(c) {
+    while (c)
+    {
         //crosslink
         current->stack[num].code = c;
         c->pos = num;
@@ -752,13 +755,15 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
         c = c->next;
     }
 
-    if(!callcode(current, 0, 0, 0)) {
+    if (!callcode(current, 0, 0, 0))
+    {
         free(current);
         return 0;
     }
     abc_exception_list_t*e = exceptions;
-    while(e) {
-        if(e->abc_exception->target)
+    while (e)
+    {
+        if (e->abc_exception->target)
             callcode(current, e->abc_exception->target->pos, 1, 0);
         e = e->next;
     }
@@ -785,25 +790,28 @@ int code_dump(code_t*c)
     return code_dump2(c, 0, 0, "", stdout);
 }
 
-int code_dump2(code_t*c, abc_exception_list_t *exceptions, abc_file_t *file, char *prefix, FILE *fo)
+int code_dump2(code_t *c, abc_exception_list_t *exceptions, abc_file_t *file, char *prefix, FILE *fo)
 {
-    abc_exception_list_t*e = exceptions;
+    abc_exception_list_t *e = exceptions;
     c = code_start(c);
-    currentstats_t*stats =  code_get_stats(c, exceptions);
+    currentstats_t *stats =  code_get_stats(c, exceptions);
 
     int pos = 0;
-    while(c) {
+    while (c)
+    {
         uint8_t opcode = c->opcode;
         //char found = 0;
-        opcode_t*op = opcode_get(opcode);
+        opcode_t *op = opcode_get(opcode);
 
         e = exceptions;
-        while(e) {
-            if(c==e->abc_exception->from)
+        while (e)
+        {
+            if (c == e->abc_exception->from)
                 fprintf(fo, "%s   TRY {\n", prefix);
-            if(c==e->abc_exception->target) {
-                char*s1 = multiname_tostring(e->abc_exception->exc_type);
-                char*s2 = multiname_tostring(e->abc_exception->var_name);
+            if (c == e->abc_exception->target)
+            {
+                char *s1 = multiname_tostring(e->abc_exception->exc_type);
+                char *s2 = multiname_tostring(e->abc_exception->var_name);
                 fprintf(fo, "%s   CATCH(%s %s)\n", prefix, s1, s2);
                 free(s1);
                 free(s2);
@@ -811,30 +819,35 @@ int code_dump2(code_t*c, abc_exception_list_t *exceptions, abc_file_t *file, cha
             e = e->next;
         }
 
-        if(!op) {
+        if (!op)
+        {
 #ifdef _DEBUG
             printf("Can't parse opcode %02x.\n", opcode);
 #endif
             return 0;
-        } else {
-            char*p = op->params;
+        } else
+        {
+            char *p = op->params;
             //char first = 1;
-            int i=0;
+            int i = 0;
 
-            if(stats) {
+            if (stats)
+            {
                 int f = stats->stack[c->pos].flags;
                 fprintf(fo, "%s%05d) %c %d:%d %s ", prefix, c->pos,
-                        (f&FLAG_ERROR)?'E':((f&FLAG_SEEN)?'+':'|'),
+                        (f & FLAG_ERROR) ? 'E' : ((f & FLAG_SEEN) ? '+' : '|'),
                         stats->stack[c->pos].stackpos,
                         stats->stack[c->pos].scopepos,
                         op->name);
-            } else {
+            } else
+            {
                 fprintf(fo, "%s%05d) ? ?:? %s ", prefix, c->pos, op->name);
             }
 
-            while(*p) {
-                void*data = c->data[i];
-                if(i>0)
+            while (*p)
+            {
+                void *data = c->data[i];
+                if (i > 0)
                     printf(", ");
 
                 if(*p == 'n') {
@@ -907,7 +920,7 @@ int code_dump2(code_t*c, abc_exception_list_t *exceptions, abc_file_t *file, cha
                     return 0;
                 }
                 p++;
-                i++;
+                i = 1;
                 //first = 0;
             }
             fprintf(fo, "\n");
@@ -1047,54 +1060,3 @@ char is_getlocal(code_t *c)
     }
     return 0;
 }
-
-code_t* cut_last_push(code_t*c)
-{
-    assert(!c->next);
-    while(c) {
-        if(!c) break;
-        opcode_t*op = opcode_get(c->opcode);
-        /* cut conversion type operations */
-        if(op->stack_minus == -1 && op->stack_plus == 1 && !(op->flags)) {
-            c = code_cutlast(c);
-            continue;
-        }
-        /* cut any type of push */
-        else if(op->stack_minus == 0 && op->stack_plus == 1 && !(op->flags)) {
-            return code_cutlast(c);
-        }
-        /* cut register lookups */
-        else if(c->opcode == OPCODE_GETLOCAL ||
-                c->opcode == OPCODE_GETLOCAL_0 ||
-                c->opcode == OPCODE_GETLOCAL_1 ||
-                c->opcode == OPCODE_GETLOCAL_2 ||
-                c->opcode == OPCODE_GETLOCAL_3) {
-            return code_cutlast(c);
-        }
-        /* discard function call values */
-        else if(c->opcode == OPCODE_CALLPROPERTY) {
-            c->opcode = OPCODE_CALLPROPVOID;
-            return c;
-        } else if(c->opcode == OPCODE_CALLSUPER) {
-            c->opcode = OPCODE_CALLSUPERVOID;
-            return c;
-        } else if((c->opcode == OPCODE_NEWOBJECT ||
-                   c->opcode == OPCODE_NEWARRAY) &&
-                  !c->data[0]) {
-            // we can discard these if they're not eating up stack parameters
-            return code_cutlast(c);
-        } else if(op->stack_minus ==0 && op->stack_plus == 0 &&
-                  !(op->flags&~(OP_REGISTER|OP_SET_DXNS)) && c->prev) {
-            // trim code *before* the kill, inclocal, declocal, dxns
-            code_t*p = c->prev;
-            p->next = 0;
-            c->prev = 0;
-            return code_append(cut_last_push(p), c);
-        } else
-            break;
-    }
-    c = abc_pop(c);
-    return c;
-}
-
-

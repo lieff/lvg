@@ -150,26 +150,6 @@ int swf_FontExtract_DefineFontInfo(int id, SWFFONT *f, TAG *t)
     return id;
 }
 
-int swf_FontExtract_GlyphNames(int id, SWFFONT *f, TAG *tag)
-{
-    uint16_t fid;
-    swf_SetTagPos(tag, 0);
-
-    fid = swf_GetU16(tag);
-
-    if (fid == id)
-    {
-        int num = swf_GetU16(tag);
-        int t;
-        f->glyphnames = (char**)malloc(sizeof(char *) * num);
-        for (t = 0; t < num; t++)
-        {
-            f->glyphnames[t] = strdup(swf_GetString(tag));
-        }
-    }
-    return id;
-}
-
 int swf_FontExtract_DefineFont2(int id, SWFFONT *font, TAG *tag)
 {
     int t, glyphcount;

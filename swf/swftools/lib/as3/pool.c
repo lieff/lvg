@@ -175,22 +175,26 @@ char*escape_string(const char*str)
     return newstr;
 }
 
-char* namespace_tostring(namespace_t*ns)
+char *namespace_tostring(namespace_t*ns)
 {
     if(!ns)
         return strdup("NULL");
-    char*access = 0;
+    char *access = 0;
     uint8_t type = ns->access;
     access = access2str(type);
-    char*s = escape_string(ns->name);
-    char*string = (char*)malloc(strlen(access)+strlen(s)+7);
-    if(!s)
+    char *s = escape_string(ns->name);
+    char *string = (char*)malloc(strlen(access) + strlen(s) + 7);
+    if (!string)
+        goto error;
+    if (!s)
         sprintf(string, "[%s]NULL", access);
     else if(!*s)
         sprintf(string, "[%s]\"\"", access);
     else
         sprintf(string, "[%s]%s", access, s);
-    free(s);
+error:
+    if (s)
+        free(s);
     return string;
 }
 

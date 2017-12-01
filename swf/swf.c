@@ -180,8 +180,17 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
         fs = (FILLSTYLE*)ls;
     }
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+    if (!shape->paths)
+        return;
     if (shape2)
+    {
         shape2->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
+        if (!shape2->paths)
+        {
+            free(shape->paths);
+            return;
+        }
+    }
     NSVGpath *path = shape->paths, *path2 = shape2 ? shape2->paths : 0;
     int i, alloc_pts = 0, append = 0;
     int start_x = fs->subpaths[0].subpath->x;
@@ -1381,6 +1390,11 @@ done:
             uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             int vid = swf_GetU16(tag);
+            if (vid >= clip->num_videos)
+            {
+                tag = tag->next;
+                continue;
+            }
             LVGVideo *video = clip->videos + idtable[vid].lvg_id;
             int frame_num = swf_GetU16(tag);
             assert(frame_num < video->num_frames);
@@ -1674,6 +1688,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                 int s_sound_block_found = 0, s_sound_block_frame = 0;
                 do {
                     tag = tag->next;
+                    if (!tag)
+                        goto done;
                     if (ST_SOUNDSTREAMBLOCK == tag->id)
                     {
                         s_sound_block_found = 1;
@@ -1687,8 +1703,6 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
                         }
                         s_sound_block_frame = 0;
                     }
-                    if (!tag)
-                        goto done;
                 } while (ST_END != tag->id);
                 if (s_sound_block_found)
                     clip->num_sounds++;

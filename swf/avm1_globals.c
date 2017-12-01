@@ -389,7 +389,7 @@ static void do_gotoAndPlay(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t
                 frame = l[i].frame_num;
                 break;
             }
-        if (frame < 0)
+        if (frame == (uint32_t)-1)
             return;
     } else
         frame = to_int(se_frame);

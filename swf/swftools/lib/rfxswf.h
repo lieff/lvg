@@ -647,7 +647,6 @@ int swf_FontExtract(TAG *firstTag, int id, SWFFONT * *font);
 int swf_FontExtract_DefineFont2(int id, SWFFONT * font, TAG * tag);
 int swf_FontExtract_DefineFontInfo(int id, SWFFONT * f, TAG * t);
 int swf_FontExtract_DefineFont(int id, SWFFONT * f, TAG * t);
-int swf_FontExtract_GlyphNames(int id, SWFFONT * f, TAG * tag);
 int swf_FontExtract_DefineFontAlignZones(int id, SWFFONT * font, TAG * tag);
 
 

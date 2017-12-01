@@ -26,7 +26,7 @@ int lvgZipOpen(const char *fname, zip_t *zip)
     }
     size_t size = st.st_size;
     char *m = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
-    if (*(int32_t*)m != 0x04034B50)
+    if (!m || *(int32_t*)m != 0x04034B50)
         goto error;
     int i;
     zipEndRecord_t *er;
