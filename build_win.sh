@@ -36,7 +36,7 @@ video/ffmpeg/ffmpeg_dec.c \
 -Lglfw/build/src -LSDL/build-win -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
 -Iglfw/include -ISDL/include -Ivideo/ffmpeg/FFmpeg \
--DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lglfw3 -lSDL2 -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
+-DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lSDL2 -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion
 scripts/compress.sh ./lvg_win.exe
 if [ "$TRAVIS" = "true" ]; then
     zip -9 -u lvg_win.zip lvg_win.exe
