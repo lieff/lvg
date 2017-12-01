@@ -5,7 +5,3 @@ compile:
   override:
     - bash -c ./build.sh
     - bash -c ./build_win.sh
-
-test:
-  override:
-    - true
