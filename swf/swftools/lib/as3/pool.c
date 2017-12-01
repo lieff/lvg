@@ -183,6 +183,8 @@ char *namespace_tostring(namespace_t*ns)
     uint8_t type = ns->access;
     access = access2str(type);
     char *s = escape_string(ns->name);
+    if (!s)
+        goto error;
     char *string = (char*)malloc(strlen(access) + strlen(s) + 7);
     if (!string)
         goto error;
