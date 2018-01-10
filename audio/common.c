@@ -23,19 +23,19 @@ short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int
     int alloc_samples = 1024*1024, num_samples = 0;
     short *music_buf = (short *)malloc(alloc_samples*2*2);
     mp3dec_init(&dec);
-    while (buf_size)
+    for(;;)
     {
         short frame_buf[2*1152];
         int samples = mp3dec_decode_frame(&dec, buf, buf_size, frame_buf, &info);
-        assert(samples && info.frame_bytes > 0);
-        if (samples <= 0 || info.frame_bytes <= 0)
-            break;
+        assert(info.frame_bytes > 0);
         if (alloc_samples < (num_samples + samples))
         {
             alloc_samples *= 2;
             music_buf = (short *)realloc(music_buf, alloc_samples*2*info.channels);
         }
         memcpy(music_buf + num_samples*info.channels, frame_buf, samples*info.channels*2);
+        if (info.frame_bytes <= 0 || buf_size <= (info.frame_bytes + 4))
+            break;
         buf += info.frame_bytes;
         buf_size -= info.frame_bytes;
         num_samples += samples;
