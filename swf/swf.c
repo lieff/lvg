@@ -5,7 +5,7 @@
 #include "lunzip.h"
 #include "render/render.h"
 #include "audio/audio.h"
-#include "audio/mp3_keyj/minimp3.h"
+#include "audio/mp3/minimp3.h"
 #include "adpcm.h"
 #include "avm1.h"
 
@@ -959,7 +959,7 @@ static TAG *skip_sprite(TAG *tag)
     return tag;
 }
 
-static void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, char *stream_buffer, int stream_buf_size, int stream_sound, int stream_format, int stream_bits, int stream_frame, int end_frame)
+static void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, const unsigned char *stream_buffer, int stream_buf_size, int stream_sound, int stream_format, int stream_bits, int stream_frame, int end_frame)
 {
     group->ssounds = realloc(group->ssounds, (group->num_ssounds + 1)*sizeof(group->ssounds[0]));
     LVGStreamSound *ssound = group->ssounds + group->num_ssounds++;
@@ -1207,42 +1207,23 @@ done:
                 int stereo = swf_GetBits(tag, 1);
                 int num_samples = swf_GetU32(tag);
                 sound->channels = stereo ? 2 : 1;
-                sound->samples = (short*)malloc(num_samples*2*sound->channels);
                 assert(1 == format || 2 == format); // adpcm, mp3
-                char *buf = (char *)&tag->data[tag->pos];
+                unsigned char *buf = &tag->data[tag->pos];
                 int buf_size = tag->len - tag->pos;
                 if (1 == format)
                 {
+                    sound->samples = (short*)malloc(num_samples*2*sound->channels);
                     int dec_samples = adpcm_decode(tag, buf_size, stereo + 1, sound->samples, num_samples);
                     assert(dec_samples == num_samples*sound->channels);
                     sound->num_samples = dec_samples/sound->channels;
                 } else
                 if (2 == format)
                 {
-                    mp3_info_t info;
-                    mp3_decoder_t dec = mp3_create();
-                    while (buf_size && sound->num_samples < num_samples)
-                    {
-                        short frame_buf[MP3_MAX_SAMPLES_PER_FRAME];
-                        int frame_size = mp3_decode(dec, buf, buf_size, frame_buf, &info);
-                        assert(frame_size && info.audio_bytes > 0);
-                        if (frame_size <= 0 || info.audio_bytes <= 0)
-                            break;
-                        assert(info.channels == sound->channels);
-                        assert(info.sample_rate == sound->rate);
-                        int samples = info.audio_bytes/(info.channels*2);
-                        if (num_samples < (sound->num_samples + samples))
-                        {
-                            num_samples = sound->num_samples + samples;
-                            sound->samples = (short*)realloc(sound->samples, num_samples*2*info.channels);
-                        }
-                        memcpy(sound->samples + sound->num_samples*info.channels, frame_buf, info.audio_bytes);
-                        buf += frame_size;
-                        buf_size -= frame_size;
-                        sound->num_samples += samples;
-                    }
-                    mp3_done(dec);
-                    assert(num_samples == sound->num_samples);
+                    int rate, channels;
+                    sound->samples = lvgLoadMP3Buf(buf, buf_size, &rate, &channels, &sound->num_samples);
+                    assert(num_samples == sound->num_samples && sound->channels == channels && sound->rate == rate);
+                    sound->channels = channels;
+                    sound->rate     = rate;
                 }
                 swf_SetTagPos(tag, oldTagPos);
                 idtable[id].type = sound_type;
