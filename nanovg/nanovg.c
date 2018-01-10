@@ -1432,7 +1432,7 @@ static void nvg__flattenPaths(NVGcontext* ctx)
 	float* cp1;
 	float* cp2;
 	float* p;
-	float area;
+//	float area;
 
 	if (cache->npaths > 0)
 		return;

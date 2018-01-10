@@ -984,7 +984,7 @@ static void flush_stream_sound(LVGMovieClip *clip, LVGMovieClipGroup *group, con
         sound->samples = lvgLoadMP3Buf(stream_buffer, stream_buf_size, &sound->rate, &sound->channels, &sound->num_samples);
     }
     if (!((0 == stream_format && stream_bits) || 1 == stream_format))
-        free(stream_buffer);
+        free((void*)stream_buffer);
     // add action to start stream sound
     add_playsound_action(group, stream_frame, stream_sound, 0, 0, sound->num_samples, 0);
 }
@@ -1003,7 +1003,7 @@ static TAG *parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, 
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
     int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1, sound_block_frame = 0;
-    char *stream_buffer = 0;
+    unsigned char *stream_buffer = 0;
     group->num_frames = 0;
     TAG *tag = firstTag;
     while (tag)
@@ -1354,14 +1354,14 @@ done:
                 short *buf = (short*)malloc(size*16);
                 int dec_samples = adpcm_decode(tag, size, stream_channels, buf, size*8);
                 stream_buf_size += dec_samples*2;
-                stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
+                stream_buffer = (unsigned char *)realloc(stream_buffer, stream_buf_size);
                 memcpy(stream_buffer + old_size, buf, dec_samples*2);
                 sound->num_samples += dec_samples/stream_channels;
                 free(buf);
             } else
             {
                 stream_buf_size += size;
-                stream_buffer = (char *)realloc(stream_buffer, stream_buf_size);
+                stream_buffer = (unsigned char *)realloc(stream_buffer, stream_buf_size);
                 memcpy(stream_buffer + old_size, &tag->data[tag->pos], size);
             }
             sound_block_frame = 1;
@@ -1371,12 +1371,13 @@ done:
             uint32_t oldTagPos = swf_GetTagPos(tag);
             swf_SetTagPos(tag, 0);
             int vid = swf_GetU16(tag);
-            if (vid >= clip->num_videos)
+            int vid_lvg_id = idtable[vid].lvg_id;
+            if (vid_lvg_id < 0 || vid_lvg_id >= clip->num_videos)
             {
                 tag = tag->next;
                 continue;
             }
-            LVGVideo *video = clip->videos + idtable[vid].lvg_id;
+            LVGVideo *video = clip->videos + vid_lvg_id;
             int frame_num = swf_GetU16(tag);
             assert(frame_num < video->num_frames);
             if (frame_num >= video->num_frames)
