@@ -4,11 +4,12 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <sys/param.h>
-#include "lunzip.h"
-#include "mp3/minimp3.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include "lunzip.h"
+#define MINIMP3_IMPLEMENTATION
+#include "mp3/minimp3.h"
 
 extern const audio_render *g_audio_render;
 extern void *g_audio_render_obj;

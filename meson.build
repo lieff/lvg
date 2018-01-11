@@ -19,7 +19,6 @@ sources = [
     'src/lunzip.c',
     'src/lvg.c',
     'src/svgb.c',
-    'audio/mp3/minimp3.c',
     'nanovg/nanovg.c',
     'render/common.c',
     'render/glad.c',

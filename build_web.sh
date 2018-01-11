@@ -6,7 +6,7 @@ audio/*.c \
 platform/*.c \
 render/common.c render/render_nanovg.c \
 scripting/tcc/script_tcc.c \
-swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c audio/mp3/minimp3.c \
+swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c \
 video/ffmpeg/ffmpeg_dec.c \
 -I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
 -Ivideo/ffmpeg/FFmpeg -Lvideo/ffmpeg/web -lavcodec -lavutil \
