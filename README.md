@@ -26,7 +26,7 @@ Following assets currently supported:
 
  * SVG vector images (loaded using [NanoSVG](https://github.com/memononen/nanosvg))
  * Raster images (loaded using [stb_image.h](https://github.com/nothings/stb))
- * MP3 files
+ * MP3 files (loaded using [minimp3](https://github.com/lieff/minimp3))
  * Flash SWF files (can contain vector, raster, video and audio). All swf video codecs (h263,vp6,flashsv,flashsv2,h264) costs additional ~600kb.
 
 Render can be done using following backends:
