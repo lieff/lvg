@@ -146,6 +146,8 @@ mesonconf -DENABLE_SCRIPT=False
  * https://github.com/mozilla/shumway
  * https://www.gnu.org/software/gnash/
  * https://swfdec.freedesktop.org/wiki/
+ * https://github.com/marmalade/gameswf
+ * http://tulrich.com/geekstuff/gameswf.html
  * http://www.swftools.org/
  * http://www.libming.org/
  * http://www.swift-tools.net/Flash/
