@@ -11,11 +11,11 @@ fi
 
 . scripts/build-sdl.sh win
 
-if [ ! -d "video/ffmpeg/FFmpeg" ]; then
+#if [ ! -d "video/ffmpeg/FFmpeg" ]; then
   cd video/ffmpeg
   ./build_win.sh
   cd ../..
-fi
+#fi
 
 #if [ ! -d "tinycc" ]; then
 #  git clone http://repo.or.cz/tinycc.git

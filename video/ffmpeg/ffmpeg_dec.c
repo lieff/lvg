@@ -3,6 +3,7 @@
 #include "../video.h"
 #include <libavcodec/avcodec.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
 //#define OLD_API
