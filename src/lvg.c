@@ -1043,8 +1043,8 @@ int main(int argc, char **argv)
 #if defined(EMSCRIPTEN)
         file_name = "main.lvg";
 #else
-        printf("error: not enough parameters\n");
-        return 1;
+        printf("usage: lvg .swf or .lvg file to play\n");
+        return 0;
 #endif
     } else
         file_name = argv[i];
