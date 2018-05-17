@@ -445,26 +445,32 @@ void codelookup_free(codelookup_t*codelookup)
 void code_free(code_t*c)
 {
     c = code_start(c);
-    while(c) {
-        code_t*next = c->next;
-        opcode_t*op = opcode_get(c->opcode);
-        char*p = op?op->params:"";
-        int pos=0;
-        while(*p) {
-            void*data = c->data[pos];
-            if(*p == '2') { //multiname
+    while (c)
+    {
+        code_t *next = c->next;
+        opcode_t *op = opcode_get(c->opcode);
+        char *p = op ? op->params : "";
+        int pos = 0;
+        while (*p)
+        {
+            void *data = c->data[pos];
+            if (*p == '2')
+            {   //multiname
                 multiname_destroy(data);
-            } else if(*p == 'N') { //namespace
+            } else if(*p == 'N')
+            {   //namespace
                 namespace_destroy(data);
-            } else if(strchr("sDf", *p)) {
+            } else if(strchr("sDf", *p))
+            {
                 free(data);
-            } else if(strchr("S", *p)) {
-                lookupswitch_t*l = (lookupswitch_t*)data;
-                list_free(l->targets);l->targets=0;
+            } else if(strchr("S", *p))
+            {
+                lookupswitch_t *l = (lookupswitch_t*)data;
+                list_free(l->targets); l->targets = 0;
                 free(l);
             }
-            c->data[pos]=0;
-            p++;pos++;
+            c->data[pos] = 0;
+            p++; pos++;
         }
         free(c);
         c = next;
@@ -488,35 +494,38 @@ typedef struct {
     int flags;
 } currentstats_t;
 
-static int stack_minus(code_t*c)
+static int stack_minus(code_t *c)
 {
-    opcode_t*op = opcode_get(c->opcode);
-    if(op->stack_minus>0) {
+    opcode_t *op = opcode_get(c->opcode);
+    if (op->stack_minus > 0)
+    {
 #ifdef _DEBUG
         printf("Invalid opcode entry %02x %s\n", c->opcode, op->name);
 #endif
     }
     int stack = op->stack_minus;
-    if(op->flags&OP_STACK_NS) {
-        multiname_t*m = (multiname_t*)c->data[0];
-        if(multiname_late_namespace(m))
+    if (op->flags & OP_STACK_NS)
+    {
+        multiname_t *m = (multiname_t*)c->data[0];
+        if (multiname_late_namespace(m))
             stack--;
-        if(multiname_late_name(m))
+        if (multiname_late_name(m))
             stack--;
     }
-    if(op->flags&OP_STACK_ARGS || op->flags&OP_STACK_ARGS2) {
+    if (op->flags & OP_STACK_ARGS || op->flags & OP_STACK_ARGS2)
+    {
         assert(strchr(op->params, 'n'));
-        int nr = (ptroff_t)(op->params[0]=='n'?c->data[0]:c->data[1]);
+        int nr = (ptroff_t)(op->params[0] == 'n' ? c->data[0] : c->data[1]);
         stack-=nr;
-        if(op->flags&OP_STACK_ARGS2)
-            stack-=nr;
+        if(op->flags & OP_STACK_ARGS2)
+            stack -= nr;
     }
     return stack;
 }
-static void handleregister(currentstats_t*stats, int reg)
+static void handleregister(currentstats_t *stats, int reg)
 {
-    if(reg+1 > stats->maxlocal)
-        stats->maxlocal = reg+1;
+    if (reg + 1 > stats->maxlocal)
+        stats->maxlocal = reg + 1;
 }
 
 #define FLAG_SEEN 1
@@ -550,10 +559,12 @@ static void handleregister(currentstats_t*stats, int reg)
 
 static char callcode(currentstats_t*stats, int pos, int stack, int scope)
 {
-    while(pos<stats->num) {
-        if(stats->stack[pos].flags&FLAG_SEEN) {
-            if(stats->stack[pos].stackpos != stack ||
-                    stats->stack[pos].scopepos != scope) {
+    while (pos < stats->num)
+    {
+        if (stats->stack[pos].flags&FLAG_SEEN)
+        {
+            if (stats->stack[pos].stackpos != stack || stats->stack[pos].scopepos != scope)
+            {
                 //dumpstack(stats);
                 stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
@@ -578,7 +589,8 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
 
         stack += stack_minus(c);
 
-        if(stack<0) {
+        if (stack < 0)
+        {
             stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
             printf("error: stack underflow at %d (%s)\n", pos, op->name);
@@ -592,52 +604,63 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
         stack += op->stack_plus;
         scope += op->scope_stack_plus;
 
-        if(stack > stats->maxstack)
+        if (stack > stats->maxstack)
             stats->maxstack = stack;
-        if(scope > stats->maxscope)
+        if (scope > stats->maxscope)
             stats->maxscope = scope;
 
-        if(op->flags & OP_SET_DXNS)
+        if (op->flags & OP_SET_DXNS)
             stats->flags |= FLAGS_SET_DXNS;
-        if(op->flags & OP_NEED_ACTIVATION)
+        if (op->flags & OP_NEED_ACTIVATION)
             stats->flags |= FLAGS_ACTIVATION;
 
-        if(c->opcode == OPCODE_NEWCLASS) {
-            abc_class_t*cls = (abc_class_t*)(c->data[0]);
-            if(scope > cls->init_scope_depth)
+        if (c->opcode == OPCODE_NEWCLASS)
+        {
+            abc_class_t *cls = (abc_class_t*)(c->data[0]);
+            if (scope > cls->init_scope_depth)
                 cls->init_scope_depth = scope;
         }
-        if(c->opcode == OPCODE_NEWFUNCTION) {
-            abc_method_t*m = (abc_method_t*)(c->data[0]);
-            if(m->body && scope > m->body->init_scope_depth)
+        if (c->opcode == OPCODE_NEWFUNCTION)
+        {
+            abc_method_t *m = (abc_method_t*)(c->data[0]);
+            if (m->body && scope > m->body->init_scope_depth)
                 m->body->init_scope_depth = scope;
         }
 
-        if(op->flags & OP_REGISTER) {
+        if (op->flags & OP_REGISTER)
+        {
             char*p = op->params;
             int pos = 0;
-            char ok=0;
-            while(*p) {
-                if(*p=='r') {
+            char ok = 0;
+            while (*p)
+            {
+                if (*p == 'r')
+                {
                     handleregister(stats, (ptroff_t)c->data[pos]);
                     ok = 1;
                 }
                 p++;
             }
-            if(!ok) {
+            if (!ok)
+            {
                 handleregister(stats, c->opcode&3);
             }
         }
-        if(op->flags&OP_RETURN) {
-            if(OP_RETURN==0x48/*returnvalue*/) {
-                if(stack!=1) {
+        if (op->flags&OP_RETURN)
+        {
+            if (OP_RETURN == 0x48/*returnvalue*/)
+            {
+                if (stack != 1)
+                {
                     stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                     printf("return(value) with stackposition %d\n", stack);
 #endif
                 }
-            } else if(OP_RETURN==0x47) {
-                if(stack!=0) {
+            } else if (OP_RETURN==0x47)
+            {
+                if (stack != 0)
+                {
                     stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                     printf("return(void) with stackposition %d\n", stack);
@@ -645,10 +668,12 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
                 }
             }
         }
-        if(op->flags & (OP_THROW|OP_RETURN))
+        if (op->flags & (OP_THROW | OP_RETURN))
             return 1;
-        if(op->flags & OP_JUMP) {
-            if(!c->branch) {
+        if (op->flags & OP_JUMP)
+        {
+            if (!c->branch)
+            {
                 stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                 printf("Error: Invalid jump target in instruction %s at position %d.\n", op->name, pos);
@@ -659,8 +684,10 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
             pos = c->pos;
             continue;
         }
-        if(op->flags & OP_BRANCH) {
-            if(!c->branch) {
+        if (op->flags & OP_BRANCH)
+        {
+            if (!c->branch)
+            {
                 stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                 printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
@@ -668,44 +695,49 @@ static char callcode(currentstats_t*stats, int pos, int stack, int scope)
                 return 0;
             }
             int newpos = c->branch->pos;
-            if(!callcode(stats, newpos, stack, scope))
+            if (!callcode(stats, newpos, stack, scope))
                 return 0;
         }
-        if(op->flags & OP_LOOKUPSWITCH) {
+        if (op->flags & OP_LOOKUPSWITCH)
+        {
             lookupswitch_t*l = c->data[0];
-            if(!l->def) {
+            if (!l->def)
+            {
                 stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                 printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
 #endif
                 return 0;
             }
-            if(!callcode(stats, l->def->pos, stack, scope))
+            if (!callcode(stats, l->def->pos, stack, scope))
                 return 0;
-            code_list_t*t = l->targets;
-            while(t) {
-                if(!t->code) {
+            code_list_t *t = l->targets;
+            while (t)
+            {
+                if (!t->code)
+                {
                     stats->stack[pos].flags |= FLAG_ERROR;
 #ifdef _DEBUG
                     printf("Error: Invalid jump target in instruction %s at position %d\n", op->name, pos);
 #endif
                     return 0;
                 }
-                if(!callcode(stats, t->code->pos, stack, scope))
+                if (!callcode(stats, t->code->pos, stack, scope))
                     return 0;
                 t = t->next;
             }
         }
 
         pos++;
-        if(pos<stats->num) {
+        if (pos<stats->num)
+        {
             assert(c->next == stats->stack[pos].code);
         }
     }
     return 1;
 }
 
-static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptions)
+static currentstats_t *code_get_stats(code_t *code, abc_exception_list_t *exceptions)
 {
     code = code_start(code);
     int num = 0;
@@ -730,13 +762,17 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
     for (t = 0; t < num; t++)
     {
         opcode_t *op = opcode_get(c->opcode);
-        if(op->flags & (OP_JUMP|OP_BRANCH)) {
+        if (op->flags & (OP_JUMP|OP_BRANCH))
+        {
             printf("%05d) %s %p\n", t, op->name, c->branch);
-        } else if(op->params[0]=='2') {
+        } else if(op->params[0] == '2')
+        {
             printf("%05d) %s %s\n", t, op->name, multiname_tostring(c->data[0]));
-        } else if(op->params[0]=='N') {
+        } else if(op->params[0] == 'N')
+        {
             printf("%05d) %s %s\n", t, op->name, namespace_tostring(c->data[0]));
-        } else {
+        } else
+        {
             printf("%05d) %s\n", t, op->name);
         }
         c = c->next;
@@ -760,33 +796,33 @@ static currentstats_t* code_get_stats(code_t*code, abc_exception_list_t*exceptio
         free(current);
         return 0;
     }
-    abc_exception_list_t*e = exceptions;
+    abc_exception_list_t *e = exceptions;
     while (e)
     {
         if (e->abc_exception->target)
             callcode(current, e->abc_exception->target->pos, 1, 0);
         e = e->next;
     }
-
     return current;
 }
 
 void stats_free(currentstats_t*stats)
 {
-    if(stats) {
-        free(stats->stack);stats->stack=0;
+    if (stats)
+    {
+        free(stats->stack); stats->stack = 0;
         free(stats);
     }
 }
 
-int code_dump(code_t*c)
+int code_dump(code_t *c)
 {
-    code_t*cc = code_start(c);
-    while(cc) {
+    code_t *cc = code_start(c);
+    while (cc)
+    {
         assert(!cc->next || cc->next->prev == cc);
         cc = cc->next;
     }
-
     return code_dump2(c, 0, 0, "", stdout);
 }
 
@@ -850,70 +886,86 @@ int code_dump2(code_t *c, abc_exception_list_t *exceptions, abc_file_t *file, ch
                 if (i > 0)
                     printf(", ");
 
-                if(*p == 'n') {
+                if (*p == 'n')
+                {
                     int n = (ptroff_t)data;
                     fprintf(fo, "%d params", n);
-                } else if(*p == '2') {
-                    multiname_t*n = (multiname_t*)data;
+                } else if (*p == '2')
+                {
+                    multiname_t *n = (multiname_t*)data;
                     char* m = multiname_tostring(n);
                     fprintf(fo, "%s", m);
                     free(m);
-                } else if(*p == 'N') {
-                    namespace_t*ns = (namespace_t*)data;
-                    char* m = namespace_tostring(ns);
+                } else if (*p == 'N')
+                {
+                    namespace_t *ns = (namespace_t*)data;
+                    char *m = namespace_tostring(ns);
                     fprintf(fo, "%s", m);
                     free(m);
-                } else if(*p == 'm') {
-                    abc_method_t*m = (abc_method_t*)data;
+                } else if (*p == 'm')
+                {
+                    abc_method_t *m = (abc_method_t*)data;
                     fprintf(fo, "[method %08x %s]", m->index, m->name);
-                } else if(*p == 'c') {
-                    abc_class_t*cls = (abc_class_t*)data;
-                    char*classname = multiname_tostring(cls->classname);
+                } else if (*p == 'c')
+                {
+                    abc_class_t *cls = (abc_class_t*)data;
+                    char *classname = multiname_tostring(cls->classname);
                     fprintf(fo, "[classinfo %08x %s]", cls->index, classname);
                     free(classname);
-                } else if(*p == 'i') {
+                } else if (*p == 'i')
+                {
                     //abc_method_body_t*b = (abc_method_body_t*)data;
                     fprintf(fo, "[methodbody]");
-                } else if(*p == 'u' || *p == 'I' || *p == 'U') {
+                } else if (*p == 'u' || *p == 'I' || *p == 'U')
+                {
                     int n = (ptroff_t)data;
                     fprintf(fo, "%d", n);
-                } else if(*p == 'f') {
+                } else if (*p == 'f')
+                {
                     double f = *(double*)data;
                     fprintf(fo, "%f", f);
-                } else if(*p == 'r') {
+                } else if (*p == 'r')
+                {
                     int n = (ptroff_t)data;
                     fprintf(fo, "r%d", n);
-                } else if(*p == 'b') {
+                } else if (*p == 'b')
+                {
                     int b = (signed char)(ptroff_t)data;
                     fprintf(fo, "%d", b);
-                } else if(*p == 'j') {
-                    if(c->branch)
+                } else if (*p == 'j')
+                {
+                    if (c->branch)
                         fprintf(fo, "->%d", c->branch->pos);
                     else
                         fprintf(fo, "%p", c->branch);
-                } else if(*p == 's') {
-                    char*s = string_escape((string_t*)data);
+                } else if (*p == 's')
+                {
+                    char *s = string_escape((string_t*)data);
                     fprintf(fo, "\"%s\"", s);
                     free(s);
-                } else if(*p == 'D') {
+                } else if (*p == 'D')
+                {
                     fprintf(fo, "[register %02x=%s]", (int)(ptroff_t)c->data[1], (char*)c->data[0]);
-                } else if(*p == 'S') {
-                    lookupswitch_t*l = c->data[0];
+                } else if (*p == 'S')
+                {
+                    lookupswitch_t *l = c->data[0];
                     fprintf(fo, "[");
-                    if(l->def)
+                    if (l->def)
                         fprintf(fo, "default->%d", l->def->pos);
                     else
                         fprintf(fo, "default->00000000");
-                    code_list_t*t = l->targets;
-                    while(t) {
-                        if(t->code)
+                    code_list_t *t = l->targets;
+                    while (t)
+                    {
+                        if (t->code)
                             fprintf(fo, ",->%d", t->code->pos);
                         else
                             fprintf(fo, ",->00000000");
                         t = t->next;
                     }
                     fprintf(fo, "]");
-                } else {
+                } else
+                {
 #ifdef _DEBUG
                     printf("Can't parse opcode param type \"%c\"\n", *p);
 #endif
@@ -927,9 +979,11 @@ int code_dump2(code_t *c, abc_exception_list_t *exceptions, abc_file_t *file, ch
         }
 
         e = exceptions;
-        while(e) {
-            if(c==e->abc_exception->to) {
-                if(e->abc_exception->target)
+        while (e)
+        {
+            if (c == e->abc_exception->to)
+            {
+                if (e->abc_exception->target)
                     fprintf(fo, "%s   } // END TRY (HANDLER: %d)\n", prefix, e->abc_exception->target->pos);
                 else
                     fprintf(fo, "%s   } // END TRY (HANDLER: 00000000)\n", prefix);
@@ -944,10 +998,10 @@ int code_dump2(code_t *c, abc_exception_list_t *exceptions, abc_file_t *file, ch
     return 1;
 }
 
-codestats_t* code_get_statistics(code_t*code, abc_exception_list_t*exceptions)
+codestats_t *code_get_statistics(code_t *code, abc_exception_list_t *exceptions)
 {
-    currentstats_t*current = code_get_stats(code, exceptions);
-    if(!current)
+    currentstats_t *current = code_get_stats(code, exceptions);
+    if (!current)
         return 0;
     codestats_t*stats = calloc(1, sizeof(codestats_t));
     stats->local_count = current->maxlocal;
@@ -964,26 +1018,28 @@ void codestats_free(codestats_t*s)
     free(s);
 }
 
-code_t* add_opcode(code_t*atag, uint8_t op)
+code_t *add_opcode(code_t *atag, uint8_t op)
 {
-    code_t*tmp = (code_t*)calloc(1, sizeof(code_t));
+    code_t *tmp = (code_t*)calloc(1, sizeof(code_t));
     tmp->opcode = op;
-    if(atag) {
+    if (atag)
+    {
         tmp->prev = atag;
         tmp->next = atag->next;
-        if(tmp->next)
+        if (tmp->next)
             tmp->next->prev = tmp;
         atag->next = tmp;
-    } else {
+    } else
+    {
         tmp->prev = 0;
         tmp->next = 0;
     }
     return tmp;
 }
 
-code_t* code_end(code_t*code)
+code_t *code_end(code_t *code)
 {
-    if(!code)
+    if (!code)
         return 0;
     while(code->next)
         code = code->next;
@@ -999,19 +1055,21 @@ code_t *code_start(code_t *code)
     return code;
 }
 
-code_t* code_append(code_t*code, code_t*toappend)
+code_t *code_append(code_t*code, code_t*toappend)
 {
-    if(!code)
+    if (!code)
         return code_end(toappend);
-    if(!toappend)
+    if (!toappend)
         return code_end(code);
     //find end of first list
-    while(code->next) {
+    while(code->next)
+    {
         code = code->next;
     }
-    code_t*start=toappend;
+    code_t *start = toappend;
     //and start of second list
-    while(start->prev) {
+    while (start->prev)
+    {
         start = start->prev;
     }
     code->next = start;

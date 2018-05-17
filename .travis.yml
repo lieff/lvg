@@ -4,6 +4,10 @@ os:
     - linux
     - osx
 
+addons:
+  apt:
+    update: true
+
 compiler:
     - gcc
 

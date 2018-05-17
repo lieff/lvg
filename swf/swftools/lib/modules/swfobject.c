@@ -26,8 +26,7 @@
 
 int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
 {
-    if (obj)
-        memset(obj, 0, sizeof(SWFPLACEOBJECT));
+    memset(obj, 0, sizeof(SWFPLACEOBJECT));
 
     if (!tag)
     {

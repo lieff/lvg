@@ -19,6 +19,21 @@ typedef struct platform_ctx
     char keys[SDL_NUM_SCANCODES];
 } platform_ctx;
 
+static void sdl_release(void *ctx)
+{
+#if PLATFORM_SDL
+    platform_ctx *platform = (platform_ctx *)ctx;
+    if (platform->context)
+        SDL_GL_DeleteContext(platform->context);
+    if (platform->window)
+        SDL_DestroyWindow(platform->window);
+#endif
+    SDL_Quit();
+#if PLATFORM_SDL
+    free(platform);
+#endif
+}
+
 static int sdl_init(void **ctx, platform_params *params, int audio_only)
 {
     *ctx = 0;
@@ -61,6 +76,7 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
         if (!platform->window)
         {
             printf("error: sdl2 init failed: %s\n", SDL_GetError()); fflush(stdout);
+            sdl_release(platform);
             return 0;
         }
     }
@@ -70,25 +86,13 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
     if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
     {
         printf("error: glad init failed\n");
+        sdl_release(platform);
         return 0;
     }
 #endif
     *ctx = platform;
 #endif
     return 1;
-}
-
-static void sdl_release(void *ctx)
-{
-#if PLATFORM_SDL
-    platform_ctx *platform = (platform_ctx *)ctx;
-    SDL_GL_DeleteContext(platform->context);
-    SDL_DestroyWindow(platform->window);
-#endif
-    SDL_Quit();
-#if PLATFORM_SDL
-    free(platform);
-#endif
 }
 
 #if PLATFORM_SDL

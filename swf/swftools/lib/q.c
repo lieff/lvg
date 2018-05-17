@@ -932,16 +932,18 @@ void dict_init2(dict_t*h, type_t*t, int size)
     h->key_type = t;
 }
 
-dict_t*dict_clone(dict_t*o)
+dict_t *dict_clone(dict_t *o)
 {
-    dict_t*h = malloc(sizeof(dict_t));
+    dict_t *h = malloc(sizeof(dict_t));
     memcpy(h, o, sizeof(dict_t));
-    h->slots = h->hashsize?(dictentry_t**)calloc(1, sizeof(dictentry_t*)*h->hashsize):0;
+    h->slots = o->hashsize ? (dictentry_t**)calloc(1, sizeof(dictentry_t*)*o->hashsize) : 0;
     int t;
-    for(t=0;t<o->hashsize;t++) {
-        dictentry_t*e = o->slots[t];
-        while(e) {
-            dictentry_t*n = (dictentry_t*)malloc(sizeof(dictentry_t));
+    for (t = 0; t < o->hashsize; t++)
+    {
+        dictentry_t *e = o->slots[t];
+        while (e)
+        {
+            dictentry_t *n = (dictentry_t*)malloc(sizeof(dictentry_t));
             memcpy(n, e, sizeof(dictentry_t));
             n->key = h->key_type->dup(e->key);
             n->data = e->data;

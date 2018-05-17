@@ -27,37 +27,41 @@
 
 // ----------------------------- float ----------------------------------
 
-void* float_clone(const void*_v) {
-    if(_v==0)
+void* float_clone(const void *_v)
+{
+    if (_v == 0)
         return 0;
-    const double*v1=_v;
+    const double *v1 = _v;
     double*v2 = malloc(sizeof(double));
     *v2 = *v1;
     return v2;
 }
-unsigned int float_hash(const void*_v) {
-    if(!_v)
+unsigned int float_hash(const void*_v)
+{
+    if (!_v)
         return 0;
-    const unsigned char*b=_v;
-    unsigned int h=0;
+    const unsigned char*b = _v;
+    unsigned int h = 0;
     int t;
-    for(t=0;t<8;t++)
+    for (t = 0; t < 8; t++)
         h = crc32_add_byte(h, b[t]);
     return h;
 }
-void float_destroy(void*_v) {
-    double*v = (double*)_v;
+void float_destroy(void*_v)
+{
+    double *v = (double*)_v;
     if(v)
         free(v);
 }
-char float_equals(const void*_v1, const void*_v2) {
-    const double*v1=_v1;
-    const double*v2=_v2;
-    if(!v1 || !v2)
-        return v1==v2;
+char float_equals(const void*_v1, const void*_v2)
+{
+    const double *v1 = _v1;
+    const double *v2 = _v2;
+    if (!v1 || !v2)
+        return v1 == v2;
 
-    if(*v1==*v2) return 1;
-    if(*v1!=*v1 && *v2!=*v2) return 1; //both values are NaN
+    if (*v1 == *v2) return 1;
+    if (*v1 != *v1 && *v2 != *v2) return 1; //both values are NaN
     return 0;
 }
 
@@ -72,31 +76,35 @@ type_t float_type = {
 
 unsigned int undefined_uint = 0;
 
-void*uint_clone(const void*_v) {
-    if(!_v)
+void *uint_clone(const void *_v)
+{
+    if (!_v)
         return 0;
-    const unsigned int*v1=_v;
-    unsigned int*v2 = malloc(sizeof(unsigned int));
+    const unsigned int *v1 = _v;
+    unsigned int *v2 = malloc(sizeof(unsigned int));
     *v2 = *v1;
     return v2;
 }
-unsigned int uint_hash(const void*_v) {
-    if(!_v)
+unsigned int uint_hash(const void *_v)
+{
+    if (!_v)
         return 0;
-    const unsigned int*v=_v;
+    const unsigned int *v = _v;
     return *v;
 }
-void uint_destroy(void*_v) {
-    unsigned int*v = (unsigned int*)_v;
-    if(v)
+void uint_destroy(void *_v)
+{
+    unsigned int *v = (unsigned int*)_v;
+    if (v)
         free(v);
 }
-char uint_equals(const void*_v1, const void*_v2) {
-    const unsigned int*v1=_v1;
-    const unsigned int*v2=_v2;
-    if(!v1 || !v2)
-        return v1==v2;
-    return *v1==*v2;
+char uint_equals(const void *_v1, const void *_v2)
+{
+    const unsigned int *v1 = _v1;
+    const unsigned int *v2 = _v2;
+    if (!v1 || !v2)
+        return v1 == v2;
+    return *v1 == *v2;
 }
 
 type_t uint_type = {
@@ -108,9 +116,9 @@ type_t uint_type = {
 
 // ----------------------------- namespace ----------------------------------
 
-unsigned int namespace_hash(namespace_t*n)
+unsigned int namespace_hash(namespace_t *n)
 {
-    if(!n)
+    if (!n)
         return 0;
     unsigned int hash = 0;
     hash = crc32_add_byte(hash, n->access);
@@ -118,56 +126,66 @@ unsigned int namespace_hash(namespace_t*n)
     return hash;
 }
 
-unsigned char namespace_equals(const namespace_t*n1, const namespace_t*n2)
+unsigned char namespace_equals(const namespace_t *n1, const namespace_t *n2)
 {
-    if(!n1 || !n2)
+    if (!n1 || !n2)
         return n1==n2;
-    if(n1->access != n2->access)
+    if (n1->access != n2->access)
         return 0;
-    if(!(n1->name) != !(n2->name))
+    if (!(n1->name) != !(n2->name))
         return 0;
-    if(n1->name && n2->name && strcmp(n1->name, n2->name))
+    if (n1->name && n2->name && strcmp(n1->name, n2->name))
         return 0;
     return 1;
 }
 
-char*escape_string(const char*str)
+char *escape_string(const char*str)
 {
-    if(!str)
+    if (!str)
         return strdup("NULL");
-    int len=0;
-    unsigned const char*s=(unsigned const char*)str;
-    while(*s) {
-        if(*s<10) {
-            len+=2; // \d
-        } else if(*s<32) {
-            len+=3; // \dd
-        } else if(*s<127) {
+    int len = 0;
+    unsigned const char *s = (unsigned const char*)str;
+    while (*s)
+    {
+        if (*s < 10)
+        {
+            len += 2; // \d
+        } else if(*s < 32)
+        {
+            len += 3; // \dd
+        } else if(*s < 127)
+        {
             len++;
-        } else {
-            len+=4; // \xhh
+        } else
+        {
+            len += 4; // \xhh
         }
         s++;
     }
-    char*newstr = malloc(len+1);
-    char*dest = newstr;
-    s=(unsigned const char*)str;
-    while(*s) {
-        if(*s<9) {
-            dest+=sprintf(dest, "\\%d", *s);
-        } else if(*s<32) {
-            if(*s==13)
-                dest+=sprintf(dest, "\\r");
-            else if(*s==10)
-                dest+=sprintf(dest, "\\n");
-            else if(*s==9)
-                dest+=sprintf(dest, "\\t");
+    char *newstr = malloc(len + 1);
+    if (!newstr)
+        return newstr;
+    char *dest = newstr;
+    s = (unsigned const char*)str;
+    while (*s)
+    {
+        if (*s < 9)
+        {
+            dest += sprintf(dest, "\\%d", *s);
+        } else if (*s < 32) {
+            if (*s == 13)
+                dest += sprintf(dest, "\\r");
+            else if(*s == 10)
+                dest += sprintf(dest, "\\n");
+            else if(*s == 9)
+                dest += sprintf(dest, "\\t");
             else
-                dest+=sprintf(dest, "\\%2o", *s);
-        } else if(*s<127) {
-            *dest++=*s;
+                dest += sprintf(dest, "\\%2o", *s);
+        } else if(*s < 127)
+        {
+            *dest ++= *s;
         } else {
-            dest+=sprintf(dest, "\\x%02x", *s);
+            dest += sprintf(dest, "\\x%02x", *s);
         }
         s++;
     }
@@ -175,22 +193,20 @@ char*escape_string(const char*str)
     return newstr;
 }
 
-char *namespace_tostring(namespace_t*ns)
+char *namespace_tostring(namespace_t *ns)
 {
-    if(!ns)
+    if (!ns)
         return strdup("NULL");
-    char *access = 0;
+    char *access = 0, *string = 0;
     uint8_t type = ns->access;
     access = access2str(type);
     char *s = escape_string(ns->name);
     if (!s)
         goto error;
-    char *string = (char*)malloc(strlen(access) + strlen(s) + 7);
+    string = (char*)malloc(strlen(access) + strlen(s) + 7);
     if (!string)
         goto error;
-    if (!s)
-        sprintf(string, "[%s]NULL", access);
-    else if(!*s)
+    if (!*s)
         sprintf(string, "[%s]\"\"", access);
     else
         sprintf(string, "[%s]%s", access, s);
@@ -200,17 +216,17 @@ error:
     return string;
 }
 
-namespace_t* namespace_clone(namespace_t*other)
+namespace_t *namespace_clone(namespace_t *other)
 {
-    if(!other)
+    if (!other)
         return 0;
-    NEW(namespace_t,n);
+    NEW(namespace_t, n);
     n->access = other->access;
-    n->name = other->name?strdup(other->name):0;
+    n->name = other->name ? strdup(other->name) : 0;
     return n;
 }
 
-namespace_t* namespace_fromstring(const char*name)
+namespace_t *namespace_fromstring(const char *name)
 {
     namespace_t *ns = malloc(sizeof(namespace_t));
     memset(ns, 0, sizeof(namespace_t));
@@ -246,7 +262,8 @@ namespace_t* namespace_fromstring(const char*name)
         ns->name = strdup(name);
         free(n);
         return ns;
-    } else {
+    } else
+    {
         ns->access = 0x16;
         ns->name = strdup(name);
         return ns;
@@ -261,33 +278,41 @@ namespace_t* namespace_new(uint8_t access, const char*name)
     ns->name = name?strdup(name):0;
     return ns;
 }
-namespace_t* namespace_new_namespace(const char*name) {
+namespace_t *namespace_new_namespace(const char *name)
+{
     return namespace_new(0x08, name); // public?
 }
-namespace_t* namespace_new_package(const char*name) {
+namespace_t *namespace_new_package(const char *name)
+{
     return namespace_new(0x16 , name);
 }
-namespace_t* namespace_new_packageinternal(const char*name) {
+namespace_t *namespace_new_packageinternal(const char *name)
+{
     return namespace_new(0x17, name);
 }
-namespace_t* namespace_new_protected(const char*name) {
+namespace_t *namespace_new_protected(const char *name)
+{
     return namespace_new(0x18, name);
 }
-namespace_t* namespace_new_explicit(const char*name) {
+namespace_t *namespace_new_explicit(const char *name)
+{
     return namespace_new(0x19, name);
 }
-namespace_t* namespace_new_staticprotected(const char*name) {
+namespace_t *namespace_new_staticprotected(const char *name)
+{
     return namespace_new(0x1a, name);
 }
-namespace_t* namespace_new_private(const char*name) {
+namespace_t *namespace_new_private(const char *name)
+{
     return namespace_new(0x05, name);
 }
 
-void namespace_destroy(namespace_t*n)
+void namespace_destroy(namespace_t *n)
 {
-    if(n) {
-        free((char*)n->name);n->name=0;
-        n->access=0x00;
+    if (n)
+    {
+        free((char*)n->name); n->name = 0;
+        n->access = 0x00;
         free(n);
     }
 }
@@ -301,13 +326,14 @@ type_t namespace_type = {
 
 // ---------------------------namespace sets --------------------------------
 
-unsigned int namespace_set_hash(namespace_set_t*set)
+unsigned int namespace_set_hash(namespace_set_t *set)
 {
-    if(!set)
+    if (!set)
         return 0;
-    namespace_list_t*l = set->namespaces;
+    namespace_list_t *l = set->namespaces;
     unsigned int hash = 0;
-    while(l) {
+    while (l)
+    {
         hash = crc32_add_byte(hash, l->namespace->access);
         hash = crc32_add_string(hash, l->namespace->name);
         l = l->next;
@@ -317,47 +343,49 @@ unsigned int namespace_set_hash(namespace_set_t*set)
 
 int namespace_set_equals(namespace_set_t*m1, namespace_set_t*m2)
 {
-    if(!m1 || !m2)
-        return m1==m2;
-    namespace_list_t*l1 = m1->namespaces;
-    namespace_list_t*l2 = m2->namespaces;
-    while(l1 && l2) {
-        if(l1->namespace->access != l2->namespace->access)
+    if (!m1 || !m2)
+        return m1 == m2;
+    namespace_list_t *l1 = m1->namespaces;
+    namespace_list_t *l2 = m2->namespaces;
+    while (l1 && l2)
+    {
+        if (l1->namespace->access != l2->namespace->access)
             return 0;
-        if(!(l1->namespace->name) != !(l2->namespace->name))
+        if (!(l1->namespace->name) != !(l2->namespace->name))
             return 0;
-        if(l1->namespace->name && l2->namespace->name && strcmp(l1->namespace->name, l2->namespace->name))
+        if (l1->namespace->name && l2->namespace->name && strcmp(l1->namespace->name, l2->namespace->name))
             return 0;
         l1 = l1->next;
         l2 = l2->next;
     }
-    if(l1||l2)
+    if (l1 || l2)
         return 0;
     return 1;
 }
 
-namespace_set_t* namespace_set_clone(namespace_set_t*other)
+namespace_set_t *namespace_set_clone(namespace_set_t *other)
 {
-    if(!other)
+    if (!other)
         return 0;
     NEW(namespace_set_t,set);
     set->namespaces = list_new();
-    namespace_list_t*l = other->namespaces;
-    while(l) {
+    namespace_list_t *l = other->namespaces;
+    while(l)
+    {
         list_append(set->namespaces, namespace_clone(l->namespace));
         l = l->next;
     }
     return set;
 }
-namespace_set_t* namespace_set_new()
+namespace_set_t *namespace_set_new()
 {
-    NEW(namespace_set_t,set);
+    NEW(namespace_set_t, set);
     set->namespaces = list_new();
     return set;
 }
-char* namespace_set_tostring(namespace_set_t*set)
+char *namespace_set_tostring(namespace_set_t *set)
 {
-    if(!set)
+    if (!set)
         return strdup("NULL");
     /* TODO: is the order of the namespaces important (does it
        change the lookup order?). E.g. flex freely shuffles namespaces
@@ -366,22 +394,24 @@ char* namespace_set_tostring(namespace_set_t*set)
        the namespaces.
     */
     int l = 0;
-    namespace_list_t*lns = set->namespaces;
-    while(lns) {
-        char*s = namespace_tostring(lns->namespace);
-        l += strlen(s)+1;
+    namespace_list_t *lns = set->namespaces;
+    while (lns)
+    {
+        char *s = namespace_tostring(lns->namespace);
+        l += strlen(s) + 1;
         free(s);
         lns = lns->next;
     }
-    char*desc = malloc(l+16);
+    char *desc = malloc(l + 16);
     strcpy(desc, "{");
     lns = set->namespaces;
-    while(lns) {
-        char*s = namespace_tostring(lns->namespace);
+    while (lns)
+    {
+        char *s = namespace_tostring(lns->namespace);
         strcat(desc, s);
         free(s);
         lns = lns->next;
-        if(lns)
+        if (lns)
             strcat(desc, ",");
     }
     strcat(desc, "}");
@@ -996,8 +1026,9 @@ int pool_find_namespace(pool_t*pool, namespace_t*ns)
     if(!ns)
         return 0;
     int i = array_find(pool->x_namespaces, ns);
-    if(i<0) {
-        char*s = namespace_tostring(ns);
+    if (i < 0)
+    {
+        char *s = namespace_tostring(ns);
 #ifdef _DEBUG
         printf("Couldn't find namespace \"%s\" %p in constant pool\n", s, ns);
 #endif
@@ -1259,54 +1290,61 @@ void pool_dump(pool_t*pool, FILE*fo, char flags)
 {
     int t;
     fprintf(fo, "%d integers\n", pool->x_ints->num);
-    for(t = 1; t < pool->x_ints->num; t++) {
+    for (t = 1; t < pool->x_ints->num; t++)
+    {
         int32_t val = *(int*)array_getkey(pool->x_ints, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_ints, t);
-        if(flags&1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
+        if (flags & 1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
     }
     fprintf(fo, "%d unsigned integers\n", pool->x_uints->num);
-    for(t = 1; t < pool->x_uints->num; t++) {
+    for (t = 1; t < pool->x_uints->num; t++)
+    {
         uint32_t val = *(unsigned int*)array_getkey(pool->x_uints, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_uints, t);
-        if(flags&1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
+        if (flags & 1) fprintf(fo, "%5d %d) %d\n", freq, t, val);
     }
     fprintf(fo, "%d floats\n", pool->x_floats->num);
-    for(t=1;t<pool->x_floats->num;t++) {
+    for (t = 1; t < pool->x_floats->num; t++)
+    {
         double d = pool_lookup_float(pool, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_floats, t);
-        if(flags&2) fprintf(fo, "%5d %d) %f\n", freq, t, d);
+        if (flags & 2) fprintf(fo, "%5d %d) %f\n", freq, t, d);
     }
     fprintf(fo, "%d strings\n", pool->x_strings->num);
-    for(t=1;t<pool->x_strings->num;t++) {
+    for (t = 1; t < pool->x_strings->num; t++)
+    {
         string_t str = pool_lookup_string2(pool, t);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_strings, t);
-        if(flags&1) fprintf(fo, "%5d %d) ", freq, t);
-        if(flags&1) fwrite(str.str, str.len, 1, fo);
-        if(flags&1) fprintf(fo, "\n");
+        if (flags & 1) fprintf(fo, "%5d %d) ", freq, t);
+        if (flags & 1) fwrite(str.str, str.len, 1, fo);
+        if (flags & 1) fprintf(fo, "\n");
     }
     fprintf(fo, "%d namespaces\n", pool->x_namespaces->num);
-    for(t=1;t<pool->x_namespaces->num;t++) {
-        namespace_t*ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
-        char*s = namespace_tostring(ns);
+    for (t = 1; t < pool->x_namespaces->num; t++)
+    {
+        namespace_t *ns= (namespace_t*)array_getkey(pool->x_namespaces, t);
+        char *s = namespace_tostring(ns);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_namespaces, t);
-        if(flags&1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
+        if (flags & 1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
         free(s);
     }
     fprintf(fo, "%d namespace sets\n", pool->x_namespace_sets->num);
-    for(t=1;t<pool->x_namespace_sets->num;t++) {
-        namespace_set_t*set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, t);
-        char*s = namespace_set_tostring(set);
+    for (t = 1; t < pool->x_namespace_sets->num; t++)
+    {
+        namespace_set_t *set = (namespace_set_t*)array_getkey(pool->x_namespace_sets, t);
+        char *s = namespace_set_tostring(set);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_namespace_sets, t);
-        if(flags&1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
+        if (flags & 1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
         free(s);
     }
 
     fprintf(fo, "%d multinames\n", pool->x_multinames->num);
-    for(t=1;t<pool->x_multinames->num;t++) {
-        multiname_t*m = (multiname_t*)array_getkey(pool->x_multinames, t);
-        char*s = multiname_tostring(m);
+    for (t = 1; t < pool->x_multinames->num; t++)
+    {
+        multiname_t *m = (multiname_t*)array_getkey(pool->x_multinames, t);
+        char *s = multiname_tostring(m);
         int freq = (int)(ptroff_t)array_getvalue(pool->x_multinames, t);
-        if(flags&1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
+        if (flags & 1) fprintf(fo, "%5d %d) %s\n", freq, t, s);
         free(s);
     }
 }
