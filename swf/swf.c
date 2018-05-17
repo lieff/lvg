@@ -150,7 +150,7 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
             g_render->cache_gradient(g_render_obj, &shape->fill);
         }
         assert(0 == ls);
-    }
+    } else
     if (ls)
     {
         shape->stroke.type  = NSVG_PAINT_COLOR;
@@ -175,8 +175,11 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
         else if (2 == startLinecap)
             shape->strokeLineCap = NSVG_CAP_SQUARE;
         //int noClose = ls->flags & 4;
-        assert(0 == fs);
         fs = (FILLSTYLE*)ls;
+    } else
+    {
+        assert(0);
+        return;
     }
     shape->paths = (NSVGpath*)calloc(1, sizeof(NSVGpath));
     if (!shape->paths)
