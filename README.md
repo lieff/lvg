@@ -121,7 +121,7 @@ mesonconf -DENABLE_SCRIPT=False
 
 ## Future
 
- * Use other scripting lanuages like [luajit](http://luajit.org/), [JerryScript](https://github.com/jerryscript-project/jerryscript), [muJS](http://artifex.com/mujs/), [mu](https://github.com/geky/mu), [avian](https://readytalk.github.io/avian/), [ImpalaJIT](https://github.com/Manuel1605/ImpalaJIT) and [AngelScript](http://angelcode.com/angelscript/).
+ * Use other scripting lanuages like [luajit](http://luajit.org/), [JerryScript](https://github.com/jerryscript-project/jerryscript), [muJS](http://artifex.com/mujs/), [mu](https://github.com/geky/mu), [avian](https://readytalk.github.io/avian/), [ImpalaJIT](https://github.com/Manuel1605/ImpalaJIT), [mochascript](https://github.com/Piot/mochascript) and [AngelScript](http://angelcode.com/angelscript/).
  * Speed up action script with jit like [sljit](http://sljit.sourceforge.net/).
  * Shaders and 3D support.
  * Parallel shape\image decoding and use file compression with parallel decoding support (like pbzip2).
