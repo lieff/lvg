@@ -590,9 +590,11 @@ static void action_string_extract(LVGActionCtx *ctx, uint8_t *a)
     assert(ASVAL_STRING == se_str->type);
     assert(ASVAL_INT == se_count->type || ASVAL_DOUBLE == se_count->type || ASVAL_FLOAT == se_count->type);
     assert(ASVAL_INT == se_index->type || ASVAL_DOUBLE == se_index->type || ASVAL_FLOAT == se_index->type);
-    //size_t len = strlen(se_str->str);
-    uint32_t idx = to_int(se_index);
+#ifdef _DEBIG
+    size_t len = strlen(se_str->str);
     assert(idx <= len);
+#endif
+    uint32_t idx = to_int(se_index);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
     SET_STRING(res, se_str->str + idx); // TODO: use se_count and allocate new string with gc
 }
@@ -659,10 +661,12 @@ static const char *props[] =
 static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_idx = &ctx->stack[ctx->stack_ptr];
-    //ASVal *se_target = se_idx + 1;
+#ifdef _DEBUG
+    ASVal *se_target = se_idx + 1;
+    assert(ASVAL_STRING == se_target->type);
+#endif
     ctx->stack_ptr += 1;
     assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
-    assert(ASVAL_STRING == se_target->type);
     uint32_t idx = to_int(se_idx);
     assert(idx <= 21);
     if (idx > 21)
@@ -683,10 +687,12 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
     ASVal *se_idx = se_val + 1;
-    //ASVal *se_target = se_val + 2;
+#ifdef _DEBUG
+    ASVal *se_target = se_val + 2;
+    assert(ASVAL_STRING == se_target->type);
+#endif
     ctx->stack_ptr += 3;
     assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
-    assert(ASVAL_STRING == se_target->type);
     uint32_t idx = to_int(se_idx);
     assert(idx <= 21);
     if (idx > 21)
@@ -1406,13 +1412,11 @@ static void action_jump(LVGActionCtx *ctx, uint8_t *a)
 static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
 {
     //int flags = *(uint8_t*)a->data;
-    //ASVal *se_target = &ctx->stack[ctx->stack_ptr];
-    //ASVal *se_url = se_target + 1;
+    ASVal *se_target = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
-#ifdef _DEBUG
     if (0 == strcmp_identifier(ctx, se_url->str, "FSCommand:quit"))
         ctx->do_exit = 1;
-#endif
 }
 
 static void action_define_function(LVGActionCtx *ctx, uint8_t *a)

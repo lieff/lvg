@@ -254,7 +254,10 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
     uint8_t *data;//, *data2;
     RGBA *dest;
     swf_SetTagPos(tag, 0);
-    /*id = */swf_GetU16(tag);
+#ifdef _DEBUG
+    int id =
+#endif
+        swf_GetU16(tag);
     format = swf_GetU8(tag);
     if (format == 3)
         bpp = 8;

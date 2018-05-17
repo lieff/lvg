@@ -4,6 +4,8 @@ CUR_DIR=$(cd $(dirname ${CUR_DIR}); pwd)/$(basename ${CUR_DIR})/
 
 pushd $CUR_DIR
 
+set -e
+
 APP=../../build/lvg_test
 if [ ! -f "$APP" ]; then
     mkdir ../../build
@@ -16,6 +18,8 @@ if [ ! -f "$APP" ]; then
     ninja
     popd
 fi
+
+set +e
 
 num_fail=0
 num_pass=0
