@@ -1540,7 +1540,7 @@ NVGcontext* nvgCreateGLES3(int flags)
 	NVGparams params;
 	NVGcontext* ctx = NULL;
 	GLNVGcontext* gl = (GLNVGcontext*)malloc(sizeof(GLNVGcontext));
-	if (gl == NULL) goto error;
+	if (gl == NULL) return NULL;
 	memset(gl, 0, sizeof(GLNVGcontext));
 
 	memset(&params, 0, sizeof(params));
@@ -1567,8 +1567,7 @@ NVGcontext* nvgCreateGLES3(int flags)
 	return ctx;
 
 error:
-	// 'gl' is freed by nvgDeleteInternal.
-	if (ctx != NULL) nvgDeleteInternal(ctx);
+	free(gl);
 	return NULL;
 }
 
