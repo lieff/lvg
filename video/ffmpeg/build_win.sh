@@ -2,7 +2,8 @@ if [ ! -d "FFmpeg" ]; then
   git clone --depth=1 https://github.com/FFmpeg/FFmpeg
 fi
 cd FFmpeg
-
+make clean
+set -e
 ./configure \
         --arch=x86_64 --target-os=mingw32 --cross-prefix=x86_64-w64-mingw32- --pkg-config=pkg-config \
 	--disable-pthreads \

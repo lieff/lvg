@@ -4,6 +4,7 @@ if [ ! -d "FFmpeg" ]; then
 git clone --depth=1 https://github.com/FFmpeg/FFmpeg
 fi
 cd FFmpeg
+set -e
 
 emconfigure ./configure \
 	--cc=emcc \
