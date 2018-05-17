@@ -25,6 +25,7 @@
 #define FONTSTASH_IMPLEMENTATION
 #include "fontstash.h"
 #define STB_IMAGE_IMPLEMENTATION
+#define STBI_NO_STDIO
 #include "stb_image.h"
 
 #ifdef _MSC_VER
@@ -780,7 +781,7 @@ void nvgFillPaint(NVGcontext* ctx, NVGpaint paint)
 	nvgTransformMultiply(state->fill.xform, state->xform);
 }
 
-int nvgCreateImage(NVGcontext* ctx, const char* filename, int imageFlags)
+/*int nvgCreateImage(NVGcontext* ctx, const char* filename, int imageFlags)
 {
 	int w, h, n, image;
 	unsigned char* img;
@@ -794,7 +795,7 @@ int nvgCreateImage(NVGcontext* ctx, const char* filename, int imageFlags)
 	image = nvgCreateImageRGBA(ctx, w, h, imageFlags, img);
 	stbi_image_free(img);
 	return image;
-}
+}*/
 
 int nvgCreateImageMem(NVGcontext* ctx, int imageFlags, unsigned char* data, int ndata)
 {

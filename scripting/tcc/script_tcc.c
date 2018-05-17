@@ -202,7 +202,7 @@ const struct SYM g_syms[] = {
     { "nvgRotate", nvgRotate },
     { "nvgLineCap", nvgLineCap },
     { "nvgLineJoin", nvgLineJoin },
-    { "nvgCreateImage", nvgCreateImage },
+    //{ "nvgCreateImage", nvgCreateImage },
     { "nvgCreateImageMem", nvgCreateImageMem },
     { "nvgCreateFont", nvgCreateFont },
     { "nvgCreateFontMem", nvgCreateFontMem },
