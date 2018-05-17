@@ -346,12 +346,16 @@ code_t *code_parse(TAG *tag, int len, abc_file_t *file, pool_t *pool, codelookup
             } else if(*p == 's') { // string
                 string_t s = pool_lookup_string2(pool, swf_GetU30(tag));
                 data = string_dup3(&s);
-            } else if(*p == 'D') { // debug
+            } else if(*p == 'D')
+            {   // debug
                 /*type, usually 1*/
-                uint8_t type = swf_GetU8(tag);
 #ifdef _DEBUG
-                if(type!=1)
-                    printf("Unknown debug type: %02x\n", type);
+                uint8_t type =
+#endif
+                    swf_GetU8(tag);
+#ifdef _DEBUG
+                if (type != 1)
+                    printf("error: unknown debug type: %02x\n", type);
 #endif
                 /*register name*/
                 code->data[0] = strdup((char*)pool_lookup_string(pool, swf_GetU30(tag)));

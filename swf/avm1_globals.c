@@ -354,8 +354,10 @@ int g_num_classes = sizeof(g_classes)/sizeof(g_classes[0]);
 static void createEmptyMovieClip(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
     ASVal *se_name = &ctx->stack[ctx->stack_ptr];
+#ifdef _DEBUG
     ASVal *se_depth = se_name + 1;
     assert(ASVAL_INT == se_depth->type || ASVAL_DOUBLE == se_depth->type || ASVAL_FLOAT == se_depth->type);
+#endif
     assert(ASVAL_STRING == se_name->type);
     ASVal *loc = create_local(ctx, THIS, se_name->str);
     loc->type = ASVAL_UNDEFINED;

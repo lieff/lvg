@@ -21,6 +21,7 @@
 #endif
 
 #include "lunzip.h"
+#define STBI_NO_STDIO
 #include "stb_image.h"
 #include <render/gl.h>
 #include <video/video.h>

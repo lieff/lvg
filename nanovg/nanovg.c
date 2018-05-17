@@ -1223,7 +1223,7 @@ static NVGvertex* nvg__allocTempVerts(NVGcontext* ctx, int nverts)
 	return ctx->cache->verts;
 }
 
-static float nvg__triarea2(float ax, float ay, float bx, float by, float cx, float cy)
+/*static float nvg__triarea2(float ax, float ay, float bx, float by, float cx, float cy)
 {
 	float abx = bx - ax;
 	float aby = by - ay;
@@ -1256,7 +1256,7 @@ static void nvg__polyReverse(NVGpoint* pts, int npts)
 		i++;
 		j--;
 	}
-}
+}*/
 
 
 static void nvg__vset(NVGvertex* vtx, float x, float y, float u, float v)

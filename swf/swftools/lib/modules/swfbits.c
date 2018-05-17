@@ -240,7 +240,7 @@ RGBA *swf_JPEG2TagToImage(TAG *tag, int *width, int *height)
 
 RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
 {
-    int id, format, height, width, pos;
+    int format, height, width, pos;
     size_t datalen;//, datalen2;
 #ifdef HAVE_ZLIB
     int error;
@@ -254,7 +254,7 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
     uint8_t *data;//, *data2;
     RGBA *dest;
     swf_SetTagPos(tag, 0);
-    id = swf_GetU16(tag);
+    /*id = */swf_GetU16(tag);
     format = swf_GetU8(tag);
     if (format == 3)
         bpp = 8;
@@ -344,12 +344,12 @@ RGBA *swf_DefineLosslessBitsTagToImage(TAG *tag, int *dwidth, int *dheight)
                 for (x = 0; x < width; x++)
                 {
                     /* remove premultiplication */
-                    int alpha = data[pos+0];
-                    if(alpha)
+                    int alpha = data[pos + 0];
+                    if (alpha)
                         alpha = 0xff0000/alpha;
-                    dest[pos2].r = (data[pos + 1]*alpha)>>16;
-                    dest[pos2].g = (data[pos + 2]*alpha)>>16;
-                    dest[pos2].b = (data[pos + 3]*alpha)>>16;
+                    dest[pos2].r = (data[pos + 1]*alpha) >> 16;
+                    dest[pos2].g = (data[pos + 2]*alpha) >> 16;
+                    dest[pos2].b = (data[pos + 3]*alpha) >> 16;
                     dest[pos2].a = data[pos + 0];        //alpha
                     pos2++;
                     pos += 4;

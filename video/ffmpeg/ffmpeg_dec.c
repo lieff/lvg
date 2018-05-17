@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+//#define OLD_API
+
 static int g_ffmpeg_initialized;
 
 typedef struct ffmpeg_decoder
@@ -107,7 +109,8 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
     dec->pkt->size = len;
 #ifndef OLD_API
     ret = avcodec_send_packet(dec->dec_ctx, dec->pkt);
-    if (ret < 0) {
+    if (ret < 0)
+    {
         printf("Error sending a packet for decoding\n");
         return 0;
     }
@@ -122,10 +125,12 @@ static int ff_decode(void *_dec, void *buf, int len, video_frame *out)
 #else
     int got_frame = 0;
     ret = avcodec_decode_video2(dec->dec_ctx, dec->frame, &got_frame, dec->pkt);
-    if (!got_frame)
+    if (ret < 0 || !got_frame)
         return 0;
 #endif
+#ifndef OLD_API
 decoded:
+#endif
     for(int i = 0; i < 3; i++)
     {
         out->planes[i] = dec->frame->data[i];

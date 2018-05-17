@@ -590,7 +590,7 @@ static void action_string_extract(LVGActionCtx *ctx, uint8_t *a)
     assert(ASVAL_STRING == se_str->type);
     assert(ASVAL_INT == se_count->type || ASVAL_DOUBLE == se_count->type || ASVAL_FLOAT == se_count->type);
     assert(ASVAL_INT == se_index->type || ASVAL_DOUBLE == se_index->type || ASVAL_FLOAT == se_index->type);
-    size_t len = strlen(se_str->str);
+    //size_t len = strlen(se_str->str);
     uint32_t idx = to_int(se_index);
     assert(idx <= len);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
@@ -659,7 +659,7 @@ static const char *props[] =
 static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_idx = &ctx->stack[ctx->stack_ptr];
-    ASVal *se_target = se_idx + 1;
+    //ASVal *se_target = se_idx + 1;
     ctx->stack_ptr += 1;
     assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
@@ -683,7 +683,7 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
     ASVal *se_idx = se_val + 1;
-    ASVal *se_target = se_val + 2;
+    //ASVal *se_target = se_val + 2;
     ctx->stack_ptr += 3;
     assert(ASVAL_INT == se_idx->type || ASVAL_DOUBLE == se_idx->type || ASVAL_FLOAT == se_idx->type);
     assert(ASVAL_STRING == se_target->type);
@@ -1311,9 +1311,11 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a)
 {   // all frames always loaded - never skip actions
+#ifdef _DEBUG
     ASVal *se_frame = &ctx->stack[ctx->stack_ptr];
-    ctx->stack_ptr++;
     assert(ASVAL_DOUBLE == se_frame->type || ASVAL_FLOAT == se_frame->type || ASVAL_INT == se_frame->type || ASVAL_BOOL == se_frame->type);
+#endif
+    ctx->stack_ptr++;
 }
 
 static void action_define_function2(LVGActionCtx *ctx, uint8_t *a)
@@ -1404,8 +1406,8 @@ static void action_jump(LVGActionCtx *ctx, uint8_t *a)
 static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
 {
     //int flags = *(uint8_t*)a->data;
-    ASVal *se_target = &ctx->stack[ctx->stack_ptr];
-    ASVal *se_url = se_target + 1;
+    //ASVal *se_target = &ctx->stack[ctx->stack_ptr];
+    //ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
 #ifdef _DEBUG
     if (0 == strcmp_identifier(ctx, se_url->str, "FSCommand:quit"))
