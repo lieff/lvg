@@ -135,6 +135,7 @@ mesonconf -DENABLE_SCRIPT=False
  * https://skia.org/
  * https://github.com/memononen/nanovg
  * https://github.com/mokafolio/Tarp
+ * https://github.com/nical/lyon
  * https://cairographics.org/
  * http://www.antigrain.com/
  * http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_home
