@@ -1223,7 +1223,7 @@ done:
                 {
                     int rate, channels;
                     sound->samples = lvgLoadMP3Buf(buf, buf_size, &rate, &channels, &sound->num_samples);
-                    assert(num_samples == sound->num_samples && sound->channels == channels && sound->rate == rate);
+                    assert(/*num_samples == sound->num_samples && */sound->channels == channels && sound->rate == rate);
                     sound->channels = channels;
                     sound->rate     = rate;
                 }

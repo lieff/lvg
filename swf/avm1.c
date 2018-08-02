@@ -710,37 +710,42 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_clone_sprite(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
 static void action_remove_sprite(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+
+static const char *as_var_to_str(LVGActionCtx *ctx, ASVal *v)
+{
+    if (ASVAL_UNDEFINED == v->type)
+        return "undefined";
+    if (ASVAL_NULL == v->type)
+        return "null";
+    if (ASVAL_STRING == v->type)
+        return v->str;
+    else if (ASVAL_BOOL == v->type)
+    {
+        if (ctx->version < 5)
+            return v->boolean ? "1" : "0";
+        else
+            return v->boolean ? "true" : "false";
+    } else if (ASVAL_INT == v->type)
+        return double_to_str(v->i32);
+    else if (ASVAL_FLOAT == v->type)
+        return double_to_str(v->f_int);
+    else if (ASVAL_DOUBLE == v->type)
+        return double_to_str(v->d_int);
+    else if (ASVAL_CLASS == v->type)
+        return v->cls->name;
+    else if (ASVAL_FUNCTION == v->type)
+        return "function";
+    return "error";
+}
+
 static void action_trace(LVGActionCtx *ctx, uint8_t *a)
 {
 #ifdef _DEBUG
     ASVal *se = &ctx->stack[ctx->stack_ptr];
-    ctx->stack_ptr++;
-    if (ASVAL_UNDEFINED == se->type)
-        printf("undefined\n");
-    if (ASVAL_NULL == se->type)
-        printf("null\n");
-    if (ASVAL_STRING == se->type)
-        printf("%s\n", se->str);
-    else if (ASVAL_BOOL == se->type)
-    {
-        if (ctx->version < 5)
-            printf(se->boolean ? "1\n" : "0\n");
-        else
-            printf(se->boolean ? "true\n" : "false\n");
-    } else if (ASVAL_INT == se->type)
-        printf("%d\n", se->i32);
-    else if (ASVAL_FLOAT == se->type)
-    {
-        char *s = double_to_str(se->f_int);
-        printf("%s\n", s);
-    } else if (ASVAL_DOUBLE == se->type)
-    {
-        char *s = double_to_str(se->d_int);
-        printf("%s\n", s);
-    } else if (ASVAL_CLASS == se->type)
-        printf("_level0\n");
+    printf("%s\n", as_var_to_str(ctx, se));
     fflush(stdout);
 #endif
+    ctx->stack_ptr++;
 }
 
 static void action_start_drag(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -1371,7 +1376,7 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
         case 1: se->type = ASVAL_FLOAT; se->f_int = read_float((uint8_t*)data + 1); size = 4; break;
         case 2: se->type = ASVAL_NULL; se->str = 0; break;
         case 3: se->type = ASVAL_UNDEFINED; se->str = 0; break;
-        case 4: { int reg = *((uint8_t*)data + 1); se->type = ctx->regs[reg].type; se->str = ctx->regs[reg].str; size = 1; } break;
+        case 4: { int reg = *((uint8_t*)data + 1); *se = ctx->regs[reg]; size = 1; } break;
         case 5: se->type = ASVAL_BOOL; se->boolean = *((uint8_t*)data + 1) ? 1 : 0; size = 1; break;
         case 6: se->type = ASVAL_DOUBLE; se->d_int = read_double((uint8_t*)data + 1); size = 8; break;
         case 7: se->type = ASVAL_INT; se->ui32 = *(uint32_t*)((char*)data + 1); size = 4; break;
@@ -1495,8 +1500,8 @@ typedef struct
 #if defined(_DEBUG) || defined(_TEST)
     const char *name;
     uint8_t   version;
-    uint8_t   npop_params;
-    uint8_t   npush_params;
+    int8_t   npop_params;
+    int8_t   npush_params;
 #endif
 } ActionEntry;
 
@@ -1677,8 +1682,27 @@ restart:
         const ActionEntry *ae = &g_avm1_actions[a];
         uint8_t *opdata = &actions[ctx->pc];
         ctx->pc += len;
+#if defined(_DEBUG)
+        printf("AS2: v%d %s(", ae->version, ae->name);
+        int i, stack_ptr = ctx->stack_ptr;
+        if (ae->npop_params > 0)
+        {
+            for (i = 0; i < ae->npop_params; i++)
+                printf((i + 1) == ae->npop_params ? "%s" : "%s, ", as_var_to_str(ctx, &ctx->stack[ctx->stack_ptr + i]));
+        } else
+            printf("...");
+        printf(") = ");
+#endif
         if (ae->vm_func)
             ae->vm_func(ctx, opdata);
+#if defined(_DEBUG)
+        int npush_params = ae->npush_params > 0 ? ae->npush_params : 0;
+        if (ae->npush_params < 0)
+            npush_params = stack_ptr - ctx->stack_ptr;
+        for (i = 0; i < npush_params; i++)
+            printf((i + 1) == npush_params ? "%s" : "%s, ", as_var_to_str(ctx, &ctx->stack[ctx->stack_ptr + i]));
+        printf("\n");
+#endif
         if (ctx->do_exit)
             break;
         if (!--execution_budget)
