@@ -19,6 +19,11 @@ short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int
     /*FILE *f = fopen("out.mp3", "wb");
     fwrite(buf, 1, buf_size, f);
     fclose(f);*/
+    if (!buf_size)
+    {
+        *rate = *channels = *nsamples = 0;
+        return 0;
+    }
     mp3dec_frame_info_t info;
     mp3dec_t dec;
     int alloc_samples = 1024*1024, num_samples = 0;

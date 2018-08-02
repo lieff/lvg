@@ -1431,7 +1431,7 @@ done:
     {
         flush_stream_sound(clip, group, stream_buffer, stream_buf_size, stream_sound, stream_format, stream_bits, stream_frame, nframe);
 #ifndef _TEST
-        assert(stream_samples == clip->sounds[stream_sound].num_samples);
+        //assert(stream_samples == clip->sounds[stream_sound].num_samples);
 #endif
     }
     assert(tag && ST_END == tag->id);

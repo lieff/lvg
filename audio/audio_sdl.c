@@ -246,6 +246,8 @@ static void sdl_audio_stop(audio_ctx *ctx, LVGSound *sound)
 static void sdl_audio_play(void *audio_render, LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
     audio_ctx *ctx = (audio_ctx *)audio_render;
+    if (!sound->num_samples)
+        return;
     SDL_LockAudioDevice(ctx->dev);
     int i;
     if (flags & PLAY_SyncStop)
@@ -294,6 +296,8 @@ done:
 static void sdl_resample(void *audio_render, LVGSound *sound)
 {
     audio_ctx *ctx = (audio_ctx *)audio_render;
+    if (!sound->num_samples)
+        return;
     SDL_AudioCVT cvt;
     if (SDL_BuildAudioCVT(&cvt, AUDIO_S16, sound->channels, sound->rate, AUDIO_S16, sound->channels, ctx->outputSpec.freq) < 0)
     {
