@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
 
 typedef void* (* GLADloadproc)(const char *name);
 int gladLoadGLLoader(GLADloadproc);
@@ -60,8 +63,9 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
     //SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+#ifndef EMSCRIPTEN
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
+#endif
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 8);
@@ -138,6 +142,9 @@ static void sdl_pull_events(void *ctx)
 
 static void sdl_main_loop(void *ctx)
 {
+#ifdef EMSCRIPTEN
+    emscripten_set_main_loop(drawframe, 0, 1);
+#else
     platform_ctx *platform = (platform_ctx *)ctx;
     platform->startTime = SDL_GetTicks();
     while (!platform->done)
@@ -146,6 +153,7 @@ static void sdl_main_loop(void *ctx)
         if (platform->keys[KEY_ESC])
             platform->done = 1;
     }
+#endif
 }
 
 static void sdl_swap_buffers(void *ctx)

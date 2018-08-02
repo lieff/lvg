@@ -104,12 +104,11 @@ static void glfw_pull_events(void *ctx)
 
 static void glfw_main_loop(void *ctx)
 {
-#ifdef EMSCRIPTEN
     glfwSetTime(0);
+#ifdef EMSCRIPTEN
     emscripten_set_main_loop(drawframe, 0, 1);
 #else
     platform_ctx *platform = (platform_ctx *)ctx;
-    glfwSetTime(0);
     while (!glfwWindowShouldClose(platform->window))
     {
         drawframe();
