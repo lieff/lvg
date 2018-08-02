@@ -189,10 +189,12 @@ uint32_t swf_GetBits(TAG *t, int nbits)
     return res;
 }
 
-int32_t swf_GetSBits(TAG * t, int nbits)
+int32_t swf_GetSBits(TAG *t, int nbits)
 {
+    if (!nbits)
+        return 0;
     uint32_t res = swf_GetBits(t, nbits);
-    if (res & (1 << (nbits - 1)))
+    if (res & ((uint32_t)1 << (nbits - 1)))
         res |= (0xffffffff << nbits);
     return (int32_t)res;
 }

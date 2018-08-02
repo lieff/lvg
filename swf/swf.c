@@ -76,7 +76,7 @@ static void path_quadBezTo(NSVGpath* p, float cx, float cy, float x, float y)
 
 static inline uint32_t RGBA2U32(RGBA *c)
 {
-    return c->r | (c->g << 8) | (c->b << 16) | (c->a << 24);
+    return (uint32_t)c->r | ((uint32_t)c->g << 8) | ((uint32_t)c->b << 16) | ((uint32_t)c->a << 24);
 }
 
 static void expandBBox(float *bounds, float x, float y)

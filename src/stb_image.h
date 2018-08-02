@@ -1765,7 +1765,7 @@ static void stbi__build_fast_ac(stbi__int16 *fast_ac, stbi__huffman *h)
             if (k < m) k += (~0U << magbits) + 1;
             // if the result is small enough, we can fit it in fast_ac table
             if (k >= -128 && k <= 127)
-               fast_ac[i] = (stbi__int16) ((k << 8) + (run << 4) + (len + magbits));
+               fast_ac[i] = (stbi__int16) ((int)((unsigned)k << 8) + (int)((unsigned)run << 4) + (len + magbits));
          }
       }
    }
@@ -1784,7 +1784,7 @@ static void stbi__grow_buffer_unsafe(stbi__jpeg *j)
             return;
          }
       }
-      j->code_buffer |= b << (24 - j->code_bits);
+      j->code_buffer |= (unsigned)b << (24 - j->code_bits);
       j->code_bits += 8;
    } while (j->code_bits <= 24);
 }
