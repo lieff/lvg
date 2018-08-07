@@ -317,6 +317,58 @@ int loadScript()
 
     for (i = 0; i < sizeof(g_syms)/sizeof(g_syms[0]); i++)
         tcc_add_symbol(s, g_syms[i].m_name, g_syms[i].m_sym);
+    tcc_add_symbol(s, "glCreateProgram", glCreateProgram);
+    tcc_add_symbol(s, "glCreateShader", glCreateShader);
+    tcc_add_symbol(s, "glShaderSource", glShaderSource);
+    tcc_add_symbol(s, "glCompileShader", glCompileShader);
+    tcc_add_symbol(s, "glGetShaderiv", glGetShaderiv);
+    tcc_add_symbol(s, "glGetShaderInfoLog", glGetShaderInfoLog);
+    tcc_add_symbol(s, "glAttachShader", glAttachShader);
+    tcc_add_symbol(s, "glLinkProgram", glLinkProgram);
+    tcc_add_symbol(s, "glGetProgramiv", glGetProgramiv);
+    tcc_add_symbol(s, "glGetUniformLocation", glGetUniformLocation);
+    tcc_add_symbol(s, "glGetAttribLocation", glGetAttribLocation);
+    tcc_add_symbol(s, "glGenBuffers", glGenBuffers);
+#ifdef GL3
+    //tcc_add_symbol(s, "glGenVertexArrays", glGenVertexArrays);
+    //tcc_add_symbol(s, "glBindVertexArray", glBindVertexArray);
+#endif
+    tcc_add_symbol(s, "glBindBuffer", glBindBuffer);
+    tcc_add_symbol(s, "glEnableVertexAttribArray", glEnableVertexAttribArray);
+    tcc_add_symbol(s, "glVertexAttribPointer", glVertexAttribPointer);
+    tcc_add_symbol(s, "glBindTexture", glBindTexture);
+    tcc_add_symbol(s, "glGenTextures", glGenTextures);
+    tcc_add_symbol(s, "glTexParameteri", glTexParameteri);
+    tcc_add_symbol(s, "glTexImage2D", glTexImage2D);
+    tcc_add_symbol(s, "glDetachShader", glDetachShader);
+    tcc_add_symbol(s, "glDeleteShader", glDeleteShader);
+    tcc_add_symbol(s, "glDeleteProgram", glDeleteProgram);
+    tcc_add_symbol(s, "glDeleteTextures", glDeleteTextures);
+    tcc_add_symbol(s, "glDeleteBuffers", glDeleteBuffers);
+    tcc_add_symbol(s, "glEnable", glEnable);
+    tcc_add_symbol(s, "glBlendEquation", glBlendEquation);
+    tcc_add_symbol(s, "glBlendFunc", glBlendFunc);
+    tcc_add_symbol(s, "glDisable", glDisable);
+    tcc_add_symbol(s, "glActiveTexture", glActiveTexture);
+    tcc_add_symbol(s, "glUseProgram", glUseProgram);
+    tcc_add_symbol(s, "glUniform1i", glUniform1i);
+    tcc_add_symbol(s, "glUniformMatrix4fv", glUniformMatrix4fv);
+    tcc_add_symbol(s, "glViewport", glViewport);
+    tcc_add_symbol(s, "glBufferData", glBufferData);
+    tcc_add_symbol(s, "glMapBuffer", glMapBuffer);
+#ifdef GL3
+    //tcc_add_symbol(s, "glMapBufferRange", glMapBufferRange);
+#endif
+    tcc_add_symbol(s, "glUnmapBuffer", glUnmapBuffer);
+    tcc_add_symbol(s, "glScissor", glScissor);
+    tcc_add_symbol(s, "glDrawElements", glDrawElements);
+    tcc_add_symbol(s, "glPushAttrib", glPushAttrib);
+    tcc_add_symbol(s, "glViewport", glViewport);
+    tcc_add_symbol(s, "glMatrixMode", glMatrixMode);
+    tcc_add_symbol(s, "glPushMatrix", glPushMatrix);
+    tcc_add_symbol(s, "glLoadIdentity", glLoadIdentity);
+    tcc_add_symbol(s, "glOrtho", glOrtho);
+    tcc_add_symbol(s, "glEnableClientState", glEnableClientState);
 
     size = tcc_relocate(s, TCC_RELOCATE_AUTO);
     if (size == -1)
