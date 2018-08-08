@@ -6,8 +6,10 @@
 #mesondefine AUDIO_SDL
 #mesondefine VIDEO_FFMPEG
 #mesondefine SCRIPT_TCC
+#mesondefine SCRIPT_PICOC
 #mesondefine PLATFORM_GLFW
 #mesondefine PLATFORM_SDL
 #mesondefine ENABLE_AUDIO
 #mesondefine ENABLE_VIDEO
 #mesondefine ENABLE_SCRIPT
+#mesondefine ENABLE_SWF

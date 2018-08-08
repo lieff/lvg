@@ -25,16 +25,12 @@ set -e
 #  cd ..
 #fi
 
-x86_64-w64-mingw32-gcc -s -Os -flto -std=gnu99 -fno-asynchronous-unwind-tables -fno-stack-protector -ffunction-sections -fdata-sections -Wl,--gc-sections nanovg/nanovg.c src/lvg.c src/svgb.c src/lunzip.c \
-audio/*.c \
-platform/*.c \
-scripting/tcc/script_tcc.c \
-swf/*.c swf/swftools/lib/*.c swf/swftools/lib/modules/*.c swf/swftools/lib/as3/*.c \
-render/*.c \
-windows/mman.c \
-video/ffmpeg/ffmpeg_dec.c \
+. build_src.sh
+SRC="$SRC windows/mman.c"
+
+x86_64-w64-mingw32-gcc -s -Os -flto -std=gnu99 -fno-asynchronous-unwind-tables -fno-stack-protector -ffunction-sections -fdata-sections -Wl,--gc-sections $SRC \
 -LSDL/build-win -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
--I. -Isrc -Iscripting/tcc -Inanovg -Iswf/swftools/lib \
+-I. -Isrc -Inanovg -Iswf/swftools/lib \
 -ISDL/include -Ivideo/ffmpeg/FFmpeg \
 -DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lSDL2 -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lbcrypt -lversion
 scripts/compress.sh ./lvg_win.exe
