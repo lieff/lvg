@@ -58,9 +58,9 @@ PFNGLPATHSTENCILFUNCNVPROC FUNC(glPathStencilFuncNV) = NULL;*/
 typedef void (APIENTRYP PFNGLMATRIXLOADIDENTITYEXTPROC) (GLenum mode);
 typedef void (APIENTRYP PFNGLMATRIXORTHOEXTPROC) (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
 typedef void (APIENTRYP PFNGLMATRIXLOADFEXTPROC) (GLenum mode, const GLfloat *m);
-PFNGLMATRIXLOADIDENTITYEXTPROC glMatrixLoadIdentityEXT = NULL;
-PFNGLMATRIXORTHOEXTPROC glMatrixOrthoEXT = NULL;
-PFNGLMATRIXLOADFEXTPROC glMatrixLoadfEXT = NULL;
+static PFNGLMATRIXLOADIDENTITYEXTPROC g_glMatrixLoadIdentityEXT = NULL;
+static PFNGLMATRIXORTHOEXTPROC g_glMatrixOrthoEXT = NULL;
+static PFNGLMATRIXLOADFEXTPROC g_glMatrixLoadfEXT = NULL;
 
 #define LOAD_PROC(type, name) \
     name = (type) platform->get_proc_address(#name); \
@@ -92,7 +92,7 @@ void MatrixLoadToGL(Transform3x2 m)
     mm[13] = m[1][2];
     mm[14] = 0;
     mm[15] = 1;
-    glMatrixLoadfEXT(GL_MODELVIEW, &mm[0]);
+    g_glMatrixLoadfEXT(GL_MODELVIEW, &mm[0]);
 }
 
 static int nvpr_init(void **render, const platform *platform)
@@ -105,9 +105,9 @@ static int nvpr_init(void **render, const platform *platform)
     if (!platform->extension_supported || !platform->extension_supported("GL_NV_path_rendering"))
         goto error;
 
-    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);
-    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
-    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
+    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, g_glMatrixLoadIdentityEXT);
+    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, g_glMatrixOrthoEXT);
+    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, g_glMatrixLoadfEXT);
 
     /*LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
     LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
@@ -176,9 +176,9 @@ static void nvpr_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int
 {
     render_ctx *ctx = render;
     ctx->winWidth = winWidth, ctx->winHeight = winHeight, ctx->width = width, ctx->height = height;
-    glMatrixLoadIdentityEXT(GL_PROJECTION);
-    glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
-    glMatrixLoadIdentityEXT(GL_MODELVIEW);
+    g_glMatrixLoadIdentityEXT(GL_PROJECTION);
+    g_glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
+    g_glMatrixLoadIdentityEXT(GL_MODELVIEW);
     if (!clip)
         return;
     float clip_w = clip->bounds[2] - clip->bounds[0], clip_h = clip->bounds[3] - clip->bounds[1];
