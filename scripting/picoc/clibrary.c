@@ -27,7 +27,7 @@ void LibraryInit(Picoc *pc)
 }
 
 /* add a library */
-void LibraryAdd(Picoc *pc, struct Table *GlobalTable, const char *LibraryName, struct LibraryFunction *FuncList)
+void LibraryAdd(Picoc *pc, struct Table *GlobalTable, const char *LibraryName, const struct LibraryFunction *FuncList)
 {
     struct ParseState Parser;
     int Count;
@@ -621,7 +621,7 @@ void LibMemcmp(struct ParseState *Parser, struct Value *ReturnValue, struct Valu
 #endif
 
 /* list of all library functions and their prototypes */
-struct LibraryFunction CLibrary[] =
+const struct LibraryFunction CLibrary[] =
 {
     { LibPrintf,        "void printf(char *, ...);" },
     { LibSPrintf,       "char *sprintf(char *, char *, ...);" },

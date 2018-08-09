@@ -17,6 +17,16 @@ enum LVG_PLAY_STATE { LVG_PLAYING = 0, LVG_STOPPED };
 
 typedef struct LVGActionCtx LVGActionCtx;
 
+typedef struct LVGColorf
+{
+    union {
+        float rgba[4];
+        struct {
+            float r,g,b,a;
+        };
+    };
+} LVGColorf;
+
 typedef struct LVGColorTransform
 {
     float mul[4];
@@ -84,6 +94,8 @@ typedef struct LVGMovieClipGroupState
 } LVGMovieClipGroupState;
 
 typedef struct LVGShapeCollection LVGShapeCollection;
+typedef struct NSVGshape NSVGshape;
+typedef struct NSVGimage NSVGimage;
 
 typedef struct LVGShapeCollection
 {
@@ -189,14 +201,11 @@ typedef struct LVGMovieClip
     LVGButton *buttons;
     LVGActionCtx *vm;        // action script vm
     float bounds[4];
-    NVGcolor bgColor;
+    LVGColorf bgColor;
     int num_shapes, num_images, num_groups, num_groupstates, num_fonts, num_texts, num_sounds, num_videos, num_buttons, as_version;
     float fps;
     double last_time;
 } LVGMovieClip;
-
-NVGpaint nvgLinearGradientTCC(NVGcontext* ctx, float sx, float sy, float ex, float ey,
-    float ir, float ig, float ib, float ia, float or, float og, float ob, float oa);
 
 char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
@@ -216,9 +225,8 @@ void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupSta
 void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);
 
-extern NVGcolor g_bgColor;
+extern LVGColorf g_bgColor;
 #ifdef __TINYC__
-extern NVGcontext *vg;
 extern int winWidth;
 extern int winHeight;
 extern int width;

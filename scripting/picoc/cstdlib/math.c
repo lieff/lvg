@@ -137,7 +137,7 @@ void MathFloor(struct ParseState *Parser, struct Value *ReturnValue, struct Valu
 }
 
 /* all math.h functions */
-struct LibraryFunction MathFunctions[] =
+const struct LibraryFunction MathFunctions[] =
 {
     { MathAcos,         "float acos(float);" },
     { MathAsin,         "float asin(float);" },

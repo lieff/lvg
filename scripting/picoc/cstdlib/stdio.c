@@ -625,7 +625,7 @@ typedef struct __FILEStruct FILE;\
 ";
 
 /* all stdio functions */
-struct LibraryFunction StdioFunctions[] =
+const struct LibraryFunction StdioFunctions[] =
 {
     { StdioFopen,   "FILE *fopen(char *, char *);" },
     { StdioFreopen, "FILE *freopen(char *, char *, FILE *);" },

@@ -1726,7 +1726,8 @@ LVGMovieClip *swf_ReadObjects(SWF *swf)
 done:
     if (sound_block_found)
         clip->num_sounds++;
-    clip->bgColor = nvgRGBA(bg.r, bg.g, bg.b, bg.a);
+    LVGColorf bgColor = {{{ bg.r/255.0f, bg.g/255.0f, bg.b/255.0f, bg.a/255.0f }}};
+    clip->bgColor = bgColor;
     clip->shapes = calloc(1, sizeof(LVGShapeCollection)*clip->num_shapes);
     clip->images = calloc(1, sizeof(int)*clip->num_images);
     clip->groups = calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);

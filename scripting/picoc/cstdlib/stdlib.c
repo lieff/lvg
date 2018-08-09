@@ -132,7 +132,7 @@ typedef struct { \
 #endif
 
 /* all stdlib.h functions */
-struct LibraryFunction StdlibFunctions[] =
+const struct LibraryFunction StdlibFunctions[] =
 {
 #ifndef NO_FP
     { StdlibAtof,           "float atof(char *);" },

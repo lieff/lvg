@@ -140,7 +140,7 @@ void StringStrtok_r(struct ParseState *Parser, struct Value *ReturnValue, struct
 #endif
 
 /* all string.h functions */
-struct LibraryFunction StringFunctions[] =
+const struct LibraryFunction StringFunctions[] =
 {
 #ifndef WIN32
 	{ StringIndex,         "char *index(char *,int);" },

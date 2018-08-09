@@ -33,7 +33,7 @@
 
 LVGMovieClip *g_clip;
 static zip_t g_zip;
-NVGcolor g_bgColor;
+LVGColorf g_bgColor;
 platform_params g_params;
 static int is_swf, b_no_actionscript, b_fullscreen, b_interpolate;
 #ifdef EMSCRIPTEN

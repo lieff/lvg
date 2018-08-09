@@ -87,7 +87,7 @@ typedef int clock_t;\
 ";
 
 /* all string.h functions */
-struct LibraryFunction StdTimeFunctions[] =
+const struct LibraryFunction StdTimeFunctions[] =
 {
     { StdAsctime,       "char *asctime(struct tm *);" },
     { StdClock,         "time_t clock();" },

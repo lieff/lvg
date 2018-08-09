@@ -349,7 +349,7 @@ struct IncludeLibrary
 {
     char *IncludeName;
     void (*SetupFunction)(Picoc *pc);
-    struct LibraryFunction *FuncList;
+    const struct LibraryFunction *FuncList;
     const char *SetupCSource;
     struct IncludeLibrary *NextLib;
 };
@@ -568,7 +568,7 @@ void VariableScopeEnd(struct ParseState * Parser, int ScopeID, int PrevScopeID);
 /* clibrary.c */
 void BasicIOInit(Picoc *pc);
 void LibraryInit(Picoc *pc);
-void LibraryAdd(Picoc *pc, struct Table *GlobalTable, const char *LibraryName, struct LibraryFunction *FuncList);
+void LibraryAdd(Picoc *pc, struct Table *GlobalTable, const char *LibraryName, const struct LibraryFunction *FuncList);
 void CLibraryInit(Picoc *pc);
 void PrintCh(char OutCh, IOFILE *Stream);
 void PrintSimpleInt(long Num, IOFILE *Stream);
@@ -604,7 +604,7 @@ void PlatformLibraryInit(Picoc *pc);
 /* include.c */
 void IncludeInit(Picoc *pc);
 void IncludeCleanup(Picoc *pc);
-void IncludeRegister(Picoc *pc, const char *IncludeName, void (*SetupFunction)(Picoc *pc), struct LibraryFunction *FuncList, const char *SetupCSource);
+void IncludeRegister(Picoc *pc, const char *IncludeName, void (*SetupFunction)(Picoc *pc), const struct LibraryFunction *FuncList, const char *SetupCSource);
 void IncludeFile(Picoc *pc, char *Filename);
 /* the following is defined in picoc.h:
  * void PicocIncludeAllSystemHeaders(); */
@@ -617,31 +617,31 @@ void DebugCheckStatement(struct ParseState *Parser);
 
 /* stdio.c */
 extern const char StdioDefs[];
-extern struct LibraryFunction StdioFunctions[];
+extern const struct LibraryFunction StdioFunctions[];
 void StdioSetupFunc(Picoc *pc);
 
 /* math.c */
-extern struct LibraryFunction MathFunctions[];
+extern const struct LibraryFunction MathFunctions[];
 void MathSetupFunc(Picoc *pc);
 
 /* string.c */
-extern struct LibraryFunction StringFunctions[];
+extern const struct LibraryFunction StringFunctions[];
 void StringSetupFunc(Picoc *pc);
 
 /* stdlib.c */
-extern struct LibraryFunction StdlibFunctions[];
+extern const struct LibraryFunction StdlibFunctions[];
 void StdlibSetupFunc(Picoc *pc);
 
 /* time.c */
 extern const char StdTimeDefs[];
-extern struct LibraryFunction StdTimeFunctions[];
+extern const struct LibraryFunction StdTimeFunctions[];
 void StdTimeSetupFunc(Picoc *pc);
 
 /* errno.c */
 void StdErrnoSetupFunc(Picoc *pc);
 
 /* ctype.c */
-extern struct LibraryFunction StdCtypeFunctions[];
+extern const struct LibraryFunction StdCtypeFunctions[];
 
 /* stdbool.c */
 extern const char StdboolDefs[];
@@ -649,7 +649,7 @@ void StdboolSetupFunc(Picoc *pc);
 
 /* unistd.c */
 extern const char UnistdDefs[];
-extern struct LibraryFunction UnistdFunctions[];
+extern const struct LibraryFunction UnistdFunctions[];
 void UnistdSetupFunc(Picoc *pc);
 
 #endif /* INTERPRETER_H */
