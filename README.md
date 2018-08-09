@@ -135,6 +135,8 @@ mesonconf -DENABLE_SCRIPT=False
  * https://skia.org/
  * https://github.com/memononen/nanovg
  * https://github.com/mokafolio/Tarp
+ * https://github.com/jpbruyere/vkvg
+ * https://github.com/jdryg/vg-renderer
  * https://github.com/nical/lyon
  * https://cairographics.org/
  * http://www.antigrain.com/
