@@ -1682,7 +1682,7 @@ restart:
         const ActionEntry *ae = &g_avm1_actions[a];
         uint8_t *opdata = &actions[ctx->pc];
         ctx->pc += len;
-#if defined(_DEBUG)
+#if defined(_DEBUG) && !defined(_TEST)
         printf("AS2: v%d %s(", ae->version, ae->name);
         int i, stack_ptr = ctx->stack_ptr;
         if (ae->npop_params > 0)
@@ -1695,7 +1695,7 @@ restart:
 #endif
         if (ae->vm_func)
             ae->vm_func(ctx, opdata);
-#if defined(_DEBUG)
+#if defined(_DEBUG) && !defined(_TEST)
         int npush_params = ae->npush_params > 0 ? ae->npush_params : 0;
         if (ae->npush_params < 0)
             npush_params = stack_ptr - ctx->stack_ptr;
