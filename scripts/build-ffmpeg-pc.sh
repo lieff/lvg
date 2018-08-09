@@ -1,19 +1,15 @@
-. ~/Public/emsdk_portable/emsdk_set_env.sh
+pushd $(dirname "$0")/../video/ffmpeg
+set -e
 
 if [ ! -d "FFmpeg" ]; then
 git clone --depth=1 https://github.com/FFmpeg/FFmpeg
 fi
-cd FFmpeg
-set -e
 
-emconfigure ./configure \
-    --cc=emcc \
-    --enable-cross-compile \
-    --target-os=none \
-    --arch=x86 \
-    --disable-runtime-cpudetect \
-    --disable-asm \
-    --disable-fast-unaligned \
+if [ ! -d "FFmpeg/build-$1" ]; then
+mkdir FFmpeg/build-$1
+cd FFmpeg/build-$1
+
+../configure --enable-lto --disable-inline-asm --ar=gcc-ar --ranlib=gcc-ranlib \
     --disable-pthreads \
     --disable-w32threads \
     --disable-os2threads \
@@ -38,4 +34,7 @@ emconfigure ./configure \
     --disable-xlib \
     --disable-zlib
 
-emmake make -j8
+make -j4
+fi
+
+popd

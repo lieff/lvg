@@ -139,9 +139,9 @@ if host_os_family == 'darwin'
 endif
 
 if host_os_family == 'windows'
-    incdirs += ['glfw/include', 'glfw/deps', 'SDL/include', 'video/ffmpeg/FFmpeg']
+    incdirs += ['glfw/include', 'glfw/deps', 'SDL/include', 'video/ffmpeg/FFmpeg', '-Ivideo/ffmpeg/FFmpeg/build-win' ]
     sources += ['windows/mman.c', 'glfw/deps/glad.c']
-    ext_link_args += ['-L../glfw/build/src', '-L../SDL/build', '-L../video/ffmpeg/FFmpeg/libavcodec', '-L../video/ffmpeg/FFmpeg/libavutil']
+    ext_link_args += ['-L../glfw/build/src', '-L../SDL/build', '-L../video/ffmpeg/FFmpeg/build-win/libavcodec', '-L../video/ffmpeg/FFmpeg/build-win/libavutil']
     ext_link_args += ['-lSDL2-static', '-lglfw3', '-lopengl32', '-luser32', '-lgdi32', '-lwinmm', '-limm32', '-lole32', '-loleaut32', '-lshell32', '-lversion']
 endif
 

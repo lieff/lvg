@@ -9,13 +9,8 @@ set -e
 #  cd ../../
 #fi
 
-. scripts/build-sdl.sh win
-
-#if [ ! -d "video/ffmpeg/FFmpeg" ]; then
-  cd video/ffmpeg
-  ./build_win.sh
-  cd ../..
-#fi
+scripts/build-sdl.sh win
+scripts/build-ffmpeg-win.sh
 
 #if [ ! -d "tinycc" ]; then
 #  git clone http://repo.or.cz/tinycc.git
@@ -29,9 +24,9 @@ set -e
 SRC="$SRC windows/mman.c"
 
 x86_64-w64-mingw32-gcc -s -Os -flto -std=gnu99 -fno-asynchronous-unwind-tables -fno-stack-protector -ffunction-sections -fdata-sections -Wl,--gc-sections $SRC \
--LSDL/build-win -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
 -I. -Isrc -Inanovg -Iswf/swftools/lib \
--ISDL/include -Ivideo/ffmpeg/FFmpeg \
+-ISDL/include -Ivideo/ffmpeg/FFmpeg -Ivideo/ffmpeg/FFmpeg/build-win \
+-LSDL/build-win -Lvideo/ffmpeg/FFmpeg/build-win/libavcodec -Lvideo/ffmpeg/FFmpeg/build-win/libavutil \
 -DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE -o lvg_win.exe -Wl,-Map=lvg.map -lm -lopengl32 -lSDL2 -lavcodec -lavutil -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lbcrypt -lversion
 scripts/compress.sh ./lvg_win.exe
 if [ "$TRAVIS" = "true" ]; then

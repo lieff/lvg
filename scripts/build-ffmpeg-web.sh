@@ -1,11 +1,19 @@
-if [ ! -d "FFmpeg" ]; then
-  git clone --depth=1 https://github.com/FFmpeg/FFmpeg
-fi
-cd FFmpeg
-make clean
+pushd $(dirname "$0")/../video/ffmpeg
 set -e
-./configure --enable-lto \
-    --arch=x86_64 --target-os=mingw32 --cross-prefix=x86_64-w64-mingw32- --pkg-config=pkg-config \
+. ~/Public/emsdk_portable/emsdk_set_env.sh
+
+if [ ! -d "FFmpeg/build-web" ]; then
+mkdir FFmpeg/build-web
+cd FFmpeg/build-web
+
+emconfigure ../configure \
+    --cc=emcc \
+    --enable-cross-compile \
+    --target-os=none \
+    --arch=x86 \
+    --disable-runtime-cpudetect \
+    --disable-asm \
+    --disable-fast-unaligned \
     --disable-pthreads \
     --disable-w32threads \
     --disable-os2threads \
@@ -30,6 +38,7 @@ set -e
     --disable-xlib \
     --disable-zlib
 
-make -j4
+emmake make -j8
+fi
 
-cd ..
+popd

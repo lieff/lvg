@@ -1,18 +1,12 @@
 set -e
 
-. scripts/build-sdl.sh linux
-
-if [ ! -d "video/ffmpeg/FFmpeg" ]; then
-  cd video/ffmpeg
-  ./build_pc.sh
-  cd ../..
-fi
-
+scripts/build-sdl.sh linux
+scripts/build-ffmpeg-pc.sh linux
 . build_src.sh
 
 CFLAGS="-s -Os -flto -std=gnu99 -Wall -fno-asynchronous-unwind-tables -fno-stack-protector -ffunction-sections -fdata-sections -Wl,--gc-sections $SRC \
 -LSDL/build-linux -ISDL/include -I. -Isrc -Inanovg -Iswf/swftools/lib \
--Ivideo/ffmpeg/FFmpeg -Lvideo/ffmpeg/FFmpeg/libavcodec -Lvideo/ffmpeg/FFmpeg/libavutil \
+-Ivideo/ffmpeg/FFmpeg -Ivideo/ffmpeg/FFmpeg/build-linux -Lvideo/ffmpeg/FFmpeg/build-linux/libavcodec -Lvideo/ffmpeg/FFmpeg/build-linux/libavutil \
 -DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE"
 
 gcc $CFLAGS -o lvg -Wl,-Map=lvg.map -lm -ldl -lSDL2 -lavcodec -lavutil -lpthread

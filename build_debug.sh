@@ -1,7 +1,7 @@
 set -e
 
-. scripts/build-sdl.sh linux
-
+scripts/build-sdl.sh linux
+scripts/build-ffmpeg-pc.sh linux
 . build_src.sh
 
 gcc -g -O0 -Wall -fsanitize=address $SRC \
