@@ -35,7 +35,6 @@ LVGMovieClip *g_clip;
 static zip_t g_zip;
 NVGcolor g_bgColor;
 platform_params g_params;
-static const char *g_main_script;
 static int is_swf, b_no_actionscript, b_fullscreen, b_interpolate;
 #ifdef EMSCRIPTEN
 static int is_gles3;
@@ -81,13 +80,8 @@ void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb,
 int loadScript();
 #endif
 
-#ifndef EMSCRIPTEN
 void (*onInit)();
 void (*onFrame)();
-#else
-extern void onInit();
-extern void onFrame();
-#endif
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
     float sx, float sy, float ex, float ey,
@@ -937,13 +931,7 @@ change_fullscreen:
     }
 
 
-#ifdef EMSCRIPTEN
-    if (is_swf)
-        swfOnFrame();
-    if (g_main_script)
-#else
     if (onFrame)
-#endif
         onFrame();
 
     g_render->end_frame(g_render_obj);
@@ -968,9 +956,7 @@ int open_swf(const char *file_name)
     close(fd);
     if (!g_clip)
         return -1;
-#ifndef EMSCRIPTEN
     onFrame = swfOnFrame;
-#endif
     g_bgColor = g_clip->bgColor;
     return 0;
 }
@@ -979,22 +965,14 @@ int open_lvg(const char *file_name)
 {
     if (lvgZipOpen(file_name, &g_zip))
         return -1;
-    g_main_script = 0;
 #ifdef EMSCRIPTEN
-    char *buf;
-    if (!(buf = lvgGetFileContents("main.js", 0)))
-    {
-        printf("error: could not open JS script.\n");
-        return -1;
-    }
-    g_main_script = buf;
     if ((buf = lvgGetFileContents("features", 0)))
     {
         is_gles3 = NULL != strstr(buf, "gles3");
         free(buf);
     }
-    return 0;
-#elif ENABLE_SCRIPT
+#endif
+#if ENABLE_SCRIPT
     return loadScript();
 #else
     return 0;
@@ -1048,14 +1026,6 @@ int main(int argc, char **argv)
 #endif
     } else
         file_name = argv[i];
-    char *e = strrchr(file_name, '.');
-    is_swf = e && !strcmp(e, ".swf");
-    if (!is_swf && open_lvg(file_name))
-    {
-        printf("error: could not open lvg file\n");
-        is_swf = 1;
-        //return -1;
-    }
 #ifdef _TEST
     g_render = &null_render;
     g_audio_render = &null_audio_render;
@@ -1119,6 +1089,16 @@ int main(int argc, char **argv)
         }
     }
 
+    char *e = strrchr(file_name, '.');
+    is_swf = e && !strcmp(e, ".swf");
+    if (!is_swf && open_lvg(file_name))
+    {
+        is_swf = 1;
+#ifndef EMSCRIPTEN
+        printf("error: could not open lvg file\n");
+        return -1;
+#endif
+    }
     if (is_swf && open_swf(file_name))
     {
         printf("error: could not open swf file\n");
@@ -1136,19 +1116,9 @@ int main(int argc, char **argv)
     g_audio_render = &null_audio_render;
 #endif
 
-#ifdef EMSCRIPTEN
-    //b_interpolate = 1;
-    if (g_main_script)
-    {
-        EM_ASM_({
-            var src = Pointer_stringify($0);
-            Runtime.loadDynamicLibrarySrc(src);
-        }, g_main_script);
-    }
-#else
     if (onInit)
         onInit();
-#endif
+
     g_platform->main_loop(g_platform_obj);
 
     g_audio_render->release(g_audio_render_obj);
