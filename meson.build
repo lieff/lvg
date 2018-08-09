@@ -25,7 +25,9 @@ sources = [
     'video/ffmpeg/ffmpeg_dec.c'
 ]
 
+host_os_family = host_machine.system()
 incdirs = [ '.', 'src' ]
+ext_link_args = [ '-lm', '-lavcodec', '-lavutil' ]
 
 if get_option('ENABLE_AUDIO')
     sources += [ 'audio/common.c' ]
@@ -47,16 +49,31 @@ endif
 
 if get_option('PLATFORM_GLFW')
     sources += [ 'platform/platform_glfw.c' ]
+    if host_os_family == 'linux'
+        ext_link_args += [ '-lglfw' ]
+    else
+        ext_link_args += [ '-lglfw3' ]
+    endif
+    if host_os_family == 'windows'
+        incdirs += [ 'glfw/include', 'glfw/deps' ]
+        ext_link_args += [ '-L../glfw/build/src' ]
+    endif
 endif
 
 if get_option('PLATFORM_SDL') or get_option('AUDIO_SDL')
     sources += [ 'platform/platform_sdl.c' ]
+    if host_os_family == 'windows'
+        ext_link_args += [ '-lSDL2-static' ]
+    else
+        ext_link_args += [ '-lSDL2' ]
+    endif
 endif
 
 if get_option('ENABLE_SCRIPT')
     if get_option('SCRIPT_TCC')
         sources += [ 'scripting/tcc/script_tcc.c' ]
         incdirs += [ 'scripting/tcc' ]
+        ext_link_args += [ '-ltcc2' ]
     endif
     if get_option('SCRIPT_PICOC')
         sources += [
@@ -118,8 +135,6 @@ else
     add_global_arguments('-D_GNU_SOURCE', '-DNDEBUG', '-Os', '-flto', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-ffunction-sections', '-fdata-sections', language : 'c')
     add_global_link_arguments('-ffunction-sections', '-fdata-sections', language : 'c')
 endif
-ext_link_args = ['-L../scripting/tcc', '-lm', '-lavcodec', '-lavutil']
-host_os_family = host_machine.system()
 
 if get_option('buildtype') != 'debug'
     if host_os_family == 'darwin'
@@ -130,19 +145,19 @@ if get_option('buildtype') != 'debug'
 endif
 
 if host_os_family == 'linux'
-    ext_link_args += ['-lGL', '-lglfw', '-lSDL2', '-ltcc2', '-ldl']
+    ext_link_args += [ '-ldl' ]
 endif
 
 if host_os_family == 'darwin'
-    incdirs += ['/usr/local/include']
-    ext_link_args += ['-L/usr/local/lib', '-lglfw3', '-lSDL2', '-ltcc', '-ldl', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo']
+    incdirs += [ '/usr/local/include' ]
+    ext_link_args += [ '-L/usr/local/lib', '-ldl', '-framework', 'OpenGL', '-framework', 'Cocoa', '-framework', 'IOKit', '-framework', 'CoreFoundation', '-framework', 'CoreVideo' ]
 endif
 
 if host_os_family == 'windows'
-    incdirs += ['glfw/include', 'glfw/deps', 'SDL/include', 'video/ffmpeg/FFmpeg', '-Ivideo/ffmpeg/FFmpeg/build-win' ]
-    sources += ['windows/mman.c', 'glfw/deps/glad.c']
-    ext_link_args += ['-L../glfw/build/src', '-L../SDL/build', '-L../video/ffmpeg/FFmpeg/build-win/libavcodec', '-L../video/ffmpeg/FFmpeg/build-win/libavutil']
-    ext_link_args += ['-lSDL2-static', '-lglfw3', '-lopengl32', '-luser32', '-lgdi32', '-lwinmm', '-limm32', '-lole32', '-loleaut32', '-lshell32', '-lversion']
+    incdirs += [ 'SDL/include', 'video/ffmpeg/FFmpeg', '-Ivideo/ffmpeg/FFmpeg/build-win' ]
+    sources += [ 'windows/mman.c' ]
+    ext_link_args += [ '-L../SDL/build', '-L../video/ffmpeg/FFmpeg/build-win/libavcodec', '-L../video/ffmpeg/FFmpeg/build-win/libavutil' ]
+    ext_link_args += [ '-luser32', '-lgdi32', '-lwinmm', '-limm32', '-lole32', '-loleaut32', '-lshell32', '-lversion' ]
 endif
 
 executable('lvg', sources, link_args : ext_link_args, include_directories : include_directories(incdirs))
