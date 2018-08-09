@@ -63,8 +63,8 @@ static PFNGLMATRIXORTHOEXTPROC g_glMatrixOrthoEXT = NULL;
 static PFNGLMATRIXLOADFEXTPROC g_glMatrixLoadfEXT = NULL;
 
 #define LOAD_PROC(type, name) \
-    name = (type) platform->get_proc_address(#name); \
-    if (!name) \
+    g_##name = (type) platform->get_proc_address(#name); \
+    if (!g_##name) \
         fail = 1;
 
 typedef struct render_ctx
@@ -105,9 +105,9 @@ static int nvpr_init(void **render, const platform *platform)
     if (!platform->extension_supported || !platform->extension_supported("GL_NV_path_rendering"))
         goto error;
 
-    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, g_glMatrixLoadIdentityEXT);
-    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, g_glMatrixOrthoEXT);
-    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, g_glMatrixLoadfEXT);
+    LOAD_PROC(PFNGLMATRIXLOADIDENTITYEXTPROC, glMatrixLoadIdentityEXT);
+    LOAD_PROC(PFNGLMATRIXORTHOEXTPROC, glMatrixOrthoEXT);
+    LOAD_PROC(PFNGLMATRIXLOADFEXTPROC, glMatrixLoadfEXT);
 
     /*LOAD_PROC(PFNGLGENPATHSNVPROC, glGenPathsNV);
     LOAD_PROC(PFNGLDELETEPATHSNVPROC, glDeletePathsNV);
