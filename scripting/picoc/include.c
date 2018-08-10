@@ -71,7 +71,6 @@ void IncludeFile(Picoc *pc, char *FileName)
     /* scan for the include file name to see if it's in our list of predefined includes */
     for (LInclude = pc->IncludeLibList; LInclude != NULL; LInclude = LInclude->NextLib)
     {
-printf("Include: %s\n", LInclude->IncludeName);
         if (strcmp(LInclude->IncludeName, FileName) == 0)
         {
             /* found it - protect against multiple inclusion */

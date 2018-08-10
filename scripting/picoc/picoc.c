@@ -27,6 +27,8 @@ typedef double GLdouble;\
 typedef double GLclampd;\
 typedef char GLchar;\
 typedef long GLsizeiptr;\
+typedef struct NSVGimage NSVGimage;\
+typedef struct LVGMovieClip LVGMovieClip;\
 typedef struct LVGSound\
 {\
     short *samples;\
@@ -360,6 +362,34 @@ static void lib_lvgLoadMP3(struct ParseState *Parser, struct Value *ReturnValue,
     ReturnValue->Val->Pointer = lvgLoadMP3(Param[0]->Val->Pointer, Param[1]->Val->Pointer, Param[2]->Val->Pointer, Param[3]->Val->Pointer);
 }
 
+static void lib_lvgLoadSVG(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    ReturnValue->Val->Pointer = lvgLoadSVG(Param[0]->Val->Pointer);
+}
+
+static void lib_lvgLoadSWF(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    ReturnValue->Val->Pointer = lvgLoadSWF(Param[0]->Val->Pointer);
+}
+
+static void lib_lvgDrawSVG(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    lvgDrawSVG(Param[0]->Val->Pointer);
+}
+
+static void lib_lvgDrawClip(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    lvgDrawClip(Param[0]->Val->Pointer);
+}
+
 static void lib_lvgPlaySound(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (5 != NumArgs)
@@ -422,6 +452,10 @@ static const struct LibraryFunction g_lvgLib[] =
     /* LVG API */
     { lib_lvgGetFileContents, "char *lvgGetFileContents(char *fname, int *size);" },
     { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
+    { lib_lvgLoadSVG, "NSVGimage *lvgLoadSVG(char *file);" },
+    { lib_lvgLoadSWF, "LVGMovieClip *lvgLoadSWF(const char *file);" },
+    { lib_lvgDrawSVG, "void lvgDrawSVG(NSVGimage *image);" },
+    { lib_lvgDrawClip, "void lvgDrawClip(LVGMovieClip *clip);" },
     { lib_lvgPlaySound, "void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);" },
     { NULL, NULL }
 };
