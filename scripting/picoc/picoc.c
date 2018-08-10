@@ -437,7 +437,7 @@ static int picoc_init(void **script, const char *file_name)
     picoc_stc *s = malloc(sizeof(picoc_stc));
     PicocInitialise(&s->pc, PICOC_STACK_SIZE);
     PicocIncludeAllSystemHeaders(&s->pc);
-    PicocParse(&s->pc, "lvg.h", g_lvgDefs, strlen(g_lvgDefs), TRUE, TRUE, FALSE, FALSE);
+    PicocParse(&s->pc, "lvg.h", g_lvgDefs, sizeof(g_lvgDefs) - 1, TRUE, TRUE, FALSE, FALSE);
     LibraryAdd(&s->pc, &s->pc.GlobalTable, "lvg library", &g_lvgLib[0]);
 
     if (PicocPlatformSetExitPoint(&s->pc))
@@ -445,6 +445,7 @@ static int picoc_init(void **script, const char *file_name)
         PicocCleanup(&s->pc);
         return s->pc.PicocExitValue;
     }
+    PicocPlatformScanFile(&s->pc, "main.c");
     *script = s;
     return 0;
 }
@@ -459,8 +460,16 @@ static void picoc_release(void *script)
 static void picoc_run(void *script, const char *func_name)
 {
     picoc_stc *s = (picoc_stc *)script;
-    if (!strcmp(func_name, "onInit"))
-        PicocPlatformScanFile(&s->pc, "main.c");
+    struct Value *FuncValue = NULL;
+    if (!VariableDefined(&s->pc, TableStrRegister(&s->pc, func_name)))
+        ProgramFailNoParser(&s->pc, "func is not defined");
+    VariableGet(&s->pc, NULL, TableStrRegister(&s->pc, func_name), &FuncValue);
+    if (FuncValue->Typ->Base != TypeFunction)
+        ProgramFailNoParser(&s->pc, "func is not a function - can't call it");
+    char buf[128];
+    snprintf(buf, sizeof(buf), "%s();", func_name);
+    buf[sizeof(buf) - 1] = 0;
+    PicocParse(&s->pc, "startup", buf, strlen(buf), TRUE, TRUE, FALSE, TRUE);
 }
 
 const script_engine script_engine_picoc =
