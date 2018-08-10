@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <scripting/scripting.h>
 #include "../../src/lvg_header.h"
 #include "../../render/gl.h"
 
@@ -425,28 +426,46 @@ static const struct LibraryFunction g_lvgLib[] =
     { NULL, NULL }
 };
 
-int loadScript()
+typedef struct picoc_stc
 {
-    int StackSize = PICOC_STACK_SIZE;
     Picoc pc;
+} picoc_stc;
 
-    PicocInitialise(&pc, StackSize);
-    PicocIncludeAllSystemHeaders(&pc);
-    PicocParse(&pc, "lvg.h", g_lvgDefs, strlen(g_lvgDefs), TRUE, TRUE, FALSE, FALSE);
-    LibraryAdd(&pc, &pc.GlobalTable, "lvg library", &g_lvgLib[0]);
-    //PicocParseInteractive(&pc);
+static int picoc_init(void **script, const char *file_name)
+{
+    *script = 0;
+    picoc_stc *s = malloc(sizeof(picoc_stc));
+    PicocInitialise(&s->pc, PICOC_STACK_SIZE);
+    PicocIncludeAllSystemHeaders(&s->pc);
+    PicocParse(&s->pc, "lvg.h", g_lvgDefs, strlen(g_lvgDefs), TRUE, TRUE, FALSE, FALSE);
+    LibraryAdd(&s->pc, &s->pc.GlobalTable, "lvg library", &g_lvgLib[0]);
 
-    if (PicocPlatformSetExitPoint(&pc))
+    if (PicocPlatformSetExitPoint(&s->pc))
     {
-        PicocCleanup(&pc);
-        return pc.PicocExitValue;
+        PicocCleanup(&s->pc);
+        return s->pc.PicocExitValue;
     }
-
-    PicocPlatformScanFile(&pc, "main.c");
-
-    //if (!DontRunMain)
-    //    PicocCallMain(&pc, argc - ParamCount, &argv[ParamCount]);
-
-    PicocCleanup(&pc);
-    return pc.PicocExitValue;
+    *script = s;
+    return 0;
 }
+
+static void picoc_release(void *script)
+{
+    picoc_stc *s = (picoc_stc *)script;
+    PicocCleanup(&s->pc);
+    free(s);
+}
+
+static void picoc_run(void *script, const char *func_name)
+{
+    picoc_stc *s = (picoc_stc *)script;
+    if (!strcmp(func_name, "onInit"))
+        PicocPlatformScanFile(&s->pc, "main.c");
+}
+
+const script_engine script_engine_picoc =
+{
+    picoc_init,
+    picoc_release,
+    picoc_run
+};

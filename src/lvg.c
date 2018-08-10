@@ -30,6 +30,7 @@
 #include <platform/platform.h>
 #include "lvg.h"
 #include "swf/avm1.h"
+#include <scripting/scripting.h>
 
 LVGMovieClip *g_clip;
 static zip_t g_zip;
@@ -77,10 +78,12 @@ void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb,
 #endif
 
 #if ENABLE_SCRIPT
-int loadScript();
+#if SCRIPT_PICOC
+extern const script_engine script_engine_picoc;
+#define SCRIPT_ENGINE script_engine_picoc
 #endif
-
-void (*onInit)();
+void *g_script;
+#endif
 void (*onFrame)();
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
@@ -930,7 +933,8 @@ change_fullscreen:
         last_enter = enter_state;
     }
 
-
+    if (g_script)
+        SCRIPT_ENGINE.run_function(g_script, "onFrame");
     if (onFrame)
         onFrame();
 
@@ -973,7 +977,10 @@ int open_lvg(const char *file_name)
     }
 #endif
 #if ENABLE_SCRIPT
-    return loadScript();
+    int ret = SCRIPT_ENGINE.init(&g_script, "main.c");
+    if (g_script)
+        SCRIPT_ENGINE.run_function(g_script, "onInit");
+    return ret;
 #else
     return 0;
 #endif
@@ -1113,9 +1120,6 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    if (onInit)
-        onInit();
-
     g_platform->main_loop(g_platform_obj);
 
     g_audio_render->release(g_audio_render_obj);
@@ -1126,6 +1130,10 @@ int main(int argc, char **argv)
     g_platform->release(g_platform_obj);
 #if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
     sdl_platform.release(audio_platform_obj);
+#endif
+#if ENABLE_SCRIPT
+    if (g_script)
+        SCRIPT_ENGINE.release(g_script);
 #endif
 #endif
     return 0;
