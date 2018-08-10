@@ -1028,7 +1028,7 @@ int main(int argc, char **argv)
 #ifdef _TEST
     g_render = &null_render;
     g_audio_render = &null_audio_render;
-    if (open_swf(file_name))
+    if (open_lvg(file_name))
     {
         printf("error: could not open swf file\n");
         return -1;
