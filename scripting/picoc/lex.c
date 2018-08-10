@@ -611,14 +611,16 @@ void LexInitParser(struct ParseState *Parser, Picoc *pc, const char *SourceText,
 {
     Parser->pc = pc;
     Parser->Pos = TokenSource;
-    Parser->Line = 1;
     Parser->FileName = FileName;
-    Parser->Mode = RunIt ? RunModeRun : RunModeSkip;
+    Parser->SourceText = SourceText;
+    Parser->SearchGotoLabel = 0;
     Parser->SearchLabel = 0;
+    Parser->ScopeID = 0;
+    Parser->Line = 1;
+    Parser->CharacterPos = 0;
     Parser->HashIfLevel = 0;
     Parser->HashIfEvaluateToLevel = 0;
-    Parser->CharacterPos = 0;
-    Parser->SourceText = SourceText;
+    Parser->Mode = RunIt ? RunModeRun : RunModeSkip;
     Parser->DebugMode = EnableDebugger;
 }
 
