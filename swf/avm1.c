@@ -369,7 +369,7 @@ static void do_call(LVGActionCtx *ctx, ASClass *c, ASVal *var, uint8_t *a, uint3
         THIS = old_this;
     } else
     {
-        assert(0);
+        assert(0); ctx->do_exit = 1;
     }
 }
 
@@ -680,7 +680,7 @@ static void action_get_property(LVGActionCtx *ctx, uint8_t *a)
             *res = c->members[i].val;
             return;
         }
-    assert(0);
+    assert(0); ctx->do_exit = 1;
 }
 
 static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
@@ -705,7 +705,7 @@ static void action_set_property(LVGActionCtx *ctx, uint8_t *a)
             c->members[i].val = *se_val;
             return;
         }
-    assert(0);
+    assert(0); ctx->do_exit = 1;
 }
 
 static void action_clone_sprite(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -837,7 +837,7 @@ static void action_call_function(LVGActionCtx *ctx, uint8_t *a)
         do_call(ctx, THIS, var, a, nargs);
         return;
     }
-    assert(0);
+    assert(0); ctx->do_exit = 1;
 }
 
 static void action_return(LVGActionCtx *ctx, uint8_t *a)
@@ -913,7 +913,9 @@ static void action_type_of(LVGActionCtx *ctx, uint8_t *a)
         SET_STRING(se, "null")
     else if (ASVAL_UNDEFINED == se->type)
         SET_STRING(se, "undefined")
-    assert(0);
+    else {
+        assert(0); ctx->do_exit = 1;
+    }
 }
 
 static void action_target_path(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -983,7 +985,7 @@ static void action_to_string(LVGActionCtx *ctx, uint8_t *a)
     {
         // TODO: support toString()
     }
-    assert(0);
+    assert(0); ctx->do_exit = 1;
     SET_STRING(se, "string");
 }
 
@@ -1131,7 +1133,7 @@ static void action_call_method(LVGActionCtx *ctx, uint8_t *a)
 do_exit:
     ctx->stack_ptr += nargs - 1;
     SET_UNDEF(res);
-    assert(0);
+    assert(0); ctx->do_exit = 1;
 }
 
 static void action_new_method(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -1301,7 +1303,7 @@ static void action_set_target(LVGActionCtx *ctx, uint8_t *a)
     const char *target = (const char*)(a + 2);
     if (strcmp(target, ""))
     {
-        assert(0);
+        assert(0); ctx->do_exit = 1;
     }
 }
 
@@ -1317,7 +1319,7 @@ static void action_goto_label(LVGActionCtx *ctx, uint8_t *a)
             handle_frame_change(ctx, ctx->groupstate);
             return;
         }
-    assert(0);
+    assert(0); ctx->do_exit = 1;
 }
 
 static void action_wait_for_frame2(LVGActionCtx *ctx, uint8_t *a)
@@ -1400,7 +1402,7 @@ static void action_push(LVGActionCtx *ctx, uint8_t *a)
             break;
         }
         default:
-            assert(0);
+            assert(0); ctx->do_exit = 1;
             return;
         }
         len -= size + 1;
