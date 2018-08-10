@@ -453,7 +453,7 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_lvgGetFileContents, "char *lvgGetFileContents(char *fname, int *size);" },
     { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
     { lib_lvgLoadSVG, "NSVGimage *lvgLoadSVG(char *file);" },
-    { lib_lvgLoadSWF, "LVGMovieClip *lvgLoadSWF(const char *file);" },
+    { lib_lvgLoadSWF, "LVGMovieClip *lvgLoadSWF(char *file);" },
     { lib_lvgDrawSVG, "void lvgDrawSVG(NSVGimage *image);" },
     { lib_lvgDrawClip, "void lvgDrawClip(LVGMovieClip *clip);" },
     { lib_lvgPlaySound, "void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);" },

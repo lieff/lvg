@@ -55,13 +55,13 @@ typedef struct __attribute__((__packed__)) zipEndRecord_t
 
 typedef struct zip_t
 {
-    char *buf;
+    const char *buf;
     zipEndRecord_t *endRecord;
     size_t size;
-    int file;
 } zip_t;
 
-int lvgZipOpen(const char *fname, zip_t *zip);
+char *lvgOpenMap(const char *fname, size_t *size);
+int lvgZipOpen(const char *m, size_t size, zip_t *zip);
 void lvgZipClose(zip_t *zip);
 uint32_t lvgZipNameLocate(zip_t *zip, const char *fname);
 char *lvgZipDecompress(zip_t *zip, uint32_t file_ofs, uint32_t *size);

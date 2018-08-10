@@ -36,7 +36,7 @@ LVGMovieClip *g_clip;
 static zip_t g_zip;
 LVGColorf g_bgColor;
 platform_params g_params;
-static int is_swf, b_no_actionscript, b_fullscreen, b_interpolate;
+static int b_no_actionscript, b_fullscreen, b_interpolate;
 #ifdef EMSCRIPTEN
 static int is_gles3;
 #endif
@@ -943,48 +943,39 @@ change_fullscreen:
     g_params.last_mkeys = g_params.mkeys;
 }
 
-int open_swf(const char *file_name)
-{
-    struct stat64 st;
-    int fd = open(file_name, O_RDONLY);
-    if (fd < 0)
-        return -1;
-    if (fstat64(fd, &st) < 0)
-    {
-        close(fd);
-        return -1;
-    }
-    char *buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-    g_clip = lvgLoadSWFBuf(buf, st.st_size, 0);
-    munmap(buf, st.st_size);
-    close(fd);
-    if (!g_clip)
-        return -1;
-    onFrame = swfOnFrame;
-    g_bgColor = g_clip->bgColor;
-    return 0;
-}
-
 int open_lvg(const char *file_name)
 {
-    if (lvgZipOpen(file_name, &g_zip))
+    size_t size;
+    char *map = lvgOpenMap(file_name, &size);
+    if (!map)
         return -1;
-#ifdef EMSCRIPTEN
-    char *buf;
-    if ((buf = lvgGetFileContents("features", 0)))
+    if (0 == lvgZipOpen(map, size, &g_zip))
     {
-        is_gles3 = NULL != strstr(buf, "gles3");
-        free(buf);
-    }
+#ifdef EMSCRIPTEN
+        char *buf;
+        if ((buf = lvgGetFileContents("features", 0)))
+        {
+            is_gles3 = NULL != strstr(buf, "gles3");
+            free(buf);
+        }
 #endif
 #if ENABLE_SCRIPT
-    int ret = SCRIPT_ENGINE.init(&g_script, "main.c");
-    if (g_script)
-        SCRIPT_ENGINE.run_function(g_script, "onInit");
-    return ret;
-#else
-    return 0;
+        int ret = SCRIPT_ENGINE.init(&g_script, "main.c");
+        if (g_script)
+            SCRIPT_ENGINE.run_function(g_script, "onInit");
+        return ret;
 #endif
+    } else if ((g_clip = lvgLoadSWFBuf(map, size, 0)))
+    {
+        munmap(map, size);
+        if (!g_clip)
+            return -1;
+        onFrame = swfOnFrame;
+        g_bgColor = g_clip->bgColor;
+        return 0;
+    }
+    munmap(map, size);
+    return -1;
 }
 
 #ifdef __MINGW32__
@@ -1105,19 +1096,9 @@ int main(int argc, char **argv)
     g_audio_render = &null_audio_render;
 #endif
 
-    char *e = strrchr(file_name, '.');
-    is_swf = e && !strcmp(e, ".swf");
-    if (!is_swf && open_lvg(file_name))
+    if (open_lvg(file_name))
     {
-        is_swf = 1;
-#ifndef EMSCRIPTEN
-        printf("error: could not open lvg file\n");
-        return -1;
-#endif
-    }
-    if (is_swf && open_swf(file_name))
-    {
-        printf("error: could not open swf file\n");
+        printf("error: could not open lvg or swf file\n");
         return -1;
     }
 

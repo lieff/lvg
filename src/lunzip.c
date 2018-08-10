@@ -13,19 +13,26 @@
 #include <lunzip.h>
 #include "stb_image.h"
 
-int lvgZipOpen(const char *fname, zip_t *zip)
+char *lvgOpenMap(const char *fname, size_t *size)
 {
     struct stat64 st;
+    *size = 0;
     int fd = open(fname, O_RDONLY);
     if (fd < 0)
-        return -1;
+        return 0;
     if (fstat64(fd, &st) < 0)
     {
         close(fd);
-        return -1;
+        return 0;
     }
-    size_t size = st.st_size;
-    char *m = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
+    *size = st.st_size;
+    char *m = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    close(fd);
+    return m;
+}
+
+int lvgZipOpen(const char *m, size_t size, zip_t *zip)
+{
     if (!m || *(int32_t*)m != 0x04034B50)
         goto error;
     int i;
@@ -38,15 +45,11 @@ int lvgZipOpen(const char *fname, zip_t *zip)
     }
     if (i <= 0 || er->diskNumber || er->centralDirectoryDiskNumber || er->numEntries != er->numEntriesThisDisk)
         goto error;
-    zip->file = fd;
     zip->buf = m;
     zip->endRecord = er;
     zip->size = size;
     return 0;
 error:
-    if (m)
-        munmap(m, size);
-    close(fd);
     return -1;
 }
 
@@ -54,13 +57,8 @@ void lvgZipClose(zip_t *zip)
 {
     if (zip->buf)
     {
-        munmap(zip->buf, zip->size);
+        munmap((void*)zip->buf, zip->size);
         zip->buf = 0;
-    }
-    if (zip->file > 0)
-    {
-        close(zip->file);
-        zip->file = 0;
     }
 }
 
