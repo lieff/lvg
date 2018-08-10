@@ -1089,6 +1089,14 @@ int main(int argc, char **argv)
         }
     }
 
+#if ENABLE_AUDIO && AUDIO_SDL
+    g_audio_render = &sdl_audio_render;
+    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
+        g_audio_render = &null_audio_render;
+#else
+    g_audio_render = &null_audio_render;
+#endif
+
     char *e = strrchr(file_name, '.');
     is_swf = e && !strcmp(e, ".swf");
     if (!is_swf && open_lvg(file_name))
@@ -1104,17 +1112,6 @@ int main(int argc, char **argv)
         printf("error: could not open swf file\n");
         return -1;
     }
-
-#if ENABLE_AUDIO && AUDIO_SDL
-    g_audio_render = &sdl_audio_render;
-    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
-        g_audio_render = &null_audio_render;
-    if (g_clip)
-        for (i = 0; i < g_clip->num_sounds; i++)
-            g_audio_render->resample(g_audio_render_obj, g_clip->sounds + i);
-#else
-    g_audio_render = &null_audio_render;
-#endif
 
     if (onInit)
         onInit();

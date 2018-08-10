@@ -10,6 +10,8 @@
 
 extern render *g_render;
 extern void *g_render_obj;
+extern const audio_render *g_audio_render;
+extern void *g_audio_render_obj;
 
 enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, font_type, text_type, edittext_type, sound_type};
 typedef struct
@@ -1786,6 +1788,10 @@ LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
     LVGMovieClip *clip = swf_ReadObjects(&swf);
     swf_FreeTags(&swf);
     reader.dealloc(&reader);
+    int i;
+    if (clip)
+        for (i = 0; i < clip->num_sounds; i++)
+            g_audio_render->resample(g_audio_render_obj, clip->sounds + i);
     return clip;
 }
 
