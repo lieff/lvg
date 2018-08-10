@@ -970,6 +970,7 @@ int open_lvg(const char *file_name)
     if (lvgZipOpen(file_name, &g_zip))
         return -1;
 #ifdef EMSCRIPTEN
+    char *buf;
     if ((buf = lvgGetFileContents("features", 0)))
     {
         is_gles3 = NULL != strstr(buf, "gles3");

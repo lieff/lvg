@@ -683,6 +683,7 @@ void StdioSetupFunc(Picoc *pc)
     struct ValueType *StructFileType;
     struct ValueType *FilePtrType;
 
+#ifndef EMSCRIPTEN
     /* make a "struct __FILEStruct" which is the same size as a native FILE structure */
     StructFileType = TypeCreateOpaqueStruct(pc, NULL, TableStrRegister(pc, "__FILEStruct"), sizeof(FILE));
 
@@ -691,7 +692,7 @@ void StdioSetupFunc(Picoc *pc)
 
     /* make a "struct __va_listStruct" which is the same size as our struct StdVararg */
     TypeCreateOpaqueStruct(pc, NULL, TableStrRegister(pc, "__va_listStruct"), sizeof(FILE));
-
+#endif
     /* define EOF equal to the system EOF */
     VariableDefinePlatformVar(pc, NULL, "EOF", &pc->IntType, (union AnyValue *)&EOFValue, FALSE);
     VariableDefinePlatformVar(pc, NULL, "SEEK_SET", &pc->IntType, (union AnyValue *)&SEEK_SETValue, FALSE);
@@ -705,10 +706,12 @@ void StdioSetupFunc(Picoc *pc)
     VariableDefinePlatformVar(pc, NULL, "L_tmpnam", &pc->IntType, (union AnyValue *)&L_tmpnamValue, FALSE);
     VariableDefinePlatformVar(pc, NULL, "GETS_MAX", &pc->IntType, (union AnyValue *)&GETS_MAXValue, FALSE);
 
+#ifndef EMSCRIPTEN
     /* define stdin, stdout and stderr */
     VariableDefinePlatformVar(pc, NULL, "stdin", FilePtrType, (union AnyValue *)&stdinValue, FALSE);
     VariableDefinePlatformVar(pc, NULL, "stdout", FilePtrType, (union AnyValue *)&stdoutValue, FALSE);
     VariableDefinePlatformVar(pc, NULL, "stderr", FilePtrType, (union AnyValue *)&stderrValue, FALSE);
+#endif
 
     /* define NULL, TRUE and FALSE */
     if (!VariableDefined(pc, TableStrRegister(pc, "NULL")))

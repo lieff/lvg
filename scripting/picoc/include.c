@@ -12,17 +12,17 @@ void IncludeInit(Picoc *pc)
 {
 #ifndef BUILTIN_MINI_STDLIB
     IncludeRegister(pc, "ctype.h", NULL, &StdCtypeFunctions[0], NULL);
-    IncludeRegister(pc, "errno.h", &StdErrnoSetupFunc, NULL, NULL);
+    IncludeRegister(pc, "errno.h", StdErrnoSetupFunc, NULL, NULL);
 # ifndef NO_FP
-    IncludeRegister(pc, "math.h", &MathSetupFunc, &MathFunctions[0], NULL);
+    IncludeRegister(pc, "math.h", MathSetupFunc, &MathFunctions[0], NULL);
 # endif
-    IncludeRegister(pc, "stdbool.h", &StdboolSetupFunc, NULL, StdboolDefs);
-    IncludeRegister(pc, "stdio.h", &StdioSetupFunc, &StdioFunctions[0], StdioDefs);
-    IncludeRegister(pc, "stdlib.h", &StdlibSetupFunc, &StdlibFunctions[0], NULL);
-    IncludeRegister(pc, "string.h", &StringSetupFunc, &StringFunctions[0], NULL);
-    IncludeRegister(pc, "time.h", &StdTimeSetupFunc, &StdTimeFunctions[0], StdTimeDefs);
+    IncludeRegister(pc, "stdbool.h", StdboolSetupFunc, NULL, StdboolDefs);
+    IncludeRegister(pc, "stdio.h", StdioSetupFunc, &StdioFunctions[0], StdioDefs);
+    IncludeRegister(pc, "stdlib.h", StdlibSetupFunc, &StdlibFunctions[0], NULL);
+    IncludeRegister(pc, "string.h", StringSetupFunc, &StringFunctions[0], NULL);
+    IncludeRegister(pc, "time.h", StdTimeSetupFunc, &StdTimeFunctions[0], StdTimeDefs);
 # ifndef WIN32
-    IncludeRegister(pc, "unistd.h", &UnistdSetupFunc, &UnistdFunctions[0], UnistdDefs);
+    IncludeRegister(pc, "unistd.h", UnistdSetupFunc, &UnistdFunctions[0], UnistdDefs);
 # endif
 #endif
 }
@@ -68,10 +68,10 @@ void PicocIncludeAllSystemHeaders(Picoc *pc)
 void IncludeFile(Picoc *pc, char *FileName)
 {
     struct IncludeLibrary *LInclude;
-
     /* scan for the include file name to see if it's in our list of predefined includes */
     for (LInclude = pc->IncludeLibList; LInclude != NULL; LInclude = LInclude->NextLib)
     {
+printf("Include: %s\n", LInclude->IncludeName);
         if (strcmp(LInclude->IncludeName, FileName) == 0)
         {
             /* found it - protect against multiple inclusion */

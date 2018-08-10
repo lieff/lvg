@@ -449,8 +449,9 @@ struct Picoc_Struct
     int LittleEndian;
 
     IOFILE *CStdOut;
+#ifdef BUILTIN_MINI_STDLIB
     IOFILE CStdOutBase;
-
+#endif
     /* the picoc version string */
     const char *VersionString;
 

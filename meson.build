@@ -98,7 +98,6 @@ if get_option('ENABLE_SCRIPT')
             'scripting/picoc/cstdlib/string.c',
             'scripting/picoc/cstdlib/time.c',
             'scripting/picoc/cstdlib/unistd.c',
-            'scripting/picoc/platform/library_unix.c',
             'scripting/picoc/platform/platform_unix.c'
         ]
         add_global_arguments('-DUNIX_HOST', language : 'c')

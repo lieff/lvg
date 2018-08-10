@@ -445,7 +445,7 @@ static int picoc_init(void **script, const char *file_name)
         PicocCleanup(&s->pc);
         return s->pc.PicocExitValue;
     }
-    PicocPlatformScanFile(&s->pc, "main.c");
+    PicocPlatformScanFile(&s->pc, file_name);
     *script = s;
     return 0;
 }

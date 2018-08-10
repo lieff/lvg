@@ -93,8 +93,10 @@ static int ZeroValue = 0;
 
 void BasicIOInit(Picoc *pc)
 {
+#ifdef BUILTIN_MINI_STDLIB
     pc->CStdOutBase.Putch = &PlatformPutc;
     pc->CStdOut = &CStdOutBase;
+#endif
 }
 
 /* initialise the C library */
