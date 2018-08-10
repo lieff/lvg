@@ -1,6 +1,6 @@
 
 if [ ! -d "SDL" ]; then
-  hg clone http://hg.libsdl.org/SDL
+  git clone --depth=1 https://github.com/SDL-mirror/SDL
 fi
 SDL_DIR=SDL/build-$1
 if [ "$1" = "win" ]; then

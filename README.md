@@ -72,7 +72,7 @@ For now windows executables builds only on linux host using [mingw](https://ming
 For windows and linux install all build dependencies with the following command:
 
 ```
-apt-get install -qq -y git mercurial cmake meson yasm libglfw3-dev libsdl2-dev libavcodec-dev mingw-w64 wget
+apt-get install -qq -y git cmake meson yasm libglfw3-dev libsdl2-dev libavcodec-dev mingw-w64 wget
 ```
 
 For macos brew must be installed:
