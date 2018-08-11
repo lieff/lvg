@@ -725,8 +725,11 @@ static const char *as_var_to_str(LVGActionCtx *ctx, ASVal *v)
     if (ASVAL_NULL == v->type)
         return "null";
     if (ASVAL_STRING == v->type)
+    {
+        if (!v->str)
+            return "error(null_str)";
         return v->str;
-    else if (ASVAL_BOOL == v->type)
+    } else if (ASVAL_BOOL == v->type)
     {
         if (ctx->version < 5)
             return v->boolean ? "1" : "0";
@@ -739,8 +742,13 @@ static const char *as_var_to_str(LVGActionCtx *ctx, ASVal *v)
     else if (ASVAL_DOUBLE == v->type)
         return double_to_str(v->d_int);
     else if (ASVAL_CLASS == v->type)
+    {
+        if (!v->cls)
+            return "error(null_class)";
+        if (!v->cls->name)
+            return "error(null_class_name)";
         return v->cls->name;
-    else if (ASVAL_FUNCTION == v->type)
+    } else if (ASVAL_FUNCTION == v->type)
         return "function";
     return "error";
 }
@@ -836,6 +844,9 @@ static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
     ASVal *se_name = se_val + 1;
     ctx->stack_ptr += 2;
+    assert(ASVAL_STRING == se_name->type);
+    if (ASVAL_STRING != se_name->type)
+        return;
     ASVal *res = create_local(ctx, THIS, se_name->str);
     *res = *se_val;
 }
@@ -1068,8 +1079,8 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr += 3;
     if (ASVAL_UNDEFINED == se_var->type)
         return;
-    assert(ASVAL_CLASS == se_var->type && ASVAL_STRING == se_member->type);
-    if (ASVAL_CLASS != se_var->type || ASVAL_STRING != se_member->type)
+    assert(ASVAL_CLASS == se_var->type && se_var->cls && ASVAL_STRING == se_member->type);
+    if (ASVAL_CLASS != se_var->type || !se_var->cls || ASVAL_STRING != se_member->type)
         return;
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
