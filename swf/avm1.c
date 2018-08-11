@@ -1068,8 +1068,8 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     ctx->stack_ptr += 3;
     if (ASVAL_UNDEFINED == se_var->type)
         return;
-    assert(ASVAL_CLASS == se_var->type);
-    if (ASVAL_CLASS != se_var->type)
+    assert(ASVAL_CLASS == se_var->type && ASVAL_STRING == se_member->type);
+    if (ASVAL_CLASS != se_var->type || ASVAL_STRING != se_member->type)
         return;
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
