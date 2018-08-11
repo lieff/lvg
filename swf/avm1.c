@@ -807,8 +807,23 @@ static void action_mb_char_to_ascii(LVGActionCtx *ctx, uint8_t *a)
 }
 
 static void action_mb_ascii_to_char(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_delete(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
-static void action_delete2(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
+static void action_delete(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_prop = &ctx->stack[ctx->stack_ptr];
+    ASVal *se_cls  = se_prop + 1;
+    ctx->stack_ptr += 2;
+    assert(ASVAL_STRING == se_prop->type && ASVAL_CLASS == se_cls->type);
+    // TODO: delete property from se_cls
+}
+
+static void action_delete2(LVGActionCtx *ctx, uint8_t *a)
+{
+    ASVal *se_prop = &ctx->stack[ctx->stack_ptr];
+    ctx->stack_ptr += 1;
+    assert(ASVAL_STRING == se_prop->type);
+    // TODO: delete property from cuttent scope
+}
+
 static void action_define_local(LVGActionCtx *ctx, uint8_t *a)
 {
     ASVal *se_val = &ctx->stack[ctx->stack_ptr];
@@ -1047,6 +1062,8 @@ static void action_set_member(LVGActionCtx *ctx, uint8_t *a)
     if (ASVAL_UNDEFINED == se_var->type)
         return;
     assert(ASVAL_CLASS == se_var->type);
+    if (ASVAL_CLASS != se_var->type)
+        return;
     ASClass *c = se_var->cls;
     for (int i = 0; i < c->num_members; i++)
         if (0 == strcmp_identifier(ctx, se_member->str, c->members[i].name))
