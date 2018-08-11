@@ -1422,8 +1422,10 @@ static void action_get_url2(LVGActionCtx *ctx, uint8_t *a)
     ASVal *se_target = &ctx->stack[ctx->stack_ptr];
     ASVal *se_url = se_target + 1;
     ctx->stack_ptr += 2;
-    if (0 == strcmp_identifier(ctx, se_url->str, "FSCommand:quit"))
-        ctx->do_exit = 1;
+    assert(ASVAL_STRING == se_url->type);
+    if (ASVAL_STRING == se_url->type)
+        if (0 == strcmp_identifier(ctx, se_url->str, "FSCommand:quit"))
+            ctx->do_exit = 1;
 }
 
 static void action_define_function(LVGActionCtx *ctx, uint8_t *a)
@@ -1693,7 +1695,7 @@ restart:
                 printf((i + 1) == ae->npop_params ? "%s" : "%s, ", as_var_to_str(ctx, &ctx->stack[ctx->stack_ptr + i]));
         } else
             printf("...");
-        printf(") = ");
+        printf(") = "); fflush(stdout);
 #endif
         if (ae->vm_func)
             ae->vm_func(ctx, opdata);
@@ -1703,7 +1705,7 @@ restart:
             npush_params = stack_ptr - ctx->stack_ptr;
         for (i = 0; i < npush_params; i++)
             printf((i + 1) == npush_params ? "%s" : "%s, ", as_var_to_str(ctx, &ctx->stack[ctx->stack_ptr + i]));
-        printf("\n");
+        printf("\n"); fflush(stdout);
 #endif
         if (ctx->do_exit)
             break;
