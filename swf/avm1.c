@@ -1695,7 +1695,7 @@ void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupSta
 {
     if (!actions)
         return;
-    int execution_budget = 10000000; // limit execution time
+    int execution_budget = 1000000; // limit execution time
     ctx->groupstate = groupstate;
     ctx->group  = ctx->clip->groups + groupstate->group_num;
     ctx->frame  = ctx->group->frames + groupstate->cur_frame;
@@ -1746,7 +1746,10 @@ restart:
         if (ctx->do_exit)
             break;
         if (!--execution_budget)
+        {
+            printf("error: execution limit reached\n");
             return;
+        }
     }
     if (ctx->call_depth && !ctx->do_exit)
     {
