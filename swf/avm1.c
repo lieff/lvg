@@ -166,13 +166,13 @@ int32_t to_int(ASVal *v)
     return 0;
 }
 
-ASClass *to_object(ASVal *v)
+ASClass *to_object(LVGActionCtx *ctx, ASVal *v)
 {
     ASClass *base, *res = 0;
     if (ASVAL_STRING == v->type)
     {
         base = &g_string;
-        res = create_instance(base);
+        res = create_instance(ctx, base);
         res->priv = strdup(v->str);
     } else if (ASVAL_DOUBLE == v->type || ASVAL_FLOAT == v->type || ASVAL_INT == v->type)
     {
@@ -322,7 +322,7 @@ ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name)
     return &res->val;
 }
 
-ASClass *create_instance(ASClass *base)
+ASClass *create_instance(LVGActionCtx *ctx, ASClass *base)
 {
     ASClass *cls = malloc(sizeof(ASClass));
     memcpy(cls, base, sizeof(ASClass));
@@ -330,6 +330,13 @@ ASClass *create_instance(ASClass *base)
     memcpy(cls->members, base->members, cls->num_members*sizeof(ASMember));
     cls->priv = 0;
     cls->ref_count = 1;
+    // track class allocation (currently no GC)
+    if (ctx)
+    {
+        ctx->num_allocated_calsses++;
+        ctx->allocated_calsses = realloc(ctx->allocated_calsses, sizeof(ASClass*)*ctx->num_allocated_calsses);
+        ctx->allocated_calsses[ctx->num_allocated_calsses - 1] = cls;
+    }
     return cls;
 }
 
@@ -899,7 +906,7 @@ static void action_new_object(LVGActionCtx *ctx, uint8_t *a)
         SET_UNDEF(res);
         return;
     }
-    ASClass *cls = create_instance(pcls->cls);
+    ASClass *cls = create_instance(ctx, pcls->cls);
     SET_CLASS(res, cls);
 }
 
@@ -1667,6 +1674,18 @@ void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip)
 
 void lvgFreeVM(LVGActionCtx *ctx)
 {
+    int i;
+    if (ctx->allocated_calsses)
+    {
+        for (i = 0; i < ctx->num_allocated_calsses; i++)
+        {
+            if (ctx->allocated_calsses[i]->members)
+                free(ctx->allocated_calsses[i]->members);
+            free(ctx->allocated_calsses[i]);
+        }
+        free(ctx->allocated_calsses);
+        ctx->allocated_calsses = NULL;
+    }
     if (ctx->cpool)
         free(ctx->cpool);
     ctx->cpool  = NULL;

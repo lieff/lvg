@@ -172,7 +172,8 @@ typedef struct LVGActionCtx
     LVGActionCall calls[256];
     const char **cpool;
     uint8_t *actions;
-    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit;
+    ASClass **allocated_calsses;
+    int size, version, stack_ptr, cpool_size, pc, call_depth, do_exit, num_allocated_calsses;
 } LVGActionCtx;
 
 extern ASVal g_classes[];
@@ -185,11 +186,11 @@ extern ASClass g_string;
 
 double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
-ASClass *to_object(ASVal *v);
+ASClass *to_object(LVGActionCtx *ctx, ASVal *v);
 int strcmp_identifier(LVGActionCtx *ctx, const char *s1, const char *s2);
 ASVal *search_var(LVGActionCtx *ctx, const char *name);
 ASVal *find_class_member(LVGActionCtx *ctx, ASClass *c, const char *name);
 ASVal *create_local(LVGActionCtx *ctx, ASClass *c, const char *name);
-ASClass *create_instance(ASClass *base);
+ASClass *create_instance(LVGActionCtx *ctx, ASClass *base);
 void free_instance(ASClass *cls);
 void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate);

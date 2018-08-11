@@ -388,7 +388,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 memset(gs, 0, sizeof(LVGMovieClipGroupState));
                 if (!b_no_actionscript)
                 {
-                    ASClass *cls = create_instance(&g_movieclip);
+                    ASClass *cls = create_instance(0, &g_movieclip);
                     gs->movieclip = cls;
                     cls->priv = (void*)(size_t)o->id;
                 }
@@ -407,7 +407,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 LVGMovieClipGroupState *g = clip->groupstates + i;
                 if (!g->movieclip)
                 {
-                    ASClass *cls = create_instance(&g_movieclip);
+                    ASClass *cls = create_instance(0, &g_movieclip);
                     g->movieclip = cls;
                     cls->priv = (void*)(size_t)i;
                 }
@@ -432,7 +432,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGButton *b = clip->buttons + l->id;
                     if (!b->button_obj)
                     {
-                        ASClass *cls = create_instance(&g_button);
+                        ASClass *cls = create_instance(0, &g_button);
                         b->button_obj = cls;
                     }
                     SET_CLASS(v, b->button_obj);
@@ -803,7 +803,8 @@ void lvgCloseClip(LVGMovieClip *clip)
         {
             for (j = 0; j < shape->morph->num_shapes; j++)
                 lvgFreeShape(shape->morph->shapes + j);
-            free(shape->morph->shapes);
+            if (shape->morph->shapes)
+                free(shape->morph->shapes);
             free(shape->morph);
         }
     }
@@ -864,7 +865,8 @@ void lvgCloseClip(LVGMovieClip *clip)
             if (str->chars)
                 free(str->chars);
         }
-        free(text->strings);
+        if (text->strings)
+            free(text->strings);
     }
     for (i = 0; i < clip->num_sounds; i++)
     {
@@ -880,11 +882,27 @@ void lvgCloseClip(LVGMovieClip *clip)
             if (video->frames[j].data)
                 free(video->frames[j].data);
         }
-        free(video->frames);
+        if (video->frames)
+            free(video->frames);
         if (video->image)
             g_render->free_image(g_render_obj, video->image);
         if (video->vdec)
             ff_decoder.release(video->vdec);
+    }
+    for (i = 0; i < clip->num_buttons; i++)
+    {
+        LVGButton *btn = clip->buttons + i;
+        for (j = 0; j < btn->num_btnactions; j++)
+        {
+            if (btn->btnactions[j].actions)
+                free(btn->btnactions[j].actions);
+        }
+        if (btn->btnactions)
+            free(btn->btnactions);
+        if (btn->btn_shapes)
+            free(btn->btn_shapes);
+        if (btn->button_obj)
+            free_instance(btn->button_obj);
     }
     if (clip->vm)
     {
