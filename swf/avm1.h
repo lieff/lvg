@@ -159,6 +159,7 @@ typedef struct LVGActionCall
     ASClass *save_this;
     int save_pc;
     int save_size;
+    int save_stack_ptr;
 } LVGActionCall;
 
 typedef struct LVGActionCtx
