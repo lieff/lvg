@@ -5,7 +5,7 @@ if [ ! -d "SDL" ]; then
 fi
 SDL_DIR=SDL/build-$1
 if [ "$1" = "win" ]; then
-TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=../../windows/mingw64.cmake
+TOOLCHAIN="-DCMAKE_TOOLCHAIN_FILE=../../windows/mingw64.cmake -DRENDER_D3D=OFF"
 fi
 if [ ! -d "$SDL_DIR" ]; then
   mkdir $SDL_DIR
