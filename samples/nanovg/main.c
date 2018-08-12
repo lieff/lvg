@@ -1,9 +1,12 @@
+#include "nanovg.h"
 #define ICON_SEARCH 0x1F50D
 #define ICON_CIRCLED_CROSS 0x2716
 #define ICON_CHEVRON_RIGHT 0xE75E
 #define ICON_CHECK 0x2713
 #define ICON_LOGIN 0xE740
 #define ICON_TRASH 0xE729
+
+NVGcontext *vg;
 
 struct DemoData {
 	int fontNormal, fontBold, fontIcons; 
@@ -1131,6 +1134,7 @@ DemoData data;
 
 void onInit()
 {
+    vg = nvgCreateGLES2(0);
     blowup = 0;
     memset(&data, 0, sizeof(data));
     loadDemoData(vg, &data);
@@ -1138,5 +1142,6 @@ void onInit()
 
 void onFrame()
 {
-    renderDemo(vg, mx, my, width, height, g_time, blowup, &data);
+    platform_params *p = lvgGetParams();
+    renderDemo(vg, p->mx, p->my, p->width, p->height, p->time, blowup, &data);
 }
