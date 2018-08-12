@@ -1,3 +1,4 @@
+set -e
 
 if [ ! -d "SDL" ]; then
   git clone --depth=1 https://github.com/SDL-mirror/SDL

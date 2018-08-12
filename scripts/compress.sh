@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 UPXVER=3.94
 if ! [ `which upx` ]; then
   if [ ! -d "upx-${UPXVER}-amd64_linux" ]; then
