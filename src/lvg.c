@@ -146,9 +146,18 @@ LVGShapeCollection *lvgLoadSVG(const char *file)
     for (; shape->next; col->num_shapes++, shape = shape->next);
     col->shapes = malloc(sizeof(NSVGshape)*col->num_shapes);
     shape = image->shapes;
+    memcpy(col->bounds, shape->bounds, sizeof(col->bounds));
     for (i = 0; i < col->num_shapes; i++)
     {
         memcpy(col->shapes + i, shape, sizeof(NSVGshape));
+        if (shape->bounds[0] < col->bounds[0])
+            col->bounds[0] = shape->bounds[0];
+        if (shape->bounds[2] < col->bounds[2])
+            col->bounds[2] = shape->bounds[2];
+        if (shape->bounds[1] > col->bounds[1])
+            col->bounds[1] = shape->bounds[1];
+        if (shape->bounds[3] > col->bounds[3])
+            col->bounds[3] = shape->bounds[3];
         g_render->cache_shape(g_render_obj, col->shapes + i);
         NSVGshape *to_free = shape;
         shape = shape->next;
@@ -176,6 +185,14 @@ LVGShapeCollection *lvgLoadSVG(const char *file)
     }
 #endif
     return col;
+}
+
+void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds)
+{   // picoc do not support floats - convert to doubles
+    bounds[0] = col->bounds[0];
+    bounds[1] = col->bounds[1];
+    bounds[2] = col->bounds[2];
+    bounds[3] = col->bounds[3];
 }
 
 #define READ(p, n) { memcpy(p, buf, n); buf += n; }
@@ -465,10 +482,10 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         for (i = 0; i < groupstate->num_timers; i++)
         {
             LVGTimer *t = groupstate->timers + i;
-            double time = g_params.frame_time - t->last_time;
+            double time = g_params.time - t->last_time;
             if (time > t->timeout/1000.0)
             {
-                t->last_time = g_params.frame_time;
+                t->last_time = g_params.time;
                 lvgExecuteActions(clip->vm, t->func, groupstate, 1);
             }
         }
@@ -756,12 +773,12 @@ void lvgDrawClip(LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
-    double r, diff = g_params.frame_time - clip->last_time;
+    double r, diff = g_params.time - clip->last_time;
     if (diff > 1.0/clip->fps)
     {
         next_frame = 1;
         clip->last_time += 1.0/clip->fps;
-        if ((g_params.frame_time - clip->last_time) > 1.0/clip->fps)
+        if ((g_params.time - clip->last_time) > 1.0/clip->fps)
             r = 0.0;
         else
             r = 1.0;
@@ -942,6 +959,29 @@ void lvgCloseClip(LVGMovieClip *clip)
     free(clip);
 }
 
+platform_params *lvgGetParams()
+{
+    return &g_params;
+}
+
+void lvgTranslate(float x, float y)
+{
+    float t[6];
+    Transform3x2 tr;
+    translate(tr, x, y);
+    from_transform3x2(t, tr);
+    g_render->set_transform(g_render_obj, t, 0);
+}
+
+void lvgScale(float x, float y)
+{
+    float t[6];
+    Transform3x2 tr;
+    scale(tr, x, y);
+    from_transform3x2(t, tr);
+    g_render->set_transform(g_render_obj, t, 0);
+}
+
 void drawframe()
 {
     g_platform->pull_events(g_platform_obj);
@@ -953,9 +993,9 @@ void drawframe()
     if (pressed)
     {
         static double last_click;
-        if (g_params.frame_time - last_click < 0.2)
+        if (g_params.time - last_click < 0.2)
             goto change_fullscreen;
-        last_click = g_params.frame_time;
+        last_click = g_params.time;
     }
     if (g_platform->get_key(g_platform_obj, KEY_LEFTALT) || g_platform->get_key(g_platform_obj, KEY_RIGHTALT))
     {

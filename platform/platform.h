@@ -8,10 +8,9 @@ typedef struct platform_params
 {
     int winWidth, winHeight;
     int width, height;
+    int mkeys, last_mkeys;
     double mx, my;
-    double frame_time;
-    int mkeys;
-    int last_mkeys;
+    double time;
 } platform_params;
 
 typedef struct platform

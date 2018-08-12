@@ -116,6 +116,20 @@ void inverse(Transform3x2 dst, Transform3x2 data)
     dst[1][2] = result[1][2];
 }
 
+void to_transform3x2(Transform3x2 tr, float *t)
+{
+    tr[0][0] = t[0]; tr[1][0] = t[1];
+    tr[0][1] = t[2]; tr[1][1] = t[3];
+    tr[0][2] = t[4]; tr[1][2] = t[5];
+}
+
+void from_transform3x2(float *t, Transform3x2 tr)
+{
+    t[0] = tr[0][0]; t[1] = tr[1][0];
+    t[2] = tr[0][1]; t[3] = tr[1][1];
+    t[4] = tr[0][2]; t[5] = tr[1][2];
+}
+
 static float clampf(float a, float mn, float mx) { return a < mn ? mn : (a > mx ? mx : a); }
 
 NVGcolor nvgColorU32(uint32_t c)

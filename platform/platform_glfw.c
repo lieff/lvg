@@ -99,7 +99,7 @@ static void glfw_pull_events(void *ctx)
     params->mkeys |= glfwGetMouseButton(platform->window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ? MOUSE_BUTTON_LEFT : 0;
     params->mkeys |= glfwGetMouseButton(platform->window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS ? MOUSE_BUTTON_MIDDLE : 0;
     params->mkeys |= glfwGetMouseButton(platform->window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS ? MOUSE_BUTTON_RIGHT : 0;
-    params->frame_time = glfwGetTime();
+    params->time = glfwGetTime();
 }
 
 static void glfw_main_loop(void *ctx)

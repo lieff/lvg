@@ -137,7 +137,7 @@ static void sdl_pull_events(void *ctx)
     }
     SDL_GetWindowSize(platform->window, &params->winWidth, &params->winHeight);
     SDL_GL_GetDrawableSize(platform->window, &params->width, &params->height);
-    params->frame_time = sdl_get_time(ctx);
+    params->time = sdl_get_time(ctx);
 }
 
 static void sdl_main_loop(void *ctx)

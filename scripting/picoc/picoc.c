@@ -27,6 +27,14 @@ typedef double GLdouble;\
 typedef double GLclampd;\
 typedef char GLchar;\
 typedef long GLsizeiptr;\
+typedef struct platform_params\
+{\
+    int winWidth; int winHeight;\
+    int width; int height;\
+    int mkeys; int last_mkeys;\
+    double mx; double my;\
+    double time;\
+} platform_params;\
 typedef struct LVGShapeCollection LVGShapeCollection;\
 typedef struct LVGMovieClip LVGMovieClip;\
 typedef struct LVGSound\
@@ -348,53 +356,92 @@ static void lib_glEnableClientState(struct ParseState *Parser, struct Value *Ret
     glEnableClientState(Int(0));
 }
 
+/* LVG API */
+static void lib_lvgGetParams(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (0 != NumArgs)
+        return;
+    ReturnValue->Val->Pointer = lvgGetParams();
+}
+
 static void lib_lvgGetFileContents(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgGetFileContents(Param[0]->Val->Pointer, Param[1]->Val->Pointer);
+    ReturnValue->Val->Pointer = lvgGetFileContents(Ptr(0), Ptr(1));
 }
 
-static void lib_lvgLoadMP3(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
-    if (4 != NumArgs)
+    if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgLoadMP3(Param[0]->Val->Pointer, Param[1]->Val->Pointer, Param[2]->Val->Pointer, Param[3]->Val->Pointer);
+    lvgFree(Ptr(0));
 }
 
+static void lib_lvgTranslate(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    lvgTranslate(Float(0), Float(1));
+}
+
+static void lib_lvgScale(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    lvgScale(Float(0), Float(1));
+}
+
+/* SVG */
 static void lib_lvgLoadSVG(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgLoadSVG(Param[0]->Val->Pointer);
-}
-
-static void lib_lvgLoadSWF(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
-{
-    if (1 != NumArgs)
-        return;
-    ReturnValue->Val->Pointer = lvgLoadSWF(Param[0]->Val->Pointer);
+    ReturnValue->Val->Pointer = lvgLoadSVG(Ptr(0));
 }
 
 static void lib_lvgDrawSVG(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgDrawSVG(Param[0]->Val->Pointer);
+    lvgDrawSVG(Ptr(0));
+}
+
+static void lib_lvgGetShapeBounds(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    lvgGetShapeBounds(Ptr(0), Ptr(1));
+}
+
+/* SWF */
+static void lib_lvgLoadSWF(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    ReturnValue->Val->Pointer = lvgLoadSWF(Ptr(0));
 }
 
 static void lib_lvgDrawClip(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgDrawClip(Param[0]->Val->Pointer);
+    lvgDrawClip(Ptr(0));
+}
+
+/* Audio */
+static void lib_lvgLoadMP3(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (4 != NumArgs)
+        return;
+    ReturnValue->Val->Pointer = lvgLoadMP3(Ptr(0), Ptr(1), Ptr(2), Ptr(3));
 }
 
 static void lib_lvgPlaySound(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (5 != NumArgs)
         return;
-    lvgPlaySound(Param[0]->Val->Pointer, Param[1]->Val->Integer, Param[2]->Val->Integer, Param[3]->Val->Integer, Param[4]->Val->Integer);
+    lvgPlaySound(Ptr(0), Int(1), Int(2), Int(3), Int(4));
 }
 
 static const struct LibraryFunction g_lvgLib[] =
@@ -450,12 +497,20 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_glMapBufferRange, "void glMapBufferRange();" },
 #endif
     /* LVG API */
+    { lib_lvgGetParams, "platform_params *lvgGetParams();" },
     { lib_lvgGetFileContents, "char *lvgGetFileContents(char *fname, int *size);" },
-    { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
+    { lib_lvgFree, "void lvgFree(void *buf);" },
+    { lib_lvgTranslate, "void lvgTranslate(float x, float y);" },
+    { lib_lvgScale, "void lvgScale(float x, float y);" },
+    /* SVG */
     { lib_lvgLoadSVG, "LVGShapeCollection *lvgLoadSVG(char *file);" },
+    { lib_lvgDrawSVG, "void lvgDrawSVG(LVGShapeCollection *svg);" },
+    { lib_lvgGetShapeBounds, "void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds);" },
+    /* SWF */
     { lib_lvgLoadSWF, "LVGMovieClip *lvgLoadSWF(char *file);" },
-    { lib_lvgDrawSVG, "void lvgDrawSVG(LVGShapeCollection *image);" },
     { lib_lvgDrawClip, "void lvgDrawClip(LVGMovieClip *clip);" },
+    /* Audio */
+    { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
     { lib_lvgPlaySound, "void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);" },
     { NULL, NULL }
 };

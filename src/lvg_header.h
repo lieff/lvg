@@ -96,6 +96,7 @@ typedef struct LVGMovieClipGroupState
 typedef struct LVGShapeCollection LVGShapeCollection;
 typedef struct NSVGshape NSVGshape;
 typedef struct NSVGimage NSVGimage;
+typedef struct platform_params platform_params;
 
 typedef struct LVGShapeCollection
 {
@@ -207,13 +208,21 @@ typedef struct LVGMovieClip
     double last_time;
 } LVGMovieClip;
 
+/* LVG API */
+platform_params *lvgGetParams();
 char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
-void lvgDrawSVG(LVGShapeCollection *svg);
-void lvgDrawClip(LVGMovieClip *clip);
+void lvgTranslate(float x, float y);
+void lvgScale(float x, float y);
+/* SVG */
 LVGShapeCollection *lvgLoadSVG(const char *file);
+void lvgDrawSVG(LVGShapeCollection *svg);
+void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds);
+/* SWF */
 LVGMovieClip *lvgLoadSWF(const char *file);
 LVGMovieClip *lvgLoadClip(const char *file);
+void lvgDrawClip(LVGMovieClip *clip);
+/* Audio */
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
 short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);

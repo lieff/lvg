@@ -841,7 +841,7 @@ static void action_get_time(LVGActionCtx *ctx, uint8_t *a)
 {
     stack_push(ctx);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_INT(res, (uint32_t)(g_params.frame_time*1000));
+    SET_INT(res, (uint32_t)(g_params.time*1000));
 }
 
 static void action_mb_string_extract(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }

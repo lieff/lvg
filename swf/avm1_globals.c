@@ -618,7 +618,7 @@ static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     ctx->groupstate->timers = realloc(ctx->groupstate->timers, (ctx->groupstate->num_timers + 1)*sizeof(ctx->groupstate->timers[0]));
     LVGTimer *t = ctx->groupstate->timers + ctx->groupstate->num_timers++;
     t->func = (uint8_t *)se_func->str;
-    t->last_time = g_params.frame_time;
+    t->last_time = g_params.time;
     t->timeout = to_double(ctx, se_timeout);
     static int counter = 0;
     t->id = ++counter;
