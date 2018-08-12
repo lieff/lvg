@@ -6,7 +6,7 @@
 #include "../../src/lvg_header.h"
 #include "../../render/gl.h"
 
-#define PICOC_STACK_SIZE (128*1024)              /* space for the the stack */
+#define PICOC_STACK_SIZE (4*1024*1024)              /* space for the the stack */
 
 const char g_lvgDefs[] = "\
 typedef unsigned int GLenum;\
