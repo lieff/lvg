@@ -29,7 +29,7 @@ typedef struct render
 {
     int (*init)(void **render, const platform *platform);
     void (*release)(void *render);
-    void (*begin_frame)(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height);
+    void (*begin_frame)(void *render, int viewportWidth, int viewportHeight, int winWidth, int winHeight, int width, int height);
     void (*end_frame)(void *render);
     int (*cache_shape)(void *render, NSVGshape *shape);
     int (*cache_image)(void *render, int width, int height, int flags, const void *rgba);

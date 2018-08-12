@@ -228,18 +228,15 @@ static void nvg_release(void *render)
 #endif
 }
 
-static void nvg_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
+static void nvg_begin_frame(void *render, int viewportWidth, int viewportHeight, int winWidth, int winHeight, int width, int height)
 {
     NVGcontext *vg = render;
     nvgBeginFrame(vg, winWidth, winHeight, (float)width / (float)winWidth);
-    if (!clip)
-        return;
-    float clip_w = clip->bounds[2] - clip->bounds[0], clip_h = clip->bounds[3] - clip->bounds[1];
-    float scalex = width/clip_w;
-    float scaley = height/clip_h;
+    float scalex = width/viewportWidth;
+    float scaley = height/viewportHeight;
     float scale = scalex < scaley ? scalex : scaley;
 
-    nvgTranslate(vg, -(clip_w*scale - width)/2, -(clip_h*scale - height)/2);
+    nvgTranslate(vg, -(viewportWidth*scale - width)/2, -(viewportHeight*scale - height)/2);
     nvgScale(vg, scale, scale);
 }
 

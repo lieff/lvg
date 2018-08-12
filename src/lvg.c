@@ -84,7 +84,6 @@ extern const script_engine script_engine_picoc;
 #endif
 void *g_script;
 #endif
-void (*onFrame)();
 
 NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
     float sx, float sy, float ex, float ey,
@@ -126,7 +125,7 @@ void lvgFree(void *buf)
     free(buf);
 }
 
-NSVGimage *lvgLoadSVG(const char *file)
+LVGShapeCollection *lvgLoadSVG(const char *file)
 {
     char *buf;
     double time = g_platform->get_time(g_platform_obj);
@@ -139,6 +138,23 @@ NSVGimage *lvgLoadSVG(const char *file)
     printf("zip time: %fs\n", time2 - time);
     NSVGimage *image = nsvgParse(buf, "px", 96.0f);
     free(buf);
+    // convert to LVGShapeCollection
+    int i;
+    LVGShapeCollection *col = calloc(1, sizeof(LVGShapeCollection));
+    NSVGshape *shape = image->shapes;
+    col->num_shapes = 1;
+    for (; shape->next; col->num_shapes++, shape = shape->next);
+    col->shapes = malloc(sizeof(NSVGshape)*col->num_shapes);
+    shape = image->shapes;
+    for (i = 0; i < col->num_shapes; i++)
+    {
+        memcpy(col->shapes + i, shape, sizeof(NSVGshape));
+        g_render->cache_shape(g_render_obj, col->shapes + i);
+        NSVGshape *to_free = shape;
+        shape = shape->next;
+        free(to_free);
+    }
+
     time = g_platform->get_time(g_platform_obj);
     printf("svg load time: %fs\n", time - time2);
 #if !defined(EMSCRIPTEN) && defined(DEBUG)
@@ -159,7 +175,7 @@ NSVGimage *lvgLoadSVG(const char *file)
         nsvgDeleteRasterizer(rast);
     }
 #endif
-    return image;
+    return col;
 }
 
 #define READ(p, n) { memcpy(p, buf, n); buf += n; }
@@ -210,7 +226,7 @@ char *load_shape(char *buf, NSVGshape *shape)
     return buf;
 }
 
-NSVGimage *lvgLoadSVGB(const char *file)
+/*NSVGimage *lvgLoadSVGB(const char *file)
 {
     char *buf, *save_buf;
     double time = g_platform->get_time(g_platform_obj);
@@ -242,7 +258,7 @@ NSVGimage *lvgLoadSVGB(const char *file)
     time = g_platform->get_time(g_platform_obj);
     printf("svg load time: %fs\n", time - time2);
     return image;
-}
+}*/
 
 static char *loadShapeCollection(char *buf, LVGShapeCollection *c)
 {
@@ -344,13 +360,9 @@ void lvgDrawShape(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float
     g_render->render_shape(g_render_obj, shapecol, cxform, ratio, blend_mode);
 }
 
-void lvgDrawSVG(NSVGimage *image)
+void lvgDrawSVG(LVGShapeCollection *svg)
 {
-    LVGShapeCollection col;
-    memset(&col, 0, sizeof(col));
-    col.shapes = image->shapes;
-    col.num_shapes = 1;
-    lvgDrawShape(&col, 0, 0.0f, BLEND_REPLACE);
+    lvgDrawShape(svg, 0, 0.0f, BLEND_REPLACE);
 }
 
 static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxform, double alpha)
@@ -793,6 +805,8 @@ void lvgFreeShape(NSVGshape *shape)
 void lvgCloseClip(LVGMovieClip *clip)
 {
     int i, j;
+    if (!clip)
+        return;
     for (i = 0; i < clip->num_shapes; i++)
     {
         LVGShapeCollection *shape = clip->shapes + i;
@@ -909,18 +923,23 @@ void lvgCloseClip(LVGMovieClip *clip)
         lvgFreeVM(clip->vm);
         free(clip->vm);
     }
-    free(clip->shapes);
-    free(clip->images);
-    free(clip->groups);
-    free(clip->fonts);
-    free(clip->texts);
-    free(clip->sounds);
-    free(clip->videos);
-}
-
-void swfOnFrame()
-{
-    lvgDrawClip(g_clip);
+    if (clip->shapes)
+        free(clip->shapes);
+    if (clip->images)
+        free(clip->images);
+    if (clip->groups)
+        free(clip->groups);
+    if (clip->fonts)
+        free(clip->fonts);
+    if (clip->texts)
+        free(clip->texts);
+    if (clip->sounds)
+        free(clip->sounds);
+    if (clip->videos)
+        free(clip->videos);
+    if (clip->buttons)
+        free(clip->buttons);
+    free(clip);
 }
 
 void drawframe()
@@ -929,7 +948,7 @@ void drawframe()
     glViewport(0, 0, g_params.width, g_params.height);
     glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    g_render->begin_frame(g_render_obj, g_clip, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+
     int pressed = (g_params.mkeys & MOUSE_BUTTON_LEFT) && !(g_params.last_mkeys & MOUSE_BUTTON_LEFT);
     if (pressed)
     {
@@ -951,10 +970,16 @@ change_fullscreen:
         last_enter = enter_state;
     }
 
-    if (g_script)
-        SCRIPT_ENGINE.run_function(g_script, "onFrame");
-    if (onFrame)
-        onFrame();
+    if (g_clip)
+    {
+        g_render->begin_frame(g_render_obj, g_clip->bounds[2] - g_clip->bounds[0], g_clip->bounds[3] - g_clip->bounds[1], g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+        lvgDrawClip(g_clip);
+    } else
+    {
+        g_render->begin_frame(g_render_obj, 800, 600, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+        if (g_script)
+            SCRIPT_ENGINE.run_function(g_script, "onFrame");
+    }
 
     g_render->end_frame(g_render_obj);
     g_platform->swap_buffers(g_platform_obj);
@@ -988,7 +1013,6 @@ int open_lvg(const char *file_name)
         munmap(map, size);
         if (!g_clip)
             return -1;
-        onFrame = swfOnFrame;
         g_bgColor = g_clip->bgColor;
         return 0;
     }

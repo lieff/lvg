@@ -10,7 +10,7 @@ static void null_release(void *render)
 {
 }
 
-static void null_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
+static void null_begin_frame(void *render, int viewportWidth, int viewportHeight, int winWidth, int winHeight, int width, int height)
 {
 }
 

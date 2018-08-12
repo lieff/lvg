@@ -172,22 +172,19 @@ static void nvpr_release(void *render)
     free(ctx);
 }
 
-static void nvpr_begin_frame(void *render, LVGMovieClip *clip, int winWidth, int winHeight, int width, int height)
+static void nvpr_begin_frame(void *render, int viewportWidth, int viewportHeight, int winWidth, int winHeight, int width, int height)
 {
     render_ctx *ctx = render;
     ctx->winWidth = winWidth, ctx->winHeight = winHeight, ctx->width = width, ctx->height = height;
     g_glMatrixLoadIdentityEXT(GL_PROJECTION);
     g_glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
     g_glMatrixLoadIdentityEXT(GL_MODELVIEW);
-    if (!clip)
-        return;
-    float clip_w = clip->bounds[2] - clip->bounds[0], clip_h = clip->bounds[3] - clip->bounds[1];
-    float scalex = width/clip_w;
-    float scaley = height/clip_h;
+    float scalex = width/viewportWidth;
+    float scaley = height/viewportHeight;
     float best_scale = scalex < scaley ? scalex : scaley;
 
     identity(ctx->transform);
-    translate(ctx->transform, -(clip_w*best_scale - width)/2, -(clip_h*best_scale - height)/2);
+    translate(ctx->transform, -(viewportWidth*best_scale - width)/2, -(viewportHeight*best_scale - height)/2);
     Transform3x2 tr;
     scale(tr, best_scale, best_scale);
     mul(ctx->transform, ctx->transform, tr);

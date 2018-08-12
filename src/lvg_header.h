@@ -209,10 +209,9 @@ typedef struct LVGMovieClip
 
 char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
-void lvgDrawSVG(NSVGimage *image);
+void lvgDrawSVG(LVGShapeCollection *svg);
 void lvgDrawClip(LVGMovieClip *clip);
-NSVGimage *lvgLoadSVG(const char *file);
-NSVGimage *lvgLoadSVGB(const char *file);
+LVGShapeCollection *lvgLoadSVG(const char *file);
 LVGMovieClip *lvgLoadSWF(const char *file);
 LVGMovieClip *lvgLoadClip(const char *file);
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
