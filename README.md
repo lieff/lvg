@@ -11,13 +11,15 @@ LVG (Lion Vector Graphics)
 
 LVG is a lightweight flash player replacement. Basic idea: we have some assets in a package and sctipts that renders them.
 It's designed to use a very small runtime (around 200kb without video codecs) for player and runs on android, ios, web and more.
-It's uses C scripts natively and javascripts for web.
 
-Why C scripts? Because C compiler is small, and runtime written in C, so no other language is needed and script can be compiled in to a save the space.
+Currently it uses C script to load and render assets.
+Why C script? Because C compiler is small, and runtime written in C, so no other language is needed and script can be compiled in to a save the space.
+Another reason is compatibility: lvg only exposes small API and opengl, with other scripting laguages we must do all from scratch, including GUI.
+But there are huge amount of already-written C code.
 Usually author prefer C++, but there also some reasons to use pure C for whole project:
 
  * We do not need to include libstdc++ for Android shared objects, which saves some .apk space (shared objects libs also usually duplicated for each supported architectue in .apk).
- * This reduces size of emscripten compiled javascript code (it's already relatively heavy).
+ * This reduces size of emscripten compiled WASM code (it's already relatively heavy).
  * Native C++ builds needs some attention for small code too. It's definetly possible to write small code with C++, but we need something like minicrt for each platform/compiler. See [farbrauch](https://github.com/farbrausch/fr_public) code for example or something similar.
  * C++ code produces much more noisy .map files which makes profile/map file analysis bit more complicated. Projects like chromium also uses objects analysis tools (like dump-static-initializers.py), there also less noise with such tools.
  * Code can be ported to specific OS'es more easily.
@@ -28,6 +30,7 @@ Following assets currently supported:
  * Raster images (loaded using [stb_image.h](https://github.com/nothings/stb))
  * MP3 files (loaded using [minimp3](https://github.com/lieff/minimp3))
  * Flash SWF files (can contain vector, raster, video and audio). All swf video codecs (h263,vp6,flashsv,flashsv2,h264) costs additional ~600kb.
+ * Scripts using [tcc](https://bellard.org/tcc/) or [picoc](https://gitlab.com/zsaleeba/picoc)
 
 Render can be done using following backends:
 
