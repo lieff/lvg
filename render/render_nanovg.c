@@ -232,8 +232,8 @@ static void nvg_begin_frame(void *render, int viewportWidth, int viewportHeight,
 {
     NVGcontext *vg = render;
     nvgBeginFrame(vg, winWidth, winHeight, (float)width / (float)winWidth);
-    float scalex = width/viewportWidth;
-    float scaley = height/viewportHeight;
+    float scalex = (float)width/viewportWidth;
+    float scaley = (float)height/viewportHeight;
     float scale = scalex < scaley ? scalex : scaley;
 
     nvgTranslate(vg, -(viewportWidth*scale - width)/2, -(viewportHeight*scale - height)/2);

@@ -179,8 +179,8 @@ static void nvpr_begin_frame(void *render, int viewportWidth, int viewportHeight
     g_glMatrixLoadIdentityEXT(GL_PROJECTION);
     g_glMatrixOrthoEXT(GL_PROJECTION, 0, winWidth, winHeight, 0, -1, 1);
     g_glMatrixLoadIdentityEXT(GL_MODELVIEW);
-    float scalex = width/viewportWidth;
-    float scaley = height/viewportHeight;
+    float scalex = (float)width/viewportWidth;
+    float scaley = (float)height/viewportHeight;
     float best_scale = scalex < scaley ? scalex : scaley;
 
     identity(ctx->transform);
