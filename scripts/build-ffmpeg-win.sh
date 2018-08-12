@@ -2,7 +2,7 @@ pushd $(dirname "$0")/../video/ffmpeg
 set -e
 
 if [ ! -d "FFmpeg" ]; then
-  git clone --depth=1 https://github.com/FFmpeg/FFmpeg
+  git clone --depth=1 https://github.com/lieff/FFmpeg
 fi
 
 if [ ! -d "FFmpeg/build-win" ]; then
