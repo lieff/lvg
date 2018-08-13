@@ -9,7 +9,11 @@ if [ ! -d "FFmpeg/build-$1" ]; then
 mkdir FFmpeg/build-$1
 cd FFmpeg/build-$1
 
-../configure --enable-lto --disable-inline-asm --ar=gcc-ar --ranlib=gcc-ranlib \
+if [ "$1" = "linux" ]; then
+FF_LTO_FLAGS="--enable-lto --disable-inline-asm --ar=gcc-ar --ranlib=gcc-ranlib"
+fi
+
+../configure $FF_LTO_FLAGS \
     --disable-pthreads \
     --disable-w32threads \
     --disable-os2threads \
