@@ -5,7 +5,8 @@ scripts/build-ffmpeg-pc.sh linux
 . build_src.sh
 
 CFLAGS="-s -Os -flto -std=gnu99 -Wall -fno-asynchronous-unwind-tables -fno-stack-protector -ffunction-sections -fdata-sections -Wl,--gc-sections $SRC \
--LSDL/build-linux -ISDL/include -I. -Isrc -Inanovg -Iswf/swftools/lib \
+-Isrc -Inanovg -Iswf/swftools/lib \
+-LSDL/build-linux -ISDL/include -I. \
 -Ivideo/ffmpeg/FFmpeg -Ivideo/ffmpeg/FFmpeg/build-linux -Lvideo/ffmpeg/FFmpeg/build-linux/libavcodec -Lvideo/ffmpeg/FFmpeg/build-linux/libavutil \
 -DNDEBUG -D_GNU_SOURCE -DLVG_INTERPOLATE"
 
