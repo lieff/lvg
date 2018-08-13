@@ -117,13 +117,46 @@ void lvgFree(void *buf)
     free(buf);
 }
 
+void lvgViewport(int width, int heigth)
+{
+    g_render->begin_frame(g_render_obj, width, heigth, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+}
+
+int lvgLoadImage(const char *file)
+{
+    char *buf;
+    uint32_t size;
+    if (!(buf = lvgGetFileContents(file, &size)))
+    {
+        printf("error: could not open file: %s\n", file);
+        return 0;
+    }
+    int image = lvgLoadImageBuf((unsigned char *)buf, size);
+    free(buf);
+    return image;
+}
+
+int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size)
+{
+    int w, h, n;
+    unsigned char *img = stbi_load_from_memory(buf, buf_size, &w, &h, &n, 4);
+    int image = g_render->cache_image(g_render_obj, w, h, 0, (const unsigned char *)img);
+    free(img);
+    return image;
+}
+
+void lvgFreeImage(int image)
+{
+    g_render->free_image(g_render_obj, image);
+}
+
 LVGShapeCollection *lvgLoadShape(const char *file)
 {
     char *buf;
     double time = g_platform->get_time(g_platform_obj);
     if (!(buf = lvgGetFileContents(file, 0)))
     {
-        printf("error: could not open SVG image.\n");
+        printf("error: could not open file: %s\n", file);
         return 0;
     }
     double time2 = g_platform->get_time(g_platform_obj);

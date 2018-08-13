@@ -214,6 +214,7 @@ char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
 void lvgTranslate(float x, float y);
 void lvgScale(float x, float y);
+void lvgViewport(int width, int heigth);
 /* Image */
 int lvgLoadImage(const char *file);
 int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size);

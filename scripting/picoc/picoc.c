@@ -392,6 +392,35 @@ static void lib_lvgScale(struct ParseState *Parser, struct Value *ReturnValue, s
     lvgScale(Float(0), Float(1));
 }
 
+static void lib_lvgViewport(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    lvgViewport(Int(0), Int(1));
+}
+
+/* Image */
+static void lib_lvgLoadImage(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    ReturnValue->Val->Integer = lvgLoadImage(Ptr(0));
+}
+
+static void lib_lvgLoadImageBuf(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    ReturnValue->Val->Integer = lvgLoadImageBuf(Ptr(0), Int(1));
+}
+
+static void lib_lvgFreeImage(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    lvgFreeImage(Int(0));
+}
+
 /* SVG */
 static void lib_lvgLoadShape(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
@@ -516,6 +545,11 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_lvgFree, "void lvgFree(void *buf);" },
     { lib_lvgTranslate, "void lvgTranslate(float x, float y);" },
     { lib_lvgScale, "void lvgScale(float x, float y);" },
+    { lib_lvgViewport, "void lvgViewport(int w, int h);" },
+    /* Image */
+    { lib_lvgLoadImage, "int lvgLoadImage(char *file);" },
+    { lib_lvgLoadImageBuf, "int lvgLoadImageBuf(unsigned char *buf, int buf_size);" },
+    { lib_lvgFreeImage, "void lvgFreeImage(int image);" },
     /* SVG */
     { lib_lvgLoadShape, "LVGShapeCollection *lvgLoadShape(char *file);" },
     { lib_lvgDrawShape, "void lvgDrawShape(LVGShapeCollection *svg);" },
