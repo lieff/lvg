@@ -15,7 +15,7 @@ install:
           rvm install ruby-2.3.3;
           rvm --default use 2.3.3;
           brew update;
-          brew install upx;
+          brew install upx yasm;
       fi
 
 script:
