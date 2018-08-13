@@ -27,6 +27,58 @@ typedef double GLdouble;\
 typedef double GLclampd;\
 typedef char GLchar;\
 typedef long GLsizeiptr;\
+#define GL_FALSE 0\n\
+#define GL_TRUE 1\n\
+\
+#define GL_FRAGMENT_SHADER  0x8B30\n\
+#define GL_VERTEX_SHADER    0x8B31\n\
+#define GL_COMPILE_STATUS   0x8B81\n\
+#define GL_LINK_STATUS      0x8B82\n\
+#define GL_INFO_LOG_LENGTH  0x8B84\n\
+\
+#define GL_ARRAY_BUFFER         0x8892\n\
+#define GL_ELEMENT_ARRAY_BUFFER 0x8893\n\
+\
+#define GL_TEXTURE_2D		0x0DE1\n\
+#define GL_TEXTURE_WRAP_S	0x2802\n\
+#define GL_TEXTURE_WRAP_T	0x2803\n\
+#define GL_TEXTURE_MAG_FILTER	0x2800\n\
+#define GL_TEXTURE_MIN_FILTER	0x2801\n\
+\
+#define GL_NEAREST_MIPMAP_NEAREST	0x2700\n\
+#define GL_NEAREST_MIPMAP_LINEAR	0x2702\n\
+#define GL_LINEAR_MIPMAP_NEAREST	0x2701\n\
+#define GL_LINEAR_MIPMAP_LINEAR		0x2703\n\
+\
+#define GL_LINEAR	0x2601\n\
+#define GL_NEAREST	0x2600\n\
+#define GL_REPEAT	0x2901\n\
+#define GL_CLAMP	0x2900\n\
+\
+#define GL_FLOAT	0x1406\n\
+#define GL_UNSIGNED_BYTE 0x1401\n\
+#define GL_UNSIGNED_SHORT 0x1403\n\
+#define GL_RGBA	0x1908\n\
+\
+#define GL_BLEND	0x0BE2\n\
+#define GL_FUNC_ADD	0x8006\n\
+#define GL_SRC_ALPHA	0x0302\n\
+#define GL_ONE_MINUS_SRC_ALPHA	0x0303\n\
+\
+#define GL_CULL_FACE	0x0B44\n\
+#define GL_DEPTH_TEST	0x0B71\n\
+#define GL_SCISSOR_TEST	0x0C11\n\
+\
+#define GL_TEXTURE0 0x84C0\n\
+\
+#define GL_STREAM_DRAW  0x88E0\n\
+#define GL_WRITE_ONLY   0x88B9\n\
+\
+#define GL_TRIANGLES 0x0004\n\
+#define GL_TRIANGLE_STRIP 0x0005\n\
+#define GL_TRIANGLE_FAN	0x0006\n\
+#define GL_QUADS 0x0007\n\
+\
 typedef struct platform_params\
 {\
     int winWidth; int winHeight;\
@@ -356,6 +408,41 @@ static void lib_glEnableClientState(struct ParseState *Parser, struct Value *Ret
     glEnableClientState(Int(0));
 }
 
+static void lib_glColor4f(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (4 != NumArgs)
+        return;
+    glColor4f(Float(0), Float(1), Float(2), Float(3));
+}
+
+static void lib_glTexCoord2f(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    glTexCoord2f(Float(0), Float(1));
+}
+
+static void lib_glVertex2f(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    glVertex2f(Float(0), Float(1));
+}
+
+static void lib_glBegin(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    glBegin(Int(0));
+}
+
+static void lib_glEnd(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (0 != NumArgs)
+        return;
+    glEnd();
+}
+
 /* LVG API */
 static void lib_lvgGetParams(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
@@ -534,6 +621,11 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_glLoadIdentity, "void glLoadIdentity();" },
     { lib_glOrtho, "void glOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);" },
     { lib_glEnableClientState, "void glEnableClientState(GLenum array);" },
+    { lib_glColor4f, "void glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);" },
+    { lib_glTexCoord2f, "void glTexCoord2f(GLfloat x, GLfloat y);" },
+    { lib_glVertex2f, "void glVertex2f(GLfloat x, GLfloat y);" },
+    { lib_glBegin, "void glBegin(GLenum mode);" },
+    { lib_glEnd, "void glEnd();" },
 #ifdef USE_GL3
     { lib_glGenVertexArrays, "void glGenVertexArrays();" },
     { lib_glBindVertexArray, "void glBindVertexArray();" },
