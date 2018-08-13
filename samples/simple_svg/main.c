@@ -3,7 +3,7 @@ LVGShapeCollection *g_image;
 
 void onInit()
 {
-    g_image = lvgLoadSVG("main.svg");
+    g_image = lvgLoadShape("main.svg");
 }
 
 void onFrame()
@@ -15,8 +15,7 @@ void onFrame()
         double bounds[4];
         lvgGetShapeBounds(g_image, bounds);
         lvgScale(p->mx/(bounds[1] - bounds[0]), p->my/(bounds[3] - bounds[2]));
-    }
-    else
+    } else
         lvgScale(scale, scale);
-    lvgDrawSVG(g_image);
+    lvgDrawShape(g_image);
 }

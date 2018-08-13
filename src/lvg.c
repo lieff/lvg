@@ -85,14 +85,6 @@ extern const script_engine script_engine_picoc;
 void *g_script;
 #endif
 
-NVGpaint nvgLinearGradientTCC(NVGcontext* ctx,
-    float sx, float sy, float ex, float ey,
-    float ir, float ig, float ib, float ia, float or, float og, float ob, float oa)
-{
-    float m = 1.0/255.0;
-    return nvgLinearGradient(ctx, sx, sy, ex, ey, nvgRGBAf(ir*m, ig*m, ib*m, ia*m), nvgRGBAf(or*m, og*m, ob*m, oa*m));
-}
-
 char *lvgGetFileContents(const char *fname, uint32_t *size)
 {
     uint32_t idx;
@@ -125,7 +117,7 @@ void lvgFree(void *buf)
     free(buf);
 }
 
-LVGShapeCollection *lvgLoadSVG(const char *file)
+LVGShapeCollection *lvgLoadShape(const char *file)
 {
     char *buf;
     double time = g_platform->get_time(g_platform_obj);
@@ -195,191 +187,14 @@ void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds)
     bounds[3] = col->bounds[3];
 }
 
-#define READ(p, n) { memcpy(p, buf, n); buf += n; }
-
-char *load_paint(char *buf, NSVGpaint *p)
-{
-    READ(&p->type, 1);
-    if (NSVG_PAINT_COLOR == p->type)
-    {
-        READ(&p->color, 4);
-    } else if (NSVG_PAINT_LINEAR_GRADIENT == p->type || NSVG_PAINT_RADIAL_GRADIENT == p->type)
-    {
-        int nstops = 0;
-        READ(&nstops, 4);
-        NSVGgradient *g = p->gradient = (NSVGgradient*)malloc(sizeof(NSVGgradient) + sizeof(NSVGgradientStop)*nstops);
-        g->nstops = nstops;
-        READ(&g->xform, 4*6);
-        READ(&g->fx, 4*2);
-        READ(&g->spread, 1);
-        READ(g->stops, g->nstops*8);
-    }
-    return buf;
-}
-
-char *load_shape(char *buf, NSVGshape *shape)
-{
-    int npaths = 0;
-    READ(&npaths, 4);
-    buf = load_paint(buf, &shape->fill);
-    buf = load_paint(buf, &shape->stroke);
-    READ(&shape->strokeWidth, 4);
-    READ(shape->bounds, 4*4);
-    shape->flags |= NSVG_FLAGS_VISIBLE;
-
-    shape->paths = (NSVGpath*)malloc(npaths*sizeof(NSVGpath));
-    memset(shape->paths, 0, npaths*sizeof(NSVGpath));
-    NSVGpath *path = 0;
-    for (int j = 0; j < npaths; j++)
-    {
-        if (path)
-            path->next = &shape->paths[j];
-        path = &shape->paths[j];
-        READ(&path->npts, 4);
-        READ(&path->closed, 1);
-        path->pts = (float*)malloc(sizeof(path->pts[0])*path->npts*2);
-        READ(path->pts, sizeof(path->pts[0])*path->npts*2);
-    }
-    return buf;
-}
-
-/*NSVGimage *lvgLoadSVGB(const char *file)
-{
-    char *buf, *save_buf;
-    double time = g_platform->get_time(g_platform_obj);
-    if (!(buf = save_buf = lvgGetFileContents(file, 0)))
-    {
-        printf("error: could not open SVG image.\n");
-        return 0;
-    }
-    double time2 = g_platform->get_time(g_platform_obj);
-    printf("zip time: %fs\n", time2 - time);
-
-    NSVGimage *image = (NSVGimage*)calloc(1, sizeof(NSVGimage));
-
-    int nshapes = 0;
-    READ(&nshapes, 4);
-    READ(&image->width, 4);
-    READ(&image->height, 4);
-    image->shapes = (NSVGshape*)calloc(1, nshapes*sizeof(NSVGshape));
-    NSVGshape *shape = 0;
-    for (int i = 0; i < nshapes; i++)
-    {
-        if (shape)
-            shape->next = &image->shapes[i];
-        shape = &image->shapes[i];
-        buf = load_shape(buf, shape);
-    }
-
-    free(save_buf);
-    time = g_platform->get_time(g_platform_obj);
-    printf("svg load time: %fs\n", time - time2);
-    return image;
-}*/
-
-static char *loadShapeCollection(char *buf, LVGShapeCollection *c)
-{
-    READ(&c->num_shapes, 4);
-    READ(c->bounds, 4*4);
-    c->shapes = (NSVGshape *)calloc(1, sizeof(NSVGshape)*c->num_shapes);
-    for (int i = 0; i < c->num_shapes; i++)
-    {
-        buf = load_shape(buf, c->shapes + i);
-        c->shapes[i].fillRule = NSVG_FILLRULE_EVENODD;
-    }
-    return buf;
-}
-
-static char *loadImage(char *buf, int *image)
-{
-    int type = 0, len = 0;
-    READ(&type, 4);
-    READ(&len, 4);
-    *image = 0;
-    return buf;
-}
-
-static char *loadObject(char *buf, LVGObject *o)
-{
-    READ(&o->id, 4);
-    READ(&o->type, 4);
-    READ(&o->depth, 4);
-    READ(&o->ratio, 4);
-    READ(&o->t, 4*6);
-    READ(&o->cxform.mul, 4*4);
-    READ(&o->cxform.add, 4*4);
-    return buf;
-}
-
-static char *loadFrame(char *buf, LVGMovieClipFrame *frame)
-{
-    READ(&frame->num_objects, 4);
-    frame->objects = (LVGObject *)calloc(1, sizeof(LVGObject)*frame->num_objects);
-    for (int i = 0; i < frame->num_objects; i++)
-        buf = loadObject(buf, frame->objects + i);
-    return buf;
-}
-
-static char *loadGroup(char *buf, LVGMovieClipGroup *group)
-{
-    READ(&group->num_frames, 4);
-    group->frames = (LVGMovieClipFrame *)calloc(1, sizeof(LVGMovieClipFrame)*group->num_frames);
-    for (int i = 0; i < group->num_frames; i++)
-        buf = loadFrame(buf, group->frames + i);
-    return buf;
-}
-
-LVGMovieClip *lvgLoadClip(const char *file)
-{
-    char *buf, *save_buf;
-    double time = g_platform->get_time(g_platform_obj);
-    if (!(buf = save_buf = lvgGetFileContents(file, 0)))
-    {
-        printf("error: could not open movie clip.\n");
-        return 0;
-    }
-    double time2 = g_platform->get_time(g_platform_obj);
-    printf("zip time: %fs\n", time2 - time);
-
-    LVGMovieClip *clip = 0;
-    uint32_t tag;
-    READ(&tag, 4);
-    if (tag != *(uint32_t*)"LVGC")
-        goto fail;
-    clip = (LVGMovieClip*)calloc(1, sizeof(LVGMovieClip));
-    READ(clip->bounds, 4*4);
-    READ(clip->bgColor.rgba, 4*4);
-    READ(&clip->num_shapes, 4);
-    READ(&clip->num_images, 4);
-    READ(&clip->num_groups, 4);
-    READ(&clip->fps, 4);
-    clip->shapes = (LVGShapeCollection*)calloc(1, sizeof(LVGShapeCollection)*clip->num_shapes);
-    clip->images = (int*)calloc(1, sizeof(int)*clip->num_images);
-    clip->groups = (LVGMovieClipGroup*)calloc(1, sizeof(LVGMovieClipGroup)*clip->num_groups);
-    int i;
-    for (i = 0; i < clip->num_shapes; i++)
-        buf = loadShapeCollection(buf, clip->shapes + i);
-    for (i = 0; i < clip->num_images; i++)
-        buf = loadImage(buf, clip->images + i);
-    for (i = 0; i < clip->num_groups; i++)
-        buf = loadGroup(buf, clip->groups + i);
-fail:
-    free(save_buf);
-    time = g_platform->get_time(g_platform_obj);
-    printf("movie clip load time: %fs\n", time - time2);
-    if (clip)
-        clip->last_time = time;
-    return clip;
-}
-
-void lvgDrawShape(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
+static void lvgDrawShapeCol(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
     g_render->render_shape(g_render_obj, shapecol, cxform, ratio, blend_mode);
 }
 
-void lvgDrawSVG(LVGShapeCollection *svg)
+void lvgDrawShape(LVGShapeCollection *svg)
 {
-    lvgDrawShape(svg, 0, 0.0f, BLEND_REPLACE);
+    lvgDrawShapeCol(svg, 0, 0.0f, BLEND_REPLACE);
 }
 
 static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxform, double alpha)
@@ -532,7 +347,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawShape(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
+            lvgDrawShapeCol(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -694,7 +509,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGColorTransform newcxform = *cxform;
                     combine_cxform(&newcxform, &o->cxform, 1.0);
                     combine_cxform(&newcxform, &bs->obj.cxform, alpha*btn_alpha);
-                    lvgDrawShape(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
+                    lvgDrawShapeCol(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
                     g_render->set_transform(g_render_obj, save_t, 1);
                 }
         } else
@@ -728,7 +543,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     combine_cxform(&newcxform, &o->cxform, alpha);
                     for (int l = 0; l < shapecol->num_shapes; l++)
                         shapecol->shapes[l].fill.color = str->color;
-                    lvgDrawShape(shapecol, &newcxform, 0.0f, blend_mode);
+                    lvgDrawShapeCol(shapecol, &newcxform, 0.0f, blend_mode);
                     float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, c->x_advance/20.0f/scale, 0.0f };
                     g_render->set_transform(g_render_obj, t, 0);
                 }
@@ -804,7 +619,7 @@ static void deletePaint(NSVGpaint* paint)
     }
 }
 
-void lvgFreeShape(NSVGshape *shape)
+static void lvgFreeNSVGShape(NSVGshape *shape)
 {
     NSVGpath *path = shape->paths;
     while (path)
@@ -819,25 +634,36 @@ void lvgFreeShape(NSVGshape *shape)
     deletePaint(&shape->stroke);
 }
 
-void lvgCloseClip(LVGMovieClip *clip)
+static void lvgFreeShape_internal(LVGShapeCollection *shape)
+{
+    int i;
+    for (i = 0; i < shape->num_shapes; i++)
+        lvgFreeNSVGShape(shape->shapes + i);
+    free(shape->shapes);
+    if (shape->morph)
+    {
+        for (i = 0; i < shape->morph->num_shapes; i++)
+            lvgFreeNSVGShape(shape->morph->shapes + i);
+        if (shape->morph->shapes)
+            free(shape->morph->shapes);
+        free(shape->morph);
+    }
+}
+
+void lvgFreeShape(LVGShapeCollection *shape)
+{
+    lvgFreeShape_internal(shape);
+    free(shape);
+}
+
+void lvgFreeClip(LVGMovieClip *clip)
 {
     int i, j;
     if (!clip)
         return;
     for (i = 0; i < clip->num_shapes; i++)
     {
-        LVGShapeCollection *shape = clip->shapes + i;
-        for (j = 0; j < shape->num_shapes; j++)
-            lvgFreeShape(shape->shapes + j);
-        free(shape->shapes);
-        if (shape->morph)
-        {
-            for (j = 0; j < shape->morph->num_shapes; j++)
-                lvgFreeShape(shape->morph->shapes + j);
-            if (shape->morph->shapes)
-                free(shape->morph->shapes);
-            free(shape->morph);
-        }
+        lvgFreeShape_internal(clip->shapes + i);
     }
     for (i = 0; i < clip->num_images; i++)
     {
@@ -1117,7 +943,7 @@ int main(int argc, char **argv)
     }
     for (int i = 0; i < 10; i++)
         lvgDrawClip(g_clip);
-    lvgCloseClip(g_clip);
+    lvgFreeClip(g_clip);
     lvgZipClose(&g_zip);
     return 0;
 #else
@@ -1188,7 +1014,7 @@ int main(int argc, char **argv)
 
     g_audio_render->release(g_audio_render_obj);
     if (g_clip)
-        lvgCloseClip(g_clip);
+        lvgFreeClip(g_clip);
     g_render->release(g_render_obj);
     lvgZipClose(&g_zip);
     g_platform->release(g_platform_obj);

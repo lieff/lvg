@@ -18,7 +18,6 @@ configure_file(input : 'config.h.in', output : 'config.h', configuration : conf)
 sources = [
     'src/lunzip.c',
     'src/lvg.c',
-    'src/svgb.c',
     'audio/audio_null.c',
     'render/common.c',
     'render/render_null.c',

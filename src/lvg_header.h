@@ -22,7 +22,7 @@ typedef struct LVGColorf
     union {
         float rgba[4];
         struct {
-            float r,g,b,a;
+            float r, g, b, a;
         };
     };
 } LVGColorf;
@@ -214,14 +214,23 @@ char *lvgGetFileContents(const char *fname, uint32_t *size);
 void lvgFree(void *buf);
 void lvgTranslate(float x, float y);
 void lvgScale(float x, float y);
+/* Image */
+int lvgLoadImage(const char *file);
+int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size);
+void lvgFreeImage(int image);
+/* Video */
+LVGVideo *lvgLoadVideo(const char *file);
+int lvgVideoGetNextFrame(LVGVideo *video);
+void lvgFreeVideo(LVGVideo *video);
 /* SVG */
-LVGShapeCollection *lvgLoadSVG(const char *file);
-void lvgDrawSVG(LVGShapeCollection *svg);
-void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds);
+LVGShapeCollection *lvgLoadShape(const char *file);
+void lvgDrawShape(LVGShapeCollection *svg);
+void lvgGetShapeBounds(LVGShapeCollection *svg, double *bounds);
+void lvgFreeShape(LVGShapeCollection *svg);
 /* SWF */
-LVGMovieClip *lvgLoadSWF(const char *file);
 LVGMovieClip *lvgLoadClip(const char *file);
 void lvgDrawClip(LVGMovieClip *clip);
+void lvgFreeClip(LVGMovieClip *clip);
 /* Audio */
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
 short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
@@ -234,17 +243,6 @@ void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);
 
 extern LVGColorf g_bgColor;
-#ifdef __TINYC__
-extern int winWidth;
-extern int winHeight;
-extern int width;
-extern int height;
-extern int mkeys;
-extern int last_mkeys;
-extern double mx;
-extern double my;
-extern double g_time;
-#endif
 
 void *malloc(size_t);
 void *calloc(size_t, size_t);

@@ -1795,7 +1795,7 @@ LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
     return clip;
 }
 
-LVGMovieClip *lvgLoadSWF(const char *file)
+LVGMovieClip *lvgLoadClip(const char *file)
 {
     char *b;
     uint32_t file_size;

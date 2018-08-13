@@ -1,5 +1,5 @@
 
-SRC="nanovg/nanovg.c src/lvg.c src/svgb.c src/lunzip.c \
+SRC="nanovg/nanovg.c src/lvg.c src/lunzip.c \
 audio/*.c \
 render/*.c \
 platform/*.c \
