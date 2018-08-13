@@ -782,6 +782,8 @@ void lvgFreeClip(LVGMovieClip *clip)
         free(clip->videos);
     if (clip->buttons)
         free(clip->buttons);
+    if (clip->groupstates)
+        free(clip->groupstates);
     free(clip);
 }
 

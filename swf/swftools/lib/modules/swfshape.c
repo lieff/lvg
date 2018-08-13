@@ -342,8 +342,10 @@ int parseFillStyleArray(TAG *tag, SHAPE2 *shape)
             if (fill)
             {
                 FILLSTYLE f;
+                memset(&f, 0, sizeof(f));
                 parseFillStyle(&f, tag, num);
                 shape->linestyles[t].color = f.color;
+                swf_FreeGradient(&f.gradient);
             } else
             {
                 if (num >= 3)
