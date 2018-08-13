@@ -3,3 +3,10 @@ glfw
 SDL
 video/ffmpeg/FFmpeg
 upx-3.94-amd64_linux
+lvg
+lvg.map
+lvg_macos
+lvg_win.exe
+lvg_player.html
+lvg_player.js
+lvg_player.wasm
