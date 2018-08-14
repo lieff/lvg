@@ -1,21 +1,26 @@
 
 LVGShapeCollection *g_image;
+int width;
+int height;
 
 void onInit()
 {
-    g_image = lvgLoadShape("main.svg");
+    g_image = lvgShapeLoad("main.svg");
+    double bounds[4];
+    lvgShapeGetBounds(g_image, bounds);
+    width = (bounds[1] - bounds[0]);
+    height = (bounds[3] - bounds[2]);
 }
 
 void onFrame()
 {
+    lvgViewport(width, height);
     platform_params *p = lvgGetParams();
     float scale = 1.0 + sin(p->time);
     if (p->mkeys)
     {
-        double bounds[4];
-        lvgGetShapeBounds(g_image, bounds);
-        lvgScale(p->mx/(bounds[1] - bounds[0]), p->my/(bounds[3] - bounds[2]));
+        lvgScale(p->mx/width, p->my/height);
     } else
         lvgScale(scale, scale);
-    lvgDrawShape(g_image);
+    lvgShapeDraw(g_image);
 }
