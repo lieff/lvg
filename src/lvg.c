@@ -122,7 +122,7 @@ void lvgViewport(int width, int heigth)
     g_render->begin_frame(g_render_obj, width, heigth, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
 }
 
-int lvgLoadImage(const char *file)
+int lvgImageLoad(const char *file)
 {
     char *buf;
     uint32_t size;
@@ -131,12 +131,12 @@ int lvgLoadImage(const char *file)
         printf("error: could not open file: %s\n", file);
         return 0;
     }
-    int image = lvgLoadImageBuf((unsigned char *)buf, size);
+    int image = lvgImageLoadBuf((unsigned char *)buf, size);
     free(buf);
     return image;
 }
 
-int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size)
+int lvgImageLoadBuf(const unsigned char *buf, uint32_t buf_size)
 {
     int w, h, n;
     unsigned char *img = stbi_load_from_memory(buf, buf_size, &w, &h, &n, 4);
@@ -145,12 +145,12 @@ int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size)
     return image;
 }
 
-void lvgFreeImage(int image)
+void lvgImageFree(int image)
 {
     g_render->free_image(g_render_obj, image);
 }
 
-LVGShapeCollection *lvgLoadShape(const char *file)
+LVGShapeCollection *lvgShapeLoad(const char *file)
 {
     char *buf;
     double time = g_platform->get_time(g_platform_obj);
@@ -212,7 +212,7 @@ LVGShapeCollection *lvgLoadShape(const char *file)
     return col;
 }
 
-void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds)
+void lvgShapeGetBounds(LVGShapeCollection *col, double *bounds)
 {   // picoc do not support floats - convert to doubles
     bounds[0] = col->bounds[0];
     bounds[1] = col->bounds[1];
@@ -220,14 +220,93 @@ void lvgGetShapeBounds(LVGShapeCollection *col, double *bounds)
     bounds[3] = col->bounds[3];
 }
 
-static void lvgDrawShapeCol(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
+static void lvgShapeDrawCol(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
     g_render->render_shape(g_render_obj, shapecol, cxform, ratio, blend_mode);
 }
 
-void lvgDrawShape(LVGShapeCollection *svg)
+void lvgShapeDraw(LVGShapeCollection *svg)
 {
-    lvgDrawShapeCol(svg, 0, 0.0f, BLEND_REPLACE);
+    lvgShapeDrawCol(svg, 0, 0.0f, BLEND_REPLACE);
+}
+
+int lvgVideoDecodeToFrame(LVGVideo *video, int frame)
+{
+#if ENABLE_VIDEO && VIDEO_FFMPEG
+    if ((!frame || frame != video->cur_frame) && frame < video->num_frames)
+    {
+        if (!video->vdec)
+            ff_decoder.init(&video->vdec, video->codec);
+        video_frame out;
+        out.planes[0] = NULL;
+        if (!frame)
+            video->cur_frame = -1;
+        for (;video->cur_frame < frame;)
+        {
+            video->cur_frame++;
+            LVGVideoFrame *frame = video->frames + video->cur_frame;
+            ff_decoder.decode(video->vdec, frame->data, frame->len, &out);
+        };
+        if (out.planes[0])
+        {
+            assert(video->width <= out.width && video->height <= out.height);
+            uint8_t *img = malloc(video->width*video->height*4);
+            uint8_t *pimg = img;
+            uint8_t *rowu = alloca(video->width + 32);
+            uint8_t *rowv = alloca(video->width + 32);
+            uint8_t *py = out.planes[0];
+            uint8_t *pu = out.planes[1];
+            uint8_t *pv = out.planes[2];
+            for(int y = 0; y < video->height/2; y++)
+            {
+#if defined(__x86_64__) || defined(_M_X64)
+#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2_simd
+#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_simd
+#else
+#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2
+#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_row
+#endif
+                stbi__resample_row_hv_2_x(rowu, pu, pu, video->width/2, 0);
+                stbi__resample_row_hv_2_x(rowv, pv, pv, video->width/2, 0);
+                stbi__YCbCr_to_RGB_row_x(pimg, py, rowu, rowv, video->width, 4);
+                pimg += video->width*4;
+                int last = (y == (video->height/2 - 1));
+                stbi__resample_row_hv_2_x(rowu, pu, pu + (last ? 0 : out.stride[1]), video->width/2, 0);
+                stbi__resample_row_hv_2_x(rowv, pv, pv + (last ? 0 : out.stride[2]), video->width/2, 0);
+                stbi__YCbCr_to_RGB_row_x(pimg, py + out.stride[0], rowu, rowv, video->width, 4);
+                pimg += video->width*4;
+                py += out.stride[0]*2;
+                pu += out.stride[1];
+                pv += out.stride[2];
+            }
+            g_render->update_image(g_render_obj, video->image, img);
+            free(img);
+        }
+    }
+#endif
+    return video->image;
+}
+
+static void lvgVideoFree_internal(LVGVideo *video)
+{
+    int i;
+    for (i = 0; i < video->num_frames; i++)
+    {
+        if (video->frames[i].data)
+            free(video->frames[i].data);
+    }
+    if (video->frames)
+        free(video->frames);
+    if (video->image)
+        g_render->free_image(g_render_obj, video->image);
+    if (video->vdec)
+        ff_decoder.release(video->vdec);
+}
+
+void lvgVideoFree(LVGVideo *video)
+{
+    lvgVideoFree_internal(video);
+    free(video);
 }
 
 static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxform, double alpha)
@@ -236,7 +315,7 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
     newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3]*alpha;
 }
 
-static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, double r, int next_frame, int blend_mode)
+static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, double r, int next_frame, int blend_mode)
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
@@ -380,7 +459,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawShapeCol(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
+            lvgShapeDrawCol(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
@@ -389,65 +468,14 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         if (LVG_OBJ_VIDEO == o->type && visible)
         {
             LVGVideo *video = &clip->videos[o->id];
-#if ENABLE_VIDEO && VIDEO_FFMPEG
-            if ((!o->ratio || o->ratio != video->cur_frame) && o->ratio < video->num_frames)
-            {
-                if (!video->vdec)
-                    ff_decoder.init(&video->vdec, video->codec);
-                video_frame out;
-                out.planes[0] = NULL;
-                if (!o->ratio)
-                    video->cur_frame = -1;
-                for (;video->cur_frame < o->ratio;)
-                {
-                    video->cur_frame++;
-                    LVGVideoFrame *frame = video->frames + video->cur_frame;
-                    ff_decoder.decode(video->vdec, frame->data, frame->len, &out);
-                };
-                if (out.planes[0])
-                {
-                    assert(video->width <= out.width && video->height <= out.height);
-                    uint8_t *img = malloc(video->width*video->height*4);
-                    uint8_t *pimg = img;
-                    uint8_t *rowu = alloca(video->width + 32);
-                    uint8_t *rowv = alloca(video->width + 32);
-                    uint8_t *py = out.planes[0];
-                    uint8_t *pu = out.planes[1];
-                    uint8_t *pv = out.planes[2];
-                    for(int y = 0; y < video->height/2; y++)
-                    {
-#if defined(__x86_64__) || defined(_M_X64)
-#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2_simd
-#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_simd
-#else
-#define stbi__resample_row_hv_2_x stbi__resample_row_hv_2
-#define stbi__YCbCr_to_RGB_row_x stbi__YCbCr_to_RGB_row
-#endif
-                        stbi__resample_row_hv_2_x(rowu, pu, pu, video->width/2, 0);
-                        stbi__resample_row_hv_2_x(rowv, pv, pv, video->width/2, 0);
-                        stbi__YCbCr_to_RGB_row_x(pimg, py, rowu, rowv, video->width, 4);
-                        pimg += video->width*4;
-                        int last = (y == (video->height/2 - 1));
-                        stbi__resample_row_hv_2_x(rowu, pu, pu + (last ? 0 : out.stride[1]), video->width/2, 0);
-                        stbi__resample_row_hv_2_x(rowv, pv, pv + (last ? 0 : out.stride[2]), video->width/2, 0);
-                        stbi__YCbCr_to_RGB_row_x(pimg, py + out.stride[0], rowu, rowv, video->width, 4);
-                        pimg += video->width*4;
-                        py += out.stride[0]*2;
-                        pu += out.stride[1];
-                        pv += out.stride[2];
-                    }
-                    g_render->update_image(g_render_obj, video->image, img);
-                    free(img);
-                }
-            }
-#endif
+            lvgVideoDecodeToFrame(video, o->ratio);
             g_render->render_image(g_render_obj, video->image);
         } else
         if (LVG_OBJ_GROUP == o->type)
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgDrawClipGroup(clip, clip->groupstates + o->id, &newcxform, r, next_frame, o->blend_mode);
+            lvgClipDrawGroup(clip, clip->groupstates + o->id, &newcxform, r, next_frame, o->blend_mode);
             THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
@@ -542,7 +570,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     LVGColorTransform newcxform = *cxform;
                     combine_cxform(&newcxform, &o->cxform, 1.0);
                     combine_cxform(&newcxform, &bs->obj.cxform, alpha*btn_alpha);
-                    lvgDrawShapeCol(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
+                    lvgShapeDrawCol(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
                     g_render->set_transform(g_render_obj, save_t, 1);
                 }
         } else
@@ -576,7 +604,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     combine_cxform(&newcxform, &o->cxform, alpha);
                     for (int l = 0; l < shapecol->num_shapes; l++)
                         shapecol->shapes[l].fill.color = str->color;
-                    lvgDrawShapeCol(shapecol, &newcxform, 0.0f, blend_mode);
+                    lvgShapeDrawCol(shapecol, &newcxform, 0.0f, blend_mode);
                     float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, c->x_advance/20.0f/scale, 0.0f };
                     g_render->set_transform(g_render_obj, t, 0);
                 }
@@ -617,7 +645,7 @@ static void lvgDrawClipGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     }
 }*/
 
-void lvgDrawClip(LVGMovieClip *clip)
+void lvgClipDraw(LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
@@ -640,7 +668,7 @@ void lvgDrawClip(LVGMovieClip *clip)
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
     //printf_frames(clip, clip->groupstates); printf("\n"); fflush(stdout);
-    lvgDrawClipGroup(clip, clip->groupstates, &startcxform, r, next_frame, BLEND_REPLACE);
+    lvgClipDrawGroup(clip, clip->groupstates, &startcxform, r, next_frame, BLEND_REPLACE);
 }
 
 static void deletePaint(NSVGpaint* paint)
@@ -667,7 +695,7 @@ static void lvgFreeNSVGShape(NSVGshape *shape)
     deletePaint(&shape->stroke);
 }
 
-static void lvgFreeShape_internal(LVGShapeCollection *shape)
+static void lvgShapeFree_internal(LVGShapeCollection *shape)
 {
     int i;
     for (i = 0; i < shape->num_shapes; i++)
@@ -683,20 +711,20 @@ static void lvgFreeShape_internal(LVGShapeCollection *shape)
     }
 }
 
-void lvgFreeShape(LVGShapeCollection *shape)
+void lvgShapeFree(LVGShapeCollection *shape)
 {
-    lvgFreeShape_internal(shape);
+    lvgShapeFree_internal(shape);
     free(shape);
 }
 
-void lvgFreeClip(LVGMovieClip *clip)
+void lvgClipFree(LVGMovieClip *clip)
 {
     int i, j;
     if (!clip)
         return;
     for (i = 0; i < clip->num_shapes; i++)
     {
-        lvgFreeShape_internal(clip->shapes + i);
+        lvgShapeFree_internal(clip->shapes + i);
     }
     for (i = 0; i < clip->num_images; i++)
     {
@@ -766,18 +794,7 @@ void lvgFreeClip(LVGMovieClip *clip)
     }
     for (i = 0; i < clip->num_videos; i++)
     {
-        LVGVideo *video = clip->videos + i;
-        for (j = 0; j < video->num_frames; j++)
-        {
-            if (video->frames[j].data)
-                free(video->frames[j].data);
-        }
-        if (video->frames)
-            free(video->frames);
-        if (video->image)
-            g_render->free_image(g_render_obj, video->image);
-        if (video->vdec)
-            ff_decoder.release(video->vdec);
+        lvgVideoFree_internal(clip->videos + i);
     }
     for (i = 0; i < clip->num_buttons; i++)
     {
@@ -874,7 +891,7 @@ change_fullscreen:
     if (g_clip)
     {
         g_render->begin_frame(g_render_obj, g_clip->bounds[2] - g_clip->bounds[0], g_clip->bounds[3] - g_clip->bounds[1], g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
-        lvgDrawClip(g_clip);
+        lvgClipDraw(g_clip);
     } else
     {
         g_render->begin_frame(g_render_obj, 800, 600, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
@@ -909,7 +926,7 @@ int open_lvg(const char *file_name)
             SCRIPT_ENGINE.run_function(g_script, "onInit");
         return ret;
 #endif
-    } else if ((g_clip = lvgLoadSWFBuf(map, size, 0)))
+    } else if ((g_clip = lvgClipLoadBuf(map, size, 0)))
     {
         munmap(map, size);
         if (!g_clip)
@@ -977,8 +994,8 @@ int main(int argc, char **argv)
         return -1;
     }
     for (int i = 0; i < 10; i++)
-        lvgDrawClip(g_clip);
-    lvgFreeClip(g_clip);
+        lvgClipDraw(g_clip);
+    lvgClipFree(g_clip);
     lvgZipClose(&g_zip);
     return 0;
 #else
@@ -1049,7 +1066,7 @@ int main(int argc, char **argv)
 
     g_audio_render->release(g_audio_render_obj);
     if (g_clip)
-        lvgFreeClip(g_clip);
+        lvgClipFree(g_clip);
     g_render->release(g_render_obj);
     lvgZipClose(&g_zip);
     g_platform->release(g_platform_obj);

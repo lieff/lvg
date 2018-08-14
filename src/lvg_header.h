@@ -208,6 +208,10 @@ typedef struct LVGMovieClip
     double last_time;
 } LVGMovieClip;
 
+typedef struct LVGShader
+{
+} LVGShader;
+
 /* LVG API */
 platform_params *lvgGetParams();
 char *lvgGetFileContents(const char *fname, uint32_t *size);
@@ -216,22 +220,29 @@ void lvgTranslate(float x, float y);
 void lvgScale(float x, float y);
 void lvgViewport(int width, int heigth);
 /* Image */
-int lvgLoadImage(const char *file);
-int lvgLoadImageBuf(const unsigned char *buf, uint32_t buf_size);
-void lvgFreeImage(int image);
+int lvgImageLoad(const char *file);
+int lvgImageLoadBuf(const unsigned char *buf, uint32_t buf_size);
+void lvgImageFree(int image);
 /* Video */
-LVGVideo *lvgLoadVideo(const char *file);
-int lvgVideoGetNextFrame(LVGVideo *video);
-void lvgFreeVideo(LVGVideo *video);
+LVGVideo *lvgVideoLoad(const char *file);
+int lvgVideoDecodeToFrame(LVGVideo *video, int frame);
+void lvgVideoFree(LVGVideo *video);
+/* Shader */
+LVGShader *lvgShaderLoadJSON(const char *file);
+LVGShader *lvgShaderLoadSPIRV(const char *file);
+void lvgShaderTraget(LVGShader *shader, int fbo_tex);
+void lvgShaderRun(LVGShader *shader, float x1, float y1, float x2, float y2);
+int lvgShaderCompile(const char *ps, const char *vs);
 /* SVG */
-LVGShapeCollection *lvgLoadShape(const char *file);
-void lvgDrawShape(LVGShapeCollection *svg);
-void lvgGetShapeBounds(LVGShapeCollection *svg, double *bounds);
-void lvgFreeShape(LVGShapeCollection *svg);
+LVGShapeCollection *lvgShapeLoad(const char *file);
+void lvgShapeDraw(LVGShapeCollection *svg);
+void lvgShapeGetBounds(LVGShapeCollection *svg, double *bounds);
+void lvgShapeFree(LVGShapeCollection *svg);
 /* SWF */
-LVGMovieClip *lvgLoadClip(const char *file);
-void lvgDrawClip(LVGMovieClip *clip);
-void lvgFreeClip(LVGMovieClip *clip);
+LVGMovieClip *lvgClipLoad(const char *file);
+LVGMovieClip *lvgClipLoadBuf(char *b, size_t file_size, int free_buf);
+void lvgClipDraw(LVGMovieClip *clip);
+void lvgClipFree(LVGMovieClip *clip);
 /* Audio */
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
 short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);

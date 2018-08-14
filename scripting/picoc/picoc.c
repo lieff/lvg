@@ -487,76 +487,76 @@ static void lib_lvgViewport(struct ParseState *Parser, struct Value *ReturnValue
 }
 
 /* Image */
-static void lib_lvgLoadImage(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgImageLoad(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Integer = lvgLoadImage(Ptr(0));
+    ReturnValue->Val->Integer = lvgImageLoad(Ptr(0));
 }
 
-static void lib_lvgLoadImageBuf(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgImageLoadBuf(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    ReturnValue->Val->Integer = lvgLoadImageBuf(Ptr(0), Int(1));
+    ReturnValue->Val->Integer = lvgImageLoadBuf(Ptr(0), Int(1));
 }
 
-static void lib_lvgFreeImage(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgImageFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgFreeImage(Int(0));
+    lvgImageFree(Int(0));
 }
 
 /* SVG */
-static void lib_lvgLoadShape(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgShapeLoad(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgLoadShape(Ptr(0));
+    ReturnValue->Val->Pointer = lvgShapeLoad(Ptr(0));
 }
 
-static void lib_lvgDrawShape(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgShapeDraw(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgDrawShape(Ptr(0));
+    lvgShapeDraw(Ptr(0));
 }
 
-static void lib_lvgGetShapeBounds(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgShapeGetBounds(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    lvgGetShapeBounds(Ptr(0), Ptr(1));
+    lvgShapeGetBounds(Ptr(0), Ptr(1));
 }
 
-static void lib_lvgFreeShape(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgShapeFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgFreeShape(Ptr(0));
+    lvgShapeFree(Ptr(0));
 }
 
 /* SWF */
-static void lib_lvgLoadClip(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgClipLoad(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgLoadClip(Ptr(0));
+    ReturnValue->Val->Pointer = lvgClipLoad(Ptr(0));
 }
 
-static void lib_lvgDrawClip(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgClipDraw(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgDrawClip(Ptr(0));
+    lvgClipDraw(Ptr(0));
 }
 
-static void lib_lvgFreeClip(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+static void lib_lvgClipFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgFreeClip(Ptr(0));
+    lvgClipFree(Ptr(0));
 }
 
 /* Audio */
@@ -639,18 +639,18 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_lvgScale, "void lvgScale(float x, float y);" },
     { lib_lvgViewport, "void lvgViewport(int w, int h);" },
     /* Image */
-    { lib_lvgLoadImage, "int lvgLoadImage(char *file);" },
-    { lib_lvgLoadImageBuf, "int lvgLoadImageBuf(unsigned char *buf, int buf_size);" },
-    { lib_lvgFreeImage, "void lvgFreeImage(int image);" },
+    { lib_lvgImageLoad, "int lvgImageLoad(char *file);" },
+    { lib_lvgImageLoadBuf, "int lvgImageLoadBuf(unsigned char *buf, int buf_size);" },
+    { lib_lvgImageFree, "void lvgImageFree(int image);" },
     /* SVG */
-    { lib_lvgLoadShape, "LVGShapeCollection *lvgLoadShape(char *file);" },
-    { lib_lvgDrawShape, "void lvgDrawShape(LVGShapeCollection *svg);" },
-    { lib_lvgGetShapeBounds, "void lvgGetShapeBounds(LVGShapeCollection *svg, double *bounds);" },
-    { lib_lvgFreeShape, "void lvgFreeShape(LVGShapeCollection *svg);" },
+    { lib_lvgShapeLoad, "LVGShapeCollection *lvgShapeLoad(char *file);" },
+    { lib_lvgShapeDraw, "void lvgShapeDraw(LVGShapeCollection *svg);" },
+    { lib_lvgShapeGetBounds, "void lvgShapeGetBounds(LVGShapeCollection *svg, double *bounds);" },
+    { lib_lvgShapeFree, "void lvgShapeFree(LVGShapeCollection *svg);" },
     /* SWF */
-    { lib_lvgLoadClip, "LVGMovieClip *lvgLoadClip(char *file);" },
-    { lib_lvgDrawClip, "void lvgDrawClip(LVGMovieClip *clip);" },
-    { lib_lvgFreeClip, "void lvgFreeClip(LVGMovieClip *clip);" },
+    { lib_lvgClipLoad, "LVGMovieClip *lvgClipLoad(char *file);" },
+    { lib_lvgClipDraw, "void lvgClipDraw(LVGMovieClip *clip);" },
+    { lib_lvgClipFree, "void lvgClipFree(LVGMovieClip *clip);" },
     /* Audio */
     { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
     { lib_lvgPlaySound, "void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);" },

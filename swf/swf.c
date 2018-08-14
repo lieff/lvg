@@ -1756,7 +1756,7 @@ done:
     return clip;
 }
 
-LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
+LVGMovieClip *lvgClipLoadBuf(char *b, size_t file_size, int free_buf)
 {
     SWF swf;
     if ((b[0] != 'F' && b[0] != 'C') || b[1] != 'W' || b[2] != 'S')
@@ -1795,7 +1795,7 @@ LVGMovieClip *lvgLoadSWFBuf(char *b, size_t file_size, int free_buf)
     return clip;
 }
 
-LVGMovieClip *lvgLoadClip(const char *file)
+LVGMovieClip *lvgClipLoad(const char *file)
 {
     char *b;
     uint32_t file_size;
@@ -1804,5 +1804,5 @@ LVGMovieClip *lvgLoadClip(const char *file)
         printf("error: could not open swf.\n");
         return 0;
     }
-    return lvgLoadSWFBuf(b, file_size, 1);
+    return lvgClipLoadBuf(b, file_size, 1);
 }
