@@ -508,6 +508,23 @@ static void lib_lvgImageFree(struct ParseState *Parser, struct Value *ReturnValu
     lvgImageFree(Int(0));
 }
 
+/* Video */
+static void lib_lvgVideoDecodeToFrame(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (2 != NumArgs)
+        return;
+    ReturnValue->Val->Integer = lvgVideoDecodeToFrame(Ptr(0), Int(1));
+}
+
+static void lib_lvgVideoFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    lvgVideoFree(Ptr(0));
+}
+
+/* Shader */
+
 /* SVG */
 static void lib_lvgShapeLoad(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
@@ -642,6 +659,10 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_lvgImageLoad, "int lvgImageLoad(char *file);" },
     { lib_lvgImageLoadBuf, "int lvgImageLoadBuf(unsigned char *buf, int buf_size);" },
     { lib_lvgImageFree, "void lvgImageFree(int image);" },
+    /* Video */
+    { lib_lvgVideoDecodeToFrame, "int lvgVideoDecodeToFrame(LVGVideo *video, int frame);" },
+    { lib_lvgVideoFree, "void lvgVideoFree(LVGVideo *video);" },
+    /* Shader */
     /* SVG */
     { lib_lvgShapeLoad, "LVGShapeCollection *lvgShapeLoad(char *file);" },
     { lib_lvgShapeDraw, "void lvgShapeDraw(LVGShapeCollection *svg);" },
