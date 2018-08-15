@@ -30,6 +30,10 @@ typedef long GLsizeiptr;\
 #define GL_FALSE 0\n\
 #define GL_TRUE 1\n\
 \
+#define GL_DEPTH_BUFFER_BIT 0x00000100\n\
+#define GL_STENCIL_BUFFER_BIT 0x00000400\n\
+#define GL_COLOR_BUFFER_BIT 0x00004000\n\
+\
 #define GL_FRAGMENT_SHADER  0x8B30\n\
 #define GL_VERTEX_SHADER    0x8B31\n\
 #define GL_COMPILE_STATUS   0x8B81\n\
@@ -89,6 +93,7 @@ typedef struct platform_params\
 } platform_params;\
 typedef struct LVGShapeCollection LVGShapeCollection;\
 typedef struct LVGMovieClip LVGMovieClip;\
+typedef struct LVGVideo LVGVideo;\
 typedef struct LVGSound\
 {\
     short *samples;\
@@ -443,6 +448,20 @@ static void lib_glEnd(struct ParseState *Parser, struct Value *ReturnValue, stru
     glEnd();
 }
 
+static void lib_glClearColor(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (4 != NumArgs)
+        return;
+    glClearColor(Float(0), Float(1), Float(2), Float(3));
+}
+
+static void lib_glClear(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    glClear(Int(0));
+}
+
 /* LVG API */
 static void lib_lvgGetParams(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
@@ -643,6 +662,8 @@ static const struct LibraryFunction g_lvgLib[] =
     { lib_glVertex2f, "void glVertex2f(GLfloat x, GLfloat y);" },
     { lib_glBegin, "void glBegin(GLenum mode);" },
     { lib_glEnd, "void glEnd();" },
+    { lib_glClearColor, "void glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);" },
+    { lib_glClear, "void glClear(GLbitfield mask);" },
 #ifdef USE_GL3
     { lib_glGenVertexArrays, "void glGenVertexArrays();" },
     { lib_glBindVertexArray, "void glBindVertexArray();" },
