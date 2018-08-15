@@ -4,8 +4,6 @@
 #include <assert.h>
 #include <time.h>
 #include <sys/stat.h>
-#include <libgen.h>
-#include <unistd.h>
 #include <errno.h>
 #include "glad.h"
 #include "jfes/jfes.h"
