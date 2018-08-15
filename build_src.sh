@@ -2,6 +2,7 @@
 SRC="nanovg/nanovg.c src/lvg.c src/lunzip.c \
 audio/*.c \
 render/*.c \
+render/jfes/*.c \
 platform/*.c \
 scripting/picoc/*.c -DUNIX_HOST \
 scripting/picoc/cstdlib/*.c \
