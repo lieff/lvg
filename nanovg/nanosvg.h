@@ -1777,6 +1777,12 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
 	} else if (strcmp(name, "id") == 0) {
 		strncpy(attr->id, value, 63);
 		attr->id[63] = '\0';
+	} else if (strcmp(name, "x") == 0) {
+		nsvg__xformSetTranslation(xform, (float)nsvg__atof(value), 0);
+		nsvg__xformPremultiply(attr->xform, xform);
+	} else if (strcmp(name, "y") == 0) {
+		nsvg__xformSetTranslation(xform, 0, (float)nsvg__atof(value));
+		nsvg__xformPremultiply(attr->xform, xform);
 	} else {
 		return 0;
 	}
@@ -2701,6 +2707,7 @@ static void nsvg__startElement(void* ud, const char* el, const char** attr)
 	} else if (strcmp(el, "defs") == 0) {
 		p->defsFlag = 1;
 	} else if (strcmp(el, "svg") == 0) {
+		nsvg__pushAttr(p);
 		nsvg__parseSVG(p, attr);
 	}
 }
@@ -2715,7 +2722,9 @@ static void nsvg__endElement(void* ud, const char* el)
 		p->pathFlag = 0;
 	} else if (strcmp(el, "defs") == 0) {
 		p->defsFlag = 0;
-	}
+	} else if (strcmp(el, "svg") == 0) {
+		nsvg__popAttr(p);
+    }
 }
 
 static void nsvg__content(void* ud, const char* s)
