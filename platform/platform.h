@@ -19,6 +19,7 @@ typedef struct platform
     void (*release)(void *ctx);
     void (*pull_events)(void *ctx);
     void (*main_loop)(void *ctx);
+    void (*set_exit)(void *ctx);
     void (*swap_buffers)(void *ctx);
     void (*fullscreen)(void *ctx, int b_fullscreen);
     double (*get_time)(void *ctx);

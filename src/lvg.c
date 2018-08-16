@@ -896,7 +896,8 @@ change_fullscreen:
     {
         g_render->begin_frame(g_render_obj, 800, 600, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
         if (g_script)
-            SCRIPT_ENGINE.run_function(g_script, "onFrame");
+            if (SCRIPT_ENGINE.run_function(g_script, "onFrame"))
+                g_platform->set_exit(g_platform_obj);
     }
 
     g_render->end_frame(g_render_obj);
@@ -921,10 +922,12 @@ int open_lvg(const char *file_name)
         }
 #endif
 #if ENABLE_SCRIPT
-        int ret = SCRIPT_ENGINE.init(&g_script, "main.c");
-        if (g_script)
-            SCRIPT_ENGINE.run_function(g_script, "onInit");
-        return ret;
+        if (!SCRIPT_ENGINE.init(&g_script, "main.c"))
+        {
+            if (g_script)
+                if (!SCRIPT_ENGINE.run_function(g_script, "onInit"))
+                    return 0;
+        }
 #endif
     } else if ((g_clip = lvgClipLoadBuf(map, size, 0)))
     {

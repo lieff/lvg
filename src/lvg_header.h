@@ -210,6 +210,8 @@ typedef struct LVGMovieClip
 
 typedef struct LVGShader
 {
+    void *shaders;
+    int num_shaders;
 } LVGShader;
 
 /* LVG API */

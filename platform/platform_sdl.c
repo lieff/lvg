@@ -156,6 +156,12 @@ static void sdl_main_loop(void *ctx)
 #endif
 }
 
+static void sdl_set_exit(void *ctx)
+{
+    platform_ctx *platform = (platform_ctx *)ctx;
+    platform->done = 1;
+}
+
 static void sdl_swap_buffers(void *ctx)
 {
     platform_ctx *platform = (platform_ctx *)ctx;
@@ -263,6 +269,7 @@ const platform sdl_platform =
 #if PLATFORM_SDL
     sdl_pull_events,
     sdl_main_loop,
+    sdl_set_exit,
     sdl_swap_buffers,
     sdl_fullscreen,
     sdl_get_time,
@@ -270,7 +277,7 @@ const platform sdl_platform =
     sdl_get_proc_address,
     sdl_extension_supported
 #else
-    0, 0, 0, 0, 0, 0, 0, 0
+    0, 0, 0, 0, 0, 0, 0, 0, 0
 #endif
 };
 #endif
