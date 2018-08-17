@@ -78,30 +78,6 @@ void PlatformPutc(unsigned char OutCh, union OutputStreamInfo *Stream)
     putchar(OutCh);
 }
 
-#include <stdint.h>
-char *lvgGetFileContents(const char *fname, uint32_t *size);
-
-/* read a file into memory */
-char *PlatformReadFile(Picoc *pc, const char *FileName)
-{
-    char *buf;
-    if (!(buf = lvgGetFileContents(FileName, 0)))
-    {
-        printf("error: could not open \"%s\".\n", FileName);
-        return 0;
-    }
-    return buf;
-}
-
-/* read and scan a file for definitions */
-void PicocPlatformScanFile(Picoc *pc, const char *FileName)
-{
-    char *SourceStr = PlatformReadFile(pc, FileName);
-    if (!SourceStr)
-        return;
-    PicocParse(pc, FileName, SourceStr, strlen(SourceStr), TRUE, FALSE, TRUE, TRUE);
-}
-
 /* exit the program */
 void PlatformExit(Picoc *pc, int RetVal)
 {

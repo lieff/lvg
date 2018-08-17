@@ -423,10 +423,10 @@ void handle_frame_change(LVGActionCtx *ctx, LVGMovieClipGroupState *groupstate)
             int start_sample = rate*time;
             if (start_sample >= sound->num_samples)
                 return;
-            lvgPlaySound(sound, PLAY_SyncStop, 0, 0, 0);
+            lvgPlaySound(ctx->e, sound, PLAY_SyncStop, 0, 0, 0);
             if (LVG_STOPPED == groupstate->play_state)
                 return;
-            lvgPlaySound(sound, 0, start_sample, sound->num_samples, 0);
+            lvgPlaySound(ctx->e, sound, 0, start_sample, sound->num_samples, 0);
             return;
         }
     }
@@ -467,7 +467,7 @@ static void action_quality(LVGActionCtx *ctx, uint8_t *a)
 
 static void action_stop_sounds(LVGActionCtx *ctx, uint8_t *a)
 {
-    lvgStopAudio();
+    lvgStopAudio(ctx->e);
 }
 
 static void action_add(LVGActionCtx *ctx, uint8_t *a)
@@ -841,7 +841,7 @@ static void action_get_time(LVGActionCtx *ctx, uint8_t *a)
 {
     stack_push(ctx);
     ASVal *res = &ctx->stack[ctx->stack_ptr];
-    SET_INT(res, (uint32_t)(g_params.time*1000));
+    SET_INT(res, (uint32_t)(ctx->e->params.time*1000));
 }
 
 static void action_mb_string_extract(LVGActionCtx *ctx, uint8_t *a) { DBG_BREAK; }
@@ -1571,7 +1571,7 @@ static void action_play_lvg_sound(LVGActionCtx *ctx, uint8_t *a)
     int start_sample = *(uint32_t*)(a + 5);
     int end_sample = *(uint32_t*)(a + 9);
     int loops = *(uint16_t*)(a + 13);
-    lvgPlaySound(ctx->clip->sounds + sound, flags, start_sample, end_sample, loops);
+    lvgPlaySound(ctx->e, ctx->clip->sounds + sound, flags, start_sample, end_sample, loops);
 }
 
 typedef struct
@@ -1716,9 +1716,10 @@ static const ActionEntry g_avm1_actions[256] =
     [ACTION_PLAY_LVG_SOUND]    = { action_play_lvg_sound,    DBG("PlayLVGSound", 0,    0, 0) },
 };
 
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip)
+void lvgInitVM(LVGActionCtx *ctx, LVGEngine *e, LVGMovieClip *clip)
 {
     memset(ctx, 0, sizeof(*ctx));
+    ctx->e      = e;
     ctx->clip   = clip;
     ctx->stack_ptr = sizeof(ctx->stack)/sizeof(ctx->stack[0]) - 1;
     ctx->version = clip->as_version;

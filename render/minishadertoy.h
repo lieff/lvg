@@ -54,5 +54,5 @@ typedef struct PLATFORM_PARAMS
     struct tm *tm;
 } PLATFORM_PARAMS;
 
-int load_json(SHADER *shaders, char *buffer, int buf_size);
-void shadertoy_renderpass(SHADER *s, PLATFORM_PARAMS *p);
+//int load_json(LVGEngine *e, SHADER *shaders, char *buffer, int buf_size);
+//void shadertoy_renderpass(SHADER *s, PLATFORM_PARAMS *p);

@@ -1,5 +1,5 @@
 #include <config.h>
-#include <audio/audio.h>
+#include <lvg.h>
 #if ENABLE_AUDIO && !defined(_TEST)
 #include <stddef.h>
 #include <stdlib.h>
@@ -7,12 +7,8 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "lunzip.h"
 #define MINIMP3_IMPLEMENTATION
 #include "mp3/minimp3.h"
-
-extern const audio_render *g_audio_render;
-extern void *g_audio_render_obj;
 
 short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples)
 {
@@ -57,11 +53,11 @@ short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int
     return music_buf;
 }
 
-short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samples)
+short *lvgLoadMP3(LVGEngine *e, const char *file_name, int *rate, int *channels, int *num_samples)
 {
     unsigned char *buf;
     uint32_t music_size;
-    if ((buf = (unsigned char *)lvgGetFileContents(file_name, &music_size)))
+    if ((buf = (unsigned char *)lvgGetFileContents(e, file_name, &music_size)))
     {
         short *ret = lvgLoadMP3Buf(buf, music_size, rate, channels, num_samples);
         free(buf);
@@ -70,14 +66,14 @@ short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samp
     return 0;
 }
 
-void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
+void lvgPlaySound(LVGEngine *e, LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
-    g_audio_render->play(g_audio_render_obj, sound, flags, start_sample, end_sample, loops);
+    e->audio_render->play(e->audio_render_obj, sound, flags, start_sample, end_sample, loops);
 }
 
-void lvgStopAudio()
+void lvgStopAudio(LVGEngine *e)
 {
-    g_audio_render->stop_all(g_audio_render_obj);
+    e->audio_render->stop_all(e->audio_render_obj);
 }
 #else
 short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples)
@@ -86,17 +82,17 @@ short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int
     return 0;
 }
 
-short *lvgLoadMP3(const char *file_name, int *rate, int *channels, int *num_samples)
+short *lvgLoadMP3(LVGEngine *e, const char *file_name, int *rate, int *channels, int *num_samples)
 {
     *num_samples = 0;
     return 0;
 }
 
-void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
+void lvgPlaySound(LVGEngine *e, LVGSound *sound, int flags, int start_sample, int end_sample, int loops)
 {
 }
 
-void lvgStopAudio()
+void lvgStopAudio(LVGEngine *e)
 {
 }
 #endif

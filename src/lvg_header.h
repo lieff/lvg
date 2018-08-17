@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __TINYC__
 #include <stddef.h>
 #include <stdint.h>
@@ -214,21 +215,23 @@ typedef struct LVGShader
     int num_shaders;
 } LVGShader;
 
+typedef struct LVGEngine LVGEngine;
+
 /* LVG API */
-platform_params *lvgGetParams();
-char *lvgGetFileContents(const char *fname, uint32_t *size);
+platform_params *lvgGetParams(LVGEngine *e);
+char *lvgGetFileContents(LVGEngine *e, const char *fname, uint32_t *size);
 void lvgFree(void *buf);
-void lvgTranslate(float x, float y);
-void lvgScale(float x, float y);
-void lvgViewport(int width, int heigth);
+void lvgTranslate(LVGEngine *e, float x, float y);
+void lvgScale(LVGEngine *e, float x, float y);
+void lvgViewport(LVGEngine *e, int width, int heigth);
 /* Image */
-int lvgImageLoad(const char *file);
-int lvgImageLoadBuf(const unsigned char *buf, uint32_t buf_size);
-void lvgImageFree(int image);
+int lvgImageLoad(LVGEngine *e, const char *file);
+int lvgImageLoadBuf(LVGEngine *e, const unsigned char *buf, uint32_t buf_size);
+void lvgImageFree(LVGEngine *e, int image);
 /* Video */
-LVGVideo *lvgVideoLoad(const char *file);
-int lvgVideoDecodeToFrame(LVGVideo *video, int frame);
-void lvgVideoFree(LVGVideo *video);
+LVGVideo *lvgVideoLoad(LVGEngine *e, const char *file);
+int lvgVideoDecodeToFrame(LVGEngine *e, LVGVideo *video, int frame);
+void lvgVideoFree(LVGEngine *e, LVGVideo *video);
 /* Shader */
 LVGShader *lvgShaderLoadJSON(const char *file);
 LVGShader *lvgShaderLoadSPIRV(const char *file);
@@ -236,24 +239,24 @@ void lvgShaderTraget(LVGShader *shader, int fbo_tex);
 void lvgShaderRun(LVGShader *shader, float x1, float y1, float x2, float y2);
 int lvgShaderCompile(const char *ps, const char *vs);
 /* SVG */
-LVGShapeCollection *lvgShapeLoad(const char *file);
-void lvgShapeDraw(LVGShapeCollection *svg);
+LVGShapeCollection *lvgShapeLoad(LVGEngine *e, const char *file);
+void lvgShapeDraw(LVGEngine *e, LVGShapeCollection *svg);
+void lvgShapeFree(LVGEngine *e, LVGShapeCollection *svg);
 void lvgShapeGetBounds(LVGShapeCollection *svg, double *bounds);
-void lvgShapeFree(LVGShapeCollection *svg);
 /* SWF */
-LVGMovieClip *lvgClipLoad(const char *file);
-LVGMovieClip *lvgClipLoadBuf(char *b, size_t file_size, int free_buf);
-void lvgClipDraw(LVGMovieClip *clip);
-void lvgClipFree(LVGMovieClip *clip);
+LVGMovieClip *lvgClipLoad(LVGEngine *e, const char *file);
+LVGMovieClip *lvgClipLoadBuf(LVGEngine *e, char *b, size_t file_size, int free_buf);
+void lvgClipDraw(LVGEngine *e, LVGMovieClip *clip);
+void lvgClipFree(LVGEngine *e, LVGMovieClip *clip);
 /* Audio */
 int lvgStartAudio(int samplerate, int channels, int format, int buffer, int is_capture, void (*callback)(void *userdata, char *stream, int len), void *userdata);
-short *lvgLoadMP3(const char *file, int *rate, int *channels, int *num_samples);
+short *lvgLoadMP3(LVGEngine *e, const char *file_name, int *rate, int *channels, int *num_samples);
 short *lvgLoadMP3Buf(const unsigned char *buf, uint32_t buf_size, int *rate, int *channels, int *nsamples);
-void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);
-void lvgStopAudio();
+void lvgPlaySound(LVGEngine *e, LVGSound *sound, int flags, int start_sample, int end_sample, int loops);
+void lvgStopAudio(LVGEngine *e);
 // action block begins with 32bit size, functions begins with 16bit size
 void lvgExecuteActions(LVGActionCtx *ctx, uint8_t *actions, LVGMovieClipGroupState *groupstate, int is_function);
-void lvgInitVM(LVGActionCtx *ctx, LVGMovieClip *clip);
+void lvgInitVM(LVGActionCtx *ctx, LVGEngine *e, LVGMovieClip *clip);
 void lvgFreeVM(LVGActionCtx *ctx);
 
 extern LVGColorf g_bgColor;

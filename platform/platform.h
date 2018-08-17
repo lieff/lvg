@@ -15,7 +15,7 @@ typedef struct platform_params
 
 typedef struct platform
 {
-    int (*init)(void **ctx, platform_params *params, int audio_only);
+    int (*init)(void **ctx, platform_params *params, void (*onFrame)(void *), void *user, int audio_only);
     void (*release)(void *ctx);
     void (*pull_events)(void *ctx);
     void (*main_loop)(void *ctx);

@@ -10,13 +10,14 @@
 
 typedef void* (* GLADloadproc)(const char *name);
 int gladLoadGLLoader(GLADloadproc);
-void drawframe();
 
 typedef struct platform_ctx
 {
     SDL_Window *window;
     SDL_GLContext context;
     platform_params *params;
+    void (*onFrame)(void *);
+    void *user;
     int winX, winY, defWidth, defHeight, done;
     Uint32 startTime;
     char keys[SDL_NUM_SCANCODES];
@@ -37,7 +38,7 @@ static void sdl_release(void *ctx)
 #endif
 }
 
-static int sdl_init(void **ctx, platform_params *params, int audio_only)
+static int sdl_init(void **ctx, platform_params *params, void (*onFrame)(void *), void *user, int audio_only)
 {
     *ctx = 0;
 #ifdef __MINGW32__
@@ -51,6 +52,8 @@ static int sdl_init(void **ctx, platform_params *params, int audio_only)
     }
 #if PLATFORM_SDL
     platform_ctx *platform = (platform_ctx *)calloc(1, sizeof(platform_ctx));
+    platform->onFrame = onFrame;
+    platform->user   = user;
     platform->params = params;
     /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
@@ -142,14 +145,14 @@ static void sdl_pull_events(void *ctx)
 
 static void sdl_main_loop(void *ctx)
 {
-#ifdef EMSCRIPTEN
-    emscripten_set_main_loop(drawframe, 0, 1);
-#else
     platform_ctx *platform = (platform_ctx *)ctx;
+#ifdef EMSCRIPTEN
+    emscripten_set_main_loop_arg(platform->onFrame, platform->user, 0, 1);
+#else
     platform->startTime = SDL_GetTicks();
     while (!platform->done)
     {
-        drawframe();
+        platform->onFrame(platform->user);
         if (platform->keys[KEY_ESC])
             platform->done = 1;
     }

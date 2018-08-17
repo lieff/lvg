@@ -9,6 +9,8 @@
 #include "nanovg_gl.h"
 #include <assert.h>
 
+extern const render nvg_render;
+
 static void nvgSVGLinearGrad(struct NVGcontext *vg, struct NSVGshape *shape, LVGColorTransform *cxform, int is_fill)
 {
     NSVGgradient *gradient = is_fill ? shape->fill.gradient : shape->stroke.gradient;
@@ -263,7 +265,8 @@ static int nvg_cache_image(void *render, int width, int height, int flags, const
 
 static int nvg_cache_gradient(void *render, NSVGpaint *fill)
 {
-    int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ? LinearGradientStops(fill->gradient, 0) : RadialGradientStops(fill->gradient, 0);
+    int img = (NSVG_PAINT_LINEAR_GRADIENT == fill->type) ?
+        LinearGradientStops(&nvg_render, render, fill->gradient, 0) : RadialGradientStops(&nvg_render, render, fill->gradient, 0);
     fill->gradient->cache = img;
     return img;
 }

@@ -6,6 +6,8 @@
 #include "../../src/lvg_header.h"
 #include "../../render/gl.h"
 
+static LVGEngine *e;
+
 #define PICOC_STACK_SIZE (4*1024*1024)              /* space for the the stack */
 
 const char g_lvgDefs[] = "\
@@ -467,14 +469,14 @@ static void lib_lvgGetParams(struct ParseState *Parser, struct Value *ReturnValu
 {
     if (0 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgGetParams();
+    ReturnValue->Val->Pointer = lvgGetParams(e);
 }
 
 static void lib_lvgGetFileContents(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgGetFileContents(Ptr(0), Ptr(1));
+    ReturnValue->Val->Pointer = lvgGetFileContents(e, Ptr(0), Ptr(1));
 }
 
 static void lib_lvgFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
@@ -488,21 +490,21 @@ static void lib_lvgTranslate(struct ParseState *Parser, struct Value *ReturnValu
 {
     if (2 != NumArgs)
         return;
-    lvgTranslate(Float(0), Float(1));
+    lvgTranslate(e, Float(0), Float(1));
 }
 
 static void lib_lvgScale(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    lvgScale(Float(0), Float(1));
+    lvgScale(e, Float(0), Float(1));
 }
 
 static void lib_lvgViewport(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    lvgViewport(Int(0), Int(1));
+    lvgViewport(e, Int(0), Int(1));
 }
 
 /* Image */
@@ -510,21 +512,21 @@ static void lib_lvgImageLoad(struct ParseState *Parser, struct Value *ReturnValu
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Integer = lvgImageLoad(Ptr(0));
+    ReturnValue->Val->Integer = lvgImageLoad(e, Ptr(0));
 }
 
 static void lib_lvgImageLoadBuf(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (2 != NumArgs)
         return;
-    ReturnValue->Val->Integer = lvgImageLoadBuf(Ptr(0), Int(1));
+    ReturnValue->Val->Integer = lvgImageLoadBuf(e, Ptr(0), Int(1));
 }
 
 static void lib_lvgImageFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgImageFree(Int(0));
+    lvgImageFree(e, Int(0));
 }
 
 /* Video */
@@ -532,14 +534,14 @@ static void lib_lvgVideoDecodeToFrame(struct ParseState *Parser, struct Value *R
 {
     if (2 != NumArgs)
         return;
-    ReturnValue->Val->Integer = lvgVideoDecodeToFrame(Ptr(0), Int(1));
+    ReturnValue->Val->Integer = lvgVideoDecodeToFrame(e, Ptr(0), Int(1));
 }
 
 static void lib_lvgVideoFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgVideoFree(Ptr(0));
+    lvgVideoFree(e, Ptr(0));
 }
 
 /* Shader */
@@ -549,14 +551,14 @@ static void lib_lvgShapeLoad(struct ParseState *Parser, struct Value *ReturnValu
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgShapeLoad(Ptr(0));
+    ReturnValue->Val->Pointer = lvgShapeLoad(e, Ptr(0));
 }
 
 static void lib_lvgShapeDraw(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgShapeDraw(Ptr(0));
+    lvgShapeDraw(e, Ptr(0));
 }
 
 static void lib_lvgShapeGetBounds(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
@@ -570,7 +572,7 @@ static void lib_lvgShapeFree(struct ParseState *Parser, struct Value *ReturnValu
 {
     if (1 != NumArgs)
         return;
-    lvgShapeFree(Ptr(0));
+    lvgShapeFree(e, Ptr(0));
 }
 
 /* SWF */
@@ -578,21 +580,21 @@ static void lib_lvgClipLoad(struct ParseState *Parser, struct Value *ReturnValue
 {
     if (1 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgClipLoad(Ptr(0));
+    ReturnValue->Val->Pointer = lvgClipLoad(e, Ptr(0));
 }
 
 static void lib_lvgClipDraw(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgClipDraw(Ptr(0));
+    lvgClipDraw(e, Ptr(0));
 }
 
 static void lib_lvgClipFree(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (1 != NumArgs)
         return;
-    lvgClipFree(Ptr(0));
+    lvgClipFree(e, Ptr(0));
 }
 
 /* Audio */
@@ -600,14 +602,14 @@ static void lib_lvgLoadMP3(struct ParseState *Parser, struct Value *ReturnValue,
 {
     if (4 != NumArgs)
         return;
-    ReturnValue->Val->Pointer = lvgLoadMP3(Ptr(0), Ptr(1), Ptr(2), Ptr(3));
+    ReturnValue->Val->Pointer = lvgLoadMP3(e, Ptr(0), Ptr(1), Ptr(2), Ptr(3));
 }
 
 static void lib_lvgPlaySound(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
 {
     if (5 != NumArgs)
         return;
-    lvgPlaySound(Ptr(0), Int(1), Int(2), Int(3), Int(4));
+    lvgPlaySound(e, Ptr(0), Int(1), Int(2), Int(3), Int(4));
 }
 
 static const struct LibraryFunction g_lvgLib[] =
@@ -702,13 +704,28 @@ static const struct LibraryFunction g_lvgLib[] =
 typedef struct picoc_stc
 {
     Picoc pc;
+    LVGEngine *e;
     int initialized;
 } picoc_stc;
 
-static int picoc_init(void **script, const char *file_name)
+/* read and scan a file for definitions */
+void PicocPlatformScanFile(Picoc *pc, const char *FileName)
+{
+    char *SourceStr;
+    if (!(SourceStr = lvgGetFileContents(e, FileName, 0)))
+    {
+        printf("error: could not open \"%s\".\n", FileName);
+        return;
+    }
+    PicocParse(pc, FileName, SourceStr, strlen(SourceStr), TRUE, FALSE, TRUE, TRUE);
+}
+
+static int picoc_init(LVGEngine *e_, void **script, const char *file_name)
 {
     *script = 0;
     picoc_stc *s = malloc(sizeof(picoc_stc));
+    e = e_;
+    s->e = e_;
     s->initialized = 0;
     PicocInitialise(&s->pc, PICOC_STACK_SIZE);
     PicocIncludeAllSystemHeaders(&s->pc);
@@ -739,6 +756,7 @@ static int picoc_run(void *script, const char *func_name)
     picoc_stc *s = (picoc_stc *)script;
     if (!s->initialized)
         return -1;
+    e = s->e;
     struct Value *FuncValue = NULL;
     if (PicocPlatformSetExitPoint(&s->pc))
     {

@@ -9,7 +9,6 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-//#include "resample.h"
 
 #ifndef MIN
 #define MIN(a,b) ((a) < (b) ? (a) : (b))

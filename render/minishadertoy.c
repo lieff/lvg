@@ -5,12 +5,11 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include "glad.h"
 #include "jfes/jfes.h"
 #include "gl.h"
 #include "minishadertoy.h"
 #include "src/stb_image.h"
-#include "src/lvg_header.h"
+#include "src/lvg.h"
 
 static const char *shader_header =
     "#version 300 es\n"
@@ -219,7 +218,7 @@ static void update_cubemap(const char *data, int len, SHADER_INPUT *inp, int i)
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0); GLCHK;
 }
 
-void fb_delete(FBO *f)
+static void fb_delete(FBO *f)
 {
     if (f->framebuffer)
         glDeleteFramebuffers(1, &f->framebuffer); GLCHK;
@@ -227,7 +226,7 @@ void fb_delete(FBO *f)
         glDeleteTextures(1, &f->framebufferTex); GLCHK;
 }
 
-void fb_init(FBO *f, int width, int height, int float_tex)
+static void fb_init(FBO *f, int width, int height, int float_tex)
 {
     f->floatTex = float_tex;
     glGenFramebuffers(1, &f->framebuffer); GLCHK;
@@ -248,7 +247,7 @@ void fb_init(FBO *f, int width, int height, int float_tex)
     glBindFramebuffer(GL_FRAMEBUFFER, 0); GLCHK;
 }
 
-void shader_delete(SHADER *s)
+static void shader_delete(SHADER *s)
 {
     if (s->shader)
         glDeleteShader(s->shader);
@@ -256,7 +255,7 @@ void shader_delete(SHADER *s)
         glDeleteProgram(s->prog);
 }
 
-int shader_init(SHADER *s, const char *pCode, const char *pCommonCode/*, int is_compute*/)
+static int shader_init(SHADER *s, const char *pCode, const char *pCommonCode/*, int is_compute*/)
 {
     char header[1024];
     snprintf(header, sizeof(header), shader_header, s->inputs[0].is_cubemap ? "Cube" : "2D",
@@ -379,7 +378,7 @@ static int switch_val(jfes_value_t *str, const char **vals)
     return -1;
 }
 
-int load_json(SHADER *shaders, char *buffer, int buf_size)
+static int load_json(LVGEngine *e, SHADER *shaders, char *buffer, int buf_size)
 {
     jfes_config_t config;
     config.jfes_malloc = (jfes_malloc_t)malloc;
@@ -468,7 +467,7 @@ int load_json(SHADER *shaders, char *buffer, int buf_size)
                             s[1] = '0' + j;
                         }
                     }
-                    char *img = lvgGetFileContents(buf + 26, (uint32_t *)&buf_size);
+                    char *img = lvgGetFileContents(e, buf + 26, (uint32_t *)&buf_size);
 #ifdef HAVE_CURL
                     if (!img)
                     {

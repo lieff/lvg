@@ -2,9 +2,6 @@
 #include "render/render.h"
 #include <math.h>
 
-extern render *g_render;
-extern void *g_render_obj;
-
 void identity(Transform3x2 dst)
 {
     dst[0][0] = 1;
@@ -169,7 +166,7 @@ static void gradientSpan(uint32_t * dst, NVGcolor color0, NVGcolor color1, float
     }
 }
 
-int LinearGradientStops(NSVGgradient *gradient, LVGColorTransform *x)
+int LinearGradientStops(const render *render, void *render_obj, NSVGgradient *gradient, LVGColorTransform *x)
 {
     int nstops = gradient->nstops;
     uint32_t data[GRADIENT_SAMPLES_L];
@@ -190,7 +187,7 @@ int LinearGradientStops(NSVGgradient *gradient, LVGColorTransform *x)
         NVGcolor s0 = transformColor(nvgColorU32(gradient->stops[nstops - 1].color), x);
         gradientSpan(data, s0, s0, gradient->stops[nstops - 1].offset, 1.0f);
     }
-    return g_render->cache_image(g_render_obj, GRADIENT_SAMPLES_L, 1, 0, (unsigned char*)data);
+    return render->cache_image(render_obj, GRADIENT_SAMPLES_L, 1, 0, (unsigned char*)data);
 }
 
 static NVGcolor lerpColor(NVGcolor color0, NVGcolor color1, float offset0, float offset1, float g)
@@ -234,7 +231,7 @@ static void calcStops(NSVGgradient *gradient, LVGColorTransform *x, NVGcolor *co
     *stop1 = s1[0];
 }
 
-int RadialGradientStops(NSVGgradient *gradient, LVGColorTransform *cxform)
+int RadialGradientStops(const render *render, void *render_obj, NSVGgradient *gradient, LVGColorTransform *cxform)
 {
     const int width = GRADIENT_SAMPLES_R, height = GRADIENT_SAMPLES_R;
     uint32_t *image = (unsigned int*)malloc(width*height*sizeof(uint32_t));
@@ -331,7 +328,7 @@ int RadialGradientStops(NSVGgradient *gradient, LVGColorTransform *cxform)
             image[(y*width) + x] = color;
         }
     }
-    int img = g_render->cache_image(g_render_obj, width, height, 0, (unsigned char*)image);
+    int img = render->cache_image(render_obj, width, height, 0, (unsigned char*)image);
     free(image);
     return img;
 }

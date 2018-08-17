@@ -1,17 +1,10 @@
 #include <assert.h>
 #include <limits.h>
 #include <rfxswf.h>
-#include "stb_image.h"
-#include "lunzip.h"
-#include "render/render.h"
-#include "audio/audio.h"
+#include <stb_image.h>
+#include <lvg.h>
 #include "adpcm.h"
 #include "avm1.h"
-
-extern render *g_render;
-extern void *g_render_obj;
-extern const audio_render *g_audio_render;
-extern void *g_audio_render_obj;
 
 enum CHARACTER_TYPE {none_type, shape_type, image_type, video_type, sprite_type, button_type, font_type, text_type, edittext_type, sound_type};
 typedef struct
@@ -103,7 +96,7 @@ static int compareStops(const void *a, const void *b)
     return 0;
 }
 
-static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, NSVGshape *shape2, FILLSTYLE *fs, LINESTYLE *ls)
+static void flushStyleToShape(LVGEngine *e, character_t *idtable, LVGMovieClip *clip, NSVGshape *shape, NSVGshape *shape2, FILLSTYLE *fs, LINESTYLE *ls)
 {
     shape->flags |= NSVG_FLAGS_VISIBLE;
     shape->fillRule = NSVG_FILLRULE_EVENODD;
@@ -149,7 +142,7 @@ static void flushStyleToShape(character_t *idtable, LVGMovieClip *clip, NSVGshap
             xf[3] = m->sy/65536.0f;
             xf[4] = m->tx/20.0f;
             xf[5] = m->ty/20.0f;
-            g_render->cache_gradient(g_render_obj, &shape->fill);
+            e->render->cache_gradient(e->render_obj, &shape->fill);
         }
         assert(0 == ls);
     } else
@@ -298,7 +291,7 @@ start_new:
         }
         append = 1;
     }
-    g_render->cache_shape(g_render_obj, shape);
+    e->render->cache_shape(e->render_obj, shape);
 }
 
 static void add_playsound_action(LVGMovieClipGroup *group, int frame_num, int sound_id, int flags, int start_sample, int end_sample, int loops)
@@ -391,7 +384,7 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
     }
 }
 
-static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE2 *swf_shape, LVGShapeCollection *shape)
+static void parseShape(LVGEngine *e, TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE2 *swf_shape, LVGShapeCollection *shape)
 {
     shape->shapes = (NSVGshape*)calloc(1, /*(swf_shape->numfillstyles + swf_shape->numlinestyles)*/65536*sizeof(NSVGshape));
 
@@ -519,7 +512,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
                     NSVGshape *s = shape->shapes + shape->num_shapes++;
-                    flushStyleToShape(idtable, clip, s, 0, fs, 0);
+                    flushStyleToShape(e, idtable, clip, s, 0, fs, 0);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
@@ -528,7 +521,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
                     NSVGshape *s = shape->shapes + shape->num_shapes++;
-                    flushStyleToShape(idtable, clip, s, 0, 0, ls);
+                    flushStyleToShape(e, idtable, clip, s, 0, 0, ls);
                 }
                 swf_ShapeFreeSubpaths(swf_shape);
             }
@@ -618,7 +611,7 @@ static void parseShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE
     free(path);
 }
 
-static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE2 *swf_shape, LVGShapeCollection *shape)
+static void parseMorphShape(LVGEngine *e, TAG *tag, character_t *idtable, LVGMovieClip *clip, SHAPE2 *swf_shape, LVGShapeCollection *shape)
 {
     shape->shapes = (NSVGshape*)calloc(1, 65536*sizeof(NSVGshape));
     shape->morph = calloc(1, sizeof(LVGShapeCollection));
@@ -789,7 +782,7 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
                     if (!fs->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, fs, 0);
+                    flushStyleToShape(e, idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, fs, 0);
                 }
                 for (i = 0; i < swf_shape->numlinestyles; i++)
                 {
@@ -797,7 +790,7 @@ static void parseMorphShape(TAG *tag, character_t *idtable, LVGMovieClip *clip, 
                     if (!ls->num_subpaths)
                         continue;
                     memcpy(shape->shapes[shape->num_shapes].bounds, shape->bounds, sizeof(shape->bounds));
-                    flushStyleToShape(idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, 0, ls);
+                    flushStyleToShape(e, idtable, clip, shape->shapes + shape->num_shapes++, morph_shape->shapes + morph_shape->num_shapes++, 0, ls);
                 }
                 swf_ShapeFreeSubpaths(swf_shape);
             }
@@ -1003,7 +996,7 @@ static void skipActions(TAG *tag)
     } while (op);
 }
 
-static TAG *parseGroup(TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
+static TAG *parseGroup(LVGEngine *e, TAG *firstTag, character_t *idtable, LVGMovieClip *clip, LVGMovieClipGroup *group)
 {
     static const int rates[4] = { 5500, 11025, 22050, 44100 };
     int stream_sound = -1, stream_buf_size = 0, stream_samples = 0, stream_format = 0, stream_bits = 0, stream_channels = 0, stream_rate = 0, stream_frame = -1, sound_block_frame = 0;
@@ -1052,9 +1045,9 @@ done:
                 shapecol->bounds[1] = idtable[id].bbox.ymax/20.0f;
                 if (ST_DEFINEMORPHSHAPE == tag->id || ST_DEFINEMORPHSHAPE2 == tag->id)
                 {
-                    parseMorphShape(tag, idtable, clip, swf_shape, shapecol);
+                    parseMorphShape(e, tag, idtable, clip, swf_shape, shapecol);
                 } else
-                    parseShape(tag, idtable, clip, swf_shape, shapecol);
+                    parseShape(e, tag, idtable, clip, swf_shape, shapecol);
                 shapecol->bounds[0] = idtable[id].bbox.xmin/20.0f;
                 shapecol->bounds[1] = idtable[id].bbox.ymin/20.0f;
                 shapecol->bounds[2] = idtable[id].bbox.xmax/20.0f;
@@ -1068,13 +1061,13 @@ done:
             {
                 int width, height;
                 RGBA *data = swf_ExtractImage(tag, &width, &height);
-                *(clip->images + clip->num_images) = g_render->cache_image(g_render_obj, width, height, 0, (const unsigned char *)data);
+                *(clip->images + clip->num_images) = e->render->cache_image(e->render_obj, width, height, 0, (const unsigned char *)data);
                 idtable[id].type = image_type;
                 idtable[id].lvg_id = clip->num_images++;
                 free(data);
             } else if (ST_DEFINESPRITE == tag->id)
             {
-                tag = parseGroup(tag->next, idtable, clip, &clip->groups[clip->num_groups]);
+                tag = parseGroup(e, tag->next, idtable, clip, &clip->groups[clip->num_groups]);
                 idtable[id].type = sprite_type;
                 idtable[id].lvg_id = clip->num_groups++;
             } else if (ST_DEFINEFONT == tag->id || ST_DEFINEFONT2 == tag->id || ST_DEFINEFONT3 == tag->id)
@@ -1107,7 +1100,7 @@ done:
                     tag2->data = shape->data;
                     tag2->len = tag2->memsize = (shape->bitlen + 7)/8;
                     if (tag2->len > 14)
-                        parseShape(tag2, idtable, clip, swf_shape, shapecol);
+                        parseShape(e, tag2, idtable, clip, swf_shape, shapecol);
                     font->glyphs[t] = clip->num_shapes++;
                     swf_Shape2Free(swf_shape);
                     free(swf_shape);
@@ -1251,7 +1244,7 @@ done:
                 video->codec  = swf_GetU8(tag) - 2;
                 assert(video->codec >= 0 && video->codec <= 5);
                 video->frames = calloc(1, video->num_frames*sizeof(LVGVideoFrame));
-                video->image = g_render->cache_image(g_render_obj, video->width, video->height, 0, 0);
+                video->image = e->render->cache_image(e->render_obj, video->width, video->height, 0, 0);
                 video->cur_frame = -1;
                 swf_SetTagPos(tag, oldTagPos);
             } else if (ST_DEFINEBUTTON == tag->id)
@@ -1642,7 +1635,7 @@ do_show_frame:
     return tag;
 }
 
-LVGMovieClip *swf_ReadObjects(SWF *swf)
+static LVGMovieClip *swf_ReadObjects(LVGEngine *e, SWF *swf)
 {
     swf_RemoveJPEGTables(swf);
 
@@ -1741,7 +1734,7 @@ done:
     clip->num_groups = 1;
     clip->num_fonts  = 0;
     clip->num_sounds = 0;
-    parseGroup(swf->firstTag, idtable, clip, clip->groups);
+    parseGroup(e, swf->firstTag, idtable, clip, clip->groups);
     clip->num_groups = 1;
     clip->num_groupstates = 1;
     clip->groupstates = calloc(1, sizeof(LVGMovieClipGroupState));
@@ -1756,7 +1749,7 @@ done:
     return clip;
 }
 
-LVGMovieClip *lvgClipLoadBuf(char *b, size_t file_size, int free_buf)
+LVGMovieClip *lvgClipLoadBuf(LVGEngine *e, char *b, size_t file_size, int free_buf)
 {
     SWF swf;
     if ((b[0] != 'F' && b[0] != 'C') || b[1] != 'W' || b[2] != 'S')
@@ -1785,24 +1778,24 @@ LVGMovieClip *lvgClipLoadBuf(char *b, size_t file_size, int free_buf)
         printf("error: could not open swf.\n");
         return 0;
     }
-    LVGMovieClip *clip = swf_ReadObjects(&swf);
+    LVGMovieClip *clip = swf_ReadObjects(e, &swf);
     swf_FreeTags(&swf);
     reader.dealloc(&reader);
     int i;
     if (clip)
         for (i = 0; i < clip->num_sounds; i++)
-            g_audio_render->resample(g_audio_render_obj, clip->sounds + i);
+            e->audio_render->resample(e->audio_render_obj, clip->sounds + i);
     return clip;
 }
 
-LVGMovieClip *lvgClipLoad(const char *file)
+LVGMovieClip *lvgClipLoad(LVGEngine *e, const char *file)
 {
     char *b;
     uint32_t file_size;
-    if (!(b = lvgGetFileContents(file, &file_size)))
+    if (!(b = lvgGetFileContents(e, file, &file_size)))
     {
         printf("error: could not open swf.\n");
         return 0;
     }
-    return lvgClipLoadBuf(b, file_size, 1);
+    return lvgClipLoadBuf(e, b, file_size, 1);
 }

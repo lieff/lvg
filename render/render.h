@@ -24,7 +24,6 @@
 #define BLEND_overlay    12
 #define BLEND_hardlight  13
 
-
 typedef struct render
 {
     int (*init)(void **render, const platform *platform);
@@ -45,8 +44,8 @@ typedef struct render
 
 NVGcolor nvgColorU32(uint32_t c);
 NVGcolor transformColor(NVGcolor color, LVGColorTransform *x);
-int LinearGradientStops(NSVGgradient *gradient, LVGColorTransform *x);
-int RadialGradientStops(NSVGgradient *gradient, LVGColorTransform *x);
+int LinearGradientStops(const render *render, void *render_obj, NSVGgradient *gradient, LVGColorTransform *x);
+int RadialGradientStops(const render *render, void *render_obj, NSVGgradient *gradient, LVGColorTransform *x);
 void gl_free_image(void *render, int image);
 
 typedef float Transform3x2[2][3];

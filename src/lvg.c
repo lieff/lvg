@@ -20,26 +20,11 @@
 #include <emscripten/html5.h>
 #endif
 
-#include "lunzip.h"
 #define STBI_NO_STDIO
-#include "stb_image.h"
-#include <render/gl.h>
-#include <video/video.h>
-#include <audio/audio.h>
-#include <render/render.h>
-#include <platform/platform.h>
-#include "lvg.h"
-#include "swf/avm1.h"
+#include <stb_image.h>
+#include <lvg.h>
+#include <swf/avm1.h>
 #include <scripting/scripting.h>
-
-LVGMovieClip *g_clip;
-static zip_t g_zip;
-LVGColorf g_bgColor;
-platform_params g_params;
-static int b_no_actionscript, b_fullscreen, b_interpolate;
-#ifdef EMSCRIPTEN
-static int is_gles3;
-#endif
 
 #if ENABLE_VIDEO && VIDEO_FFMPEG
 extern const video_dec ff_decoder;
@@ -51,15 +36,11 @@ extern const render nvg_render;
 extern const render nvpr_render;
 #endif
 extern const render null_render;
-const render *g_render;
-void *g_render_obj;
 
 #if AUDIO_SDL
 extern const audio_render sdl_audio_render;
 #endif
 extern const audio_render null_audio_render;
-const audio_render *g_audio_render;
-void *g_audio_render_obj;
 
 #if PLATFORM_GLFW
 extern const platform glfw_platform;
@@ -67,8 +48,13 @@ extern const platform glfw_platform;
 #if PLATFORM_SDL || (ENABLE_AUDIO && AUDIO_SDL)
 extern const platform sdl_platform;
 #endif
-const platform *g_platform;
-void *g_platform_obj;
+
+#if ENABLE_SCRIPT
+#if SCRIPT_PICOC
+extern const script_engine script_engine_picoc;
+#define SCRIPT_ENGINE script_engine_picoc
+#endif
+#endif
 
 stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
@@ -77,19 +63,11 @@ stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stbi_uc *i
 void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step);
 #endif
 
-#if ENABLE_SCRIPT
-#if SCRIPT_PICOC
-extern const script_engine script_engine_picoc;
-#define SCRIPT_ENGINE script_engine_picoc
-#endif
-void *g_script;
-#endif
-
-char *lvgGetFileContents(const char *fname, uint32_t *size)
+char *lvgGetFileContents(LVGEngine *e, const char *fname, uint32_t *size)
 {
     uint32_t idx;
-    if ((idx = lvgZipNameLocate(&g_zip, fname)) != (int32_t)-1)
-        return lvgZipDecompress(&g_zip, idx, size);
+    if ((idx = lvgZipNameLocate(&e->zip, fname)) != (int32_t)-1)
+        return lvgZipDecompress(&e->zip, idx, size);
 #ifdef EMSCRIPTEN
     struct stat st;
     int fd = open(fname, O_RDONLY);
@@ -117,49 +95,49 @@ void lvgFree(void *buf)
     free(buf);
 }
 
-void lvgViewport(int width, int heigth)
+void lvgViewport(LVGEngine *e, int width, int heigth)
 {
-    g_render->begin_frame(g_render_obj, width, heigth, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
+    e->render->begin_frame(e->render_obj, width, heigth, e->params.winWidth, e->params.winHeight, e->params.width, e->params.height);
 }
 
-int lvgImageLoad(const char *file)
+int lvgImageLoad(LVGEngine *e, const char *file)
 {
     char *buf;
     uint32_t size;
-    if (!(buf = lvgGetFileContents(file, &size)))
+    if (!(buf = lvgGetFileContents(e, file, &size)))
     {
         printf("error: could not open file: %s\n", file);
         return 0;
     }
-    int image = lvgImageLoadBuf((unsigned char *)buf, size);
+    int image = lvgImageLoadBuf(e, (unsigned char *)buf, size);
     free(buf);
     return image;
 }
 
-int lvgImageLoadBuf(const unsigned char *buf, uint32_t buf_size)
+int lvgImageLoadBuf(LVGEngine *e, const unsigned char *buf, uint32_t buf_size)
 {
     int w, h, n;
     unsigned char *img = stbi_load_from_memory(buf, buf_size, &w, &h, &n, 4);
-    int image = g_render->cache_image(g_render_obj, w, h, 0, (const unsigned char *)img);
+    int image = e->render->cache_image(e->render_obj, w, h, 0, (const unsigned char *)img);
     free(img);
     return image;
 }
 
-void lvgImageFree(int image)
+void lvgImageFree(LVGEngine *e, int image)
 {
-    g_render->free_image(g_render_obj, image);
+    e->render->free_image(e->render_obj, image);
 }
 
-LVGShapeCollection *lvgShapeLoad(const char *file)
+LVGShapeCollection *lvgShapeLoad(LVGEngine *e, const char *file)
 {
     char *buf;
-    double time = g_platform->get_time(g_platform_obj);
-    if (!(buf = lvgGetFileContents(file, 0)))
+    double time = e->platform->get_time(e->platform_obj);
+    if (!(buf = lvgGetFileContents(e, file, 0)))
     {
         printf("error: could not open file: %s\n", file);
         return 0;
     }
-    double time2 = g_platform->get_time(g_platform_obj);
+    double time2 = e->platform->get_time(e->platform_obj);
     printf("zip time: %fs\n", time2 - time);
     NSVGimage *image = nsvgParse(buf, "px", 96.0f);
     free(buf);
@@ -183,32 +161,14 @@ LVGShapeCollection *lvgShapeLoad(const char *file)
             col->bounds[1] = shape->bounds[1];
         if (shape->bounds[3] > col->bounds[3])
             col->bounds[3] = shape->bounds[3];
-        g_render->cache_shape(g_render_obj, col->shapes + i);
+        e->render->cache_shape(e->render_obj, col->shapes + i);
         NSVGshape *to_free = shape;
         shape = shape->next;
         free(to_free);
     }
 
-    time = g_platform->get_time(g_platform_obj);
+    time = e->platform->get_time(e->platform_obj);
     printf("svg load time: %fs\n", time - time2);
-#if !defined(EMSCRIPTEN) && defined(DEBUG)
-    if (0)
-    {
-        int w = (int)image->width;
-        int h = (int)image->height;
-        NSVGrasterizer *rast = nsvgCreateRasterizer();
-        if (rast == NULL) {
-            printf("Could not init rasterizer.\n");
-        }
-        unsigned char *img = malloc(w*h*4);
-        if (img == NULL) {
-            printf("Could not alloc image buffer.\n");
-        }
-        nsvgRasterize(rast, image, 0, 0, 1, img, w, h, w*4);
-        stbi_write_png("svg.png", w, h, 4, img, w*4);
-        nsvgDeleteRasterizer(rast);
-    }
-#endif
     return col;
 }
 
@@ -220,17 +180,17 @@ void lvgShapeGetBounds(LVGShapeCollection *col, double *bounds)
     bounds[3] = col->bounds[3];
 }
 
-static void lvgShapeDrawCol(LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
+static void lvgShapeDrawCol(LVGEngine *e, LVGShapeCollection *shapecol, LVGColorTransform *cxform, float ratio, int blend_mode)
 {
-    g_render->render_shape(g_render_obj, shapecol, cxform, ratio, blend_mode);
+    e->render->render_shape(e->render_obj, shapecol, cxform, ratio, blend_mode);
 }
 
-void lvgShapeDraw(LVGShapeCollection *svg)
+void lvgShapeDraw(LVGEngine *e, LVGShapeCollection *svg)
 {
-    lvgShapeDrawCol(svg, 0, 0.0f, BLEND_REPLACE);
+    lvgShapeDrawCol(e, svg, 0, 0.0f, BLEND_REPLACE);
 }
 
-int lvgVideoDecodeToFrame(LVGVideo *video, int frame)
+int lvgVideoDecodeToFrame(LVGEngine *e, LVGVideo *video, int frame)
 {
 #if ENABLE_VIDEO && VIDEO_FFMPEG
     if ((!frame || frame != video->cur_frame) && frame < video->num_frames)
@@ -279,7 +239,7 @@ int lvgVideoDecodeToFrame(LVGVideo *video, int frame)
                 pu += out.stride[1];
                 pv += out.stride[2];
             }
-            g_render->update_image(g_render_obj, video->image, img);
+            e->render->update_image(e->render_obj, video->image, img);
             free(img);
         }
     }
@@ -287,7 +247,7 @@ int lvgVideoDecodeToFrame(LVGVideo *video, int frame)
     return video->image;
 }
 
-static void lvgVideoFree_internal(LVGVideo *video)
+static void lvgVideoFree_internal(LVGEngine *e, LVGVideo *video)
 {
     int i;
     for (i = 0; i < video->num_frames; i++)
@@ -298,14 +258,14 @@ static void lvgVideoFree_internal(LVGVideo *video)
     if (video->frames)
         free(video->frames);
     if (video->image)
-        g_render->free_image(g_render_obj, video->image);
+        e->render->free_image(e->render_obj, video->image);
     if (video->vdec)
         ff_decoder.release(video->vdec);
 }
 
-void lvgVideoFree(LVGVideo *video)
+void lvgVideoFree(LVGEngine *e, LVGVideo *video)
 {
-    lvgVideoFree_internal(video);
+    lvgVideoFree_internal(e, video);
     free(video);
 }
 
@@ -315,7 +275,7 @@ static void combine_cxform(LVGColorTransform *newcxform, LVGColorTransform *cxfo
     newcxform->mul[0] *= cxform->mul[0]; newcxform->mul[1] *= cxform->mul[1]; newcxform->mul[2] *= cxform->mul[2]; newcxform->mul[3] *= cxform->mul[3]*alpha;
 }
 
-static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, double r, int next_frame, int blend_mode)
+static void lvgClipDrawGroup(LVGEngine *e, LVGMovieClip *clip, LVGMovieClipGroupState *groupstate, LVGColorTransform *cxform, double r, int next_frame, int blend_mode)
 {
     LVGMovieClipGroup *group = clip->groups + groupstate->group_num;
     LVGMovieClipFrame *frame = group->frames + groupstate->cur_frame;
@@ -334,7 +294,7 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             {   // sprite place position - reset sprite
                 LVGMovieClipGroupState *gs = clip->groupstates + o->id;
                 int group_num = gs->group_num;
-                if (!b_no_actionscript)
+                if (!e->b_no_actionscript)
                 {
                     if (gs->movieclip)
                         free_instance(gs->movieclip);
@@ -342,7 +302,7 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                         free(gs->timers);
                 }
                 memset(gs, 0, sizeof(LVGMovieClipGroupState));
-                if (!b_no_actionscript)
+                if (!e->b_no_actionscript)
                 {
                     ASClass *cls = create_instance(0, &g_movieclip);
                     gs->movieclip = cls;
@@ -352,12 +312,12 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             }
         }
     }
-    if (!b_no_actionscript)
+    if (!e->b_no_actionscript)
     {
         if (!clip->vm)
         {
             clip->vm = malloc(sizeof(LVGActionCtx));
-            lvgInitVM(clip->vm, clip);
+            lvgInitVM(clip->vm, e, clip);
             for (i = 0; i < clip->num_groupstates; i++)
             {
                 LVGMovieClipGroupState *g = clip->groupstates + i;
@@ -409,10 +369,10 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
         for (i = 0; i < groupstate->num_timers; i++)
         {
             LVGTimer *t = groupstate->timers + i;
-            double time = g_params.time - t->last_time;
+            double time = e->params.time - t->last_time;
             if (time > t->timeout/1000.0)
             {
-                t->last_time = g_params.time;
+                t->last_time = e->params.time;
                 lvgExecuteActions(clip->vm, t->func, groupstate, 1);
             }
         }
@@ -440,42 +400,42 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     for (i = 0; i < frame->num_objects; i++)
     {
         LVGObject *o = frame->objects + i;
-        g_render->get_transform(g_render_obj, save_transform);
+        e->render->get_transform(e->render_obj, save_transform);
         int ratio = o->ratio;
 #ifdef LVG_INTERPOLATE
         float o_t[6];
-        if (b_interpolate && o->interpolate_obj)
+        if (e->b_interpolate && o->interpolate_obj)
         {
             LVGObject *inter = o->interpolate_obj;
             double omr = 1.0 - r;
             ratio = round((double)ratio*omr + (double)inter->ratio*r);
             for (int idx = 0; idx < 6; idx++)
                 o_t[idx] = o->t[idx]*omr + inter->t[idx]*r;
-            g_render->set_transform(g_render_obj, o_t, 0);
+            e->render->set_transform(e->render_obj, o_t, 0);
         } else
 #endif
-        g_render->set_transform(g_render_obj, o->t, 0);
+        e->render->set_transform(e->render_obj, o->t, 0);
         if (LVG_OBJ_SHAPE == o->type && visible)
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgShapeDrawCol(&clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
+            lvgShapeDrawCol(e, &clip->shapes[o->id], &newcxform, ratio/65535.0f, blend_mode ? blend_mode : o->blend_mode);
         } else
         if (LVG_OBJ_IMAGE == o->type && visible)
         {
-            g_render->render_image(g_render_obj, clip->images[o->id]);
+            e->render->render_image(e->render_obj, clip->images[o->id]);
         } else
         if (LVG_OBJ_VIDEO == o->type && visible)
         {
             LVGVideo *video = &clip->videos[o->id];
-            lvgVideoDecodeToFrame(video, o->ratio);
-            g_render->render_image(g_render_obj, video->image);
+            lvgVideoDecodeToFrame(e, video, o->ratio);
+            e->render->render_image(e->render_obj, video->image);
         } else
         if (LVG_OBJ_GROUP == o->type)
         {
             LVGColorTransform newcxform = *cxform;
             combine_cxform(&newcxform, &o->cxform, alpha);
-            lvgClipDrawGroup(clip, clip->groupstates + o->id, &newcxform, r, next_frame, o->blend_mode);
+            lvgClipDrawGroup(e, clip, clip->groupstates + o->id, &newcxform, r, next_frame, o->blend_mode);
             THIS = groupstate->movieclip; // restore this if changed in other groups
         } else
         if (LVG_OBJ_BUTTON == o->type)
@@ -492,7 +452,7 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
             }
             int mouse_hit = 0;
             float save_t[6];
-            g_render->get_transform(g_render_obj, save_t);
+            e->render->get_transform(e->render_obj, save_t);
             for (j = 0; j < b->num_btn_shapes; j++)
             {
                 LVGButtonState *bs = b->btn_shapes + j;
@@ -502,14 +462,14 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 if (LVG_OBJ_SHAPE != bs->obj.type)
                     continue;
                 float t[6];
-                g_render->set_transform(g_render_obj, bs->obj.t, 0);
-                g_render->get_transform(g_render_obj, t);
+                e->render->set_transform(e->render_obj, bs->obj.t, 0);
+                e->render->get_transform(e->render_obj, t);
                 Transform3x2 tr;
                 tr[0][0] = t[0]; tr[1][0] = t[1];
                 tr[0][1] = t[2]; tr[1][1] = t[3];
                 tr[0][2] = t[4]; tr[1][2] = t[5];
                 inverse(tr, tr);
-                float m[2] = { g_params.mx, g_params.my };
+                float m[2] = { e->params.mx, e->params.my };
                 xform(m, tr, m);
                 LVGShapeCollection *col = &clip->shapes[bs->obj.id];
                 for (int k = 0; k < col->num_shapes; k++)
@@ -519,22 +479,22 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     float x1 = s->bounds[2], y1 = s->bounds[3];
                     if (m[0] >= x && m[0] <=x1 && m[1] >= y && m[1] <= y1)
                     {
-                        if (g_render->inside_shape)
-                            mouse_hit = g_render->inside_shape(g_render_obj, s, m[0], m[1]);
+                        if (e->render->inside_shape)
+                            mouse_hit = e->render->inside_shape(e->render_obj, s, m[0], m[1]);
                         else
                             mouse_hit = 1;
                         if (mouse_hit)
                             break;
                     }
                 }
-                g_render->set_transform(g_render_obj, save_t, 1);
+                e->render->set_transform(e->render_obj, save_t, 1);
             }
             int state_flags = UP_SHAPE;
             if (mouse_hit)
                 state_flags = OVER_SHAPE;
-            if (mouse_hit && (g_params.mkeys & 1))
+            if (mouse_hit && (e->params.mkeys & 1))
                 state_flags = DOWN_SHAPE;
-            int flags = 0, keypressed = (g_params.mkeys & MOUSE_BUTTON_LEFT), waspressed = (g_params.last_mkeys & MOUSE_BUTTON_LEFT);
+            int flags = 0, keypressed = (e->params.mkeys & MOUSE_BUTTON_LEFT), waspressed = (e->params.last_mkeys & MOUSE_BUTTON_LEFT);
             flags |= (!b->prev_mousehit && mouse_hit) ? CondIdleToOverUp : 0;
             flags |= (b->prev_mousehit && !mouse_hit) ? CondOverUpToIdle : 0;
             flags |= (mouse_hit && !waspressed && keypressed) ? CondOverUpToOverDown : 0;
@@ -566,12 +526,12 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     assert(LVG_OBJ_SHAPE == bs->obj.type || LVG_OBJ_GROUP == bs->obj.type || LVG_OBJ_BUTTON == bs->obj.type || LVG_OBJ_TEXT == bs->obj.type);
                     if (LVG_OBJ_SHAPE != bs->obj.type)
                         continue;
-                    g_render->set_transform(g_render_obj, bs->obj.t, 0);
+                    e->render->set_transform(e->render_obj, bs->obj.t, 0);
                     LVGColorTransform newcxform = *cxform;
                     combine_cxform(&newcxform, &o->cxform, 1.0);
                     combine_cxform(&newcxform, &bs->obj.cxform, alpha*btn_alpha);
-                    lvgShapeDrawCol(&clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
-                    g_render->set_transform(g_render_obj, save_t, 1);
+                    lvgShapeDrawCol(e, &clip->shapes[bs->obj.id], &newcxform, bs->obj.ratio/65535.0f, blend_mode);
+                    e->render->set_transform(e->render_obj, save_t, 1);
                 }
         } else
         if (LVG_OBJ_TEXT == o->type && visible)
@@ -583,19 +543,19 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                 if (str->font_id < 0)
                     continue;
                 LVGFont *f = clip->fonts + str->font_id;
-                g_render->set_transform(g_render_obj, save_transform, 1);
+                e->render->set_transform(e->render_obj, save_transform, 1);
 #ifdef LVG_INTERPOLATE
-                if (b_interpolate && o->interpolate_obj)
-                    g_render->set_transform(g_render_obj, o_t, 0);
+                if (e->b_interpolate && o->interpolate_obj)
+                    e->render->set_transform(e->render_obj, o_t, 0);
                 else
 #endif
-                g_render->set_transform(g_render_obj, o->t, 0);
-                g_render->set_transform(g_render_obj, text->t, 0);
+                e->render->set_transform(e->render_obj, o->t, 0);
+                e->render->set_transform(e->render_obj, text->t, 0);
                 float scale = str->height/50.0f;
                 if (3 == f->version)
                     scale /= 20.0f;
                 float t[6] = { scale, 0.0f, 0.0f, scale, str->x, str->y };
-                g_render->set_transform(g_render_obj, t, 0);
+                e->render->set_transform(e->render_obj, t, 0);
                 for (int k = 0; k < str->num_chars; k++)
                 {
                     LVGChar *c = str->chars + k;
@@ -604,17 +564,17 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
                     combine_cxform(&newcxform, &o->cxform, alpha);
                     for (int l = 0; l < shapecol->num_shapes; l++)
                         shapecol->shapes[l].fill.color = str->color;
-                    lvgShapeDrawCol(shapecol, &newcxform, 0.0f, blend_mode);
+                    lvgShapeDrawCol(e, shapecol, &newcxform, 0.0f, blend_mode);
                     float t[6] = { 1.0f, 0.0f, 0.0f, 1.0f, c->x_advance/20.0f/scale, 0.0f };
-                    g_render->set_transform(g_render_obj, t, 0);
+                    e->render->set_transform(e->render_obj, t, 0);
                 }
             }
         }
-        g_render->set_transform(g_render_obj, save_transform, 1);
+        e->render->set_transform(e->render_obj, save_transform, 1);
     }
     if (next_frame && LVG_PLAYING == groupstate->play_state && cur_frame == groupstate->cur_frame/*not changed by as*/)
         groupstate->cur_frame = (groupstate->cur_frame + 1) % group->num_frames;
-    if (!b_no_actionscript)
+    if (!e->b_no_actionscript)
     {   // execute sprite events after frame advance
         ASVal *_currentframe = find_class_member(clip->vm, groupstate->movieclip, "_currentframe");
         SET_INT(_currentframe, groupstate->cur_frame + 1);
@@ -645,16 +605,16 @@ static void lvgClipDrawGroup(LVGMovieClip *clip, LVGMovieClipGroupState *groupst
     }
 }*/
 
-void lvgClipDraw(LVGMovieClip *clip)
+void lvgClipDraw(LVGEngine *e, LVGMovieClip *clip)
 {
 #ifndef _TEST
     int next_frame = 0;
-    double r, diff = g_params.time - clip->last_time;
+    double r, diff = e->params.time - clip->last_time;
     if (diff > 1.0/clip->fps)
     {
         next_frame = 1;
         clip->last_time += 1.0/clip->fps;
-        if ((g_params.time - clip->last_time) > 1.0/clip->fps)
+        if ((e->params.time - clip->last_time) > 1.0/clip->fps)
             r = 0.0;
         else
             r = 1.0;
@@ -668,19 +628,19 @@ void lvgClipDraw(LVGMovieClip *clip)
     memset(&startcxform, 0, sizeof(startcxform));
     startcxform.mul[0] = startcxform.mul[1] = startcxform.mul[2] = startcxform.mul[3] = 1.0f;
     //printf_frames(clip, clip->groupstates); printf("\n"); fflush(stdout);
-    lvgClipDrawGroup(clip, clip->groupstates, &startcxform, r, next_frame, BLEND_REPLACE);
+    lvgClipDrawGroup(e, clip, clip->groupstates, &startcxform, r, next_frame, BLEND_REPLACE);
 }
 
-static void deletePaint(NSVGpaint* paint)
+static void deletePaint(LVGEngine *e, NSVGpaint *paint)
 {
     if (paint->type == NSVG_PAINT_LINEAR_GRADIENT || paint->type == NSVG_PAINT_RADIAL_GRADIENT)
     {
-        g_render->free_image(g_render_obj, paint->gradient->cache);
+        e->render->free_image(e->render_obj, paint->gradient->cache);
         free(paint->gradient);
     }
 }
 
-static void lvgFreeNSVGShape(NSVGshape *shape)
+static void lvgFreeNSVGShape(LVGEngine *e, NSVGshape *shape)
 {
     NSVGpath *path = shape->paths;
     while (path)
@@ -691,44 +651,44 @@ static void lvgFreeNSVGShape(NSVGshape *shape)
         free(path);
         path = next;
     }
-    deletePaint(&shape->fill);
-    deletePaint(&shape->stroke);
+    deletePaint(e, &shape->fill);
+    deletePaint(e, &shape->stroke);
 }
 
-static void lvgShapeFree_internal(LVGShapeCollection *shape)
+static void lvgShapeFree_internal(LVGEngine *e, LVGShapeCollection *shape)
 {
     int i;
     for (i = 0; i < shape->num_shapes; i++)
-        lvgFreeNSVGShape(shape->shapes + i);
+        lvgFreeNSVGShape(e, shape->shapes + i);
     free(shape->shapes);
     if (shape->morph)
     {
         for (i = 0; i < shape->morph->num_shapes; i++)
-            lvgFreeNSVGShape(shape->morph->shapes + i);
+            lvgFreeNSVGShape(e, shape->morph->shapes + i);
         if (shape->morph->shapes)
             free(shape->morph->shapes);
         free(shape->morph);
     }
 }
 
-void lvgShapeFree(LVGShapeCollection *shape)
+void lvgShapeFree(LVGEngine *e, LVGShapeCollection *shape)
 {
-    lvgShapeFree_internal(shape);
+    lvgShapeFree_internal(e, shape);
     free(shape);
 }
 
-void lvgClipFree(LVGMovieClip *clip)
+void lvgClipFree(LVGEngine *e, LVGMovieClip *clip)
 {
     int i, j;
     if (!clip)
         return;
     for (i = 0; i < clip->num_shapes; i++)
     {
-        lvgShapeFree_internal(clip->shapes + i);
+        lvgShapeFree_internal(e, clip->shapes + i);
     }
     for (i = 0; i < clip->num_images; i++)
     {
-        g_render->free_image(g_render_obj, clip->images[i]);
+        e->render->free_image(e->render_obj, clip->images[i]);
     }
     for (i = 0; i < clip->num_groups; i++)
     {
@@ -794,7 +754,7 @@ void lvgClipFree(LVGMovieClip *clip)
     }
     for (i = 0; i < clip->num_videos; i++)
     {
-        lvgVideoFree_internal(clip->videos + i);
+        lvgVideoFree_internal(e, clip->videos + i);
     }
     for (i = 0; i < clip->num_buttons; i++)
     {
@@ -837,104 +797,102 @@ void lvgClipFree(LVGMovieClip *clip)
     free(clip);
 }
 
-platform_params *lvgGetParams()
+platform_params *lvgGetParams(LVGEngine *e)
 {
-    return &g_params;
+    return &e->params;
 }
 
-void lvgTranslate(float x, float y)
+void lvgTranslate(LVGEngine *e, float x, float y)
 {
     float t[6];
     Transform3x2 tr;
     translate(tr, x, y);
     from_transform3x2(t, tr);
-    g_render->set_transform(g_render_obj, t, 0);
+    e->render->set_transform(e->render_obj, t, 0);
 }
 
-void lvgScale(float x, float y)
+void lvgScale(LVGEngine *e, float x, float y)
 {
     float t[6];
     Transform3x2 tr;
     scale(tr, x, y);
     from_transform3x2(t, tr);
-    g_render->set_transform(g_render_obj, t, 0);
+    e->render->set_transform(e->render_obj, t, 0);
 }
 
-void drawframe()
+void drawframe(LVGEngine *e)
 {
-    g_platform->pull_events(g_platform_obj);
-    glViewport(0, 0, g_params.width, g_params.height);
-    glClearColor(g_bgColor.r, g_bgColor.g, g_bgColor.b, 1.0f);
+    e->platform->pull_events(e->platform_obj);
+    glViewport(0, 0, e->params.width, e->params.height);
+    glClearColor(e->bgColor.r, e->bgColor.g, e->bgColor.b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    int pressed = (g_params.mkeys & MOUSE_BUTTON_LEFT) && !(g_params.last_mkeys & MOUSE_BUTTON_LEFT);
+    int pressed = (e->params.mkeys & MOUSE_BUTTON_LEFT) && !(e->params.last_mkeys & MOUSE_BUTTON_LEFT);
     if (pressed)
     {
-        static double last_click;
-        if (g_params.time - last_click < 0.2)
+        if (e->params.time - e->last_click < 0.2)
             goto change_fullscreen;
-        last_click = g_params.time;
+        e->last_click = e->params.time;
     }
-    if (g_platform->get_key(g_platform_obj, KEY_LEFTALT) || g_platform->get_key(g_platform_obj, KEY_RIGHTALT))
+    if (e->platform->get_key(e->platform_obj, KEY_LEFTALT) || e->platform->get_key(e->platform_obj, KEY_RIGHTALT))
     {
-        static int last_enter;
-        int enter_state = g_platform->get_key(g_platform_obj, KEY_ENTER);
-        if (enter_state && !last_enter)
+        int enter_state = e->platform->get_key(e->platform_obj, KEY_ENTER);
+        if (enter_state && !e->last_enter)
         {
 change_fullscreen:
-            b_fullscreen = !b_fullscreen;
-            g_platform->fullscreen(g_platform_obj, b_fullscreen);
+            e->b_fullscreen = !e->b_fullscreen;
+            e->platform->fullscreen(e->platform_obj, e->b_fullscreen);
         }
-        last_enter = enter_state;
+        e->last_enter = enter_state;
     }
 
-    if (g_clip)
+    if (e->clip)
     {
-        g_render->begin_frame(g_render_obj, g_clip->bounds[2] - g_clip->bounds[0], g_clip->bounds[3] - g_clip->bounds[1], g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
-        lvgClipDraw(g_clip);
+        e->render->begin_frame(e->render_obj, e->clip->bounds[2] - e->clip->bounds[0], e->clip->bounds[3] - e->clip->bounds[1], e->params.winWidth, e->params.winHeight, e->params.width, e->params.height);
+        lvgClipDraw(e, e->clip);
     } else
     {
-        g_render->begin_frame(g_render_obj, 800, 600, g_params.winWidth, g_params.winHeight, g_params.width, g_params.height);
-        if (g_script)
-            if (SCRIPT_ENGINE.run_function(g_script, "onFrame"))
-                g_platform->set_exit(g_platform_obj);
+        e->render->begin_frame(e->render_obj, 800, 600, e->params.winWidth, e->params.winHeight, e->params.width, e->params.height);
+        if (e->script)
+            if (SCRIPT_ENGINE.run_function(e->script, "onFrame"))
+                e->platform->set_exit(e->platform_obj);
     }
 
-    g_render->end_frame(g_render_obj);
-    g_platform->swap_buffers(g_platform_obj);
-    g_params.last_mkeys = g_params.mkeys;
+    e->render->end_frame(e->render_obj);
+    e->platform->swap_buffers(e->platform_obj);
+    e->params.last_mkeys = e->params.mkeys;
 }
 
-int open_lvg(const char *file_name)
+int open_lvg(LVGEngine *e, const char *file_name)
 {
     size_t size;
     char *map = lvgOpenMap(file_name, &size);
     if (!map)
         return -1;
-    if (0 == lvgZipOpen(map, size, &g_zip))
+    if (0 == lvgZipOpen(map, size, &e->zip))
     {
 #ifdef EMSCRIPTEN
         char *buf;
-        if ((buf = lvgGetFileContents("features", 0)))
+        if ((buf = lvgGetFileContents(e, "features", 0)))
         {
-            is_gles3 = NULL != strstr(buf, "gles3");
+            e->b_gles3 = NULL != strstr(buf, "gles3");
             free(buf);
         }
 #endif
 #if ENABLE_SCRIPT
-        if (!SCRIPT_ENGINE.init(&g_script, "main.c"))
+        if (!SCRIPT_ENGINE.init(e, &e->script, "main.c"))
         {
-            if (g_script)
-                if (!SCRIPT_ENGINE.run_function(g_script, "onInit"))
+            if (e->script)
+                if (!SCRIPT_ENGINE.run_function(e->script, "onInit"))
                     return 0;
         }
 #endif
-    } else if ((g_clip = lvgClipLoadBuf(map, size, 0)))
+    } else if ((e->clip = lvgClipLoadBuf(e, map, size, 0)))
     {
         munmap(map, size);
-        if (!g_clip)
+        if (!e->clip)
             return -1;
-        g_bgColor = g_clip->bgColor;
+        e->bgColor = e->clip->bgColor;
         return 0;
     }
     munmap(map, size);
@@ -961,6 +919,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 int main(int argc, char **argv)
 {
 #endif
+    LVGEngine engine;
+    LVGEngine *e = &engine;
+    memset(e, 0, sizeof(*e));
     // check switches
     int i;
     for(i = 1; i < argc; i++)
@@ -969,9 +930,9 @@ int main(int argc, char **argv)
             break;
         switch (argv[i][1])
         {
-        case 'n': b_no_actionscript = 1; break;
-        case 'f': b_fullscreen = 1; break;
-        case 'i': b_interpolate = 1; break;
+        case 'n': e->b_no_actionscript = 1; break;
+        case 'f': e->b_fullscreen = 1; break;
+        case 'i': e->b_interpolate = 1; break;
         default:
             printf("error: unrecognized option\n");
             return 1;
@@ -989,21 +950,21 @@ int main(int argc, char **argv)
     } else
         file_name = argv[i];
 #ifdef _TEST
-    g_render = &null_render;
-    g_audio_render = &null_audio_render;
-    if (open_lvg(file_name))
+    e->render = &null_render;
+    e->audio_render = &null_audio_render;
+    if (open_lvg(e, file_name))
     {
         printf("error: could not open swf file\n");
         return -1;
     }
     for (int i = 0; i < 10; i++)
-        lvgClipDraw(g_clip);
-    lvgClipFree(g_clip);
-    lvgZipClose(&g_zip);
+        lvgClipDraw(e, e->clip);
+    lvgClipFree(e, e->clip);
+    lvgZipClose(&e->zip);
     return 0;
 #else
 #if defined(EMSCRIPTEN)
-    if (is_gles3)
+    if (e->b_gles3)
     {
         EmscriptenWebGLContextAttributes attrs;
         emscripten_webgl_init_context_attributes(&attrs);
@@ -1021,30 +982,30 @@ int main(int argc, char **argv)
 #endif
 
 #if PLATFORM_GLFW
-    g_platform = &glfw_platform;
+    e->platform = &glfw_platform;
 #endif
 #if PLATFORM_SDL
-    g_platform = &sdl_platform;
+    e->platform = &sdl_platform;
 #endif
 #if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
     void *audio_platform_obj;
-    sdl_platform.init(&audio_platform_obj, 0, 1);
+    sdl_platform.init(&audio_platform_obj, 0, 0, 0, 1);
 #endif
-    if (!g_platform->init(&g_platform_obj, &g_params, 0))
+    if (!e->platform->init(&e->platform_obj, &e->params, (void (*)(void *))drawframe, e, 0))
     {
         printf("error: could not open platform\n");
         return 1;
     }
-    if (b_fullscreen)
-        g_platform->fullscreen(g_platform_obj, b_fullscreen);
+    if (e->b_fullscreen)
+        e->platform->fullscreen(e->platform_obj, e->b_fullscreen);
 
 #ifndef EMSCRIPTEN
-    g_render = &nvpr_render;
-    if (!g_render->init(&g_render_obj, g_platform))
+    e->render = &nvpr_render;
+    if (!e->render->init(&e->render_obj, e->platform))
 #endif
     {
-        g_render = &nvg_render;
-        if (!g_render->init(&g_render_obj, g_platform))
+        e->render = &nvg_render;
+        if (!e->render->init(&e->render_obj, e->platform))
         {
             printf("error: could not open render\n");
             return -1;
@@ -1052,33 +1013,33 @@ int main(int argc, char **argv)
     }
 
 #if ENABLE_AUDIO && AUDIO_SDL
-    g_audio_render = &sdl_audio_render;
-    if (!g_audio_render->init(&g_audio_render_obj, 44100, 2, 0, 0, 0))
-        g_audio_render = &null_audio_render;
+    e->audio_render = &sdl_audio_render;
+    if (!e->audio_render->init(&e->audio_render_obj, 44100, 2, 0, 0, 0))
+        e->audio_render = &null_audio_render;
 #else
-    g_audio_render = &null_audio_render;
+    e->audio_render = &null_audio_render;
 #endif
 
-    if (open_lvg(file_name))
+    if (open_lvg(e, file_name))
     {
         printf("error: could not open lvg or swf file\n");
         return -1;
     }
 
-    g_platform->main_loop(g_platform_obj);
+    e->platform->main_loop(e->platform_obj);
 
-    g_audio_render->release(g_audio_render_obj);
-    if (g_clip)
-        lvgClipFree(g_clip);
-    g_render->release(g_render_obj);
-    lvgZipClose(&g_zip);
-    g_platform->release(g_platform_obj);
+    e->audio_render->release(e->audio_render_obj);
+    if (e->clip)
+        lvgClipFree(e, e->clip);
+    e->render->release(e->render_obj);
+    lvgZipClose(&e->zip);
+    e->platform->release(e->platform_obj);
 #if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
     sdl_platform.release(audio_platform_obj);
 #endif
 #if ENABLE_SCRIPT
-    if (g_script)
-        SCRIPT_ENGINE.release(g_script);
+    if (e->script)
+        SCRIPT_ENGINE.release(e->script);
 #endif
 #endif
     return 0;

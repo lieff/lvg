@@ -13,12 +13,13 @@
 
 typedef void* (* GLADloadproc)(const char *name);
 int gladLoadGLLoader(GLADloadproc);
-void drawframe();
 
 typedef struct platform_ctx
 {
     GLFWwindow *window;
     platform_params *params;
+    void (*onFrame)(void *);
+    void *user;
     int winX, winY;
     int defWidth, defHeight;
     //char keys[256];
@@ -30,7 +31,7 @@ typedef struct platform_ctx
     platform->keys[scancode & 0xff] = (action == GLFW_PRESS || action == GLFW_REPEAT) ? 1 : 0;
 }*/
 
-static int glfw_init(void **ctx, platform_params *params, int audio_only)
+static int glfw_init(void **ctx, platform_params *params, void (*onFrame)(void *), void *user, int audio_only)
 {
     *ctx = 0;
     if (!glfwInit())
@@ -39,6 +40,8 @@ static int glfw_init(void **ctx, platform_params *params, int audio_only)
         return 0;
     }
     platform_ctx *platform = (platform_ctx *)calloc(1, sizeof(platform_ctx));
+    platform->onFrame = onFrame;
+    platform->user   = user;
     platform->params = params;
 
     glfwWindowHint(GLFW_RESIZABLE, 1);
@@ -105,13 +108,13 @@ static void glfw_pull_events(void *ctx)
 static void glfw_main_loop(void *ctx)
 {
     glfwSetTime(0);
-#ifdef EMSCRIPTEN
-    emscripten_set_main_loop(drawframe, 0, 1);
-#else
     platform_ctx *platform = (platform_ctx *)ctx;
+#ifdef EMSCRIPTEN
+    emscripten_set_main_loop(platform->onFrame, platform->user, 0, 1);
+#else
     while (!glfwWindowShouldClose(platform->window))
     {
-        drawframe();
+        platform->onFrame(platform->user);
         if (glfwGetKey(platform->window, GLFW_KEY_ESCAPE))
             glfwSetWindowShouldClose(platform->window, 1);
     }
