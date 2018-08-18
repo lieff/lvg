@@ -1,4 +1,5 @@
 #pragma once
+#include <config.h>
 #include <lvg_header.h>
 #include <render/gl.h>
 #include <video/video.h>

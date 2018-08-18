@@ -863,7 +863,85 @@ change_fullscreen:
     e->params.last_mkeys = e->params.mkeys;
 }
 
-int open_lvg(LVGEngine *e, const char *file_name)
+int lvg_init(LVGEngine *e)
+{
+#if defined(EMSCRIPTEN)
+    if (e->b_gles3)
+    {
+        EmscriptenWebGLContextAttributes attrs;
+        emscripten_webgl_init_context_attributes(&attrs);
+        attrs.enableExtensionsByDefault = 1;
+        attrs.majorVersion = 2;
+        attrs.minorVersion = 0;
+        EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context = emscripten_webgl_create_context(0, &attrs);
+        if (!context)
+        {
+            printf("error: this clip requires GLES3, but WebGL 2 is not supported\n");
+            return -1;
+        }
+        emscripten_webgl_make_context_current(context);
+    }
+#endif
+
+#if PLATFORM_GLFW
+    e->platform = &glfw_platform;
+#endif
+#if PLATFORM_SDL
+    e->platform = &sdl_platform;
+#endif
+#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
+    void *audio_platform_obj;
+    sdl_platform.init(&audio_platform_obj, 0, 0, 0, 1);
+#endif
+    if (!e->platform->init(&e->platform_obj, &e->params, (void (*)(void *))drawframe, e, 0))
+    {
+        printf("error: could not open platform\n");
+        return -1;
+    }
+    if (e->b_fullscreen)
+        e->platform->fullscreen(e->platform_obj, e->b_fullscreen);
+
+#ifndef EMSCRIPTEN
+    e->render = &nvpr_render;
+    if (!e->render->init(&e->render_obj, e->platform))
+#endif
+    {
+        e->render = &nvg_render;
+        if (!e->render->init(&e->render_obj, e->platform))
+        {
+            printf("error: could not open render\n");
+            return -1;
+        }
+    }
+
+#if ENABLE_AUDIO && AUDIO_SDL
+    e->audio_render = &sdl_audio_render;
+    if (!e->audio_render->init(&e->audio_render_obj, 44100, 2, 0, 0, 0))
+        e->audio_render = &null_audio_render;
+#else
+    e->audio_render = &null_audio_render;
+#endif
+    return 0;
+}
+
+void lvg_close(LVGEngine *e)
+{
+    e->audio_render->release(e->audio_render_obj);
+    if (e->clip)
+        lvgClipFree(e, e->clip);
+    e->render->release(e->render_obj);
+    lvgZipClose(&e->zip);
+    e->platform->release(e->platform_obj);
+#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
+    sdl_platform.release(audio_platform_obj);
+#endif
+#if ENABLE_SCRIPT
+    if (e->script)
+        SCRIPT_ENGINE.release(e->script);
+#endif
+}
+
+int lvg_open(LVGEngine *e, const char *file_name)
 {
     size_t size;
     char *map = lvgOpenMap(file_name, &size);
@@ -952,7 +1030,7 @@ int main(int argc, char **argv)
 #ifdef _TEST
     e->render = &null_render;
     e->audio_render = &null_audio_render;
-    if (open_lvg(e, file_name))
+    if (lvg_open(e, file_name))
     {
         printf("error: could not open swf file\n");
         return -1;
@@ -963,64 +1041,10 @@ int main(int argc, char **argv)
     lvgZipClose(&e->zip);
     return 0;
 #else
-#if defined(EMSCRIPTEN)
-    if (e->b_gles3)
-    {
-        EmscriptenWebGLContextAttributes attrs;
-        emscripten_webgl_init_context_attributes(&attrs);
-        attrs.enableExtensionsByDefault = 1;
-        attrs.majorVersion = 2;
-        attrs.minorVersion = 0;
-        EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context = emscripten_webgl_create_context(0, &attrs);
-        if (!context)
-        {
-            printf("error: this clip requires GLES3, but WebGL 2 is not supported\n");
-            return -1;
-        }
-        emscripten_webgl_make_context_current(context);
-    }
-#endif
+    if (lvg_init(e))
+        return -1;
 
-#if PLATFORM_GLFW
-    e->platform = &glfw_platform;
-#endif
-#if PLATFORM_SDL
-    e->platform = &sdl_platform;
-#endif
-#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
-    void *audio_platform_obj;
-    sdl_platform.init(&audio_platform_obj, 0, 0, 0, 1);
-#endif
-    if (!e->platform->init(&e->platform_obj, &e->params, (void (*)(void *))drawframe, e, 0))
-    {
-        printf("error: could not open platform\n");
-        return 1;
-    }
-    if (e->b_fullscreen)
-        e->platform->fullscreen(e->platform_obj, e->b_fullscreen);
-
-#ifndef EMSCRIPTEN
-    e->render = &nvpr_render;
-    if (!e->render->init(&e->render_obj, e->platform))
-#endif
-    {
-        e->render = &nvg_render;
-        if (!e->render->init(&e->render_obj, e->platform))
-        {
-            printf("error: could not open render\n");
-            return -1;
-        }
-    }
-
-#if ENABLE_AUDIO && AUDIO_SDL
-    e->audio_render = &sdl_audio_render;
-    if (!e->audio_render->init(&e->audio_render_obj, 44100, 2, 0, 0, 0))
-        e->audio_render = &null_audio_render;
-#else
-    e->audio_render = &null_audio_render;
-#endif
-
-    if (open_lvg(e, file_name))
+    if (lvg_open(e, file_name))
     {
         printf("error: could not open lvg or swf file\n");
         return -1;
@@ -1028,19 +1052,7 @@ int main(int argc, char **argv)
 
     e->platform->main_loop(e->platform_obj);
 
-    e->audio_render->release(e->audio_render_obj);
-    if (e->clip)
-        lvgClipFree(e, e->clip);
-    e->render->release(e->render_obj);
-    lvgZipClose(&e->zip);
-    e->platform->release(e->platform_obj);
-#if ENABLE_AUDIO && AUDIO_SDL && !PLATFORM_SDL
-    sdl_platform.release(audio_platform_obj);
-#endif
-#if ENABLE_SCRIPT
-    if (e->script)
-        SCRIPT_ENGINE.release(e->script);
-#endif
+    lvg_close(e);
 #endif
     return 0;
 }
