@@ -160,9 +160,9 @@ mesonconf -DENABLE_SCRIPT=False
  * http://www.libming.org/
  * http://www.swift-tools.net/Flash/
  * https://github.com/crossbridge-community/crossbridge
- * SWF v19 reference http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/swf/pdf/swf-file-format-spec.pdf
- * AMF v0 referemce http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/amf/pdf/amf0-file-format-specification.pdf
- * AMF v3 reference http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/amf/pdf/amf-file-format-spec.pdf
- * AS2 reference http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html
+ * SWF v19 reference https://wwwimages2.adobe.com/content/dam/acom/en/devnet/pdf/swf-file-format-spec.pdf
+ * AMF v0 referemce https://wwwimages2.adobe.com/content/dam/acom/en/devnet/pdf/amf0-file-format-specification.pdf
+ * AMF v3 reference https://wwwimages2.adobe.com/content/dam/acom/en/devnet/pdf/amf-file-format-spec.pdf
+ * AS2 reference http://homepage.divms.uiowa.edu/~slonnegr/flash/ActionScript2Reference.pdf
 
 LVG is developed and maintained by https://github.com/lieff
