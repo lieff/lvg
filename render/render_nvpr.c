@@ -2,6 +2,7 @@
 #include "render.h"
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 extern const render nvpr_render;
 
@@ -422,14 +423,24 @@ static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGCol
         glGetPathParameterfvNV(pathObj, GL_PATH_STROKE_BOUNDING_BOX_NV, stroke_bbox);*/
 
         glEnable(GL_BLEND);
-        if (BLEND_overlay == blend_mode || BLEND_multiply == blend_mode)
+        glBlendEquation(GL_FUNC_ADD);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        switch(blend_mode)
         {
-            glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
-        } if (BLEND_screen == blend_mode)
-        {
-            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
-        } else
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        case BLEND_LAYER:     assert(0); break;
+        case BLEND_MULTIPLY:  glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA); break;
+        case BLEND_SCREEN:    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); break;
+        case BLEND_LIGHTEN:   glBlendFunc(GL_ONE, GL_ONE); glBlendEquation(GL_MAX); break;
+        case BLEND_DARKEN:    glBlendFunc(GL_ONE, GL_ONE); glBlendEquation(GL_MIN); break;
+        case BLEND_DIFFERENCE: assert(0); break;
+        case BLEND_ADD:       glBlendFunc(GL_ONE, GL_ONE); break;
+        case BLEND_SUBTRACT:  glBlendFunc(GL_ONE, GL_ONE); glBlendEquation(GL_FUNC_REVERSE_SUBTRACT); break;
+        case BLEND_INVERT:    assert(0); break;
+        case BLEND_ALPHA:     assert(0); break;
+        case BLEND_ERASE:     assert(0); break;
+        case BLEND_OVERLAY:   assert(0); break;
+        case BLEND_HARDLIGHT: assert(0); break;
+        }
 
         glStencilFunc(GL_NOTEQUAL, 0, 0x1F);
         glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);

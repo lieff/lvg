@@ -365,7 +365,7 @@ static void parse_button_record(TAG *tag, LVGButton *b, character_t *idtable)
             o->id    = idtable[cid].lvg_id;
             o->type  = idtable[cid].type;
             o->depth = depth;
-            o->blend_mode = blendmode;
+            o->blend_mode = blendmode ? blendmode - 1 : 0;
             o->t[0] = m.sx/65536.0f;
             o->t[1] = m.r0/65536.0f;
             o->t[2] = m.r1/65536.0f;
