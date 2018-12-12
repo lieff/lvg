@@ -54,6 +54,7 @@ int swf_GetPlaceObject(TAG *tag, SWFPLACEOBJECT *obj, int version)
         swf_GetCXForm(0, &obj->cxform, 1);
 
         obj->flags = flags;
+        obj->flags2 = flags2;
         obj->depth = swf_GetU16(tag);
         if ((flags2 & PF2_CLASS_NAME) || ((flags & PF_CHAR) && (flags2 & PF2_HAS_IMAGE)))
         {

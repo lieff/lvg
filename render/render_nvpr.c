@@ -438,7 +438,7 @@ static void nvpr_render_shape(void *render, LVGShapeCollection *shapecol, LVGCol
         case BLEND_INVERT:    assert(0); break;
         case BLEND_ALPHA:     assert(0); break;
         case BLEND_ERASE:     assert(0); break;
-        case BLEND_OVERLAY:   assert(0); break;
+        case BLEND_OVERLAY:   assert(0); glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA); break;
         case BLEND_HARDLIGHT: assert(0); break;
         }
 

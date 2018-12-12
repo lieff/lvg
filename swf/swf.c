@@ -1471,7 +1471,7 @@ static TAG *parsePlacements(TAG *firstTag, character_t *idtable, LVGMovieClip *c
             assert(INVALID_ID != p.id);
             target->id = p.id;
             target->depth = p.depth;
-            target->blendmode = p.blendmode;
+            if (p.flags2 & PF2_BLENDMODE) target->blendmode = p.blendmode;
             if (flags & PF_MATRIX) target->matrix = p.matrix;
             if (flags & PF_CXFORM) target->cxform = p.cxform;
             if (flags & PF_RATIO) target->ratio = p.ratio;

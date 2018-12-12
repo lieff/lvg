@@ -984,7 +984,7 @@ int swf_ObjectMove(TAG * t,uint16_t depth,MATRIX * m,CXFORM * cx);
 #define BLENDMODE_HARDLIGHT 14
 
 typedef struct _SWFPLACEOBJECT {
-    uint8_t flags;
+    uint8_t flags, flags2;
     uint16_t depth;
     uint32_t id; // may be 0
     char move; //true: move/replace character, false: set character
