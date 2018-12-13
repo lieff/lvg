@@ -182,7 +182,7 @@ static int glfw_get_key(void *ctx, int key)
         [KEY_W] = GLFW_KEY_W,
         [KEY_X] = GLFW_KEY_X,
         [KEY_Y] = GLFW_KEY_Y,
-        [KEY_Z] = GLFW_KEY_X,
+        [KEY_Z] = GLFW_KEY_Z,
 
         [KEY_1] = GLFW_KEY_1,
         [KEY_2] = GLFW_KEY_2,
