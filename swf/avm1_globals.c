@@ -362,15 +362,14 @@ static void createEmptyMovieClip(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, ui
     ASVal *loc = create_local(ctx, THIS, se_name->str);
     loc->type = ASVAL_UNDEFINED;
     loc->str  = 0;
-    ctx->stack_ptr += nargs - 1;
-    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    ASVal *res = result_val(ctx, nargs);
     *res = *loc;
 }
 
 static void getBytesLoaded(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
-    ctx->stack_ptr--;
-    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    assert(0 == nargs);
+    ASVal *res = result_val(ctx, nargs);
     SET_DOUBLE(res, 100.0);
 }
 
@@ -416,8 +415,8 @@ static void gotoAndStop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
 
 static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
-    ctx->stack_ptr--;
-    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    assert(0 == nargs);
+    ASVal *res = result_val(ctx, nargs);
     SET_UNDEF(res);
     LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_PLAYING;
@@ -426,8 +425,8 @@ static void play(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 
 static void stop(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t nargs)
 {
-    ctx->stack_ptr--;
-    ASVal *res = &ctx->stack[ctx->stack_ptr];
+    assert(0 == nargs);
+    ASVal *res = result_val(ctx, nargs);
     SET_UNDEF(res);
     LVGMovieClipGroupState *groupstate = ctx->clip->groupstates + (size_t)cls->priv;
     groupstate->play_state = LVG_STOPPED;
@@ -606,12 +605,11 @@ static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     assert(2 == nargs);
     ASVal *se_func = &ctx->stack[ctx->stack_ptr];
     ASVal *se_timeout = se_func + 1;
-    ctx->stack_ptr += (int32_t)nargs - 1;
     assert(ASVAL_FUNCTION == se_func->type);
     assert(ASVAL_INT == se_timeout->type || ASVAL_DOUBLE == se_timeout->type || ASVAL_FLOAT == se_timeout->type);
-    ASVal *res = &ctx->stack[ctx->stack_ptr];
     if (ctx->groupstate->num_timers > 10)
     {
+        ASVal *res = result_val(ctx, nargs);
         SET_INT(res, 0);
         return;
     }
@@ -622,6 +620,7 @@ static void setInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t na
     t->timeout = to_double(ctx, se_timeout);
     static int counter = 0;
     t->id = ++counter;
+    ASVal *res = result_val(ctx, nargs);
     SET_INT(res, t->id);
 }
 
@@ -636,6 +635,8 @@ static void clearInterval(LVGActionCtx *ctx, ASClass *cls, uint8_t *a, uint32_t 
         {
             memmove(&ctx->groupstate->timers[i], &ctx->groupstate->timers[i + 1], (ctx->groupstate->num_timers - i - 1)*sizeof(ctx->groupstate->timers[0]));
             ctx->groupstate->num_timers--;
+            ASVal *res = result_val(ctx, nargs);
+            SET_UNDEF(res);
             return;
         }
     assert(0);

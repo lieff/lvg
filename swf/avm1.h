@@ -138,6 +138,7 @@ typedef struct ASVal
         int boolean;
     };
     ASValType type;
+    char is_dynamic;
 } ASVal;
 
 typedef struct ASMember
@@ -186,6 +187,9 @@ extern ASClass g_movieclip;
 extern ASClass g_button;
 extern ASClass g_string;
 
+void stack_push(LVGActionCtx *ctx);
+void stack_pop(LVGActionCtx *ctx, int n);
+ASVal *result_val(LVGActionCtx *ctx, int to_pop);
 double to_double(LVGActionCtx *ctx, ASVal *v);
 int32_t to_int(ASVal *v);
 ASClass *to_object(LVGActionCtx *ctx, ASVal *v);
