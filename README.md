@@ -152,6 +152,7 @@ mesonconf -DENABLE_SCRIPT=False
 
  * https://github.com/lightspark/lightspark
  * https://github.com/mozilla/shumway
+ * https://github.com/ruffle-rs/ruffle
  * https://www.gnu.org/software/gnash/
  * https://swfdec.freedesktop.org/wiki/
  * https://github.com/marmalade/gameswf
