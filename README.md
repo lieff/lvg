@@ -136,6 +136,7 @@ mesonconf -DENABLE_SCRIPT=False
 
  * https://github.com/01org/fastuidraw
  * https://skia.org/
+ * https://github.com/blend2d/blend2d/
  * https://github.com/memononen/nanovg
  * https://github.com/mokafolio/Tarp
  * https://github.com/jpbruyere/vkvg
