@@ -3,6 +3,8 @@
 #include "../rfxswf.h"
 #include "assets.h"
 
+classinfo_t voidclass;
+
 void swf_ResolveAssets(asset_resolver_t*assets, abc_file_t*file)
 {
     int resolved = 0;

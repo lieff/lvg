@@ -153,7 +153,6 @@ void registry_use(slotinfo_t*s);
 asset_bundle_list_t*registry_getassets();
 
 // static multinames
-classinfo_t voidclass;
 classinfo_t* registry_getanytype();
 classinfo_t* registry_getarrayclass();
 classinfo_t* registry_getobjectclass();
