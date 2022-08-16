@@ -155,10 +155,10 @@ LVGShapeCollection *lvgShapeLoad(LVGEngine *e, const char *file)
         memcpy(col->shapes + i, shape, sizeof(NSVGshape));
         if (shape->bounds[0] < col->bounds[0])
             col->bounds[0] = shape->bounds[0];
-        if (shape->bounds[2] < col->bounds[2])
-            col->bounds[2] = shape->bounds[2];
-        if (shape->bounds[1] > col->bounds[1])
+        if (shape->bounds[1] < col->bounds[1])
             col->bounds[1] = shape->bounds[1];
+        if (shape->bounds[2] > col->bounds[2])
+            col->bounds[2] = shape->bounds[2];
         if (shape->bounds[3] > col->bounds[3])
             col->bounds[3] = shape->bounds[3];
         e->render->cache_shape(e->render_obj, col->shapes + i);

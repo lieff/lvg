@@ -8,8 +8,8 @@ void onInit()
     g_image = lvgShapeLoad("main.svg");
     double bounds[4];
     lvgShapeGetBounds(g_image, bounds);
-    width = (bounds[1] - bounds[0]);
-    height = (bounds[3] - bounds[2]);
+    width = (bounds[2] - bounds[0]);
+    height = (bounds[3] - bounds[1]);
 }
 
 void onFrame()
