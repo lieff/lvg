@@ -142,7 +142,7 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
         path2 = shape2 ? shape2->paths : 0;
         for (path = shape->paths; path != NULL; path = path->next)
         {
-            if (NSVG_PAINT_NONE == shape->stroke.type && (NSVG_PAINT_NONE == shape->fill.type || (NSVG_PAINT_NONE != shape->fill.type && !path->closed)))
+            if (NSVG_PAINT_NONE == shape->stroke.type && (NSVG_PAINT_NONE == shape->fill.type))
             {
                 if (path2)
                     path2 = path2->next;
@@ -161,8 +161,6 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
                     nvgBezierTo(vg, p[2]*om_ratio + p2[2]*ratio, p[3]*om_ratio + p2[3]*ratio, p[4]*om_ratio + p2[4]*ratio,
                             p[5]*om_ratio + p2[5]*ratio, p[6]*om_ratio + p2[6]*ratio, p[7]*om_ratio + p2[7]*ratio);
                 }
-                if (path->closed)
-                    nvgClosePath(vg);
                 path2 = path2->next;
             } else
             {
@@ -172,8 +170,6 @@ static void nvgDrawShape(NVGcontext *vg, LVGShapeCollection *shapecol, LVGColorT
                     float *p = &path->pts[i*2];
                     nvgBezierTo(vg, p[2], p[3], p[4], p[5], p[6], p[7]);
                 }
-                if (path->closed)
-                    nvgClosePath(vg);
             }
         }
         if (NSVG_PAINT_NONE != shape->fill.type)

@@ -212,8 +212,6 @@ static int nvpr_cache_shape(void *render, NSVGshape *shape)
             int ncubic = (path->npts - 1)/3;
             cmds += 1 + ncubic;
             coords += 2 + ncubic*6;
-            if (path->closed)
-                cmds++;
         }
     }
     GLubyte *cmd = (GLubyte *)alloca(cmds*sizeof(GLubyte));
@@ -229,8 +227,6 @@ static int nvpr_cache_shape(void *render, NSVGshape *shape)
             cmds += 1 + ncubic;
             memcpy(coord + coords, path->pts, (2 + ncubic*6)*sizeof(float));
             coords += 2 + ncubic*6;
-            if (path->closed)
-                cmd[cmds++] = GL_CLOSE_PATH_NV;
         }
     }
     glPathCommandsNV(pathObj, cmds, cmd, coords, GL_FLOAT, coord);
@@ -251,8 +247,6 @@ static int morph_shape(NSVGshape *shape, NSVGshape *shape2, float ratio)
             int ncubic = (path->npts - 1)/3;
             cmds += 1 + ncubic;
             coords += 2 + ncubic*6;
-            if (path->closed)
-                cmds++;
         }
     }
     GLubyte *cmd = (GLubyte *)alloca(cmds*sizeof(GLubyte));
@@ -270,8 +264,6 @@ static int morph_shape(NSVGshape *shape, NSVGshape *shape2, float ratio)
             for (int i = 0; i < (2 + ncubic*6); i++)
                 coord[coords + i] = path->pts[i]*om_ratio + path2->pts[i]*ratio;
             coords += 2 + ncubic*6;
-            if (path->closed)
-                cmd[cmds++] = GL_CLOSE_PATH_NV;
         }
     }
     GLuint pathObj = glGenPathsNV(1);

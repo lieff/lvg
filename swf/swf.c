@@ -285,7 +285,7 @@ start_new:
         }
         if (start_x == x && start_y == y)
         {   // path finished - start new
-            path->closed = shape->fill.type != NSVG_PAINT_NONE;
+            path->closed = 1;
             subpath = 0;
             goto start_new;
         }
