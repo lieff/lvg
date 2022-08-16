@@ -4,6 +4,7 @@
 #include <string.h>
 #include <scripting/scripting.h>
 #include "../../src/lvg_header.h"
+#include "../../src/lvg.h"
 #include "../../render/gl.h"
 
 static LVGEngine *e;
@@ -93,6 +94,13 @@ typedef struct platform_params\
     double mx; double my;\
     double time;\
 } platform_params;\
+typedef struct LVGColorf\
+{\
+    double r;\
+    double g;\
+    double b;\
+    double a;\
+} LVGColorf;\
 typedef struct LVGShapeCollection LVGShapeCollection;\
 typedef struct LVGMovieClip LVGMovieClip;\
 typedef struct LVGVideo LVGVideo;\
@@ -612,6 +620,17 @@ static void lib_lvgPlaySound(struct ParseState *Parser, struct Value *ReturnValu
     lvgPlaySound(e, Ptr(0), Int(1), Int(2), Int(3), Int(4));
 }
 
+static void lib_lvgSetBgColor(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs)
+{
+    if (1 != NumArgs)
+        return;
+    double *bgColor = (double *)Ptr(0);
+    e->bgColor.r = bgColor[0];
+    e->bgColor.g = bgColor[1];
+    e->bgColor.b = bgColor[2];
+    e->bgColor.a = bgColor[3];
+}
+
 static const struct LibraryFunction g_lvgLib[] =
 {
     /* GL2 */
@@ -698,6 +717,7 @@ static const struct LibraryFunction g_lvgLib[] =
     /* Audio */
     { lib_lvgLoadMP3, "short *lvgLoadMP3(char *file, int *rate, int *channels, int *num_samples);" },
     { lib_lvgPlaySound, "void lvgPlaySound(LVGSound *sound, int flags, int start_sample, int end_sample, int loops);" },
+    { lib_lvgSetBgColor, "void lvgSetBgColor(LVGColorf *bgColor);" },
     { NULL, NULL }
 };
 
