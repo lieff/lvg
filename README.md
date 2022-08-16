@@ -98,7 +98,7 @@ ninja
 LVG can be configured to use different backends for platform, audio and video. You can see current configuration by executing mesonconf (or meson configure for newer meson versions) in build directory:
 
 ```
-mesonconf
+meson configure
 ...
 Project options:
   Option        Description   Current Value Possible Values
